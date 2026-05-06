@@ -1,0 +1,80 @@
+body {
+  background-color: #efeff2;
+  margin: 0px;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.container {
+  width: 1440px;
+  margin: 0px auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 36px;
+}
+
+.logo-menu-box {
+  display: flex;
+  align-items: center;
+  gap: 68px;
+}
+
+.menu-list {
+  display: flex;
+  gap: 48px;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: Inter, sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 30px;
+  color: #19191c;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:visited {
+  color: #19191c;
+}
+
+.btn-box {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.link-header {
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #19191c;
+}
+
+.header-btn {
+  padding: 12px 37px;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  background-color: #19191c;
+  color: #efeff2;
+}
+
+.header-btn:visited {
+  color: #efeff2;
+}
