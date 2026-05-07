@@ -8,22 +8,22 @@ body {
 }
 
 .container-header {
-  max-width: 1440px;
-  margin: 36px auto 0px;
+  width: 1440px;
+  margin: 36px 240px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .container-footer {
-  max-width: 1920px;
+  min-width: 1905px;
   height: 536px;
   padding: 68px 240px 62px;
   background-color: #19191c;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-sizing: border-box;
 }
 
 .logo-menu-box {
@@ -81,7 +81,7 @@ body {
 
 .footer-links-wrapper {
   display: flex;
-  justify-content: space-between;
+  gap: 200px;
 }
 
 .logo-contacts-box {
@@ -132,12 +132,6 @@ body {
   color: #fbfbfc;
 }
 
-.footer-list {
-  list-style-type: none;
-  margin: 0px;
-  padding: 0px;
-}
-
 .footer-block {
   display: flex;
   flex-direction: column;
@@ -148,6 +142,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
 }
 
 .copyright,
@@ -160,4 +157,9 @@ body {
   font-size: 18px;
   line-height: 28px;
   color: #6d6d77;
+}
+
+.footer-top-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
