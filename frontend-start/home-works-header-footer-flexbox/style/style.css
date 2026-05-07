@@ -7,23 +7,31 @@ body {
   line-height: 28px;
 }
 
-.container-header {
+.container {
   width: 1440px;
-  margin: 36px 240px 0px;
+  margin: 0px auto;
+}
+
+.container-header {
+  padding-top: 36px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .container-footer {
-  min-width: 1905px;
-  height: 536px;
-  padding: 68px 240px 62px;
+  min-height: 536px;
+  padding: 68px 0px 62px;
   background-color: #19191c;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
+}
+
+footer {
+  background-color: #19191c;
 }
 
 .logo-menu-box {
@@ -59,6 +67,7 @@ body {
   display: flex;
   align-items: center;
   gap: 48px;
+  justify-content: space-around;
 }
 
 .link-header {
@@ -81,6 +90,8 @@ body {
 
 .footer-links-wrapper {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 200px;
 }
 
@@ -161,5 +172,14 @@ body {
 
 .footer-top-wrapper {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-between;
+  gap: 146px;
+}
+
+.link-footer-box {
+  display: flex;
+  justify-content: center;
+  gap: 200px;
 }
