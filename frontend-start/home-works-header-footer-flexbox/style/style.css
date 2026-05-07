@@ -7,15 +7,23 @@ body {
   line-height: 28px;
 }
 
-.container {
-  width: 1440px;
-  margin: 0px auto;
-}
-
-.header {
+.container-header {
+  max-width: 1440px;
+  margin: 36px auto 0px;
   display: flex;
   justify-content: space-between;
-  margin-top: 36px;
+  align-items: center;
+}
+
+.container-footer {
+  max-width: 1920px;
+  height: 536px;
+  padding: 68px 240px 62px;
+  background-color: #19191c;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .logo-menu-box {
@@ -32,23 +40,19 @@ body {
   list-style-type: none;
 }
 
-.logo {
+.logo-header {
   display: flex;
   align-items: center;
   gap: 14px;
   font-family: Inter, sans-serif;
   font-weight: 800;
   font-size: 24px;
-  line-height: 30px;
+  line-height: 29px;
   color: #19191c;
 }
 
 .link {
   text-decoration: none;
-}
-
-.link:visited {
-  color: #19191c;
 }
 
 .btn-box {
@@ -75,6 +79,85 @@ body {
   color: #efeff2;
 }
 
-.header-btn:visited {
+.footer-links-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-contacts-box {
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+}
+
+.logo-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: Inter, sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 22px;
+  color: #fbfbfc;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.link-contacts {
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #fbfbfc;
+}
+
+.link-footer {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
   color: #efeff2;
+}
+
+.footer-header {
+  margin: 0px;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  color: #fbfbfc;
+}
+
+.footer-list {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.footer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.copyright,
+.link-policy {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #6d6d77;
 }
