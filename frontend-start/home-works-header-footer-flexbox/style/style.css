@@ -178,7 +178,7 @@ footer {
   gap: 146px;
 }
 
-.link-footer-box {
+.footer-blocks-wrapper {
   display: flex;
   justify-content: center;
   gap: 200px;
