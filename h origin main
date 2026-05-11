@@ -1,0 +1,523 @@
+[33mcommit 55eeaa7b72ea846f709ebacd2866e40aee70d592[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 11 22:33:48 2026 +0300
+
+    feat: refactor naming to BEM
+    
+    Refactored project according to BEM naming convention
+
+[33mcommit e70436606800d373b6c9957a0df095738fcb11f4[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 11 17:20:33 2026 +0300
+
+    feat: start new project "BEM namings"
+
+[33mcommit 22e004ab8fa891e51c44b7d856ac09abfca9bd5b[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 11 17:11:09 2026 +0300
+
+    fix(styles): change footer padding-top
+
+[33mcommit e98fc2986aadd791a1b969e0f7b62cec6071c353[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 11 16:50:03 2026 +0300
+
+    fix(styles): remove huge gaps in the footer
+    
+    Removed huge gaps in the footer. Replaced gap between logo-contacts and
+    sitemap with margin-right. Made gaps between sitemap-lists inside
+    sitemap automatic via justify-content: space-between and flex-grow: 1.
+
+[33mcommit b09a03b559e3f4abdfc6d544ad78f22410f89dc8[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 11 15:55:37 2026 +0300
+
+    feat(styles): add icon to header menu
+
+[33mcommit e64333d3de19001001f73691c195514243cac264[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 11 15:09:50 2026 +0300
+
+    refactor: add width and height to logo image
+
+[33mcommit 0945e81191f6f4d28150d89d6203fa1dbb65121f[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 11 14:59:03 2026 +0300
+
+    refactor: add cite tag
+
+[33mcommit ea7691be387e4d0465bd547d6d0f913bbd685368[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 11 14:34:25 2026 +0300
+
+    refactor: update HTML semantics and names
+
+[33mcommit 0f8cc4380a7f3b37eea1291ff414682871aa3fc2[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sun May 10 17:40:18 2026 +0300
+
+    refactor(styles): rename file
+
+[33mcommit 0ca23409e26b7adb50bbc3830d24b480a89e9724[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sun May 10 17:36:14 2026 +0300
+
+    refactor(styles): rename folder
+
+[33mcommit f7cb6ae1aa04dde03fe57c81171e9d53f00e9256[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sun May 10 17:30:54 2026 +0300
+
+    refactor(styles): replace every 0px with 0
+
+[33mcommit 1d9cb6998e8bf1ba406601256326845d39b4ca44[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri May 8 08:25:10 2026 +0300
+
+    refactor: header-footer-flexbox(frontend-start) rename class
+    
+    Renamed class link-footer-box to footer-blocks-wrapper
+
+[33mcommit c6a7b3337a932889b812871e81812835a5456242[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Thu May 7 16:46:20 2026 +0300
+
+    fix: header-footer-flexbox fix container
+
+[33mcommit 2ea18b59697d53f2fbbbcaa43d0249ea27ac494b[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Thu May 7 13:11:23 2026 +0300
+
+    frontend-start/index.html add home-works-header-footer-flexbox in list
+
+[33mcommit 54813a15c37de2bbfd778c6a69d9fde7deff0c48[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Thu May 7 12:57:21 2026 +0300
+
+    feat: header-footer-flexbox(frontend-start) fix footer positioning
+    
+    Edited positioning of logo and contacts block in the footer
+    to match the layout
+
+[33mcommit 6a80162d20a48428881586229d8235c77974a0c9[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Thu May 7 10:18:42 2026 +0300
+
+    feat: home-works-header-footer-flexbox style footer
+    
+    First working version of footer. Need to try to edit positioning
+    of logo footer and contacts block.
+
+[33mcommit 0cfdf7d00f37e4ac2970b86871c680b56e53ad4d[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed May 6 21:56:46 2026 +0300
+
+    feat: home-works-header-footer-flexbox style header
+    
+    Styled header using flexbox
+
+[33mcommit 380bd62b7bc9334ec9284a4cd2fd0c0039d72646[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed May 6 17:49:07 2026 +0300
+
+    feat: home-works-header-footer-flexbox start project
+
+[33mcommit cea68cb5a25c29454d6cd745e12a3295d1131eae[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Tue May 5 08:45:17 2026 +0300
+
+    refactor: home-work-7 remove redundant tag selectors
+
+[33mcommit 0e0d4d932a8594d17c17379ec97a658c1b966d2f[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 22:52:22 2026 +0300
+
+    refactor: portfolio rename list items to capitalised
+
+[33mcommit 488be372050fdaf27eb0c2829aefe938bb64f429[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 22:36:16 2026 +0300
+
+    refactor: portfolio add new folder
+    
+    Added new folder to improve the structure of portfolio folders and
+    for better navigating. New folder is HTML-CSS in /fullstack-js/.
+    Moved all relevant homeworks in new folder /fullstack-js/HTML-CSS.
+
+[33mcommit 94043ed8155be183f3cd037e0f6695c9cf07a4e7[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 22:17:21 2026 +0300
+
+    reafctor: home-work-7 remove redundant style
+    
+    Removed redundant style font-size: 0px for image spacing
+    added by mistake
+
+[33mcommit 814026256b5c6e252dc133e638c4e28eb14193c4[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 21:56:36 2026 +0300
+
+    docs: git cheat sheet update command
+    
+    Updated git commit.
+
+[33mcommit 8d292847db18d5d9494c39e36670f8c95efbfe32[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 20:01:44 2026 +0300
+
+    fullstack-js/index.html: add home-work-7 in list
+
+[33mcommit 91ba1a438a23a8946c14bddebb4889e74f8496ae[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 19:35:44 2026 +0300
+
+    feat: home-work-7 add position
+    
+    Added position: static, relative, absolute, fixed, sticky.
+    Used z-index and opacity.
+
+[33mcommit ad67f065e192e66074265f952c35d525f5992add[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 17:06:31 2026 +0300
+
+    feat: home-work-7 add overflow
+    
+    Added overflow: visible, hidden, scroll and auto.
+
+[33mcommit 6656c362058558d31399551a7f3d3cdf4993c0a7[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 16:39:02 2026 +0300
+
+    feat: home-work-7 add float and clear
+    
+    Added float: left and right. Added clear: both, left and right.
+
+[33mcommit 0608091a31276a29ffedb9c9d64bdda7d8254960[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 14:31:15 2026 +0300
+
+    feat: home-work-7 add display and box-sizing
+    
+    Added display: block, inline, inline-block.
+    Added box-sizing: content-box, border-box
+
+[33mcommit 1064efcd46af52323a4a91054ab25886db7dcb1b[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 13:05:46 2026 +0300
+
+    feat: home-work-7 add normalize and reset
+    
+    Added one version of normalize.css and three versions of reset.css
+
+[33mcommit 675e46f6aaf684f55ebd8aaf2cb5b802ac53d2ab[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon May 4 11:44:54 2026 +0300
+
+    feat: home-work-7 block and inline elements
+
+[33mcommit 2c32e808d46d1d4027cc6ef9be8fe09c16de49e2[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sun May 3 12:19:59 2026 +0300
+
+    git cheat sheet: update commands
+    
+    Updated git push and git switch. Updated branch info.
+
+[33mcommit de9c9c10f256f8b6f6708063ec29e0b63e682537[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri May 1 18:54:15 2026 +0300
+
+    refactor(home-work-6): remove reduntant attribute
+
+[33mcommit 41f74b7453b4af7840454dbc11aca7322a7f950f[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri May 1 17:47:22 2026 +0300
+
+    fullstack-js/index.html: add home-work-6 in list
+
+[33mcommit ffa5bab9a72949b4c0658a70715df861da32079a[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri May 1 17:28:27 2026 +0300
+
+    home-work-6: final version
+
+[33mcommit 3547234b7981913f9e47a4b14d89e7b2dde8b634[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri May 1 15:08:45 2026 +0300
+
+    home-work-6: first fully working version
+
+[33mcommit 554757a3cfeb1110d0843e7cdc62bf9ecb5e2edd[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed Apr 29 16:45:31 2026 +0300
+
+    git cheat sheet. Update commands, add new commands
+    
+    Updated git config, git merge, git log, git gc, git apply,
+    git reset, git cherry.
+    Added git prune, git repack, git bisect, git subtree, git submodule.
+    Added git log --cherry-pick and git log --cherry-mark.
+    A few cosmetic changes.
+
+[33mcommit b9cbc7764ac79eda0ead305b95627f1dafd1c31a[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed Apr 29 10:39:43 2026 +0300
+
+    fullstack-js/home-work-1. Fix bug in image path
+    
+    Changed image path from absolute to relative (from / to ./).
+
+[33mcommit f1c460085ceaf03915be183127cdd507cd3bbd78[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed Apr 29 10:28:34 2026 +0300
+
+    git cheat sheet. Update commands, add new command
+    
+    Updated git config, git commit, git branch, git merge, git remote,
+    git pull, git revert, git rebase, git rebase -i, git cherry-pick.
+    Added git cherry. Added some cosmetic changes.
+
+[33mcommit 917df79c81941c0b586d7bc30cdcf9ed00f8803e[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Tue Apr 28 18:24:43 2026 +0300
+
+    Update git config
+
+[33mcommit 7a9d7a86509f8c6b8954b9fafe498c7df874d923[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Tue Apr 28 10:37:43 2026 +0300
+
+    Add git merge-tree --write-tree. Update git rebase --onto, git push and git cherry-pick. Some cosmetic changes.
+
+[33mcommit 6ad18ce501e1bf666ffbc4a0f3db466e064d82c2[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Tue Apr 28 09:17:38 2026 +0300
+
+    Update git config and git reflog. Add git gc, git check-ignore and .attributes
+
+[33mcommit 8aef8f4bc8a4cfabbe4d9e1e851ed1883dc9e229[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Tue Apr 28 07:36:21 2026 +0300
+
+    Add folder docs/ and move README.md and git commands.txt in it
+
+[33mcommit 8da54d9b08944d01ea8eda85ca862820585bb258[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon Apr 27 17:36:34 2026 +0300
+
+    Add rerere
+
+[33mcommit 7c8a1470238660ea1f3955a32f4fdc8efb8ae0b8[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon Apr 27 16:00:57 2026 +0300
+
+    Update git diff. Add .gitattributes and diff drivers
+
+[33mcommit 4ec5fc01cb2e5fd9dcc5c3528107655ee14bb165[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon Apr 27 14:36:05 2026 +0300
+
+    Update tags
+
+[33mcommit 74a5c60987a32507a7d41a3dae0bea374bd21993[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon Apr 27 13:35:27 2026 +0300
+
+    Update patch mode for git add, git stash and git restore. Add patch mode for git checkout and git reset
+
+[33mcommit e78f332fd0406400610b0415614922ebe94eb38e[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon Apr 27 12:23:15 2026 +0300
+
+    Cosmetic updates
+
+[33mcommit 155c6bd1bb49125c255b4b8666530b7cfe8371fa[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon Apr 27 12:11:47 2026 +0300
+
+    Update git revert, git rebase, git rebase --onto, git cherry-pick and HEADs examples
+
+[33mcommit 86bf0355eb0b795342c571b440c77072f680262f[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon Apr 27 08:33:33 2026 +0300
+
+    Edit git reabse -i and some cosmetic edits
+
+[33mcommit 7b53e576b8ef9b30be5c9559b17f10f0cc1bec16[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Mon Apr 27 08:10:42 2026 +0300
+
+    Add git commands cheat sheet
+
+[33mcommit 785aa1e1bab1254c58c5327c59d782fe762b0f72[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sun Apr 19 17:44:57 2026 +0300
+
+    Add a few new lines in README file
+
+[33mcommit 7567a9d812dd2e53ce84c567ddff1bc165a1cfe0[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sun Apr 19 17:42:02 2026 +0300
+
+    Add link to C/C++/C# repository on Bitbucket and information about C/C++ dewelopment in the past in README file
+
+[33mcommit 3dd0b897265471726e224b0bc75c78aa80d1ee37[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sat Apr 4 12:05:28 2026 +0300
+
+    Edit CSS styles path in project main index.html page
+
+[33mcommit f0355ba89e16751440e5cd0cde7441235c95fced[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sat Apr 4 12:02:38 2026 +0300
+
+    Add paddings and margins to list items refs
+
+[33mcommit 1c52cfee64ad5cca2e8e858048ed71bfbe63b05f[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sat Apr 4 11:33:13 2026 +0300
+
+    Edit CSS styles paths in index.html files
+
+[33mcommit 92d2f76e2da97e6318151b4d62d5b6cf32c9604e[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sat Apr 4 11:00:44 2026 +0300
+
+    Edit cosmetics
+
+[33mcommit c4c50e962918a506332753666d518a234ae49f11[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sat Apr 4 10:50:48 2026 +0300
+
+    Edit names Frontend Start
+
+[33mcommit c3be8c39241982408779169ddf1d19742ef60696[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sat Apr 4 10:38:53 2026 +0300
+
+    Update Portfolio Site
+    
+    Remove Border Lines, Arrange Projects
+
+[33mcommit dd28a81f9289a5775f9e43ecbb1df5f1a6310719[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Sat Apr 4 09:46:31 2026 +0300
+
+    Add header My Portfolio to main page
+
+[33mcommit 268b5507fbd3daae532cdb93df88167be4116654[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri Apr 3 19:10:06 2026 +0300
+
+    Edit REAME.md
+
+[33mcommit a682c614e2c454d4d9626f1a60277f7f4da1b3b2[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri Apr 3 18:59:28 2026 +0300
+
+    Edit README.md
+
+[33mcommit f2c4b77b89a88557335a1d47bd068168f6c1d5df[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri Apr 3 18:23:19 2026 +0300
+
+    Rename repository to 604vadym.github.io
+
+[33mcommit c9f158c7b2c1fdff4aadcf999b4b1a0b36479485[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri Apr 3 18:12:34 2026 +0300
+
+    Add Fullstack JS Homework versions folder
+
+[33mcommit 25e66559772cfa571fc96581b3c5fbea1795d69c[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri Apr 3 18:07:20 2026 +0300
+
+    Add frontend-start and fullstack-js folders
+
+[33mcommit ceb318eb5b72d6e3790fb231afde604809062730[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri Apr 3 17:56:42 2026 +0300
+
+    Create Portfolio page
+
+[33mcommit 9f3093aeb5cb286a66c659c63044ffed0612b1b2[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri Apr 3 17:26:16 2026 +0300
+
+    Add docs folder with project
+
+[33mcommit 552f3e232ae2c20ef60bc2fb3a6a34c25f0c6560[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri Apr 3 17:08:50 2026 +0300
+
+    Delete test files and folders
+
+[33mcommit 12da7168cf7b301a1e1c38b0c551f2ddd57831de[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Fri Apr 3 16:30:48 2026 +0300
+
+    Add .gitkeep to .gitignore
+
+[33mcommit 3f91d22a4b0127bb3990dbc60b394d62d862d2ce[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Thu Apr 2 11:08:21 2026 +0300
+
+    Add .gitignore
+
+[33mcommit 94ee0026e8a5a809afac421d83f1e3394e9f02fe[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Thu Apr 2 10:53:05 2026 +0300
+
+    Remove zip archives and add folder with old projects
+
+[33mcommit 38794a53a8e5d6f4120e7b0f8db15027f4cbd0ab[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed Apr 1 11:34:02 2026 +0300
+
+    commit-for-push
+
+[33mcommit e73fc577194adca90207260167eada4e1619840c[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed Apr 1 11:25:06 2026 +0300
+
+    Create github-file.txt
+    
+    New file was created on GitHub
+
+[33mcommit bc1b32ee6fa46f6689917e4e004eb4587c9853d8[m
+Merge: c65aa57 499f5fd
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed Apr 1 09:25:40 2026 +0300
+
+    Merging new-feature into main
+
+[33mcommit c65aa572382586c13819c15b8e0bca90d7e9abce[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed Apr 1 09:20:20 2026 +0300
+
+    Changes made in the main branch
+
+[33mcommit 499f5fdab796388be4682473cdbfc10546151d1a[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed Apr 1 09:09:22 2026 +0300
+
+    Modified fourh file in the feaure branch
+
+[33mcommit 50111e6c6703d82cb3fbeb814779fd5240702622[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Wed Apr 1 09:02:54 2026 +0300
+
+    New file in the feature branch
+
+[33mcommit b9f0be4cb799dd9278a2a9055e495a6c51f57b39[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Tue Mar 31 11:03:59 2026 +0300
+
+    Second commit
+
+[33mcommit 3112524cd12809fed684da20f2d3140d07c096bd[m
+Author: 604vadym <604vadym@proton.me>
+Date:   Tue Mar 31 09:46:46 2026 +0300
+
+    First commit

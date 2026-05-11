@@ -23,8 +23,8 @@ ul {
   list-style-type: none;
 }
 
-.header-logo-img,
-.footer-logo-img {
+.header__logo-img,
+.footer__logo-img {
   width: 42px;
   height: 36px;
 }
@@ -34,7 +34,11 @@ ul {
   margin: 0 auto;
 }
 
-.header-wrapper {
+.btn {
+  font-weight: 700;
+}
+
+.header__wrapper {
   padding-top: 36px;
   display: flex;
   justify-content: space-between;
@@ -44,13 +48,13 @@ ul {
   color: #19191c;
 }
 
-.logo-menu-wrapper {
+.header__main {
   display: flex;
   align-items: center;
   gap: 68px;
 }
 
-.header-logo-box {
+.header__logo-box {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -60,13 +64,12 @@ ul {
   color: #19191c;
 }
 
-.nav-list {
+.header__list {
   display: flex;
   gap: 48px;
 }
 
-.nav-list-item:first-child > .header-link::after,
-.btn-links-wrapper > .header-link:first-child::after {
+.header__link--with-arrow::after {
   content: "";
   display: inline-block;
   width: 16px;
@@ -75,16 +78,15 @@ ul {
   background-image: url(../img/icon-menu.svg);
 }
 
-.btn-links-wrapper {
+.header__side {
   display: flex;
   align-items: center;
   gap: 48px;
   justify-content: space-around;
 }
 
-.header-btn {
+.header__btn {
   padding: 12px 37px;
-  font-weight: 700;
   background-color: #19191c;
   color: #efeff2;
 }
@@ -93,7 +95,7 @@ ul {
   background-color: #19191c;
 }
 
-.footer-wrapper {
+.footer__wrapper {
   min-height: 536px;
   padding: 59px 0 62px;
   background-color: #19191c;
@@ -103,19 +105,20 @@ ul {
   color: #fbfbfc;
 }
 
-.footer-main-wrapper {
+.footer__main {
   display: flex;
   justify-content: space-between;
+  gap: 146px;
 }
 
-.copyright-wrapper {
+.footer__copyright {
   display: flex;
   justify-content: center;
   gap: 28px;
   color: #6d6d77;
 }
 
-.footer-logo-box {
+.footer__logo-box {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -123,14 +126,13 @@ ul {
   line-height: 22px;
 }
 
-.logo-contacts-wrapper {
+.footer__logo-contacts {
   display: flex;
   flex-direction: column;
   gap: 43px;
-  margin-right: 146px;
 }
 
-.contacts {
+.footer__contacts {
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -140,24 +142,29 @@ ul {
   line-height: 29px;
 }
 
-.sitemap-wrapper {
+.footer__sitemap {
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
 }
 
-.sitemap-list {
+.sitemap__column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sitemap__list {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.sitemap-list-title {
+.sitemap__title {
   font-weight: 600;
   line-height: 22px;
-  margin-bottom: 16px;
 }
 
-.sitemap-link {
+.sitemap__link {
   color: #efeff2;
 }
