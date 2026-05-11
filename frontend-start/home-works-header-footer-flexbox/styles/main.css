@@ -1,10 +1,26 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: #efeff2;
-  margin: 0;
   font-family: Inter, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 28px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
 }
 
 .container {
@@ -12,7 +28,7 @@ body {
   margin: 0 auto;
 }
 
-.container-header {
+.header-wrapper {
   padding-top: 36px;
   display: flex;
   justify-content: space-between;
@@ -20,157 +36,63 @@ body {
   flex-wrap: wrap;
 }
 
-.container-footer {
-  min-height: 536px;
-  padding: 68px 0 62px;
-  background-color: #19191c;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
-
-footer {
-  background-color: #19191c;
-}
-
-.logo-menu-box {
+.logo-menu-wrapper {
   display: flex;
   align-items: center;
   gap: 68px;
 }
 
-.menu-list {
-  display: flex;
-  gap: 48px;
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-.logo-header {
+.header-logo-box {
   display: flex;
   align-items: center;
   gap: 14px;
-  font-family: Inter, sans-serif;
   font-weight: 800;
   font-size: 24px;
   line-height: 29px;
   color: #19191c;
 }
 
-.link {
-  text-decoration: none;
+.header-link {
+  font-weight: 600;
+  line-height: 22px;
+  color: #19191c;
 }
 
-.btn-box {
+.nav-list {
+  display: flex;
+  gap: 48px;
+}
+
+.btn-links-wrapper {
   display: flex;
   align-items: center;
   gap: 48px;
   justify-content: space-around;
 }
 
-.link-header {
-  font-family: Inter, sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 22px;
-  color: #19191c;
-}
-
 .header-btn {
   padding: 12px 37px;
-  font-family: Inter, sans-serif;
   font-weight: 700;
-  font-size: 18px;
   line-height: 22px;
   background-color: #19191c;
   color: #efeff2;
 }
 
-.footer-links-wrapper {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 200px;
+.footer {
+  background-color: #19191c;
 }
 
-.logo-contacts-box {
+.footer-wrapper {
+  min-height: 536px;
+  padding: 68px 0 62px;
+  background-color: #19191c;
   display: flex;
   flex-direction: column;
-  gap: 43px;
-}
-
-.logo-footer {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: Inter, sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  line-height: 22px;
+  justify-content: space-between;
   color: #fbfbfc;
 }
 
-.contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.link-contacts {
-  font-family: Inter, sans-serif;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
-  color: #fbfbfc;
-}
-
-.link-footer {
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
-  color: #efeff2;
-}
-
-.footer-header {
-  margin: 0;
-  font-family: Inter, sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 22px;
-  color: #fbfbfc;
-}
-
-.footer-block {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.footer-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.copyright,
-.link-policy {
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
-  color: #6d6d77;
-}
-
-.footer-top-wrapper {
+.footer-main-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -178,8 +100,56 @@ footer {
   gap: 146px;
 }
 
-.footer-blocks-wrapper {
+.copyright-wrapper {
   display: flex;
   justify-content: center;
+  gap: 28px;
+  color: #6d6d77;
+}
+
+.footer-logo-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  line-height: 22px;
+}
+
+.logo-contacts-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.sitemap-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 200px;
+}
+
+.sitemap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sitemap-list-title {
+  font-weight: 600;
+  line-height: 22px;
+  margin-bottom: 16px;
+}
+
+.sitemap-link {
+  color: #efeff2;
 }
