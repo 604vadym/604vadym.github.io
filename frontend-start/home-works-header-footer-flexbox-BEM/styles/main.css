@@ -1,0 +1,163 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #efeff2;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.header-logo-img,
+.footer-logo-img {
+  width: 42px;
+  height: 36px;
+}
+
+.container {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.header-wrapper {
+  padding-top: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  line-height: 22px;
+  color: #19191c;
+}
+
+.logo-menu-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 68px;
+}
+
+.header-logo-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 29px;
+  color: #19191c;
+}
+
+.nav-list {
+  display: flex;
+  gap: 48px;
+}
+
+.nav-list-item:first-child > .header-link::after,
+.btn-links-wrapper > .header-link:first-child::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 10px;
+  margin-left: 6px;
+  background-image: url(../img/icon-menu.svg);
+}
+
+.btn-links-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  justify-content: space-around;
+}
+
+.header-btn {
+  padding: 12px 37px;
+  font-weight: 700;
+  background-color: #19191c;
+  color: #efeff2;
+}
+
+.footer {
+  background-color: #19191c;
+}
+
+.footer-wrapper {
+  min-height: 536px;
+  padding: 59px 0 62px;
+  background-color: #19191c;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fbfbfc;
+}
+
+.footer-main-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.copyright-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  color: #6d6d77;
+}
+
+.footer-logo-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  line-height: 22px;
+}
+
+.logo-contacts-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+  margin-right: 146px;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.sitemap-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.sitemap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sitemap-list-title {
+  font-weight: 600;
+  line-height: 22px;
+  margin-bottom: 16px;
+}
+
+.sitemap-link {
+  color: #efeff2;
+}
