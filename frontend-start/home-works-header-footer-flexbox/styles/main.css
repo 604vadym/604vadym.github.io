@@ -40,6 +40,9 @@ ul {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  font-weight: 600;
+  line-height: 22px;
+  color: #19191c;
 }
 
 .logo-menu-wrapper {
@@ -58,15 +61,19 @@ ul {
   color: #19191c;
 }
 
-.header-link {
-  font-weight: 600;
-  line-height: 22px;
-  color: #19191c;
-}
-
 .nav-list {
   display: flex;
   gap: 48px;
+}
+
+.nav-list-item:first-child > .header-link::after,
+.btn-links-wrapper > .header-link:first-child::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 10px;
+  margin-left: 6px;
+  background-image: url(../img/icon-menu.svg);
 }
 
 .btn-links-wrapper {
@@ -79,7 +86,6 @@ ul {
 .header-btn {
   padding: 12px 37px;
   font-weight: 700;
-  line-height: 22px;
   background-color: #19191c;
   color: #efeff2;
 }
