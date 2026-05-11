@@ -23,6 +23,12 @@ ul {
   list-style-type: none;
 }
 
+.header-logo-img,
+.footer-logo-img {
+  width: 42px;
+  height: 36px;
+}
+
 .container {
   width: 1440px;
   margin: 0 auto;
