@@ -671,8 +671,8 @@ git restore --staged/--cached -p       restore в режиме patch для из
 git rm <file-name>                     удалить файл из Staging Area и локально (безопасна - удалит только если изменения в рабочей директории и в индексе есть в последнем коммите)
 git rm -r <folder-name>                удалить папку из Staging Area и локально
 git rm -f/--force <file-name>          удалить файл из Staging Area и локально (небезопасна - удалит даже если изменений нету в последнем коммите)
-git rm --staged/--cached <file-name>   удалить файл из Staging Area (удалить из кеша, но не локально)
-git rm --staged/--cached <file-name> = git restore --staged/--cached <file-name>
+git rm -cached <file-name>   удалить файл из Staging Area (удалить из кеша, но не локально)
+git rm --cached <file-name> = git restore --staged/--cached <file-name>
 
 git clean                              удаление неотслеживаемых файлов из директории репозитория (выдаст ошибку, так как сработает запрет на удаление неотслеживаемых файлов из директории репозитория)
 git clean -n                           посмотреть, какие неотслеживаемые файлы будут удалены командой clean
