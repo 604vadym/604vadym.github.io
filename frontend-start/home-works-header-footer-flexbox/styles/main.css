@@ -34,6 +34,10 @@ ul {
   margin: 0 auto;
 }
 
+.btn {
+  font-weight: 700;
+}
+
 .header-wrapper {
   padding-top: 36px;
   display: flex;
@@ -65,8 +69,7 @@ ul {
   gap: 48px;
 }
 
-.nav-list-item:first-child > .header-link::after,
-.btn-links-wrapper > .header-link:first-child::after {
+.header-link-with-arrow:first-child::after {
   content: "";
   display: inline-block;
   width: 16px;
@@ -84,7 +87,6 @@ ul {
 
 .header-btn {
   padding: 12px 37px;
-  font-weight: 700;
   background-color: #19191c;
   color: #efeff2;
 }
