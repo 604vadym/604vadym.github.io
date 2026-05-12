@@ -146,16 +146,21 @@ ul {
   flex-grow: 1;
 }
 
+.sitemap-column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
 .sitemap-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.sitemap-list-title {
+.sitemap-title {
   font-weight: 600;
   line-height: 22px;
-  margin-bottom: 16px;
 }
 
 .sitemap-link {
