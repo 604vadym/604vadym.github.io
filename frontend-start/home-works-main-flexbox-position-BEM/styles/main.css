@@ -6,15 +6,6 @@
   padding: 0;
 }
 
-body {
-  background-color: #efeff2;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
-  color: #19191c;
-}
-
 a {
   text-decoration: none;
   color: inherit;
@@ -22,6 +13,31 @@ a {
 
 ul {
   list-style-type: none;
+}
+
+:root {
+  --main-color-dark: #19191c;
+  --main-color-light: #efeff2;
+  --main-color-muted: #6d6d77;
+  --main-color-accent: #504dee;
+
+  --secondary-color-light: #fbfbfc;
+
+  --card-bg-accent: #504dee;
+  --card-bg-variant-1: #deefe4;
+  --card-bg-variant-2: #f3f3d7;
+  --card-bg-variant-3: #efdeee;
+
+  --line-thickness: 4px;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--main-color-dark);
+  background-color: var(--main-color-light);
 }
 
 .header__logo-img,
@@ -33,6 +49,21 @@ ul {
 .container {
   width: 1440px;
   margin: 0 auto;
+}
+
+.card {
+  width: 467px;
+}
+
+.card--size-small {
+  padding: 68px 48px;
+
+  --card-title-space: 26px;
+  --card-line-space: 10px;
+}
+
+.title__line {
+  display: block;
 }
 
 .btn,
@@ -67,8 +98,16 @@ ul {
   line-height: 26px;
 }
 
-.title__line {
-  display: block;
+.card--type-portfolio {
+  background-color: var(--card-bg-variant-1);
+}
+
+.card--type-internship {
+  background-color: var(--card-bg-variant-2);
+}
+
+.card--type-certificate {
+  background-color: var(--card-bg-variant-3);
 }
 
 .header__wrapper,
@@ -117,8 +156,8 @@ ul {
 
 .header__btn {
   padding: 12px 37px;
-  background-color: #19191c;
-  color: #efeff2;
+  background-color: var(--main-color-dark);
+  color: var(--main-color-light);
 }
 
 .footer__main,
@@ -152,15 +191,19 @@ ul {
   gap: 43px;
 }
 
+.footer,
+.footer__wrapper {
+  background-color: var(--main-color-dark);
+}
+
 .footer__wrapper {
   min-height: 536px;
   padding: 59px 0 62px;
-  background-color: #19191c;
-  color: #fbfbfc;
+  color: var(--secondary-color-light);
 }
 
 .footer__copyright {
-  color: #6d6d77;
+  color: var(--main-color-muted);
 }
 
 .footer__logo-box {
@@ -196,7 +239,7 @@ ul {
 }
 
 .sitemap__link {
-  color: #efeff2;
+  color: var(--main-color-light);
 }
 
 .copyright {
@@ -235,9 +278,9 @@ ul {
   display: block;
   width: calc(100% + (var(--side-padding) * 2));
   margin-left: calc(var(--side-padding) * -1);
-  height: 4px;
+  height: var(--line-thickness);
   margin-top: 4px;
-  background-color: #504dee;
+  background-color: var(--main-color-accent);
 }
 
 .promo__overtitle {
@@ -253,13 +296,13 @@ ul {
 }
 
 .promo__btn {
+  display: inline-block;
   min-width: 141px;
   height: 54px;
   padding: 16px 37px;
-  background-color: #504dee;
-  color: #fbfbfc;
   margin-bottom: 110px;
-  display: inline-block;
+  background-color: var(--main-color-accent);
+  color: var(--secondary-color-light);
 }
 
 .promo__discount {
@@ -290,7 +333,7 @@ ul {
 }
 
 .what-learn {
-  background-color: #fbfbfc;
+  background-color: var(--secondary-color-light);
 }
 
 .what-learn__wrapper {
@@ -301,10 +344,6 @@ ul {
 
 .what-learn__stats-wrapper {
   gap: 103px;
-}
-
-.what-learn__cards {
-  gap: 20px;
 }
 
 .what-learn__description {
@@ -331,12 +370,29 @@ ul {
   content: "";
   display: block;
   width: 100%;
-  height: 4px;
+  height: var(--line-thickness);
   margin-top: 21px;
-  background-color: #19191c;
+  background-color: var(--main-color-dark);
 }
 
 .what-learn__description-text,
 .what-learn__stats-text {
-  color: #6d6d77;
+  color: var(--main-color-muted);
+}
+
+.card__text {
+  width: 368px;
+}
+
+.card__text::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: var(--line-thickness);
+  margin-bottom: var(--card-line-space);
+  background-color: var(--main-color-dark);
+}
+
+.card__title {
+  margin-bottom: var(--card-title-space);
 }
