@@ -51,11 +51,11 @@
 
     <main class="main">
       <section class="promo section">
-        <div class="promo__wrapper">
+        <div class="container promo__wrapper">
           <div class="promo__content">
             <p class="promo__duration">6 months</p>
             <p class="promo__overtitle">profession:</p>
-            <h1 class="title promo__title">UI/UX designer</h1>
+            <h1 class="title title--large promo__title">UI/UX designer</h1>
             <p class="text promo__text">
               You will learn how to create a brand identity on the web and for
               printing. Learn how to work in Illustrator, Photoshop, InDesign
@@ -66,7 +66,8 @@
             <a class="btn promo__btn" href="#">Started</a>
             <p class="promo__discount">25%</p>
             <time class="timer promo__timer" datetime="P17DT17H44M16S"
-              >17 Days 17:44:16</time
+              ><span class="timer__days">17 Days</span>
+              <span class="timer__hours-mins-secs">17:44:16</span></time
             >
           </div>
 
@@ -85,10 +86,12 @@
       </section>
 
       <section class="what-learn section">
-        <div class="what-learn__wrapper">
+        <div class="container what-learn__wrapper">
           <div class="what-learn__content">
             <div class="what-learn__description">
-              <h2 class="title what-learn__title">Profession UI/UX designer</h2>
+              <h2 class="title title--large what-learn__title">
+                <span class="title__line">Profession</span> UI/UX designer
+              </h2>
               <p class="text what-learn__description-text">
                 At vero eos et accusamus et iusto odio dignissimos ducimus qui
                 blanditiis occaecati cupiditate non provident, similique sunt in
@@ -97,24 +100,30 @@
               </p>
             </div>
 
-            <div class="what-learn__stats">
-              <p class="what-learn__salary">5 000 $</p>
-              <p class="label what-learn__label">Salary</p>
-              <p class="text what-learn__stats-text">
-                Nam libero tempore, cum soluta nobis est
-              </p>
-            </div>
+            <div class="what-learn__stats-wrapper">
+              <div class="what-learn__stats">
+                <div class="what-learn__box">
+                  <p class="value what-learn__value">5 000 $</p>
+                  <p class="label what-learn__label">Salary</p>
+                </div>
+                <p class="text what-learn__stats-text">
+                  Nam libero tempore, cum soluta nobis est
+                </p>
+              </div>
 
-            <div class="what-learn__stats">
-              <p class="what-learn__vacancies">4 225</p>
-              <p class="label what-learn__label">Vacancies</p>
-              <p class="text what-learn__stats-text">Vero eos et accusamus</p>
+              <div class="what-learn__stats">
+                <div class="what-learn__box">
+                  <p class="value what-learn__value">4 225</p>
+                  <p class="label what-learn__label">Vacancies</p>
+                </div>
+                <p class="text what-learn__stats-text">Vero eos et accusamus</p>
+              </div>
             </div>
           </div>
 
           <div class="what-learn__cards">
             <article class="card card--type-portfolio what-learn__card">
-              <h3 class="title card__title">Portfolio</h3>
+              <h3 class="title title--medium card__title">Portfolio</h3>
               <p class="text card__text">
                 You will learn how to create a brand identity on the web and for
                 printing. Learn how to work in Illustrator, Photoshop, InDesign
@@ -122,7 +131,7 @@
               </p>
             </article>
             <article class="card card--type-internship what-learn__card">
-              <h3 class="title card__title">Internship</h3>
+              <h3 class="title title--medium card__title">Internship</h3>
               <p class="text card__text">
                 You will learn how to create a brand identity on the web and for
                 printing. Learn how to work in Illustrator, Photoshop, InDesign
@@ -130,7 +139,7 @@
               </p>
             </article>
             <article class="card card--type-certificate what-learn__card">
-              <h3 class="title card__title">Certificate</h3>
+              <h3 class="title title--medium card__title">Certificate</h3>
               <p class="text card__text">
                 You will learn how to create a brand identity on the web and for
                 printing. Learn how to work in Illustrator, Photoshop, InDesign
@@ -142,12 +151,12 @@
       </section>
 
       <section class="prices section">
-        <div class="prices__wrapper">
-          <h2 class="title prices__title">Discover Our Prices</h2>
+        <div class="container prices__wrapper">
+          <h2 class="title title--large prices__title">Discover Our Prices</h2>
 
           <div class="prices__cards">
             <article class="card card--type-base prices__card">
-              <h3 class="title card__title">Base</h3>
+              <h3 class="title title--medium card__title">Base</h3>
               <ul class="card__list">
                 <li class="card__item">
                   Et dolorum fuga et harum quidem rerum
@@ -156,13 +165,15 @@
                 <li class="card__item">Necessitatibus saepe</li>
                 <li class="card__item">Ut aut reiciendis</li>
               </ul>
-              <p class="card__price card__price--full">12 000$</p>
-              <p class="card__price card__price--partial">3 000$</p>
+              <p class="value value--small card__price card__price--full-term">
+                12 000$
+              </p>
+              <p class="value card__price card__price--per-month">3 000$</p>
               <a class="btn card__btn" href="#">Choose</a>
             </article>
 
             <article class="card card--type-optimal prices__card">
-              <h3 class="title card__title">Optimal</h3>
+              <h3 class="title title--medium card__title">Optimal</h3>
               <ul class="card__list">
                 <li class="card__item">Rerum hic tenetur a sapiente</li>
                 <li class="card__item">Consectetur, adipisci velit</li>
@@ -172,13 +183,15 @@
                   Illo inventore veritatis et quasi architecto
                 </li>
               </ul>
-              <p class="card__price card__price--full">24 000$</p>
-              <p class="card__price card__price--partial">6 000$</p>
+              <p class="value value--small card__price card__price--full-term">
+                24 000$
+              </p>
+              <p class="value card__price card__price--per-month">6 000$</p>
               <a class="btn card__btn" href="#">Choose</a>
             </article>
 
             <article class="card card--type-premium prices__card">
-              <h3 class="title card__title">Premium</h3>
+              <h3 class="title title--medium card__title">Premium</h3>
               <ul class="card__list">
                 <li class="card__item">Ullamco laboris nisi ut</li>
                 <li class="card__item">Voluptate velit esse cillum</li>
@@ -188,8 +201,10 @@
                 <li class="card__item">Necessitatibus saepe eveniet</li>
                 <li class="card__item">Sunt in culpa qui officia</li>
               </ul>
-              <p class="card__price card__price--full">64 000$</p>
-              <p class="card__price card__price--partial">18 000$</p>
+              <p class="value value--small card__price card__price--full-term">
+                64 000$
+              </p>
+              <p class="value card__price card__price--per-month">18 000$</p>
               <a class="btn card__btn" href="#">Choose</a>
             </article>
           </div>
@@ -220,7 +235,7 @@
 
           <div class="sitemap footer__sitemap">
             <div class="sitemap__column">
-              <h4 class="title sitemap__title">Courses</h4>
+              <h4 class="title title--small sitemap__title">Courses</h4>
               <ul class="sitemap__list">
                 <li class="sitemap__item">
                   <a class="link sitemap__link" href="#">Animation</a>
@@ -244,7 +259,7 @@
             </div>
 
             <div class="sitemap__column">
-              <h4 class="title sitemap__title">Teachers</h4>
+              <h4 class="title title--small sitemap__title">Teachers</h4>
               <ul class="sitemap__list">
                 <li class="sitemap__item">
                   <a class="link sitemap__link" href="#">All Teachers</a>
@@ -256,7 +271,7 @@
             </div>
 
             <div class="sitemap__column">
-              <h4 class="title sitemap__title">Information</h4>
+              <h4 class="title title--small sitemap__title">Information</h4>
               <ul class="sitemap__list">
                 <li class="sitemap__item">
                   <a class="link sitemap__link" href="#">Blog</a>
@@ -271,7 +286,7 @@
             </div>
 
             <div class="sitemap__column">
-              <h4 class="title sitemap__title">En</h4>
+              <h4 class="title title--small sitemap__title">En</h4>
               <ul class="sitemap__list">
                 <li class="sitemap__item">
                   <a class="link sitemap__link" href="#">English</a>
@@ -287,9 +302,9 @@
           </div>
         </div>
 
-        <div class="footer__copyright">
-          <a class="link footer__link" href="#">Policy privacy</a>
-          <span class="text footer__text"
+        <div class="copyright footer__copyright">
+          <a class="link copyright__link" href="#">Policy privacy</a>
+          <span class="text copyright__text"
             >Copyright 2022. All rights reserved</span
           >
         </div>
