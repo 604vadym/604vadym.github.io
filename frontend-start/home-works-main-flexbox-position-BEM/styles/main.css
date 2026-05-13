@@ -52,6 +52,9 @@ body {
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 467px;
 }
 
@@ -60,6 +63,107 @@ body {
 
   --card-title-space: 26px;
   --card-line-space: 10px;
+}
+
+.card--size-large {
+  padding-top: 48px;
+  padding-bottom: 51px;
+  padding-left: 68px;
+  min-height: 732px;
+
+  --card-title-space: 47px;
+  --card-item-space: 22px;
+  --card-price-space-small: 3px;
+  --card-price-space-large: 18px;
+}
+
+.card__price--space-small {
+  margin-bottom: var(--card-price-space-small);
+}
+
+.card__price--space-large {
+  margin-bottom: var(--card-price-space-large);
+}
+
+.card__text {
+  max-width: 368px;
+}
+
+.card__text::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: var(--line-thickness);
+  margin-bottom: var(--card-line-space);
+  background-color: var(--main-color-dark);
+}
+
+.card__title {
+  margin-bottom: var(--card-title-space);
+}
+
+.card__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-item-space);
+}
+
+.card__item {
+  max-width: 361px;
+}
+
+.card--type-portfolio,
+.card--type-base,
+.card--type-premium {
+  background-color: var(--card-bg-variant-1);
+}
+
+.value--small {
+  color: var(--card-price-full-term);
+}
+
+.card--type-internship {
+  background-color: var(--card-bg-variant-2);
+}
+
+.card--type-certificate {
+  background-color: var(--card-bg-variant-3);
+}
+
+.card--type-base,
+.card--type-premium {
+  --card-price-full-term: var(--main-color-muted);
+
+  --card-btn-bg: var(--main-color-dark);
+  --card-btn-color: var(--secondary-color-light);
+}
+
+.card--type-optimal {
+  background-color: var(--card-bg-accent);
+  color: var(--main-color-light);
+
+  --card-btn-bg: var(--secondary-color-light);
+  --card-btn-color: var(--main-color-accent);
+}
+
+.card__item::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 12px;
+  background-color: var(--main-color-dark);
+}
+
+.card__btn {
+  display: inline-block;
+  min-width: 163px;
+  height: 58px;
+  padding: 16px 36px;
+  background-color: var(--card-btn-bg);
+  color: var(--card-btn-color);
+  text-align: center;
+  line-height: 26px;
 }
 
 .title__line {
@@ -96,18 +200,6 @@ body {
 .value--small {
   font-size: 24px;
   line-height: 26px;
-}
-
-.card--type-portfolio {
-  background-color: var(--card-bg-variant-1);
-}
-
-.card--type-internship {
-  background-color: var(--card-bg-variant-2);
-}
-
-.card--type-certificate {
-  background-color: var(--card-bg-variant-3);
 }
 
 .header__wrapper,
@@ -380,19 +472,15 @@ body {
   color: var(--main-color-muted);
 }
 
-.card__text {
-  width: 368px;
+.prices__wrapper {
+  padding-top: 171px;
 }
 
-.card__text::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: var(--line-thickness);
-  margin-bottom: var(--card-line-space);
-  background-color: var(--main-color-dark);
+.prices__title {
+  margin-bottom: 100px;
 }
 
-.card__title {
-  margin-bottom: var(--card-title-space);
+.prices__cards {
+  display: flex;
+  justify-content: space-between;
 }
