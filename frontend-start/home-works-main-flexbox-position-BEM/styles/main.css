@@ -221,9 +221,11 @@ ul {
 }
 
 .promo__duration {
+  --side-padding: 0.75px;
+
   font-weight: 700;
   line-height: 22px;
-  padding: 0 0.75px;
+  padding: 0 var(--side-padding);
   margin-bottom: 32px;
   display: inline-block;
 }
@@ -231,10 +233,10 @@ ul {
 .promo__duration::after {
   content: "";
   display: block;
-  width: calc(100% + 1.5px);
+  width: calc(100% + (var(--side-padding) * 2));
+  margin-left: calc(var(--side-padding) * -1);
   height: 4px;
   margin-top: 4px;
-  margin-left: -0.75px;
   background-color: #504dee;
 }
 
