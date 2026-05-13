@@ -108,8 +108,22 @@ body {
   gap: var(--card-item-space);
 }
 
-.card__item {
-  max-width: 361px;
+.card--type-base,
+.card--type-premium {
+  --card-price-full-term: var(--main-color-muted);
+
+  --card-marker-color: var(--main-color-dark);
+  --card-btn-bg: var(--main-color-dark);
+  --card-btn-color: var(--secondary-color-light);
+}
+
+.card--type-optimal {
+  background-color: var(--card-bg-accent);
+  color: var(--main-color-light);
+
+  --card-marker-color: var(--secondary-color-light);
+  --card-btn-bg: var(--secondary-color-light);
+  --card-btn-color: var(--main-color-accent);
 }
 
 .card--type-portfolio,
@@ -118,7 +132,7 @@ body {
   background-color: var(--card-bg-variant-1);
 }
 
-.value--small {
+.card__price--full-term {
   color: var(--card-price-full-term);
 }
 
@@ -130,20 +144,10 @@ body {
   background-color: var(--card-bg-variant-3);
 }
 
-.card--type-base,
-.card--type-premium {
-  --card-price-full-term: var(--main-color-muted);
-
-  --card-btn-bg: var(--main-color-dark);
-  --card-btn-color: var(--secondary-color-light);
-}
-
-.card--type-optimal {
-  background-color: var(--card-bg-accent);
-  color: var(--main-color-light);
-
-  --card-btn-bg: var(--secondary-color-light);
-  --card-btn-color: var(--main-color-accent);
+.card__item {
+  display: flex;
+  align-items: center;
+  max-width: 361px;
 }
 
 .card__item::before {
@@ -152,7 +156,7 @@ body {
   width: 8px;
   height: 8px;
   margin-right: 12px;
-  background-color: var(--main-color-dark);
+  background-color: var(--card-marker-color);
 }
 
 .card__btn {
@@ -470,6 +474,10 @@ body {
 .what-learn__description-text,
 .what-learn__stats-text {
   color: var(--main-color-muted);
+}
+
+.prices {
+  background-color: var(--secondary-color-light);
 }
 
 .prices__wrapper {
