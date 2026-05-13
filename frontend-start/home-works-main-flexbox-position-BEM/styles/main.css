@@ -367,13 +367,16 @@ body {
   gap: 28px;
 }
 
+.promo {
+  overflow: hidden;
+}
+
 .promo__wrapper {
   position: relative;
 }
 
 .promo__wrapper::after {
   content: "";
-  display: inline-block;
   position: absolute;
   width: 831px;
   height: 751px;
@@ -383,7 +386,7 @@ body {
     url(../img/ellipse-2.png) no-repeat right top -100px;
   bottom: 0;
   right: 0;
-  margin-right: -232px;
+  margin-right: -240px;
 }
 
 .promo__wrapper,
