@@ -1,0 +1,170 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #efeff2;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.header__logo-img,
+.footer__logo-img {
+  width: 42px;
+  height: 36px;
+}
+
+.container {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.btn {
+  font-weight: 700;
+}
+
+.header__wrapper {
+  padding-top: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  line-height: 22px;
+  color: #19191c;
+}
+
+.header__main {
+  display: flex;
+  align-items: center;
+  gap: 68px;
+}
+
+.header__logo-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 29px;
+  color: #19191c;
+}
+
+.header__list {
+  display: flex;
+  gap: 48px;
+}
+
+.header__link--with-arrow::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 10px;
+  margin-left: 6px;
+  background-image: url(../img/icon-menu.svg);
+}
+
+.header__side {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  justify-content: space-around;
+}
+
+.header__btn {
+  padding: 12px 37px;
+  background-color: #19191c;
+  color: #efeff2;
+}
+
+.footer {
+  background-color: #19191c;
+}
+
+.footer__wrapper {
+  min-height: 536px;
+  padding: 59px 0 62px;
+  background-color: #19191c;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fbfbfc;
+}
+
+.footer__main {
+  display: flex;
+  justify-content: space-between;
+  gap: 146px;
+}
+
+.footer__copyright {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  color: #6d6d77;
+}
+
+.footer__logo-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  line-height: 22px;
+}
+
+.footer__logo-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+}
+
+.footer__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.footer__sitemap {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.sitemap__column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sitemap__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sitemap__title {
+  font-weight: 600;
+  line-height: 22px;
+}
+
+.sitemap__link {
+  color: #efeff2;
+}
