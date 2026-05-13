@@ -223,15 +223,18 @@ ul {
 .promo__duration {
   font-weight: 700;
   line-height: 22px;
+  padding: 0 0.75px;
   margin-bottom: 32px;
+  display: inline-block;
 }
 
 .promo__duration::after {
   content: "";
   display: block;
-  width: 84px;
+  width: calc(100% + 1.5px);
   height: 4px;
   margin-top: 4px;
+  margin-left: -0.75px;
   background-color: #504dee;
 }
 
