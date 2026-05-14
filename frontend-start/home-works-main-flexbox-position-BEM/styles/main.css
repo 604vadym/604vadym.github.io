@@ -147,7 +147,7 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; /* HERE IS BUG (should be fixed) - add more text to what-learn__card and text in what-learn__cards is on different level*/
   width: 467px;
 }
 
