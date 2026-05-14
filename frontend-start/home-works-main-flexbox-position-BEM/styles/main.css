@@ -352,6 +352,8 @@ body {
 }
 
 .header__btn {
+  min-width: 153px;
+  height: 46px;
   padding: 12px 37px;
   background-color: var(--btn-primary-bg);
   color: var(--btn-primary-color);
@@ -478,6 +480,22 @@ body {
   /* margin-right: -240px; */
 }
 
+/* .promo {
+  overflow: hidden;
+}
+
+.promo__media {
+  position: relative;
+}
+
+.promo__img {
+  position: absolute;
+  bottom: 0px;
+  left: 190px;
+  display: block;
+  width: 831px;
+} */
+
 .promo__wrapper,
 .promo__timer {
   display: flex;
@@ -510,6 +528,7 @@ body {
 
 .promo__duration {
   --side-padding: 0.75px;
+
   font-weight: var(--promo-duration-font-weight);
   line-height: var(--promo-duration-line-height);
   padding: 0 var(--side-padding);
