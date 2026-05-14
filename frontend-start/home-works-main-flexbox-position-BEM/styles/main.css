@@ -16,6 +16,10 @@ ul {
 }
 
 :root {
+  --line-thickness: 4px;
+
+  --container-width: 1440px;
+
   --color-black-pure: #19191c;
   --color-white-pure: #efeff2;
   --color-gray-pure: #6d6d77;
@@ -38,22 +42,31 @@ ul {
   --btn-accent-bg: var(--color-purple-accent);
   --btn-accent-color: var(--color-white-soft);
 
-  --btn-card-primary-bg: var(--color-black-pure);
-  --btn-card-primary-color: var(--color-white-soft);
-
-  --btn-card-primary-bg-inverse: var(--color-white-soft);
-  --btn-card-primary-color-inverse: var(--color-purple-accent);
-
   --card-bg-accent: var(--color-purple-accent);
   --card-bg-variant-1: var(--color-green-pastel);
   --card-bg-variant-2: var(--color-yellow-pastel);
   --card-bg-variant-3: var(--color-pink-pastel);
 
-  --line-thickness: 4px;
+  --card-text-color: var(--color-black-pure);
+  --card-text-color-inverse: var(--color-white-soft);
+  --card-text-color-muted: var(--color-gray-pure);
+
+  --card-btn-primary-bg: var(--color-black-pure);
+  --card-btn-primary-color: var(--color-white-soft);
+  --card-btn-primary-bg-inverse: var(--color-white-soft);
+  --card-btn-primary-color-inverse: var(--color-purple-accent);
+
+  --card-marker-color: var(--color-black-pure);
+  --card-marker-color-inverse: var(--color-white-soft);
+
+  --card-line-color: var(--color-black-pure);
+  --card-line-thickness: var(--line-thickness);
+
+  --font-main: Inter, sans-serif;
 }
 
 body {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-main);
   font-weight: 400;
   font-size: 18px;
   line-height: 28px;
@@ -68,7 +81,7 @@ body {
 }
 
 .container {
-  width: 1440px;
+  width: var(--container-width);
   margin: 0 auto;
 }
 
@@ -80,22 +93,57 @@ body {
 }
 
 .card--size-small {
-  padding: 68px 48px;
-
   --card-title-space: 26px;
   --card-line-space: 10px;
+
+  padding: 68px 48px;
 }
 
 .card--size-large {
-  padding-top: 48px;
-  padding-bottom: 51px;
-  padding-left: 68px;
-  min-height: 732px;
-
   --card-title-space: 47px;
   --card-item-space: 22px;
   --card-price-space-small: 3px;
   --card-price-space-large: 18px;
+
+  padding: 48px 0 51px 68px;
+  min-height: 732px;
+}
+
+.card--type-base,
+.card--type-premium {
+  --card-price-full-term: var(--card-text-color-muted);
+
+  --card-btn-bg: var(--card-btn-primary-bg);
+  --card-btn-color: var(--card-btn-primary-color);
+  --card-marker-color: var(--card-marker-color);
+
+  background-color: var(--card-bg-variant-1);
+  color: var(--card-text-color);
+}
+
+.card--type-optimal {
+  --card-btn-bg: var(--card-btn-primary-bg-inverse);
+  --card-btn-color: var(--card-btn-primary-color-inverse);
+  --card-marker-color: var(--card-marker-color-inverse);
+
+  background-color: var(--card-bg-accent);
+  color: var(--card-text-color-inverse);
+}
+
+.card--type-portfolio {
+  background-color: var(--card-bg-variant-1);
+}
+
+.card--type-internship {
+  background-color: var(--card-bg-variant-2);
+}
+
+.card--type-certificate {
+  background-color: var(--card-bg-variant-3);
+}
+
+.card__price--full-term {
+  color: var(--card-price-full-term);
 }
 
 .card__price--space-small {
@@ -114,62 +162,26 @@ body {
   content: "";
   display: block;
   width: 100%;
-  height: var(--line-thickness);
+  height: var(--card-line-thickness);
   margin-bottom: var(--card-line-space);
-  background-color: var(--main-color-dark);
+  background-color: var(--card-line-color);
 }
 
 .card__title {
   margin-bottom: var(--card-title-space);
 }
 
-.card__list {
+.card__list,
+.card__item {
   display: flex;
+}
+
+.card__list {
   flex-direction: column;
   gap: var(--card-item-space);
 }
 
-.card--type-base,
-.card--type-premium {
-  --card-price-full-term: var(--main-color-muted);
-
-  --card-marker-color: var(--main-color-dark);
-  --card-btn-bg: var(--btn-card-primary-bg);
-  --card-btn-color: var(--btn-card-primary-color);
-}
-
-.card--type-optimal {
-  background-color: var(--card-bg-accent);
-  color: var(--main-color-light);
-
-  --card-marker-color: var(--main-color-surface);
-  --card-btn-bg: var(--btn-card-primary-bg-inverse);
-  --card-btn-color: var(--btn-card-primary-color-inverse);
-}
-
-.card--type-base,
-.card--type-premium {
-  background-color: var(--card-bg-variant-1);
-}
-
-.card__price--full-term {
-  color: var(--card-price-full-term);
-}
-
-.card--type-portfolio {
-  background-color: var(--card-bg-variant-1);
-}
-
-.card--type-internship {
-  background-color: var(--card-bg-variant-2);
-}
-
-.card--type-certificate {
-  background-color: var(--card-bg-variant-3);
-}
-
 .card__item {
-  display: flex;
   align-items: center;
   max-width: 361px;
 }
@@ -367,9 +379,9 @@ body {
   gap: 28px;
 }
 
-.promo {
-  /* overflow: hidden; */
-}
+/* .promo {
+  overflow: hidden;
+} */
 
 .promo__wrapper {
   position: relative;
