@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <title>Flex Layout</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="block block-left">Left</div>
+      <div class="block block-right">Right</div>
+    </div>
+
+    <div class="container">
+      <div class="block block-left">Left</div>
+      <div class="block block-right block-right">Right 1</div>
+      <div class="block block-right">Right 2</div>
+      <div class="block block-right">Right 3</div>
+    </div>
+
+    <div class="container">
+      <div class="block block-left">Left 1</div>
+      <div class="block block-left">Left 2</div>
+      <div class="block block-right">Right 1</div>
+      <div class="block block-right">Right 2</div>
+    </div>
+
+    <div class="container container-big">
+      <div class="block-right block-wrapper">
+        <div class="block">Right 1</div>
+        <div class="block">Right 2</div>
+      </div>
+      <div class="block block-right block-big-height">Right big height</div>
+    </div>
+
+    <div class="container container-big">
+      <div class="block block-center-left block-big-width block-big-height">
+        Center big height big width
+      </div>
+      <div class="block-center-right block-wrapper">
+        <div class="block block-big-width">Center 1 big width</div>
+        <div class="block block-big-width">Center 2 big width</div>
+      </div>
+    </div>
+  </body>
+</html>
