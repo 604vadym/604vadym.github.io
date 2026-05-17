@@ -24,8 +24,13 @@ body {
   border: 1px solid black;
 }
 
-.block-wrapper {
+.block-wrapper-right {
   display: flex;
   flex-direction: row-reverse;
+  gap: 20px;
+}
+
+.block-wrapper-left {
+  display: flex;
   gap: 20px;
 }
