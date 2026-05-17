@@ -4,6 +4,7 @@ body {
 
 .container {
   height: 50px;
+  min-width: 688px;
   padding: 10px 0 10px 20px;
   margin-bottom: 15px;
 
