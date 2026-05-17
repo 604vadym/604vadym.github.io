@@ -5,7 +5,7 @@ body {
 .container {
   height: 50px;
   min-width: 688px;
-  padding: 10px 0 10px 20px;
+  padding: 10px 20px 10px 20px;
   margin-bottom: 15px;
 
   display: flex;
@@ -17,10 +17,15 @@ body {
 .block {
   height: 50px;
   width: 150px;
-  margin-right: 20px;
 
   text-align: center;
 
   background-color: grey;
   border: 1px solid black;
+}
+
+.block-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
 }
