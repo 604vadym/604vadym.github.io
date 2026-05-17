@@ -11,12 +11,6 @@ body {
   background-color: lightgrey;
 }
 
-.container::after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
 .block {
   height: 50px;
   width: 150px;
