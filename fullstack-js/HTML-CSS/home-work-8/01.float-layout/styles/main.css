@@ -29,6 +29,10 @@ body {
   height: 112px;
 }
 
+.block-big-height-margin-top-minus {
+  margin-top: -52px;
+}
+
 .block-wrapper .block:first-child {
   margin-bottom: 10px;
 }
@@ -39,4 +43,9 @@ body {
 
 .block-right {
   float: right;
+}
+
+.block-right-clear {
+  margin-top: 10px;
+  clear: both;
 }
