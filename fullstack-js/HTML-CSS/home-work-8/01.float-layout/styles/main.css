@@ -10,6 +10,12 @@ body {
   background-color: lightgrey;
 }
 
+.container::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 .container-big {
   height: 112px;
 }
