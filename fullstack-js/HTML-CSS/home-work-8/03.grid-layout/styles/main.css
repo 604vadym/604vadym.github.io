@@ -4,7 +4,7 @@ body {
 
 .container {
   padding: 10px 20px;
-  margin-bottom: 15px;
+  margin: 15px auto;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -22,6 +22,14 @@ body {
   border: 1px solid black;
 }
 
-.block:last-child {
+.container > .block:nth-child(2) {
   justify-self: end;
+}
+
+.block-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  justify-self: end;
+  direction: rtl;
 }
