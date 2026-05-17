@@ -62,9 +62,14 @@ body {
 
 .block-center-left {
   float: left;
-  margin-left: calc(50% - 300px);
+  margin-left: calc(50% - 320px);
 }
 
 .block-center-right {
   float: left;
+}
+
+.block-center-right-calc {
+  float: right;
+  margin-right: calc(50% - 300px - 24px);
 }
