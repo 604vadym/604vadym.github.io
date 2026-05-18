@@ -14,15 +14,12 @@ body {
   background-color: lightgrey;
 }
 
-.container-big-right,
-.container-big-center {
-  justify-content: center;
-  gap: 20px;
-}
-
 .container-big-right {
   justify-content: end;
-  flex-direction: row-reverse;
+}
+
+.container-big-center {
+  justify-content: center;
 }
 
 .block {
@@ -44,20 +41,17 @@ body {
 }
 
 .block-wrapper-right,
-.block-wrapper-center {
+.block-wrapper-left,
+.block-wrapper-column {
   display: flex;
-  flex-direction: row-reverse;
-  gap: 20px;
 }
 
+.block-wrapper-right,
 .block-wrapper-left {
-  display: flex;
   gap: 20px;
 }
 
-.container-big-right .block-wrapper-right,
-.container-big-center .block-wrapper-center {
+.block-wrapper-column {
   flex-direction: column;
-  justify-content: space-between;
   gap: 10px;
 }
