@@ -19,3 +19,13 @@ body {
   background-color: grey;
   border: 1px solid black;
 }
+
+.grid1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.block:not(:first-child) {
+  justify-self: end;
+}
