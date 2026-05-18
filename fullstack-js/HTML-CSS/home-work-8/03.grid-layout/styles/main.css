@@ -9,6 +9,7 @@ body {
 
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 20px;
 
   background-color: lightgrey;
 }
@@ -24,7 +25,11 @@ body {
 }
 
 .block-big-height {
-  height: 102px;
+  height: 112px;
+}
+
+.block-big-width {
+  width: 300px;
 }
 
 .container > .block:nth-child(2) {
@@ -69,6 +74,6 @@ body {
   gap: 10px;
 }
 
-.block-big-height {
-  align-self: center;
+.block-big-width.block-big-height {
+  justify-self: end;
 }
