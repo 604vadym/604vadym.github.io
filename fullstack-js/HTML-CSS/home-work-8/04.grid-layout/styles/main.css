@@ -26,6 +26,22 @@ body {
   gap: 20px;
 }
 
-.block:not(:first-child) {
+.grid2-v1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto auto;
+  gap: 20px;
+}
+
+.grid2-v2 {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 20px;
+}
+
+.grid1 .block:last-child {
+  justify-self: end;
+}
+
+.grid2-v1 .block:nth-child(2) {
   justify-self: end;
 }
