@@ -20,22 +20,29 @@ body {
   border: 1px solid black;
 }
 
-.grid1 {
+.grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 20px;
+}
+
+.grid1 {
+  grid-template-columns: 1fr 1fr;
 }
 
 .grid2-v1 {
-  display: grid;
   grid-template-columns: 1fr 1fr auto auto;
-  gap: 20px;
 }
 
 .grid2-v2 {
-  display: grid;
   grid-template-columns: 1fr auto auto auto;
-  gap: 20px;
+}
+
+.grid3-v1 {
+  grid-template-columns: auto 1fr 1fr auto;
+}
+
+.grid3-v2 {
+  grid-template-columns: auto 1fr auto auto;
 }
 
 .grid1 .block:last-child {
@@ -43,5 +50,9 @@ body {
 }
 
 .grid2-v1 .block:nth-child(2) {
+  justify-self: end;
+}
+
+.grid3-v1 .block:nth-child(3) {
   justify-self: end;
 }
