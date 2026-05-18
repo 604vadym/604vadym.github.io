@@ -41,7 +41,6 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   justify-self: end;
-  direction: rtl;
 }
 
 .block-wrapper-left,
@@ -57,7 +56,6 @@ body {
 
 .block-wrapper-right {
   justify-self: end;
-  direction: rtl;
 }
 
 .block-wrapper-big-right {
@@ -65,7 +63,6 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   justify-self: end;
-  direction: rtl;
 }
 
 .block-wrapper-big {
