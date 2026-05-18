@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+}
+
+.container {
+  min-width: 668px;
+  padding: 10px 20px;
+  margin: 15px auto;
+
+  background-color: lightgrey;
+}
+
+.block {
+  height: 50px;
+  width: 150px;
+
+  text-align: center;
+
+  background-color: grey;
+  border: 1px solid black;
+}
