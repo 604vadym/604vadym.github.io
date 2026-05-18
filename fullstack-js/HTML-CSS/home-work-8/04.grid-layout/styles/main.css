@@ -5,7 +5,7 @@ body {
 .container {
   min-width: 668px;
   padding: 10px 20px;
-  margin: 15px auto;
+  margin: 15px 0;
 
   background-color: lightgrey;
 }
