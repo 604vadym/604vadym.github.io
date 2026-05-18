@@ -3,6 +3,7 @@ body {
 }
 
 .container {
+  min-width: 668px;
   padding: 10px 20px;
   margin: 15px auto;
 
@@ -20,6 +21,10 @@ body {
 
   background-color: grey;
   border: 1px solid black;
+}
+
+.block-big-height {
+  height: 102px;
 }
 
 .container > .block:nth-child(2) {
@@ -48,4 +53,22 @@ body {
 .block-wrapper-right {
   justify-self: end;
   direction: rtl;
+}
+
+.block-wrapper-big-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  justify-self: end;
+  direction: rtl;
+}
+
+.block-wrapper-big {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+
+.block-big-height {
+  align-self: center;
 }
