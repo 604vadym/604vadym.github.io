@@ -252,3 +252,31 @@ body {
   position: absolute;
   background: transparent;
 }
+
+/* ==============================
+   4.3 FOOTER
+   ============================== */
+.footer {
+  background-color: var(--main-color-accent);
+}
+
+.footer__content {
+  padding: 50px 7px;
+}
+
+.footer__author {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-tight);
+
+  margin-bottom: 20px;
+}
+
+.footer__author,
+.footer__copyright {
+  color: var(--main-color-light);
+}
+
+.footer__copyright {
+  font-size: var(--font-size-xs);
+}
