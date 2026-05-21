@@ -158,3 +158,19 @@ body {
 .main__about {
   background-color: var(--main-color-light);
 }
+
+.about__content {
+  padding: 112px 0 100px;
+  text-align: center;
+}
+
+.about__title {
+  width: 540px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.about__description {
+  width: 540px;
+  margin: 0 auto;
+}
