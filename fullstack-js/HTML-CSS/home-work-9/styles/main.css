@@ -94,6 +94,8 @@ body {
 .btn {
   display: inline-block;
   text-align: center;
+  border: none;
+  cursor: pointer;
 }
 
 .btn--type-cta {
@@ -172,8 +174,6 @@ body {
 }
 
 .about__title {
-  width: 540px;
-  margin: 0 auto;
   margin-bottom: 50px;
 }
 
@@ -217,4 +217,39 @@ body {
 
 .feature__text {
   text-align: left;
+}
+
+/* ==============================
+   4.3 WORK
+   ============================== */
+.work__content {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.work__title {
+  margin-bottom: 50px;
+}
+
+.work__description {
+  width: 540px;
+  margin: 0 auto;
+  margin-bottom: 57px;
+}
+
+.work__video {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video__poster {
+  width: 1110px;
+  height: 600px;
+}
+
+.video__play-btn {
+  position: absolute;
+  background: transparent;
 }
