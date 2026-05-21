@@ -70,3 +70,32 @@ body {
   width: var(--container-width);
   margin: 0 auto;
 }
+
+/* ==============================
+   4. HEADER
+   ============================== */
+.header__content {
+  padding-top: 79px;
+}
+
+.menu__list {
+  display: flex;
+  gap: 45px;
+}
+
+.menu__link {
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--main-color-dark);
+}
+
+.menu__link--active {
+  font-weight: var(--font-weight-medium);
+  color: var(--main-color-accent);
+  pointer-events: none;
+}
+
+.menu__link:hover {
+  text-decoration: underline;
+}
