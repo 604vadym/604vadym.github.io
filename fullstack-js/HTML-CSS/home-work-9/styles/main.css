@@ -42,4 +42,14 @@ ul {
   --line-height-tight: 1;
 
   --letter-spacing-wide: 0.1em;
+
+  --container-width: 1122px;
+}
+
+/* ==============================
+   3. BASE STYLES
+   ============================== */
+.container {
+  width: var(--container-width);
+  margin: 0 auto;
 }
