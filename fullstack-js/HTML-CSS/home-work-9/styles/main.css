@@ -39,7 +39,7 @@ ul {
   --font-size-lg: 32px;
   --font-size-xl: 48px;
 
-  --line-height-maim: 1.64;
+  --line-height-main: 1.64;
   --line-height-tight: 1;
 
   --letter-spacing-wide: 0.1em;
@@ -60,7 +60,7 @@ body {
   font-family: var(--font-main);
   font-weight: var(--font-weight-normal);
   font-size: var(--font-size-sm);
-  line-height: var(--line-height-maim);
+  line-height: var(--line-height-main);
   color: var(--color-grey);
 
   background-color: var(--color-silver);
