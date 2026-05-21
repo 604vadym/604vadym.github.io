@@ -44,8 +44,8 @@ ul {
 
   --letter-spacing-wide: 0.1em;
 
-  --site-min-width: 1122px;
-  --container-width: 1122px;
+  --site-min-width: 1130px;
+  --container-width: 1130px;
 
   --main-color-dark: var(--color-black);
   --main-color-light: var(--color-white);
@@ -117,7 +117,7 @@ body {
    4.1 HEADER
    ============================== */
 .header__content {
-  padding: 79px 0;
+  padding: 79px 4px;
 }
 
 .menu__list {
@@ -146,7 +146,7 @@ body {
    4.2 HERO
    ============================== */
 .hero {
-  padding: 83px 0 141px;
+  padding: 83px 4px 141px;
 }
 
 .hero__title {
@@ -194,11 +194,11 @@ body {
 
 .projects__content {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
   gap: 49px;
 
-  padding: 100px 0;
+  padding: 100px 14px;
 }
 
 .projects__item {
@@ -226,7 +226,7 @@ body {
    4.3 WORK
    ============================== */
 .work__content {
-  padding: 100px 0;
+  padding: 100px 10px;
   text-align: center;
 }
 
@@ -264,7 +264,7 @@ body {
 }
 
 .footer__content {
-  padding: 50px 7px;
+  padding: 50px 11px;
 }
 
 .footer__author {
