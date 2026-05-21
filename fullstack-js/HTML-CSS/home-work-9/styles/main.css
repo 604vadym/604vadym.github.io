@@ -84,6 +84,19 @@ body {
   text-transform: capitalize;
 }
 
+.btn {
+  display: inline-block;
+  text-align: center;
+}
+
+.btn--type-cta {
+  color: var(--main-color-light);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+
+  background-color: var(--main-color-accent);
+}
+
 /* ==============================
    4. COMPONENTS & SECTIONS
    ============================== */
@@ -121,7 +134,7 @@ body {
    4.2 HERO
    ============================== */
 .main__hero {
-  padding: 83px 0;
+  padding: 83px 0 141px;
 }
 
 .hero__title {
@@ -135,15 +148,13 @@ body {
 }
 
 .hero__btn {
-  display: inline-block;
-  min-width: 225px;
-  padding: 25px 41px;
-  margin-bottom: 58px;
+  width: 225px;
+  padding: 25px 0;
+}
 
-  color: var(--main-color-light);
-  letter-spacing: var(--letter-spacing-wide);
-  text-align: center;
-  text-transform: uppercase;
-
-  background-color: var(--main-color-accent);
+/* ==============================
+   4.3 ABOUT
+   ============================== */
+.main__about {
+  background-color: var(--main-color-light);
 }
