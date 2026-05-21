@@ -49,6 +49,13 @@ ul {
 /* ==============================
    3. BASE STYLES
    ============================== */
+body {
+  font-family: var(--font-main);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-maim);
+}
+
 .container {
   width: var(--container-width);
   margin: 0 auto;
