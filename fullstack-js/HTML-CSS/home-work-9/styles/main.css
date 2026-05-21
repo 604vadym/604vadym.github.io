@@ -1,3 +1,6 @@
+/* ==============================
+   1. RESET
+   ============================== */
 *,
 *::before,
 *::after {
@@ -12,4 +15,31 @@ a {
 
 ul {
   list-style-type: none;
+}
+
+/* ==============================
+   2. VARIABLES
+   ============================== */
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-grey: #727272;
+  --color-silver: #eeeff1;
+  --color-accent: #34547a;
+
+  --font-main: "Roboto", sans-serif;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+
+  --font-size-xs: 13px;
+  --font-size-sm: 16px;
+  --font-size-md: 21px;
+  --font-size-lg: 32px;
+  --font-size-xl: 48px;
+
+  --line-height-maim: 1.64;
+  --line-height-tight: 1;
+
+  --letter-spacing-wide: 0.1em;
 }
