@@ -142,7 +142,7 @@ body {
 /* ==============================
    4.2 HERO
    ============================== */
-.main__hero {
+.hero {
   padding: 83px 0 141px;
 }
 
@@ -164,7 +164,7 @@ body {
 /* ==============================
    4.3 ABOUT
    ============================== */
-.main__about {
+.about {
   background-color: var(--main-color-light);
 }
 
@@ -185,7 +185,7 @@ body {
 /* ==============================
    4.3 PROJECTS
    ============================== */
-.main__projects {
+.projects {
   background-color: var(--main-color-accent);
 }
 
