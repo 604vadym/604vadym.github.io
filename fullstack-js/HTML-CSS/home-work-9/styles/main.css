@@ -60,6 +60,9 @@ body {
   font-weight: var(--font-weight-normal);
   font-size: var(--font-size-sm);
   line-height: var(--line-height-maim);
+  color: var(--color-grey);
+
+  background-color: var(--color-silver);
 }
 
 .container {
