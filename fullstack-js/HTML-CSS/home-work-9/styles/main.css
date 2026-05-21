@@ -71,11 +71,28 @@ body {
   margin: 0 auto;
 }
 
+.main-title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xl);
+  color: var(--main-color-dark);
+}
+
+.section-title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-lg);
+  color: var(--main-color-dark);
+  text-transform: capitalize;
+}
+
 /* ==============================
-   4. HEADER
+   4. COMPONENTS & SECTIONS
+   ============================== */
+
+/* ==============================
+   4.1 HEADER
    ============================== */
 .header__content {
-  padding-top: 79px;
+  padding: 79px 0;
 }
 
 .menu__list {
@@ -84,7 +101,7 @@ body {
 }
 
 .menu__link {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--main-color-dark);
@@ -98,4 +115,35 @@ body {
 
 .menu__link:hover {
   text-decoration: underline;
+}
+
+/* ==============================
+   4.2 HERO
+   ============================== */
+.main__hero {
+  padding: 83px 0;
+}
+
+.hero__title {
+  margin-bottom: 60px;
+}
+
+.hero__description {
+  width: 540px;
+  padding: 0 1px;
+  margin-bottom: 65px;
+}
+
+.hero__btn {
+  display: inline-block;
+  min-width: 225px;
+  padding: 25px 41px;
+  margin-bottom: 58px;
+
+  color: var(--main-color-light);
+  letter-spacing: var(--letter-spacing-wide);
+  text-align: center;
+  text-transform: uppercase;
+
+  background-color: var(--main-color-accent);
 }
