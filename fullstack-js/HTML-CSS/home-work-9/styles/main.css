@@ -198,7 +198,7 @@ body {
 }
 
 /* ==============================
-   4.3 PROJECTS
+   4.4 PROJECTS
    ============================== */
 .projects {
   background-color: var(--main-color-accent);
@@ -235,7 +235,7 @@ body {
 }
 
 /* ==============================
-   4.3 WORK
+   4.5 WORK
    ============================== */
 .work__content {
   padding-top: 100px;
@@ -278,7 +278,7 @@ body {
 }
 
 /* ==============================
-   4.3 FOOTER
+   4.6 FOOTER
    ============================== */
 .footer {
   background-color: var(--main-color-accent);
