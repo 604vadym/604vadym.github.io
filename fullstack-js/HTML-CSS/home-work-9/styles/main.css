@@ -26,6 +26,7 @@ ul {
   --color-white: #fff;
   --color-grey: #727272;
   --color-silver: #eeeff1;
+  --color-light-silver: #f9f9f9;
   --color-blue: #34547a;
   --color-dark-blue: #1a3557;
 
@@ -52,6 +53,7 @@ ul {
   --main-color-light: var(--color-white);
   --main-color-muted: var(--color-grey);
   --main-color-surface: var(--color-silver);
+  --main-color-surface-alt: var(--color-light-silver);
   --main-color-accent: var(--color-blue);
   --main-color-accent-hover: var(--color-dark-blue);
 }
@@ -174,7 +176,7 @@ body {
    4.3 ABOUT
    ============================== */
 .about {
-  background-color: var(--main-color-light);
+  background-color: var(--main-color-surface-alt);
 }
 
 .about__content {
