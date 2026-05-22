@@ -27,6 +27,7 @@ ul {
   --color-grey: #727272;
   --color-silver: #eeeff1;
   --color-blue: #34547a;
+  --color-dark-blue: #1a3557;
 
   --font-main: "Roboto", sans-serif;
 
@@ -52,6 +53,7 @@ ul {
   --main-color-muted: var(--color-grey);
   --main-color-surface: var(--color-silver);
   --main-color-accent: var(--color-blue);
+  --main-color-accent-hover: var(--color-dark-blue);
 }
 
 /* ==============================
@@ -107,6 +109,10 @@ body {
   text-transform: uppercase;
 
   background-color: var(--main-color-accent);
+}
+
+.btn--type-cta:hover {
+  background-color: var(--main-color-accent-hover);
 }
 
 /* ==============================
@@ -254,6 +260,10 @@ body {
 .video__play-btn {
   position: absolute;
   background: transparent;
+}
+
+.video__play-btn:hover {
+  filter: brightness(0.8);
 }
 
 /* ==============================
