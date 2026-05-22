@@ -136,7 +136,6 @@ body {
 }
 
 .menu__link {
-  font-weight: var(--font-weight-normal);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--main-color-dark);
