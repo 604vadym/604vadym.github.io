@@ -74,7 +74,7 @@ body {
   width: 100%;
   max-width: var(--container-width);
   margin-inline: auto;
-  padding: 0 0.9375rem;
+  padding-inline: 0.9375rem;
 }
 
 .main-title,
@@ -124,12 +124,12 @@ body {
    4.1 HEADER
    ============================== */
 .header__content {
-  padding-block: 79px;
+  padding-block: clamp(2rem, 1.287rem + 3.04vw, 4.938rem);
 }
 
 .menu__list {
   display: flex;
-  gap: 45px;
+  gap: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
 }
 
 .menu__link {
@@ -152,24 +152,24 @@ body {
    4.2 HERO
    ============================== */
 .hero {
-  padding-top: 83px;
-  padding-bottom: 141px;
+  padding-top: clamp(2rem, 1.226rem + 3.3vw, 5.188rem);
+  padding-bottom: clamp(3rem, 1.589rem + 6.02vw, 8.813rem);
 }
 
 .hero__title {
-  margin-bottom: 60px;
+  margin-bottom: clamp(1.5rem, 0.954rem + 2.33vw, 3.75rem);
 }
 
 .hero__description {
   width: 100%;
   max-width: 56ch;
-  padding-inline: 1px;
-  margin-bottom: 65px;
+  padding-inline: 0.0625rem;
+  margin-bottom: clamp(1.75rem, 1.189rem + 2.39vw, 4.063rem);
 }
 
 .hero__btn {
-  width: 225px;
-  padding: 20px 0;
+  width: clamp(10.625rem, 9.791rem + 3.56vw, 14.063rem);
+  padding: clamp(1rem, 0.939rem + 0.26vw, 1.25rem);
 }
 
 /* ==============================
@@ -180,13 +180,13 @@ body {
 }
 
 .about__content {
-  padding-top: 112px;
-  padding-bottom: 100px;
+  padding-top: clamp(2.5rem, 1.408rem + 4.66vw, 7rem);
+  padding-bottom: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
   text-align: center;
 }
 
 .about__title {
-  margin-bottom: 50px;
+  margin-bottom: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
 }
 
 .about__description {
@@ -207,15 +207,15 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   text-align: center;
-  gap: 49px;
+  gap: clamp(1.25rem, 0.81rem + 1.88vw, 3.063rem);
 
-  padding-block: 100px;
+  padding-block: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
 }
 
 .projects__item {
   display: flex;
   gap: 20px;
-  width: 141px;
+  flex: 0 0 141px;
   align-items: center;
 }
 
@@ -236,19 +236,19 @@ body {
    4.5 WORK
    ============================== */
 .work__content {
-  padding-block: 100px;
+  padding-block: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
   text-align: center;
 }
 
 .work__title {
-  margin-bottom: 50px;
+  margin-bottom: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
 }
 
 .work__description {
   width: 100%;
   max-width: 56ch;
   margin-inline: auto;
-  margin-bottom: 57px;
+  margin-bottom: clamp(1.5rem, 0.999rem + 2.14vw, 3.563rem);
 }
 
 .work__video {
@@ -261,7 +261,7 @@ body {
 .video__poster {
   width: 100%;
   max-width: 1110px;
-  padding-inline: 0.375rem;
+  padding-inline: clamp(0rem, -0.091rem + 0.39vw, 0.375rem);
 }
 
 .video__play-btn {
@@ -274,7 +274,7 @@ body {
 }
 
 .video__play-icon {
-  width: 100px;
+  width: clamp(3.125rem, 2.367rem + 3.24vw, 6.25rem);
 }
 
 /* ==============================
@@ -285,7 +285,7 @@ body {
 }
 
 .footer__content {
-  padding-block: 50px;
+  padding-block: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
 }
 
 .footer__author {
@@ -293,13 +293,13 @@ body {
   font-size: var(--font-size-md);
   line-height: var(--line-height-tight);
 
-  margin-bottom: 20px;
+  margin-bottom: clamp(0.75rem, 0.629rem + 0.52vw, 1.25rem);
 }
 
 .footer__author,
 .footer__copyright {
   color: var(--main-color-light);
-  padding-inline: 0.4375rem;
+  padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
 }
 
 .footer__copyright {
