@@ -1,0 +1,305 @@
+/* ==============================
+   1. RESET
+   ============================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/* ==============================
+   2. VARIABLES
+   ============================== */
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-grey: #727272;
+  --color-silver: #eeeff1;
+  --color-light-silver: #f9f9f9;
+  --color-blue: #34547a;
+  --color-dark-blue: #1a3557;
+
+  --font-main: "Roboto", sans-serif;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+
+  --font-size-xs: 13px;
+  --font-size-sm: 16px;
+  --font-size-md: 21px;
+  --font-size-lg: 32px;
+  --font-size-xl: 48px;
+
+  --line-height-main: 1.64;
+  --line-height-tight: 1;
+
+  --letter-spacing-wide: 0.1em;
+
+  --site-min-width: 1130px;
+  --container-width: 1130px;
+
+  --main-color-dark: var(--color-black);
+  --main-color-light: var(--color-white);
+  --main-color-muted: var(--color-grey);
+  --main-color-surface: var(--color-silver);
+  --main-color-surface-alt: var(--color-light-silver);
+  --main-color-accent: var(--color-blue);
+  --main-color-accent-hover: var(--color-dark-blue);
+}
+
+/* ==============================
+   3. BASE STYLES
+   ============================== */
+body {
+  font-family: var(--font-main);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-main);
+  color: var(--color-grey);
+
+  background-color: var(--color-silver);
+
+  min-width: var(--site-min-width);
+}
+
+.container {
+  width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 4px;
+}
+
+.main-title,
+.section-title,
+.item-title {
+  font-weight: var(--font-weight-medium);
+  color: var(--main-color-dark);
+}
+
+.main-title {
+  font-size: var(--font-size-xl);
+}
+
+.section-title {
+  font-size: var(--font-size-lg);
+  text-transform: capitalize;
+}
+
+.item-title {
+  font-size: var(--font-size-md);
+}
+
+.btn {
+  display: inline-block;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+.btn--type-cta {
+  color: var(--main-color-light);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+
+  background-color: var(--main-color-accent);
+}
+
+.btn--type-cta:hover {
+  background-color: var(--main-color-accent-hover);
+}
+
+/* ==============================
+   4. COMPONENTS & SECTIONS
+   ============================== */
+
+/* ==============================
+   4.1 HEADER
+   ============================== */
+.header__content {
+  padding-top: 79px;
+  padding-bottom: 79px;
+}
+
+.menu__list {
+  display: flex;
+  gap: 45px;
+}
+
+.menu__link {
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--main-color-dark);
+}
+
+.menu__link--active {
+  font-weight: var(--font-weight-medium);
+  color: var(--main-color-accent);
+  pointer-events: none;
+}
+
+.menu__link:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   4.2 HERO
+   ============================== */
+.hero {
+  padding-top: 83px;
+  padding-bottom: 141px;
+}
+
+.hero__title {
+  margin-bottom: 60px;
+}
+
+.hero__description {
+  width: 540px;
+  padding-left: 1px;
+  margin-bottom: 65px;
+}
+
+.hero__btn {
+  width: 225px;
+  padding: 20px 0;
+}
+
+/* ==============================
+   4.3 ABOUT
+   ============================== */
+.about {
+  background-color: var(--main-color-surface-alt);
+}
+
+.about__content {
+  padding-top: 112px;
+  padding-bottom: 100px;
+  text-align: center;
+}
+
+.about__title {
+  margin-bottom: 50px;
+}
+
+.about__description {
+  width: 540px;
+  margin: 0 auto;
+}
+
+/* ==============================
+   4.4 PROJECTS
+   ============================== */
+.projects {
+  background-color: var(--main-color-accent);
+}
+
+.projects__content {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 49px;
+
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.projects__item {
+  display: flex;
+  gap: 20px;
+  width: 141px;
+  align-items: center;
+}
+
+.feature__icon {
+  width: 50px;
+}
+
+.feature__title,
+.feature__description {
+  color: var(--main-color-light);
+}
+
+.feature__text {
+  text-align: left;
+}
+
+/* ==============================
+   4.5 WORK
+   ============================== */
+.work__content {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  text-align: center;
+}
+
+.work__title {
+  margin-bottom: 50px;
+}
+
+.work__description {
+  width: 540px;
+  margin: 0 auto;
+  margin-bottom: 57px;
+}
+
+.work__video {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video__poster {
+  width: 1110px;
+}
+
+.video__play-btn {
+  position: absolute;
+  background: transparent;
+}
+
+.video__play-btn:hover {
+  filter: brightness(0.8);
+}
+
+.video__play-icon {
+  width: 100px;
+}
+
+/* ==============================
+   4.6 FOOTER
+   ============================== */
+.footer {
+  background-color: var(--main-color-accent);
+}
+
+.footer__content {
+  padding: 50px 7px;
+}
+
+.footer__author {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-tight);
+
+  margin-bottom: 20px;
+}
+
+.footer__author,
+.footer__copyright {
+  color: var(--main-color-light);
+}
+
+.footer__copyright {
+  font-size: var(--font-size-xs);
+}
