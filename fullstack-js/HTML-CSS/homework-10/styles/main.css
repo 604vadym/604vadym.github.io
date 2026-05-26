@@ -49,6 +49,8 @@ ul {
 
   --container-width: 70.125rem;
 
+  --text-max-width: 56ch;
+
   --main-color-dark: var(--color-black);
   --main-color-light: var(--color-white);
   --main-color-muted: var(--color-grey);
@@ -169,7 +171,7 @@ body {
 }
 
 .hero__description {
-  width: min(100%, 56ch);
+  width: min(100%, var(--text-max-width));
   padding-inline: 0.0625rem;
   margin-bottom: clamp(1.75rem, 1.189rem + 2.39vw, 4.063rem);
 }
@@ -197,7 +199,7 @@ body {
 }
 
 .about__description {
-  width: min(100%, 56ch);
+  width: min(100%, var(--text-max-width));
   margin-inline: auto;
 }
 
@@ -250,7 +252,7 @@ body {
 }
 
 .work__description {
-  width: min(100%, 56ch);
+  width: min(100%, var(--text-max-width));
   margin-inline: auto;
   margin-bottom: clamp(1.5rem, 0.999rem + 2.14vw, 3.563rem);
 }
