@@ -46,7 +46,6 @@ ul {
 
   --letter-spacing-wide: 0.1em;
 
-  --site-min-width: 1130px;
   --container-width: 1130px;
 
   --main-color-dark: var(--color-black);
@@ -69,12 +68,11 @@ body {
   color: var(--color-grey);
 
   background-color: var(--color-silver);
-
-  min-width: var(--site-min-width);
 }
 
 .container {
-  width: var(--container-width);
+  width: 100%;
+  max-width: var(--container-width);
   margin: 0 auto;
   padding: 0 4px;
 }
@@ -164,7 +162,8 @@ body {
 }
 
 .hero__description {
-  width: 540px;
+  width: 100%;
+  max-width: 540px;
   padding-left: 1px;
   margin-bottom: 65px;
 }
@@ -192,7 +191,8 @@ body {
 }
 
 .about__description {
-  width: 540px;
+  width: 100%;
+  max-width: 540px;
   margin: 0 auto;
 }
 
@@ -206,6 +206,7 @@ body {
 .projects__content {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   text-align: center;
   gap: 49px;
 
@@ -247,7 +248,8 @@ body {
 }
 
 .work__description {
-  width: 540px;
+  width: 100%;
+  max-width: 540px;
   margin: 0 auto;
   margin-bottom: 57px;
 }
@@ -260,7 +262,8 @@ body {
 }
 
 .video__poster {
-  width: 1110px;
+  width: 100%;
+  max-width: 1110px;
 }
 
 .video__play-btn {
