@@ -139,8 +139,11 @@ body {
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--main-color-dark);
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.3s;
+  padding: 3px;
+  border-radius: 10px;
+  transition:
+    background-color 0.5s,
+    color 0.5s;
 }
 
 .menu__link--active {
@@ -150,7 +153,8 @@ body {
 }
 
 .menu__link:hover {
-  border-color: var(--main-color-accent);
+  color: var(--main-color-light);
+  background-color: var(--main-color-accent);
 }
 
 /* ==============================
