@@ -110,6 +110,7 @@ body {
   text-transform: uppercase;
 
   background-color: var(--main-color-accent);
+  transition: background-color 0.5s;
 }
 
 .btn--type-cta:hover {
@@ -136,6 +137,8 @@ body {
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--main-color-dark);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
 }
 
 .menu__link--active {
@@ -145,7 +148,7 @@ body {
 }
 
 .menu__link:hover {
-  text-decoration: underline;
+  border-color: var(--main-color-accent);
 }
 
 /* ==============================
@@ -266,6 +269,7 @@ body {
 .video__play-btn {
   position: absolute;
   background: transparent;
+  transition: filter 0.5s;
 }
 
 .video__play-btn:hover {
