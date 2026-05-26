@@ -305,3 +305,17 @@ body {
 .footer__copyright {
   font-size: var(--font-size-xs);
 }
+
+/* ==============================
+   5. MEDIA
+   ============================== */
+@media (max-width: 497px) {
+  .menu__list {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hero {
+    padding-top: 0;
+  }
+}
