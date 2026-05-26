@@ -205,7 +205,6 @@ body {
 .projects__content {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   text-align: center;
   gap: clamp(1.25rem, 0.81rem + 1.88vw, 3.063rem);
 
@@ -309,7 +308,14 @@ body {
 /* ==============================
    5. MEDIA
    ============================== */
-@media (max-width: 497px) {
+@media (max-width: 1038px) {
+  .projects__content {
+    flex-wrap: wrap;
+    column-gap: clamp(1.25rem, -6.043rem + 23.67vw, 9.313rem);
+  }
+}
+
+@media (max-width: 492px) {
   .menu__list {
     flex-direction: column;
     gap: 0.5rem;
