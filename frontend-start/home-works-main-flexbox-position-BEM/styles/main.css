@@ -131,6 +131,7 @@ body {
   line-height: var(--line-height-normal);
   color: var(--main-color-dark);
   background-color: var(--main-color-light);
+  min-width: var(--container-width);
 }
 
 .header__logo-img,
