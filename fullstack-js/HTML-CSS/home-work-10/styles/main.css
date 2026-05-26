@@ -102,6 +102,7 @@ body {
   display: inline-block;
   text-align: center;
   border: none;
+  background: transparent;
   cursor: pointer;
 }
 
@@ -269,7 +270,6 @@ body {
 
 .video__play-btn {
   position: absolute;
-  background: transparent;
   transition: filter 0.5s;
 }
 
