@@ -106,16 +106,16 @@ ul {
   --card-bg-variant-2: var(--color-yellow-pastel);
   --card-bg-variant-3: var(--color-pink-pastel);
 
-  --card-text-color: var(--color-black-pure);
+  --card-text-color-main: var(--color-black-pure);
   --card-text-color-inverse: var(--color-white-soft);
   --card-text-color-muted: var(--color-gray-pure);
 
-  --card-btn-primary-bg: var(--color-black-pure);
-  --card-btn-primary-color: var(--color-white-soft);
+  --card-btn-primary-bg-main: var(--color-black-pure);
   --card-btn-primary-bg-inverse: var(--color-white-soft);
+  --card-btn-primary-color-main: var(--color-white-soft);
   --card-btn-primary-color-inverse: var(--color-purple-accent);
 
-  --card-marker-color: var(--color-black-pure);
+  --card-marker-color-main: var(--color-black-pure);
   --card-marker-color-inverse: var(--color-white-soft);
 
   --card-line-color: var(--color-black-pure);
@@ -148,7 +148,8 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* HERE IS BUG (should be fixed) - add more text to what-learn__card and text in what-learn__cards is on different level*/
+  justify-content: space-between;
+  /* HERE IS BUG (should be fixed) - add more text to what-learn__card and text in what-learn__cards is on different level*/
   width: 467px;
 }
 
@@ -173,12 +174,12 @@ body {
 .card--type-premium {
   --card-price-full-term: var(--card-text-color-muted);
 
-  --card-btn-bg: var(--card-btn-primary-bg);
-  --card-btn-color: var(--card-btn-primary-color);
+  --card-btn-bg: var(--card-btn-primary-bg-main);
+  --card-btn-color: var(--card-btn-primary-color-main);
   --card-marker-color: var(--card-marker-color);
 
   background-color: var(--card-bg-variant-1);
-  color: var(--card-text-color);
+  color: var(--card-text-color-main);
 }
 
 .card--type-optimal {
