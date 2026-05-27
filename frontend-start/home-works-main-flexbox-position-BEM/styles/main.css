@@ -164,7 +164,6 @@ body {
   --card-price-space-small: 3px;
   --card-price-space-large: 18px;
 
-  justify-content: space-between;
   padding: 48px 0 51px 68px;
   min-height: 732px;
 }
@@ -713,5 +712,9 @@ body {
 
 .prices__cards {
   display: flex;
+  justify-content: space-between;
+}
+
+.prices__card {
   justify-content: space-between;
 }
