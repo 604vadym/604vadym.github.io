@@ -148,8 +148,6 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  /* HERE IS BUG (should be fixed) - add more text to what-learn__card and text in what-learn__cards is on different level*/
   width: 467px;
 }
 
@@ -166,6 +164,7 @@ body {
   --card-price-space-small: 3px;
   --card-price-space-large: 18px;
 
+  justify-content: space-between;
   padding: 48px 0 51px 68px;
   min-height: 732px;
 }
