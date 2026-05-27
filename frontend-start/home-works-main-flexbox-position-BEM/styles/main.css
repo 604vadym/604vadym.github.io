@@ -176,7 +176,7 @@ body {
 
   --card-btn-bg: var(--card-btn-primary-bg-main);
   --card-btn-color: var(--card-btn-primary-color-main);
-  --card-marker-color: var(--card-marker-color);
+  --card-marker-color: var(--card-marker-color-main);
 
   background-color: var(--card-bg-variant-1);
   color: var(--card-text-color-main);
