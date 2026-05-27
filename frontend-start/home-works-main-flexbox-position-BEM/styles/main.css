@@ -106,16 +106,16 @@ ul {
   --card-bg-variant-2: var(--color-yellow-pastel);
   --card-bg-variant-3: var(--color-pink-pastel);
 
-  --card-text-color: var(--color-black-pure);
+  --card-text-color-main: var(--color-black-pure);
   --card-text-color-inverse: var(--color-white-soft);
   --card-text-color-muted: var(--color-gray-pure);
 
-  --card-btn-primary-bg: var(--color-black-pure);
-  --card-btn-primary-color: var(--color-white-soft);
+  --card-btn-primary-bg-main: var(--color-black-pure);
   --card-btn-primary-bg-inverse: var(--color-white-soft);
+  --card-btn-primary-color-main: var(--color-white-soft);
   --card-btn-primary-color-inverse: var(--color-purple-accent);
 
-  --card-marker-color: var(--color-black-pure);
+  --card-marker-color-main: var(--color-black-pure);
   --card-marker-color-inverse: var(--color-white-soft);
 
   --card-line-color: var(--color-black-pure);
@@ -131,6 +131,7 @@ body {
   line-height: var(--line-height-normal);
   color: var(--main-color-dark);
   background-color: var(--main-color-light);
+  min-width: var(--container-width);
 }
 
 .header__logo-img,
@@ -147,7 +148,6 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* HERE IS BUG (should be fixed) - add more text to what-learn__card and text in what-learn__cards is on different level*/
   width: 467px;
 }
 
@@ -172,12 +172,12 @@ body {
 .card--type-premium {
   --card-price-full-term: var(--card-text-color-muted);
 
-  --card-btn-bg: var(--card-btn-primary-bg);
-  --card-btn-color: var(--card-btn-primary-color);
-  --card-marker-color: var(--card-marker-color);
+  --card-btn-bg: var(--card-btn-primary-bg-main);
+  --card-btn-color: var(--card-btn-primary-color-main);
+  --card-marker-color: var(--card-marker-color-main);
 
   background-color: var(--card-bg-variant-1);
-  color: var(--card-text-color);
+  color: var(--card-text-color-main);
 }
 
 .card--type-optimal {
@@ -458,30 +458,7 @@ body {
 
 .promo {
   background-color: var(--promo-bg);
-  /* overflow: hidden; */
-}
-
-.promo__wrapper {
-  position: relative;
-}
-
-.promo__wrapper::after {
-  content: "";
-  position: absolute;
-  width: 831px;
-  height: 751px;
-  background:
-    url(../img/woman.png) no-repeat right bottom / contain,
-    url(../img/rectangle.svg) no-repeat left 125px bottom,
-    url(../img/ellipse-2.png) no-repeat right top -100px;
-  bottom: 0;
-  right: 0;
-  margin-right: -232px;
-  /* margin-right: -240px; */
-}
-
-/* .promo {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .promo__media {
@@ -491,10 +468,12 @@ body {
 .promo__img {
   position: absolute;
   bottom: 0px;
-  left: 190px;
-  display: block;
-  width: 831px;
-} */
+  left: 212px;
+  max-width: 831px;
+  background:
+    url(../img/rectangle.svg) no-repeat left 125px bottom,
+    url(../img/ellipse-2.png) no-repeat right top -100px;
+}
 
 .promo__wrapper,
 .promo__timer {
@@ -712,5 +691,9 @@ body {
 
 .prices__cards {
   display: flex;
+  justify-content: space-between;
+}
+
+.prices__card {
   justify-content: space-between;
 }
