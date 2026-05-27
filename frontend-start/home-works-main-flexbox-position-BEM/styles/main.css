@@ -458,30 +458,7 @@ body {
 
 .promo {
   background-color: var(--promo-bg);
-  /* overflow: hidden; */
-}
-
-.promo__wrapper {
-  position: relative;
-}
-
-.promo__wrapper::after {
-  content: "";
-  position: absolute;
-  width: 831px;
-  height: 751px;
-  background:
-    url(../img/woman.png) no-repeat right bottom / contain,
-    url(../img/rectangle.svg) no-repeat left 125px bottom,
-    url(../img/ellipse-2.png) no-repeat right top -100px;
-  bottom: 0;
-  right: 0;
-  margin-right: -232px;
-  /* margin-right: -240px; */
-}
-
-/* .promo {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .promo__media {
@@ -491,10 +468,12 @@ body {
 .promo__img {
   position: absolute;
   bottom: 0px;
-  left: 190px;
-  display: block;
-  width: 831px;
-} */
+  left: 212px;
+  max-width: 831px;
+  background:
+    url(../img/rectangle.svg) no-repeat left 125px bottom,
+    url(../img/ellipse-2.png) no-repeat right top -100px;
+}
 
 .promo__wrapper,
 .promo__timer {
