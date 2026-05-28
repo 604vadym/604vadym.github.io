@@ -42,7 +42,6 @@ ul {
   --font-size-xl: clamp(1.75rem, 1.447rem + 1.294vw, 3rem);
 
   --line-height-main: 1.64;
-  --line-height-mobile-main: 1.45;
   --line-height-tight: 1;
 
   --letter-spacing-wide: 0.1em;
@@ -92,6 +91,7 @@ body {
 
 .section-title {
   font-size: var(--font-size-lg);
+  line-height: var(--line-height-tight);
   text-transform: capitalize;
 }
 
@@ -322,14 +322,6 @@ body {
 }
 
 @media (max-width: 492px) {
-  body {
-    line-height: var(--line-height-mobile-main);
-  }
-
-  .section-title {
-    line-height: var(--line-height-tight);
-  }
-
   .menu__list {
     flex-direction: column;
     gap: 0.5rem;
