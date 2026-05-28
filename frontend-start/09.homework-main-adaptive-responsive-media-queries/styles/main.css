@@ -43,7 +43,6 @@ ul {
   --line-height-normal: 1.55;
 
   --line-thickness: 4px;
-  --cards-gap: clamp(0.875rem, 0.784rem + 0.39vw, 1.25rem);
 
   --container-width: 1472px;
 
@@ -104,6 +103,7 @@ ul {
   --btn-accent-color: var(--color-white-soft);
 
   --card-width: 467px;
+  --cards-gap: clamp(0.875rem, 0.784rem + 0.39vw, 1.25rem);
 
   --card-bg-accent: var(--color-purple-accent);
   --card-bg-variant-1: var(--color-green-pastel);
@@ -263,7 +263,7 @@ body {
 
 .card__btn {
   display: inline-block;
-  min-width: 163px;
+  min-width: clamp(8.75rem, 8.401rem + 1.49vw, 10.188rem);
   padding: clamp(0.75rem, 0.704rem + 0.19vw, 0.938rem)
     clamp(1.125rem, 0.852rem + 1.17vw, 2.25rem);
 
@@ -363,7 +363,7 @@ body {
 }
 
 .header__btn {
-  min-width: 153px;
+  min-width: clamp(7.125rem, 6.533rem + 2.52vw, 9.563rem);
   padding: clamp(0.625rem, 0.595rem + 0.13vw, 0.75rem)
     clamp(1.125rem, 0.837rem + 1.23vw, 2.313rem);
 
@@ -502,7 +502,7 @@ body {
 }
 
 .promo__content {
-  width: 648px;
+  width: min(100%, 648px);
   margin-bottom: clamp(3.5rem, 1.391rem + 9vw, 12.188rem);
 }
 
@@ -543,7 +543,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 141px;
+  min-width: clamp(6.875rem, 6.405rem + 2.01vw, 8.813rem);
   padding: clamp(0.625rem, 0.579rem + 0.19vw, 0.813rem)
     clamp(1.125rem, 0.837rem + 1.23vw, 2.313rem);
   margin-bottom: clamp(2.75rem, 1.749rem + 4.27vw, 6.875rem);
@@ -615,7 +615,7 @@ body {
   position: absolute;
   bottom: 0px;
   left: 212px;
-  max-width: 831px;
+  max-width: clamp(21.438rem, 14.035rem + 31.59vw, 51.938rem);
 
   background:
     url(../img/rectangle.svg) no-repeat left 125px bottom,
@@ -653,11 +653,11 @@ body {
 }
 
 .what-learn__description {
-  width: 588px;
+  width: min(100%, 588px);
 }
 
 .what-learn__box {
-  width: 254px;
+  max-width: clamp(15rem, 13.271rem + 7.38vw, 22.125rem);
 }
 
 .what-learn__title {
@@ -687,8 +687,7 @@ body {
 }
 
 .what-learn__card {
-  width: 100%;
-  max-width: var(--card-width);
+  width: min(calc((100% - (var(--cards-gap) * 2)) / 3), var(--card-width));
 }
 
 .prices {
@@ -709,8 +708,7 @@ body {
 }
 
 .prices__card {
-  width: 100%;
-  max-width: var(--card-width);
+  width: min(calc((100% - (var(--cards-gap) * 2)) / 3), var(--card-width));
   min-height: clamp(30rem, 26.177rem + 16.31vw, 45.75rem);
   justify-content: space-between;
 }
