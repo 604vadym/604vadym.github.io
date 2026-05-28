@@ -43,7 +43,7 @@ ul {
   --line-height-normal: 1.55;
 
   --line-thickness: 4px;
-  --container-width: 1470px;
+  --container-width: 1472px;
 
   --main-color-dark: var(--color-black-pure);
   --main-color-light: var(--color-white-pure);
@@ -142,7 +142,7 @@ body {
 .container {
   width: var(--container-width);
   margin-inline: auto;
-  padding-inline: 15px;
+  padding-inline: 16px;
 }
 
 .card {
