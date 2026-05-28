@@ -90,9 +90,9 @@ ul {
   --promo-timer-font-size: var(--font-size-md);
   --promo-timer-line-height: var(--line-height-tight);
 
-  --what-learn-bg: var(--color-white-soft);
+  --features-bg: var(--color-white-soft);
 
-  --what-learn-text-color: var(--color-gray-pure);
+  --features-text-color: var(--color-gray-pure);
 
   --prices-bg: var(--color-white-soft);
 
@@ -622,57 +622,57 @@ body {
     url(../img/ellipse-2.png) no-repeat right top -100px;
 }
 
-.what-learn {
-  background-color: var(--what-learn-bg);
+.features {
+  background-color: var(--features-bg);
 }
 
-.what-learn__wrapper,
-.what-learn__content,
-.what-learn__stats-wrapper,
-.what-learn__cards {
+.features__wrapper,
+.features__content,
+.features__stats-wrapper,
+.features__cards {
   display: flex;
 }
 
-.what-learn__wrapper,
-.what-learn__content {
+.features__wrapper,
+.features__content {
   justify-content: space-between;
 }
 
-.what-learn__cards {
+.features__cards {
   gap: var(--cards-gap);
 }
 
-.what-learn__wrapper {
+.features__wrapper {
   flex-direction: column;
   padding-top: clamp(3.5rem, 1.801rem + 7.25vw, 10.5rem);
   gap: clamp(3.5rem, 1.801rem + 7.25vw, 10.5rem);
 }
 
-.what-learn__stats-wrapper {
+.features__stats-wrapper {
   gap: clamp(2rem, 0.923rem + 4.6vw, 6.438rem);
 }
 
-.what-learn__description {
+.features__description {
   width: min(100%, 588px);
 }
 
-.what-learn__box {
+.features__box {
   max-width: clamp(15rem, 13.271rem + 7.38vw, 22.125rem);
 }
 
-.what-learn__title {
+.features__title {
   margin-bottom: clamp(1rem, 0.818rem + 0.78vw, 1.75rem);
 }
 
-.what-learn__value {
+.features__value {
   margin-bottom: -3px;
 }
 
-.what-learn__label {
+.features__label {
   margin-bottom: clamp(0.625rem, 0.564rem + 0.26vw, 0.875rem);
 }
 
-.what-learn__label::after {
+.features__label::after {
   content: "";
   display: block;
   width: 100%;
@@ -681,12 +681,12 @@ body {
   background-color: var(--main-color-dark);
 }
 
-.what-learn__description-text,
-.what-learn__stats-text {
-  color: var(--what-learn-text-color);
+.features__description-text,
+.features__stats-text {
+  color: var(--features-text-color);
 }
 
-.what-learn__card {
+.features__card {
   width: min(calc((100% - (var(--cards-gap) * 2)) / 3), var(--card-width));
 }
 
