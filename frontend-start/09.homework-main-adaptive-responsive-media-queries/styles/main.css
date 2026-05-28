@@ -248,15 +248,23 @@ body {
 }
 
 .card__item {
+  --card-item-font-size: var(--font-size-md);
+
   align-items: center;
   max-width: 31.5ch;
+  font-size: var(--card-item-font-size);
+  position: relative;
 }
 
 .card__item::before {
+  --card-marker-size: 8px;
+
   content: "";
-  width: 8px;
-  height: 8px;
-  margin-right: clamp(0.5rem, 0.439rem + 0.26vw, 0.75rem);
+  width: var(--card-marker-size);
+  height: var(--card-marker-size);
+  position: absolute;
+  top: calc(var(--card-item-font-size) / 2);
+  left: calc(-12px - var(--card-marker-size));
 
   background-color: var(--card-marker-color);
 }
