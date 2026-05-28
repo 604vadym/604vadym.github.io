@@ -515,11 +515,8 @@ body {
 }
 
 .promo__duration {
-  --side-padding: 1px;
-
   font-weight: var(--promo-duration-font-weight);
   line-height: var(--promo-duration-line-height);
-  padding: 0 var(--side-padding);
   margin-bottom: clamp(1.25rem, 1.068rem + 0.78vw, 2rem);
   display: inline-block;
 }
@@ -527,8 +524,7 @@ body {
 .promo__duration::after {
   content: "";
   display: block;
-  width: calc(100% + (var(--side-padding) * 2));
-  margin-left: calc(var(--side-padding) * -1);
+  width: 100%;
   height: var(--line-thickness);
   margin-top: 4px;
 
