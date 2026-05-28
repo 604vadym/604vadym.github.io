@@ -633,27 +633,26 @@ body {
   display: flex;
 }
 
-.features__wrapper,
-.features__content {
-  justify-content: space-between;
-}
-
-.features__cards {
-  gap: var(--cards-gap);
-}
-
 .features__wrapper {
   flex-direction: column;
   padding-top: clamp(3.5rem, 1.801rem + 7.25vw, 10.5rem);
   gap: clamp(3.5rem, 1.801rem + 7.25vw, 10.5rem);
 }
 
+.features__description {
+  width: min(100%, 588px);
+}
+
 .features__stats-wrapper {
   gap: clamp(2rem, 0.923rem + 4.6vw, 6.438rem);
 }
 
-.features__description {
-  width: min(100%, 588px);
+.features__content {
+  gap: clamp(2.5rem, 0.968rem + 6.54vw, 8.813rem);
+}
+
+.features__cards {
+  gap: var(--cards-gap);
 }
 
 .features__box {
