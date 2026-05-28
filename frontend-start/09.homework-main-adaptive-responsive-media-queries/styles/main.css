@@ -43,6 +43,8 @@ ul {
   --line-height-normal: 1.55;
 
   --line-thickness: 4px;
+  --cards-gap: 20px;
+
   --container-width: 1472px;
 
   --main-color-dark: var(--color-black-pure);
@@ -163,7 +165,7 @@ body {
   --card-price-space-small: 3px;
   --card-price-space-large: 18px;
 
-  padding: 48px 0 51px 68px;
+  padding: 48px 38px 51px 68px;
   min-height: 732px;
 }
 
@@ -213,7 +215,7 @@ body {
 }
 
 .card__text {
-  max-width: 368px;
+  max-width: 32ch;
 }
 
 .card__text::before {
@@ -241,7 +243,7 @@ body {
 
 .card__item {
   align-items: center;
-  max-width: 361px;
+  max-width: 31.5ch;
 }
 
 .card__item::before {
@@ -608,9 +610,12 @@ body {
 }
 
 .what-learn__wrapper,
-.what-learn__content,
-.what-learn__cards {
+.what-learn__content {
   justify-content: space-between;
+}
+
+.what-learn__cards {
+  gap: var(--cards-gap);
 }
 
 .what-learn__wrapper {
@@ -671,7 +676,7 @@ body {
 
 .prices__cards {
   display: flex;
-  justify-content: space-between;
+  gap: var(--cards-gap);
 }
 
 .prices__card {
