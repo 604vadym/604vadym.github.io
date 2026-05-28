@@ -149,7 +149,7 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  width: 467px;
+  max-width: 467px;
 }
 
 .card--size-small {
@@ -615,6 +615,7 @@ body {
 }
 
 .what-learn__cards {
+  justify-content: center;
   gap: var(--cards-gap);
 }
 
@@ -676,6 +677,7 @@ body {
 
 .prices__cards {
   display: flex;
+  justify-content: center;
   gap: var(--cards-gap);
 }
 
