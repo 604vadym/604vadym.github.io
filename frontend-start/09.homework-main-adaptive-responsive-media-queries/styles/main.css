@@ -33,10 +33,10 @@ ul {
   --font-weight-bold: 700;
   --font-weight-extra-bold: 800;
 
-  --font-size-md: 18px;
-  --font-size-lg: 24px;
-  --font-size-xl: 34px;
-  --font-size-2xl: 58px;
+  --font-size-md: clamp(0.938rem, 0.892rem + 0.19vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 1.034rem + 0.39vw, 1.5rem);
+  --font-size-xl: clamp(1.5rem, 1.348rem + 0.65vw, 2.125rem);
+  --font-size-2xl: clamp(2rem, 1.606rem + 1.68vw, 3.625rem);
 
   --line-height-super-tight: 1.08;
   --line-height-tight: 1.2;
