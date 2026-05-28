@@ -674,7 +674,7 @@ body {
 .features__label::after {
   content: "";
   display: block;
-  width: 100%;
+  width: clamp(10.625rem, 9.351rem + 5.44vw, 15.875rem);
   height: var(--line-thickness);
   margin-top: clamp(0.875rem, 0.769rem + 0.45vw, 1.313rem);
   background-color: var(--main-color-dark);
