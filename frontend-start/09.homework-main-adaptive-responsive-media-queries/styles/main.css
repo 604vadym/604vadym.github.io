@@ -457,20 +457,6 @@ body {
   overflow-x: hidden;
 }
 
-.promo__media {
-  position: relative;
-}
-
-.promo__img {
-  position: absolute;
-  bottom: 0px;
-  left: 212px;
-  max-width: 831px;
-  background:
-    url(../img/rectangle.svg) no-repeat left 125px bottom,
-    url(../img/ellipse-2.png) no-repeat right top -100px;
-}
-
 .promo__wrapper,
 .promo__timer {
   display: flex;
@@ -598,6 +584,16 @@ body {
 .promo__app--pos-bb {
   top: 570px;
   left: 36px;
+}
+
+.promo__img {
+  position: absolute;
+  bottom: 0px;
+  left: 212px;
+  max-width: 831px;
+  background:
+    url(../img/rectangle.svg) no-repeat left 125px bottom,
+    url(../img/ellipse-2.png) no-repeat right top -100px;
 }
 
 .what-learn {
