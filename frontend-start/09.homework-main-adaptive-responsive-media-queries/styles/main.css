@@ -600,45 +600,43 @@ body {
 
 .promo__app {
   position: absolute;
-  padding: clamp(0.625rem, 0.61rem + 0.06vw, 0.688rem)
-    clamp(1.125rem, 0.852rem + 1.17vw, 2.25rem);
+  padding: clamp(0.188rem, 0.067rem + 0.52vw, 0.688rem)
+    clamp(0.375rem, -0.079rem + 1.94vw, 2.25rem);
 
   border: 2px solid var(--main-color-dark);
   text-align: center;
   width: max-content;
 }
-
 .promo__app--pos-tr {
-  top: 66px;
-  left: 660px;
+  top: clamp(3.5rem, 10.732rem + -6.03vw, 6.875rem);
+  left: clamp(15.375rem, -14.271rem + 46.21vw, 41.25rem);
 }
 
 .promo__app--pos-tc {
-  top: 0;
-  left: 433px;
+  top: clamp(-0.813rem, 12.321rem - 10.77vw, 6.25rem);
+  left: clamp(7rem, -15.079rem + 35.67vw, 27.063rem);
 }
 
 .promo__app--pos-mu {
-  top: 74px;
-  left: 204px;
+  top: clamp(4rem, 14.888rem - 9.08vw, 9.813rem);
+  left: clamp(6.563rem, -0.51rem + 11.05vw, 12.75rem);
 }
 
 .promo__app--pos-mb {
-  top: 256px;
-  left: 168px;
+  top: clamp(12.75rem, 9.535rem + 5.18vw, 16rem);
+  left: clamp(2.188rem, -7.313rem + 14.85vw, 10.5rem);
 }
 
 .promo__app--pos-bt {
-  top: 393px;
-  left: 0;
+  top: clamp(16.313rem, 7.362rem + 14.36vw, 24.563rem);
+  left: clamp(-1.563rem, -3.04rem + 2.58vw, 0rem);
 }
 
 .promo__app--pos-bb {
-  top: 570px;
-  left: 36px;
+  top: clamp(30.813rem, 25.311rem + 8.59vw, 35.625rem);
+  left: clamp(-4.125rem, -11.411rem + 11.38vw, 2.25rem);
 }
 
-/* prettier-ignore */
 .promo__img {
   position: absolute;
   bottom: 0px;
@@ -646,9 +644,11 @@ body {
   max-width: clamp(21.438rem, 14.035rem + 31.59vw, 51.938rem);
 
   background:
-    url(../img/rectangle.svg) no-repeat left clamp(5.188rem, 2.188rem + 4.69vw, 7.813rem) bottom /
+    url(../img/rectangle.svg) no-repeat left
+      clamp(5.188rem, 2.188rem + 4.69vw, 7.813rem) bottom /
       clamp(12.063rem, 7.906rem + 17.73vw, 29.188rem),
-    url(../img/ellipse-2.png) no-repeat right top clamp(-6.25rem, -4.698rem - 1.29vw, -5rem) /
+    url(../img/ellipse-2.png) no-repeat right 0px top
+      clamp(-6.25rem, -4.698rem - 1.29vw, -5rem) /
       clamp(13.438rem, 12.618rem + 3.5vw, 16.813rem)
       clamp(34.25rem, 32.172rem + 8.87vw, 42.813rem);
 }
