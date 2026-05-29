@@ -516,10 +516,14 @@ body {
 .promo__content::after {
   content: "";
   position: absolute;
-  width: 724px;
-  height: 724px;
-  left: -225px;
-  top: -150px;
+  /* width: clamp(33.938rem, 31.192rem + 11.72vw, 45.25rem);
+  height: clamp(33.938rem, 31.192rem + 11.72vw, 45.25rem);
+  left: clamp(-14.063rem, -9.636rem - 3.69vw, -10.5rem);
+  top: clamp(-9.375rem, -5.492rem - 3.24vw, -6.25rem); */
+  width: clamp(36.25rem, 34.066rem + 9.32vw, 45.25rem);
+  height: clamp(36.25rem, 34.066rem + 9.32vw, 45.25rem);
+  left: clamp(-14.063rem, -10.568rem - 2.91vw, -11.25rem);
+  top: clamp(-9.375rem, -7.046rem - 1.94vw, -7.5rem);
   z-index: -1;
 
   background: url(../img/ellipse-1.png) no-repeat center / contain;
