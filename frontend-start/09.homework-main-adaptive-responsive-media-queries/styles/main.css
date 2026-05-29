@@ -638,15 +638,19 @@ body {
   left: 36px;
 }
 
+/* prettier-ignore */
 .promo__img {
   position: absolute;
   bottom: 0px;
-  left: 212px;
+  left: clamp(0rem, -15.143rem + 23.66vw, 13.25rem);
   max-width: clamp(21.438rem, 14.035rem + 31.59vw, 51.938rem);
 
   background:
-    url(../img/rectangle.svg) no-repeat left 125px bottom,
-    url(../img/ellipse-2.png) no-repeat right top -100px;
+    url(../img/rectangle.svg) no-repeat left clamp(5.188rem, 2.188rem + 4.69vw, 7.813rem) bottom /
+      clamp(12.063rem, 7.906rem + 17.73vw, 29.188rem),
+    url(../img/ellipse-2.png) no-repeat right top clamp(-6.25rem, -4.698rem - 1.29vw, -5rem) /
+      clamp(13.438rem, 12.618rem + 3.5vw, 16.813rem)
+      clamp(34.25rem, 32.172rem + 8.87vw, 42.813rem);
 }
 
 .features {
