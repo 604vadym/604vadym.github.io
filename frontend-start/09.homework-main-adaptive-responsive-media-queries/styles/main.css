@@ -104,6 +104,7 @@ ul {
 
   --card-width: 467px;
   --cards-gap: clamp(0.875rem, 0.784rem + 0.39vw, 1.25rem);
+  --card-prices-gap: clamp(1.875rem, 1.045rem + 3.54vw, 3.125rem);
 
   --card-bg-accent: var(--color-purple-accent);
   --card-bg-variant-1: var(--color-green-pastel);
@@ -237,8 +238,7 @@ body {
   margin-bottom: var(--card-title-space);
 }
 
-.card__list,
-.card__item {
+.card__list {
   display: flex;
 }
 
@@ -250,7 +250,6 @@ body {
 .card__item {
   --card-item-font-size: var(--font-size-md);
 
-  align-items: center;
   max-width: 31.5ch;
   font-size: var(--card-item-font-size);
   position: relative;
@@ -604,7 +603,6 @@ body {
     clamp(0.375rem, -0.079rem + 1.94vw, 2.25rem);
 
   border: 2px solid var(--main-color-dark);
-  text-align: center;
   width: max-content;
 }
 .promo__app--pos-tr {
@@ -741,4 +739,76 @@ body {
   width: min(calc((100% - (var(--cards-gap) * 2)) / 3), var(--card-width));
   min-height: clamp(30rem, 26.177rem + 16.31vw, 45.75rem);
   justify-content: space-between;
+}
+
+@media (max-width: 1023px) {
+  .promo__media {
+    display: none;
+  }
+
+  .footer__main {
+    padding-inline: 16px;
+  }
+}
+
+@media (max-width: 940px) {
+  .features__stats-wrapper {
+    flex-direction: column;
+    gap: clamp(0.938rem, -0.169rem + 3.37vw, 1.813rem);
+  }
+
+  .prices__cards {
+    flex-wrap: wrap;
+  }
+
+  .prices__card {
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: calc((100% - var(--cards-gap)) / 2);
+  }
+
+  .prices__card--fluid {
+    order: -1;
+    flex-basis: 100%;
+    text-align: center;
+    align-items: center;
+    min-height: auto;
+    gap: var(--card-prices-gap);
+  }
+
+  .prices__card--fluid .card__item {
+    text-align: start;
+  }
+}
+
+@media (max-width: 585px) {
+  .prices__card {
+    flex-basis: 100%;
+    text-align: center;
+    align-items: center;
+    min-height: auto;
+    gap: var(--card-prices-gap);
+  }
+
+  .prices__card--fluid {
+    order: 0;
+  }
+
+  .prices__card .card__item {
+    text-align: start;
+  }
+
+  .prices__card .card__wrapper:last-child {
+    width: 100%;
+  }
+
+  .card__btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 525px) {
+  .features__stats-wrapper {
+    display: none;
+  }
 }
