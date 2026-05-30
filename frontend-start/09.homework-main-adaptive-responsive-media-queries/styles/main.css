@@ -777,6 +777,13 @@ body {
   }
 }
 
+@media (max-width: 850px) {
+  .footer__main {
+    flex-direction: column;
+    gap: clamp(1.563rem, 1.069rem + 2.11vw, 2.188rem);
+  }
+}
+
 @media (max-width: 750px) {
   .header__main,
   .header__wrapper,
@@ -838,10 +845,25 @@ body {
   .features__stats-wrapper {
     display: none;
   }
+
+  .footer__sitemap {
+    flex-wrap: wrap;
+    row-gap: clamp(1.563rem, 0.781rem + 3.33vw, 1.875rem);
+  }
+
+  .sitemap__column {
+    flex-basis: 50%;
+  }
 }
 
 @media (max-width: 475px) {
   .header__main {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 350px) {
+  .sitemap__column {
+    flex-basis: 100%;
   }
 }
