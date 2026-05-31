@@ -268,14 +268,12 @@ body {
 }
 
 .card__btn {
-  display: inline-block;
   min-width: clamp(8.75rem, 8.401rem + 1.49vw, 10.188rem);
   padding: clamp(0.75rem, 0.704rem + 0.19vw, 0.938rem)
     clamp(1.125rem, 0.852rem + 1.17vw, 2.25rem);
 
   background-color: var(--card-btn-bg);
   color: var(--card-btn-color);
-  text-align: center;
 }
 
 .title__line {
@@ -289,6 +287,8 @@ body {
 }
 
 .btn {
+  display: inline-block;
+  text-align: center;
   white-space: nowrap;
 }
 
@@ -562,9 +562,6 @@ body {
 }
 
 .promo__btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   min-width: clamp(6.875rem, 6.405rem + 2.01vw, 8.813rem);
   padding: clamp(0.625rem, 0.579rem + 0.19vw, 0.813rem)
     clamp(1.125rem, 0.837rem + 1.23vw, 2.313rem);
