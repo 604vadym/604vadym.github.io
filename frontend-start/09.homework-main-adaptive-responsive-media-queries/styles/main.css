@@ -563,7 +563,7 @@ body {
 
 .promo__btn {
   display: inline-flex;
-  /* align-items: center; */
+  align-items: center;
   justify-content: center;
   min-width: clamp(6.875rem, 6.405rem + 2.01vw, 8.813rem);
   padding: clamp(0.625rem, 0.579rem + 0.19vw, 0.813rem)
@@ -572,7 +572,6 @@ body {
 
   background-color: var(--btn-accent-bg);
   color: var(--btn-accent-color);
-  /* vertical-align: middle; */
 }
 
 .promo__discount {
@@ -748,14 +747,6 @@ body {
   .footer__wrapper {
     padding-inline: 2rem;
   }
-
-  /* .footer__main {
-    padding-inline: 16px;
-  }
-
-  .footer__copyright {
-    padding-inline: 16px;
-  } */
 }
 
 @media (max-width: 940px) {
