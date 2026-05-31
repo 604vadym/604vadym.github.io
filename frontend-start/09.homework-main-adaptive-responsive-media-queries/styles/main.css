@@ -42,9 +42,9 @@ ul {
   --line-height-tight: 1.2;
   --line-height-normal: 1.55;
 
-  --line-thickness: 4px;
+  --line-thickness: 0.25rem;
 
-  --container-width: 1472px;
+  --container-width: 92rem;
 
   --main-color-dark: var(--color-black-pure);
   --main-color-light: var(--color-white-pure);
@@ -140,13 +140,13 @@ body {
 
 .header__logo-img,
 .footer__logo-img {
-  max-height: 36px;
+  max-height: 2.25rem;
 }
 
 .container {
   width: min(100%, var(--container-width));
   margin-inline: auto;
-  padding-inline: 16px;
+  padding-inline: 1rem;
 }
 
 .card {
@@ -165,7 +165,7 @@ body {
 .card--size-large {
   --card-title-space: clamp(1.25rem, 0.84rem + 1.75vw, 2.938rem);
   --card-item-space: clamp(0.875rem, 0.754rem + 0.52vw, 1.375rem);
-  --card-price-space-small: 3px;
+  --card-price-space-small: 0.1875rem;
   --card-price-space-large: clamp(0.75rem, 0.659rem + 0.39vw, 1.125rem);
 
   padding: clamp(1.5rem, 1.136rem + 1.55vw, 3rem)
@@ -255,14 +255,14 @@ body {
 }
 
 .card__item::before {
-  --card-marker-size: 8px;
+  --card-marker-size: 0.5rem;
 
   content: "";
   width: var(--card-marker-size);
   height: var(--card-marker-size);
   position: absolute;
   top: calc(var(--card-item-font-size) / 2);
-  left: calc(-12px - var(--card-marker-size));
+  left: calc(-0.75rem - var(--card-marker-size));
 
   background-color: var(--card-marker-color);
 }
@@ -363,6 +363,7 @@ body {
   font-weight: var(--header-logo-font-weight);
   font-size: var(--header-logo-font-size);
   line-height: var(--header-logo-line-height);
+  pointer-events: none;
 }
 
 .header__link {
@@ -372,9 +373,9 @@ body {
 .header__link--with-arrow::after {
   content: "";
   display: inline-block;
-  width: 16px;
-  height: 10px;
-  margin-left: 6px;
+  width: 1rem;
+  height: 0.625rem;
+  margin-left: 0.375rem;
 
   background-image: url(../img/icon-menu.svg);
 }
@@ -452,6 +453,7 @@ body {
   font-weight: var(--footer-logo-font-weight);
   font-size: var(--footer-logo-font-size);
   line-height: var(--footer-logo-line-height);
+  pointer-events: none;
 }
 
 .footer__contacts {
@@ -526,7 +528,7 @@ body {
 }
 
 .promo__content {
-  width: min(100%, 648px);
+  width: min(100%, 40.5rem);
   margin-bottom: clamp(3.5rem, 1.391rem + 9vw, 12.188rem);
 }
 
@@ -542,13 +544,13 @@ body {
   display: block;
   width: 100%;
   height: var(--line-thickness);
-  margin-top: 4px;
+  margin-top: 0.25rem;
 
   background-color: var(--main-color-accent);
 }
 
 .promo__overtitle {
-  margin-bottom: 2px;
+  margin-bottom: 0.125rem;
 }
 
 .promo__title {
@@ -578,7 +580,7 @@ body {
   font-size: var(--promo-discount-font-size);
   line-height: var(--promo-discount-line-height);
 
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .promo__timer {
@@ -599,7 +601,7 @@ body {
   padding: clamp(0.188rem, 0.067rem + 0.52vw, 0.688rem)
     clamp(0.375rem, -0.079rem + 1.94vw, 2.25rem);
 
-  border: 2px solid var(--main-color-dark);
+  border: 0.125rem solid var(--main-color-dark);
   width: max-content;
 }
 .promo__app--pos-tr {
@@ -634,7 +636,7 @@ body {
 
 .promo__img {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   left: clamp(0rem, -15.143rem + 23.66vw, 13.25rem);
   max-width: clamp(21.438rem, 14.035rem + 31.59vw, 51.938rem);
 
@@ -642,7 +644,7 @@ body {
     url(../img/rectangle.svg) no-repeat left
       clamp(5.188rem, 2.188rem + 4.69vw, 7.813rem) bottom /
       clamp(12.063rem, 7.906rem + 17.73vw, 29.188rem),
-    url(../img/ellipse-2.png) no-repeat right 0px top
+    url(../img/ellipse-2.png) no-repeat right 0 top
       clamp(-6.25rem, -4.698rem - 1.29vw, -5rem) /
       clamp(13.438rem, 12.618rem + 3.5vw, 16.813rem)
       clamp(34.25rem, 32.172rem + 8.87vw, 42.813rem);
@@ -666,7 +668,7 @@ body {
 }
 
 .features__description {
-  width: min(100%, 588px);
+  width: min(100%, 36.75rem);
 }
 
 .features__stats-wrapper {
@@ -690,7 +692,7 @@ body {
 }
 
 .features__value {
-  margin-bottom: -3px;
+  margin-bottom: -0.1875rem;
 }
 
 .features__label {
@@ -744,7 +746,7 @@ body {
   }
 
   .footer__wrapper {
-    padding-inline: 32px;
+    padding-inline: 2rem;
   }
 
   /* .footer__main {
