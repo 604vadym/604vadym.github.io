@@ -104,7 +104,6 @@ ul {
   --btn-accent-color: var(--color-white-soft);
 
   --cards-gap: clamp(0.875rem, 0.784rem + 0.39vw, 1.25rem);
-  --card-prices-gap: clamp(1.875rem, 1.045rem + 3.54vw, 3.125rem);
 
   --card-bg-accent: var(--color-purple-accent);
   --card-bg-variant-1: var(--color-green-pastel);
@@ -174,6 +173,7 @@ footer {
 .card {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .card--size-small {
@@ -262,6 +262,7 @@ footer {
 .card__list {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: var(--card-item-space);
 }
 
@@ -753,7 +754,6 @@ footer {
 .prices__card {
   flex-basis: calc((100% - var(--cards-gap) * 2) / 3);
   min-height: clamp(30rem, 26.177rem + 16.31vw, 45.75rem);
-  justify-content: space-between;
 }
 
 @media (max-width: 1023px) {
@@ -783,14 +783,12 @@ footer {
   .prices__card--fluid {
     order: -1;
     flex-basis: 100%;
-    text-align: center;
     align-items: center;
     min-height: auto;
-    gap: var(--card-prices-gap);
   }
 
-  .prices__card--fluid .card__item {
-    text-align: start;
+  .card__list {
+    margin-bottom: clamp(1.875rem, 1.045rem + 3.54vw, 3.125rem);
   }
 }
 
@@ -831,21 +829,14 @@ footer {
   }
 
   .prices__card {
-    text-align: center;
     align-items: center;
     min-height: auto;
-    gap: var(--card-prices-gap);
   }
 
   .prices__card--fluid {
     order: 0;
   }
 
-  .prices__card .card__item {
-    text-align: start;
-  }
-
-  .prices__card .card__wrapper:last-child,
   .card__btn {
     width: 100%;
   }
