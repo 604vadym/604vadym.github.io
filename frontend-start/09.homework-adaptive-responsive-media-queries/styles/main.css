@@ -711,7 +711,7 @@ body {
 }
 
 .features__card {
-  width: calc((100% - var(--cards-gap) * 2) / 3);
+  flex-basis: calc((100% - var(--cards-gap) * 2) / 3);
 }
 
 .prices {
@@ -732,7 +732,7 @@ body {
 }
 
 .prices__card {
-  width: calc((100% - var(--cards-gap) * 2) / 3);
+  flex-basis: calc((100% - var(--cards-gap) * 2) / 3);
   min-height: clamp(30rem, 26.177rem + 16.31vw, 45.75rem);
   justify-content: space-between;
 }
