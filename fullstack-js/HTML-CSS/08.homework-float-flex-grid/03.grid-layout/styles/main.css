@@ -42,6 +42,10 @@ body {
   justify-content: space-between;
 }
 
+.grid1-v3 {
+  grid-template-columns: 1fr auto;
+}
+
 .grid2-v1 {
   grid-template-columns: 1fr 1fr auto auto;
 }
