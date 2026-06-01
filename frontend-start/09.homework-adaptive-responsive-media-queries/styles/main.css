@@ -45,6 +45,7 @@ ul {
   --line-thickness: 0.25rem;
 
   --container-width: 92rem;
+  --container-padding: 1rem;
 
   --main-color-dark: var(--color-black-pure);
   --main-color-light: var(--color-white-pure);
@@ -167,7 +168,7 @@ footer {
 .container {
   width: min(100%, var(--container-width));
   margin-inline: auto;
-  padding-inline: 1rem;
+  padding-inline: var(--container-padding);
 }
 
 .card {
@@ -189,10 +190,10 @@ footer {
   --card-price-space-small: 0.1875rem;
   --card-price-space-large: clamp(0.75rem, 0.659rem + 0.39vw, 1.125rem);
 
-  padding: clamp(1.5rem, 1.136rem + 1.55vw, 3rem)
-    clamp(1rem, 0.666rem + 1.42vw, 2.375rem)
-    clamp(1.625rem, 1.246rem + 1.62vw, 3.188rem)
-    clamp(1.25rem, 0.522rem + 3.11vw, 4.25rem);
+  padding-top: clamp(1.5rem, 1.136rem + 1.55vw, 3rem);
+  padding-right: clamp(1rem, 0.666rem + 1.42vw, 2.375rem);
+  padding-bottom: clamp(1.625rem, 1.246rem + 1.62vw, 3.188rem);
+  padding-left: clamp(1.25rem, 0.522rem + 3.11vw, 4.25rem);
 }
 
 .card--type-base,
@@ -290,8 +291,8 @@ footer {
 
 .card__btn {
   min-width: clamp(8.75rem, 8.401rem + 1.49vw, 10.188rem);
-  padding: clamp(0.75rem, 0.704rem + 0.19vw, 0.938rem)
-    clamp(1.125rem, 0.852rem + 1.17vw, 2.25rem);
+  padding-block: clamp(0.75rem, 0.704rem + 0.19vw, 0.938rem);
+  padding-inline: clamp(1.125rem, 0.852rem + 1.17vw, 2.25rem);
 
   background-color: var(--card-btn-bg);
   color: var(--card-btn-color);
@@ -403,8 +404,8 @@ footer {
 
 .header__btn {
   min-width: clamp(7.125rem, 6.533rem + 2.52vw, 9.563rem);
-  padding: clamp(0.625rem, 0.595rem + 0.13vw, 0.75rem)
-    clamp(1.125rem, 0.837rem + 1.23vw, 2.313rem);
+  padding-block: clamp(0.625rem, 0.595rem + 0.13vw, 0.75rem);
+  padding-inline: clamp(1.125rem, 0.837rem + 1.23vw, 2.313rem);
 
   background-color: var(--btn-primary-bg);
   color: var(--btn-primary-color);
@@ -584,8 +585,8 @@ footer {
 
 .promo__btn {
   min-width: clamp(6.875rem, 6.405rem + 2.01vw, 8.813rem);
-  padding: clamp(0.625rem, 0.579rem + 0.19vw, 0.813rem)
-    clamp(1.125rem, 0.837rem + 1.23vw, 2.313rem);
+  padding-block: clamp(0.625rem, 0.579rem + 0.19vw, 0.813rem);
+  padding-inline: clamp(1.125rem, 0.837rem + 1.23vw, 2.313rem);
   margin-bottom: clamp(2.75rem, 1.749rem + 4.27vw, 6.875rem);
 
   background-color: var(--btn-accent-bg);
@@ -615,8 +616,8 @@ footer {
 
 .promo__app {
   position: absolute;
-  padding: clamp(0.188rem, 0.067rem + 0.52vw, 0.688rem)
-    clamp(0.375rem, -0.079rem + 1.94vw, 2.25rem);
+  padding-block: clamp(0.188rem, 0.067rem + 0.52vw, 0.688rem);
+  padding-inline: clamp(0.375rem, -0.079rem + 1.94vw, 2.25rem);
 
   border: 0.125rem solid var(--main-color-dark);
   width: max-content;
@@ -764,7 +765,7 @@ footer {
   }
 
   .footer__wrapper {
-    padding-inline: 2rem;
+    padding-inline: calc(var(--container-padding) * 2);
   }
 }
 
