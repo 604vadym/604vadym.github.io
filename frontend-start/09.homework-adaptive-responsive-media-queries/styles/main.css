@@ -289,7 +289,7 @@ body {
 .btn {
   display: inline-block;
   text-align: center;
-  white-space: nowrap;
+  max-width: 100%;
 }
 
 .title--large,
