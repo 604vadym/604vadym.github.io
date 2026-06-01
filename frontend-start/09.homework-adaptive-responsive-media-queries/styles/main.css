@@ -782,18 +782,21 @@ body {
     align-items: flex-start;
   }
 
-  .header__list {
+  .header__list,
+  .header__side,
+  .footer__main {
     flex-direction: column;
+  }
+
+  .header__list {
     gap: clamp(0.75rem, 0.563rem + 0.8vw, 0.938rem);
   }
 
   .header__side {
-    flex-direction: column;
     gap: 1rem;
   }
 
   .footer__main {
-    flex-direction: column;
     gap: clamp(1.563rem, 1.069rem + 2.11vw, 2.188rem);
   }
 }
@@ -803,12 +806,12 @@ body {
     flex-wrap: wrap;
   }
 
-  .features__card {
+  .features__card,
+  .prices__card {
     flex-basis: 100%;
   }
 
   .prices__card {
-    flex-basis: 100%;
     text-align: center;
     align-items: center;
     min-height: auto;
@@ -823,10 +826,7 @@ body {
     text-align: start;
   }
 
-  .prices__card .card__wrapper:last-child {
-    width: 100%;
-  }
-
+  .prices__card .card__wrapper:last-child,
   .card__btn {
     width: 100%;
   }
