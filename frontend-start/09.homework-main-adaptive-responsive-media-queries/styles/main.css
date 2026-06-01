@@ -600,6 +600,7 @@ body {
   border: 0.125rem solid var(--main-color-dark);
   width: max-content;
 }
+
 .promo__app--pos-tr {
   top: clamp(3.5rem, 10.732rem + -6.03vw, 6.875rem);
   left: clamp(15.375rem, -14.271rem + 46.21vw, 41.25rem);
