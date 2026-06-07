@@ -1,0 +1,22 @@
+@use "../abstracts/" as a;
+
+.main-title,
+.section-title,
+.item-title {
+  font-weight: a.$font-weight-medium;
+  color: a.$color-dark;
+}
+
+.main-title {
+  font-size: a.$font-size-xl;
+}
+
+.section-title {
+  font-size: a.$font-size-lg;
+  line-height: a.$line-height-tight;
+  text-transform: capitalize;
+}
+
+.item-title {
+  font-size: a.$font-size-md;
+}

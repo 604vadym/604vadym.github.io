@@ -1,0 +1,15 @@
+@use "../abstracts/" as a;
+
+html {
+  overflow-y: auto;
+}
+
+body {
+  font-family: a.$font-main;
+  font-weight: a.$font-weight-normal;
+  font-size: a.$font-size-sm;
+  line-height: a.$line-height-main;
+  color: a.$color-muted;
+
+  background-color: a.$color-surface;
+}

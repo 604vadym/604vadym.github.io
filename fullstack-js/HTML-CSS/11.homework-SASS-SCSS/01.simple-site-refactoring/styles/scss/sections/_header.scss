@@ -1,0 +1,37 @@
+@use "../abstracts/" as a;
+
+.header__content {
+  padding-block: clamp(2rem, 1.287rem + 3.04vw, 4.938rem);
+}
+
+.menu__list {
+  display: flex;
+  gap: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
+
+  @include a.responsive(492px) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.menu__link {
+  letter-spacing: a.$letter-spacing-wide;
+  text-transform: uppercase;
+  color: a.$color-dark;
+  padding: 0.1875rem;
+  border-radius: 0.625rem;
+  transition:
+    background-color 0.5s,
+    color 0.5s;
+}
+
+.menu__link--active {
+  font-weight: a.$font-weight-medium;
+  color: a.$color-accent;
+  pointer-events: none;
+}
+
+.menu__link:hover {
+  color: a.$color-light;
+  background-color: a.$color-accent;
+}

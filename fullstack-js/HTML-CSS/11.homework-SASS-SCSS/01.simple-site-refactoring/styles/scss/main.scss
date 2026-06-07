@@ -1,0 +1,13 @@
+@use "./base/reset";
+@use "./base/typography";
+@use "./base/layout";
+
+@use "./components/titles";
+@use "./components/button";
+
+@use "./sections/header";
+@use "./sections/hero";
+@use "./sections/about";
+@use "./sections/projects";
+@use "./sections/work";
+@use "./sections/footer";
