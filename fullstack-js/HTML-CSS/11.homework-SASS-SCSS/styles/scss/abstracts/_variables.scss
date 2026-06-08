@@ -1,3 +1,5 @@
+@use "functions" as f;
+
 $color-black: #000;
 $color-white: #fff;
 $color-grey: #727272;
@@ -11,19 +13,19 @@ $font-main: "Roboto", sans-serif;
 $font-weight-normal: 400;
 $font-weight-medium: 500;
 
-$font-size-xs: clamp(0.75rem, 0.735rem + 0.065vw, 0.8125rem);
-$font-size-sm: clamp(0.875rem, 0.845rem + 0.129vw, 1rem);
-$font-size-md: clamp(1.0625rem, 1.002rem + 0.259vw, 1.3125rem);
-$font-size-lg: clamp(1.375rem, 1.223rem + 0.647vw, 2rem);
-$font-size-xl: clamp(1.75rem, 1.447rem + 1.294vw, 3rem);
+$font-size-xs: clamp(f.rem(12px), 0.735rem + 0.065vw, f.rem(13px));
+$font-size-sm: clamp(f.rem(14px), 0.845rem + 0.129vw, f.rem(16px));
+$font-size-md: clamp(f.rem(17px), 1.002rem + 0.259vw, f.rem(21px));
+$font-size-lg: clamp(f.rem(22px), 1.223rem + 0.647vw, f.rem(32px));
+$font-size-xl: clamp(f.rem(28px), 1.447rem + 1.294vw, f.rem(48px));
 
 $line-height-main: 1.64;
 $line-height-tight: 1;
 
 $letter-spacing-wide: 0.1em;
 
-$container-width: 72rem;
-$container-padding: 0.9375rem;
+$container-width: f.rem(1152px);
+$container-padding: f.rem(15px);
 
 $text-max-width: 56ch;
 

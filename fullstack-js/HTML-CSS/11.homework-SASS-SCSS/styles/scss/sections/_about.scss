@@ -4,13 +4,13 @@
   background-color: a.$color-surface-alt;
 
   &__content {
-    padding-top: clamp(2.5rem, 1.408rem + 4.66vw, 7rem);
-    padding-bottom: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
+    padding-top: clamp(a.rem(40px), 1.408rem + 4.66vw, a.rem(112px));
+    padding-bottom: clamp(a.rem(36px), 1.279rem + 4.14vw, a.rem(100px));
     text-align: center;
   }
 
   &__title {
-    margin-bottom: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
+    margin-bottom: clamp(a.rem(24px), 1.106rem + 1.68vw, a.rem(50px));
   }
 
   &__description {

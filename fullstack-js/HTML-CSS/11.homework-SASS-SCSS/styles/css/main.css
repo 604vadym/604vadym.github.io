@@ -90,7 +90,7 @@ body {
 
 .menu__list {
   display: flex;
-  gap: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
+  gap: clamp(1rem, 0.56rem + 1.88vw, 2.8125rem);
 }
 @media (max-width: 30.75em) {
   .menu__list {
@@ -150,12 +150,12 @@ body {
 }
 
 .header__content {
-  padding-block: clamp(2rem, 1.287rem + 3.04vw, 4.938rem);
+  padding-block: clamp(2rem, 1.287rem + 3.04vw, 4.9375rem);
 }
 
 .hero {
-  padding-top: clamp(2rem, 1.226rem + 3.3vw, 5.188rem);
-  padding-bottom: clamp(3rem, 1.589rem + 6.02vw, 8.813rem);
+  padding-top: clamp(2rem, 1.226rem + 3.3vw, 5.1875rem);
+  padding-bottom: clamp(3rem, 1.589rem + 6.02vw, 8.8125rem);
 }
 @media (max-width: 30.75em) {
   .hero {
@@ -168,11 +168,11 @@ body {
 .hero__description {
   width: min(100%, 56ch);
   padding-inline: 0.0625rem;
-  margin-bottom: clamp(1.75rem, 1.189rem + 2.39vw, 4.063rem);
+  margin-bottom: clamp(1.75rem, 1.189rem + 2.39vw, 4.0625rem);
 }
 .hero__btn {
   display: inline-block;
-  min-width: clamp(10.625rem, 9.791rem + 3.56vw, 14.063rem);
+  min-width: clamp(10.625rem, 9.791rem + 3.56vw, 14.0625rem);
   padding: clamp(1rem, 0.939rem + 0.26vw, 1.25rem);
 }
 
@@ -199,13 +199,13 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
-  gap: clamp(1.25rem, 0.81rem + 1.88vw, 3.063rem);
+  gap: clamp(1.25rem, 0.81rem + 1.88vw, 3.0625rem);
   padding-block: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
 }
 @media (max-width: 64.875em) {
   .projects__content {
     flex-wrap: wrap;
-    column-gap: clamp(1.25rem, -6.043rem + 23.67vw, 9.313rem);
+    column-gap: clamp(1.25rem, -6.043rem + 23.67vw, 9.3125rem);
   }
 }
 .projects__item {
@@ -225,7 +225,7 @@ body {
 .work__description {
   width: min(100%, 56ch);
   margin-inline: auto;
-  margin-bottom: clamp(1.5rem, 0.999rem + 2.14vw, 3.563rem);
+  margin-bottom: clamp(1.5rem, 0.999rem + 2.14vw, 3.5625rem);
 }
 
 .footer {
@@ -240,12 +240,12 @@ body {
   line-height: 1;
   color: #fff;
   margin-bottom: clamp(0.75rem, 0.629rem + 0.52vw, 1.25rem);
-  padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
+  padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.4375rem);
 }
 .footer__copyright {
   font-size: clamp(0.75rem, 0.735rem + 0.065vw, 0.8125rem);
   color: #fff;
-  padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
+  padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.4375rem);
 }
 
 /*# sourceMappingURL=main.css.map */

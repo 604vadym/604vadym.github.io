@@ -3,11 +3,11 @@
 .menu {
   &__list {
     display: flex;
-    gap: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
+    gap: clamp(a.rem(16px), 0.56rem + 1.88vw, a.rem(45px));
 
     @include a.responsive(a.$breakpoint-mobile) {
       flex-direction: column;
-      gap: 0.5rem;
+      gap: a.rem(8px);
     }
   }
 
@@ -15,8 +15,8 @@
     letter-spacing: a.$letter-spacing-wide;
     text-transform: uppercase;
     color: a.$color-dark;
-    padding: 0.1875rem;
-    border-radius: 0.625rem;
+    padding: a.rem(3px);
+    border-radius: a.rem(10px);
     transition:
       background-color 0.5s,
       color 0.5s;

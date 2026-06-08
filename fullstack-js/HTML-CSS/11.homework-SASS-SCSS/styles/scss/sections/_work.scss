@@ -2,17 +2,17 @@
 
 .work {
   &__content {
-    padding-block: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
+    padding-block: clamp(a.rem(36px), 1.279rem + 4.14vw, a.rem(100px));
     text-align: center;
   }
 
   &__title {
-    margin-bottom: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
+    margin-bottom: clamp(a.rem(24px), 1.106rem + 1.68vw, a.rem(50px));
   }
 
   &__description {
     width: min(100%, a.$text-max-width);
     margin-inline: auto;
-    margin-bottom: clamp(1.5rem, 0.999rem + 2.14vw, 3.563rem);
+    margin-bottom: clamp(a.rem(24px), 0.999rem + 2.14vw, a.rem(57px));
   }
 }

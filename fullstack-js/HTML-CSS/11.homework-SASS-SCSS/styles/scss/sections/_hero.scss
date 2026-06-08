@@ -1,26 +1,26 @@
 @use "../abstracts" as a;
 
 .hero {
-  padding-top: clamp(2rem, 1.226rem + 3.3vw, 5.188rem);
-  padding-bottom: clamp(3rem, 1.589rem + 6.02vw, 8.813rem);
+  padding-top: clamp(a.rem(32px), 1.226rem + 3.3vw, a.rem(83px));
+  padding-bottom: clamp(a.rem(48px), 1.589rem + 6.02vw, a.rem(141px));
 
   @include a.responsive(a.$breakpoint-mobile) {
     padding-top: 0;
   }
 
   &__title {
-    margin-bottom: clamp(1.5rem, 0.954rem + 2.33vw, 3.75rem);
+    margin-bottom: clamp(a.rem(24px), 0.954rem + 2.33vw, a.rem(60px));
   }
 
   &__description {
     width: min(100%, a.$text-max-width);
-    padding-inline: 0.0625rem;
-    margin-bottom: clamp(1.75rem, 1.189rem + 2.39vw, 4.063rem);
+    padding-inline: a.rem(1px);
+    margin-bottom: clamp(a.rem(28px), 1.189rem + 2.39vw, a.rem(65px));
   }
 
   &__btn {
     display: inline-block;
-    min-width: clamp(10.625rem, 9.791rem + 3.56vw, 14.063rem);
-    padding: clamp(1rem, 0.939rem + 0.26vw, 1.25rem);
+    min-width: clamp(a.rem(170px), 9.791rem + 3.56vw, a.rem(225px));
+    padding: clamp(a.rem(16px), 0.939rem + 0.26vw, a.rem(20px));
   }
 }

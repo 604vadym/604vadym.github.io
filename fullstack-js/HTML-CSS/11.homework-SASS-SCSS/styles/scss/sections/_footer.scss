@@ -4,7 +4,7 @@
   background-color: a.$color-accent;
 
   &__content {
-    padding-block: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
+    padding-block: clamp(a.rem(24px), 1.106rem + 1.68vw, a.rem(50px));
   }
 
   &__author {
@@ -13,14 +13,14 @@
     line-height: a.$line-height-tight;
     color: a.$color-light;
 
-    margin-bottom: clamp(0.75rem, 0.629rem + 0.52vw, 1.25rem);
-    padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
+    margin-bottom: clamp(a.rem(12px), 0.629rem + 0.52vw, a.rem(20px));
+    padding-inline: clamp(0rem, -0.106rem + 0.45vw, a.rem(7px));
   }
 
   &__copyright {
     font-size: a.$font-size-xs;
     color: a.$color-light;
 
-    padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
+    padding-inline: clamp(0rem, -0.106rem + 0.45vw, a.rem(7px));
   }
 }
