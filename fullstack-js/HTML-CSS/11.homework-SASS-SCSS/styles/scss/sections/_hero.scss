@@ -7,19 +7,19 @@
   @include a.responsive(492px) {
     padding-top: 0;
   }
-}
 
-.hero__title {
-  margin-bottom: clamp(1.5rem, 0.954rem + 2.33vw, 3.75rem);
-}
+  &__title {
+    margin-bottom: clamp(1.5rem, 0.954rem + 2.33vw, 3.75rem);
+  }
 
-.hero__description {
-  width: min(100%, a.$text-max-width);
-  padding-inline: 0.0625rem;
-  margin-bottom: clamp(1.75rem, 1.189rem + 2.39vw, 4.063rem);
-}
+  &__description {
+    width: min(100%, a.$text-max-width);
+    padding-inline: 0.0625rem;
+    margin-bottom: clamp(1.75rem, 1.189rem + 2.39vw, 4.063rem);
+  }
 
-.hero__btn {
-  min-width: clamp(10.625rem, 9.791rem + 3.56vw, 14.063rem);
-  padding: clamp(1rem, 0.939rem + 0.26vw, 1.25rem);
+  &__btn {
+    min-width: clamp(10.625rem, 9.791rem + 3.56vw, 14.063rem);
+    padding: clamp(1rem, 0.939rem + 0.26vw, 1.25rem);
+  }
 }

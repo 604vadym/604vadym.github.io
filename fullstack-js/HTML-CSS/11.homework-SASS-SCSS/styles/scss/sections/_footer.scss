@@ -2,26 +2,26 @@
 
 .footer {
   background-color: a.$color-accent;
-}
 
-.footer__content {
-  padding-block: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
-}
+  &__content {
+    padding-block: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
+  }
 
-.footer__author {
-  font-weight: a.$font-weight-medium;
-  font-size: a.$font-size-md;
-  line-height: a.$line-height-tight;
+  &__author {
+    font-weight: a.$font-weight-medium;
+    font-size: a.$font-size-md;
+    line-height: a.$line-height-tight;
 
-  margin-bottom: clamp(0.75rem, 0.629rem + 0.52vw, 1.25rem);
-}
+    margin-bottom: clamp(0.75rem, 0.629rem + 0.52vw, 1.25rem);
+  }
 
-.footer__author,
-.footer__copyright {
-  color: a.$color-light;
-  padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
-}
+  &__author,
+  &__copyright {
+    color: a.$color-light;
+    padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
+  }
 
-.footer__copyright {
-  font-size: a.$font-size-xs;
+  &__copyright {
+    font-size: a.$font-size-xs;
+  }
 }

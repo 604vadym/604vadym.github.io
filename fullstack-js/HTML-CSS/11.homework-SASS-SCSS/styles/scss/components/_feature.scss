@@ -1,0 +1,16 @@
+@use "../abstracts/" as a;
+
+.feature {
+  &__icon {
+    width: 3.125rem;
+  }
+
+  &__text {
+    text-align: left;
+  }
+
+  &__title,
+  &__description {
+    color: a.$color-light;
+  }
+}

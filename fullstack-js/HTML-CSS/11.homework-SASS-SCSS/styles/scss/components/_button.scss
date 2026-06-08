@@ -6,17 +6,17 @@
   border: none;
   background: transparent;
   cursor: pointer;
-}
 
-.btn--type-cta {
-  color: a.$color-light;
-  letter-spacing: a.$letter-spacing-wide;
-  text-transform: uppercase;
+  &--type-cta {
+    color: a.$color-light;
+    letter-spacing: a.$letter-spacing-wide;
+    text-transform: uppercase;
 
-  background-color: a.$color-accent;
-  transition: background-color 0.5s;
-}
+    background-color: a.$color-accent;
+    transition: background-color 0.5s;
 
-.btn--type-cta:hover {
-  background-color: a.$color-accent-hover;
+    &:hover {
+      background-color: a.$color-accent-hover;
+    }
+  }
 }
