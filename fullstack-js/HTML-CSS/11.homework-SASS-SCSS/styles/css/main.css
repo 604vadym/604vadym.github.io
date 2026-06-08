@@ -118,6 +118,8 @@ body {
 
 .feature__icon {
   width: 3.125rem;
+  height: auto;
+  flex-shrink: 0;
 }
 .feature__text {
   text-align: left;
