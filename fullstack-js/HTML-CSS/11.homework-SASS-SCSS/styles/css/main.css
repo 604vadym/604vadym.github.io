@@ -92,7 +92,7 @@ body {
   display: flex;
   gap: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
 }
-@media (max-width: 492px) {
+@media (max-width: 30.75em) {
   .menu__list {
     flex-direction: column;
     gap: 0.5rem;
@@ -155,7 +155,7 @@ body {
   padding-top: clamp(2rem, 1.226rem + 3.3vw, 5.188rem);
   padding-bottom: clamp(3rem, 1.589rem + 6.02vw, 8.813rem);
 }
-@media (max-width: 492px) {
+@media (max-width: 30.75em) {
   .hero {
     padding-top: 0;
   }
@@ -200,7 +200,7 @@ body {
   gap: clamp(1.25rem, 0.81rem + 1.88vw, 3.063rem);
   padding-block: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
 }
-@media (max-width: 1038px) {
+@media (max-width: 64.875em) {
   .projects__content {
     flex-wrap: wrap;
     column-gap: clamp(1.25rem, -6.043rem + 23.67vw, 9.313rem);

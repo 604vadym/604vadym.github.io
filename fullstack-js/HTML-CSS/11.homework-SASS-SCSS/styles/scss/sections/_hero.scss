@@ -4,7 +4,7 @@
   padding-top: clamp(2rem, 1.226rem + 3.3vw, 5.188rem);
   padding-bottom: clamp(3rem, 1.589rem + 6.02vw, 8.813rem);
 
-  @include a.responsive(492px) {
+  @include a.responsive(30.75em) {
     padding-top: 0;
   }
 

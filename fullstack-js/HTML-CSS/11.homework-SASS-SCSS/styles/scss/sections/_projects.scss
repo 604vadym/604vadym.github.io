@@ -11,7 +11,7 @@
 
     padding-block: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
 
-    @include a.responsive(1038px) {
+    @include a.responsive(64.875em) {
       flex-wrap: wrap;
       column-gap: clamp(1.25rem, -6.043rem + 23.67vw, 9.313rem);
     }
