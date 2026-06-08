@@ -1,0 +1,36 @@
+$color-black: #000;
+$color-white: #fff;
+$color-grey: #727272;
+$color-silver: #eeeff1;
+$color-light-silver: #f9f9f9;
+$color-blue: #34547a;
+$color-dark-blue: #1a3557;
+
+$font-main: "Roboto", sans-serif;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+
+$font-size-xs: clamp(0.75rem, 0.735rem + 0.065vw, 0.8125rem);
+$font-size-sm: clamp(0.875rem, 0.845rem + 0.129vw, 1rem);
+$font-size-md: clamp(1.0625rem, 1.002rem + 0.259vw, 1.3125rem);
+$font-size-lg: clamp(1.375rem, 1.223rem + 0.647vw, 2rem);
+$font-size-xl: clamp(1.75rem, 1.447rem + 1.294vw, 3rem);
+
+$line-height-main: 1.64;
+$line-height-tight: 1;
+
+$letter-spacing-wide: 0.1em;
+
+$container-width: 72rem;
+$container-padding: 0.9375rem;
+
+$text-max-width: 56ch;
+
+$color-dark: $color-black;
+$color-light: $color-white;
+$color-muted: $color-grey;
+$color-surface: $color-silver;
+$color-surface-alt: $color-light-silver;
+$color-accent: $color-blue;
+$color-accent-hover: $color-dark-blue;

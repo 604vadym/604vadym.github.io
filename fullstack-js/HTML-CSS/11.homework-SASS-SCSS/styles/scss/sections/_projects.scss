@@ -1,0 +1,26 @@
+@use "../abstracts" as a;
+
+.projects {
+  background-color: a.$color-accent;
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: clamp(1.25rem, 0.81rem + 1.88vw, 3.063rem);
+
+    padding-block: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
+
+    @include a.responsive(64.875em) {
+      flex-wrap: wrap;
+      column-gap: clamp(1.25rem, -6.043rem + 23.67vw, 9.313rem);
+    }
+  }
+
+  &__item {
+    display: flex;
+    gap: 1.25rem;
+    flex: 0 0 8.8125rem;
+    align-items: center;
+  }
+}

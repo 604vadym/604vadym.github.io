@@ -1,0 +1,24 @@
+.video {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__poster {
+    width: min(100%, 69.375rem);
+    padding-inline: clamp(0rem, -0.091rem + 0.39vw, 0.375rem);
+  }
+
+  &__play-btn {
+    position: absolute;
+    transition: filter 0.5s;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
+
+  &__play-icon {
+    width: clamp(3.125rem, 2.367rem + 3.24vw, 6.25rem);
+  }
+}

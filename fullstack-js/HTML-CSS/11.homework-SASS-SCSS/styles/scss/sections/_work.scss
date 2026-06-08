@@ -1,0 +1,18 @@
+@use "../abstracts" as a;
+
+.work {
+  &__content {
+    padding-block: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
+    text-align: center;
+  }
+
+  &__title {
+    margin-bottom: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
+  }
+
+  &__description {
+    width: min(100%, a.$text-max-width);
+    margin-inline: auto;
+    margin-bottom: clamp(1.5rem, 0.999rem + 2.14vw, 3.563rem);
+  }
+}

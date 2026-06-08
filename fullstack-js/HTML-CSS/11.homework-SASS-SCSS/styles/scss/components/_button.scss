@@ -1,0 +1,22 @@
+@use "../abstracts" as a;
+
+.btn {
+  display: inline-block;
+  text-align: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  &--type-cta {
+    color: a.$color-light;
+    letter-spacing: a.$letter-spacing-wide;
+    text-transform: uppercase;
+
+    background-color: a.$color-accent;
+    transition: background-color 0.5s;
+
+    &:hover {
+      background-color: a.$color-accent-hover;
+    }
+  }
+}
