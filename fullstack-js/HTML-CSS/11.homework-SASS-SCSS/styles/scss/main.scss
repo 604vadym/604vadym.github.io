@@ -1,16 +1,16 @@
-@use "./base/reset";
-@use "./base/typography";
-@use "./base/layout";
+@use "base/reset";
+@use "base/typography";
+@use "base/layout";
 
-@use "./components/titles";
-@use "./components/button";
-@use "./components/menu";
-@use "./components/feature";
-@use "./components/video";
+@use "components/titles";
+@use "components/button";
+@use "components/menu";
+@use "components/feature";
+@use "components/video";
 
-@use "./sections/header";
-@use "./sections/hero";
-@use "./sections/about";
-@use "./sections/projects";
-@use "./sections/work";
-@use "./sections/footer";
+@use "sections/header";
+@use "sections/hero";
+@use "sections/about";
+@use "sections/projects";
+@use "sections/work";
+@use "sections/footer";
