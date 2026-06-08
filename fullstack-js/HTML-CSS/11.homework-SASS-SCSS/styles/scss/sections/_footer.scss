@@ -1,4 +1,4 @@
-@use "../abstracts/" as a;
+@use "../abstracts" as a;
 
 .footer {
   background-color: a.$color-accent;

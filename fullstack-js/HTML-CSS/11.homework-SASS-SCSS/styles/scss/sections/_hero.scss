@@ -1,4 +1,4 @@
-@use "../abstracts/" as a;
+@use "../abstracts" as a;
 
 .hero {
   padding-top: clamp(2rem, 1.226rem + 3.3vw, 5.188rem);
