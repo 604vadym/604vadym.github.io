@@ -149,8 +149,8 @@ body {
   flex-direction: column;
 }
 
-header,
-footer {
+.header,
+.footer {
   flex-shrink: 0;
 }
 
