@@ -5,7 +5,7 @@
     display: flex;
     gap: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
 
-    @include a.responsive(30.75em) {
+    @include a.responsive(a.$breakpoint-mobile) {
       flex-direction: column;
       gap: 0.5rem;
     }
