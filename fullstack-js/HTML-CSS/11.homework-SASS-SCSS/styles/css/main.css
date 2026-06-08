@@ -51,9 +51,7 @@ body {
   padding-inline: 0.9375rem;
 }
 
-.main-title,
-.section-title,
-.item-title {
+.item-title, .section-title, .main-title {
   font-weight: 500;
   color: #000;
 }
@@ -171,6 +169,7 @@ body {
   margin-bottom: clamp(1.75rem, 1.189rem + 2.39vw, 4.063rem);
 }
 .hero__btn {
+  display: inline-block;
   min-width: clamp(10.625rem, 9.791rem + 3.56vw, 14.063rem);
   padding: clamp(1rem, 0.939rem + 0.26vw, 1.25rem);
 }
@@ -237,14 +236,14 @@ body {
   font-weight: 500;
   font-size: clamp(1.0625rem, 1.002rem + 0.259vw, 1.3125rem);
   line-height: 1;
-  margin-bottom: clamp(0.75rem, 0.629rem + 0.52vw, 1.25rem);
-}
-.footer__author, .footer__copyright {
   color: #fff;
+  margin-bottom: clamp(0.75rem, 0.629rem + 0.52vw, 1.25rem);
   padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
 }
 .footer__copyright {
   font-size: clamp(0.75rem, 0.735rem + 0.065vw, 0.8125rem);
+  color: #fff;
+  padding-inline: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
 }
 
 /*# sourceMappingURL=main.css.map */

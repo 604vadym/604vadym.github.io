@@ -12,10 +12,10 @@
   &__play-btn {
     position: absolute;
     transition: filter 0.5s;
-  }
 
-  &__play-btn:hover {
-    filter: brightness(0.8);
+    &:hover {
+      filter: brightness(0.8);
+    }
   }
 
   &__play-icon {
