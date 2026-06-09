@@ -9,3 +9,31 @@
 body {
   padding: 100px 300px;
 }
+
+.square,
+.rectangle,
+.circle,
+.ellipse {
+  vector-effect: non-scaling-stroke;
+  stroke-width: 5px;
+}
+
+.square {
+  stroke: green;
+  fill: salmon;
+}
+
+.rectangle {
+  stroke: blue;
+  fill: olive;
+}
+
+.circle {
+  stroke: orangered;
+  fill: cornflowerblue;
+}
+
+.ellipse {
+  stroke: cyan;
+  fill: burlywood;
+}
