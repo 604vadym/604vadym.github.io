@@ -31,9 +31,35 @@ body {
 .circle {
   stroke: orangered;
   fill: cornflowerblue;
+  animation: octopus 6s infinite;
+}
+
+.circle:hover {
+  animation-play-state: paused;
+}
+
+@keyframes octopus {
+  25% {
+    stroke: cyan;
+    fill: burlywood;
+  }
+  50% {
+    stroke: blue;
+    fill: olive;
+  }
+  75% {
+    stroke: green;
+    fill: salmon;
+  }
 }
 
 .ellipse {
   stroke: cyan;
   fill: burlywood;
+  transition: all 1.5s;
+}
+
+.ellipse:hover {
+  stroke: fuchsia;
+  fill: teal;
 }
