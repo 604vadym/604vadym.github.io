@@ -39,9 +39,12 @@ button:focus-visible {
   --color-white-pure: #efeff2;
   --color-gray-pure: #6d6d77;
   --color-purple-accent: #504dee;
+  --color-purple-dark: #3331b3;
+  --color-purple-lavender: #bebeff;
+  --color-black-soft: #323142;
   --color-white-soft: #fbfbfc;
-
   --color-green-pastel: #deefe4;
+  --color-green-pastel-dark: #4a7359;
   --color-yellow-pastel: #f3f3d7;
   --color-pink-pastel: #efdeee;
 
@@ -67,10 +70,18 @@ button:focus-visible {
   --container-padding: 1rem;
 
   --color-dark: var(--color-black-pure);
+  --color-dark-interactive: var(--color-black-soft);
   --color-light: var(--color-white-pure);
   --color-muted: var(--color-gray-pure);
   --color-accent: var(--color-purple-accent);
+  --color-accent-interactive: var(--color-purple-dark);
   --color-surface: var(--color-white-soft);
+  --color-surface-interactive: var(--color-purple-lavender);
+
+  --color-variant-1: var(--color-green-pastel);
+  --color-variant-1-interactive: var(--color-green-pastel-dark);
+  --color-variant-2: var(--color-yellow-pastel);
+  --color-variant-3: var(--color-pink-pastel);
 
   --outline-color: var(--color-accent);
 
@@ -118,24 +129,28 @@ button:focus-visible {
   --prices-bg: var(--color-surface);
 
   --btn-primary-bg: var(--color-dark);
+  --btn-primary-bg-interactive: var(--color-dark-interactive);
   --btn-primary-color: var(--color-light);
 
   --btn-accent-bg: var(--color-accent);
+  --btn-accent-bg-interactive: var(--color-accent-interactive);
   --btn-accent-color: var(--color-surface);
 
   --cards-gap: clamp(0.875rem, 0.784rem + 0.39vw, 1.25rem);
 
   --card-bg-accent: var(--color-accent);
-  --card-bg-variant-1: var(--color-green-pastel);
-  --card-bg-variant-2: var(--color-yellow-pastel);
-  --card-bg-variant-3: var(--color-pink-pastel);
+  --card-bg-variant-1: var(--color-variant-1);
+  --card-bg-variant-2: var(--color-variant-2);
+  --card-bg-variant-3: var(--color-variant-3);
 
   --card-text-color-main: var(--color-dark);
   --card-text-color-inverse: var(--color-surface);
   --card-text-color-muted: var(--color-muted);
 
   --card-btn-primary-bg-main: var(--color-dark);
+  --card-btn-primary-bg-main-interactive: var(--color-variant-1-interactive);
   --card-btn-primary-bg-inverse: var(--color-surface);
+  --card-btn-primary-bg-inverse-interactive: var(--color-surface-interactive);
   --card-btn-primary-color-main: var(--color-surface);
   --card-btn-primary-color-inverse: var(--color-accent);
 
@@ -223,6 +238,7 @@ body {
   --card-price-full-term: var(--card-text-color-muted);
 
   --card-btn-bg: var(--card-btn-primary-bg-main);
+  --card-btn-bg-active: var(--card-btn-primary-bg-main-interactive);
   --card-btn-color: var(--card-btn-primary-color-main);
   --card-marker-color: var(--card-marker-color-main);
 
@@ -232,6 +248,7 @@ body {
 
 .card--type-optimal {
   --card-btn-bg: var(--card-btn-primary-bg-inverse);
+  --card-btn-bg-active: var(--card-btn-primary-bg-inverse-interactive);
   --card-btn-color: var(--card-btn-primary-color-inverse);
   --card-marker-color: var(--card-marker-color-inverse);
 
@@ -320,6 +337,10 @@ body {
   color: var(--card-btn-color);
 }
 
+.card__btn:active {
+  --card-btn-bg: var(--card-btn-bg-active);
+}
+
 .title__line {
   display: block;
 }
@@ -334,6 +355,12 @@ body {
   display: inline-block;
   text-align: center;
   max-width: 100%;
+
+  transition: all 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
 }
 
 .title--large,
@@ -431,6 +458,10 @@ body {
 
   background-color: var(--btn-primary-bg);
   color: var(--btn-primary-color);
+}
+
+.header__btn:active {
+  --btn-primary-bg: var(--btn-primary-bg-interactive);
 }
 
 .footer {
@@ -613,6 +644,10 @@ body {
 
   background-color: var(--btn-accent-bg);
   color: var(--btn-accent-color);
+}
+
+.promo__btn:active {
+  --btn-accent-bg: var(--btn-accent-bg-interactive);
 }
 
 .promo__discount {
