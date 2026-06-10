@@ -15,22 +15,9 @@ body {
 .circle,
 .ellipse {
   vector-effect: non-scaling-stroke;
-  stroke-width: 5px;
-}
-
-.square {
-  stroke: green;
-  fill: salmon;
-}
-
-.rectangle {
-  stroke: blue;
-  fill: olive;
 }
 
 .circle {
-  stroke: orangered;
-  fill: cornflowerblue;
   animation: octopus 6s infinite;
 }
 
@@ -54,8 +41,6 @@ body {
 }
 
 .ellipse {
-  stroke: cyan;
-  fill: burlywood;
   transition: all 1.5s;
 }
 
