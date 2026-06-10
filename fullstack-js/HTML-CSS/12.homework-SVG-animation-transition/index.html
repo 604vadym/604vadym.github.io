@@ -3,50 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/layout.css" />
     <link rel="stylesheet" href="./styles/main.css" />
     <title>SVG.Animation.Transition</title>
   </head>
   <body>
-    <svg viewBox="0 0 100 100" width="500" height="500">
-      <rect
-        class="square"
-        x="10"
-        y="5"
-        width="20"
-        height="20"
-        fill="salmon"
-        stroke="green"
-        stroke-width="5"
-      ></rect>
-      <rect
-        class="rectangle"
-        x="60"
-        y="10"
-        width="30"
-        height="10"
-        fill="olive"
-        stroke="blue"
-        stroke-width="5"
-      ></rect>
-      <circle
-        class="circle"
-        cx="50"
-        cy="45"
-        r="15"
-        fill="cornflowerblue"
-        stroke="orangered"
-        stroke-width="5"
-      ></circle>
-      <ellipse
-        class="ellipse"
-        cx="50"
-        cy="80"
-        rx="25"
-        ry="15"
-        fill="burlywood"
-        stroke="cyan"
-        stroke-width="5"
-      ></ellipse>
-    </svg>
+    <div class="container">
+      <div class="row">
+        <svg width="105" height="105">
+          <rect
+            class="square"
+            x="2.5"
+            y="2.5"
+            width="100"
+            height="100"
+            fill="salmon"
+            stroke="green"
+            stroke-width="5"
+          ></rect>
+        </svg>
+
+        <svg width="155" height="55">
+          <rect
+            class="rectangle"
+            x="2.5"
+            y="2.5"
+            width="150"
+            height="50"
+            fill="olive"
+            stroke="blue"
+            stroke-width="5"
+          ></rect>
+        </svg>
+      </div>
+
+      <svg width="155" height="155">
+        <circle
+          class="circle"
+          cx="77.5"
+          cy="77.5"
+          r="75"
+          fill="cornflowerblue"
+          stroke="orangered"
+          stroke-width="5"
+        ></circle>
+      </svg>
+
+      <figure>
+        <svg width="255" height="155">
+          <ellipse
+            class="ellipse"
+            cx="127.5"
+            cy="77.5"
+            rx="125"
+            ry="75"
+            fill="burlywood"
+            stroke="cyan"
+            stroke-width="5"
+          ></ellipse>
+        </svg>
+        <figcaption>hover for animation</figcaption>
+      </figure>
+    </div>
   </body>
 </html>
