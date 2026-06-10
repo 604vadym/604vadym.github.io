@@ -47,22 +47,21 @@ ul {
   --container-width: 92rem;
   --container-padding: 1rem;
 
-  --main-color-dark: var(--color-black-pure);
-  --main-color-light: var(--color-white-pure);
-  --main-color-muted: var(--color-gray-pure);
-  --main-color-accent: var(--color-purple-accent);
-  --main-color-surface: var(--color-white-soft);
+  --color-dark: var(--color-black-pure);
+  --color-light: var(--color-white-pure);
+  --color-muted: var(--color-gray-pure);
+  --color-accent: var(--color-purple-accent);
+  --color-surface: var(--color-white-soft);
 
-  --header-bg: var(--color-white-pure);
-  --header-text-color: var(--color-white-soft);
+  --header-bg: var(--color-light);
   --header-line-height: var(--line-height-tight);
 
   --header-logo-font-weight: var(--font-weight-extra-bold);
   --header-logo-font-size: var(--font-size-lg);
   --header-logo-line-height: var(--line-height-tight);
 
-  --footer-bg: var(--color-black-pure);
-  --footer-text-color: var(--color-white-soft);
+  --footer-bg: var(--color-dark);
+  --footer-text-color: var(--color-surface);
   --footer-line-height: var(--line-height-tight);
 
   --footer-logo-font-weight: var(--font-weight-extra-bold);
@@ -73,12 +72,12 @@ ul {
   --footer-contacts-font-size: var(--font-size-lg);
   --footer-contacts-line-height: var(--line-height-tight);
 
-  --sitemap-link-color: var(--color-white-pure);
-  --sitemap-title-color: var(--color-white-soft);
+  --sitemap-link-color: var(--color-light);
+  --sitemap-title-color: var(--color-surface);
 
-  --copyright--text-color: var(--color-gray-pure);
+  --copyright-text-color: var(--color-muted);
 
-  --promo-bg: var(--color-white-pure);
+  --promo-bg: var(--color-light);
 
   --promo-duration-font-weight: var(--font-weight-bold);
   --promo-duration-line-height: var(--line-height-tight);
@@ -91,38 +90,38 @@ ul {
   --promo-timer-font-size: var(--font-size-md);
   --promo-timer-line-height: var(--line-height-tight);
 
-  --features-bg: var(--color-white-soft);
+  --features-bg: var(--color-surface);
 
-  --features-text-color: var(--color-gray-pure);
+  --features-text-color: var(--color-muted);
 
-  --prices-bg: var(--color-white-soft);
+  --prices-bg: var(--color-surface);
 
-  --btn-primary-bg: var(--color-black-pure);
-  --btn-primary-color: var(--color-white-pure);
+  --btn-primary-bg: var(--color-dark);
+  --btn-primary-color: var(--color-light);
 
-  --btn-accent-bg: var(--color-purple-accent);
-  --btn-accent-color: var(--color-white-soft);
+  --btn-accent-bg: var(--color-accent);
+  --btn-accent-color: var(--color-surface);
 
   --cards-gap: clamp(0.875rem, 0.784rem + 0.39vw, 1.25rem);
 
-  --card-bg-accent: var(--color-purple-accent);
+  --card-bg-accent: var(--color-accent);
   --card-bg-variant-1: var(--color-green-pastel);
   --card-bg-variant-2: var(--color-yellow-pastel);
   --card-bg-variant-3: var(--color-pink-pastel);
 
-  --card-text-color-main: var(--color-black-pure);
-  --card-text-color-inverse: var(--color-white-soft);
-  --card-text-color-muted: var(--color-gray-pure);
+  --card-text-color-main: var(--color-dark);
+  --card-text-color-inverse: var(--color-surface);
+  --card-text-color-muted: var(--color-muted);
 
-  --card-btn-primary-bg-main: var(--color-black-pure);
-  --card-btn-primary-bg-inverse: var(--color-white-soft);
-  --card-btn-primary-color-main: var(--color-white-soft);
-  --card-btn-primary-color-inverse: var(--color-purple-accent);
+  --card-btn-primary-bg-main: var(--color-dark);
+  --card-btn-primary-bg-inverse: var(--color-surface);
+  --card-btn-primary-color-main: var(--color-surface);
+  --card-btn-primary-color-inverse: var(--color-accent);
 
-  --card-marker-color-main: var(--color-black-pure);
-  --card-marker-color-inverse: var(--color-white-soft);
+  --card-marker-color-main: var(--color-dark);
+  --card-marker-color-inverse: var(--color-surface);
 
-  --card-line-color: var(--color-black-pure);
+  --card-line-color: var(--color-dark);
   --card-line-thickness: var(--line-thickness);
 
   --card-btn-line-height: var(--line-height-super-tight);
@@ -138,8 +137,8 @@ body {
   font-size: var(--font-size-md);
   line-height: var(--line-height-normal);
 
-  color: var(--main-color-dark);
-  background-color: var(--main-color-light);
+  color: var(--color-dark);
+  background-color: var(--color-light);
 }
 
 .wrapper {
@@ -462,7 +461,7 @@ body {
 }
 
 .footer__copyright {
-  color: var(--copyright--text-color);
+  color: var(--copyright-text-color);
 }
 
 .footer__logo-box {
@@ -566,7 +565,7 @@ body {
   height: var(--line-thickness);
   margin-top: 0.25rem;
 
-  background-color: var(--main-color-accent);
+  background-color: var(--color-accent);
 }
 
 .promo__overtitle {
@@ -617,7 +616,7 @@ body {
   padding-block: clamp(0.188rem, 0.067rem + 0.52vw, 0.688rem);
   padding-inline: clamp(0.375rem, -0.079rem + 1.94vw, 2.25rem);
 
-  border: 0.125rem solid var(--main-color-dark);
+  border: 0.125rem solid var(--color-dark);
   width: max-content;
 }
 
@@ -722,7 +721,7 @@ body {
   width: clamp(10.625rem, 9.351rem + 5.44vw, 15.875rem);
   height: var(--line-thickness);
   margin-top: clamp(0.875rem, 0.769rem + 0.45vw, 1.313rem);
-  background-color: var(--main-color-dark);
+  background-color: var(--color-dark);
 }
 
 .features__description-text,
