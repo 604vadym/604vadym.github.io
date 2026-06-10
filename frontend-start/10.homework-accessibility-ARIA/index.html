@@ -22,15 +22,19 @@
               ><img
                 class="header__logo-img"
                 src="./img/logo-header.svg"
-                alt="UpDate logo"
+                alt=""
               /><span class="header__logo-text">UpDate</span></a
             >
-            <nav class="header__nav">
+            <nav class="header__nav" aria-label="Header navigation">
               <ul class="header__list">
                 <li class="header__item">
-                  <a class="link header__link header__link--with-arrow" href="#"
-                    >Courses</a
+                  <button
+                    class="link header__link header__link--with-arrow"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
                   >
+                    Courses
+                  </button>
                 </li>
                 <li class="header__item">
                   <a class="link header__link" href="#">Teachers</a>
@@ -44,9 +48,13 @@
 
           <div class="header__side">
             <div class="header__actions">
-              <a class="link header__link header__link--with-arrow" href="#"
-                >En</a
+              <button
+                class="link header__link header__link--with-arrow"
+                aria-label="Change language. Current language: English"
+                aria-expanded="false"
               >
+                En
+              </button>
               <a class="link header__link" href="#">Sign In</a>
             </div>
             <a class="btn header__btn" href="#">Trial free</a>
@@ -58,7 +66,13 @@
         <section class="promo">
           <div class="container promo__wrapper">
             <div class="promo__content">
-              <p class="promo__duration">6&nbsp;months</p>
+              <p
+                class="promo__duration"
+                role="paragraph"
+                aria-label="Course duration: 6 months"
+              >
+                6&nbsp;months
+              </p>
               <p class="promo__overtitle">profession:</p>
               <h1 class="title title--large promo__title">
                 UI/UX&nbsp;designer
@@ -71,14 +85,20 @@
                 Start&nbsp;a&nbsp;career in the studio or freelance.
               </p>
               <a class="btn promo__btn" href="#">Started</a>
-              <p class="promo__discount">25%</p>
-              <time class="timer promo__timer" datetime="P17DT17H44M16S"
+              <p
+                class="promo__discount"
+                role="paragraph"
+                aria-label="Discount: 25%"
+              >
+                25%
+              </p>
+              <time class="timer promo__timer" datetime="2026-06-27T17:44:16"
                 >17 Days 17:44:16</time
               >
             </div>
 
             <div class="promo__media">
-              <ul class="promo__apps">
+              <ul class="promo__apps" aria-hidden="true">
                 <li class="promo__app promo__app--pos-tr">InVision</li>
                 <li class="promo__app promo__app--pos-tc">ProtoPie</li>
                 <li class="promo__app promo__app--pos-mu">Miro</li>
@@ -89,7 +109,7 @@
               <img
                 class="promo__img"
                 src="./img/woman.png"
-                alt="Woman with laptop"
+                alt="UI/UX design student with a laptop"
               />
             </div>
           </div>
@@ -113,7 +133,7 @@
               <div class="features__stats-wrapper">
                 <div class="features__stats">
                   <div class="features__box">
-                    <h2 class="value features__value">5&nbsp;000&nbsp;$</h2>
+                    <p class="value features__value">5&nbsp;000&nbsp;$</p>
                     <p class="label features__label">Salary</p>
                   </div>
                   <p class="text features__stats-text">
@@ -123,7 +143,7 @@
 
                 <div class="features__stats">
                   <div class="features__box">
-                    <h2 class="value features__value">4&nbsp;225</h2>
+                    <p class="value features__value">4&nbsp;225</p>
                     <p class="label features__label">Vacancies</p>
                   </div>
                   <p class="text features__stats-text">Vero eos et accusamus</p>
@@ -185,17 +205,22 @@
                   <li class="card__item">Necessitatibus saepe</li>
                   <li class="card__item">Ut aut reiciendis</li>
                 </ul>
-                <h4
+                <p
                   class="value value--small card__price card__price--full-term card__price--space-small"
                 >
                   12&nbsp;000$
-                </h4>
-                <h2
+                </p>
+                <p
                   class="value card__price card__price--per-month card__price--space-large"
                 >
                   3&nbsp;000$
-                </h2>
-                <a class="btn card__btn" href="#">Choose</a>
+                </p>
+                <a
+                  class="btn card__btn"
+                  href="#"
+                  aria-label="Choose Base tariff"
+                  >Choose</a
+                >
               </article>
 
               <article
@@ -213,17 +238,22 @@
                     Illo inventore veritatis et quasi architecto
                   </li>
                 </ul>
-                <h4
+                <p
                   class="value value--small card__price card__price--full-term card__price--space-small"
                 >
                   24&nbsp;000$
-                </h4>
-                <h2
+                </p>
+                <p
                   class="value card__price card__price--per-month card__price--space-large"
                 >
                   6&nbsp;000$
-                </h2>
-                <a class="btn card__btn" href="#">Choose</a>
+                </p>
+                <a
+                  class="btn card__btn"
+                  href="#"
+                  aria-label="Choose Optimal tariff"
+                  >Choose</a
+                >
               </article>
 
               <article
@@ -239,24 +269,29 @@
                   <li class="card__item">Necessitatibus saepe eveniet</li>
                   <li class="card__item">Sunt in culpa qui officia</li>
                 </ul>
-                <h4
+                <p
                   class="value value--small card__price card__price--full-term card__price--space-small"
                 >
                   64&nbsp;000$
-                </h4>
-                <h2
+                </p>
+                <p
                   class="value card__price card__price--per-month card__price--space-large"
                 >
                   18&nbsp;000$
-                </h2>
-                <a class="btn card__btn" href="#">Choose</a>
+                </p>
+                <a
+                  class="btn card__btn"
+                  href="#"
+                  aria-label="Choose Premium tariff"
+                  >Choose</a
+                >
               </article>
             </div>
           </div>
         </section>
       </main>
 
-      <footer class="footer">
+      <footer class="footer" role="contentinfo">
         <div class="container footer__wrapper">
           <div class="footer__main">
             <div class="footer__logo-contacts">
@@ -264,7 +299,7 @@
                 <img
                   class="footer__logo-img"
                   src="./img/logo-footer.svg"
-                  alt="UpDate logo"
+                  alt=""
                 /><span class="footer__logo-text">UpDate</span></a
               >
               <address class="footer__contacts">
@@ -277,9 +312,9 @@
               </address>
             </div>
 
-            <div class="sitemap footer__sitemap">
+            <nav class="sitemap footer__sitemap" aria-label="Footer navigation">
               <div class="sitemap__column">
-                <h4 class="title title--small sitemap__title">Courses</h4>
+                <h3 class="title title--small sitemap__title">Courses</h3>
                 <ul class="sitemap__list">
                   <li class="sitemap__item">
                     <a class="link sitemap__link" href="#">Animation</a>
@@ -303,7 +338,7 @@
               </div>
 
               <div class="sitemap__column">
-                <h4 class="title title--small sitemap__title">Teachers</h4>
+                <h3 class="title title--small sitemap__title">Teachers</h3>
                 <ul class="sitemap__list">
                   <li class="sitemap__item">
                     <a class="link sitemap__link" href="#">All Teachers</a>
@@ -315,7 +350,7 @@
               </div>
 
               <div class="sitemap__column">
-                <h4 class="title title--small sitemap__title">Information</h4>
+                <h3 class="title title--small sitemap__title">Information</h3>
                 <ul class="sitemap__list">
                   <li class="sitemap__item">
                     <a class="link sitemap__link" href="#">Blog</a>
@@ -330,7 +365,7 @@
               </div>
 
               <div class="sitemap__column">
-                <h4 class="title title--small sitemap__title">En</h4>
+                <h3 class="title title--small sitemap__title">En</h3>
                 <ul class="sitemap__list">
                   <li class="sitemap__item">
                     <a class="link sitemap__link" href="#">English</a>
@@ -343,7 +378,7 @@
                   </li>
                 </ul>
               </div>
-            </div>
+            </nav>
           </div>
 
           <div class="copyright footer__copyright">
