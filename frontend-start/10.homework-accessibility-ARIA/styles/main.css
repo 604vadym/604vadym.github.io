@@ -23,6 +23,17 @@ button {
   cursor: pointer;
 }
 
+a:focus,
+button:focus {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 0.125rem solid var(--outline-color);
+  outline-offset: 0.25rem;
+}
+
 :root {
   --color-black-pure: #19191c;
   --color-white-pure: #efeff2;
@@ -60,6 +71,8 @@ button {
   --color-muted: var(--color-gray-pure);
   --color-accent: var(--color-purple-accent);
   --color-surface: var(--color-white-soft);
+
+  --outline-color: var(--color-accent);
 
   --header-bg: var(--color-light);
   --header-line-height: var(--line-height-tight);
@@ -128,6 +141,8 @@ button {
 
   --card-marker-color-main: var(--color-dark);
   --card-marker-color-inverse: var(--color-surface);
+
+  --card-outline-color-inverse: var(--color-surface);
 
   --card-line-color: var(--color-dark);
   --card-line-thickness: var(--line-thickness);
@@ -219,6 +234,8 @@ body {
   --card-btn-bg: var(--card-btn-primary-bg-inverse);
   --card-btn-color: var(--card-btn-primary-color-inverse);
   --card-marker-color: var(--card-marker-color-inverse);
+
+  --outline-color: var(--card-outline-color-inverse);
 
   background-color: var(--card-bg-accent);
   color: var(--card-text-color-inverse);
@@ -376,7 +393,7 @@ body {
 }
 
 .header__wrapper {
-  padding-top: clamp(1.25rem, 1.007rem + 1.04vw, 2.25rem);
+  padding-block: clamp(1.25rem, 1.007rem + 1.04vw, 2.25rem);
   justify-content: space-between;
 
   font-weight: var(--font-weight-semi-bold);
@@ -534,7 +551,7 @@ body {
 }
 
 .promo__wrapper {
-  padding-top: clamp(3.5rem, 1.816rem + 7.18vw, 10.438rem);
+  padding-top: clamp(2.25rem, 0.809rem + 6.14vw, 8.188rem);
 }
 
 .promo__content {
