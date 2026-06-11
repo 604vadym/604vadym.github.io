@@ -488,7 +488,6 @@ body {
   font-weight: var(--header-logo-font-weight);
   font-size: var(--header-logo-font-size);
   line-height: var(--header-logo-line-height);
-  pointer-events: none;
 }
 
 .header__link {
@@ -540,6 +539,10 @@ body {
 .footer__logo-box,
 .footer__sitemap {
   display: flex;
+}
+
+.footer__logo-box {
+  align-self: flex-start;
 }
 
 .footer__wrapper,
@@ -600,7 +603,6 @@ body {
   font-weight: var(--footer-logo-font-weight);
   font-size: var(--footer-logo-font-size);
   line-height: var(--footer-logo-line-height);
-  pointer-events: none;
 }
 
 .footer__contacts {
