@@ -381,14 +381,34 @@ body {
 .link {
   transition:
     color 0.2s ease,
-    opacity 0.2s ease;
+    background-color 0.2s ease;
 }
 
-.link:hover {
+.link--theme-badge {
+  border-radius: 1.25rem;
+  padding-block: clamp(0.313rem, 0.274rem + 0.19vw, 0.5rem);
+  padding-inline: clamp(0.375rem, 0.246rem + 0.65vw, 1rem);
+}
+
+.link--theme-badge:hover {
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.link--theme-badge:active {
+  background-color: var(--color-accent-interactive);
+}
+
+.link--theme-underlined {
+  transition: opacity 0.2s ease;
+}
+
+.link--theme-underlined:hover {
   opacity: 0.75;
+  text-decoration: underline;
 }
 
-.link:active {
+.link--theme-underlined:active {
   opacity: 1;
 }
 
@@ -436,16 +456,20 @@ body {
 
 .header__list {
   display: flex;
+  align-items: center;
 }
 
 .header__main {
-  gap: clamp(1.25rem, 0.522rem + 3.11vw, 4.25rem);
+  gap: clamp(0.25rem, -0.478rem + 3.11vw, 3.25rem);
 }
 
 .header__list,
-.header__side,
 .header__actions {
-  gap: clamp(1rem, 0.515rem + 2.07vw, 3rem);
+  gap: clamp(-1rem, -1.485rem + 2.07vw, 1rem);
+}
+
+.header__side {
+  gap: clamp(0rem, -0.485rem + 2.07vw, 2rem);
 }
 
 .header__wrapper {
@@ -470,16 +494,12 @@ body {
   white-space: nowrap;
 }
 
-.header__link:active {
-  color: var(--color-accent);
-}
-
 .header__link--with-arrow::after {
   content: "";
   display: inline-block;
   width: 1rem;
   height: 0.625rem;
-  margin-left: 0.375rem;
+  margin-left: 0.095rem;
 
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10' fill='none'><path d='M2 2L8 8L14 2' stroke='%2319191c' stroke-width='2' stroke-linecap='square'/></svg>");
   background-size: contain;
@@ -487,8 +507,9 @@ body {
   transition: background-image 0.2s ease;
 }
 
+.header__link--with-arrow:hover::after,
 .header__link--with-arrow:active::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10' fill='none'><path d='M2 2L8 8L14 2' stroke='%23504dee' stroke-width='2' stroke-linecap='square'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10' fill='none'><path d='M2 2L8 8L14 2' stroke='%23fbfbfc' stroke-width='2' stroke-linecap='square'/></svg>");
 }
 
 .header__btn {
