@@ -397,6 +397,7 @@ body {
 
 .link--theme-badge:active {
   background-color: var(--color-accent-interactive);
+  color: var(--color-surface);
 }
 
 .link--theme-underlined {
