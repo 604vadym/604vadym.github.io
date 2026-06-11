@@ -36,38 +36,19 @@ button:focus-visible {
 
 :root {
   --color-black-pure: #19191c;
-  --color-white-pure: #efeff2;
+  --color-black-soft: #323142;
   --color-gray-pure: #6d6d77;
+  --color-white-pure: #efeff2;
+  --color-white-soft: #fbfbfc;
+
   --color-purple-accent: #504dee;
   --color-purple-dark: #3331b3;
   --color-purple-lavender: #bebeff;
-  --color-black-soft: #323142;
-  --color-white-soft: #fbfbfc;
+
   --color-green-pastel: #deefe4;
   --color-green-pastel-dark: #4a7359;
   --color-yellow-pastel: #f3f3d7;
   --color-pink-pastel: #efdeee;
-
-  --font-main: Inter, sans-serif;
-
-  --font-weight-regular: 400;
-  --font-weight-semi-bold: 600;
-  --font-weight-bold: 700;
-  --font-weight-extra-bold: 800;
-
-  --font-size-md: clamp(0.938rem, 0.892rem + 0.19vw, 1.125rem);
-  --font-size-lg: clamp(1.125rem, 1.034rem + 0.39vw, 1.5rem);
-  --font-size-xl: clamp(1.5rem, 1.348rem + 0.65vw, 2.125rem);
-  --font-size-2xl: clamp(2rem, 1.606rem + 1.68vw, 3.625rem);
-
-  --line-height-super-tight: 1.08;
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.55;
-
-  --line-thickness: 0.25rem;
-
-  --container-width: 92rem;
-  --container-padding: 1rem;
 
   --color-dark: var(--color-black-pure);
   --color-dark-interactive: var(--color-black-soft);
@@ -85,12 +66,40 @@ button:focus-visible {
 
   --outline-color: var(--color-accent);
 
+  /* ------------------------------ */
+
+  --font-main: Inter, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+
+  --font-size-md: clamp(0.938rem, 0.892rem + 0.19vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 1.034rem + 0.39vw, 1.5rem);
+  --font-size-xl: clamp(1.5rem, 1.348rem + 0.65vw, 2.125rem);
+  --font-size-2xl: clamp(2rem, 1.606rem + 1.68vw, 3.625rem);
+
+  --line-height-super-tight: 1.08;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.55;
+
+  --line-thickness: 0.25rem;
+
+  /* ------------------------------ */
+
+  --container-width: 92rem;
+  --container-padding: 1rem;
+
+  /* ------------------------------ */
+
   --header-bg: var(--color-light);
   --header-line-height: var(--line-height-tight);
 
   --header-logo-font-weight: var(--font-weight-extra-bold);
   --header-logo-font-size: var(--font-size-lg);
   --header-logo-line-height: var(--line-height-tight);
+
+  /* ------------------------------ */
 
   --footer-bg: var(--color-dark);
   --footer-text-color: var(--color-surface);
@@ -109,6 +118,8 @@ button:focus-visible {
 
   --copyright-text-color: var(--color-muted);
 
+  /* ------------------------------ */
+
   --promo-bg: var(--color-light);
 
   --promo-duration-font-weight: var(--font-weight-bold);
@@ -122,11 +133,17 @@ button:focus-visible {
   --promo-timer-font-size: var(--font-size-md);
   --promo-timer-line-height: var(--line-height-tight);
 
+  /* ------------------------------ */
+
   --features-bg: var(--color-surface);
 
   --features-text-color: var(--color-muted);
 
+  /* ------------------------------ */
+
   --prices-bg: var(--color-surface);
+
+  /* ------------------------------ */
 
   --btn-primary-bg: var(--color-dark);
   --btn-primary-bg-interactive: var(--color-dark-interactive);
@@ -135,6 +152,8 @@ button:focus-visible {
   --btn-accent-bg: var(--color-accent);
   --btn-accent-bg-interactive: var(--color-accent-interactive);
   --btn-accent-color: var(--color-surface);
+
+  /* ------------------------------ */
 
   --cards-gap: clamp(0.875rem, 0.784rem + 0.39vw, 1.25rem);
 
@@ -147,13 +166,6 @@ button:focus-visible {
   --card-text-color-inverse: var(--color-surface);
   --card-text-color-muted: var(--color-muted);
 
-  --card-btn-primary-bg-main: var(--color-dark);
-  --card-btn-primary-bg-main-interactive: var(--color-variant-1-interactive);
-  --card-btn-primary-bg-inverse: var(--color-surface);
-  --card-btn-primary-bg-inverse-interactive: var(--color-surface-interactive);
-  --card-btn-primary-color-main: var(--color-surface);
-  --card-btn-primary-color-inverse: var(--color-accent);
-
   --card-marker-color-main: var(--color-dark);
   --card-marker-color-inverse: var(--color-surface);
 
@@ -161,6 +173,13 @@ button:focus-visible {
 
   --card-line-color: var(--color-dark);
   --card-line-thickness: var(--line-thickness);
+
+  --card-btn-primary-bg-main: var(--color-dark);
+  --card-btn-primary-bg-main-interactive: var(--color-variant-1-interactive);
+  --card-btn-primary-bg-inverse: var(--color-surface);
+  --card-btn-primary-bg-inverse-interactive: var(--color-surface-interactive);
+  --card-btn-primary-color-main: var(--color-surface);
+  --card-btn-primary-color-inverse: var(--color-accent);
 
   --card-btn-line-height: var(--line-height-super-tight);
 }
