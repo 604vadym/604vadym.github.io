@@ -362,7 +362,11 @@ body {
   text-align: center;
   max-width: 100%;
 
-  transition: all 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease,
+    filter 0.2s ease,
+    transform 0.1s ease;
 }
 
 .btn:hover {
@@ -375,7 +379,9 @@ body {
 }
 
 .link {
-  transition: all 0.2s ease;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .link:hover {
