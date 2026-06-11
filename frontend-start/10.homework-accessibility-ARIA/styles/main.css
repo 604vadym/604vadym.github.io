@@ -337,8 +337,14 @@ body {
   color: var(--card-btn-color);
 }
 
+.card__btn:hover {
+  opacity: 0.85;
+}
+
 .card__btn:active {
   --card-btn-bg: var(--card-btn-bg-active);
+
+  opacity: 1;
 }
 
 .title__line {
@@ -359,12 +365,25 @@ body {
   transition: all 0.2s ease;
 }
 
+.btn:hover {
+  filter: brightness(1.12);
+}
+
 .btn:active {
   transform: scale(0.97);
+  filter: none;
 }
 
 .link {
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  opacity: 0.75;
+}
+
+.link:active {
+  opacity: 1;
 }
 
 .title--large,
@@ -475,8 +494,14 @@ body {
   color: var(--btn-primary-color);
 }
 
+.header__btn:hover {
+  opacity: 0.85;
+}
+
 .header__btn:active {
   --btn-primary-bg: var(--btn-primary-bg-interactive);
+
+  opacity: 1;
 }
 
 .footer {
