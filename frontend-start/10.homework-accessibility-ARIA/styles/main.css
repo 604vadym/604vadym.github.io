@@ -6,32 +6,8 @@
   padding: 0;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 ul {
   list-style-type: none;
-}
-
-button {
-  border: none;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-a:focus,
-button:focus {
-  outline: none;
-}
-
-a:focus-visible,
-button:focus-visible {
-  outline: 0.125rem solid var(--outline-color);
-  outline-offset: 0.25rem;
 }
 
 :root {
@@ -379,6 +355,7 @@ body {
 .btn {
   display: inline-block;
   text-align: center;
+  text-decoration: none;
   max-width: 100%;
 
   transition:
@@ -386,6 +363,15 @@ body {
     opacity 0.2s ease,
     filter 0.2s ease,
     transform 0.1s ease;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:focus-visible {
+  outline: 0.125rem solid var(--outline-color);
+  outline-offset: 0.25rem;
 }
 
 .btn:hover {
@@ -398,9 +384,21 @@ body {
 }
 
 .link {
+  text-decoration: none;
+  color: inherit;
+
   transition:
     color 0.2s ease,
     background-color 0.2s ease;
+}
+
+.link:focus {
+  outline: none;
+}
+
+.link:focus-visible {
+  outline: 0.125rem solid var(--outline-color);
+  outline-offset: 0.25rem;
 }
 
 .link--theme-badge {
@@ -511,6 +509,14 @@ body {
 
 .header__link {
   white-space: nowrap;
+}
+
+.header__link--with-arrow {
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .header__link--with-arrow::after {
