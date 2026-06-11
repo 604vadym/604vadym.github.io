@@ -363,6 +363,10 @@ body {
   transform: scale(0.97);
 }
 
+.link {
+  transition: color 0.2s ease;
+}
+
 .title--large,
 .title--medium,
 .title--small {
@@ -441,6 +445,10 @@ body {
   white-space: nowrap;
 }
 
+.header__link:active {
+  color: var(--color-accent);
+}
+
 .header__link--with-arrow::after {
   content: "";
   display: inline-block;
@@ -448,7 +456,14 @@ body {
   height: 0.625rem;
   margin-left: 0.375rem;
 
-  background-image: url(../img/icon-menu.svg);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10' fill='none'><path d='M2 2L8 8L14 2' stroke='%2319191c' stroke-width='2' stroke-linecap='square'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: background-image 0.2s ease;
+}
+
+.header__link--with-arrow:active::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10' fill='none'><path d='M2 2L8 8L14 2' stroke='%23504dee' stroke-width='2' stroke-linecap='square'/></svg>");
 }
 
 .header__btn {
@@ -493,6 +508,10 @@ body {
 
 .footer__link {
   white-space: nowrap;
+}
+
+.footer__link:active {
+  color: var(--color-muted);
 }
 
 .footer__main {
@@ -563,6 +582,10 @@ body {
 .sitemap__link {
   white-space: nowrap;
   color: var(--sitemap-link-color);
+}
+
+.sitemap__link:active {
+  color: var(--color-muted);
 }
 
 .copyright {
