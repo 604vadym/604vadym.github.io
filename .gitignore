@@ -2,8 +2,8 @@
 **/.vscode/
 **/*.css.map
 **/*.map
-**/.sass-cache/
-**/.eslintcache
-**/node_modules/
-**/dist/node_modules/
-**/Thumbs.db
+
+.sass-cache/
+.eslintcache
+node_modules/
+Thumbs.db
