@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="./img/favicon.svg" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <title>Positioning</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <div class="container header__wrapper">
+          <div class="header__main">
+            <a class="link header__logo-box" href="./index.html"
+              ><img
+                class="header__logo-img"
+                src="./img/logo-header.svg"
+                alt=""
+              /><span class="header__logo-text">UpDate</span></a
+            >
+            <nav class="header__nav" aria-label="Header navigation">
+              <ul class="header__list">
+                <li class="header__item">
+                  <button
+                    class="link link--theme-badge header__link header__link--with-arrow"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                  >
+                    Courses
+                  </button>
+                </li>
+                <li class="header__item">
+                  <a class="link link--theme-badge header__link" href="#"
+                    >Teachers</a
+                  >
+                </li>
+                <li class="header__item">
+                  <a class="link link--theme-badge header__link" href="#"
+                    >Blog</a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="header__side">
+            <div class="header__actions">
+              <button
+                class="link link--theme-badge header__link header__link--with-arrow"
+                aria-label="Change language. Current language: English"
+                aria-expanded="false"
+              >
+                En
+              </button>
+              <a class="link link--theme-badge header__link" href="#"
+                >Sign In</a
+              >
+            </div>
+            <a class="btn header__btn" href="#">Trial free</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <section class="promo">
+          <div class="container promo__wrapper">
+            <div class="promo__content">
+              <p
+                class="promo__duration"
+                role="paragraph"
+                aria-label="Course duration: 6 months"
+              >
+                6&nbsp;months
+              </p>
+              <p class="promo__overtitle">profession:</p>
+              <h1 class="title title--large promo__title">
+                UI/UX&nbsp;designer
+              </h1>
+              <p class="text promo__text">
+                You will learn how to create a brand identity on the web and for
+                printing.<br />Learn how to work in Illustrator, Photoshop,
+                InDesign and Figma.<br />Add posters, logos, merch design and
+                other strong projects to your portfolio.
+                Start&nbsp;a&nbsp;career in the studio or freelance.
+              </p>
+              <a class="btn promo__btn" href="#">Started</a>
+              <p
+                class="promo__discount"
+                role="paragraph"
+                aria-label="Discount: 25%"
+              >
+                25%
+              </p>
+              <time class="timer promo__timer" datetime="2026-06-27T17:44:16"
+                >17 Days 17:44:16</time
+              >
+            </div>
+
+            <div class="promo__media">
+              <ul class="promo__apps" aria-hidden="true">
+                <li class="promo__app promo__app--pos-tr">InVision</li>
+                <li class="promo__app promo__app--pos-tc">ProtoPie</li>
+                <li class="promo__app promo__app--pos-mu">Miro</li>
+                <li class="promo__app promo__app--pos-mb">Photoshop</li>
+                <li class="promo__app promo__app--pos-bt">Figma</li>
+                <li class="promo__app promo__app--pos-bb">Illustrator</li>
+              </ul>
+              <img
+                class="promo__img"
+                src="./img/woman.png"
+                alt="UI/UX design student with a laptop"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section class="features">
+          <div class="container features__wrapper">
+            <div class="features__content">
+              <div class="features__description">
+                <h2 class="title title--large features__title">
+                  <span class="title__line">Profession</span>UI/UX&nbsp;designer
+                </h2>
+                <p class="text features__description-text">
+                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
+                  blanditiis occaecati cupiditate non provident, similique sunt
+                  in culpa qui officia deserunt mollitia animi, id est laborum
+                  et dolorum fuga.
+                </p>
+              </div>
+
+              <div class="features__stats-wrapper">
+                <div class="features__stats">
+                  <div class="features__box">
+                    <p class="value features__value">5&nbsp;000&nbsp;$</p>
+                    <p class="label features__label">Salary</p>
+                  </div>
+                  <p class="text features__stats-text">
+                    Nam libero tempore, cum soluta nobis est
+                  </p>
+                </div>
+
+                <div class="features__stats">
+                  <div class="features__box">
+                    <p class="value features__value">4&nbsp;225</p>
+                    <p class="label features__label">Vacancies</p>
+                  </div>
+                  <p class="text features__stats-text">Vero eos et accusamus</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="features__cards">
+              <article
+                class="card card--type-portfolio card--size-small features__card"
+              >
+                <h3 class="title title--medium card__title">Portfolio</h3>
+                <p class="text card__text">
+                  You will learn how to create a&nbsp;brand identity on the web
+                  and for printing. Learn how to work in Illustrator, Photoshop,
+                  InDesign and Figma
+                </p>
+              </article>
+              <article
+                class="card card--type-internship card--size-small features__card"
+              >
+                <h3 class="title title--medium card__title">Internship</h3>
+                <p class="text card__text">
+                  You will learn how to create a&nbsp;brand identity on the web
+                  and for printing. Learn how to work in Illustrator, Photoshop,
+                  InDesign and Figma
+                </p>
+              </article>
+              <article
+                class="card card--type-certificate card--size-small features__card"
+              >
+                <h3 class="title title--medium card__title">Certificate</h3>
+                <p class="text card__text">
+                  You will learn how to create a&nbsp;brand identity on the web
+                  and for printing. Learn how to work in Illustrator, Photoshop,
+                  InDesign and Figma
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="prices">
+          <div class="container prices__wrapper">
+            <h2 class="title title--large prices__title">
+              <span class="title__line">Discover Our</span>Prices
+            </h2>
+
+            <div class="prices__cards">
+              <article
+                class="card card--type-base card--size-large prices__card"
+              >
+                <h3 class="title title--medium card__title">Base</h3>
+                <ul class="card__list">
+                  <li class="card__item">
+                    Et dolorum fuga et harum quidem rerum
+                  </li>
+                  <li class="card__item">Mentors and community support</li>
+                  <li class="card__item">Necessitatibus saepe</li>
+                  <li class="card__item">Ut aut reiciendis</li>
+                </ul>
+                <p
+                  class="value value--small card__price card__price--full-term card__price--space-small"
+                >
+                  12&nbsp;000$
+                </p>
+                <p
+                  class="value card__price card__price--per-month card__price--space-large"
+                >
+                  3&nbsp;000$
+                </p>
+                <a
+                  class="btn card__btn"
+                  href="#"
+                  aria-label="Choose Base tariff"
+                  >Choose</a
+                >
+              </article>
+
+              <article
+                class="card card--type-optimal card--size-large prices__card prices__card--fluid"
+              >
+                <h3 class="title title--medium card__title">Optimal</h3>
+                <ul class="card__list">
+                  <li class="card__item">Rerum hic tenetur a sapiente</li>
+                  <li class="card__item">Consectetur, adipisci velit</li>
+                  <li class="card__item">
+                    Ut aliquid ex ea commodi consequatur
+                  </li>
+                  <li class="card__item">Eum fugiat quo voluptas nulla</li>
+                  <li class="card__item">
+                    Illo inventore veritatis et quasi architecto
+                  </li>
+                </ul>
+                <p
+                  class="value value--small card__price card__price--full-term card__price--space-small"
+                >
+                  24&nbsp;000$
+                </p>
+                <p
+                  class="value card__price card__price--per-month card__price--space-large"
+                >
+                  6&nbsp;000$
+                </p>
+                <a
+                  class="btn card__btn"
+                  href="#"
+                  aria-label="Choose Optimal tariff"
+                  >Choose</a
+                >
+              </article>
+
+              <article
+                class="card card--type-premium card--size-large prices__card"
+              >
+                <h3 class="title title--medium card__title">Premium</h3>
+                <ul class="card__list">
+                  <li class="card__item">Ullamco laboris nisi ut</li>
+                  <li class="card__item">Voluptate velit esse cillum</li>
+                  <li class="card__item">
+                    Qui in ea voluptate velit esse quam nihil molestiae
+                  </li>
+                  <li class="card__item">Necessitatibus saepe eveniet</li>
+                  <li class="card__item">Sunt in culpa qui officia</li>
+                </ul>
+                <p
+                  class="value value--small card__price card__price--full-term card__price--space-small"
+                >
+                  64&nbsp;000$
+                </p>
+                <p
+                  class="value card__price card__price--per-month card__price--space-large"
+                >
+                  18&nbsp;000$
+                </p>
+                <a
+                  class="btn card__btn"
+                  href="#"
+                  aria-label="Choose Premium tariff"
+                  >Choose</a
+                >
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer" role="contentinfo">
+        <div class="container footer__wrapper">
+          <div class="footer__main">
+            <div class="footer__logo-contacts">
+              <a class="link footer__logo-box" href="./index.html">
+                <img
+                  class="footer__logo-img"
+                  src="./img/logo-footer.svg"
+                  alt=""
+                /><span class="footer__logo-text">UpDate</span></a
+              >
+              <address class="footer__contacts">
+                <a
+                  class="link link--theme-underlined footer__link"
+                  href="mailto:support@update.com"
+                  >support@update.com</a
+                >
+                <a
+                  class="link link--theme-underlined footer__link"
+                  href="tel:+12136771024"
+                  >+1 (213) 677 10 24</a
+                >
+              </address>
+            </div>
+
+            <nav class="sitemap footer__sitemap" aria-label="Footer navigation">
+              <div class="sitemap__column">
+                <h3 class="title title--small sitemap__title">Courses</h3>
+                <ul class="sitemap__list">
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >Animation</a
+                    >
+                  </li>
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >Design</a
+                    >
+                  </li>
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >Illustration</a
+                    >
+                  </li>
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >Programming</a
+                    >
+                  </li>
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >Photo & Film</a
+                    >
+                  </li>
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >Marketing</a
+                    >
+                  </li>
+                </ul>
+              </div>
+
+              <div class="sitemap__column">
+                <h3 class="title title--small sitemap__title">Teachers</h3>
+                <ul class="sitemap__list">
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >All Teachers</a
+                    >
+                  </li>
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >Become a Teacher</a
+                    >
+                  </li>
+                </ul>
+              </div>
+
+              <div class="sitemap__column">
+                <h3 class="title title--small sitemap__title">Information</h3>
+                <ul class="sitemap__list">
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >Blog</a
+                    >
+                  </li>
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >About us</a
+                    >
+                  </li>
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >FAQ</a
+                    >
+                  </li>
+                </ul>
+              </div>
+
+              <div class="sitemap__column">
+                <h3 class="title title--small sitemap__title">En</h3>
+                <ul class="sitemap__list">
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >English</a
+                    >
+                  </li>
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >French</a
+                    >
+                  </li>
+                  <li class="sitemap__item">
+                    <a
+                      class="link link--theme-underlined sitemap__link"
+                      href="#"
+                      >Russian</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+
+          <div class="copyright footer__copyright">
+            <a class="link link--theme-underlined copyright__link" href="#"
+              >Policy&nbsp;privacy</a
+            >
+            <span class="text copyright__text"
+              >Copyright&nbsp;2022. All rights reserved</span
+            >
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
