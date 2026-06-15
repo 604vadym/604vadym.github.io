@@ -7,3 +7,9 @@
     height: 100% !important;
   }
 }
+
+.nav {
+  --bs-nav-link-color: var(--bs-secondary-color);
+  --bs-nav-link-hover-color: var(--bs-body-color);
+  --bs-nav-tabs-link-active-color: var(--bs-body-color);
+}
