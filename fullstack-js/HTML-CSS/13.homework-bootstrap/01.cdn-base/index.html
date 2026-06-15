@@ -134,7 +134,7 @@
       <div class="row g-2 flex-grow-1">
         <aside class="col-md-4 col-lg">
           <div class="border border-dark-subtle bg-body-secondary h-100">
-            <article id="carousel604" class="carousel aside-carousel slide">
+            <article id="id-carousel" class="carousel aside-carousel slide">
               <div class="carousel-inner h-100">
                 <div class="carousel-item active h-100">
                   <img
@@ -172,7 +172,7 @@
               <button
                 class="carousel-control-prev"
                 type="button"
-                data-bs-target="#carousel604"
+                data-bs-target="#id-carousel"
                 data-bs-slide="prev"
               >
                 <span
@@ -184,7 +184,7 @@
               <button
                 class="carousel-control-next"
                 type="button"
-                data-bs-target="#carousel604"
+                data-bs-target="#id-carousel"
                 data-bs-slide="next"
               >
                 <span
@@ -199,7 +199,7 @@
 
         <main class="col-md-8 col-lg-6">
           <div class="border border-dark-subtle bg-body-secondary h-100 p-3">
-            <div class="accordion" id="accordion604">
+            <article class="accordion" id="id-accordion">
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button
@@ -216,7 +216,7 @@
                 <div
                   id="collapseOne"
                   class="accordion-collapse collapse"
-                  data-bs-parent="#accordion604"
+                  data-bs-parent="#id-accordion"
                 >
                   <div class="accordion-body">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -243,7 +243,7 @@
                 <div
                   id="collapseTwo"
                   class="accordion-collapse collapse"
-                  data-bs-parent="#accordion604"
+                  data-bs-parent="#id-accordion"
                 >
                   <div class="accordion-body">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit.
@@ -270,7 +270,7 @@
                 <div
                   id="collapseThree"
                   class="accordion-collapse collapse"
-                  data-bs-parent="#accordion604"
+                  data-bs-parent="#id-accordion"
                 >
                   <div class="accordion-body">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -296,7 +296,7 @@
                 <div
                   id="collapseFour"
                   class="accordion-collapse collapse"
-                  data-bs-parent="#accordion604"
+                  data-bs-parent="#id-accordion"
                 >
                   <div class="accordion-body">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -322,7 +322,7 @@
                 <div
                   id="collapseFive"
                   class="accordion-collapse collapse"
-                  data-bs-parent="#accordion604"
+                  data-bs-parent="#id-accordion"
                 >
                   <div class="accordion-body">
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -348,7 +348,7 @@
                 <div
                   id="collapseSix"
                   class="accordion-collapse collapse"
-                  data-bs-parent="#accordion604"
+                  data-bs-parent="#id-accordion"
                 >
                   <div class="accordion-body">
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -374,7 +374,7 @@
                 <div
                   id="collapseSeven"
                   class="accordion-collapse collapse"
-                  data-bs-parent="#accordion604"
+                  data-bs-parent="#id-accordion"
                 >
                   <div class="accordion-body">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -384,14 +384,88 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
           </div>
         </main>
 
         <aside class="col-lg">
-          <div class="border border-dark-subtle bg-body-secondary h-100">
-            RIGHT
-          </div>
+          <article
+            class="border border-dark-subtle bg-body-secondary h-100 px-3 py-2"
+          >
+            <form>
+              <fieldset>
+                <legend>Registration</legend>
+                <div class="mb-2">
+                  <label for="id-name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="id-name" />
+                </div>
+
+                <div class="mb-2">
+                  <label for="id-surname" class="form-label">Surname</label>
+                  <input type="text" class="form-control" id="id-surname" />
+                </div>
+
+                <div class="mb-2">
+                  <label for="id-city" class="form-label">City</label>
+                  <input type="text" class="form-control" id="id-city" />
+                </div>
+
+                <div class="mb-2">
+                  <label for="id-email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="id-email" />
+                </div>
+
+                <div class="mb-3">
+                  <label for="id-password" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="id-password"
+                  />
+                </div>
+
+                <div class="form-check d-inline-block me-2 mb-2">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="Gender"
+                    value="Male"
+                    id="id-radio-male"
+                    checked
+                  />
+                  <label class="form-check-label" for="id-radio-male">
+                    Male
+                  </label>
+                </div>
+                <div class="form-check d-inline-block">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="Gender"
+                    value="Female"
+                    id="id-radio-female"
+                  />
+                  <label class="form-check-label" for="id-radio-female">
+                    Female
+                  </label>
+                </div>
+
+                <div
+                  class="mb-3 form-check text-start d-flex justify-content-center"
+                >
+                  <input
+                    type="checkbox"
+                    class="form-check-input me-2"
+                    id="id-accept"
+                  />
+                  <label class="form-check-label" for="id-accept"
+                    >Accept terms and conditions</label
+                  >
+                </div>
+                <button type="submit" class="btn btn-primary px-5">OK</button>
+              </fieldset>
+            </form>
+          </article>
         </aside>
       </div>
 
