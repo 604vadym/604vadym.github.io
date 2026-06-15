@@ -1,0 +1,9 @@
+.aside-carousel {
+  height: 750px;
+}
+
+@media (min-width: 768px) {
+  .aside-carousel {
+    height: 100% !important;
+  }
+}
