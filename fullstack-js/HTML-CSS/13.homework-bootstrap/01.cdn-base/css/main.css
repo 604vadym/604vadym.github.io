@@ -1,10 +1,9 @@
-.aside-carousel {
-  height: 750px;
-}
-
-@media (min-width: 768px) {
-  .aside-carousel {
-    height: 100% !important;
+@media (max-width: 768px) {
+  .aside-carousel,
+  .carousel-inner,
+  .carousel-item,
+  .carousel-item img {
+    height: 575px !important;
   }
 }
 
