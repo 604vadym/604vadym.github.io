@@ -48,6 +48,6 @@ footer > aside p[title="Параграф"].p-class {
   background-color: cornflowerblue;
 }
 
-footer + aside p[title="Параграф"] {
+footer > aside p[title="Параграф"] {
   background-color: deeppink;
 }
