@@ -310,6 +310,15 @@
   .p-1 {
     padding: var(--spacing);
   }
+  .px-0 {
+    padding-inline: 0;
+  }
+  .px-0\.25 {
+    padding-inline: calc(var(--spacing) * 0.25);
+  }
+  .px-px {
+    padding-inline: 1px;
+  }
   .text-center {
     text-align: center;
   }
