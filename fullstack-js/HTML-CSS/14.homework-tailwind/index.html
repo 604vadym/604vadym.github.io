@@ -16,10 +16,10 @@
     class="bg-surface font-body text-sm leading-relaxed font-normal text-muted"
   >
     <div class="flex min-h-dvh flex-col">
-      <header class="shrink-0">
-        <div class="header__content container">
+      <header class="shrink-0 py-header-pad">
+        <div class="container">
           <nav class="menu header__menu">
-            <ul class="flex gap-[clamp(1rem,0.56rem+1.88vw,2.813rem)]">
+            <ul class="flex gap-menu-space">
               <li>
                 <a
                   data-active="true"
@@ -31,7 +31,7 @@
               <li>
                 <a
                   data-active="false"
-                  class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
+                  class="rounded-xl p-1.5 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
                   href="#"
                   >About</a
                 >
@@ -66,8 +66,10 @@
       </header>
 
       <main class="grow wrap-break-word">
-        <section class="hero">
-          <div class="hero__content container">
+        <section
+          class="pt-[clamp(2rem,1.226rem+3.3vw,5.188rem)] pb-[clamp(3rem,1.589rem+6.02vw,8.813rem)]"
+        >
+          <div class="container">
             <h1 class="hero__title text-xl font-medium text-dark">
               Design and Layout
             </h1>
@@ -84,8 +86,10 @@
           </div>
         </section>
 
-        <section class="bg-surface-alt">
-          <div class="about__content container text-center">
+        <section
+          class="bg-surface-alt pt-[clamp(2.5rem,1.408rem+4.66vw,7rem)] pb-section-pad"
+        >
+          <div class="container text-center">
             <h2
               class="about__title text-lg leading-none font-medium text-dark capitalize"
             >
@@ -99,7 +103,7 @@
           </div>
         </section>
 
-        <section class="bg-accent">
+        <section class="bg-accent py-section-pad">
           <div
             class="container flex justify-center gap-[clamp(1.25rem,0.81rem+1.88vw,3.063rem)] text-center"
           >
@@ -148,8 +152,8 @@
           </div>
         </section>
 
-        <section>
-          <div class="work__content container text-center">
+        <section class="py-section-pad">
+          <div class="container text-center">
             <h2
               class="work__title text-lg leading-none font-medium text-dark capitalize"
             >
@@ -163,7 +167,7 @@
 
             <div class="relative flex items-center justify-center">
               <img
-                class="video__poster w-full max-w-277.5"
+                class="w-full max-w-277.5 px-[clamp(0rem,-0.091rem+0.39vw,0.375rem)]"
                 src="./img/code.jpg"
                 alt="Video preview showing code editor"
               />
@@ -184,13 +188,13 @@
       </main>
 
       <footer class="shrink-0 bg-accent">
-        <div class="footer__content container">
+        <div class="container py-step-md">
           <p
-            class="footer__author text-base leading-none font-medium text-light"
+            class="px-footer-pad text-base leading-none font-medium text-light"
           >
             Ostap&nbsp;Ivanenko
           </p>
-          <small class="footer__copyright text-xs text-light">
+          <small class="px-footer-pad text-xs text-light">
             &copy;&nbsp;2018. All rights reserved.
           </small>
         </div>

@@ -31,6 +31,11 @@
     --default-mono-font-family: var(--font-mono);
     --font-body: "Roboto", sans-serif;
     --max-width-readable: 56ch;
+    --spacing-section-pad: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
+    --spacing-header-pad: clamp(2rem, 1.287rem + 3.04vw, 4.938rem);
+    --spacing-step-md: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
+    --spacing-menu-space: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
+    --spacing-footer-pad: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
     --color-dark: var(--color-black);
     --color-light: var(--color-white);
     --color-muted: var(--color-grey);
@@ -268,8 +273,8 @@
   .gap-\[clamp\(1\.25rem\,0\.81rem\+1\.88vw\,3\.063rem\)\] {
     gap: clamp(1.25rem, 0.81rem + 1.88vw, 3.063rem);
   }
-  .gap-\[clamp\(1rem\,0\.56rem\+1\.88vw\,2\.813rem\)\] {
-    gap: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
+  .gap-menu-space {
+    gap: var(--spacing-menu-space);
   }
   .overflow-y-auto {
     overflow-y: auto;
@@ -289,8 +294,38 @@
   .p-1 {
     padding: var(--spacing);
   }
+  .p-1\.5 {
+    padding: calc(var(--spacing) * 1.5);
+  }
+  .px-\[clamp\(0rem\,-0\.091rem\+0\.39vw\,0\.375rem\)\] {
+    padding-inline: clamp(0rem, -0.091rem + 0.39vw, 0.375rem);
+  }
+  .px-footer-pad {
+    padding-inline: var(--spacing-footer-pad);
+  }
   .px-px {
     padding-inline: 1px;
+  }
+  .py-header-pad {
+    padding-block: var(--spacing-header-pad);
+  }
+  .py-section-pad {
+    padding-block: var(--spacing-section-pad);
+  }
+  .py-step-md {
+    padding-block: var(--spacing-step-md);
+  }
+  .pt-\[clamp\(2\.5rem\,1\.408rem\+4\.66vw\,7rem\)\] {
+    padding-top: clamp(2.5rem, 1.408rem + 4.66vw, 7rem);
+  }
+  .pt-\[clamp\(2rem\,1\.226rem\+3\.3vw\,5\.188rem\)\] {
+    padding-top: clamp(2rem, 1.226rem + 3.3vw, 5.188rem);
+  }
+  .pb-\[clamp\(3rem\,1\.589rem\+6\.02vw\,8\.813rem\)\] {
+    padding-bottom: clamp(3rem, 1.589rem + 6.02vw, 8.813rem);
+  }
+  .pb-section-pad {
+    padding-bottom: var(--spacing-section-pad);
   }
   .text-center {
     text-align: center;
