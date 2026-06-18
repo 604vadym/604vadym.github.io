@@ -243,9 +243,6 @@
   .max-w-277\.5 {
     max-width: calc(var(--spacing) * 277.5);
   }
-  .max-w-full {
-    max-width: 100%;
-  }
   .max-w-readable {
     max-width: var(--max-width-readable);
   }
@@ -288,6 +285,12 @@
   .gap-5 {
     gap: calc(var(--spacing) * 5);
   }
+  .gap-\[clamp\(1\.25rem\,0\.81rem\+1\.88vw\,3\.063rem\)\] {
+    gap: clamp(1.25rem, 0.81rem + 1.88vw, 3.063rem);
+  }
+  .gap-\[clamp\(1rem\,0\.56rem\+1\.88vw\,2\.813rem\)\] {
+    gap: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
+  }
   .overflow-y-auto {
     overflow-y: auto;
   }
@@ -309,12 +312,6 @@
   }
   .p-1 {
     padding: var(--spacing);
-  }
-  .px-0 {
-    padding-inline: 0;
-  }
-  .px-0\.25 {
-    padding-inline: calc(var(--spacing) * 0.25);
   }
   .px-px {
     padding-inline: 1px;
