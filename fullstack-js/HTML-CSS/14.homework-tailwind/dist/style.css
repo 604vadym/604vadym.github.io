@@ -228,8 +228,20 @@
   .min-h-dvh {
     min-height: 100dvh;
   }
+  .w-12 {
+    width: calc(var(--spacing) * 12);
+  }
+  .w-12\.5 {
+    width: calc(var(--spacing) * 12.5);
+  }
   .w-full {
     width: 100%;
+  }
+  .max-w-277 {
+    max-width: calc(var(--spacing) * 277);
+  }
+  .max-w-277\.5 {
+    max-width: calc(var(--spacing) * 277.5);
   }
   .max-w-full {
     max-width: 100%;
