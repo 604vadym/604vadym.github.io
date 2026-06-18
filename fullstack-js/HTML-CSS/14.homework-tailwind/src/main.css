@@ -49,4 +49,8 @@
   width: min(100%, var(--container-width));
   margin-inline: auto;
   padding-inline: var(--container-padding);
+
+  @media (width >= 0) {
+    max-width: none;
+  }
 }
