@@ -38,6 +38,9 @@
   --color-surface-alt: var(--color-light-silver);
   --color-accent: var(--color-blue);
   --color-accent-hover: var(--color-dark-blue);
+
+  --breakpoint-tablet: 64.875rem;
+  --breakpoint-mobile: 30.75rem;
 }
 
 @utility container {
