@@ -10,8 +10,12 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --text-xs: clamp(0.75rem, 0.735rem + 0.065vw, 0.8125rem);
+    --text-xs--line-height: calc(1 / 0.75);
     --text-sm: clamp(0.875rem, 0.845rem + 0.129vw, 1rem);
     --text-sm--line-height: calc(1.25 / 0.875);
+    --text-base: clamp(1.0625rem, 1.002rem + 0.259vw, 1.3125rem);
+    --text-base--line-height: calc(1.5 / 1);
     --text-lg: clamp(1.375rem, 1.223rem + 0.647vw, 2rem);
     --text-lg--line-height: calc(1.75 / 1.125);
     --text-xl: clamp(1.75rem, 1.447rem + 1.294vw, 3rem);
@@ -31,6 +35,7 @@
     --color-light: var(--color-white);
     --color-muted: var(--color-grey);
     --color-surface: var(--color-silver);
+    --color-surface-alt: var(--color-light-silver);
     --color-accent: var(--color-blue);
     --color-accent-hover: var(--color-dark-blue);
   }
@@ -257,11 +262,20 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .bg-accent {
+    background-color: var(--color-accent);
+  }
   .bg-accent-hover {
     background-color: var(--color-accent-hover);
   }
+  .bg-dark {
+    background-color: var(--color-dark);
+  }
   .bg-surface {
     background-color: var(--color-surface);
+  }
+  .bg-surface-alt {
+    background-color: var(--color-surface-alt);
   }
   .p-0 {
     padding: 0;
@@ -272,8 +286,18 @@
   .p-1 {
     padding: var(--spacing);
   }
+  .text-center {
+    text-align: center;
+  }
+  .text-left {
+    text-align: left;
+  }
   .font-body {
     font-family: var(--font-body);
+  }
+  .text-base {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
   }
   .text-lg {
     font-size: var(--text-lg);
@@ -286,6 +310,10 @@
   .text-xl {
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
   }
   .leading-none {
     --tw-leading: 1;
@@ -315,6 +343,9 @@
   }
   .text-dark {
     color: var(--color-dark);
+  }
+  .text-light {
+    color: var(--color-light);
   }
   .text-muted {
     color: var(--color-muted);

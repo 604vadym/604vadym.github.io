@@ -20,7 +20,7 @@
         <div class="header__content container">
           <nav class="menu header__menu">
             <ul class="menu__list flex">
-              <li class="menu__item">
+              <li>
                 <a
                   data-active="true"
                   class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
@@ -28,7 +28,7 @@
                   >Home</a
                 >
               </li>
-              <li class="menu__item">
+              <li>
                 <a
                   data-active="false"
                   class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
@@ -36,7 +36,7 @@
                   >About</a
                 >
               </li>
-              <li class="menu__item">
+              <li>
                 <a
                   data-active="false"
                   class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
@@ -44,7 +44,7 @@
                   >Works</a
                 >
               </li>
-              <li class="menu__item">
+              <li>
                 <a
                   data-active="false"
                   class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
@@ -52,7 +52,7 @@
                   >Process</a
                 >
               </li>
-              <li class="menu__item">
+              <li>
                 <a
                   data-active="false"
                   class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
@@ -80,8 +80,8 @@
           </div>
         </section>
 
-        <section class="about">
-          <div class="about__content container">
+        <section class="bg-surface-alt">
+          <div class="about__content container text-center">
             <h2
               class="about__title text-lg leading-none font-medium text-dark capitalize"
             >
@@ -95,67 +95,57 @@
           </div>
         </section>
 
-        <section class="projects">
-          <div class="projects__content container flex justify-center">
+        <section class="bg-accent">
+          <div
+            class="projects__content container flex justify-center text-center"
+          >
             <div class="feature projects__item flex">
               <img class="feature__icon" src="./img/icons/project.svg" alt="" />
-              <div class="feature__text">
-                <h3 class="feature__title text-md font-medium text-dark">
-                  40+
-                </h3>
-                <p class="feature__description">projects</p>
+              <div class="text-left">
+                <h3 class="text-md font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
               </div>
             </div>
             <div class="feature projects__item flex items-center">
               <img class="feature__icon" src="./img/icons/project.svg" alt="" />
-              <div class="feature__text">
-                <h3 class="feature__title text-md font-medium text-dark">
-                  40+
-                </h3>
-                <p class="feature__description">projects</p>
+              <div class="text-left">
+                <h3 class="text-md font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
               </div>
             </div>
             <div class="feature projects__item flex items-center">
               <img class="feature__icon" src="./img/icons/project.svg" alt="" />
-              <div class="feature__text">
-                <h3 class="feature__title text-md font-medium text-dark">
-                  40+
-                </h3>
-                <p class="feature__description">projects</p>
+              <div class="text-left">
+                <h3 class="text-md font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
               </div>
             </div>
             <div class="feature projects__item flex items-center">
               <img class="feature__icon" src="./img/icons/project.svg" alt="" />
-              <div class="feature__text">
-                <h3 class="feature__title text-md font-medium text-dark">
-                  40+
-                </h3>
-                <p class="feature__description">projects</p>
+              <div class="text-left">
+                <h3 class="text-md font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
               </div>
             </div>
             <div class="feature projects__item flex items-center">
               <img class="feature__icon" src="./img/icons/project.svg" alt="" />
-              <div class="feature__text">
-                <h3 class="feature__title text-md font-medium text-dark">
-                  40+
-                </h3>
-                <p class="feature__description">projects</p>
+              <div class="text-left">
+                <h3 class="text-md font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
               </div>
             </div>
             <div class="feature projects__item flex items-center">
               <img class="feature__icon" src="./img/icons/project.svg" alt="" />
-              <div class="feature__text">
-                <h3 class="feature__title text-md font-medium text-dark">
-                  40+
-                </h3>
-                <p class="feature__description">projects</p>
+              <div class="text-left">
+                <h3 class="text-md font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section class="work">
-          <div class="work__content container">
+        <section>
+          <div class="work__content container text-center">
             <h2
               class="work__title text-lg leading-none font-medium text-dark capitalize"
             >
@@ -189,10 +179,14 @@
         </section>
       </main>
 
-      <footer class="shrink-0">
+      <footer class="shrink-0 bg-accent">
         <div class="footer__content container">
-          <p class="footer__author">Ostap&nbsp;Ivanenko</p>
-          <small class="footer__copyright">
+          <p
+            class="footer__author text-base leading-none font-medium text-light"
+          >
+            Ostap&nbsp;Ivanenko
+          </p>
+          <small class="footer__copyright text-xs text-light">
             &copy;&nbsp;2018. All rights reserved.
           </small>
         </div>
