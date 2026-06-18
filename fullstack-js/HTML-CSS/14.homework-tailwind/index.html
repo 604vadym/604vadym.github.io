@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="overflow-y-auto">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,8 +15,8 @@
   <body
     class="bg-surface font-body text-sm leading-relaxed font-normal text-muted"
   >
-    <div class="wrapper">
-      <header class="header">
+    <div class="flex min-h-dvh flex-col">
+      <header class="shrink-0">
         <div class="header__content container">
           <nav class="menu header__menu">
             <ul class="menu__list">
@@ -40,7 +40,7 @@
         </div>
       </header>
 
-      <main>
+      <main class="grow wrap-break-word">
         <section class="hero">
           <div class="hero__content container">
             <h1 class="main-title hero__title">Design and Layout</h1>
@@ -142,7 +142,7 @@
         </section>
       </main>
 
-      <footer class="footer">
+      <footer class="shrink-0">
         <div class="footer__content container">
           <p class="footer__author">Ostap&nbsp;Ivanenko</p>
           <small class="footer__copyright">

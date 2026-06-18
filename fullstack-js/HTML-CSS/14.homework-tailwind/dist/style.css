@@ -187,14 +187,35 @@
       max-width: 96rem;
     }
   }
+  .flex {
+    display: flex;
+  }
   .table {
     display: table;
+  }
+  .min-h-dvh {
+    min-height: 100dvh;
+  }
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  .shrink-0 {
+    flex-shrink: 0;
+  }
+  .grow {
+    flex-grow: 1;
   }
   .border-collapse {
     border-collapse: collapse;
   }
   .resize {
     resize: both;
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
   }
   .border {
     border-style: var(--tw-border-style);
@@ -217,6 +238,9 @@
   .font-normal {
     --tw-font-weight: var(--font-weight-normal);
     font-weight: var(--font-weight-normal);
+  }
+  .wrap-break-word {
+    overflow-wrap: break-word;
   }
   .text-muted {
     color: var(--color-muted);
