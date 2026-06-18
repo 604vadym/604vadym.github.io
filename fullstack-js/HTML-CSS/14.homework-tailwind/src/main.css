@@ -6,6 +6,9 @@
   --color-light-silver: #f9f9f9;
   --color-blue: #34547a;
   --color-dark-blue: #1a3557;
+
+  --container-width: 72rem;
+  --container-padding: 0.9375rem;
 }
 
 @theme {
@@ -40,4 +43,10 @@
 @utility btn-cta {
   min-width: clamp(10.625rem, 9.791rem + 3.56vw, 14.063rem);
   padding: clamp(1rem, 0.939rem + 0.26vw, 1.25rem);
+}
+
+@utility container {
+  width: min(100%, var(--container-width));
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
 }

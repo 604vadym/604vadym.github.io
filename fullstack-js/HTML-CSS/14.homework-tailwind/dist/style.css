@@ -219,6 +219,11 @@
       max-width: 96rem;
     }
   }
+  .container {
+    width: min(100%, var(--container-width));
+    margin-inline: auto;
+    padding-inline: var(--container-padding);
+  }
   .mx-auto {
     margin-inline: auto;
   }
@@ -499,6 +504,8 @@
   --color-light-silver: #f9f9f9;
   --color-blue: #34547a;
   --color-dark-blue: #1a3557;
+  --container-width: 72rem;
+  --container-padding: 0.9375rem;
 }
 @property --tw-leading {
   syntax: "*";
