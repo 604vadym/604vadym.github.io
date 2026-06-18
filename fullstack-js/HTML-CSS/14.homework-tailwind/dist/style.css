@@ -9,10 +9,15 @@
       "Courier New", monospace;
     --color-black: #000;
     --color-white: #fff;
+    --text-sm: clamp(0.875rem, 0.845rem + 0.129vw, 1rem);
+    --text-sm--line-height: calc(1.25 / 0.875);
     --font-weight-normal: 400;
+    --leading-relaxed: 1.64;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --font-body: "Roboto", sans-serif;
+    --color-muted: var(--color-grey);
+    --color-surface: var(--color-silver);
   }
 }
 @layer base {
@@ -182,31 +187,80 @@
       max-width: 96rem;
     }
   }
+  .table {
+    display: table;
+  }
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .resize {
+    resize: both;
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
   .font-body {
     font-family: var(--font-body);
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .leading-relaxed {
+    --tw-leading: var(--leading-relaxed);
+    line-height: var(--leading-relaxed);
   }
   .font-normal {
     --tw-font-weight: var(--font-weight-normal);
     font-weight: var(--font-weight-normal);
   }
+  .text-muted {
+    color: var(--color-muted);
+  }
+  .underline {
+    text-decoration-line: underline;
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
 }
 :root {
-  --color-black: #000;
-  --color-white: #fff;
   --color-grey: #727272;
   --color-silver: #eeeff1;
   --color-light-silver: #f9f9f9;
   --color-blue: #34547a;
   --color-dark-blue: #1a3557;
 }
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
 @property --tw-font-weight {
   syntax: "*";
   inherits: false;
 }
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-border-style: solid;
+      --tw-leading: initial;
       --tw-font-weight: initial;
+      --tw-outline-style: solid;
     }
   }
 }
