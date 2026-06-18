@@ -19,7 +19,7 @@
 
   --leading-relaxed: 1.64;
 
-  --max-w-readable: 56ch;
+  --max-width-readable: 56ch;
 
   --color-dark: var(--color-black);
   --color-light: var(--color-white);
