@@ -1,4 +1,5 @@
 /*! tailwindcss v4.3.1 | MIT License | https://tailwindcss.com */
+@layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -6,9 +7,12 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-amber-50: oklch(98.7% 0.022 95.277);
+    --color-black: #000;
+    --color-white: #fff;
+    --font-weight-normal: 400;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --font-body: "Roboto", sans-serif;
   }
 }
 @layer base {
@@ -178,10 +182,31 @@
       max-width: 96rem;
     }
   }
-  .flex-1 {
-    flex: 1;
+  .font-body {
+    font-family: var(--font-body);
   }
-  .bg-amber-50 {
-    background-color: var(--color-amber-50);
+  .font-normal {
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
+  }
+}
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+  --color-grey: #727272;
+  --color-silver: #eeeff1;
+  --color-light-silver: #f9f9f9;
+  --color-blue: #34547a;
+  --color-dark-blue: #1a3557;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-font-weight: initial;
+    }
   }
 }
