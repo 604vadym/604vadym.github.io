@@ -35,6 +35,7 @@
     --spacing-header-pad: clamp(2rem, 1.287rem + 3.04vw, 4.938rem);
     --spacing-step-md: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
     --spacing-menu-space: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
+    --spacing-footer-author-space: clamp(0.75rem, 0.629rem + 0.52vw, 1.25rem);
     --spacing-footer-pad: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
     --color-dark: var(--color-black);
     --color-light: var(--color-white);
@@ -220,6 +221,21 @@
   }
   .mx-auto {
     margin-inline: auto;
+  }
+  .mb-\[clamp\(1\.5rem\,0\.954rem\+2\.33vw\,3\.75rem\)\] {
+    margin-bottom: clamp(1.5rem, 0.954rem + 2.33vw, 3.75rem);
+  }
+  .mb-\[clamp\(1\.5rem\,0\.999rem\+2\.14vw\,3\.563rem\)\] {
+    margin-bottom: clamp(1.5rem, 0.999rem + 2.14vw, 3.563rem);
+  }
+  .mb-\[clamp\(1\.75rem\,1\.189rem\+2\.39vw\,4\.063rem\)\] {
+    margin-bottom: clamp(1.75rem, 1.189rem + 2.39vw, 4.063rem);
+  }
+  .mb-footer-author-space {
+    margin-bottom: var(--spacing-footer-author-space);
+  }
+  .mb-step-md {
+    margin-bottom: var(--spacing-step-md);
   }
   .flex {
     display: flex;

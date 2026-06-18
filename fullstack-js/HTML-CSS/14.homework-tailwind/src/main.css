@@ -25,6 +25,7 @@
   --spacing-header-pad: clamp(2rem, 1.287rem + 3.04vw, 4.938rem);
   --spacing-step-md: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
   --spacing-menu-space: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
+  --spacing-footer-author-space: clamp(0.75rem, 0.629rem + 0.52vw, 1.25rem);
   --spacing-footer-pad: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
 
   --color-dark: var(--color-black);
