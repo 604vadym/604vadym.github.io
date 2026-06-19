@@ -43,7 +43,7 @@
     --color-surface: var(--color-silver);
     --color-surface-alt: var(--color-light-silver);
     --color-accent: var(--color-blue);
-    --color-accent-hover: var(--color-dark-blue);
+    --color-accent-alt: var(--color-dark-blue);
   }
 }
 @layer base {
@@ -314,9 +314,6 @@
   .p-1 {
     padding: var(--spacing);
   }
-  .p-1\.5 {
-    padding: calc(var(--spacing) * 1.5);
-  }
   .p-\[clamp\(1rem\,0\.939rem\+0\.26vw\,1\.25rem\)\] {
     padding: clamp(1rem, 0.939rem + 0.26vw, 1.25rem);
   }
@@ -443,10 +440,10 @@
       }
     }
   }
-  .hover\:bg-accent-hover {
+  .hover\:bg-accent-alt {
     &:hover {
       @media (hover: hover) {
-        background-color: var(--color-accent-hover);
+        background-color: var(--color-accent-alt);
       }
     }
   }
