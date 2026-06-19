@@ -12,21 +12,21 @@
         <div class="border bg-gray-300 py-4 text-center">HEADER</div>
       </header>
 
-      <main class="container flex grow flex-wrap gap-2 wrap-break-word">
-        <aside
-          class="flex basis-full items-center justify-center border bg-gray-300 md:basis-[calc((100%-0.5rem)/3)] lg:basis-[calc((100%-2*0.5rem)/4)]"
-        >
+      <main
+        class="container grid grow grid-cols-1 gap-2 wrap-break-word md:grid-cols-3 lg:grid-cols-4"
+      >
+        <aside class="flex items-center justify-center border bg-gray-300">
           LEFT
         </aside>
 
         <section
-          class="flex basis-full items-center justify-center border bg-gray-300 md:basis-[calc((100%-0.5rem)/3*2)] lg:basis-[calc((100%-2*0.5rem)/2)]"
+          class="flex items-center justify-center border bg-gray-300 md:col-span-2"
         >
           MAIN
         </section>
 
         <aside
-          class="flex basis-full items-center justify-center border bg-gray-300 lg:basis-[calc((100%-2*0.5rem)/4)]"
+          class="flex items-center justify-center border bg-gray-300 md:col-span-3 lg:col-span-1"
         >
           RIGHT
         </aside>
