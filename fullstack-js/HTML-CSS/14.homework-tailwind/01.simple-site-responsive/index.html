@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en" class="overflow-y-auto">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dist/style.css" />
+    <title>Tailwind CSS. Simple site</title>
+  </head>
+  <body
+    class="bg-surface font-body text-sm leading-relaxed font-normal text-muted"
+  >
+    <div class="flex min-h-dvh flex-col">
+      <header class="shrink-0 py-header-pad">
+        <div class="container-fluid">
+          <nav>
+            <ul
+              class="flex gap-menu-space max-mobile:flex-col max-mobile:gap-2"
+            >
+              <li>
+                <a
+                  data-active="true"
+                  class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
+                  href="#"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  data-active="false"
+                  class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
+                  href="#"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  data-active="false"
+                  class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
+                  href="#"
+                  >Works</a
+                >
+              </li>
+              <li>
+                <a
+                  data-active="false"
+                  class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
+                  href="#"
+                  >Process</a
+                >
+              </li>
+              <li>
+                <a
+                  data-active="false"
+                  class="rounded-xl p-1 tracking-widest text-dark uppercase transition-colors duration-500 hover:bg-accent hover:text-light data-[active=true]:pointer-events-none data-[active=true]:font-medium data-[active=true]:text-accent"
+                  href="#"
+                  >Contacts</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main class="grow wrap-break-word">
+        <section
+          class="pt-[clamp(2rem,1.226rem+3.3vw,5.188rem)] pb-[clamp(3rem,1.589rem+6.02vw,8.813rem)] max-mobile:pt-0"
+        >
+          <div class="container-fluid">
+            <h1
+              class="mb-[clamp(1.5rem,0.954rem+2.33vw,3.75rem)] text-xl font-medium text-dark"
+            >
+              Design and Layout
+            </h1>
+            <p
+              class="mb-[clamp(1.75rem,1.189rem+2.39vw,4.063rem)] w-full max-w-readable px-px"
+            >
+              Lorem Ipsum is a placeholder text commonly used in printing and
+              web design. Lorem Ipsum has been the standard dummy text for Latin
+              scripts since the 16th century.
+            </p>
+            <a
+              class="inline-block min-w-[clamp(10.625rem,9.791rem+3.56vw,14.063rem)] bg-accent p-[clamp(1rem,0.939rem+0.26vw,1.25rem)] text-center tracking-widest text-light uppercase transition-[background-color] duration-500 hover:bg-accent-alt"
+              href="#"
+              >Write to&nbsp;me</a
+            >
+          </div>
+        </section>
+
+        <section
+          class="bg-surface-alt pt-[clamp(2.5rem,1.408rem+4.66vw,7rem)] pb-section-pad"
+        >
+          <div class="container-fluid text-center">
+            <h2
+              class="mb-step-md text-lg leading-none font-medium text-dark capitalize"
+            >
+              About&nbsp;me
+            </h2>
+            <p class="mx-auto w-full max-w-readable">
+              Lorem Ipsum is a placeholder text commonly used in printing and
+              web design. Lorem Ipsum has been the standard dummy text for Latin
+              scripts since the 16th century.
+            </p>
+          </div>
+        </section>
+
+        <section class="bg-accent py-section-pad">
+          <div
+            class="container-fluid flex justify-center gap-[clamp(1.25rem,0.81rem+1.88vw,3.063rem)] text-center max-tablet:flex-wrap max-tablet:gap-x-[clamp(1.25rem,-6.043rem+23.67vw,9.313rem)]"
+          >
+            <div class="flex shrink-0 basis-35.25 items-center gap-5">
+              <img
+                class="w-12.5 shrink-0"
+                src="./img/icons/project.svg"
+                alt=""
+              />
+              <div class="text-left">
+                <h3 class="text-base font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
+              </div>
+            </div>
+            <div class="flex shrink-0 basis-35.25 items-center gap-5">
+              <img
+                class="w-12.5 shrink-0"
+                src="./img/icons/project.svg"
+                alt=""
+              />
+              <div class="text-left">
+                <h3 class="text-base font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
+              </div>
+            </div>
+            <div class="flex shrink-0 basis-35.25 items-center gap-5">
+              <img
+                class="w-12.5 shrink-0"
+                src="./img/icons/project.svg"
+                alt=""
+              />
+              <div class="text-left">
+                <h3 class="text-base font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
+              </div>
+            </div>
+            <div class="flex shrink-0 basis-35.25 items-center gap-5">
+              <img
+                class="w-12.5 shrink-0"
+                src="./img/icons/project.svg"
+                alt=""
+              />
+              <div class="text-left">
+                <h3 class="text-base font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
+              </div>
+            </div>
+            <div class="flex shrink-0 basis-35.25 items-center gap-5">
+              <img
+                class="w-12.5 shrink-0"
+                src="./img/icons/project.svg"
+                alt=""
+              />
+              <div class="text-left">
+                <h3 class="text-base font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
+              </div>
+            </div>
+            <div class="flex shrink-0 basis-35.25 items-center gap-5">
+              <img
+                class="w-12.5 shrink-0"
+                src="./img/icons/project.svg"
+                alt=""
+              />
+              <div class="text-left">
+                <h3 class="text-base font-medium text-light">40+</h3>
+                <p class="text-light">projects</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="py-section-pad">
+          <div class="container-fluid text-center">
+            <h2
+              class="mb-step-md text-lg leading-none font-medium text-dark capitalize"
+            >
+              How I work
+            </h2>
+            <p
+              class="mx-auto mb-[clamp(1.5rem,0.999rem+2.14vw,3.563rem)] w-full max-w-readable"
+            >
+              Lorem Ipsum is a placeholder text commonly used in printing and
+              web design. Lorem Ipsum has been the standard dummy text for Latin
+              scripts since the 16th century.
+            </p>
+
+            <div class="relative flex items-center justify-center">
+              <img
+                class="aspect-1100/600 w-full max-w-277.5 object-cover px-[clamp(0rem,-0.091rem+0.39vw,0.375rem)]"
+                src="./img/code.jpg"
+                alt="Video preview showing code editor"
+              />
+              <button
+                class="absolute h-[clamp(3.125rem,2.367rem+3.24vw,6.25rem)] w-[clamp(3.125rem,2.367rem+3.24vw,6.25rem)] cursor-pointer transition-[filter] duration-500 hover:brightness-80"
+                type="button"
+                aria-label="Play video"
+              >
+                <img
+                  class="h-full w-full object-contain"
+                  src="./img/icons/play-button.svg"
+                  alt=""
+                />
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="shrink-0 bg-accent">
+        <div class="container-fluid py-step-md">
+          <p
+            class="mb-footer-author-space px-footer-pad text-base leading-none font-medium text-light"
+          >
+            Ostap&nbsp;Ivanenko
+          </p>
+          <small class="px-footer-pad text-xs text-light">
+            &copy;&nbsp;2018. All rights reserved.
+          </small>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

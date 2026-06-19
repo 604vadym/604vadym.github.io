@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+  --color-grey: #727272;
+  --color-silver: #eeeff1;
+  --color-light-silver: #f9f9f9;
+  --color-blue: #34547a;
+  --color-dark-blue: #1a3557;
+
+  --container-width: 72rem;
+  --container-padding: 0.9375rem;
+}
+
+@theme {
+  --font-body: "Roboto", sans-serif;
+
+  --text-xs: clamp(0.75rem, 0.735rem + 0.065vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.845rem + 0.129vw, 1rem);
+  --text-base: clamp(1.0625rem, 1.002rem + 0.259vw, 1.3125rem);
+  --text-lg: clamp(1.375rem, 1.223rem + 0.647vw, 2rem);
+  --text-xl: clamp(1.75rem, 1.447rem + 1.294vw, 3rem);
+
+  --leading-relaxed: 1.64;
+
+  --max-width-readable: 56ch;
+
+  --spacing-section-pad: clamp(2.25rem, 1.279rem + 4.14vw, 6.25rem);
+  --spacing-header-pad: clamp(2rem, 1.287rem + 3.04vw, 4.938rem);
+  --spacing-step-md: clamp(1.5rem, 1.106rem + 1.68vw, 3.125rem);
+  --spacing-menu-space: clamp(1rem, 0.56rem + 1.88vw, 2.813rem);
+  --spacing-footer-author-space: clamp(0.75rem, 0.629rem + 0.52vw, 1.25rem);
+  --spacing-footer-pad: clamp(0rem, -0.106rem + 0.45vw, 0.438rem);
+
+  --color-dark: var(--color-black);
+  --color-light: var(--color-white);
+  --color-muted: var(--color-grey);
+  --color-surface: var(--color-silver);
+  --color-surface-alt: var(--color-light-silver);
+  --color-accent: var(--color-blue);
+  --color-accent-alt: var(--color-dark-blue);
+
+  --breakpoint-tablet: 64.875rem;
+  --breakpoint-mobile: 30.75rem;
+}
+
+@utility container-fluid {
+  width: min(100%, var(--container-width));
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
