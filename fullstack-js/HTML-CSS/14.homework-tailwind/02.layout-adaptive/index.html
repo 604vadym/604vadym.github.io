@@ -7,28 +7,28 @@
     <title>Tailwind CSS. Layout</title>
   </head>
   <body>
-    <div class="flex min-h-dvh flex-col gap-2.5">
-      <header class="shrink-0 border bg-gray-300 py-2.5 text-center">
+    <div class="flex min-h-dvh flex-col gap-2">
+      <header class="shrink-0 border bg-gray-300 py-4 text-center">
         HEADER
       </header>
-      <div class="flex grow gap-2.5 wrap-break-word">
+      <div class="flex grow flex-wrap gap-2 wrap-break-word">
         <aside
-          class="flex w-full items-center justify-center border bg-gray-300"
+          class="flex basis-full items-center justify-center border bg-gray-300 md:basis-[calc((100%-0.5rem)/3)] lg:basis-[calc((100%-2*0.5rem)/4)]"
         >
           LEFT
         </aside>
         <main
-          class="flex w-full items-center justify-center border bg-gray-300"
+          class="flex basis-full items-center justify-center border bg-gray-300 md:basis-[calc((100%-0.5rem)/3*2)] lg:basis-[calc((100%-2*0.5rem)/2)]"
         >
           MAIN
         </main>
         <aside
-          class="flex w-full items-center justify-center border bg-gray-300"
+          class="flex basis-full items-center justify-center border bg-gray-300 lg:basis-[calc((100%-2*0.5rem)/4)]"
         >
           RIGHT
         </aside>
       </div>
-      <footer class="shrink-0 border bg-gray-300 py-2.5 text-center">
+      <footer class="shrink-0 border bg-gray-300 py-4 text-center">
         FOOTER
       </footer>
     </div>
