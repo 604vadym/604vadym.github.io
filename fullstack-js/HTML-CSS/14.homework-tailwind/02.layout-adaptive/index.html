@@ -1,10 +1,36 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="overflow-y-auto">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./dist/style.css" />
     <title>Tailwind CSS. Layout</title>
   </head>
-  <body></body>
+  <body>
+    <div class="flex min-h-dvh flex-col gap-2.5">
+      <header class="shrink-0 border bg-gray-300 py-2.5 text-center">
+        HEADER
+      </header>
+      <div class="flex grow gap-2.5 wrap-break-word">
+        <aside
+          class="flex w-full items-center justify-center border bg-gray-300"
+        >
+          LEFT
+        </aside>
+        <main
+          class="flex w-full items-center justify-center border bg-gray-300"
+        >
+          MAIN
+        </main>
+        <aside
+          class="flex w-full items-center justify-center border bg-gray-300"
+        >
+          RIGHT
+        </aside>
+      </div>
+      <footer class="shrink-0 border bg-gray-300 py-2.5 text-center">
+        FOOTER
+      </footer>
+    </div>
+  </body>
 </html>
