@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" class="overflow-y-auto">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./dist/style.css" />
+    <title>Tailwind CSS. Layout grid</title>
+  </head>
+  <body>
+    <div class="flex min-h-dvh flex-col gap-2">
+      <header class="container shrink-0">
+        <div class="border bg-gray-300 py-4 text-center">HEADER</div>
+      </header>
+
+      <main class="container flex grow flex-wrap gap-2 wrap-break-word">
+        <aside
+          class="flex basis-full items-center justify-center border bg-gray-300 md:basis-[calc((100%-0.5rem)/3)] lg:basis-[calc((100%-2*0.5rem)/4)]"
+        >
+          LEFT
+        </aside>
+
+        <section
+          class="flex basis-full items-center justify-center border bg-gray-300 md:basis-[calc((100%-0.5rem)/3*2)] lg:basis-[calc((100%-2*0.5rem)/2)]"
+        >
+          MAIN
+        </section>
+
+        <aside
+          class="flex basis-full items-center justify-center border bg-gray-300 lg:basis-[calc((100%-2*0.5rem)/4)]"
+        >
+          RIGHT
+        </aside>
+      </main>
+
+      <footer class="container shrink-0">
+        <div class="border bg-gray-300 py-4 text-center">FOOTER</div>
+      </footer>
+    </div>
+  </body>
+</html>
