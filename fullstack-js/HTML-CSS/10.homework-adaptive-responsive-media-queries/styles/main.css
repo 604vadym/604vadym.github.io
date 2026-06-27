@@ -161,8 +161,8 @@ footer {
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--main-color-dark);
-  padding: 0.1875rem;
-  border-radius: 0.625rem;
+  padding: 0.25rem;
+  border-radius: 0.75rem;
   transition:
     background-color 0.5s,
     color 0.5s;
