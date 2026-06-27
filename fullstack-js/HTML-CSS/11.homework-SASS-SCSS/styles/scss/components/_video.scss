@@ -8,6 +8,8 @@
 
   &__poster {
     width: min(100%, a.rem(1110px));
+    aspect-ratio: 1100/600;
+    object-fit: cover;
     padding-inline: clamp(0rem, -0.091rem + 0.39vw, a.rem(6px));
   }
 
