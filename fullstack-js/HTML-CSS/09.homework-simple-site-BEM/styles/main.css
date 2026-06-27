@@ -266,6 +266,8 @@ body {
 .video__play-btn {
   position: absolute;
   background: transparent;
+  width: 100px;
+  height: 100px;
 }
 
 .video__play-btn:hover {
@@ -273,7 +275,8 @@ body {
 }
 
 .video__play-icon {
-  width: 100px;
+  width: 100%;
+  height: 100%
 }
 
 /* ==============================

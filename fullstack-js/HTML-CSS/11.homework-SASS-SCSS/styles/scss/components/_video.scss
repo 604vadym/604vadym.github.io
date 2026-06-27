@@ -14,6 +14,8 @@
   &__play-btn {
     position: absolute;
     transition: filter 0.5s;
+    width: clamp(a.rem(50px), 2.367rem + 3.24vw, a.rem(100px));
+    height: clamp(a.rem(50px), 2.367rem + 3.24vw, a.rem(100px));
 
     &:hover {
       filter: brightness(0.8);
@@ -21,6 +23,7 @@
   }
 
   &__play-icon {
-    width: clamp(a.rem(50px), 2.367rem + 3.24vw, a.rem(100px));
+    width: 100%;
+    height: 100%;
   }
 }

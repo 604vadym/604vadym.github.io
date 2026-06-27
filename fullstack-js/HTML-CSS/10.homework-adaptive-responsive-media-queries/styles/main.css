@@ -293,6 +293,8 @@ footer {
 .video__play-btn {
   position: absolute;
   transition: filter 0.5s;
+  width: clamp(3.125rem, 2.367rem + 3.24vw, 6.25rem);
+  height: clamp(3.125rem, 2.367rem + 3.24vw, 6.25rem);
 }
 
 .video__play-btn:hover {
@@ -300,7 +302,8 @@ footer {
 }
 
 .video__play-icon {
-  width: clamp(3.125rem, 2.367rem + 3.24vw, 6.25rem);
+  width: 100%;
+  height: 100%;
 }
 
 /* ==============================
