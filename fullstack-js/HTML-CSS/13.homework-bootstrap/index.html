@@ -20,11 +20,11 @@
               <div class="container-fluid">
                 <a
                   class="navbar-brand p-0 me-xl-5 d-inline-block"
-                  href="#"
+                  href="./index.html"
                   style="height: 50px"
                   ><img
                     src="./img/logo.svg"
-                    alt=""
+                    alt="604"
                     class="h-100 w-auto d-block"
                 /></a>
 
@@ -41,7 +41,7 @@
                 </button>
 
                 <button type="button" class="btn btn-outline-dark">
-                  Login
+                  Log in
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -407,15 +407,25 @@
           >
             <form>
               <fieldset>
-                <legend>Registration</legend>
+                <legend>Create account</legend>
                 <div class="mb-2">
                   <label for="id-name" class="form-label">Name</label>
-                  <input type="text" class="form-control" id="id-name" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="id-name"
+                    required
+                  />
                 </div>
 
                 <div class="mb-2">
                   <label for="id-surname" class="form-label">Surname</label>
-                  <input type="text" class="form-control" id="id-surname" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="id-surname"
+                    required
+                  />
                 </div>
 
                 <div class="mb-2">
@@ -425,7 +435,12 @@
 
                 <div class="mb-2">
                   <label for="id-email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="id-email" />
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="id-email"
+                    required
+                  />
                 </div>
 
                 <div class="mb-3">
@@ -434,6 +449,7 @@
                     type="password"
                     class="form-control"
                     id="id-password"
+                    required
                   />
                 </div>
 
@@ -470,9 +486,10 @@
                     type="checkbox"
                     class="form-check-input me-2"
                     id="id-accept"
+                    required
                   />
                   <label class="form-check-label" for="id-accept"
-                    >Accept terms and conditions</label
+                    >I accept the terms and conditions</label
                   >
                 </div>
 
