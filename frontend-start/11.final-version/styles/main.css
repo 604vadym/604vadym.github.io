@@ -227,9 +227,8 @@ body {
   padding-left: clamp(1.25rem, 0.522rem + 3.11vw, 4.25rem);
 }
 
-.card--type-base,
-.card--type-premium {
-  --card-price-full-term: var(--card-text-color-muted);
+.card--theme-standard {
+  --card-price-full-term-color: var(--card-text-color-muted);
 
   --card-btn-bg: var(--card-btn-primary-bg-main);
   --card-btn-bg-active: var(--card-btn-primary-bg-main-interactive);
@@ -240,7 +239,7 @@ body {
   color: var(--card-text-color-main);
 }
 
-.card--type-optimal {
+.card--theme-accent {
   --card-btn-bg: var(--card-btn-primary-bg-inverse);
   --card-btn-bg-active: var(--card-btn-primary-bg-inverse-interactive);
   --card-btn-color: var(--card-btn-primary-color-inverse);
@@ -252,20 +251,20 @@ body {
   color: var(--card-text-color-inverse);
 }
 
-.card--type-portfolio {
+.card--bg-variant1 {
   background-color: var(--card-bg-variant-1);
 }
 
-.card--type-internship {
+.card--bg-variant2 {
   background-color: var(--card-bg-variant-2);
 }
 
-.card--type-certificate {
+.card--bg-variant3 {
   background-color: var(--card-bg-variant-3);
 }
 
 .card__price--full-term {
-  color: var(--card-price-full-term);
+  color: var(--card-price-full-term-color);
 }
 
 .card__price--space-small {
