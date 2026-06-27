@@ -157,12 +157,12 @@ body {
   padding-block: clamp(2rem, 1.287rem + 3.04vw, 4.9375rem);
 }
 
-.hero {
+.hero__content {
   padding-top: clamp(2rem, 1.226rem + 3.3vw, 5.1875rem);
   padding-bottom: clamp(3rem, 1.589rem + 6.02vw, 8.8125rem);
 }
 @media (max-width: 30.75em) {
-  .hero {
+  .hero__content {
     padding-top: 0;
   }
 }

@@ -182,7 +182,7 @@ footer {
 /* ==============================
    4.2 HERO
    ============================== */
-.hero {
+.hero__content {
   padding-top: clamp(2rem, 1.226rem + 3.3vw, 5.188rem);
   padding-bottom: clamp(3rem, 1.589rem + 6.02vw, 8.813rem);
 }
@@ -353,7 +353,7 @@ footer {
     gap: 0.5rem;
   }
 
-  .hero {
+  .hero__content {
     padding-top: 0;
   }
 }

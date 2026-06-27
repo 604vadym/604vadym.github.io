@@ -568,8 +568,7 @@ body {
   gap: clamp(1.25rem, 0.901rem + 1.49vw, 2.688rem);
 }
 
-.footer,
-.footer__wrapper {
+.footer {
   background-color: var(--footer-bg);
 }
 

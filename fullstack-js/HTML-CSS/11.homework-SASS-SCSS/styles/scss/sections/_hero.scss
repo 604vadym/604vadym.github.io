@@ -1,11 +1,13 @@
 @use "../abstracts" as a;
 
 .hero {
-  padding-top: clamp(a.rem(32px), 1.226rem + 3.3vw, a.rem(83px));
-  padding-bottom: clamp(a.rem(48px), 1.589rem + 6.02vw, a.rem(141px));
+  &__content {
+    padding-top: clamp(a.rem(32px), 1.226rem + 3.3vw, a.rem(83px));
+    padding-bottom: clamp(a.rem(48px), 1.589rem + 6.02vw, a.rem(141px));
 
-  @include a.responsive(a.$breakpoint-mobile) {
-    padding-top: 0;
+    @include a.responsive(a.$breakpoint-mobile) {
+      padding-top: 0;
+    }
   }
 
   &__title {
