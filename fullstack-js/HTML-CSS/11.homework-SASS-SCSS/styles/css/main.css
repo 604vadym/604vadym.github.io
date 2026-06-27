@@ -42,7 +42,7 @@ body {
 
 .main {
   flex-grow: 1;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .container {
