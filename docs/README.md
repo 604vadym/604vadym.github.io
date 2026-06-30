@@ -27,6 +27,9 @@ To be edited in the future.
 
 - HTML5
 - CSS3
+- SASS/SCSS
+- Bootstrap
+- Tailwind CSS
 - JavaScript
 
 ## Screenshots / Demo
