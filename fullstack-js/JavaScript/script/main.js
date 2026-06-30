@@ -1,7 +1,7 @@
 const terminal = document.getElementById("terminal");
 const select = document.getElementById("hw-select");
 
-console.log = function (...args) {
+function logToTerminal(...args) {
   const msg = args
     .map((arg) =>
       typeof arg === "object" ? JSON.stringify(arg, null, 2) : arg,
@@ -9,13 +9,12 @@ console.log = function (...args) {
     .join(" ");
   terminal.innerHTML += `<div class="line">${msg}</div>`;
   terminal.scrollTop = terminal.scrollHeight;
-};
+}
 
-window.onerror = function (message) {
+function logErrorToTerminal(message) {
   terminal.innerHTML += `<div class="line error">[Runtime Error]: ${message}</div>`;
   terminal.scrollTop = terminal.scrollHeight;
-  return false;
-};
+}
 
 select.addEventListener("change", (e) => {
   if (!e.target.value) {
@@ -28,16 +27,30 @@ select.addEventListener("change", (e) => {
     '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
 
   if (e.target.value === "hw1") {
-    loadScript("01.homework-variables-dataTypes-operators/script/main.js");
+    runScriptInSandbox(
+      "01.homework-variables-dataTypes-operators/script/main.js",
+    );
   }
 });
 
-function loadScript(src) {
-  const oldScript = document.getElementById("active-hw");
-  if (oldScript) oldScript.remove();
+function runScriptInSandbox(src) {
+  const oldSandbox = document.getElementById("sandbox");
+  if (oldSandbox) oldSandbox.remove();
 
-  const script = document.createElement("script");
+  const iframe = document.createElement("iframe");
+  iframe.id = "sandbox";
+  iframe.style.display = "none";
+  document.body.appendChild(iframe);
+
+  const iframeWindow = iframe.contentWindow;
+
+  iframeWindow.console.log = logToTerminal;
+  iframeWindow.onerror = function (message) {
+    logErrorToTerminal(message);
+    return false;
+  };
+
+  const script = iframeWindow.document.createElement("script");
   script.src = src;
-  script.id = "active-hw";
-  document.body.appendChild(script);
+  iframeWindow.document.body.appendChild(script);
 }
