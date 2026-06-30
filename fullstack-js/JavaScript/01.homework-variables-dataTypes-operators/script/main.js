@@ -1,4 +1,8 @@
-console.log('JS #1. Домашнє завдання. Основи JavaScript: Працюємо зі змінними, типами даних');
+"use strict";
+
+console.log(
+  "JS #1. Домашнє завдання. Основи JavaScript: Працюємо зі змінними, типами даних",
+);
 
 /*
  * #1
@@ -12,6 +16,26 @@ console.log('JS #1. Домашнє завдання. Основи JavaScript: П
 // ім'я змінної: myArr, значення: 1, 2, 3, 4, 5
 // ім'я змінної: myObj, значення: first: 'First Name', last: 'Last Name'
 
+var myNum = 10;
+let myNum_ = 100;
+const myNum__ = 1000;
+console.log("myNum > " + myNum);
+console.log("myNum_ > " + myNum_);
+console.log("myNum__ > " + myNum__);
+
+var myStr = "some string";
+console.log("myStr > " + myStr);
+
+var myBool = true;
+console.log("myBool > " + myBool);
+
+var myArr = [1, 2, 3, 4, 5];
+console.log("myArr > " + myArr);
+
+var myObj = { first: "First Name", last: "Last Name" };
+console.log(
+  "myObj.first > " + myObj.first + "\n" + "myObj.last > " + myObj.last,
+);
 /*
  * #2
  *
