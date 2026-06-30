@@ -16,3 +16,7 @@ console.log(
     "Task 1\n" +
     "******************************",
 );
+let number = 7.6;
+let roundedNumber = Math.round(number);
+console.log("number > " + number);
+console.log("roundedNumber > " + roundedNumber);
