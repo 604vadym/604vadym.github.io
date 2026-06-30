@@ -8,12 +8,10 @@ function logToTerminal(...args) {
     )
     .join(" ");
   terminal.innerHTML += `<div class="line">${msg}</div>`;
-  terminal.scrollTop = terminal.scrollHeight;
 }
 
 function logErrorToTerminal(message) {
   terminal.innerHTML += `<div class="line error">[Runtime Error]: ${message}</div>`;
-  terminal.scrollTop = terminal.scrollHeight;
 }
 
 select.addEventListener("change", (e) => {
