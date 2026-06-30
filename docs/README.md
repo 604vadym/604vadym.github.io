@@ -8,13 +8,16 @@ See also my C/C++/C# repository, hosted on [Bitbucket](https://bitbucket.org/vad
 
 This repository contains the source code of my personal portfolio website and
 source code of all my projects. Projects are homework for Hillel for now.
-- Homework for Frontend Start Course Hillel
+
 - Homework for Fullstack JS Course Hillel
+- Homework for Frontend Start Course Hillel
+- Homework for JavaScript Start
 
 ## Key Features
 
 - Astral Projection website built with HTML5 and CSS3
 - Other few homework sites built with HTML5 and CSS3
+- Javascript homework projects
 
 ## Highlights & Advantages
 
@@ -24,6 +27,7 @@ To be edited in the future.
 
 - HTML5
 - CSS3
+- JavaScript
 
 ## Screenshots / Demo
 
@@ -39,3 +43,4 @@ git clone https://github.com/604vadym/604vadym.github.io.git
 cd 604vadym.github.io
 
 # Open index.html in browser
+```
