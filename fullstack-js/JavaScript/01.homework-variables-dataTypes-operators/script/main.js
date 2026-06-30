@@ -16,6 +16,12 @@ console.log(
 // ім'я змінної: myArr, значення: 1, 2, 3, 4, 5
 // ім'я змінної: myObj, значення: first: 'First Name', last: 'Last Name'
 
+console.log(
+  "******************************\n" +
+    "Task 1\n" +
+    "******************************",
+);
+
 var myNum = 10;
 let myNum_ = 100;
 const myNum__ = 1000;
@@ -44,6 +50,16 @@ console.log(
  */
 
 // decimal2
+
+console.log(
+  "******************************\n" +
+    "Task 2\n" +
+    "******************************",
+);
+
+var decimal2 = myNum.toFixed(2);
+console.log("myNum > " + myNum);
+console.log("decimal2 > " + decimal2);
 
 /*
  * #3
