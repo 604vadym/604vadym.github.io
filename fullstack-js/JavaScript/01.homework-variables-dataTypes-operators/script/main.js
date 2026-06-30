@@ -23,11 +23,11 @@ console.log(
 );
 
 var myNum = 10;
-let myNum_ = 100;
-const myNum__ = 1000;
+let myNumLet = 100;
+const myNumConst = 1000;
 console.log("myNum > " + myNum);
-console.log("myNum_ > " + myNum_);
-console.log("myNum__ > " + myNum__);
+console.log("myNumLet > " + myNumLet);
+console.log("myNumConst > " + myNumConst);
 
 var myStr = "some string";
 console.log("myStr > " + myStr);
@@ -69,3 +69,38 @@ console.log("decimal2 > " + decimal2);
  */
 
 // myBigInt
+
+console.log(
+  "******************************\n" +
+    "Task 3\n" +
+    "******************************",
+);
+
+var myBigInt = 123n;
+myBigInt = 123n + 1n;
+console.log("myBigInt > " + myBigInt);
+
+var myBigInt2 = 123n;
+myBigInt2 += 1n;
+console.log("myBigInt2 > " + myBigInt2);
+
+var myBigInt3 = 123n;
+myBigInt3 = 124n;
+console.log("myBigInt3 > " + myBigInt3);
+
+var myBigInt4 = 123n;
+++myBigInt4;
+console.log("MyBigInt4 > " + myBigInt4);
+
+var myBigInt5 = 123n;
+myBigInt5 = 123n + BigInt(1);
+console.log("MyBigInt5 > " + myBigInt5);
+
+var myBigInt6 = 123n;
+myBigInt6 += BigInt(1);
+console.log("MyBigInt6 > " + myBigInt6);
+
+var myBigInt7 = 123n;
+var number = 1;
+myBigInt7 += BigInt(number);
+console.log("MyBigInt7 > " + myBigInt7);
