@@ -16,8 +16,8 @@ console.log(
     "Task 1\n" +
     "******************************",
 );
-let number = 7.6;
-let roundedNumber = Math.round(number);
+const number = 7.6;
+const roundedNumber = Math.round(number);
 console.log("number > " + number);
 console.log("roundedNumber > " + roundedNumber);
 
@@ -34,6 +34,6 @@ console.log(
     "******************************",
 );
 
-let text = "Hello, world!";
-let characterCount = text.length;
+const text = "Hello, world!";
+const characterCount = text.length;
 console.log("characterCount > " + characterCount);

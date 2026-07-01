@@ -22,23 +22,23 @@ console.log(
     "******************************",
 );
 
-var myNum = 10;
+const myNum = 10;
 let myNumLet = 100;
-const myNumConst = 1000;
+var myNumVar = 1000;
 console.log("myNum > " + myNum);
 console.log("myNumLet > " + myNumLet);
-console.log("myNumConst > " + myNumConst);
+console.log("myNumVar > " + myNumVar);
 
-var myStr = "some string";
+const myStr = "some string";
 console.log("myStr > " + myStr);
 
-var myBool = true;
+const myBool = true;
 console.log("myBool > " + myBool);
 
-var myArr = [1, 2, 3, 4, 5];
+const myArr = [1, 2, 3, 4, 5];
 console.log("myArr > " + myArr);
 
-var myObj = { first: "First Name", last: "Last Name" };
+const myObj = { first: "First Name", last: "Last Name" };
 console.log(
   "myObj.first > " + myObj.first + "\n" + "myObj.last > " + myObj.last,
 );
@@ -58,7 +58,7 @@ console.log(
     "******************************",
 );
 
-var decimal2 = myNum.toFixed(2);
+const decimal2 = myNum.toFixed(2);
 console.log("myNum > " + myNum);
 console.log("decimal2 > " + decimal2);
 
@@ -77,31 +77,31 @@ console.log(
     "******************************",
 );
 
-var myBigInt = 123n;
+let myBigInt = 123n;
 myBigInt = 123n + 1n;
 console.log("myBigInt > " + myBigInt);
 
-var myBigInt2 = 123n;
+let myBigInt2 = 123n;
 myBigInt2 += 1n;
 console.log("myBigInt2 > " + myBigInt2);
 
-var myBigInt3 = 123n;
+let myBigInt3 = 123n;
 myBigInt3 = 124n;
 console.log("myBigInt3 > " + myBigInt3);
 
-var myBigInt4 = 123n;
+let myBigInt4 = 123n;
 ++myBigInt4;
 console.log("MyBigInt4 > " + myBigInt4);
 
-var myBigInt5 = 123n;
+let myBigInt5 = 123n;
 myBigInt5 = 123n + BigInt(1);
 console.log("MyBigInt5 > " + myBigInt5);
 
-var myBigInt6 = 123n;
+let myBigInt6 = 123n;
 myBigInt6 += BigInt(1);
 console.log("MyBigInt6 > " + myBigInt6);
 
-var myBigInt7 = 123n;
-var number = 1;
+let myBigInt7 = 123n;
+const number = 1;
 myBigInt7 += BigInt(number);
 console.log("MyBigInt7 > " + myBigInt7);
