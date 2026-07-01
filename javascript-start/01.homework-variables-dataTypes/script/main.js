@@ -18,8 +18,8 @@ console.log(
 );
 const number = 7.6;
 const roundedNumber = Math.round(number);
-console.log("number > " + number);
-console.log("roundedNumber > " + roundedNumber);
+console.log("number = " + number);
+console.log("roundedNumber = " + roundedNumber);
 
 /*
  * #2 Обчислення кількості символів у рядку
@@ -36,4 +36,4 @@ console.log(
 
 const text = "Hello, world!";
 const characterCount = text.length;
-console.log("characterCount > " + characterCount);
+console.log("characterCount = " + characterCount);
