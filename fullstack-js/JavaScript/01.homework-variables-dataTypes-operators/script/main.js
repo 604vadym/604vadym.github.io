@@ -42,6 +42,7 @@ var myObj = { first: "First Name", last: "Last Name" };
 console.log(
   "myObj.first > " + myObj.first + "\n" + "myObj.last > " + myObj.last,
 );
+
 /*
  * #2
  *
