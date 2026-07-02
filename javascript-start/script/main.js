@@ -25,9 +25,9 @@ select.addEventListener("change", (e) => {
     '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
 
   if (e.target.value === "hw1") {
-    runScriptInSandbox(
-      "01.homework-variables-dataTypes/script/main.js",
-    );
+    runScriptInSandbox("01.homework-variables-dataTypes/script/main.js");
+  } else if (e.target.value === "hw2") {
+    runScriptInSandbox("02.homework-logical-operators/script/main.js");
   }
 });
 
