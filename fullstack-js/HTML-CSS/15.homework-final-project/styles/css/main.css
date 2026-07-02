@@ -54,6 +54,19 @@ select {
   align-items: center;
 }
 
+html {
+  overflow-y: auto;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.625;
+  color: #fff;
+  background-color: #f5f5fa;
+}
+
 .page {
   position: relative;
 }

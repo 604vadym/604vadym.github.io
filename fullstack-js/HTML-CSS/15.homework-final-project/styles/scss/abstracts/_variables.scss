@@ -1,6 +1,11 @@
 @use "functions" as f;
 
+$color-white: #fff;
+$color-grey: #f5f5fa;
+
+$color-basic: $color-white;
 $color-main-regular: #323264;
+$color-bg: $color-grey;
 
 $gradient-supersoft: linear-gradient(
   228.57deg,
@@ -21,6 +26,8 @@ $font-size-lead: f.rem(19px);
 $font-size-h3: f.rem(22px);
 $font-size-h2: f.rem(30px);
 $font-size-h1: f.rem(38px);
+
+$line-height-main: 1.625;
 
 $container-width: f.rem(1630px);
 $container-padding: f.rem(60px);
