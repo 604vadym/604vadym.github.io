@@ -3,7 +3,11 @@
 .menu {
   &__list {
     display: flex;
-    justify-content: flex-end;
     gap: 15px;
+  }
+
+  &__link {
+    font-weight: a.$font-weight-bold;
+    line-height: a.$line-height-tight;
   }
 }

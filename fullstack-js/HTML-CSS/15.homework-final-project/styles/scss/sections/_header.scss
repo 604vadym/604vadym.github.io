@@ -10,13 +10,25 @@
     padding-block: a.rem(50px);
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "left right-top"
+      "left right-bottom";
+    row-gap: 16px;
   }
 
-  &__side {
+  &__logo {
+    grid-area: left;
+    justify-self: start;
+  }
+
+  &__top {
+    grid-area: right-top;
     justify-self: end;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  }
+
+  &__bottom {
+    grid-area: right-bottom;
+    justify-self: end;
   }
 
   &__top {
