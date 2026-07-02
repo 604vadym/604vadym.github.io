@@ -1,0 +1,15 @@
+.wrapper {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header,
+.footer {
+  flex-shrink: 0;
+}
+
+.main {
+  flex-grow: 1;
+  overflow-wrap: break-word;
+}
