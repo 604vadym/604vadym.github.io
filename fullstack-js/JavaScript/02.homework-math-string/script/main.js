@@ -18,9 +18,11 @@ console.log(
 );
 
 function sumBigIntegers(numStr1, numStr2) {
-  // 'your code here'
-  return "your code here";
+  const sumBigInt = BigInt(numStr1) + BigInt(numStr2);
+  return sumBigInt;
 }
+
+console.log(sumBigIntegers("9007199254740991", "9007199254740991"));
 
 /* #2
  Створіть функцію `getRandomInt`, яка приймає два цілих числа: `min` та `max`. Ця функція повинна генерувати випадкове ціле число в діапазоні від `min` до `max` (включно).
