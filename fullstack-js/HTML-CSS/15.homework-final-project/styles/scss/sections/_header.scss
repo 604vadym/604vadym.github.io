@@ -1,6 +1,27 @@
+@use "../abstracts/" as a;
+
 .header {
   position: absolute;
   left: 0;
+  right: 0;
   top: 0;
+  bottom: 0;
+}
+
+.header__content {
+  padding-block: a.rem(50px);
   display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.header__side {
+  justify-self: end;
+}
+
+.header__contacts {
+  display: flex;
+}
+
+.header__list {
+  display: flex;
 }
