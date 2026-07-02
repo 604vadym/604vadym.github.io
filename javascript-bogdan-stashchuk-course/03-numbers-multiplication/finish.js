@@ -7,3 +7,9 @@
  *
  * 3. Выведите значение последней переменной в консоль
  */
+"use strict";
+
+const number1 = 11;
+const number2 = 8;
+const numberResult = number1 * number2;
+console.log("numberResult =", numberResult);
