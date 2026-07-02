@@ -10,3 +10,10 @@
  *
  * 5. Выведите значение переменной в консоль
  */
+"use strict";
+
+let isStudent;
+isStudent = true;
+console.log("isStudent =", isStudent);
+isStudent = false;
+console.log("isStudent =", isStudent);
