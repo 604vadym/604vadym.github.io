@@ -3,10 +3,21 @@ const select = document.getElementById("hw-select");
 
 function logToTerminal(...args) {
   const msg = args
-    .map((arg) =>
-      typeof arg === "object" ? JSON.stringify(arg, null, 2) : arg,
-    )
+    .map((arg) => {
+      if (typeof arg === "bigint") {
+        return `${arg}n`;
+      }
+      if (typeof arg === "object" && arg !== null) {
+        return JSON.stringify(
+          arg,
+          (key, value) => (typeof value === "bigint" ? `${value}n` : value),
+          2,
+        );
+      }
+      return arg;
+    })
     .join(" ");
+
   terminal.innerHTML += `<div class="line">${msg}</div>`;
 }
 
