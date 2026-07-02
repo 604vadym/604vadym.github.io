@@ -5,23 +5,46 @@
   left: 0;
   right: 0;
   top: 0;
-  bottom: 0;
-}
 
-.header__content {
-  padding-block: a.rem(50px);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
+  &__content {
+    padding-block: a.rem(50px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 
-.header__side {
-  justify-self: end;
-}
+  &__side {
+    justify-self: end;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 
-.header__contacts {
-  display: flex;
-}
+  &__top {
+    display: flex;
+    align-items: flex-start;
+  }
 
-.header__list {
-  display: flex;
+  &__contacts {
+    display: flex;
+    white-space: nowrap;
+
+    > *::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-inline: 6px;
+      background-color: a.$color-grey-separator;
+    }
+  }
+
+  &__telephone {
+    font-weight: a.$font-weight-bold;
+  }
+
+  &__socials img {
+    display: inline-block;
+    vertical-align: middle;
+  }
 }

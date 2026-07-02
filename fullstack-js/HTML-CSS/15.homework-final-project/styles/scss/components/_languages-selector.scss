@@ -1,0 +1,20 @@
+@use "../abstracts/" as a;
+
+.languages-selector {
+  display: flex;
+
+  &__link {
+    @extend %flex-center;
+    font-weight: a.$font-weight-bold;
+    font-size: a.$font-size-sub;
+    line-height: a.$line-height-tight;
+    letter-spacing: a.em(1px, a.$font-size-sub);
+
+    padding: 7px 8px;
+
+    &--active {
+      border-radius: 8px;
+      background-color: a.$color-accent;
+    }
+  }
+}

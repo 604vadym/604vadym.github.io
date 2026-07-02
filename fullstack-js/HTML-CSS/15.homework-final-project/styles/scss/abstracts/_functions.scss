@@ -4,3 +4,7 @@
 @function rem($px-value) {
   @return math.div($px-value, cfg.$base-font-size) * 1rem;
 }
+
+@function em($px-value, $base-font-size) {
+  @return math.div($px-value, $base-font-size) * 1em;
+}

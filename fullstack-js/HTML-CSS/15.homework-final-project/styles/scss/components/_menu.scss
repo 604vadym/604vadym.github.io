@@ -1,0 +1,9 @@
+@use "../abstracts" as a;
+
+.menu {
+  &__list {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+  }
+}

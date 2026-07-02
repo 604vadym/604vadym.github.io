@@ -5,4 +5,11 @@
   min-height: 100vh;
   background: url(../../assets/images/homepage/h-bg.svg) center top / 100% 100%
     no-repeat;
+
+  &__title {
+    font-weight: a.$font-weight-bold;
+    font-size: a.$font-size-h1;
+    line-height: a.$line-height-tight;
+    text-align: center;
+  }
 }
