@@ -13,8 +13,12 @@ console.log(
  * Виведіть результати перевірок у консоль.
  */
 
-console.log(
-  "******************************\n" +
-    "Task 1\n" +
-    "******************************",
-);
+const a = 5;
+const b = 10;
+const c = 15;
+
+const isLess = a < b && b < c;
+const isEqual = a === 10 || b === 10 || c === 10;
+
+console.log("isLess =", isLess);
+console.log("isEqual =", isEqual);

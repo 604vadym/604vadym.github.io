@@ -26,7 +26,7 @@ select.addEventListener("change", (e) => {
 
   if (e.target.value === "hw1") {
     runScriptInSandbox(
-      "01.homework-variables-dataTypes-operators/script/main.js",
+      "01.homework-variables-data-types-operators/script/main.js",
     );
   }
 });
