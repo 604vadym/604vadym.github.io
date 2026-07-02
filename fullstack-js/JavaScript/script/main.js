@@ -28,6 +28,8 @@ select.addEventListener("change", (e) => {
     runScriptInSandbox(
       "01.homework-variables-data-types-operators/script/main.js",
     );
+  } else if (e.target.value === "hw2") {
+    runScriptInSandbox("02.homework-math-string/script/main.js");
   }
 });
 
