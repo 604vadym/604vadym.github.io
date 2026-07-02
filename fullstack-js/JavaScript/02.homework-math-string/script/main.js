@@ -100,5 +100,9 @@ console.log(
 );
 
 function greetByName(msg, name) {
-  return "your code here";
+  return `${msg}, ${name}`;
 }
+
+console.log(greetByName("Hi", "John"));
+console.log(greetByName("Hey", "Bob"));
+console.log(greetByName("Hello", "Mary"));
