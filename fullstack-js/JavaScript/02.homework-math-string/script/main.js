@@ -40,16 +40,6 @@ console.log(sumBigIntegers("9007199254740991", "9007199254740991"));
  Зверніть увагу, що кожен виклик `getRandomInt` може повертати різні числа, оскільки вони випадкові. Завдання полягає в написанні цієї функції та її використанні для генерації випадкових чисел.
 */
 
-console.log(
-  "******************************\n" +
-    "Task 2\n" +
-    "******************************",
-);
-
-function getRandomInt(min, max) {
-  return "your code here";
-}
-
 /*
  Використовуйте `Math.floor`, а не `Math.round` для забезпечення рівномірного розподілення випадкових чисел.
 
@@ -57,6 +47,36 @@ function getRandomInt(min, max) {
 
  Тому використовуйте `Math.floor` для забезпечення рівномірного розподілення. Це гарантує, що кожне число в діапазоні має однакову ймовірність з'явлення.
 */
+
+console.log(
+  "******************************\n" +
+    "Task 2\n" +
+    "******************************",
+);
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+console.log(getRandomInt(1, 10));
+console.log(getRandomInt(40, 50));
+console.log(getRandomInt(1, 100));
+console.log("******************************");
+console.log(getRandomInt(-777, 888));
+console.log(getRandomInt(-88, -8));
+console.log(getRandomInt(-100, 10));
+console.log("******************************");
+console.log(getRandomInt(-7, 3));
+console.log(getRandomInt(-83, -78));
+console.log(getRandomInt(-3, 0));
+console.log("******************************");
+console.log(getRandomInt(-8, -7));
+console.log(getRandomInt(-8, -8));
+console.log(getRandomInt(-8, 0));
+console.log("******************************");
+console.log(getRandomInt(0, 1));
+console.log(getRandomInt(0, 0));
+console.log(getRandomInt(1, 1));
 
 /* #3
  Ваше завдання - створити функцію greet в JavaScript. Ця функція повинна приймати два аргументи:
