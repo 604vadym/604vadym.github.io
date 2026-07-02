@@ -1,0 +1,8 @@
+@use "../../abstracts/" as a;
+
+.hero {
+  @extend %flex-center;
+  min-height: 100vh;
+  background: url(../../assets/images/homepage/h-bg.svg) center top / 100% 100%
+    no-repeat;
+}
