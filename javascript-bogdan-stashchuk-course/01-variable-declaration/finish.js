@@ -7,3 +7,7 @@
  *
  * 3. Выведите значение переменной в консоль
  */
+"use strict";
+
+const myCountry = "Ukraine";
+console.log("myCountry =", myCountry);
