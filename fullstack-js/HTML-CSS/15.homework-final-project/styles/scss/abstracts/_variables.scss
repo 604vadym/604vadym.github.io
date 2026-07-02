@@ -1,0 +1,36 @@
+@use "functions" as f;
+
+$color-white: #fff;
+$color-grey: #f5f5fa;
+$color-grey-separator: #e6e6f0;
+
+$color-basic: $color-white;
+$color-main-regular: #323264;
+$color-accent: #f0145a;
+$color-bg: $color-grey;
+
+$gradient-supersoft: linear-gradient(
+  228.57deg,
+  $color-main-regular 11.93%,
+  $color-main-regular 57.17%,
+  #643e72 87.46%
+);
+
+$font-main: "Montserrat", sans-serif;
+
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+$font-size-sub: f.rem(12px);
+$font-size-caption: f.rem(14px);
+$font-size-main: f.rem(16px);
+$font-size-lead: f.rem(19px);
+$font-size-h3: f.rem(22px);
+$font-size-h2: f.rem(30px);
+$font-size-h1: f.rem(38px);
+
+$line-height-main: 1.625;
+$line-height-tight: 1;
+
+$container-width: f.rem(1630px);
+$container-padding: f.rem(60px);

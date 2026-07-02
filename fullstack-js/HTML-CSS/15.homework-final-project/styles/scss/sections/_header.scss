@@ -1,0 +1,50 @@
+@use "../abstracts/" as a;
+
+.header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  &__content {
+    padding-block: a.rem(50px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &__side {
+    justify-self: end;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__top {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &__contacts {
+    display: flex;
+    white-space: nowrap;
+
+    > *::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-inline: 6px;
+      background-color: a.$color-grey-separator;
+    }
+  }
+
+  &__telephone {
+    font-weight: a.$font-weight-bold;
+  }
+
+  &__socials img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
