@@ -39,6 +39,8 @@ select.addEventListener("change", (e) => {
     runScriptInSandbox("01.homework-variables-data-types/script/main.js");
   } else if (e.target.value === "hw2") {
     runScriptInSandbox("02.homework-logical-operators/script/main.js");
+  } else if (e.target.value === "hw3") {
+    runScriptInSandbox("03.homework-if-else/script/main.js");
   }
 });
 
