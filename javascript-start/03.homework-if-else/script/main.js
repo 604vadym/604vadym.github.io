@@ -16,5 +16,23 @@ console.log(
  */
 
 function checkAgeCategory(age) {
-  // Використайте if-else для перевірки категорії віку
+  if (age < 13) {
+    console.log("Дитина");
+  } else if (age >= 13 && age <= 19) {
+    console.log("Підліток");
+  } else if (age >= 20 && age <= 59) {
+    console.log("Дорослий");
+  } else if (age >= 60) {
+    console.log("Пенсіонер");
+  }
 }
+
+checkAgeCategory(7);
+checkAgeCategory(13);
+checkAgeCategory(15);
+checkAgeCategory(19);
+checkAgeCategory(20);
+checkAgeCategory(35);
+checkAgeCategory(59);
+checkAgeCategory(60);
+checkAgeCategory(80);
