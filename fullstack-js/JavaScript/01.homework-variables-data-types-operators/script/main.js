@@ -39,7 +39,7 @@ const myArr = [1, 2, 3, 4, 5];
 console.log("myArr =", myArr);
 
 const myObj = { first: "First Name", last: "Last Name" };
-console.log(`myObj.first = ${myObj.first}\nmyObj.last = ${myObj.last}`);
+console.log("myObj =", myObj);
 
 /*
  * #2
