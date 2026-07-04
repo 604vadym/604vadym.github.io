@@ -69,14 +69,16 @@ console.log(
     "******************************",
 );
 
+const generatedPassword = Math.floor(Math.random() * 100000);
+
 const user = {
   username: "admin",
-  password: Math.floor(Math.random() * 100000),
+  password: generatedPassword,
 };
 
 if (user.password < 1000 || user.password > 9999) {
   console.log(
-    "Error: password invalid. Password must contain exactly 4 digits. Try again...",
+    `Error: password invalid (${user.password}). Password must contain exactly 4 digits. Try again...`,
   );
 } else {
   console.log(user);
