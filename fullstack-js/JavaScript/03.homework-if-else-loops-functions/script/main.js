@@ -56,7 +56,7 @@ userObj.firstName = "John";
 userObj.lastName = "Smith";
 userObj.age = 18;
 
-console.log(userObj.fullName());
+console.log(userObj.fullName()); // John Smith
 
 /*
  * #3
@@ -68,8 +68,29 @@ console.log(userObj.fullName());
  * При виконанні завдання не використовуйте оператор if, потрібен розв'язок із логічним оператором ||.
  */
 
-// console.log(defUpperStr('My text')) // MY TEXT
-// console.log(defUpperStr())             // DEFAULT TEXT
+console.log(
+  "******************************\n" +
+    "Task 3\n" +
+    "******************************",
+);
+
+console.log("Variant 1");
+
+function defUpperStr(text) {
+  return "to be done";
+}
+
+console.log(defUpperStr("My text")); // MY TEXT
+console.log(defUpperStr()); // DEFAULT TEXT
+
+console.log("Variant 2");
+
+defUpperStr = function (text = "default text") {
+  return String(text).toUpperCase();
+};
+
+console.log(defUpperStr("My text")); // MY TEXT
+console.log(defUpperStr()); // DEFAULT TEXT
 
 /*
  * #4
