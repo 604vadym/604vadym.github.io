@@ -41,6 +41,8 @@ select.addEventListener("change", (e) => {
     );
   } else if (e.target.value === "hw2") {
     runScriptInSandbox("02.homework-math-string/script/main.js");
+  } else if (e.target.value === "hw3") {
+    runScriptInSandbox("03.homework-if-else-loops-functions/script/main.js");
   }
 });
 
