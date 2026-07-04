@@ -74,7 +74,9 @@ console.log(
     "******************************",
 );
 
-console.log("Variant 1 - solution strictly according to the task requirements");
+console.log(
+  "Variant 1 - solution strictly according to the task requirements (by arguments length, issue with explicit undefined argument)",
+);
 
 function defUpperStr(text) {
   // prettier-ignore
@@ -85,17 +87,37 @@ function defUpperStr(text) {
 console.log(defUpperStr("My text")); // MY TEXT
 console.log(defUpperStr()); // DEFAULT TEXT
 
+/**************************************************/
+
 console.log(
-  "Variant 1 version 2 - solution strictly according to the task requirements",
+  "Variant 1 version 2 - solution strictly according to the task requirements (with empty string or number 0 issues)",
 );
 
 defUpperStr = function (text) {
-  text || ("Sometimes a useless string is useful", (text = "default text"));
+  // prettier-ignore
+  text || ("Sometimes even a useless string is useful", text = "default text");
   return String(text).toUpperCase();
 };
 
 console.log(defUpperStr("My text")); // MY TEXT
 console.log(defUpperStr()); // DEFAULT TEXT
+
+/**************************************************/
+
+console.log(
+  "Variant 1 version 3 - solution strictly according to the task requirements (the best one, the most reliable, handles explicit undefined, no issues)",
+);
+
+defUpperStr = function (text) {
+  // prettier-ignore
+  typeof text !== "undefined" || ("Gotcha!!!", text = "default text");
+  return String(text).toUpperCase();
+};
+
+console.log(defUpperStr("My text")); // MY TEXT
+console.log(defUpperStr()); // DEFAULT TEXT
+
+/**************************************************/
 
 console.log("Variant 2 - standard solution, but without operator ||");
 
