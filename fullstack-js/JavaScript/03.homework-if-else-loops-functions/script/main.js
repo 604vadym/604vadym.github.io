@@ -1,5 +1,7 @@
+"use strict";
+
 console.log(
-  "#3. JavaScript homework. Основи JavaScript: Функції, умовні оператори, цикли та callback-и",
+  "JS #3. Домашнє завдання. Основи JavaScript: Функції, умовні оператори, цикли та callback-и",
 );
 
 /*
@@ -20,9 +22,9 @@ console.log(
 );
 
 const userObj = {
-  firstName: "John",
-  lastName: "Smith",
-  age: 18,
+  firstName: "Bjarne",
+  lastName: "Stroustrup",
+  age: 75,
 };
 
 console.log(userObj);
@@ -38,7 +40,23 @@ console.log(userObj);
  * userObj.fullName() → 'John Smith'.
  */
 
-// console.log(userObj.fullName()) // John Smith
+console.log(
+  "******************************\n" +
+    "Task 2\n" +
+    "******************************",
+);
+
+userObj.fullName = function () {
+  return this.firstName + " " + this.lastName;
+};
+
+console.log(userObj.fullName());
+
+userObj.firstName = "John";
+userObj.lastName = "Smith";
+userObj.age = 18;
+
+console.log(userObj.fullName());
 
 /*
  * #3
