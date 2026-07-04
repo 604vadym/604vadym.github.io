@@ -74,16 +74,18 @@ console.log(
     "******************************",
 );
 
-console.log("Variant 1");
+console.log("Variant 1 - solution strictly according to the task requirements");
 
 function defUpperStr(text) {
-  return "to be done";
+  // prettier-ignore
+  arguments.length !== 0 || ("JavaScript is a little bit strange :)", text = "default text");
+  return String(text).toUpperCase();
 }
 
 console.log(defUpperStr("My text")); // MY TEXT
 console.log(defUpperStr()); // DEFAULT TEXT
 
-console.log("Variant 2");
+console.log("Variant 2 - standard solution");
 
 defUpperStr = function (text = "default text") {
   return String(text).toUpperCase();
