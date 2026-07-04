@@ -79,45 +79,51 @@ console.log(
 );
 
 function defUpperStr(text) {
-  // prettier-ignore
-  arguments.length !== 0 || ("JavaScript is a little bit strange :)", text = "default text");
+  arguments.length !== 0 || (text = "default text");
   return String(text).toUpperCase();
 }
 
 console.log(defUpperStr("My text")); // MY TEXT
 console.log(defUpperStr()); // DEFAULT TEXT
+console.log("Issue: undefined =>", defUpperStr(undefined));
+console.log("No issue: empty string =>", defUpperStr(""));
+console.log("No issue: 0 =>", defUpperStr(0));
 
-/**************************************************/
+console.log("******************************");
 
 console.log(
   "Variant 1 version 2 - solution strictly according to the task requirements (with empty string or number 0 issues)",
 );
 
 defUpperStr = function (text) {
-  // prettier-ignore
-  text || ("Sometimes even a useless string is useful", text = "default text");
+  text || (text = "default text");
   return String(text).toUpperCase();
 };
 
 console.log(defUpperStr("My text")); // MY TEXT
 console.log(defUpperStr()); // DEFAULT TEXT
+console.log("No issue: undefined =>", defUpperStr(undefined));
+console.log("Issue: empty string =>", defUpperStr(""));
+console.log("Issue: 0 =>", defUpperStr(0));
 
-/**************************************************/
+console.log("******************************");
 
 console.log(
   "Variant 1 version 3 - solution strictly according to the task requirements (the best one, the most reliable, handles explicit undefined, no issues)",
 );
 
 defUpperStr = function (text) {
-  // prettier-ignore
-  typeof text !== "undefined" || ("Gotcha!!!", text = "default text");
+  typeof text !== "undefined" || (text = "default text");
   return String(text).toUpperCase();
 };
 
 console.log(defUpperStr("My text")); // MY TEXT
 console.log(defUpperStr()); // DEFAULT TEXT
+console.log("No issue: undefined =>", defUpperStr(undefined));
+console.log("No issue: empty string =>", defUpperStr(""));
+console.log("No issue: 0 =>", defUpperStr(0));
 
-/**************************************************/
+console.log("******************************");
 
 console.log("Variant 2 - standard solution, but without operator ||");
 
@@ -127,6 +133,9 @@ defUpperStr = function (text = "default text") {
 
 console.log(defUpperStr("My text")); // MY TEXT
 console.log(defUpperStr()); // DEFAULT TEXT
+console.log("No issue: undefined =>", defUpperStr(undefined));
+console.log("No issue: empty string =>", defUpperStr(""));
+console.log("No issue: 0 =>", defUpperStr(0));
 
 /*
  * #4
