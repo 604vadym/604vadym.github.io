@@ -78,10 +78,10 @@ console.log(
   "Variant 1 - solution strictly according to the task requirements (by arguments length, issue with explicit undefined argument)",
 );
 
-function defUpperStr(text) {
+let defUpperStr = function (text) {
   arguments.length !== 0 || (text = "default text");
   return String(text).toUpperCase();
-}
+};
 
 console.log(defUpperStr("My text")); // MY TEXT
 console.log(defUpperStr()); // DEFAULT TEXT
@@ -154,9 +154,84 @@ console.log("No issue: 0 =>", defUpperStr(0));
  * evenFn(20) → [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
  */
 
-// console.log(evenFn(10)) // [2, 4, 6, 8, 10]
-// console.log(evenFn(15)) // [2, 4, 6, 8, 10, 12, 14]
-// console.log(evenFn(20)) // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+console.log(
+  "******************************\n" +
+    "Task 4\n" +
+    "******************************",
+);
+
+console.log(
+  "C style - manual add (strictly according to the task requirements):",
+);
+
+let evenFn = function (n) {
+  const arr = [];
+  for (let i = 0; i <= n; i++) {
+    if (i !== 0 && i % 2 === 0) {
+      arr[arr.length] = i;
+    }
+  }
+  return arr;
+};
+
+console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+console.log("******************************");
+console.log(
+  "Standard, modern - method push (strictly according to the task requirements):",
+);
+
+evenFn = function (n) {
+  const arr = [];
+  for (let i = 0; i <= n; i++) {
+    if (i !== 0 && i % 2 === 0) {
+      arr.push(i);
+    }
+  }
+  return arr;
+};
+
+console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+console.log("******************************");
+console.log(
+  "Start loop from 2, no i !== 0 checks (more efficient, but doesn't match the task requirements):",
+);
+
+evenFn = function (n) {
+  const arr = [];
+  for (let i = 2; i <= n; i++) {
+    if (i % 2 === 0) {
+      arr.push(i);
+    }
+  }
+  return arr;
+};
+
+console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+console.log("******************************");
+console.log(
+  "Best variant, start loop from 2, no checks at all, fully optimised (the most optimal, but doesn't match the task requirements):",
+);
+
+evenFn = function (n) {
+  const arr = [];
+  for (let i = 2; i <= n; i += 2) {
+    arr.push(i);
+  }
+  return arr;
+};
+
+console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 
 /*
  * #5
