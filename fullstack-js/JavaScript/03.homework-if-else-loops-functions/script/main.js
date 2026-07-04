@@ -13,7 +13,19 @@ console.log(
  * age - будь-який вік, число
  */
 
-// console.log(userObj)
+console.log(
+  "******************************\n" +
+    "Task 1\n" +
+    "******************************",
+);
+
+const userObj = {
+  firstName: "John",
+  lastName: "Smith",
+  age: 18,
+};
+
+console.log(userObj);
 
 /*
  * #2
