@@ -85,7 +85,19 @@ function defUpperStr(text) {
 console.log(defUpperStr("My text")); // MY TEXT
 console.log(defUpperStr()); // DEFAULT TEXT
 
-console.log("Variant 2 - standard solution");
+console.log(
+  "Variant 1 version 2 - solution strictly according to the task requirements",
+);
+
+defUpperStr = function (text) {
+  text || ("Sometimes a useless string is useful", (text = "default text"));
+  return String(text).toUpperCase();
+};
+
+console.log(defUpperStr("My text")); // MY TEXT
+console.log(defUpperStr()); // DEFAULT TEXT
+
+console.log("Variant 2 - standard solution, but without operator ||");
 
 defUpperStr = function (text = "default text") {
   return String(text).toUpperCase();
