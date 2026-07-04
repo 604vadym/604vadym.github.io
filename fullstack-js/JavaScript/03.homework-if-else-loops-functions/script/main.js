@@ -74,68 +74,78 @@ console.log(
     "******************************",
 );
 
-console.log(
-  "Variant 1 - solution strictly according to the task requirements (by arguments length, issue with explicit undefined argument)",
-);
+{
+  console.log(
+    "Variant 1 - solution strictly according to the task requirements (by arguments length, issue with explicit undefined argument)",
+  );
 
-let defUpperStr = function (text) {
-  arguments.length !== 0 || (text = "default text");
-  return String(text).toUpperCase();
-};
+  function defUpperStr(text) {
+    arguments.length !== 0 || (text = "default text");
+    return String(text).toUpperCase();
+  }
 
-console.log(defUpperStr("My text")); // MY TEXT
-console.log(defUpperStr()); // DEFAULT TEXT
-console.log("Issue: undefined =>", defUpperStr(undefined));
-console.log("No issue: empty string =>", defUpperStr(""));
-console.log("No issue: 0 =>", defUpperStr(0));
-
-console.log("******************************");
-
-console.log(
-  "Variant 1 version 2 - solution strictly according to the task requirements (with empty string or number 0 issues)",
-);
-
-defUpperStr = function (text) {
-  text || (text = "default text");
-  return String(text).toUpperCase();
-};
-
-console.log(defUpperStr("My text")); // MY TEXT
-console.log(defUpperStr()); // DEFAULT TEXT
-console.log("No issue: undefined =>", defUpperStr(undefined));
-console.log("Issue: empty string =>", defUpperStr(""));
-console.log("Issue: 0 =>", defUpperStr(0));
+  console.log(defUpperStr("My text")); // MY TEXT
+  console.log(defUpperStr()); // DEFAULT TEXT
+  console.log("Issue: undefined =>", defUpperStr(undefined));
+  console.log("No issue: empty string =>", defUpperStr(""));
+  console.log("No issue: 0 =>", defUpperStr(0));
+}
 
 console.log("******************************");
 
-console.log(
-  "Variant 1 version 3 - solution strictly according to the task requirements (the best one, the most reliable, handles explicit undefined, no issues)",
-);
+{
+  console.log(
+    "Variant 1 version 2 - solution strictly according to the task requirements (with empty string or number 0 issues)",
+  );
 
-defUpperStr = function (text) {
-  typeof text !== "undefined" || (text = "default text");
-  return String(text).toUpperCase();
-};
+  function defUpperStr(text) {
+    text || (text = "default text");
+    return String(text).toUpperCase();
+  }
 
-console.log(defUpperStr("My text")); // MY TEXT
-console.log(defUpperStr()); // DEFAULT TEXT
-console.log("No issue: undefined =>", defUpperStr(undefined));
-console.log("No issue: empty string =>", defUpperStr(""));
-console.log("No issue: 0 =>", defUpperStr(0));
+  console.log(defUpperStr("My text")); // MY TEXT
+  console.log(defUpperStr()); // DEFAULT TEXT
+  console.log("No issue: undefined =>", defUpperStr(undefined));
+  console.log("Issue: empty string =>", defUpperStr(""));
+  console.log("Issue: 0 =>", defUpperStr(0));
+}
 
 console.log("******************************");
 
-console.log("Variant 2 - standard solution, but without operator ||");
+{
+  console.log(
+    "Variant 1 version 3 - solution strictly according to the task requirements (the best one, the most reliable, handles explicit undefined, empty string and number 0, no issues at all)",
+  );
 
-defUpperStr = function (text = "default text") {
-  return String(text).toUpperCase();
-};
+  function defUpperStr(text) {
+    typeof text !== "undefined" || (text = "default text");
+    return String(text).toUpperCase();
+  }
 
-console.log(defUpperStr("My text")); // MY TEXT
-console.log(defUpperStr()); // DEFAULT TEXT
-console.log("No issue: undefined =>", defUpperStr(undefined));
-console.log("No issue: empty string =>", defUpperStr(""));
-console.log("No issue: 0 =>", defUpperStr(0));
+  console.log(defUpperStr("My text")); // MY TEXT
+  console.log(defUpperStr()); // DEFAULT TEXT
+  console.log("No issue: undefined =>", defUpperStr(undefined));
+  console.log("No issue: empty string =>", defUpperStr(""));
+  console.log("No issue: 0 =>", defUpperStr(0));
+}
+
+console.log("******************************");
+
+{
+  console.log(
+    "Variant 2 - standard solution, but doesn't match the task requirements - without operator ||",
+  );
+
+  function defUpperStr(text = "default text") {
+    return String(text).toUpperCase();
+  }
+
+  console.log(defUpperStr("My text")); // MY TEXT
+  console.log(defUpperStr()); // DEFAULT TEXT
+  console.log("No issue: undefined =>", defUpperStr(undefined));
+  console.log("No issue: empty string =>", defUpperStr(""));
+  console.log("No issue: 0 =>", defUpperStr(0));
+}
 
 /*
  * #4
@@ -156,82 +166,93 @@ console.log("No issue: 0 =>", defUpperStr(0));
 
 console.log(
   "******************************\n" +
-    "Task 4\n" +
+    "Task 4 (the task requirements are conflicting)\n" +
     "******************************",
 );
 
-console.log(
-  "C style - manual add (strictly according to the task requirements):",
-);
+{
+  console.log(
+    "C style - manual add (according to the task requirement 'for 0..n' && 'цикл має працювати до n включно', but not according 'приймає параметром число - кількість ітерацій циклу'):",
+  );
 
-let evenFn = function (n) {
-  const arr = [];
-  for (let i = 0; i <= n; i++) {
-    if (i !== 0 && i % 2 === 0) {
-      arr[arr.length] = i;
+  function evenFn(n) {
+    const arr = [];
+    for (let i = 0; i <= n; i++) {
+      if (i !== 0 && i % 2 === 0) {
+        arr[arr.length] = i;
+      }
     }
+    return arr;
   }
-  return arr;
-};
 
-console.log(evenFn(10)); // [2, 4, 6, 8, 10]
-console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
-console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+  console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+  console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+  console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+}
 
 console.log("******************************");
-console.log(
-  "Standard, modern - method push (strictly according to the task requirements):",
-);
 
-evenFn = function (n) {
-  const arr = [];
-  for (let i = 0; i <= n; i++) {
-    if (i !== 0 && i % 2 === 0) {
+{
+  console.log(
+    "Standard, modern - method push (according to the task requirement 'for 0..n' && 'цикл має працювати до n включно', but not according 'приймає параметром число - кількість ітерацій циклу'):",
+  );
+
+  function evenFn(n) {
+    const arr = [];
+    for (let i = 0; i <= n; i++) {
+      if (i !== 0 && i % 2 === 0) {
+        arr.push(i);
+      }
+    }
+    return arr;
+  }
+
+  console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+  console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+  console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+}
+
+console.log("******************************");
+
+{
+  console.log(
+    "Start loop from 1, no i !== 0 checks (more efficient, according to the task requirement 'приймає параметром число - кількість ітерацій циклу', but not according 'for 0..n'):",
+  );
+
+  function evenFn(n) {
+    const arr = [];
+    for (let i = 1; i <= n; i++) {
+      if (i % 2 === 0) {
+        arr.push(i);
+      }
+    }
+    return arr;
+  }
+
+  console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+  console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+  console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+}
+
+console.log("******************************");
+
+{
+  console.log(
+    "Best variant, start loop from 2, no checks at all, fully optimised (the most optimal, but doesn't match the task requirements at all):",
+  );
+
+  function evenFn(n) {
+    const arr = [];
+    for (let i = 2; i <= n; i += 2) {
       arr.push(i);
     }
+    return arr;
   }
-  return arr;
-};
 
-console.log(evenFn(10)); // [2, 4, 6, 8, 10]
-console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
-console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
-
-console.log("******************************");
-console.log(
-  "Start loop from 2, no i !== 0 checks (more efficient, but doesn't match the task requirements):",
-);
-
-evenFn = function (n) {
-  const arr = [];
-  for (let i = 2; i <= n; i++) {
-    if (i % 2 === 0) {
-      arr.push(i);
-    }
-  }
-  return arr;
-};
-
-console.log(evenFn(10)); // [2, 4, 6, 8, 10]
-console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
-console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
-
-console.log("******************************");
-console.log(
-  "Best variant, start loop from 2, no checks at all, fully optimised (the most optimal, but doesn't match the task requirements):",
-);
-
-evenFn = function (n) {
-  const arr = [];
-  for (let i = 2; i <= n; i += 2) {
-    arr.push(i);
-  }
-  return arr;
-};
-
-console.log(evenFn(10)); // [2, 4, 6, 8, 10]
-console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
-console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+  console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+  console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+  console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+}
 
 /*
  * #5
