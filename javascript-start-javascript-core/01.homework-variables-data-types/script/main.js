@@ -16,6 +16,7 @@ console.log(
     "Task 1\n" +
     "******************************",
 );
+
 const number = 7.6;
 const roundedNumber = Math.round(number);
 console.log("number =", number);
