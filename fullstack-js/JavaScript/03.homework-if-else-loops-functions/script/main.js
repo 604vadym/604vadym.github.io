@@ -278,7 +278,7 @@ console.log(
 );
 
 {
-  console.log("Varinat 1 - using local variable:");
+  console.log("Variant 1 - using local variable:");
 
   function weekFn(n) {
     let weekDayName;
@@ -322,7 +322,7 @@ console.log(
 console.log("******************************");
 
 {
-  console.log("Varinat 2 - return in switch case:");
+  console.log("Variant 2 - return in switch case:");
 
   function weekFn(n) {
     switch (n) {
