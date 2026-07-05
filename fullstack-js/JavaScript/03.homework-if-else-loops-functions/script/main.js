@@ -587,7 +587,18 @@ console.log("******************************");
  * Реалізуйте перевірку: якщо третім параметром передається не функція, потрібно повернути false.
  */
 
-// function mainFunc(a, b, cb) { }
+console.log(
+  "******************************\n" +
+    "Task 8\n" +
+    "******************************",
+);
+
+function mainFunc(a, b, callback) {
+  if (typeof callback !== "function") {
+    return false;
+  }
+  return callback(a, b);
+}
 
 /*
  * Реалізуйте callback функції (cbRandom, cbPow, cbAdd) до основної функції (mainFunc), що повертатимуть відповідні результати обчислень.
@@ -595,13 +606,23 @@ console.log("******************************");
  */
 
 // cbRandom(a, b) - обчислює і повертає довільне ціле число в діапазоні між a і b включно.
-// function cbRandom(min, max) { }
+function cbRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 // cbPow(a, b) - обчислює і повертає результат піднесення числа a у ступінь b.
-// function cbPow(num, pow) { }
+function cbPow(num, pow) {
+  return Math.pow(num, pow);
+}
+
+function cbPowAlt(num, pow) {
+  return num ** pow;
+}
 
 // cbAdd(a, b) - обчислює і повертає суму двох чисел a і b.
-// function cbAdd(a, b) { }
+function cbAdd(a, b) {
+  return a + b;
+}
 
 /*
  * mainFunc() повинна повертати результат роботи переданої їй поворотної функції, наприклад:
@@ -612,7 +633,9 @@ console.log("******************************");
  * mainFunc(2, 5, 'not a func') → false
  */
 
-// console.log(mainFunc(2, 5, cbRandom)) // цілі числа в діапазоні 2..5
-// console.log(mainFunc(2, 5, cbPow)) // 32
-// console.log(mainFunc(2, 5, cbAdd)) // 7
-// console.log(mainFunc(2, 5, 'not a func')) // false
+console.log(mainFunc(2, 5, cbRandom)); // цілі числа в діапазоні 2..5
+console.log(mainFunc(10, 30, cbRandom)); // цілі числа в діапазоні 10..30
+console.log(mainFunc(2, 5, cbPow)); // 32
+console.log(mainFunc(2, 5, cbPowAlt)); // 32
+console.log(mainFunc(2, 5, cbAdd)); // 7
+console.log(mainFunc(2, 5, "not a func")); // false
