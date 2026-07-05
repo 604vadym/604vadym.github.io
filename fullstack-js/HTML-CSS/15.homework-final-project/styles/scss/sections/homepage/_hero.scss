@@ -7,9 +7,7 @@
     no-repeat;
 
   &__title {
-    font-weight: a.$font-weight-bold;
-    font-size: a.$font-size-h1;
-    line-height: a.$line-height-tight;
+    @extend %text-bold-h1;
     text-align: center;
   }
 }

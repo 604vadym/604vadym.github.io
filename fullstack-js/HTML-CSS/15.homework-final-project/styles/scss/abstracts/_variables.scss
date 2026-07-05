@@ -2,6 +2,7 @@
 
 $color-white: #fff;
 $color-grey: #f5f5fa;
+$color-grey-text: #b3b3ba;
 $color-grey-separator: #e6e6f0;
 
 $color-basic: $color-white;
@@ -14,6 +15,12 @@ $gradient-supersoft: linear-gradient(
   $color-main-regular 11.93%,
   $color-main-regular 57.17%,
   #643e72 87.46%
+);
+
+$gradient-text-red-reversed: linear-gradient(
+  90.13deg,
+  #ef8080 0.84%,
+  #f0145a 99.96%
 );
 
 $font-main: "Montserrat", sans-serif;

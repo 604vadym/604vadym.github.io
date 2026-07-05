@@ -1,0 +1,73 @@
+@use "sass:color";
+@use "../../abstracts/" as a;
+
+.about {
+  &__content {
+    padding-block: 60px;
+  }
+
+  &__features {
+    display: flex;
+    justify-content: center;
+    max-width: 1360px;
+  }
+
+  &__list {
+    padding: 14.5px 0;
+  }
+
+  &__feature {
+    text-align: right;
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__button {
+    @extend %text-bold-h1;
+    color: a.$color-grey-text;
+    text-align: right;
+
+    @media (hover: hover) {
+      &:hover {
+        color: a.$color-accent;
+      }
+    }
+
+    &--active {
+      background-image: a.$gradient-text-red-reversed;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      pointer-events: none;
+    }
+  }
+
+  &__description {
+    max-width: 87ch;
+    position: relative;
+    padding: 73px 0 73px 60px;
+    transform: translateX(60px);
+
+    &::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 303px;
+      background-color: color.adjust(a.$color-basic, $alpha: -0.7);
+    }
+  }
+
+  &__title {
+    @extend %text-bold-h2;
+    margin-bottom: 30px;
+  }
+
+  &__text {
+    font-size: a.$font-size-lead;
+  }
+}
