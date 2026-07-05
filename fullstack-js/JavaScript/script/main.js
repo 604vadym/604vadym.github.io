@@ -4,10 +4,13 @@ const select = document.getElementById("hw-select");
 function logToTerminal(...args) {
   const msg = args
     .map((arg) => {
+      if (arg === null) {
+        return "null";
+      }
       if (typeof arg === "bigint") {
         return `${arg}n`;
       }
-      if (typeof arg === "object" && arg !== null) {
+      if (typeof arg === "object") {
         return JSON.stringify(
           arg,
           (key, value) => (typeof value === "bigint" ? `${value}n` : value),
@@ -17,7 +20,6 @@ function logToTerminal(...args) {
       return arg;
     })
     .join(" ");
-
   terminal.innerHTML += `<div class="line">${msg}</div>`;
 }
 
