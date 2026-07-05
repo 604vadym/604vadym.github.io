@@ -29,11 +29,7 @@
     color: a.$color-grey-text;
     text-align: right;
 
-    @media (hover: hover) {
-      &:hover {
-        color: a.$color-accent;
-      }
-    }
+    @include a.hover-color-smooth(a.$color-accent);
 
     &--active {
       background-image: a.$gradient-text-red-reversed;

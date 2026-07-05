@@ -200,6 +200,15 @@ body {
 .hero__title {
   text-align: center;
 }
+.hero__scroll {
+  color: #fff;
+  transition: color 0.2s;
+}
+@media (hover: hover) {
+  .hero__scroll:hover {
+    color: #f0145a;
+  }
+}
 
 .about__content {
   padding-block: 60px;
@@ -221,6 +230,7 @@ body {
 .about__button {
   color: #b3b3ba;
   text-align: right;
+  transition: color 0.2s;
 }
 @media (hover: hover) {
   .about__button:hover {

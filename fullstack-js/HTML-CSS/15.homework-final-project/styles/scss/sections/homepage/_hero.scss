@@ -10,4 +10,10 @@
     @extend %text-bold-h1;
     text-align: center;
   }
+
+  &__scroll {
+    color: a.$color-basic;
+
+    @include a.hover-color-smooth(a.$color-accent);
+  }
 }

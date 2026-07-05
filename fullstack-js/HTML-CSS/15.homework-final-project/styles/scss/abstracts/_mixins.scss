@@ -1,8 +1,31 @@
 @use "sass:math";
 @use "config" as cfg;
+@use "variables" as v;
 
 @mixin responsive($breakpoint) {
   @media (max-width: #{math.div($breakpoint, cfg.$base-font-size) * 1em}) {
     @content;
+  }
+}
+
+@mixin hover-desktop {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin hover-color-smooth($color, $transition-time: null) {
+  $time: if($transition-time == null, v.$transition-time, $transition-time);
+
+  @if $time and $time != 0s {
+    transition: color $time;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: $color;
+    }
   }
 }
