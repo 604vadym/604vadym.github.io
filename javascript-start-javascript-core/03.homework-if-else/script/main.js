@@ -1,7 +1,7 @@
 "use strict";
 
 console.log(
-  "JavaScriptStart #3. Домашнє завдання. Основи JavaScript: Керуючі конструкції",
+  "JavaScriptStart & JavaScript Core #3. Домашнє завдання. Основи JavaScript: Керуючі конструкції",
 );
 
 /*

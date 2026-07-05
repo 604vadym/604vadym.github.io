@@ -43,6 +43,8 @@ select.addEventListener("change", (e) => {
     runScriptInSandbox("03.homework-if-else/script/main.js");
   } else if (e.target.value === "hw4") {
     runScriptInSandbox("04.homework-functions/script/main.js");
+  } else if (e.target.value === "hw5") {
+    runScriptInSandbox("05.homework-switch-case/script/main.js");
   }
 });
 
