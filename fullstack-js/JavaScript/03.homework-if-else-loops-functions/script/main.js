@@ -76,7 +76,7 @@ console.log(
 
 {
   console.log(
-    "Variant 1 - solution strictly according to the task requirements (by arguments length, issue with explicit undefined argument)",
+    "Variant 1 - solution strictly according to the task requirements (by arguments length, issue with explicit undefined argument):",
   );
 
   function defUpperStr(text) {
@@ -95,7 +95,7 @@ console.log("******************************");
 
 {
   console.log(
-    "Variant 1 version 2 - solution strictly according to the task requirements (with empty string or number 0 issues)",
+    "Variant 1 version 2 - solution strictly according to the task requirements (with empty string or number 0 issues):",
   );
 
   function defUpperStr(text) {
@@ -114,7 +114,7 @@ console.log("******************************");
 
 {
   console.log(
-    "Variant 1 version 3 - solution strictly according to the task requirements (the best one, the most reliable, handles explicit undefined, empty string and number 0, no issues at all)",
+    "Variant 1 version 3 - solution strictly according to the task requirements (the best one, the most reliable, handles explicit undefined, empty string and number 0, no issues at all):",
   );
 
   function defUpperStr(text) {
@@ -133,7 +133,7 @@ console.log("******************************");
 
 {
   console.log(
-    "Variant 2 - standard solution, but doesn't match the task requirements - without operator ||",
+    "Variant 2 - standard solution, but doesn't match the task requirements - without operator ||:",
   );
 
   function defUpperStr(text = "default text") {
@@ -278,7 +278,7 @@ console.log(
 );
 
 {
-  console.log("Varinat 1 - using local variable");
+  console.log("Varinat 1 - using local variable:");
 
   function weekFn(n) {
     let weekDayName;
@@ -322,7 +322,7 @@ console.log(
 console.log("******************************");
 
 {
-  console.log("Varinat 2 - return in switch case");
+  console.log("Varinat 2 - return in switch case:");
 
   function weekFn(n) {
     switch (n) {
@@ -444,9 +444,137 @@ console.log("   150 :", ageClassification(150) === null); // 150 : null
  * oddFn(20) → [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
  */
 
-// console.log(oddFn(10)) // [1, 3, 5, 7, 9]
-// console.log(oddFn(15)) // [1, 3, 5, 7, 9, 11, 13, 15]
-// console.log(oddFn(20)) // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+console.log(
+  "******************************\n" +
+    "Task 7\n" +
+    "******************************",
+);
+
+{
+  console.log(
+    "Variant 1 - push (strictly according to the task requirements 'цикл має працювати до n включно'):",
+  );
+
+  function oddFn(n) {
+    const arr = [];
+    let i = 0;
+    while (i <= n) {
+      if (i % 2 !== 0) {
+        arr.push(i);
+      }
+      i++;
+    }
+    return arr;
+  }
+
+  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+}
+
+console.log("******************************");
+
+{
+  console.log("Variant 2 - unshift:");
+
+  function oddFn(n) {
+    const arr = [];
+    while (n) {
+      if (n % 2 !== 0) {
+        arr.unshift(n);
+      }
+      n--;
+    }
+    return arr;
+  }
+
+  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+}
+
+console.log("******************************");
+
+{
+  console.log("Variant 3 - while(true):");
+
+  function oddFn(n) {
+    const arr = [];
+    while (true) {
+      if (n % 2 !== 0) {
+        arr.unshift(n);
+      }
+      --n;
+      if (!n) {
+        return arr;
+      }
+    }
+  }
+
+  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+}
+
+console.log("******************************");
+
+{
+  console.log("Variant 4 - postfix decrement in while():");
+
+  function oddFn(n) {
+    const arr = [];
+    while (n--) {
+      if (n % 2 === 0) {
+        arr.unshift(n + 1);
+      }
+    }
+    return arr;
+  }
+
+  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+}
+
+console.log("******************************");
+
+{
+  console.log("Variant 5 - prefix decrement in while():");
+
+  function oddFn(n) {
+    const arr = [];
+    while (--n >= 0) {
+      if (n % 2 === 0) {
+        arr.unshift(n + 1);
+      }
+    }
+    return arr;
+  }
+
+  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+}
+
+console.log("******************************");
+
+{
+  console.log("Variant 6 - if check another logic:");
+
+  function oddFn(n) {
+    const arr = [];
+    while (n--) {
+      if ((n + 1) % 2 !== 0) {
+        arr.unshift(n + 1);
+      }
+    }
+    return arr;
+  }
+
+  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+}
 
 /*
  * #8
