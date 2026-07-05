@@ -457,7 +457,7 @@ console.log(
 
   function oddFn(n) {
     const arr = [];
-    let i = 0;
+    let i = 1;
     while (i <= n) {
       if (i % 2 !== 0) {
         arr.push(i);
