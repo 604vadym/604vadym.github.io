@@ -271,12 +271,87 @@ console.log("******************************");
  * У реалізації функції обов'язково мають бути використані оператори switch / case / default.
  */
 
-// console.log(weekFn(1))   // 'Понеділок'
-// console.log(weekFn(3))   // 'Середа'
-// console.log(weekFn(7))   // 'Неділя'
-// console.log(weekFn(9))   // null
-// console.log(weekFn(1.5)) // null
-// console.log(weekFn('2')) // null
+console.log(
+  "******************************\n" +
+    "Task 5\n" +
+    "******************************",
+);
+
+{
+  console.log("Varinat 1 - using local variable");
+
+  function weekFn(n) {
+    let weekDayName;
+    switch (n) {
+      case 1:
+        weekDayName = "Понеділок";
+        break;
+      case 2:
+        weekDayName = "Вівторок";
+        break;
+      case 3:
+        weekDayName = "Середа";
+        break;
+      case 4:
+        weekDayName = "Четвер";
+        break;
+      case 5:
+        weekDayName = "П'ятниця";
+        break;
+      case 6:
+        weekDayName = "Субота";
+        break;
+      case 7:
+        weekDayName = "Неділя";
+        break;
+      default:
+        weekDayName = null;
+        break;
+    }
+    return weekDayName;
+  }
+
+  console.log(weekFn(1)); // 'Понеділок'
+  console.log(weekFn(3)); // 'Середа'
+  console.log(weekFn(7)); // 'Неділя'
+  console.log(weekFn(9)); // null
+  console.log(weekFn(1.5)); // null
+  console.log(weekFn("2")); // null
+}
+
+console.log("******************************");
+
+{
+  console.log("Varinat 2 - return in switch case");
+
+  function weekFn(n) {
+    switch (n) {
+      case 1:
+        return "Понеділок";
+      case 2:
+        return "Вівторок";
+      case 3:
+        return "Середа";
+      case 4:
+        return "Четвер";
+      case 5:
+        return "П'ятниця";
+      case 6:
+        return "Субота";
+      case 7:
+        return "Неділя";
+      default:
+        return null;
+    }
+  }
+
+  console.log(weekFn(1)); // 'Понеділок'
+  console.log(weekFn(3)); // 'Середа'
+  console.log(weekFn(7)); // 'Неділя'
+  console.log(weekFn(9)); // null
+  console.log(weekFn(1.5)); // null
+  console.log(weekFn("2")); // null
+}
 
 /*
  * #6
