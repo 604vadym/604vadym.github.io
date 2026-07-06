@@ -11,7 +11,7 @@
 
 // comment
 
-const userName; // variable for storing the user name
+let userName; // variable for storing the user name
 
 /*
 Long comments
