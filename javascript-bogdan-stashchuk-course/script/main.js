@@ -41,6 +41,12 @@ select.addEventListener("change", (e) => {
     runScriptInSandbox("02-value-reassignment/finish.js");
   } else if (e.target.value === "hw3") {
     runScriptInSandbox("03-numbers-multiplication/finish.js");
+  } else if (e.target.value === "hw4") {
+    runScriptInSandbox("04-strings-concatenation/finish.js");
+  } else if (e.target.value === "hw5") {
+    runScriptInSandbox("05-comments/finish.js");
+  } else if (e.target.value === "hw6") {
+    runScriptInSandbox("06-data-types/finish.js");
   }
 });
 
