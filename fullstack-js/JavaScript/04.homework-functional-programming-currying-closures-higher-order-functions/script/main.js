@@ -19,20 +19,26 @@ console.log("JS #4. Принципи вищих функцій і замикан
 */
 
 console.log(
-  "******************************\n" +
-    "Task 1\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 1\n" +
+        "******************************",
 );
 
 function curriedAdd(a) {
-  // code
+    return function (b) {
+        return function (c) {
+            return a + b + c;
+        };
+    };
 }
 
 // Приклад використання
-// const addFirst = curriedAdd(1)
-// const addSecond = addFirst(2)
-// const result = addSecond(3) // Повинно повернути 6
-// console.log('Result:', result)
+const addFirst = curriedAdd(1);
+const addSecond = addFirst(2);
+const result = addSecond(3); // Повинно повернути 6
+console.log("Result:", result);
+
+console.log("Result:", curriedAdd(1)(2)(3));
 
 /*
  ? Ось як працює цей код:
@@ -62,13 +68,13 @@ function curriedAdd(a) {
 */
 
 console.log(
-  "******************************\n" +
-    "Task 2\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 2\n" +
+        "******************************",
 );
 
 function curriedDomain(protocol) {
-  // code
+    // code
 }
 
 // Приклад використання
@@ -102,17 +108,17 @@ function curriedDomain(protocol) {
 */
 
 console.log(
-  "******************************\n" +
-    "Task 3\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 3\n" +
+        "******************************",
 );
 
 function originalFunction(num) {
-  // code
+    // code
 }
 
 function modifyFunction(originalFunc, multiplier) {
-  // code
+    // code
 }
 
 // Приклад використання
@@ -146,21 +152,21 @@ deepInnerFunction повинна виконувати операцію множ�
 */
 
 console.log(
-  "******************************\n" +
-    "Task 4\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 4\n" +
+        "******************************",
 );
 
 function outerFunction(arg1) {
-  function innerFunction(arg2) {
-    function deepInnerFunction(arg3) {
-      // code
+    function innerFunction(arg2) {
+        function deepInnerFunction(arg3) {
+            // code
+        }
+
+        // code
     }
 
     // code
-  }
-
-  // code
 }
 
 // const result = outerFunction(2)(3)(4)
@@ -191,9 +197,9 @@ function outerFunction(arg1) {
 */
 
 export {
-  curriedAdd,
-  curriedDomain,
-  originalFunction,
-  modifyFunction,
-  outerFunction,
+    curriedAdd,
+    curriedDomain,
+    originalFunction,
+    modifyFunction,
+    outerFunction,
 };
