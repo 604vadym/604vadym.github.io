@@ -88,7 +88,33 @@ body {
 }
 
 .gradient-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 20px;
   background: linear-gradient(228.57deg, #323264 11.93%, #323264 57.17%, #643e72 87.46%);
+}
+.gradient-wrapper, .gradient-wrapper::before, .gradient-wrapper::after {
+  border-radius: 0 0 12px 12px;
+}
+.gradient-wrapper::before, .gradient-wrapper::after {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 10px;
+}
+.gradient-wrapper::before {
+  z-index: -1;
+  left: 20px;
+  bottom: -10px;
+  width: calc(100% - 40px);
+  background-color: #cacadb;
+}
+.gradient-wrapper::after {
+  z-index: -2;
+  left: 40px;
+  bottom: -20px;
+  width: calc(100% - 80px);
+  background-color: #e7e7f2;
 }
 
 .menu__list {

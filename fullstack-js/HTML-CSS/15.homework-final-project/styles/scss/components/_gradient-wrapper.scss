@@ -1,5 +1,38 @@
 @use "../abstracts/" as a;
 
 .gradient-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 20px;
   background: a.$gradient-supersoft;
+
+  &,
+  &::before,
+  &::after {
+    border-radius: 0 0 12px 12px;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    height: 10px;
+  }
+
+  &::before {
+    z-index: -1;
+    left: 20px;
+    bottom: -10px;
+    width: calc(100% - 40px);
+    background-color: #cacadb;
+  }
+
+  &::after {
+    z-index: -2;
+    left: 40px;
+    bottom: -20px;
+    width: calc(100% - 80px);
+    background-color: #e7e7f2;
+  }
 }
