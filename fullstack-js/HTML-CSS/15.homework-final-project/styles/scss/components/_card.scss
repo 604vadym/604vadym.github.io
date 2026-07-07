@@ -2,12 +2,12 @@
 
 .card {
   &__image {
-    margin-bottom: 30px;
+    margin-bottom: a.$space-md;
   }
 
   &__title {
     @include a.text-bold-h3;
     color: a.$color-active-regular;
-    margin-bottom: 15px;
+    margin-bottom: a.$space-sm;
   }
 }

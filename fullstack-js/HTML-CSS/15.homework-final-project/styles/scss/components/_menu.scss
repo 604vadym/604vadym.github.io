@@ -3,7 +3,7 @@
 .menu {
   &__list {
     display: flex;
-    gap: 15px;
+    gap: a.$space-sm;
   }
 
   &__link {

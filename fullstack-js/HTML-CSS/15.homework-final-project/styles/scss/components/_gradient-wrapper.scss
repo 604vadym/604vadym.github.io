@@ -1,9 +1,12 @@
 @use "../abstracts/" as a;
 
 .gradient-wrapper {
+  $frame-height: 10px;
+  $frame-padding: 20px;
+
   position: relative;
   z-index: 1;
-  margin-bottom: 20px;
+  margin-bottom: $frame-height * 2;
   background: a.$gradient-supersoft;
 
   &,
@@ -16,23 +19,22 @@
   &::after {
     content: "";
     position: absolute;
-    display: block;
-    height: 10px;
+    height: $frame-height;
   }
 
   &::before {
     z-index: -1;
-    left: 20px;
-    bottom: -10px;
-    width: calc(100% - 40px);
+    left: $frame-padding;
+    right: $frame-padding;
+    bottom: -$frame-height;
     background-color: #cacadb;
   }
 
   &::after {
     z-index: -2;
-    left: 40px;
-    bottom: -20px;
-    width: calc(100% - 80px);
+    left: $frame-padding * 2;
+    right: $frame-padding * 2;
+    bottom: -$frame-height * 2;
     background-color: #e7e7f2;
   }
 }

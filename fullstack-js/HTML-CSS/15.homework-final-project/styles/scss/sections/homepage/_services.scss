@@ -1,7 +1,7 @@
 @use "../../abstracts/" as a;
 
 .services {
-  padding-bottom: 60px;
+  padding-bottom: a.$space-lg;
 
   &__link {
     @include a.hover-color-smooth(a.$color-accent);
@@ -16,12 +16,12 @@
   &__title {
     @include a.text-bold-h1;
     @include a.gradient-text(a.$gradient-text-red);
-    margin-bottom: 60px;
+    margin-bottom: a.$space-lg;
   }
 
   &__cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
+    gap: a.$space-lg;
   }
 }
