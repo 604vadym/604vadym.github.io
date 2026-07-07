@@ -110,7 +110,7 @@ console.log("Full Domain:", curriedDomain("https")("example")("com"));
 
  modifyFunction повинна повертати нову функцію, яка при виклику з будь-яким числовим аргументом викликає originalFunction з цим аргументом і множить результат на multiplier.
 
- Наприклад, якщо originalFunction повертає вхідний аргумент, помножений на 2, і multiplier дорівнює 3, то повернута функція повинна повертати вхідний аргумент, помножений на 6.
+ Наприклад, якщо originalFunction повертає вхідний аргумент, помножений ** на 2, і multiplier дорівнює 3, то повернута функція повинна повертати вхідний аргумент, помножений на 6.
 */
 
 console.log(
@@ -120,17 +120,31 @@ console.log(
 );
 
 function originalFunction(num) {
-    // code
+    return num ** 2;
+}
+
+function multiply2(num) {
+    return num * 2;
 }
 
 function modifyFunction(originalFunc, multiplier) {
-    // code
+    return function (num) {
+        return originalFunc(num) * multiplier;
+    };
 }
 
 // Приклад використання
-// const modifiedFunc = modifyFunction(originalFunction, 3)
-// console.log('Original function output for 4:', originalFunction(4)) // Повинно вивести 16
-// console.log('Modified function output for 4:', modifiedFunc(4)) // Повинно вивести 48 (16 * 3)
+const modifiedFunc = modifyFunction(originalFunction, 3);
+console.log("Original function output for 4:", originalFunction(4)); // Повинно вивести 16
+console.log("Modified function output for 4:", modifiedFunc(4)); // Повинно вивести 48 (16 * 3)
+
+console.log(modifyFunction(originalFunction, 3)(4));
+
+const modifiedFunc2 = modifyFunction(multiply2, 3);
+console.log("Original function output for 2:", multiply2(2)); // Повинно вивести 4 (вхідний аргумент 2, помножений на 2)
+console.log("Modified function output for 2:", modifiedFunc2(2)); // Повинно вивести 12 (результат 4, помножений на 3, що дорівнює 2 * 6)
+
+console.log(modifyFunction(multiply2, 3)(2));
 
 /*
  У цьому коді ми створюємо модифіковану версію originalFunction за допомогою modifyFunction з множником 3.
