@@ -10,3 +10,16 @@
  *
  * 3. Выведите значение последней переменной в консоль
  */
+"use strict";
+
+const name = "Вадим";
+const surname = "Рогачко";
+const profession = "программист";
+
+const greeting = "Меня зовут " + name + " " + surname + " и я " + profession;
+
+console.log(greeting);
+
+const greeting2 = `Меня зовут ${name} ${surname} и я ${profession}`;
+
+console.log(greeting2);

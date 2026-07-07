@@ -45,6 +45,10 @@ select.addEventListener("change", (e) => {
     runScriptInSandbox("02.homework-math-string/script/main.js");
   } else if (e.target.value === "hw3") {
     runScriptInSandbox("03.homework-if-else-loops-functions/script/main.js");
+  } else if (e.target.value === "hw4") {
+    runScriptInSandbox(
+      "04.homework-functional-programming-currying-closures-higher-order-functions/script/main.js",
+    );
   }
 });
 

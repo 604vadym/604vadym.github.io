@@ -7,3 +7,20 @@
  *
  * 3. Создайте многострочный комментарий
  */
+"use strict";
+
+// comment
+
+let userName; // variable for storing the user name
+
+/*
+Long comments
+Long comments
+Long comments
+*/
+
+/**
+ * Long comments
+ * Long comments
+ * Long comments
+ */
