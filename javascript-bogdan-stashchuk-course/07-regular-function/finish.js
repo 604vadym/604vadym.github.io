@@ -8,3 +8,13 @@
  *
  * 4. Вызовите функцию
  */
+"use strict";
+
+function printMyName() {
+  const myName = "Vadym";
+  console.log(myName);
+}
+
+printMyName();
+printMyName();
+printMyName();
