@@ -249,10 +249,10 @@ body {
 .about__features {
   display: flex;
   justify-content: center;
-  max-width: 1360px;
 }
 .about__list {
   padding: 14.5px 0;
+  padding-right: 60px;
 }
 .about__feature {
   text-align: right;
@@ -283,7 +283,7 @@ body {
 .about__description {
   max-width: 87ch;
   position: relative;
-  padding: 73px 0 73px 60px;
+  padding: 73px 0 73px 64px;
 }
 .about__description::before {
   content: "";
