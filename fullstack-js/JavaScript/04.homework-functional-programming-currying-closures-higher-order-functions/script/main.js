@@ -178,15 +178,19 @@ console.log(
 );
 
 function outerFunction(arg1) {
-    return function innerFunction(arg2) {
-        return function deepInnerFunction(arg3) {
+    function innerFunction(arg2) {
+        function deepInnerFunction(arg3) {
             return arg1 * arg2 * arg3;
-        };
-    };
+        }
+
+        return deepInnerFunction;
+    }
+
+    return innerFunction;
 }
 
-const resultClosure = outerFunction(2)(3)(4);
-console.log(resultClosure); // Повинно повернути 24 (2*3*4)
+const resultNested = outerFunction(2)(3)(4);
+console.log(resultNested); // Повинно повернути 24 (2*3*4)
 
 /*
  Цей код є прикладом використання вкладених функцій у JavaScript, а також демонструє концепцію замикань (closures).
