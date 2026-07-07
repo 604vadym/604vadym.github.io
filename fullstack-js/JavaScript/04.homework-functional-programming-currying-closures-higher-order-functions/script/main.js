@@ -211,11 +211,3 @@ console.log(resultClosure); // Повинно повернути 24 (2*3*4)
  * Нарешті, deepInnerFunction(4) викликається, і вона повертає 2 * 3 * 4, що дорівнює 24.
  console.log(result) виводить результат, 24, у консоль.
 */
-
-export {
-    curriedAdd,
-    curriedDomain,
-    originalFunction,
-    modifyFunction,
-    outerFunction,
-};
