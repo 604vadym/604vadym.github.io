@@ -13,7 +13,8 @@
 
   &__list {
     padding-block: a.$space-sm;
-    padding-right: a.$space-lg;
+    padding-inline: 0 a.$space-lg;
+    border-right: 4px solid color.adjust(a.$color-basic, $alpha: -0.7);
   }
 
   &__feature {
@@ -39,8 +40,8 @@
 
   &__description {
     max-width: 87ch;
-    padding: 73px 0 73px a.$space-lg;
-    border-left: 4px solid color.adjust(a.$color-basic, $alpha: -0.7);
+    padding-block: 73px;
+    padding-inline: a.$space-lg 0;
   }
 
   &__title {

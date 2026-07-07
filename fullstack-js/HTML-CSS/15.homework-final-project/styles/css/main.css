@@ -252,7 +252,8 @@ body {
 }
 .about__list {
   padding-block: 15px;
-  padding-right: 60px;
+  padding-inline: 0 60px;
+  border-right: 4px solid rgba(255, 255, 255, 0.3);
 }
 .about__feature {
   text-align: right;
@@ -282,8 +283,8 @@ body {
 }
 .about__description {
   max-width: 87ch;
-  padding: 73px 0 73px 60px;
-  border-left: 4px solid rgba(255, 255, 255, 0.3);
+  padding-block: 73px;
+  padding-inline: 60px 0;
 }
 .about__title {
   font-weight: 700;
