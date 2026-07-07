@@ -4,7 +4,7 @@
   display: flex;
 
   &__link {
-    @extend %flex-center;
+    @include a.flex-center;
     font-weight: a.$font-weight-bold;
     font-size: a.$font-size-sub;
     line-height: a.$line-height-tight;

@@ -29,3 +29,21 @@
     }
   }
 }
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin text-bold-h1 {
+  font-weight: v.$font-weight-bold;
+  font-size: v.$font-size-h1;
+  line-height: v.$line-height-tight;
+}
+
+@mixin text-bold-h2 {
+  font-weight: v.$font-weight-bold;
+  font-size: v.$font-size-h2;
+  line-height: v.$line-height-tight;
+}

@@ -25,7 +25,7 @@
   }
 
   &__button {
-    @extend %text-bold-h1;
+    @include a.text-bold-h1;
     color: a.$color-grey-text;
     text-align: right;
 
@@ -59,7 +59,7 @@
   }
 
   &__title {
-    @extend %text-bold-h2;
+    @include a.text-bold-h2;
     margin-bottom: 30px;
   }
 

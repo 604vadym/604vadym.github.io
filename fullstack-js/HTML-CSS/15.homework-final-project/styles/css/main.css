@@ -48,24 +48,6 @@ select {
   src: url(../../../assets/fonts/Montserrat-Variable.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-.hero, .language-selector__link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.about__button, .hero__title {
-  font-weight: 700;
-  font-size: 2.375rem;
-  line-height: 1;
-}
-
-.about__title {
-  font-weight: 700;
-  font-size: 1.875rem;
-  line-height: 1;
-}
-
 html {
   overflow-y: auto;
 }
@@ -122,6 +104,9 @@ body {
   display: flex;
 }
 .language-selector__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 700;
   font-size: 0.75rem;
   line-height: 1;
@@ -194,10 +179,16 @@ body {
 }
 
 .hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
   background: url(../../assets/images/homepage/h-bg.svg) center top/100% 100% no-repeat;
 }
 .hero__title {
+  font-weight: 700;
+  font-size: 2.375rem;
+  line-height: 1;
   text-align: center;
 }
 .hero__scroll {
@@ -228,6 +219,9 @@ body {
   margin-bottom: 30px;
 }
 .about__button {
+  font-weight: 700;
+  font-size: 2.375rem;
+  line-height: 1;
   color: #b3b3ba;
   text-align: right;
   transition: color 0.2s;
@@ -261,6 +255,9 @@ body {
   background-color: rgba(255, 255, 255, 0.3);
 }
 .about__title {
+  font-weight: 700;
+  font-size: 1.875rem;
+  line-height: 1;
   margin-bottom: 30px;
 }
 .about__text {

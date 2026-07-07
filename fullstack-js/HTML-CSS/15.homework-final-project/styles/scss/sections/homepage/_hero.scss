@@ -1,13 +1,13 @@
 @use "../../abstracts/" as a;
 
 .hero {
-  @extend %flex-center;
+  @include a.flex-center;
   min-height: 100vh;
   background: url(../../assets/images/homepage/h-bg.svg) center top / 100% 100%
     no-repeat;
 
   &__title {
-    @extend %text-bold-h1;
+    @include a.text-bold-h1;
     text-align: center;
   }
 
