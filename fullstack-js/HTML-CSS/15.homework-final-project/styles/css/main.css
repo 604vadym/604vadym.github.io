@@ -82,7 +82,7 @@ body {
 }
 
 .container {
-  width: min(100%, 1630px);
+  width: min(100%, 1720px);
   margin-inline: auto;
   padding-inline: 60px;
 }
@@ -126,6 +126,17 @@ body {
   border: none;
   background: transparent;
   cursor: pointer;
+}
+
+.card__image {
+  margin-bottom: 30px;
+}
+.card__title {
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1;
+  color: #24a3ff;
+  margin-bottom: 15px;
 }
 
 .header {
@@ -247,7 +258,6 @@ body {
   max-width: 87ch;
   position: relative;
   padding: 73px 0 73px 60px;
-  transform: translateX(60px);
 }
 .about__description::before {
   content: "";
@@ -267,6 +277,41 @@ body {
 }
 .about__text {
   font-size: 1.1875rem;
+}
+
+.services {
+  padding-bottom: 60px;
+}
+.services__link {
+  transition: color 0.2s;
+}
+@media (hover: hover) {
+  .services__link:hover {
+    color: #f0145a;
+  }
+}
+.services__link {
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: #24a3ff;
+}
+.services__title {
+  font-weight: 700;
+  font-size: 2.375rem;
+  line-height: 1;
+  background-image: linear-gradient(90.13deg, #f0145a 0.84%, #ef8080 99.96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 60px;
+}
+.services__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
 }
 
 /*# sourceMappingURL=main.css.map */

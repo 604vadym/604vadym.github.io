@@ -7,6 +7,7 @@ $color-grey-separator: #e6e6f0;
 
 $color-basic: $color-white;
 $color-main-regular: #323264;
+$color-active-regular: #24a3ff;
 $color-accent: #f0145a;
 $color-bg: $color-grey;
 
@@ -16,6 +17,8 @@ $gradient-supersoft: linear-gradient(
   $color-main-regular 57.17%,
   #643e72 87.46%
 );
+
+$gradient-text-red: linear-gradient(90.13deg, #f0145a 0.84%, #ef8080 99.96%);
 
 $gradient-text-red-reversed: linear-gradient(
   90.13deg,
@@ -41,5 +44,5 @@ $font-size-h1: f.rem(38px);
 $line-height-main: 1.625;
 $line-height-tight: 1;
 
-$container-width: 1630px;
+$container-width: 1720px;
 $container-padding: 60px;

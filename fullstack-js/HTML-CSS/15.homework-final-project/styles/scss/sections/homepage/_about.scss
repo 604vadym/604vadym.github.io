@@ -32,10 +32,7 @@
     @include a.hover-color-smooth(a.$color-accent);
 
     &--active {
-      background-image: a.$gradient-text-red-reversed;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      @include a.gradient-text(a.$gradient-text-red-reversed);
       pointer-events: none;
     }
   }
@@ -44,7 +41,7 @@
     max-width: 87ch;
     position: relative;
     padding: 73px 0 73px 60px;
-    transform: translateX(60px);
+    // transform: translateX(60px);
 
     &::before {
       content: "";
