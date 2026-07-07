@@ -10,3 +10,11 @@
  *
  * 5. Результат вызовов функции выведите в консоль
  */
+"use strict";
+
+const greetByName = function (name) {
+  return `Привет, ${name}`;
+};
+
+console.log(greetByName("Vadym"));
+console.log(greetByName("John"));

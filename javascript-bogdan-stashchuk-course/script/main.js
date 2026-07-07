@@ -47,6 +47,10 @@ select.addEventListener("change", (e) => {
     runScriptInSandbox("05-comments/finish.js");
   } else if (e.target.value === "hw6") {
     runScriptInSandbox("06-data-types/finish.js");
+  } else if (e.target.value === "hw7") {
+    runScriptInSandbox("07-regular-function/finish.js");
+  } else if (e.target.value === "hw8") {
+    runScriptInSandbox("08-function-expression/finish.js");
   }
 });
 
