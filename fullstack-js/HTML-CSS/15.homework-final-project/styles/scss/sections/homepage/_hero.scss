@@ -2,6 +2,7 @@
 
 .hero {
   @include a.flex-center;
+  position: relative;
   min-height: 100vh;
   background: url(../../assets/images/homepage/h-bg.svg) center top / 100% 100%
     no-repeat;
@@ -12,6 +13,10 @@
   }
 
   &__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
     color: a.$color-basic;
 
     @include a.hover-color-smooth(a.$color-accent);
