@@ -4,13 +4,7 @@
   padding-bottom: a.$space-lg;
 
   &__link {
-    @include a.hover-color-smooth(a.$color-accent);
-    font-weight: a.$font-weight-bold;
-    font-size: a.$font-size-caption;
-    line-height: a.$line-height-tight;
-    text-transform: uppercase;
     margin-bottom: 10px;
-    color: a.$color-active-regular;
   }
 
   &__title {

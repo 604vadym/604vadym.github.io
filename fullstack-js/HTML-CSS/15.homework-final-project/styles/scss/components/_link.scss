@@ -1,0 +1,8 @@
+@use "../abstracts/" as a;
+
+.link {
+  @include a.hover-color-smooth(a.$color-accent);
+  @include a.text-bold-caption;
+  text-transform: uppercase;
+  color: a.$color-active-regular;
+}

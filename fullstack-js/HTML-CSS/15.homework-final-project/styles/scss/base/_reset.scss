@@ -26,11 +26,17 @@ ul {
   list-style-type: none;
 }
 
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
 img,
 picture,
 svg {
   max-width: 100%;
   display: block;
+  height: auto;
 }
 
 input,

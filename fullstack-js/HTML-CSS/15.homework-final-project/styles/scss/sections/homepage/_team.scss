@@ -1,0 +1,32 @@
+@use "../../abstracts/" as a;
+
+.team {
+  &__content {
+    padding-block: a.$space-lg;
+  }
+
+  &__body {
+    display: flex;
+    margin-bottom: a.$space-md;
+  }
+
+  &__image {
+    width: min(100%, 400px);
+    aspect-ratio: 400 / 298;
+    flex-shrink: 0;
+    @include a.border-radius-left(a.$border-radius);
+  }
+
+  &__info {
+    background-color: a.$color-bg;
+    padding: a.$space-md;
+  }
+
+  &__link {
+    margin-bottom: 5px;
+  }
+
+  &__pagination {
+    justify-content: center;
+  }
+}

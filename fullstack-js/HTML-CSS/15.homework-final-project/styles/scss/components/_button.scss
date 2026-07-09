@@ -1,7 +1,10 @@
+@use "../abstracts/" as a;
+
 .button {
-  display: inline-block;
-  text-align: center;
+  @include a.inline-flex-center;
+  padding: 0;
   border: none;
   background: transparent;
+  color: inherit;
   cursor: pointer;
 }

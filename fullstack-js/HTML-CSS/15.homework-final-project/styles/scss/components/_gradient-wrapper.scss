@@ -12,7 +12,7 @@
   &,
   &::before,
   &::after {
-    border-radius: 0 0 12px 12px;
+    @include a.border-radius-bottom(a.$border-radius);
   }
 
   &::before,

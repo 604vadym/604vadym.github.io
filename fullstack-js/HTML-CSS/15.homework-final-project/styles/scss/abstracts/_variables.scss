@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "functions" as f;
 
 $color-white: #fff;
@@ -41,8 +42,11 @@ $font-size-h3: f.rem(22px);
 $font-size-h2: f.rem(30px);
 $font-size-h1: f.rem(38px);
 
+$line-height-none: 1;
+$line-height-tight: math.div(22, 14);
 $line-height-main: 1.625;
-$line-height-tight: 1;
+
+$border-radius: 12px;
 
 $space-sm: 15px;
 $space-md: 30px;

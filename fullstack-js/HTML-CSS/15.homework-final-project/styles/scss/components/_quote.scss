@@ -1,0 +1,24 @@
+@use "../abstracts/" as a;
+
+.quote {
+  &__text {
+    @include a.text-bold-h1;
+    @include a.gradient-text(a.$gradient-text-red);
+    margin-bottom: a.$space-md;
+  }
+
+  &__cite {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: a.$color-grey-text;
+  }
+
+  &__name {
+    @include a.text-bold-main;
+  }
+
+  &__role {
+    line-height: a.$line-height-tight;
+  }
+}

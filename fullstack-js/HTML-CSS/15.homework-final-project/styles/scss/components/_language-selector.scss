@@ -5,9 +5,7 @@
 
   &__link {
     @include a.flex-center;
-    font-weight: a.$font-weight-bold;
-    font-size: a.$font-size-sub;
-    line-height: a.$line-height-tight;
+    @include a.text-bold-sub;
     letter-spacing: 1px;
 
     min-width: 33px;

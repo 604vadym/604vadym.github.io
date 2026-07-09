@@ -7,7 +7,6 @@
   }
 
   &__link {
-    font-weight: a.$font-weight-bold;
-    line-height: a.$line-height-tight;
+    @include a.text-bold-main;
   }
 }
