@@ -11,10 +11,10 @@
   }
 
   &__image {
+    @include a.border-radius-left(a.$border-radius);
     width: min(100%, 400px);
     aspect-ratio: 400 / 298;
     flex-shrink: 0;
-    @include a.border-radius-left(a.$border-radius);
   }
 
   &__info {

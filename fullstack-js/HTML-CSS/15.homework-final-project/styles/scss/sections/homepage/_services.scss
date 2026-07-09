@@ -8,8 +8,7 @@
   }
 
   &__title {
-    @include a.text-bold-h1;
-    @include a.gradient-text(a.$gradient-text-red);
+    @include a.text-bold-h1-gradient;
     margin-bottom: a.$space-lg;
   }
 

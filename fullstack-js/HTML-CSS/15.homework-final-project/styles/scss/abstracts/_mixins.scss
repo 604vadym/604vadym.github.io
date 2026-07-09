@@ -32,13 +32,6 @@
   }
 }
 
-@mixin gradient-text($gradient) {
-  background-image: $gradient;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 @mixin flex-center {
   display: flex;
   justify-content: center;
@@ -49,6 +42,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin gradient-text($gradient) {
+  background-image: $gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 @mixin text-bold-sub {
@@ -91,6 +91,11 @@
   font-weight: v.$font-weight-bold;
   font-size: v.$font-size-h3;
   line-height: v.$line-height-none;
+}
+
+@mixin text-bold-h1-gradient($gradient: v.$gradient-text-red) {
+  @include text-bold-h1;
+  @include gradient-text($gradient);
 }
 
 @mixin border-radius-left($radius) {

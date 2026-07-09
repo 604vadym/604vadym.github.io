@@ -12,7 +12,8 @@ h4,
 p,
 ul,
 ol,
-figure {
+figure,
+blockquote {
   margin: 0;
   padding: 0;
 }
@@ -24,11 +25,6 @@ a {
 
 ul {
   list-style-type: none;
-}
-
-blockquote {
-  margin: 0;
-  padding: 0;
 }
 
 img,
@@ -180,8 +176,6 @@ body {
 }
 
 .image {
-  position: relative;
-  display: block;
   overflow: hidden;
 }
 .image img {
@@ -403,10 +397,10 @@ body {
   margin-bottom: 30px;
 }
 .team__image {
+  border-radius: 12px 0 0 12px;
   width: min(100%, 400px);
   aspect-ratio: 400/298;
   flex-shrink: 0;
-  border-radius: 12px 0 0 12px;
 }
 .team__info {
   background-color: #f5f5fa;
