@@ -17,7 +17,9 @@
 }
 
 @mixin hover-color-smooth($color, $transition-time: null) {
-  $time: if($transition-time == null, v.$transition-time, $transition-time);
+  $time: if(
+    sass($transition-time == null): v.$transition-time; else: $transition-time,
+  );
 
   @if $time and $time != 0s {
     transition: color $time;
