@@ -1,0 +1,46 @@
+@use "sass:color";
+@use "../abstracts/" as a;
+
+.tabs {
+  display: flex;
+  justify-content: center;
+
+  &__list {
+    padding-block: a.$space-sm;
+    padding-inline: 0 a.$space-lg;
+    border-right: 4px solid color.adjust(a.$color-basic, $alpha: -0.7);
+  }
+
+  &__item:not(:last-child) {
+    margin-bottom: a.$space-md;
+  }
+
+  &__btn {
+    @include a.text-bold-h1;
+    color: a.$color-grey-text;
+    width: 100%;
+    justify-content: flex-end;
+
+    @include a.hover-color-smooth(a.$color-accent);
+
+    &--active {
+      @include a.gradient-text(a.$gradient-text-red-reversed);
+      pointer-events: none;
+    }
+  }
+
+  &__content {
+    max-width: 87ch;
+    padding-block: 73px;
+    padding-inline: a.$space-lg 0;
+  }
+
+  &__title {
+    @include a.text-bold-h2;
+    margin-bottom: a.$space-md;
+  }
+
+  &__text {
+    font-size: a.$font-size-lead;
+  }
+}
