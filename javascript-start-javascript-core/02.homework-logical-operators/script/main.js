@@ -1,7 +1,7 @@
 "use strict";
 
 console.log(
-  "JavaScriptStart #2. Домашнє завдання. Основи JavaScript: Оператори та Вирази",
+    "JavaScriptStart #2. Домашнє завдання. Основи JavaScript: Оператори та Вирази",
 );
 
 /*

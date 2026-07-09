@@ -1,7 +1,7 @@
 "use strict";
 
 console.log(
-  "JS #3. Домашнє завдання. Основи JavaScript: Функції, умовні оператори, цикли та callback-и",
+    "JS #3. Домашнє завдання. Основи JavaScript: Функції, умовні оператори, цикли та callback-и",
 );
 
 /*
@@ -16,15 +16,15 @@ console.log(
  */
 
 console.log(
-  "******************************\n" +
-    "Task 1\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 1\n" +
+        "******************************",
 );
 
 const userObj = {
-  firstName: "Bjarne",
-  lastName: "Stroustrup",
-  age: 75,
+    firstName: "Bjarne",
+    lastName: "Stroustrup",
+    age: 75,
 };
 
 console.log(userObj);
@@ -41,13 +41,13 @@ console.log(userObj);
  */
 
 console.log(
-  "******************************\n" +
-    "Task 2\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 2\n" +
+        "******************************",
 );
 
 userObj.fullName = function () {
-  return this.firstName + " " + this.lastName;
+    return this.firstName + " " + this.lastName;
 };
 
 console.log(userObj.fullName());
@@ -69,82 +69,82 @@ console.log(userObj.fullName()); // John Smith
  */
 
 console.log(
-  "******************************\n" +
-    "Task 3\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 3\n" +
+        "******************************",
 );
 
 {
-  console.log(
-    "Variant 1 - solution strictly according to the task requirements (by arguments length, issue with explicit undefined argument):",
-  );
+    console.log(
+        "Variant 1 - solution strictly according to the task requirements (by arguments length, issue with explicit undefined argument):",
+    );
 
-  function defUpperStr(text) {
-    arguments.length !== 0 || (text = "default text");
-    return String(text).toUpperCase();
-  }
+    function defUpperStr(text) {
+        arguments.length !== 0 || (text = "default text");
+        return String(text).toUpperCase();
+    }
 
-  console.log(defUpperStr("My text")); // MY TEXT
-  console.log(defUpperStr()); // DEFAULT TEXT
-  console.log("Issue: undefined =>", defUpperStr(undefined));
-  console.log("No issue: empty string =>", defUpperStr(""));
-  console.log("No issue: 0 =>", defUpperStr(0));
+    console.log(defUpperStr("My text")); // MY TEXT
+    console.log(defUpperStr()); // DEFAULT TEXT
+    console.log("Issue: undefined =>", defUpperStr(undefined));
+    console.log("No issue: empty string =>", defUpperStr(""));
+    console.log("No issue: 0 =>", defUpperStr(0));
 }
 
 console.log("******************************");
 
 {
-  console.log(
-    "Variant 1 version 2 - solution strictly according to the task requirements (with empty string or number 0 issues):",
-  );
+    console.log(
+        "Variant 1 version 2 - solution strictly according to the task requirements (with empty string or number 0 issues):",
+    );
 
-  function defUpperStr(text) {
-    text || (text = "default text");
-    return String(text).toUpperCase();
-  }
+    function defUpperStr(text) {
+        text || (text = "default text");
+        return String(text).toUpperCase();
+    }
 
-  console.log(defUpperStr("My text")); // MY TEXT
-  console.log(defUpperStr()); // DEFAULT TEXT
-  console.log("No issue: undefined =>", defUpperStr(undefined));
-  console.log("Issue: empty string =>", defUpperStr(""));
-  console.log("Issue: 0 =>", defUpperStr(0));
+    console.log(defUpperStr("My text")); // MY TEXT
+    console.log(defUpperStr()); // DEFAULT TEXT
+    console.log("No issue: undefined =>", defUpperStr(undefined));
+    console.log("Issue: empty string =>", defUpperStr(""));
+    console.log("Issue: 0 =>", defUpperStr(0));
 }
 
 console.log("******************************");
 
 {
-  console.log(
-    "Variant 1 version 3 - solution strictly according to the task requirements (the best one, the most reliable, handles explicit undefined, empty string and number 0, no issues at all):",
-  );
+    console.log(
+        "Variant 1 version 3 - solution strictly according to the task requirements (the best one, the most reliable, handles explicit undefined, empty string and number 0, no issues at all):",
+    );
 
-  function defUpperStr(text) {
-    typeof text !== "undefined" || (text = "default text");
-    return String(text).toUpperCase();
-  }
+    function defUpperStr(text) {
+        typeof text !== "undefined" || (text = "default text");
+        return String(text).toUpperCase();
+    }
 
-  console.log(defUpperStr("My text")); // MY TEXT
-  console.log(defUpperStr()); // DEFAULT TEXT
-  console.log("No issue: undefined =>", defUpperStr(undefined));
-  console.log("No issue: empty string =>", defUpperStr(""));
-  console.log("No issue: 0 =>", defUpperStr(0));
+    console.log(defUpperStr("My text")); // MY TEXT
+    console.log(defUpperStr()); // DEFAULT TEXT
+    console.log("No issue: undefined =>", defUpperStr(undefined));
+    console.log("No issue: empty string =>", defUpperStr(""));
+    console.log("No issue: 0 =>", defUpperStr(0));
 }
 
 console.log("******************************");
 
 {
-  console.log(
-    "Variant 2 - standard solution, but doesn't match the task requirements - without operator ||:",
-  );
+    console.log(
+        "Variant 2 - standard solution, but doesn't match the task requirements - without operator ||:",
+    );
 
-  function defUpperStr(text = "default text") {
-    return String(text).toUpperCase();
-  }
+    function defUpperStr(text = "default text") {
+        return String(text).toUpperCase();
+    }
 
-  console.log(defUpperStr("My text")); // MY TEXT
-  console.log(defUpperStr()); // DEFAULT TEXT
-  console.log("No issue: undefined =>", defUpperStr(undefined));
-  console.log("No issue: empty string =>", defUpperStr(""));
-  console.log("No issue: 0 =>", defUpperStr(0));
+    console.log(defUpperStr("My text")); // MY TEXT
+    console.log(defUpperStr()); // DEFAULT TEXT
+    console.log("No issue: undefined =>", defUpperStr(undefined));
+    console.log("No issue: empty string =>", defUpperStr(""));
+    console.log("No issue: 0 =>", defUpperStr(0));
 }
 
 /*
@@ -165,93 +165,93 @@ console.log("******************************");
  */
 
 console.log(
-  "******************************\n" +
-    "Task 4 (the task requirements are conflicting)\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 4 (the task requirements are conflicting)\n" +
+        "******************************",
 );
 
 {
-  console.log(
-    "C style - manual add (according to the task requirement 'for 0..n' && 'цикл має працювати до n включно', but not according 'приймає параметром число - кількість ітерацій циклу'):",
-  );
+    console.log(
+        "C style - manual add (according to the task requirement 'for 0..n' && 'цикл має працювати до n включно', but not according 'приймає параметром число - кількість ітерацій циклу'):",
+    );
 
-  function evenFn(n) {
-    const arr = [];
-    for (let i = 0; i <= n; i++) {
-      if (i !== 0 && i % 2 === 0) {
-        arr[arr.length] = i;
-      }
+    function evenFn(n) {
+        const arr = [];
+        for (let i = 0; i <= n; i++) {
+            if (i !== 0 && i % 2 === 0) {
+                arr[arr.length] = i;
+            }
+        }
+        return arr;
     }
-    return arr;
-  }
 
-  console.log(evenFn(10)); // [2, 4, 6, 8, 10]
-  console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
-  console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+    console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+    console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+    console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 }
 
 console.log("******************************");
 
 {
-  console.log(
-    "Standard, modern - method push (according to the task requirement 'for 0..n' && 'цикл має працювати до n включно', but not according 'приймає параметром число - кількість ітерацій циклу'):",
-  );
+    console.log(
+        "Standard, modern - method push (according to the task requirement 'for 0..n' && 'цикл має працювати до n включно', but not according 'приймає параметром число - кількість ітерацій циклу'):",
+    );
 
-  function evenFn(n) {
-    const arr = [];
-    for (let i = 0; i <= n; i++) {
-      if (i !== 0 && i % 2 === 0) {
-        arr.push(i);
-      }
+    function evenFn(n) {
+        const arr = [];
+        for (let i = 0; i <= n; i++) {
+            if (i !== 0 && i % 2 === 0) {
+                arr.push(i);
+            }
+        }
+        return arr;
     }
-    return arr;
-  }
 
-  console.log(evenFn(10)); // [2, 4, 6, 8, 10]
-  console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
-  console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+    console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+    console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+    console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 }
 
 console.log("******************************");
 
 {
-  console.log(
-    "Start loop from 1, no i !== 0 checks (more efficient, according to the task requirement 'приймає параметром число - кількість ітерацій циклу', but not according 'for 0..n'):",
-  );
+    console.log(
+        "Start loop from 1, no i !== 0 checks (more efficient, according to the task requirement 'приймає параметром число - кількість ітерацій циклу', but not according 'for 0..n'):",
+    );
 
-  function evenFn(n) {
-    const arr = [];
-    for (let i = 1; i <= n; i++) {
-      if (i % 2 === 0) {
-        arr.push(i);
-      }
+    function evenFn(n) {
+        const arr = [];
+        for (let i = 1; i <= n; i++) {
+            if (i % 2 === 0) {
+                arr.push(i);
+            }
+        }
+        return arr;
     }
-    return arr;
-  }
 
-  console.log(evenFn(10)); // [2, 4, 6, 8, 10]
-  console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
-  console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+    console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+    console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+    console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 }
 
 console.log("******************************");
 
 {
-  console.log(
-    "Best variant, start loop from 2, no checks at all, fully optimised (the most optimal, but doesn't match the task requirements at all):",
-  );
+    console.log(
+        "Best variant, start loop from 2, no checks at all, fully optimised (the most optimal, but doesn't match the task requirements at all):",
+    );
 
-  function evenFn(n) {
-    const arr = [];
-    for (let i = 2; i <= n; i += 2) {
-      arr.push(i);
+    function evenFn(n) {
+        const arr = [];
+        for (let i = 2; i <= n; i += 2) {
+            arr.push(i);
+        }
+        return arr;
     }
-    return arr;
-  }
 
-  console.log(evenFn(10)); // [2, 4, 6, 8, 10]
-  console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
-  console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+    console.log(evenFn(10)); // [2, 4, 6, 8, 10]
+    console.log(evenFn(15)); // [2, 4, 6, 8, 10, 12, 14]
+    console.log(evenFn(20)); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 }
 
 /*
@@ -272,85 +272,85 @@ console.log("******************************");
  */
 
 console.log(
-  "******************************\n" +
-    "Task 5\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 5\n" +
+        "******************************",
 );
 
 {
-  console.log("Variant 1 - using local variable:");
+    console.log("Variant 1 - using local variable:");
 
-  function weekFn(n) {
-    let weekDayName;
-    switch (n) {
-      case 1:
-        weekDayName = "Понеділок";
-        break;
-      case 2:
-        weekDayName = "Вівторок";
-        break;
-      case 3:
-        weekDayName = "Середа";
-        break;
-      case 4:
-        weekDayName = "Четвер";
-        break;
-      case 5:
-        weekDayName = "П'ятниця";
-        break;
-      case 6:
-        weekDayName = "Субота";
-        break;
-      case 7:
-        weekDayName = "Неділя";
-        break;
-      default:
-        weekDayName = null;
-        break;
+    function weekFn(n) {
+        let weekDayName;
+        switch (n) {
+            case 1:
+                weekDayName = "Понеділок";
+                break;
+            case 2:
+                weekDayName = "Вівторок";
+                break;
+            case 3:
+                weekDayName = "Середа";
+                break;
+            case 4:
+                weekDayName = "Четвер";
+                break;
+            case 5:
+                weekDayName = "П'ятниця";
+                break;
+            case 6:
+                weekDayName = "Субота";
+                break;
+            case 7:
+                weekDayName = "Неділя";
+                break;
+            default:
+                weekDayName = null;
+                break;
+        }
+        return weekDayName;
     }
-    return weekDayName;
-  }
 
-  console.log(weekFn(1)); // 'Понеділок'
-  console.log(weekFn(3)); // 'Середа'
-  console.log(weekFn(7)); // 'Неділя'
-  console.log(weekFn(9)); // null
-  console.log(weekFn(1.5)); // null
-  console.log(weekFn("2")); // null
+    console.log(weekFn(1)); // 'Понеділок'
+    console.log(weekFn(3)); // 'Середа'
+    console.log(weekFn(7)); // 'Неділя'
+    console.log(weekFn(9)); // null
+    console.log(weekFn(1.5)); // null
+    console.log(weekFn("2")); // null
 }
 
 console.log("******************************");
 
 {
-  console.log("Variant 2 - return in switch case:");
+    console.log("Variant 2 - return in switch case:");
 
-  function weekFn(n) {
-    switch (n) {
-      case 1:
-        return "Понеділок";
-      case 2:
-        return "Вівторок";
-      case 3:
-        return "Середа";
-      case 4:
-        return "Четвер";
-      case 5:
-        return "П'ятниця";
-      case 6:
-        return "Субота";
-      case 7:
-        return "Неділя";
-      default:
-        return null;
+    function weekFn(n) {
+        switch (n) {
+            case 1:
+                return "Понеділок";
+            case 2:
+                return "Вівторок";
+            case 3:
+                return "Середа";
+            case 4:
+                return "Четвер";
+            case 5:
+                return "П'ятниця";
+            case 6:
+                return "Субота";
+            case 7:
+                return "Неділя";
+            default:
+                return null;
+        }
     }
-  }
 
-  console.log(weekFn(1)); // 'Понеділок'
-  console.log(weekFn(3)); // 'Середа'
-  console.log(weekFn(7)); // 'Неділя'
-  console.log(weekFn(9)); // null
-  console.log(weekFn(1.5)); // null
-  console.log(weekFn("2")); // null
+    console.log(weekFn(1)); // 'Понеділок'
+    console.log(weekFn(3)); // 'Середа'
+    console.log(weekFn(7)); // 'Неділя'
+    console.log(weekFn(9)); // null
+    console.log(weekFn(1.5)); // null
+    console.log(weekFn("2")); // null
 }
 
 /*
@@ -371,25 +371,25 @@ console.log("******************************");
  */
 
 console.log(
-  "******************************\n" +
-    "Task 6\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 6\n" +
+        "******************************",
 );
 
 function ageClassification(n) {
-  return n > 0 && n <= 24
-    ? "Дитинство"
-    : n > 24 && n <= 44
-      ? "Молодість"
-      : n > 44 && n <= 65
-        ? "Зрілість"
-        : n > 65 && n <= 75
-          ? "Старість"
-          : n > 75 && n <= 90
-            ? "Довголіття"
-            : n > 90 && n <= 122
-              ? "Рекорд"
-              : null;
+    return n > 0 && n <= 24
+        ? "Дитинство"
+        : n > 24 && n <= 44
+          ? "Молодість"
+          : n > 44 && n <= 65
+            ? "Зрілість"
+            : n > 65 && n <= 75
+              ? "Старість"
+              : n > 75 && n <= 90
+                ? "Довголіття"
+                : n > 90 && n <= 122
+                  ? "Рекорд"
+                  : null;
 }
 
 console.log("    -1 :", ageClassification(-1)); // -1 : null
@@ -445,135 +445,135 @@ console.log("   150 :", ageClassification(150) === null); // 150 : null
  */
 
 console.log(
-  "******************************\n" +
-    "Task 7\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 7\n" +
+        "******************************",
 );
 
 {
-  console.log(
-    "Variant 1 - push (strictly according to the task requirements 'цикл має працювати до n включно'):",
-  );
+    console.log(
+        "Variant 1 - push (strictly according to the task requirements 'цикл має працювати до n включно'):",
+    );
 
-  function oddFn(n) {
-    const arr = [];
-    let i = 1;
-    while (i <= n) {
-      if (i % 2 !== 0) {
-        arr.push(i);
-      }
-      i++;
-    }
-    return arr;
-  }
-
-  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
-  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
-  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
-}
-
-console.log("******************************");
-
-{
-  console.log("Variant 2 - unshift:");
-
-  function oddFn(n) {
-    const arr = [];
-    while (n) {
-      if (n % 2 !== 0) {
-        arr.unshift(n);
-      }
-      n--;
-    }
-    return arr;
-  }
-
-  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
-  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
-  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
-}
-
-console.log("******************************");
-
-{
-  console.log("Variant 3 - while(true):");
-
-  function oddFn(n) {
-    const arr = [];
-    while (true) {
-      if (n % 2 !== 0) {
-        arr.unshift(n);
-      }
-      --n;
-      if (!n) {
+    function oddFn(n) {
+        const arr = [];
+        let i = 1;
+        while (i <= n) {
+            if (i % 2 !== 0) {
+                arr.push(i);
+            }
+            i++;
+        }
         return arr;
-      }
     }
-  }
 
-  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
-  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
-  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+    console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+    console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+    console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
 }
 
 console.log("******************************");
 
 {
-  console.log("Variant 4 - postfix decrement in while():");
+    console.log("Variant 2 - unshift:");
 
-  function oddFn(n) {
-    const arr = [];
-    while (n--) {
-      if (n % 2 === 0) {
-        arr.unshift(n + 1);
-      }
+    function oddFn(n) {
+        const arr = [];
+        while (n) {
+            if (n % 2 !== 0) {
+                arr.unshift(n);
+            }
+            n--;
+        }
+        return arr;
     }
-    return arr;
-  }
 
-  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
-  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
-  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+    console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+    console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+    console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
 }
 
 console.log("******************************");
 
 {
-  console.log("Variant 5 - prefix decrement in while():");
+    console.log("Variant 3 - while(true):");
 
-  function oddFn(n) {
-    const arr = [];
-    while (--n >= 0) {
-      if (n % 2 === 0) {
-        arr.unshift(n + 1);
-      }
+    function oddFn(n) {
+        const arr = [];
+        while (true) {
+            if (n % 2 !== 0) {
+                arr.unshift(n);
+            }
+            --n;
+            if (!n) {
+                return arr;
+            }
+        }
     }
-    return arr;
-  }
 
-  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
-  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
-  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+    console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+    console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+    console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
 }
 
 console.log("******************************");
 
 {
-  console.log("Variant 6 - if check another logic:");
+    console.log("Variant 4 - postfix decrement in while():");
 
-  function oddFn(n) {
-    const arr = [];
-    while (n--) {
-      if ((n + 1) % 2 !== 0) {
-        arr.unshift(n + 1);
-      }
+    function oddFn(n) {
+        const arr = [];
+        while (n--) {
+            if (n % 2 === 0) {
+                arr.unshift(n + 1);
+            }
+        }
+        return arr;
     }
-    return arr;
-  }
 
-  console.log(oddFn(10)); // [1, 3, 5, 7, 9]
-  console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
-  console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+    console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+    console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+    console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+}
+
+console.log("******************************");
+
+{
+    console.log("Variant 5 - prefix decrement in while():");
+
+    function oddFn(n) {
+        const arr = [];
+        while (--n >= 0) {
+            if (n % 2 === 0) {
+                arr.unshift(n + 1);
+            }
+        }
+        return arr;
+    }
+
+    console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+    console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+    console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+}
+
+console.log("******************************");
+
+{
+    console.log("Variant 6 - if check another logic:");
+
+    function oddFn(n) {
+        const arr = [];
+        while (n--) {
+            if ((n + 1) % 2 !== 0) {
+                arr.unshift(n + 1);
+            }
+        }
+        return arr;
+    }
+
+    console.log(oddFn(10)); // [1, 3, 5, 7, 9]
+    console.log(oddFn(15)); // [1, 3, 5, 7, 9, 11, 13, 15]
+    console.log(oddFn(20)); // [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
 }
 
 /*
@@ -588,16 +588,16 @@ console.log("******************************");
  */
 
 console.log(
-  "******************************\n" +
-    "Task 8\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 8\n" +
+        "******************************",
 );
 
 function mainFunc(a, b, callback) {
-  if (typeof callback !== "function") {
-    return false;
-  }
-  return callback(a, b);
+    if (typeof callback !== "function") {
+        return false;
+    }
+    return callback(a, b);
 }
 
 /*
@@ -607,21 +607,21 @@ function mainFunc(a, b, callback) {
 
 // cbRandom(a, b) - обчислює і повертає довільне ціле число в діапазоні між a і b включно.
 function cbRandom(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // cbPow(a, b) - обчислює і повертає результат піднесення числа a у ступінь b.
 function cbPow(num, pow) {
-  return Math.pow(num, pow);
+    return Math.pow(num, pow);
 }
 
 function cbPowAlt(num, pow) {
-  return num ** pow;
+    return num ** pow;
 }
 
 // cbAdd(a, b) - обчислює і повертає суму двох чисел a і b.
 function cbAdd(a, b) {
-  return a + b;
+    return a + b;
 }
 
 /*

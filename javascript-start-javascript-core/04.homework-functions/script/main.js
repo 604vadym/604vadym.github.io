@@ -9,13 +9,13 @@ console.log("JavaScriptStart #4. Домашнє завдання. Основи J
  */
 
 function factorial(number) {
-  if (number < 0) {
-    return NaN;
-  }
-  if (number === 0 || number === 1) {
-    return 1;
-  }
-  return number * factorial(number - 1);
+    if (number < 0) {
+        return NaN;
+    }
+    if (number === 0 || number === 1) {
+        return 1;
+    }
+    return number * factorial(number - 1);
 }
 
 console.log("-5! =", factorial(-5));

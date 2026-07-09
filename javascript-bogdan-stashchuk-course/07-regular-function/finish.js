@@ -11,8 +11,8 @@
 "use strict";
 
 function printMyName() {
-  const myName = "Vadym";
-  console.log(myName);
+    const myName = "Vadym";
+    console.log(myName);
 }
 
 printMyName();
