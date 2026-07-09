@@ -1,7 +1,7 @@
 "use strict";
 
 console.log(
-  "JS #2. Домашнє завдання. Занурення в JavaScript: Від простих до складних обчислень і рядків",
+    "JS #2. Домашнє завдання. Занурення в JavaScript: Від простих до складних обчислень і рядків",
 );
 
 /* #1
@@ -12,14 +12,14 @@ console.log(
 */
 
 console.log(
-  "******************************\n" +
-    "Task 1\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 1\n" +
+        "******************************",
 );
 
 function sumBigIntegers(numStr1, numStr2) {
-  const sumBigInt = BigInt(numStr1) + BigInt(numStr2);
-  return sumBigInt;
+    const sumBigInt = BigInt(numStr1) + BigInt(numStr2);
+    return sumBigInt;
 }
 
 console.log(sumBigIntegers("9007199254740991", "9007199254740991"));
@@ -49,13 +49,13 @@ console.log(sumBigIntegers("9007199254740991", "9007199254740991"));
 */
 
 console.log(
-  "******************************\n" +
-    "Task 2\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 2\n" +
+        "******************************",
 );
 
 function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 console.log(getRandomInt(1, 10));
@@ -94,13 +94,13 @@ console.log(getRandomInt(1, 1));
 */
 
 console.log(
-  "******************************\n" +
-    "Task 3\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 3\n" +
+        "******************************",
 );
 
 function greetByName(msg, name) {
-  return `${msg}, ${name}`;
+    return `${msg}, ${name}`;
 }
 
 console.log(greetByName("Hi", "John"));

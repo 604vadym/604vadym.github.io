@@ -1,7 +1,7 @@
 "use strict";
 
 console.log(
-  "JavaScriptStart & JavaScript Core #3. Домашнє завдання. Основи JavaScript: Керуючі конструкції",
+    "JavaScriptStart & JavaScript Core #3. Домашнє завдання. Основи JavaScript: Керуючі конструкції",
 );
 
 /*
@@ -16,21 +16,21 @@ console.log(
  */
 
 console.log(
-  "******************************\n" +
-    "Task 1\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 1\n" +
+        "******************************",
 );
 
 function checkAgeCategory(age) {
-  if (age < 13) {
-    console.log("Дитина");
-  } else if (age >= 13 && age <= 19) {
-    console.log("Підліток");
-  } else if (age >= 20 && age <= 59) {
-    console.log("Дорослий");
-  } else if (age >= 60) {
-    console.log("Пенсіонер");
-  }
+    if (age < 13) {
+        console.log("Дитина");
+    } else if (age >= 13 && age <= 19) {
+        console.log("Підліток");
+    } else if (age >= 20 && age <= 59) {
+        console.log("Дорослий");
+    } else if (age >= 60) {
+        console.log("Пенсіонер");
+    }
 }
 
 checkAgeCategory(7);
@@ -64,22 +64,22 @@ checkAgeCategory(80);
  */
 
 console.log(
-  "******************************\n" +
-    "Task 2\n" +
-    "******************************",
+    "******************************\n" +
+        "Task 2\n" +
+        "******************************",
 );
 
 const generatedPassword = Math.floor(Math.random() * 100000);
 
 const user = {
-  username: "admin",
-  password: generatedPassword,
+    username: "admin",
+    password: generatedPassword,
 };
 
 if (user.password < 1000 || user.password > 9999) {
-  console.log(
-    `Error: password invalid (${user.password}). Password must contain exactly 4 digits. Try again...`,
-  );
+    console.log(
+        `Error: password invalid (${user.password}). Password must contain exactly 4 digits. Try again...`,
+    );
 } else {
-  console.log(user);
+    console.log(user);
 }
