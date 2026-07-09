@@ -21,7 +21,6 @@ console.log(
 
 const counter = (function () {
     let currentValue = 0;
-
     return (n) => {
         if (typeof n === "number" && !Number.isNaN(n)) {
             currentValue = n;
@@ -61,7 +60,6 @@ console.log(
 
 const counterFactory = (function () {
     let currentValue = 0;
-
     return {
         value(n) {
             if (typeof n === "number" && !Number.isNaN(n)) {
@@ -115,13 +113,25 @@ console.log(
         "******************************",
 );
 
-// const myPrint = () => {}
-// const myPow = () => {}
+const myPrint = (a, b, res) => `${a}^${b}=${res}`;
 
-// console.log(myPow(3, 4, myPrint)) // 3^4=81
-// console.log(myPow(2, 3, myPrint)) // 2^3=8
-// console.log(myPow(2, 0, myPrint)) // 2^0=1
-// console.log(myPow(2, -2, myPrint)) // 2^-2=0.25
+const myPow = (a, b, myPrint) => {
+    function calc(exponent) {
+        if (exponent === 0) {
+            return 1;
+        }
+        if (exponent < 0) {
+            return 1 / calc(-exponent);
+        }
+        return calc(exponent - 1) * a;
+    }
+    return myPrint(a, b, calc(b));
+};
+
+console.log(myPow(3, 4, myPrint)); // 3^4=81
+console.log(myPow(2, 3, myPrint)); // 2^3=8
+console.log(myPow(2, 0, myPrint)); // 2^0=1
+console.log(myPow(2, -2, myPrint)); // 2^-2=0.25
 
 /*
  * #4
