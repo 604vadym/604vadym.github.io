@@ -27,6 +27,11 @@ ul {
   list-style-type: none;
 }
 
+cite {
+  display: block;
+  font-style: normal;
+}
+
 img,
 picture,
 svg {
@@ -283,18 +288,19 @@ body {
   color: transparent;
   margin-bottom: 30px;
 }
-.quote__cite {
+
+.person-info {
   display: flex;
   flex-direction: column;
   gap: 6px;
   color: #b3b3ba;
 }
-.quote__name {
+.person-info__name {
   font-weight: 700;
   font-size: 1rem;
   line-height: 1;
 }
-.quote__role {
+.person-info__role {
   line-height: 1.5714285714;
 }
 

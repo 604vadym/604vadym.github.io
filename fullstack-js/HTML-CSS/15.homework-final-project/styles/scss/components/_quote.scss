@@ -5,19 +5,4 @@
     @include a.text-bold-h1-gradient;
     margin-bottom: a.$space-md;
   }
-
-  &__cite {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    color: a.$color-grey-text;
-  }
-
-  &__name {
-    @include a.text-bold-main;
-  }
-
-  &__role {
-    line-height: a.$line-height-tight;
-  }
 }

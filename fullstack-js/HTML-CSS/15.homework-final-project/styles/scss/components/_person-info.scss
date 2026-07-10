@@ -1,0 +1,16 @@
+@use "../abstracts" as a;
+
+.person-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: a.$color-grey-text;
+
+  &__name {
+    @include a.text-bold-main;
+  }
+
+  &__role {
+    line-height: a.$line-height-tight;
+  }
+}
