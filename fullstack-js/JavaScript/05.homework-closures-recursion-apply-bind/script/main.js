@@ -146,10 +146,11 @@ console.log(
         "******************************",
 );
 
-// const list = [12, 23, 100, 34, 56, 9, 233]
-// const myMax = () => {}
+const list = [12, 23, 100, 34, 56, 9, 233];
 
-// console.log(myMax(list)); // 233
+const myMax = (arr) => Math.max.apply(null, arr);
+
+console.log(myMax(list)); // 233
 
 /*
  * #5
