@@ -1,0 +1,38 @@
+@use "../abstracts/" as a;
+
+.slider {
+  display: flex;
+  flex-direction: column;
+
+  &__body {
+    margin-bottom: a.$space-md;
+  }
+
+  &__slide {
+    display: none;
+
+    &--active {
+      display: flex;
+    }
+  }
+
+  &__image {
+    @include a.border-radius-left(a.$border-radius);
+    width: min(100%, 400px);
+    aspect-ratio: 400 / 298;
+    flex-shrink: 0;
+  }
+
+  &__info {
+    background-color: a.$color-bg;
+    padding: a.$space-md;
+  }
+
+  &__overline {
+    margin-bottom: 5px;
+  }
+
+  &__pagination {
+    justify-content: center;
+  }
+}

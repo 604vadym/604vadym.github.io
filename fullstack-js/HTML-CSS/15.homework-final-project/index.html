@@ -254,48 +254,56 @@
 
         <section class="team">
           <div class="team__content container">
-            <div class="team__body">
-              <div class="image team__image">
-                <img
-                  src="./assets/images/homepage/partner.jpg"
-                  alt=""
-                  aria-hidden="true"
-                />
+            <div class="slider team__slider">
+              <div class="slider__body">
+                <div class="slider__slide slider__slide--active">
+                  <div class="image slider__image">
+                    <img
+                      src="./assets/images/homepage/partner.jpg"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <div class="slider__info">
+                    <a class="link slider__overline" href="#">команда</a>
+
+                    <blockquote class="quote">
+                      <p class="quote__text">
+                        Ми звикли брати на себе відповідальність та завжди
+                        гарантуємо чесну, вчасну допомогу, навіть у ситуаціях,
+                        коли більшість безсилі.
+                      </p>
+                      <cite class="quote__cite">
+                        <div class="person">
+                          <span class="person__name"
+                            >Олександр Олександровський</span
+                          >
+                          <span class="person__role">Керуючий партнер</span>
+                        </div></cite
+                      >
+                    </blockquote>
+                  </div>
+                </div>
               </div>
 
-              <div class="team__info">
-                <a class="link team__link" href="#">команда</a>
-
-                <blockquote class="quote team__quote">
-                  <p class="quote__text">
-                    Ми звикли брати на себе відповідальність та завжди
-                    гарантуємо чесну, вчасну допомогу, навіть у ситуаціях, коли
-                    більшість безсилі.
-                  </p>
-                  <cite class="quote__cite"
-                    ><span class="quote__name">Олександр Олександровський</span>
-                    <span class="quote__role">Керуючий партнер</span></cite
-                  >
-                </blockquote>
+              <div class="pagination slider__pagination">
+                <button
+                  class="button pagination__dot pagination__dot--active"
+                  type="button"
+                  aria-label="Go to slide 1"
+                ></button>
+                <button
+                  class="button pagination__dot"
+                  type="button"
+                  aria-label="Go to slide 2"
+                ></button>
+                <button
+                  class="button pagination__dot"
+                  type="button"
+                  aria-label="Go to slide 3"
+                ></button>
               </div>
-            </div>
-
-            <div class="pagination team__pagination">
-              <button
-                class="button pagination__dot pagination__dot--active"
-                type="button"
-                aria-label="Go to slide 1"
-              ></button>
-              <button
-                class="button pagination__dot"
-                type="button"
-                aria-label="Go to slide 2"
-              ></button>
-              <button
-                class="button pagination__dot"
-                type="button"
-                aria-label="Go to slide 3"
-              ></button>
             </div>
           </div>
         </section>
