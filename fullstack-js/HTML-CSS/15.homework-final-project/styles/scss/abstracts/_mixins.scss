@@ -55,6 +55,7 @@
   font-weight: v.$font-weight-bold;
   font-size: v.$font-size-sub;
   line-height: v.$line-height-none;
+  letter-spacing: 1px;
 }
 
 @mixin text-bold-caption {

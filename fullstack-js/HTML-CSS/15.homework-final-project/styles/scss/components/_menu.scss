@@ -5,8 +5,4 @@
     display: flex;
     gap: a.$space-sm;
   }
-
-  &__link {
-    @include a.text-bold-main;
-  }
 }

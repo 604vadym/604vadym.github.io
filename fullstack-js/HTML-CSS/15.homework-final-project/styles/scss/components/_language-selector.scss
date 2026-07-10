@@ -5,9 +5,6 @@
 
   &__link {
     @include a.flex-center;
-    @include a.text-bold-sub;
-    letter-spacing: 1px;
-
     min-width: 33px;
     min-height: 25px;
     padding: 5px 7px;

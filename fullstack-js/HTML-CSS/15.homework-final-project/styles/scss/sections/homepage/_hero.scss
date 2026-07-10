@@ -13,12 +13,12 @@
   }
 
   &__scroll {
+    // @include a.inline-flex-center;
+    @include a.hover-color-smooth(a.$color-accent);
     position: absolute;
     left: 50%;
     bottom: a.$space-md;
     transform: translateX(-50%);
     color: a.$color-basic;
-
-    @include a.hover-color-smooth(a.$color-accent);
   }
 }
