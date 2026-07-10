@@ -22,7 +22,7 @@ console.log(
 const counter = (function () {
     let currentValue = 0;
     return (n) => {
-        if (typeof n === "number" && !Number.isNaN(n)) {
+        if (Number.isFinite(n)) {
             currentValue = n;
         }
         return currentValue++;
@@ -62,7 +62,7 @@ const counterFactory = (function () {
     let currentValue = 0;
     return {
         value(n) {
-            if (typeof n === "number" && !Number.isNaN(n)) {
+            if (Number.isFinite(n)) {
                 currentValue = n;
             }
             return currentValue;
