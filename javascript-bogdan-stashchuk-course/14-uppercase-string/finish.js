@@ -12,3 +12,14 @@
  *
  * 5. Выведите в консоль значение второй переменной
  */
+"use strict";
+
+const myString = "Are You Sequenced?";
+
+console.log("myString instanceof String:", myString instanceof String);
+
+console.log("typeof myString:", typeof myString);
+
+const myStringUpperCase = myString.toUpperCase();
+
+console.log(myStringUpperCase);

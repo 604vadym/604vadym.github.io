@@ -8,3 +8,14 @@
  * 2. Выведите в консоль строку
  * "My name is <name> <surname> and my favorite number is <favoriteNumber>"
  */
+"use strict";
+
+const BoC = {
+    name: "Michael",
+    surname: "Sandison",
+    favoriteNumber: 70,
+};
+
+console.log(
+    `My name is ${BoC.name} ${BoC.surname} and my favorite number is ${BoC.favoriteNumber}`,
+);

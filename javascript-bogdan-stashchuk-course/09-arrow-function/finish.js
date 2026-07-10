@@ -10,3 +10,14 @@
  *
  * 5. Перепишите функцию так, чтобы результат возвращался неявно
  */
+"use strict";
+
+const sayHelloWorld = () => {
+    return "Привет, мир!";
+};
+
+console.log(sayHelloWorld());
+
+const sayHiWorld = () => "Привет, мир!";
+
+console.log(sayHiWorld());
