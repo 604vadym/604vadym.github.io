@@ -18,6 +18,6 @@ const sayHelloWorld = () => {
 
 console.log(sayHelloWorld());
 
-const sayHiWorld = (_) => "Привет, мир!";
+const sayHiWorld = () => "Привет, мир!";
 
 console.log(sayHiWorld());
