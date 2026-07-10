@@ -6,7 +6,7 @@
   }
 
   &__title {
-    @include a.text-bold-h3;
+    @include a.text-bold(a.$font-size-h3);
     color: a.$color-active-regular;
     margin-bottom: a.$space-sm;
   }

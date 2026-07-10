@@ -8,7 +8,7 @@
     no-repeat;
 
   &__title {
-    @include a.text-bold-h1;
+    @include a.text-bold(a.$font-size-h1);
     text-align: center;
   }
 

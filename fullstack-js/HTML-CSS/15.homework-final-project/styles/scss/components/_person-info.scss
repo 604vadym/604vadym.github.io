@@ -7,7 +7,7 @@
   color: a.$color-grey-text;
 
   &__name {
-    @include a.text-bold-main;
+    @include a.text-bold(a.$font-size-main);
   }
 
   &__role {

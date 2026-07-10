@@ -161,8 +161,8 @@ body {
 }
 .link--caption {
   font-weight: 700;
-  font-size: 0.875rem;
   line-height: 1;
+  font-size: 0.875rem;
   transition: color 0.3s;
 }
 @media (hover: hover) {
@@ -176,13 +176,13 @@ body {
 }
 .link--main {
   font-weight: 700;
-  font-size: 1rem;
   line-height: 1;
+  font-size: 1rem;
 }
 .link--sub {
   font-weight: 700;
-  font-size: 0.75rem;
   line-height: 1;
+  font-size: 0.75rem;
   letter-spacing: 1px;
 }
 .link--with-arrow {
@@ -221,8 +221,8 @@ body {
 }
 .tabs__btn {
   font-weight: 700;
-  font-size: 2.375rem;
   line-height: 1;
+  font-size: 2.375rem;
   color: #b3b3ba;
   width: 100%;
   justify-content: flex-end;
@@ -247,8 +247,8 @@ body {
 }
 .tabs__title {
   font-weight: 700;
-  font-size: 1.875rem;
   line-height: 1;
+  font-size: 1.875rem;
   margin-bottom: 30px;
 }
 .tabs__text {
@@ -260,8 +260,8 @@ body {
 }
 .card__title {
   font-weight: 700;
-  font-size: 1.375rem;
   line-height: 1;
+  font-size: 1.375rem;
   color: #24a3ff;
   margin-bottom: 15px;
 }
@@ -299,8 +299,8 @@ body {
 
 .quote__text {
   font-weight: 700;
-  font-size: 2.375rem;
   line-height: 1;
+  font-size: 2.375rem;
   background-image: linear-gradient(90.13deg, #f0145a 0.84%, #ef8080 99.96%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -316,8 +316,8 @@ body {
 }
 .person-info__name {
   font-weight: 700;
-  font-size: 1rem;
   line-height: 1;
+  font-size: 1rem;
 }
 .person-info__role {
   line-height: 1.5714285714;
@@ -394,8 +394,8 @@ body {
 }
 .hero__title {
   font-weight: 700;
-  font-size: 2.375rem;
   line-height: 1;
+  font-size: 2.375rem;
   text-align: center;
 }
 .hero__scroll {
@@ -426,8 +426,8 @@ body {
 }
 .services__title {
   font-weight: 700;
-  font-size: 2.375rem;
   line-height: 1;
+  font-size: 2.375rem;
   background-image: linear-gradient(90.13deg, #f0145a 0.84%, #ef8080 99.96%);
   -webkit-background-clip: text;
   background-clip: text;

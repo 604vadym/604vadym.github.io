@@ -5,18 +5,19 @@
   align-items: center;
 
   &--caption {
-    @include a.text-bold-caption;
+    @include a.text-bold(a.$font-size-caption);
     @include a.hover-color-smooth(a.$color-accent);
     text-transform: uppercase;
     color: a.$color-active-regular;
   }
 
   &--main {
-    @include a.text-bold-main;
+    @include a.text-bold(a.$font-size-main);
   }
 
   &--sub {
-    @include a.text-bold-sub;
+    @include a.text-bold(a.$font-size-sub);
+    letter-spacing: 1px;
   }
 
   &--with-arrow {

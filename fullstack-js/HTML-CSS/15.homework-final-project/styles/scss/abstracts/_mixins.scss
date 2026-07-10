@@ -51,51 +51,14 @@
   color: transparent;
 }
 
-@mixin text-bold-sub {
+@mixin text-bold($size) {
   font-weight: v.$font-weight-bold;
-  font-size: v.$font-size-sub;
   line-height: v.$line-height-none;
-  letter-spacing: 1px;
-}
-
-@mixin text-bold-caption {
-  font-weight: v.$font-weight-bold;
-  font-size: v.$font-size-caption;
-  line-height: v.$line-height-none;
-}
-
-@mixin text-bold-main {
-  font-weight: v.$font-weight-bold;
-  font-size: v.$font-size-main;
-  line-height: v.$line-height-none;
-}
-
-@mixin text-bold-lead {
-  font-weight: v.$font-weight-bold;
-  font-size: v.$font-size-lead;
-  line-height: v.$line-height-none;
-}
-
-@mixin text-bold-h1 {
-  font-weight: v.$font-weight-bold;
-  font-size: v.$font-size-h1;
-  line-height: v.$line-height-none;
-}
-
-@mixin text-bold-h2 {
-  font-weight: v.$font-weight-bold;
-  font-size: v.$font-size-h2;
-  line-height: v.$line-height-none;
-}
-
-@mixin text-bold-h3 {
-  font-weight: v.$font-weight-bold;
-  font-size: v.$font-size-h3;
-  line-height: v.$line-height-none;
+  font-size: $size;
 }
 
 @mixin text-bold-h1-gradient($gradient: v.$gradient-text-red) {
-  @include text-bold-h1;
+  @include text-bold(v.$font-size-h1);
   @include gradient-text($gradient);
 }
 
