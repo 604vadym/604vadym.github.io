@@ -12,3 +12,15 @@
  *
  * 4. Вызовите функцию
  */
+"use strict";
+
+/**
+ * Возвращает разницу двух чисел
+ *
+ * @param {number} num1
+ * @param {number} num2
+ * @returns {number} Разница чисел.
+ */
+const difference = (num1, num2) => num1 - num2;
+
+console.log(difference(25, 15));
