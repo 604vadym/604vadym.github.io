@@ -9,18 +9,6 @@
     @include a.hover-color-smooth(a.$color-accent);
     text-transform: uppercase;
     color: a.$color-active-regular;
-
-    &::after {
-      content: "";
-      position: relative;
-      bottom: 0;
-      left: 2px;
-      width: 8px;
-      height: 8px;
-      border-bottom: 2px solid currentColor;
-      border-right: 2px solid currentColor;
-      transform: rotate(-45deg);
-    }
   }
 
   &--main {
@@ -29,5 +17,19 @@
 
   &--sub {
     @include a.text-bold-sub;
+  }
+
+  &--with-arrow {
+    gap: 2px;
+
+    &::after {
+      content: "";
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-bottom: 2px solid currentColor;
+      border-right: 2px solid currentColor;
+      transform: rotate(-45deg);
+    }
   }
 }

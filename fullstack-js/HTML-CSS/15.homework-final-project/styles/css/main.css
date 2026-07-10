@@ -145,7 +145,7 @@ body {
 }
 
 .button {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   padding: 0;
@@ -174,17 +174,6 @@ body {
   text-transform: uppercase;
   color: #24a3ff;
 }
-.link--caption::after {
-  content: "";
-  position: relative;
-  bottom: 0;
-  left: 2px;
-  width: 8px;
-  height: 8px;
-  border-bottom: 2px solid currentColor;
-  border-right: 2px solid currentColor;
-  transform: rotate(-45deg);
-}
 .link--main {
   font-weight: 700;
   font-size: 1rem;
@@ -195,6 +184,18 @@ body {
   font-size: 0.75rem;
   line-height: 1;
   letter-spacing: 1px;
+}
+.link--with-arrow {
+  gap: 2px;
+}
+.link--with-arrow::after {
+  content: "";
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(-45deg);
 }
 
 .image {
