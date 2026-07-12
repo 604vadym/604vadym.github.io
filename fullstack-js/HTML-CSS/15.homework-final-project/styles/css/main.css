@@ -349,9 +349,6 @@ body {
   background-color: #24a3ff;
 }
 
-.logos-list {
-  border-radius: 12px;
-}
 .logos-list__item {
   display: flex;
   justify-content: center;
