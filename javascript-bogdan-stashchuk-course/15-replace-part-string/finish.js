@@ -6,3 +6,10 @@
  *
  * 3. Выведите значение второй переменной в консоль
  */
+"use strict";
+
+const greetingMorning = "Good Morning";
+
+const greetingEvening = greetingMorning.replace("Morning", "Evening");
+
+console.log(greetingEvening);

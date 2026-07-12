@@ -5,13 +5,30 @@
  *
  * 2. Преобразуйте обе переменные в числа перед сравнением.
  */
+"use strict";
 
-let myVariable1 = 10
-let myVariable2 = '5'
+let myVariable1 = 10;
+let myVariable2 = "5";
 
-// Напишите код здесь
+if (+myVariable1 <= +myVariable2) {
+    console.log(true);
+    console.log("log msg: if №1");
+}
 
-myVariable1 = '20'
-myVariable2 = 100
+if (Number(myVariable1) <= Number(myVariable2)) {
+    console.log(true);
+    console.log("log msg: if №2");
+}
 
-// Напишите код здесь
+myVariable1 = "20";
+myVariable2 = 100;
+
+if (+myVariable1 <= +myVariable2) {
+    console.log(true);
+    console.log("log msg: if №3");
+}
+
+if (Number(myVariable1) <= Number(myVariable2)) {
+    console.log(true);
+    console.log("log msg: if №4");
+}

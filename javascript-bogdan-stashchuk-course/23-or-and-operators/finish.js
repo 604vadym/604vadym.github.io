@@ -3,4 +3,7 @@
  * Что будет выведено в консоль?
  */
 
-console.log(3 || (true && null) || false)
+console.log(
+    "(true && null) ---> null, 3 || null ---> 3 => 3 will be in console",
+);
+console.log(3 || (true && null) || false);
