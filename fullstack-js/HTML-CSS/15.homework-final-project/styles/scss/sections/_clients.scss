@@ -1,0 +1,14 @@
+@use "../abstracts/" as a;
+
+.clients {
+  padding-bottom: a.$space-lg;
+
+  &__title {
+    @include a.text-bold(a.$font-size-caption);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: a.$color-main-regular;
+    text-align: center;
+    margin-bottom: a.$space-md;
+  }
+}

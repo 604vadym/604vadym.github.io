@@ -33,4 +33,13 @@
       transform: rotate(-45deg);
     }
   }
+
+  &--icon {
+    justify-content: center;
+  }
+
+  &__icon {
+    width: 24px;
+    flex-shrink: 0;
+  }
 }

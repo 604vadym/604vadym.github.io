@@ -69,3 +69,19 @@
 @mixin border-radius-bottom($radius) {
   border-radius: 0 0 $radius $radius;
 }
+
+@mixin border-radius-top-left($radius) {
+  border-radius: $radius 0 0 0;
+}
+
+@mixin border-radius-top-right($radius) {
+  border-radius: 0 $radius 0 0;
+}
+
+@mixin border-radius-bottom-left($radius) {
+  border-radius: 0 0 0 $radius;
+}
+
+@mixin border-radius-bottom-right($radius) {
+  border-radius: 0 0 $radius 0;
+}

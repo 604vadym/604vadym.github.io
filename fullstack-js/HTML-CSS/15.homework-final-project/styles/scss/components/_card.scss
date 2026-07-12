@@ -1,7 +1,7 @@
 @use "../abstracts/" as a;
 
 .card {
-  &__image {
+  &__img {
     margin-bottom: a.$space-md;
   }
 

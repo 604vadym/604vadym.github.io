@@ -94,6 +94,10 @@ body {
   padding-inline: 60px;
 }
 
+.logo__img {
+  width: 130px;
+}
+
 .gradient-wrapper {
   position: relative;
   z-index: 5;
@@ -197,11 +201,18 @@ body {
   border-right: 2px solid currentColor;
   transform: rotate(-45deg);
 }
+.link--icon {
+  justify-content: center;
+}
+.link__icon {
+  width: 24px;
+  flex-shrink: 0;
+}
 
 .image {
   overflow: hidden;
 }
-.image img {
+.image__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -255,7 +266,7 @@ body {
   font-size: 1.1875rem;
 }
 
-.card__image {
+.card__img {
   margin-bottom: 30px;
 }
 .card__title {
@@ -336,6 +347,73 @@ body {
 .pagination__dot--active {
   pointer-events: none;
   background-color: #24a3ff;
+}
+
+.logos-list {
+  border-radius: 12px;
+}
+.logos-list__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: min(100%, 430px);
+  height: 120px;
+}
+.logos-list__item:nth-child(1) {
+  background-color: #1c4280;
+}
+.logos-list__item:nth-child(2) {
+  background-color: #143646;
+}
+.logos-list__item:nth-child(3) {
+  background-color: #f48b30;
+}
+.logos-list__item:nth-child(4) {
+  background-color: #9e4dc3;
+}
+.logos-list__item:nth-child(5) {
+  background-color: #fd9339;
+}
+.logos-list__item:nth-child(6) {
+  background-color: #e2e2e4;
+}
+.logos-list__item:nth-child(7) {
+  background-color: #c71c36;
+}
+.logos-list__item:nth-child(8) {
+  background-color: #dcf3f9;
+}
+.logos-list__item:nth-child(9) {
+  background-color: #eaeaea;
+}
+.logos-list__item:nth-child(10) {
+  background-color: #282240;
+}
+.logos-list__item:nth-child(11) {
+  background-color: #1d4568;
+}
+.logos-list__item:nth-child(12) {
+  background-color: #000;
+}
+.logos-list--stretched-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  margin-inline: -60px;
+}
+@media (min-width: 1720px) {
+  .logos-list--stretched-grid .logos-list__item:first-child {
+    border-radius: 12px 0 0 0;
+  }
+  .logos-list--stretched-grid .logos-list__item:nth-child(4) {
+    border-radius: 0 12px 0 0;
+  }
+  .logos-list--stretched-grid .logos-list__item:nth-child(9) {
+    border-radius: 0 0 0 12px;
+  }
+  .logos-list--stretched-grid .logos-list__item:last-child {
+    border-radius: 0 0 12px 0;
+  }
 }
 
 .header {
@@ -442,6 +520,20 @@ body {
 
 .team__content {
   padding-block: 60px;
+}
+
+.clients {
+  padding-bottom: 60px;
+}
+.clients__title {
+  font-weight: 700;
+  line-height: 1;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #323264;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 /*# sourceMappingURL=main.css.map */

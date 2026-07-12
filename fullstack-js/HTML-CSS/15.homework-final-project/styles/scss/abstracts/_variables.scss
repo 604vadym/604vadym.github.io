@@ -2,6 +2,7 @@
 @use "functions" as f;
 
 $color-white: #fff;
+$color-black: #000;
 $color-grey: #f5f5fa;
 $color-grey-text: #b3b3ba;
 $color-grey-separator: #e6e6f0;
@@ -52,5 +53,5 @@ $space-sm: 15px;
 $space-md: 30px;
 $space-lg: 60px;
 
-$container-width: 1720px;
-$container-padding: 60px;
+$container-width: 1600px + $space-lg * 2;
+$container-padding: $space-lg;

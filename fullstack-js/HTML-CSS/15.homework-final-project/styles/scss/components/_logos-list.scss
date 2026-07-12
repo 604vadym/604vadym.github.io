@@ -1,0 +1,49 @@
+@use "../abstracts/" as a;
+
+.logos-list {
+  border-radius: 12px;
+  &__item {
+    @include a.flex-center;
+    width: min(100%, 430px);
+    height: 120px;
+
+    $item-backgrounds:
+      #1c4280, #143646, #f48b30, #9e4dc3, #fd9339, #e2e2e4, #c71c36, #dcf3f9,
+      #eaeaea, #282240, #1d4568, a.$color-black;
+
+    @each $color in $item-backgrounds {
+      $index: index($item-backgrounds, $color);
+
+      &:nth-child(#{$index}) {
+        background-color: $color;
+      }
+    }
+  }
+
+  &--stretched-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    margin-inline: -(a.$space-lg);
+
+    @media (min-width: a.$container-width) {
+      .logos-list__item {
+        &:first-child {
+          @include a.border-radius-top-left(a.$border-radius);
+        }
+
+        &:nth-child(4) {
+          @include a.border-radius-top-right(a.$border-radius);
+        }
+
+        &:nth-child(9) {
+          @include a.border-radius-bottom-left(a.$border-radius);
+        }
+
+        &:last-child {
+          @include a.border-radius-bottom-right(a.$border-radius);
+        }
+      }
+    }
+  }
+}
