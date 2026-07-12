@@ -29,19 +29,19 @@
     @media (min-width: a.$container-width) {
       .logos-list__item {
         &:first-child {
-          @include a.border-radius-top-left(a.$border-radius);
+          border-top-left-radius: a.$border-radius;
         }
 
         &:nth-child(4) {
-          @include a.border-radius-top-right(a.$border-radius);
+          border-top-right-radius: a.$border-radius;
         }
 
         &:nth-child(9) {
-          @include a.border-radius-bottom-left(a.$border-radius);
+          border-bottom-left-radius: a.$border-radius;
         }
 
         &:last-child {
-          @include a.border-radius-bottom-right(a.$border-radius);
+          border-bottom-right-radius: a.$border-radius;
         }
       }
     }

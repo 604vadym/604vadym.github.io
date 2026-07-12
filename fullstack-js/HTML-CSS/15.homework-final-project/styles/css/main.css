@@ -400,16 +400,16 @@ body {
 }
 @media (min-width: 1720px) {
   .logos-list--stretched-grid .logos-list__item:first-child {
-    border-radius: 12px 0 0 0;
+    border-top-left-radius: 12px;
   }
   .logos-list--stretched-grid .logos-list__item:nth-child(4) {
-    border-radius: 0 12px 0 0;
+    border-top-right-radius: 12px;
   }
   .logos-list--stretched-grid .logos-list__item:nth-child(9) {
-    border-radius: 0 0 0 12px;
+    border-bottom-left-radius: 12px;
   }
   .logos-list--stretched-grid .logos-list__item:last-child {
-    border-radius: 0 0 12px 0;
+    border-bottom-right-radius: 12px;
   }
 }
 
