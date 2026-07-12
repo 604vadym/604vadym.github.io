@@ -23,33 +23,38 @@ console.log(
 );
 
 class CalorieCalculator {
+    #storage;
+
     constructor() {
-        // code here
+        this.#storage = new Map();
     }
 
-    addProduct() {
-        // code here
+    addProduct(productName, calories) {
+        this.#storage.set(productName, calories);
     }
 
     getProductCalories(productName) {
-        // code here
+        if (!this.#storage.has(productName)) {
+            return "Product not found";
+        }
+        return this.#storage.get(productName);
     }
 
     removeProduct(productName) {
-        // code here
+        this.#storage.delete(productName);
     }
 }
 
 // Демонстрація використання
-// const calorieCalculator = new CalorieCalculator()
-// calorieCalculator.addProduct('Apple', 52)
-// calorieCalculator.addProduct('Banana', 89)
-//
-// console.log(calorieCalculator.getProductCalories('Apple')) // 52
-// console.log(calorieCalculator.getProductCalories('Banana')) // 89
-//
-// calorieCalculator.removeProduct('Apple')
-// console.log(calorieCalculator.getProductCalories('Apple')) // Product not found
+const calorieCalculator = new CalorieCalculator();
+calorieCalculator.addProduct("Apple", 52);
+calorieCalculator.addProduct("Banana", 89);
+
+console.log(calorieCalculator.getProductCalories("Apple")); // 52
+console.log(calorieCalculator.getProductCalories("Banana")); // 89
+
+calorieCalculator.removeProduct("Apple");
+console.log(calorieCalculator.getProductCalories("Apple")); // Product not found
 
 /*
  * #2
