@@ -1,7 +1,7 @@
 "use strict";
 
 console.log(
-    "JavaScript Core #4. Домашнє завдання. Основи JavaScript: Оператор switch",
+    "JavaScript Core #5. Домашнє завдання. Основи JavaScript: Оператор switch",
 );
 
 /*
