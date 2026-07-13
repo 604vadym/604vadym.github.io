@@ -2,6 +2,7 @@
  *
  * Что будет выведено в консоль?
  */
+"use strict";
 
 console.log(
     "(true && null) ---> null, 3 || null ---> 3 => 3 will be in console",
