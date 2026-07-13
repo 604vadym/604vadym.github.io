@@ -18,3 +18,17 @@ console.log(
  *
  * На числі 15 в консоль виводиться “Розміновано.”
  */
+
+const number = Math.floor(Math.random() * 100) + 1;
+
+for (let bomb = 100; bomb !== 0; bomb--) {
+    console.log(bomb);
+    if (bomb === number) {
+        if (bomb > 10) {
+            console.log("Розміновано.");
+        } else {
+            console.log("BOOM!");
+        }
+        break;
+    }
+}
