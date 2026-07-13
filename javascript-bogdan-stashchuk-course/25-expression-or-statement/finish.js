@@ -5,24 +5,34 @@
  *  - инструкция (statement)
  *  - выражение-инструкция (expression statement)
  */
+"use strict";
 
-15
+// expression statement
+15;
 
+// statement
 const myObject = {
-  x: 10,
-  y: true,
-}
+    x: 10,
+    y: true,
+}; // expression
 
-myObject.z = 'abc'
+// expression statement
+myObject.z = "abc"; // expression
 
-delete myObject.x
+// expression statement
+delete myObject.x;
 
-let newVariable
+// statement
+let newVariable;
 
-newVariable = 30 + 5
+// expression statement
+newVariable = 30 + 5; // expression
 
-console.log(newVariable)
+// expression statement
+console.log(newVariable); // expression
 
+// statement
 if (newVariable > 10) {
-  console.log(`${newVariable} больше 10`)
+    // expression expression    expression
+    console.log(`${newVariable} больше 10`); // expression statement
 }
