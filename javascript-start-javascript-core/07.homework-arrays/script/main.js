@@ -19,3 +19,17 @@ console.log(
  *
  * Важливо: алгоритм має працювати для масиву любого розміру
  */
+
+const arr = new Array(10);
+
+for (let i = 0; i < arr.length; i++) {
+    arr[i] = Math.floor(Math.random() * 21);
+}
+
+console.log(arr);
+
+for (let i = 1; i < arr.length; i += 2) {
+    arr[i] *= 2;
+}
+
+console.log(arr);
