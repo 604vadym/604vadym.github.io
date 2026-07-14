@@ -136,8 +136,18 @@ function DateCalculator(initialDate) {
         date.setDate(date.getDate() - days);
     };
 
+    // Optimal variant
     this.getResult = function () {
         return date.toLocaleDateString("sv-SE");
+    };
+
+    // Variant to have more practice with Date and String methods. Date formatted manually
+    this.getResultV2 = function () {
+        const year = date.getFullYear();
+        const month = ("0" + (date.getMonth() + 1)).slice(-2);
+        const day = ("0" + date.getDate()).slice(-2);
+
+        return `${year}-${month}-${day}`;
     };
 }
 
@@ -146,9 +156,11 @@ try {
     const dateCalculator = new DateCalculator("2023-01-01");
     dateCalculator.addDays(5);
     console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+    console.log(dateCalculator.getResultV2()); // Виводить нову дату після додавання днів
 
     dateCalculator.subtractDays(3);
     console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+    console.log(dateCalculator.getResultV2()); // Виводить нову дату після віднімання днів
 
     console.log("Test 1: Correct date format -> OK");
 } catch (error) {
@@ -161,9 +173,11 @@ try {
     const dateCalculator = new DateCalculator();
     dateCalculator.addDays(5);
     console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+    console.log(dateCalculator.getResultV2()); // Виводить нову дату після додавання днів
 
     dateCalculator.subtractDays(3);
     console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+    console.log(dateCalculator.getResultV2()); // Виводить нову дату після віднімання днів
 
     console.log("Test 2: Empty constructor -> use current date");
 } catch (error) {
@@ -176,9 +190,11 @@ try {
     const dateCalculator = new DateCalculator("hello");
     dateCalculator.addDays(5);
     console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+    console.log(dateCalculator.getResultV2()); // Виводить нову дату після додавання днів
 
     dateCalculator.subtractDays(3);
     console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+    console.log(dateCalculator.getResultV2()); // Виводить нову дату після віднімання днів
 
     console.log("Test 3 Failed: Exception was not thrown for invalid date");
 } catch (error) {
