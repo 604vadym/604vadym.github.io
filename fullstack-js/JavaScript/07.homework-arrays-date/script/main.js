@@ -64,7 +64,6 @@ console.log("Подвоєні елементи масиву:", doubledArray); //
  *   - Повертає поточний масив усіх навичок, збережених у класі.
  *
  * Загальні вимоги:
- * - Клас має бути модульним і здатним до використання в інших частинах програми, тому він повинен бути експортований.
  * - Клас має забезпечувати легке управління навичками, включаючи додавання нових навичок та отримання списку всіх наявних навичок.
  * - Код має бути написаний з урахуванням принципів чистого коду, забезпечуючи читабельність та легкість підтримки.
  */
@@ -76,14 +75,30 @@ console.log(
 );
 
 class SkillsManager {
-    // code here
+    #skills;
+
+    constructor() {
+        this.#skills = [];
+    }
+
+    addSkill(skill) {
+        if (typeof skill !== "string" || skill.length < 2) {
+            return null;
+        }
+        this.#skills.push(skill);
+        return skill;
+    }
+
+    getAllSkills() {
+        return this.#skills.slice(); // make copy to protect private property
+    }
 }
 
-// const skillsManager = new SkillsManager()
-//
-// console.log(skillsManager.addSkill('JavaScript'))
-// console.log(skillsManager.addSkill('CSS'))
-// console.log(skillsManager.getAllSkills())
+const skillsManager = new SkillsManager();
+
+console.log(skillsManager.addSkill("JavaScript"));
+console.log(skillsManager.addSkill("CSS"));
+console.log(skillsManager.getAllSkills());
 
 /*
  * #4
