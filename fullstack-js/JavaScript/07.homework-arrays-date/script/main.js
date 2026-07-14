@@ -18,13 +18,13 @@ console.log(
 );
 
 function sumArray(numbers) {
-    // code here
+    return numbers.reduce((accum, value) => accum + value);
 }
 
 // Використання функції
-// const exampleArray = [1, 2, 3, 4, 5]
-// const sum = sumArray(exampleArray)
-// console.log('Сума елементів масиву:', sum) // Виведення суми
+const exampleArray = [1, 2, 3, 4, 5];
+const sum = sumArray(exampleArray);
+console.log("Сума елементів масиву:", sum); // Виведення суми
 
 /*
  * #2
