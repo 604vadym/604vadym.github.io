@@ -165,10 +165,10 @@ console.log(
         "******************************",
 );
 
-const strings = ["juice", "milk", "potato", "palyanytsia", "banana"];
+const purchases = ["juice", "milk", "potato", "palyanytsia", "banana"];
 
-console.log(strings);
+console.log(purchases);
 
-strings.sort();
+purchases.sort();
 
-console.log(strings);
+console.log(purchases);
