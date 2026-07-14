@@ -138,3 +138,28 @@ const sum = numbersRand.reduce((accum, value) => accum + value);
 
 console.log("array:", numbersRand);
 console.log("sum:", sum);
+
+/**
+ * #4 Завдання.
+ * Список покупок:
+ *
+ * створити масив строк зі списком покупок і вивести на екран
+ *
+ * Приклад: [‘juice’, ‘milk’, ‘potato’, ‘palyanytsia’, ‘banana’]
+ *
+ * Відсортувати масив і вивести на екран знову
+ */
+
+console.log(
+    "******************************\n" +
+        "Task 4\n" +
+        "******************************",
+);
+
+const strings = ["juice", "milk", "potato", "palyanytsia", "banana"];
+
+console.log(strings);
+
+strings.sort();
+
+console.log(strings);
