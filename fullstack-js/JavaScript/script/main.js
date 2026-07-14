@@ -8,6 +8,7 @@ const homeworkMap = {
     hw4: "04.homework-functional-programming-currying-closures-higher-order-functions/script/main.js",
     hw5: "05.homework-closures-recursion-apply-bind/script/main.js",
     hw6: "06.homework-classes-map-set/script/main.js",
+    hw7: "07.homework-arrays-date/script/main.js",
 };
 
 function logToTerminal(...args) {
