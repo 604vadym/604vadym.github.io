@@ -121,10 +121,12 @@ console.log(
 );
 
 function DateCalculator(initialDate) {
-    const parsedDate = initialDate ? new Date(initialDate) : new Date();
-
     // use variable (instead of this.date) for closure to protect internal state of object
-    let date = isNaN(parsedDate) ? new Date() : parsedDate;
+    let date = initialDate === undefined ? new Date() : new Date(initialDate);
+
+    if (isNaN(date)) {
+        throw new Error("Invalid date format provided to DateCalculator");
+    }
 
     this.addDays = function (days) {
         date.setDate(date.getDate() + days);
@@ -140,11 +142,50 @@ function DateCalculator(initialDate) {
 }
 
 // Демонстрація використання
-const dateCalculator = new DateCalculator("2023-01-01");
-dateCalculator.addDays(5);
-console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+try {
+    const dateCalculator = new DateCalculator("2023-01-01");
+    dateCalculator.addDays(5);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
 
-dateCalculator.subtractDays(3);
-console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+    dateCalculator.subtractDays(3);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+
+    console.log("Test 1: Correct date format -> OK");
+} catch (error) {
+    console.error("Test 1 Failed:", error.message);
+} finally {
+    console.log("******************************");
+}
+
+try {
+    const dateCalculator = new DateCalculator();
+    dateCalculator.addDays(5);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+
+    dateCalculator.subtractDays(3);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+
+    console.log("Test 2: Empty constructor -> use current date");
+} catch (error) {
+    console.error("Test 2 Failed:", error.message);
+} finally {
+    console.log("******************************");
+}
+
+try {
+    const dateCalculator = new DateCalculator("hello");
+    dateCalculator.addDays(5);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+
+    dateCalculator.subtractDays(3);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+
+    console.log("Test 3 Failed: Exception was not thrown for invalid date");
+} catch (error) {
+    console.log(
+        "Test 3: Incorrect date format -> successfully caught exception:",
+        error.message,
+    );
+}
 
 // export { doubleArrayElements, sumArray, SkillsManager, DateCalculator }
