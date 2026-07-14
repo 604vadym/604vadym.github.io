@@ -18,7 +18,7 @@ console.log(
 );
 
 function sumArray(numbers) {
-    return numbers.reduce((accum, value) => accum + value);
+    return numbers.reduce((accum, value) => accum + value, 0);
 }
 
 // Використання функції
