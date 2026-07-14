@@ -3,13 +3,16 @@
  * Что будет выведено в консоли?
  * Ответьте на вопрос без запуска кода
  */
+"use sctrict";
+
+console.log("Привет из функции fn true will be in console");
 
 function fn() {
-  console.log('Привет из функции fn')
+    console.log("Привет из функции fn");
 
-  return function (a) {
-    console.log(a)
-  }
+    return function (a) {
+        console.log(a);
+    };
 }
 
-fn()(true)
+fn()(true);
