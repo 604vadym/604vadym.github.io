@@ -24,6 +24,7 @@ function sumArray(numbers) {
 // Використання функції
 const exampleArray = [1, 2, 3, 4, 5];
 const sum = sumArray(exampleArray);
+console.log(exampleArray);
 console.log("Сума елементів масиву:", sum); // Виведення суми
 
 /*
@@ -39,13 +40,14 @@ console.log(
 );
 
 function doubleArrayElements(numbers) {
-    // code here
+    return numbers.map((value) => value * 2);
 }
 
 // Використання функції
-// const exampleArray = [1, 2, 3, 4, 5]
-// const doubledArray = doubleArrayElements(exampleArray)
-// console.log('Подвоєні елементи масиву:', doubledArray) // Виведення подвоєних елементів
+const exampleArray2 = [1, 2, 3, 4, 5];
+const doubledArray = doubleArrayElements(exampleArray2);
+console.log(exampleArray2);
+console.log("Подвоєні елементи масиву:", doubledArray); // Виведення подвоєних елементів
 
 /*
  * #3
