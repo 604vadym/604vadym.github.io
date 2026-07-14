@@ -5,11 +5,12 @@
  * 2. Что будет, если отключить строгий режим?
  */
 
-'use strict'
+"use strict";
 
+// there will be no error without "use strict" because of hoisting
 function myFunction() {
-  a = 2
-  return a
+    const a = 2;
+    return a;
 }
 
-myFunction()
+myFunction();
