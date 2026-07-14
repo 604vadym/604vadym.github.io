@@ -121,25 +121,30 @@ console.log(
 );
 
 function DateCalculator(initialDate) {
+    const parsedDate = initialDate ? new Date(initialDate) : new Date();
+
+    // use variable (instead of this.date) for closure to protect internal state of object
+    let date = isNaN(parsedDate) ? new Date() : parsedDate;
+
     this.addDays = function (days) {
-        // code here
+        date.setDate(date.getDate() + days);
     };
 
     this.subtractDays = function (days) {
-        // code here
+        date.setDate(date.getDate() - days);
     };
 
     this.getResult = function () {
-        // code here
+        return date.toLocaleDateString("sv-SE");
     };
 }
 
 // Демонстрація використання
-// const dateCalculator = new DateCalculator('2023-01-01')
-// dateCalculator.addDays(5)
-// console.log(dateCalculator.getResult()) // Виводить нову дату після додавання днів
-//
-// dateCalculator.subtractDays(3)
-// console.log(dateCalculator.getResult()) // Виводить нову дату після віднімання днів
+const dateCalculator = new DateCalculator("2023-01-01");
+dateCalculator.addDays(5);
+console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+
+dateCalculator.subtractDays(3);
+console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
 
 // export { doubleArrayElements, sumArray, SkillsManager, DateCalculator }
