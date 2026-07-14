@@ -139,6 +139,15 @@ const sum = numbersRand.reduce((accum, value) => accum + value);
 console.log("array:", numbersRand);
 console.log("sum:", sum);
 
+let sum2 = 0;
+
+for (let i = 0; i < numbersRand.length; i++) {
+    sum2 += numbersRand[i];
+}
+
+console.log("array:", numbersRand);
+console.log("sum:", sum2);
+
 /**
  * #4 Завдання.
  * Список покупок:
