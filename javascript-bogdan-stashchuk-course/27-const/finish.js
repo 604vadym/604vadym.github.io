@@ -8,16 +8,18 @@
  * Не меняйте строки 13, 18
  */
 
-const arr = [1, 2] // <-- Объявление переменной используя const
+let arr = [1, 2]; // <-- Объявление переменной используя const
 
-arr.push(3)
+// No error because arr is a const variable, but it assigned to object (Array) which is reference type. arr has reference (address in memory) inside so we can change (mutate) this object (Array).
+arr.push(3);
 
-console.log(arr)
+console.log(arr);
 // [1, 2, 3]
 
-arr = [1, 2, 3, 4]
+// Error because we are trying to change the value of a variable arr which is const. We can change the value of an object by reference assigned to variable arr, but we can't change this reference by itself.
+arr = [1, 2, 3, 4];
 // ДО: Uncaught TypeError: Assignment to constant variable.
 // ПОСЛЕ: Нет ошибки
 
-console.log(arr)
+console.log(arr);
 // [1, 2, 3, 4]
