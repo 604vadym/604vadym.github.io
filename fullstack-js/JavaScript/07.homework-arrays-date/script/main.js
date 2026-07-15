@@ -128,6 +128,13 @@ function DateCalculator(initialDate) {
         throw new Error("Invalid date format provided to DateCalculator");
     }
 
+    function formatDate(rawDate) {
+        const year = rawDate.getFullYear();
+        const month = ("0" + (rawDate.getMonth() + 1)).slice(-2);
+        const day = ("0" + rawDate.getDate()).slice(-2);
+        return `${year}-${month}-${day}`;
+    }
+
     this.addDays = function (days) {
         date.setDate(date.getDate() + days);
     };
@@ -141,13 +148,9 @@ function DateCalculator(initialDate) {
         return date.toLocaleDateString("sv-SE");
     };
 
-    // Variant to have more practice with Date and String methods. Date formatted manually
+    // Variant to have more practice with Date and String methods. Date formatted manually in inner function formatDate()
     this.getResultV2 = function () {
-        const year = date.getFullYear();
-        const month = ("0" + (date.getMonth() + 1)).slice(-2);
-        const day = ("0" + date.getDate()).slice(-2);
-
-        return `${year}-${month}-${day}`;
+        return formatDate(date);
     };
 }
 
