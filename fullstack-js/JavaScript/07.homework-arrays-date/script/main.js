@@ -137,21 +137,21 @@ function DateCalculator(initialDate) {
         return `${year}-${month}-${day}`;
     }
 
-    this.addDays = function (days) {
-        if (!Number.isFinite(days)) {
+    function checkArgument(value, name) {
+        if (!Number.isFinite(value)) {
             throw new TypeError(
-                `Argument 'days' must be a valid finite number. Received: "${days}" (type: ${typeof days})`,
+                `Argument ${name} must be a finite number. Received: "${value}" (type: ${typeof value})`,
             );
         }
+    }
+
+    this.addDays = function (days) {
+        checkArgument(days, "days");
         date.setDate(date.getDate() + days);
     };
 
     this.subtractDays = function (days) {
-        if (!Number.isFinite(days)) {
-            throw new TypeError(
-                `Argument 'days' must be a valid finite number. Received: "${days}" (type: ${typeof days})`,
-            );
-        }
+        checkArgument(days, "days");
         date.setDate(date.getDate() - days);
     };
 
