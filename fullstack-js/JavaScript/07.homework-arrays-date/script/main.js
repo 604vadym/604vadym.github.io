@@ -125,7 +125,7 @@ function DateCalculator(initialDate) {
     let date = initialDate === undefined ? new Date() : new Date(initialDate);
 
     if (isNaN(date)) {
-        throw new Error("Invalid date format provided to DateCalculator");
+        throw new TypeError("Invalid date format provided to DateCalculator");
     }
 
     function formatDate(rawDate) {
@@ -136,10 +136,20 @@ function DateCalculator(initialDate) {
     }
 
     this.addDays = function (days) {
+        if (!Number.isFinite(days)) {
+            throw new TypeError(
+                "Argument 'days' must be a valid finite number",
+            );
+        }
         date.setDate(date.getDate() + days);
     };
 
     this.subtractDays = function (days) {
+        if (!Number.isFinite(days)) {
+            throw new TypeError(
+                "Argument 'days' must be a valid finite number",
+            );
+        }
         date.setDate(date.getDate() - days);
     };
 
