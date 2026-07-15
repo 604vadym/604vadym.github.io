@@ -215,6 +215,46 @@ try {
         "Test 3: Incorrect date format -> successfully caught exception:",
         error.message,
     );
+} finally {
+    console.log("******************************");
+}
+
+try {
+    const dateCalculator = new DateCalculator("2023-01-01");
+    dateCalculator.addDays("hello");
+    console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+    console.log(dateCalculator.getResultV2()); // Виводить нову дату після додавання днів
+
+    dateCalculator.subtractDays(3);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+    console.log(dateCalculator.getResultV2()); // Виводить нову дату після віднімання днів
+
+    console.log("Test 4 Failed: Exception was not thrown for invalid argument");
+} catch (error) {
+    console.log(
+        "Test 4: Incorrect method argument -> successfully caught exception:",
+        error.message,
+    );
+} finally {
+    console.log("******************************");
+}
+
+try {
+    const dateCalculator = new DateCalculator("2023-01-01");
+    dateCalculator.addDays(5);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+    console.log(dateCalculator.getResultV2()); // Виводить нову дату після додавання днів
+
+    dateCalculator.subtractDays("hi");
+    console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+    console.log(dateCalculator.getResultV2()); // Виводить нову дату після віднімання днів
+
+    console.log("Test 5 Failed: Exception was not thrown for invalid argument");
+} catch (error) {
+    console.log(
+        "Test 5: Incorrect method argument -> successfully caught exception:",
+        error.message,
+    );
 }
 
 // export { doubleArrayElements, sumArray, SkillsManager, DateCalculator }
