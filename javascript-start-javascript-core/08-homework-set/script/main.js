@@ -16,10 +16,8 @@ console.log(
 
 const numbers = new Set();
 
-const generateRandomNumber = () => Math.floor(Math.random() * 11);
-
 while (numbers.size < 10) {
-    numbers.add(generateRandomNumber());
+    numbers.add(Math.floor(Math.random() * 11));
 }
 
 console.log(numbers);
