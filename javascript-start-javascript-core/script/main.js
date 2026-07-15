@@ -18,11 +18,29 @@ function logToTerminal(...args) {
             if (typeof arg === "bigint") {
                 return `${arg}n`;
             }
+
+            const typeStr = Object.prototype.toString.call(arg);
+
+            if (typeStr === "[object Set]") {
+                arg = Array.from(arg);
+            } else if (typeStr === "[object Map]") {
+                arg = Object.fromEntries(arg);
+            }
+
             if (typeof arg === "object" && arg !== null) {
                 return JSON.stringify(
                     arg,
-                    (key, value) =>
-                        typeof value === "bigint" ? `${value}n` : value,
+                    (key, value) => {
+                        if (typeof value === "bigint") return `${value}n`;
+
+                        const innerType = Object.prototype.toString.call(value);
+                        if (innerType === "[object Set]")
+                            return Array.from(value);
+                        if (innerType === "[object Map]")
+                            return Object.fromEntries(value);
+
+                        return value;
+                    },
                     2,
                 );
             }
@@ -36,17 +54,6 @@ function logToTerminal(...args) {
 function logErrorToTerminal(message) {
     terminal.innerHTML += `<div class="line error">[Runtime Error]: ${message}</div>`;
 }
-
-select.addEventListener("change", (e) => {
-    if (!e.target.value) {
-        terminal.innerHTML =
-            '<div class="line system">[System]: Console cleared. Waiting for selection...</div>';
-        return;
-    }
-
-    terminal.innerHTML =
-        '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
-});
 
 select.addEventListener("change", (e) => {
     if (!e.target.value) {

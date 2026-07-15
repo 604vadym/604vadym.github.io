@@ -14,23 +14,39 @@ const homeworkMap = {
 function logToTerminal(...args) {
     const msg = args
         .map((arg) => {
-            if (arg === null) {
-                return "null";
-            }
             if (typeof arg === "bigint") {
                 return `${arg}n`;
             }
-            if (typeof arg === "object") {
+
+            const typeStr = Object.prototype.toString.call(arg);
+
+            if (typeStr === "[object Set]") {
+                arg = Array.from(arg);
+            } else if (typeStr === "[object Map]") {
+                arg = Object.fromEntries(arg);
+            }
+
+            if (typeof arg === "object" && arg !== null) {
                 return JSON.stringify(
                     arg,
-                    (key, value) =>
-                        typeof value === "bigint" ? `${value}n` : value,
+                    (key, value) => {
+                        if (typeof value === "bigint") return `${value}n`;
+
+                        const innerType = Object.prototype.toString.call(value);
+                        if (innerType === "[object Set]")
+                            return Array.from(value);
+                        if (innerType === "[object Map]")
+                            return Object.fromEntries(value);
+
+                        return value;
+                    },
                     2,
                 );
             }
             return arg;
         })
         .join(" ");
+
     terminal.innerHTML += `<div class="line">${msg}</div>`;
 }
 
