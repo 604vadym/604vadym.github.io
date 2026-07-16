@@ -101,19 +101,39 @@ console.log(
         "******************************",
 );
 
-function findNegativeNumbers(array) {
-    let counter = 0;
-    for (let i = 0; i < array.length; i++) {
-        if (array[i] < 0) {
-            counter++;
+{
+    function findNegativeNumbers(array) {
+        let counter = 0;
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] < 0) {
+                counter++;
+            }
         }
+        return counter;
     }
-    return counter;
+
+    const numbers = [9, -2, 0, 100, -35, 6, 23, 8, 1, -1, 0, 12];
+
+    const result = findNegativeNumbers(numbers);
+
+    console.log(numbers);
+    console.log("Count of negative numbers in array:", result);
 }
 
-const numbers = [9, -2, 0, 100, -35, 6, 23, 8, 1, -1, 0, 12];
+console.log("******************************");
 
-const result = findNegativeNumbers(numbers);
+{
+    function findNegativeNumbers(array) {
+        return array.reduce(
+            (counter, value) => (value < 0 ? counter + 1 : counter),
+            0,
+        );
+    }
 
-console.log(numbers);
-console.log("Count of negative numbers in array:", result);
+    const numbers = [9, -2, 0, 100, -35, 6, 23, 8, 1, -1, 0, 12];
+
+    const result = findNegativeNumbers(numbers);
+
+    console.log(numbers);
+    console.log("Count of negative numbers in array:", result);
+}
