@@ -52,3 +52,17 @@ const outputViaSpread = [...links.values()]
     .join(", ");
 
 console.log(outputViaSpread);
+
+console.log("******************************");
+
+const viewsMillionForEach = [];
+
+links.forEach((views) => {
+    if (views >= 1_000_000) {
+        viewsMillionForEach.push(views);
+    }
+});
+
+const outputViaForEach = viewsMillionForEach.join(", ");
+
+console.log(outputViaForEach);
