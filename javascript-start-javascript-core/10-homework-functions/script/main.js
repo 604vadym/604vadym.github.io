@@ -157,3 +157,22 @@ console.log("******************************");
     console.log(numbers);
     console.log("Count of negative numbers in array:", result);
 }
+
+console.log("******************************");
+
+{
+    function findNegativeNumbers(array) {
+        let counter = 0;
+        for (const value of array) {
+            if (value < 0) ++counter;
+        }
+        return counter;
+    }
+
+    const numbers = [9, -2, 0, 100, -35, 6, 23, 8, 1, -1, 0, 12];
+
+    const result = findNegativeNumbers(numbers);
+
+    console.log(numbers);
+    console.log("Count of negative numbers in array:", result);
+}
