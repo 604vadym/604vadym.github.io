@@ -124,7 +124,6 @@ console.log("******************************");
 
 {
     function findNegativeNumbers(array) {
-        array.entries();
         return array.reduce(
             (counter, value) => (value < 0 ? counter + 1 : counter),
             0,
