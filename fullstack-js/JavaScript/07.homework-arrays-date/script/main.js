@@ -309,4 +309,59 @@ try {
     console.error(error.message);
 }
 
+console.log(
+    "******************************\n" +
+        "Task 4 - Variant via class\n" +
+        "******************************",
+);
+/*export*/ class DateCalculatorViaClass {
+    #date;
+
+    constructor(initialDate) {
+        this.#date =
+            initialDate === undefined ? new Date() : new Date(initialDate);
+
+        if (isNaN(this.#date)) {
+            throw new TypeError(
+                `Invalid date format provided to DateCalculator. Received: "${initialDate}"`,
+            );
+        }
+    }
+
+    #checkArgument(value, name) {
+        if (!Number.isFinite(value)) {
+            throw new TypeError(
+                `Argument ${name} must be a finite number. Received: "${value}" (type: ${typeof value})`,
+            );
+        }
+    }
+
+    addDays(days) {
+        this.#checkArgument(days, "days");
+        this.#date.setDate(this.#date.getDate() + days);
+    }
+
+    subtractDays(days) {
+        this.#checkArgument(days, "days");
+        this.#date.setDate(this.#date.getDate() - days);
+    }
+
+    getResult() {
+        return this.#date.toLocaleDateString("sv-SE");
+    }
+}
+
+try {
+    const dateCalculator = new DateCalculatorViaClass("2023-01-01");
+    dateCalculator.addDays(5);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+
+    dateCalculator.subtractDays(3);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+
+    console.log("Correct date format -> OK");
+} catch (error) {
+    console.error(error.message);
+}
+
 // export { doubleArrayElements, sumArray, SkillsManager, DateCalculator }
