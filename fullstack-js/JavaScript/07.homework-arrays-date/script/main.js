@@ -74,7 +74,7 @@ console.log(
         "******************************",
 );
 
-class SkillsManager {
+/*export*/ class SkillsManager {
     #skills;
 
     constructor() {
@@ -120,7 +120,7 @@ console.log(
         "******************************",
 );
 
-function DateCalculator(initialDate) {
+/*export*/ function DateCalculator(initialDate) {
     // use variable (instead of this.date) for closure to protect internal state of object
     let date = initialDate === undefined ? new Date() : new Date(initialDate);
 
@@ -257,6 +257,56 @@ try {
         "Test 5: Incorrect method argument -> successfully caught exception:",
         error.message,
     );
+}
+
+console.log(
+    "******************************\n" +
+        "Task 4 - Optimised Variant (memory-efficient)\n" +
+        "******************************",
+);
+/*export*/ function DateCalculatorOldSchoolOptimised(initialDate) {
+    this._date = initialDate === undefined ? new Date() : new Date(initialDate);
+
+    if (isNaN(this._date)) {
+        throw new TypeError(
+            `Invalid date format provided to DateCalculator. Received: "${initialDate}"`,
+        );
+    }
+}
+
+DateCalculatorOldSchoolOptimised.prototype.addDays = function (days) {
+    checkArgument(days, "days");
+    this._date.setDate(this._date.getDate() + days);
+};
+
+DateCalculatorOldSchoolOptimised.prototype.subtractDays = function (days) {
+    checkArgument(days, "days");
+    this._date.setDate(this._date.getDate() - days);
+};
+
+DateCalculatorOldSchoolOptimised.prototype.getResult = function () {
+    return this._date.toLocaleDateString("sv-SE");
+};
+
+function checkArgument(value, name) {
+    if (!Number.isFinite(value)) {
+        throw new TypeError(
+            `Argument ${name} must be a finite number. Received: "${value}" (type: ${typeof value})`,
+        );
+    }
+}
+
+try {
+    const dateCalculator = new DateCalculatorOldSchoolOptimised("2023-01-01");
+    dateCalculator.addDays(5);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після додавання днів
+
+    dateCalculator.subtractDays(3);
+    console.log(dateCalculator.getResult()); // Виводить нову дату після віднімання днів
+
+    console.log("Correct date format -> OK");
+} catch (error) {
+    console.error(error.message);
 }
 
 // export { doubleArrayElements, sumArray, SkillsManager, DateCalculator }
