@@ -274,6 +274,14 @@ console.log(
     }
 }
 
+const checkArgument = function (value, name) {
+    if (!Number.isFinite(value)) {
+        throw new TypeError(
+            `Argument ${name} must be a finite number. Received: "${value}" (type: ${typeof value})`,
+        );
+    }
+};
+
 DateCalculatorOldSchoolOptimised.prototype.addDays = function (days) {
     checkArgument(days, "days");
     this._date.setDate(this._date.getDate() + days);
@@ -287,14 +295,6 @@ DateCalculatorOldSchoolOptimised.prototype.subtractDays = function (days) {
 DateCalculatorOldSchoolOptimised.prototype.getResult = function () {
     return this._date.toLocaleDateString("sv-SE");
 };
-
-function checkArgument(value, name) {
-    if (!Number.isFinite(value)) {
-        throw new TypeError(
-            `Argument ${name} must be a finite number. Received: "${value}" (type: ${typeof value})`,
-        );
-    }
-}
 
 try {
     const dateCalculator = new DateCalculatorOldSchoolOptimised("2023-01-01");
