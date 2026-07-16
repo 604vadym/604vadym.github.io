@@ -31,6 +31,12 @@ console.log(
  *       calc(100, 4, "/"); 		// результат: 25
  */
 
+console.log(
+    "******************************\n" +
+        "Task 1\n" +
+        "******************************",
+);
+
 function calc(operand1, operand2, operation) {
     if (!Number.isFinite(operand1)) {
         console.log(`Error: invalid operand1: ${operand1}`);
@@ -79,3 +85,35 @@ calc(100, "hi", "*"); // Error: invalid operand
 calc(100, 4, "plus"); // Error: invalid operation
 calc(100, 4, 5); // Error: invalid operation
 calc(100, 0, "/"); // Error: division by zero
+
+/**
+ * Дано масив чисел array. Порахувати скільки від'ємних чисел у масиві.
+ *
+ * Приклад вхідного масиву:
+ *
+ * [9, -2, 0, 100, -35, 6, 23, 8, 1, -1, 0, 12]
+ * Очікуємий результат: 3
+ */
+
+console.log(
+    "******************************\n" +
+        "Task 2\n" +
+        "******************************",
+);
+
+function findNegativeNumbers(array) {
+    let counter = 0;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] < 0) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+const numbers = [9, -2, 0, 100, -35, 6, 23, 8, 1, -1, 0, 12];
+
+const result = findNegativeNumbers(numbers);
+
+console.log(numbers);
+console.log("Count of negative numbers in array:", result);
