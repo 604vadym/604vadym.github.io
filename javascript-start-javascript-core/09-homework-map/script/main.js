@@ -33,7 +33,7 @@ const links = new Map([
     ["https://www.youtube.com/watch?v=vcbnd43g", 330_000],
 ]);
 
-let viewsMillion = [];
+const viewsMillion = [];
 
 for (const views of links.values()) {
     if (views >= 1_000_000) {
@@ -44,3 +44,11 @@ for (const views of links.values()) {
 const output = viewsMillion.join(", ");
 
 console.log(output);
+
+console.log("******************************");
+
+const outputViaSpread = [...links.values()]
+    .filter((views) => views >= 1_000_000)
+    .join(", ");
+
+console.log(outputViaSpread);
