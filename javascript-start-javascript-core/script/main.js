@@ -13,6 +13,7 @@ const homeworkMap = {
     hw9: "09-homework-map/script/main.js",
     hw10: "10-homework-functions/script/main.js",
     hw11: "11-homework-DOM/script/main.js",
+    hw12: "12-homework-DOM/script/main.js",
 };
 
 function logToTerminal(...args) {
