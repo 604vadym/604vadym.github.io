@@ -8,3 +8,11 @@
  *
  * 4. Выведите в консоль измененный массив
  */
+
+const arr = ["hello", false, 70, null, 7788553789367847203n];
+
+console.log(arr);
+
+arr[1] = "world";
+
+console.log(arr);
