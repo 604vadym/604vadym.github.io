@@ -6,3 +6,12 @@
  *
  * 3. Выведите в консоль длину результирующего массива
  */
+"use strict";
+
+const arr = [1, 2, 3, 4, 5];
+
+arr.push(6);
+arr.push(7);
+arr.push(8, 9, 10);
+
+console.log(arr.length);
