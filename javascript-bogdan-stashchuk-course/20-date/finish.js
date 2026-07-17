@@ -4,3 +4,8 @@
  *
  * 2. Выведите значение в консоль
  */
+"use strict";
+
+const currentTimeUnixMs = Date.now();
+
+console.log(currentTimeUnixMs);
