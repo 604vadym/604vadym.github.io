@@ -55,7 +55,12 @@ function setUserInfoCookie(key, value) {
     const rawData = `${key}=${value}`;
     const encodedData = encodeURIComponent(rawData);
     document.cookie = `userInfo=${encodedData}; max-age=10; path=/`;
-    console.log(`Cookie successfully set: userInfo=${encodedData}`);
+
+    if (document.cookie.includes("userInfo=")) {
+        console.log(`Cookie successfully set: userInfo=${encodedData}`);
+    } else {
+        console.error("Error: Cookie 'userInfo' could not be set");
+    }
 }
 
 // Демонстрація використання функції
