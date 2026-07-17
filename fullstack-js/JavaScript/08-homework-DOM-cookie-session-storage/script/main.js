@@ -20,6 +20,12 @@ console.log(
  * 4. Функція повертає посилання на створений елемент, що дозволяє подальшу взаємодію з ним.
  */
 
+console.log(
+    "******************************\n" +
+        "Task 1\n" +
+        "******************************",
+);
+
 function createDomElement(tagName, textContent, container) {
     const element = document.createElement(tagName);
     element.textContent = textContent;
@@ -51,6 +57,12 @@ console.log(
  * 4. При встановленні cookie, функція виводить інформаційне повідомлення у консоль про успішне зберігання даних.
  */
 
+console.log(
+    "******************************\n" +
+        "Task 2\n" +
+        "******************************",
+);
+
 function setUserInfoCookie(key, value) {
     const rawData = `${key}=${value}`;
     const encodedData = encodeURIComponent(rawData);
@@ -65,15 +77,6 @@ function setUserInfoCookie(key, value) {
 
 // Демонстрація використання функції
 setUserInfoCookie("language", "en");
-
-const interval = setInterval(() => {
-    console.log("Cookie:", document.cookie);
-}, 1000);
-
-setTimeout(() => {
-    clearInterval(interval);
-    console.log("Test finished");
-}, 15000);
 
 /*
  * #3
@@ -95,16 +98,40 @@ setTimeout(() => {
  * 4. Повертає значення отримане з sessionStorage.
  */
 
+console.log(
+    "******************************\n" +
+        "Task 3\n" +
+        "******************************",
+);
+
 function saveUserInfo(key, value) {
-    // code here
+    sessionStorage.setItem(key, value);
+    console.log(`Saved ${key}: ${value}`);
 }
 
 function getUserInfo(key) {
-    // code here
+    const value = sessionStorage.getItem(key);
+    console.log(`Retrieved ${key}: ${value}`);
+    return value;
 }
 
 // Демонстрація використання функцій
-// saveUserInfo('username', 'JohnDoe');
-// console.log(getUserInfo('username')); // Виведе: JohnDoe
+saveUserInfo("username", "JohnDoe");
+console.log(getUserInfo("username")); // Виведе: JohnDoe
 
 // export { createDomElement, setUserInfoCookie, saveUserInfo, getUserInfo }
+
+console.log(
+    "******************************\n" +
+        "Task 2 - cookie: Test via interval 10s\n" +
+        "******************************",
+);
+
+const interval = setInterval(() => {
+    console.log("Cookie:", document.cookie);
+}, 1000);
+
+setTimeout(() => {
+    clearInterval(interval);
+    console.log("Test finished");
+}, 15000);
