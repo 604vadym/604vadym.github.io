@@ -12,8 +12,8 @@ const homeworkMap = {
     hw8: "08-homework-set/script/main.js",
     hw9: "09-homework-map/script/main.js",
     hw10: "10-homework-functions/script/main.js",
-    hw11: "11-homework-DOM/script/main.js",
-    hw12: "12-homework-DOM/script/main.js",
+    hw11: "11-homework-DOM/index.html",
+    hw12: "12-homework-DOM/index.html",
 };
 
 function logToTerminal(...args) {
@@ -60,22 +60,32 @@ function logErrorToTerminal(message) {
 }
 
 select.addEventListener("change", (e) => {
-    if (!e.target.value) {
+    const selectedValue = e.target.value;
+
+    if (!selectedValue) {
         terminal.innerHTML =
             '<div class="line system">[System]: Console cleared. Waiting for selection...</div>';
         return;
     }
 
-    terminal.innerHTML =
-        '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
+    const path = homeworkMap[selectedValue];
 
-    const path = homeworkMap[e.target.value];
+    if (path && path.endsWith(".html")) {
+        terminal.innerHTML =
+            '<div class="line system">[System]: Homework page opened in a new tab.</div>';
+
+        window.open(`${path}`, "_blank");
+        return;
+    }
 
     if (path) {
+        terminal.innerHTML =
+            '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
+
         runScriptInSandbox(path);
     } else {
         logErrorToTerminal(
-            `Path for homework key "${e.target.value}" was not found.`,
+            `Path for homework key "${selectedValue}" was not found.`,
         );
     }
 });
