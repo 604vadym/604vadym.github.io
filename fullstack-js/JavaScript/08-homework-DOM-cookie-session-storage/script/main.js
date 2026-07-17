@@ -20,19 +20,22 @@ console.log(
  * 4. Функція повертає посилання на створений елемент, що дозволяє подальшу взаємодію з ним.
  */
 
-console.log(
-    "******************************\n" +
-        "Task 1\n" +
-        "******************************",
-);
-
 function createDomElement(tagName, textContent, container) {
-    // code here
+    const element = document.createElement(tagName);
+    element.textContent = textContent;
+    container.appendChild(element);
+    return element;
 }
 
 // Демонстрація використання функції
-// const container = document.body // В якості прикладу використовуємо body як контейнер
-// console.log(createDomElement('p', 'This paragraph has been added to the specified container.', container))
+const container = document.body; // В якості прикладу використовуємо body як контейнер
+console.log(
+    createDomElement(
+        "p",
+        "This paragraph has been added to the specified container.",
+        container,
+    ),
+);
 
 /*
  * #2
