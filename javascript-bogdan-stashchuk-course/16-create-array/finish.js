@@ -6,3 +6,10 @@
  *
  * 3. Выведите в консоль длину массива
  */
+"use strict";
+
+const arr = [8, "hello", true];
+
+console.log(arr[0]);
+
+console.log(arr.length);
