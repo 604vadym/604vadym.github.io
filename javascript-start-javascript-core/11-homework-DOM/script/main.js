@@ -9,3 +9,10 @@ console.log(
  *
  * Важливо: Ви повинні використати метод document.getElementById() для вибору елемента.
  */
+
+function changeText(elementId, text) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.textContent = text;
+    }
+}
