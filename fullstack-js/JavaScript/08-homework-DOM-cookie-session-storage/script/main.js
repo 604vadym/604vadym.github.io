@@ -51,14 +51,24 @@ console.log(
  * 4. При встановленні cookie, функція виводить інформаційне повідомлення у консоль про успішне зберігання даних.
  */
 
-// setUserInfoCookie.js
-
 function setUserInfoCookie(key, value) {
-    // code here
+    const rawData = `${key}=${value}`;
+    const encodedData = encodeURIComponent(rawData);
+    document.cookie = `userInfo=${encodedData}; max-age=10; path=/`;
+    console.log(`Cookie successfully set: userInfo=${encodedData}`);
 }
 
 // Демонстрація використання функції
-// setUserInfoCookie('language', 'en');
+setUserInfoCookie("language", "en");
+
+const interval = setInterval(() => {
+    console.log("Cookie:", document.cookie);
+}, 1000);
+
+setTimeout(() => {
+    clearInterval(interval);
+    console.log("Test finished");
+}, 15000);
 
 /*
  * #3
