@@ -46,17 +46,11 @@ handleButtonClick("myButton", "Button clicked!");
  *
  */
 
-console.log(
-    "******************************\n" +
-        "Task 2\n" +
-        "******************************",
-);
-
 let isTracking = false;
 
 function printMousePosition(e) {
     console.log(
-        `Mouse X: [${e.clientX}], Mouse Y: [${e.clientY}]. Click on button to stop`,
+        `Mouse X: ${e.clientX}, Mouse Y: ${e.clientY}. Click on button to stop`,
     );
 }
 
@@ -108,21 +102,44 @@ trackMousePosition();
  *
  */
 
-// function createTestList() {
-//   document.body.innerHTML = `
-//     <ul id="testList">
-//       <li>Item 1</li>
-//       <li>Item 2</li>
-//       <li>Item 3</li>
-//     </ul>
-//     `
-// }
-// createTestList()
+function createTestList() {
+    const container = document.createElement("div");
+    container.innerHTML = `
+    <ul id="testList">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+    `;
+    document.body.appendChild(container);
+}
+createTestList();
 
 function setupEventDelegation(selector) {
-    // code here
+    try {
+        const list = document.querySelector(selector);
+
+        if (!list) {
+            console.log(`Element with selector "${selector}" not found`);
+            return;
+        }
+
+        list.addEventListener("click", (e) => {
+            const listItem = e.target.closest("li");
+            if (listItem) {
+                console.log(`Item clicked: ${listItem.textContent.trim()}`);
+            }
+        });
+    } catch (error) {
+        console.warn(
+            `setupEventDelegation failed with selector "${selector}". ${error.message}`,
+        );
+    }
 }
 
-// setupEventDelegation('#testList')
+setupEventDelegation("test");
+setupEventDelegation(7);
+
+setupEventDelegation("#testList");
 
 // export { handleButtonClick, trackMousePosition, setupEventDelegation }
