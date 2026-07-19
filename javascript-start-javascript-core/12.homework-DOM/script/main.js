@@ -1,0 +1,17 @@
+"use strict";
+
+console.log(
+    "JavaScriptStart #12. Домашнє завдання. DOM. Функція для зміни стилю елемента",
+);
+
+/**
+ * Створіть функцію changeBackgroundColor, яка приймає ідентифікатор HTML-елемента та колір.
+ * Функція повинна знайти елемент на сторінці за допомогою document.getElementById() та змінити його фон на заданий колір.
+ */
+
+function changeBackgroundColor(elementId, bgColor) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.style.backgroundColor = bgColor;
+    }
+}

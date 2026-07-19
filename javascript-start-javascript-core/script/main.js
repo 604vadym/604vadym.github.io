@@ -7,6 +7,14 @@ const homeworkMap = {
     hw3: "03.homework-if-else/script/main.js",
     hw4: "04.homework-functions/script/main.js",
     hw5: "05.homework-switch-case/script/main.js",
+    hw6: "06.homework-loops/script/main.js",
+    hw7: "07.homework-arrays/script/main.js",
+    hw8: "08.homework-set/script/main.js",
+    hw9: "09.homework-map/script/main.js",
+    hw10: "10.homework-functions/script/main.js",
+    hw11: "11.homework-DOM/index.html",
+    hw12: "12.homework-DOM/index.html",
+    hw13: "13.homework-events/index.html",
 };
 
 function logToTerminal(...args) {
@@ -15,11 +23,29 @@ function logToTerminal(...args) {
             if (typeof arg === "bigint") {
                 return `${arg}n`;
             }
+
+            const typeStr = Object.prototype.toString.call(arg);
+
+            if (typeStr === "[object Set]") {
+                arg = Array.from(arg);
+            } else if (typeStr === "[object Map]") {
+                arg = Object.fromEntries(arg);
+            }
+
             if (typeof arg === "object" && arg !== null) {
                 return JSON.stringify(
                     arg,
-                    (key, value) =>
-                        typeof value === "bigint" ? `${value}n` : value,
+                    (key, value) => {
+                        if (typeof value === "bigint") return `${value}n`;
+
+                        const innerType = Object.prototype.toString.call(value);
+                        if (innerType === "[object Set]")
+                            return Array.from(value);
+                        if (innerType === "[object Map]")
+                            return Object.fromEntries(value);
+
+                        return value;
+                    },
                     2,
                 );
             }
@@ -35,33 +61,32 @@ function logErrorToTerminal(message) {
 }
 
 select.addEventListener("change", (e) => {
-    if (!e.target.value) {
+    const selectedValue = e.target.value;
+
+    if (!selectedValue) {
         terminal.innerHTML =
             '<div class="line system">[System]: Console cleared. Waiting for selection...</div>';
         return;
     }
 
-    terminal.innerHTML =
-        '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
-});
+    const path = homeworkMap[selectedValue];
 
-select.addEventListener("change", (e) => {
-    if (!e.target.value) {
+    if (path && path.endsWith(".html")) {
         terminal.innerHTML =
-            '<div class="line system">[System]: Console cleared. Waiting for selection...</div>';
+            '<div class="line system">[System]: Homework page opened in a new tab.</div>';
+
+        window.open(`${path}`, "_blank");
         return;
     }
-
-    terminal.innerHTML =
-        '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
-
-    const path = homeworkMap[e.target.value];
 
     if (path) {
+        terminal.innerHTML =
+            '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
+
         runScriptInSandbox(path);
     } else {
         logErrorToTerminal(
-            `Path for homework key "${e.target.value}" was not found.`,
+            `Path for homework key "${selectedValue}" was not found.`,
         );
     }
 });

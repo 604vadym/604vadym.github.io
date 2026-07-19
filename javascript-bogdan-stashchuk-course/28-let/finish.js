@@ -2,13 +2,14 @@
  *
  * Измените код так, чтобы ошибка исчезла
  */
+"use sctrict";
 
-const myFavoriteAnimal = 'Monkey'
+let myFavoriteAnimal = "Monkey";
 
-console.log(myFavoriteAnimal)
+console.log(myFavoriteAnimal);
 // 'Monkey'
 
-const myFavoriteAnimal = 'Cat'
+myFavoriteAnimal = "Cat";
 
-console.log(myFavoriteAnimal)
+console.log(myFavoriteAnimal);
 // 'Cat'

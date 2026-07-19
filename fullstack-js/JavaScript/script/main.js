@@ -8,28 +8,47 @@ const homeworkMap = {
     hw4: "04.homework-functional-programming-currying-closures-higher-order-functions/script/main.js",
     hw5: "05.homework-closures-recursion-apply-bind/script/main.js",
     hw6: "06.homework-classes-map-set/script/main.js",
+    hw7: "07.homework-arrays-date/script/main.js",
+    hw8: "08.homework-DOM-cookie-session-storage/index.html",
+    hw9: "09.homework-events/index.html",
 };
 
 function logToTerminal(...args) {
     const msg = args
         .map((arg) => {
-            if (arg === null) {
-                return "null";
-            }
             if (typeof arg === "bigint") {
                 return `${arg}n`;
             }
-            if (typeof arg === "object") {
+
+            const typeStr = Object.prototype.toString.call(arg);
+
+            if (typeStr === "[object Set]") {
+                arg = Array.from(arg);
+            } else if (typeStr === "[object Map]") {
+                arg = Object.fromEntries(arg);
+            }
+
+            if (typeof arg === "object" && arg !== null) {
                 return JSON.stringify(
                     arg,
-                    (key, value) =>
-                        typeof value === "bigint" ? `${value}n` : value,
+                    (key, value) => {
+                        if (typeof value === "bigint") return `${value}n`;
+
+                        const innerType = Object.prototype.toString.call(value);
+                        if (innerType === "[object Set]")
+                            return Array.from(value);
+                        if (innerType === "[object Map]")
+                            return Object.fromEntries(value);
+
+                        return value;
+                    },
                     2,
                 );
             }
             return arg;
         })
         .join(" ");
+
     terminal.innerHTML += `<div class="line">${msg}</div>`;
 }
 
@@ -38,22 +57,32 @@ function logErrorToTerminal(message) {
 }
 
 select.addEventListener("change", (e) => {
-    if (!e.target.value) {
+    const selectedValue = e.target.value;
+
+    if (!selectedValue) {
         terminal.innerHTML =
             '<div class="line system">[System]: Console cleared. Waiting for selection...</div>';
         return;
     }
 
-    terminal.innerHTML =
-        '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
+    const path = homeworkMap[selectedValue];
 
-    const path = homeworkMap[e.target.value];
+    if (path && path.endsWith(".html")) {
+        terminal.innerHTML =
+            '<div class="line system">[System]: Homework page opened in a new tab.</div>';
+
+        window.open(`${path}`, "_blank");
+        return;
+    }
 
     if (path) {
+        terminal.innerHTML =
+            '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
+
         runScriptInSandbox(path);
     } else {
         logErrorToTerminal(
-            `Path for homework key "${e.target.value}" was not found.`,
+            `Path for homework key "${selectedValue}" was not found.`,
         );
     }
 });
