@@ -134,12 +134,12 @@ select.addEventListener("change", (e) => {
         return;
     }
 
-    terminal.innerHTML =
-        '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
-
     const path = homeworkMap[e.target.value];
 
     if (path) {
+        terminal.innerHTML =
+            '<div class="line system">[System]: Executing script...</div><div class="line system">--------------------------------------------------</div>';
+
         runScriptInSandbox(path);
     } else {
         logErrorToTerminal(
