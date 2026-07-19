@@ -134,7 +134,7 @@ function setupEventDelegation(selector) {
         });
     } catch (error) {
         console.warn(
-            `setupEventDelegation failed with selector "${selector}". ${error.message}`,
+            `setupEventDelegation() failed with selector "${selector}". ${error.message}`,
         );
     }
 }
@@ -142,7 +142,7 @@ function setupEventDelegation(selector) {
 setupEventDelegation("#testList");
 
 setupEventDelegation("test");
-setupEventDelegation("8");
-setupEventDelegation(7);
+setupEventDelegation("7");
+setupEventDelegation(8);
 
 // export { handleButtonClick, trackMousePosition, setupEventDelegation }
