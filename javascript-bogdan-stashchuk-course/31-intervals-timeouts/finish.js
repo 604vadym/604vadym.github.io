@@ -12,3 +12,12 @@
  * "Сообщение номер 4"
  * "Сообщение номер 5"
  */
+"use strict";
+
+let counter = 1;
+const intervalId = setInterval(
+    () => console.log(`Сообщение номер ${counter++}`),
+    2000,
+);
+
+setTimeout(() => clearInterval(intervalId), 11000);
