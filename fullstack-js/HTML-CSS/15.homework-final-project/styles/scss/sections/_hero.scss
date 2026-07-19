@@ -4,8 +4,8 @@
   @include a.flex-center;
   position: relative;
   min-height: 100vh;
-  background: url(../../assets/images/homepage/h-bg.svg) center top / 100% 100%
-    no-repeat;
+  background: url(../../assets/images/backgrounds/h-bg.svg) center top / 100%
+    100% no-repeat;
 
   &__title {
     @include a.text-bold(a.$font-size-h1);

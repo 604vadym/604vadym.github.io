@@ -413,6 +413,60 @@ body {
   }
 }
 
+.news-card {
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+.news-card__image-link ~ .news-card__info .news-card__link {
+  transition: color 0.3s;
+}
+@media (hover: hover) {
+  .news-card__image-link:hover ~ .news-card__info .news-card__link {
+    color: #f0145a;
+  }
+}
+.news-card__image {
+  border-radius: 8px 8px 0 0;
+  width: min(100%, 513px);
+  aspect-ratio: 513/200;
+}
+.news-card__info {
+  padding: 30px;
+}
+.news-card__info > *:not(:last-child) {
+  margin-bottom: 15px;
+}
+.news-card__title {
+  font-weight: 700;
+  line-height: 1;
+  font-size: 1rem;
+  color: #24a3ff;
+}
+.news-card__link {
+  transition: color 0.3s;
+}
+@media (hover: hover) {
+  .news-card__link:hover {
+    color: #f0145a;
+  }
+}
+.news-card__date {
+  font-weight: 700;
+  line-height: 1;
+  font-size: 0.75rem;
+  display: block;
+  color: #b3b3ba;
+}
+.news-card__text {
+  border-top: 4px solid #e6e6f0;
+  padding-top: 15px;
+  font-size: 0.875rem;
+  line-height: 1.5714285714;
+  color: #000;
+}
+
 .header {
   position: absolute;
   z-index: 10;
@@ -465,7 +519,7 @@ body {
   align-items: center;
   position: relative;
   min-height: 100vh;
-  background: url(../../assets/images/homepage/h-bg.svg) center top/100% 100% no-repeat;
+  background: url(../../assets/images/backgrounds/h-bg.svg) center top/100% 100% no-repeat;
 }
 .hero__title {
   font-weight: 700;
@@ -531,6 +585,29 @@ body {
   color: #323264;
   text-align: center;
   margin-bottom: 30px;
+}
+
+.publications {
+  background-color: #f5f5fa;
+  padding-top: 30px;
+}
+.publications__link {
+  margin-bottom: 10px;
+}
+.publications__title {
+  font-weight: 700;
+  line-height: 1;
+  font-size: 2.375rem;
+  background-image: linear-gradient(90.13deg, #f0145a 0.84%, #ef8080 99.96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 30px;
+}
+.publications__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
 }
 
 /*# sourceMappingURL=main.css.map */

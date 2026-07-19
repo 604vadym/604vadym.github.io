@@ -16,18 +16,32 @@
   }
 }
 
-@mixin hover-color-smooth($color, $transition-time: null) {
+@mixin hover-color-smooth($color, $transition-time: null, $target: null) {
   $time: if(
     sass($transition-time == null): v.$transition-time; else: $transition-time,
   );
 
-  @if $time and $time != 0s {
-    transition: color $time;
+  @if $target {
+    #{$target} {
+      @if $time and $time != 0s {
+        transition: color $time;
+      }
+    }
+  } @else {
+    @if $time and $time != 0s {
+      transition: color $time;
+    }
   }
 
   @media (hover: hover) {
-    &:hover {
-      color: $color;
+    @if $target {
+      &:hover #{$target} {
+        color: $color;
+      }
+    } @else {
+      &:hover {
+        color: $color;
+      }
     }
   }
 }
@@ -62,8 +76,16 @@
   @include gradient-text($gradient);
 }
 
+@mixin border-radius-right($radius) {
+  border-radius: 0 $radius $radius 0;
+}
+
 @mixin border-radius-left($radius) {
   border-radius: $radius 0 0 $radius;
+}
+
+@mixin border-radius-top($radius) {
+  border-radius: $radius $radius 0 0;
 }
 
 @mixin border-radius-bottom($radius) {
