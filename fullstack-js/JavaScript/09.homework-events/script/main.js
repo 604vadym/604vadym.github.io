@@ -56,39 +56,44 @@ let isTracking = false;
 
 function printMousePosition(e) {
     console.log(
-        `Mouse X: [${e.clientX}], Mouse Y: [${e.clientY}]. Click on button to stop.`,
+        `Mouse X: [${e.clientX}], Mouse Y: [${e.clientY}]. Click on button to stop`,
     );
 }
 
 function trackMousePosition() {
     document.addEventListener("mousemove", printMousePosition);
     isTracking = true;
-    return "Position of your mouse will be tracked. Click on button to stop.";
+    console.log("Mouse position tracking started. Click on button to stop");
 }
 
-console.log(trackMousePosition());
-
-const stopButton = document.getElementById("buttonStopMouseTrack");
-stopButton.addEventListener("click", () => {
-    if (isTracking) {
-        document.removeEventListener("mousemove", printMousePosition);
-        isTracking = false;
-        console.log(
-            "Tracking of your mouse position stopped. Click on button to run tracking again.",
-        );
-    } else {
-        console.log("Tracking of your mouse position is already stopped.");
-    }
-});
+function stopMouseTracking() {
+    document.removeEventListener("mousemove", printMousePosition);
+    isTracking = false;
+    console.log(
+        "Mouse position tracking stopped. Click on button to run tracking again",
+    );
+}
 
 const runButton = document.getElementById("buttonRunMouseTrack");
+const stopButton = document.getElementById("buttonStopMouseTrack");
+
 runButton.addEventListener("click", () => {
     if (!isTracking) {
-        console.log(trackMousePosition());
+        trackMousePosition();
     } else {
-        console.log("Your mouse position is already being tracked.");
+        console.log("Mouse position tracking is already running");
     }
 });
+
+stopButton.addEventListener("click", () => {
+    if (isTracking) {
+        stopMouseTracking();
+    } else {
+        console.log("Mouse position tracking is already stopped");
+    }
+});
+
+trackMousePosition();
 
 /*
  * #3
