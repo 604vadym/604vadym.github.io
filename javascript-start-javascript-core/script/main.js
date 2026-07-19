@@ -9,11 +9,11 @@ const homeworkMap = {
     hw5: "05.homework-switch-case/script/main.js",
     hw6: "06.homework-loops/script/main.js",
     hw7: "07.homework-arrays/script/main.js",
-    hw8: "08-homework-set/script/main.js",
-    hw9: "09-homework-map/script/main.js",
-    hw10: "10-homework-functions/script/main.js",
-    hw11: "11-homework-DOM/index.html",
-    hw12: "12-homework-DOM/index.html",
+    hw8: "08.homework-set/script/main.js",
+    hw9: "09.homework-map/script/main.js",
+    hw10: "10.homework-functions/script/main.js",
+    hw11: "11.homework-DOM/index.html",
+    hw12: "12.homework-DOM/index.html",
 };
 
 function logToTerminal(...args) {
