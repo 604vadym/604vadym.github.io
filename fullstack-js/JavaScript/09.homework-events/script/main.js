@@ -46,11 +46,49 @@ handleButtonClick("myButton", "Button clicked!");
  *
  */
 
-function trackMousePosition() {
-    // code here
+console.log(
+    "******************************\n" +
+        "Task 2\n" +
+        "******************************",
+);
+
+let isTracking = false;
+
+function printMousePosition(e) {
+    console.log(
+        `Mouse X: [${e.clientX}], Mouse Y: [${e.clientY}]. Click on button to stop.`,
+    );
 }
 
-// console.log(trackMousePosition())
+function trackMousePosition() {
+    document.addEventListener("mousemove", printMousePosition);
+    isTracking = true;
+    return "Position of your mouse will be tracked. Click on button to stop.";
+}
+
+console.log(trackMousePosition());
+
+const stopButton = document.getElementById("buttonStopMouseTrack");
+stopButton.addEventListener("click", () => {
+    if (isTracking) {
+        document.removeEventListener("mousemove", printMousePosition);
+        isTracking = false;
+        console.log(
+            "Tracking of your mouse position stopped. Click on button to run tracking again.",
+        );
+    } else {
+        console.log("Tracking of your mouse position is already stopped.");
+    }
+});
+
+const runButton = document.getElementById("buttonRunMouseTrack");
+runButton.addEventListener("click", () => {
+    if (!isTracking) {
+        console.log(trackMousePosition());
+    } else {
+        console.log("Your mouse position is already being tracked.");
+    }
+});
 
 /*
  * #3
