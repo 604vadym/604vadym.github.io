@@ -9,3 +9,10 @@ console.log(
  *
  * Важливо: Використовуйте метод addEventListener для додавання обробника події кліку.
  */
+
+function handleClick() {
+    console.log("Кнопку натиснуто");
+}
+
+const button = document.getElementById("myButton");
+button.addEventListener("click", handleClick);
