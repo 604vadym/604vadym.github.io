@@ -14,16 +14,24 @@ console.log("JS #9. JavaScript на практиці: відстеження д�
  *    - message (рядок) - повідомлення, яке буде виводитись у консоль при кліку на кнопку.
  * 2. Функція має знайти кнопку за допомогою buttonId і призначити їй обробник події кліку.
  * 3. При кліку на кнопку у консоль має виводитись задане message.
- * 4. Функція має бути експортована для подальшого використання і тестування.
  *
  */
 
+console.log(
+    "******************************\n" +
+        "Task 1\n" +
+        "******************************",
+);
+
 function handleButtonClick(buttonId, message) {
-    // code here
+    const button = document.getElementById(buttonId);
+    if (button) {
+        button.addEventListener("click", () => console.log(message));
+    }
 }
 
 // Демонстрація використання функції (припустимо, що HTML містить кнопку з ID 'myButton')
-// handleButtonClick('myButton', 'Button clicked!');
+handleButtonClick("myButton", "Button clicked!");
 
 /*
  * #2
