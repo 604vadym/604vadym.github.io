@@ -17,17 +17,15 @@ console.log("JS #9. JavaScript на практиці: відстеження д�
  *
  */
 
-console.log(
-    "******************************\n" +
-        "Task 1\n" +
-        "******************************",
-);
-
 function handleButtonClick(buttonId, message) {
     const button = document.getElementById(buttonId);
-    if (button) {
-        button.addEventListener("click", () => console.log(message));
+
+    if (!button) {
+        console.log(`Button with id "${buttonId}" not found`);
+        return;
     }
+
+    button.addEventListener("click", () => console.log(message));
 }
 
 // Демонстрація використання функції (припустимо, що HTML містить кнопку з ID 'myButton')
