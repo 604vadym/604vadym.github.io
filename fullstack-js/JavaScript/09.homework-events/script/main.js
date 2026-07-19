@@ -31,6 +31,10 @@ function handleButtonClick(buttonId, message) {
 // Демонстрація використання функції (припустимо, що HTML містить кнопку з ID 'myButton')
 handleButtonClick("myButton", "Button clicked!");
 
+handleButtonClick("test", "Button clicked!");
+handleButtonClick("7", "Button clicked!");
+handleButtonClick(8, "Button clicked!");
+
 /*
  * #2
  *
@@ -135,9 +139,10 @@ function setupEventDelegation(selector) {
     }
 }
 
-setupEventDelegation("test");
-setupEventDelegation(7);
-
 setupEventDelegation("#testList");
+
+setupEventDelegation("test");
+setupEventDelegation("8");
+setupEventDelegation(7);
 
 // export { handleButtonClick, trackMousePosition, setupEventDelegation }
