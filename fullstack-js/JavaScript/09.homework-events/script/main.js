@@ -114,28 +114,21 @@ function createTestList() {
 createTestList();
 
 function setupEventDelegation(selector) {
-    try {
-        const list = document.querySelector(selector);
+    const list = document.querySelector(selector);
 
-        if (!list) {
-            console.error(
-                `DOM Error: Element with selector "${selector}" not found`,
-            );
-            return;
-        }
-
-        list.addEventListener("click", (e) => {
-            const listItem = e.target.closest("li");
-            if (listItem) {
-                console.log(`Item clicked: ${listItem.textContent.trim()}`);
-            }
-        });
-    } catch (error) {
+    if (!list) {
         console.error(
-            `setupEventDelegation() failed with selector "${selector}".`,
-            error,
+            `DOM Error: Element with selector "${selector}" not found`,
         );
+        return;
     }
+
+    list.addEventListener("click", (e) => {
+        const listItem = e.target.closest("li");
+        if (listItem) {
+            console.log(`Item clicked: ${listItem.textContent.trim()}`);
+        }
+    });
 }
 
 setupEventDelegation("#testList");
