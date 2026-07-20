@@ -216,3 +216,28 @@ console.log(array);
 
 array = even(-5, 7, undefined, null, 1024, "$", "(", ")", 0, 64, { age: 12 }); // Результат: { 1024, 64 }
 console.log(array);
+
+/**
+ * Дано масив чисел array, порахувати середнє арифметичне всіх чисел у ньому. Функція має повертати число якщо масив не пустий, і нуль у випадку якщо масив пустий.
+ *
+ * Приклади:
+ *
+ * [10, 20, 30] → 20
+ * [100, 300, 500, 700] → 400
+ */
+
+console.log(
+    "******************************\n" +
+        "Task 4\n" +
+        "******************************",
+);
+
+function calculateAverage(arr) {
+    return arr.length === 0
+        ? 0
+        : arr.reduce((acc, val) => acc + val, 0) / arr.length;
+}
+
+console.log(calculateAverage([10, 20, 30])); // → 20
+console.log(calculateAverage([100, 300, 500, 700])); // → 400
+console.log(calculateAverage([])); // → 0
