@@ -16,7 +16,12 @@
   }
 }
 
-@mixin hover-color-smooth($color, $transition-time: null, $target: null) {
+@mixin hover-color-smooth(
+  $color,
+  $transition-time: null,
+  $trigger: null,
+  $target: null
+) {
   $time: if(
     sass($transition-time == null): v.$transition-time; else: $transition-time,
   );
@@ -34,7 +39,11 @@
   }
 
   @media (hover: hover) {
-    @if $target {
+    @if $trigger and $target {
+      &:has(#{$trigger}:hover) #{$target} {
+        color: $color;
+      }
+    } @else if $target {
       &:hover #{$target} {
         color: $color;
       }

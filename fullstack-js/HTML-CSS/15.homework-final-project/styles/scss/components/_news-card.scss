@@ -2,16 +2,13 @@
 
 .news-card {
   @include a.border-radius-bottom(8px);
-  display: flex;
-  flex-direction: column;
   background-color: a.$color-white;
 
-  &__image-link {
-    @include a.hover-color-smooth(
-      $color: a.$color-accent,
-      $target: "~ .news-card__info .news-card__link"
-    );
-  }
+  @include a.hover-color-smooth(
+    $color: a.$color-accent,
+    $trigger: ".news-card__image-link",
+    $target: ".news-card__link"
+  );
 
   &__image {
     @include a.border-radius-top(8px);
@@ -27,13 +24,9 @@
     }
   }
 
-  &__title {
-    @include a.text-bold(a.$font-size-main);
-    color: a.$color-active-regular;
-  }
-
   &__link {
     @include a.hover-color-smooth(a.$color-accent);
+    color: a.$color-active-regular;
   }
 
   &__date {

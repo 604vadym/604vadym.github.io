@@ -38,6 +38,10 @@
     justify-content: center;
   }
 
+  &--image {
+    display: block;
+  }
+
   &__icon {
     width: 24px;
     flex-shrink: 0;
