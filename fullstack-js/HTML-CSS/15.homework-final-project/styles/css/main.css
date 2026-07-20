@@ -136,6 +136,13 @@ body {
     color: #f0145a;
   }
 }
+@media (hover: hover) {
+  .menu__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
+  }
+}
 
 .language-selector {
   display: flex;

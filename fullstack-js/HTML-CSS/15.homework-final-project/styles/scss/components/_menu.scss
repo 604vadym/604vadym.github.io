@@ -8,5 +8,10 @@
 
   &__link {
     @include a.hover-color-smooth(a.$color-accent);
+    @include a.hover-desktop {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-thickness: 2px;
+    }
   }
 }
