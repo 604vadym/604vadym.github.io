@@ -212,9 +212,6 @@ body {
 .link--icon {
   justify-content: center;
 }
-.link--image {
-  display: block;
-}
 .link__icon {
   width: 24px;
   flex-shrink: 0;
