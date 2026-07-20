@@ -21,7 +21,7 @@ function handleButtonClick(buttonId, message) {
     const button = document.getElementById(buttonId);
 
     if (!button) {
-        console.log(`Button with id "${buttonId}" not found`);
+        console.error(`DOM Error: Button with id "${buttonId}" not found`);
         return;
     }
 
@@ -30,10 +30,6 @@ function handleButtonClick(buttonId, message) {
 
 // Демонстрація використання функції (припустимо, що HTML містить кнопку з ID 'myButton')
 handleButtonClick("myButton", "Button clicked!");
-
-handleButtonClick("test", "Button clicked!");
-handleButtonClick("7", "Button clicked!");
-handleButtonClick(8, "Button clicked!");
 
 /*
  * #2
@@ -118,31 +114,23 @@ function createTestList() {
 createTestList();
 
 function setupEventDelegation(selector) {
-    try {
-        const list = document.querySelector(selector);
+    const list = document.querySelector(selector);
 
-        if (!list) {
-            console.log(`Element with selector "${selector}" not found`);
-            return;
-        }
-
-        list.addEventListener("click", (e) => {
-            const listItem = e.target.closest("li");
-            if (listItem) {
-                console.log(`Item clicked: ${listItem.textContent.trim()}`);
-            }
-        });
-    } catch (error) {
-        console.warn(
-            `setupEventDelegation() failed with selector "${selector}". ${error.message}`,
+    if (!list) {
+        console.error(
+            `DOM Error: Element with selector "${selector}" not found`,
         );
+        return;
     }
+
+    list.addEventListener("click", (e) => {
+        const listItem = e.target.closest("li");
+        if (listItem) {
+            console.log(`Item clicked: ${listItem.textContent.trim()}`);
+        }
+    });
 }
 
 setupEventDelegation("#testList");
-
-setupEventDelegation("test");
-setupEventDelegation("7");
-setupEventDelegation(8);
 
 // export { handleButtonClick, trackMousePosition, setupEventDelegation }
