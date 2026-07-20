@@ -10,6 +10,8 @@
 
   &__slide {
     display: none;
+    border-radius: a.$border-radius;
+    overflow: hidden;
 
     &--active {
       display: flex;
@@ -17,7 +19,6 @@
   }
 
   &__image {
-    @include a.border-radius-left(a.$border-radius);
     width: min(100%, 400px);
     aspect-ratio: 400 / 298;
     flex-shrink: 0;

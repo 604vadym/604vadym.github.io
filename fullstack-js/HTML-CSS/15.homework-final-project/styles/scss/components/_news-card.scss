@@ -1,7 +1,8 @@
 @use "../abstracts/" as a;
 
 .news-card {
-  @include a.border-radius-bottom(8px);
+  border-radius: a.$border-radius-sm;
+  overflow: hidden;
   background-color: a.$color-white;
 
   @include a.hover-color-smooth(
@@ -11,7 +12,6 @@
   );
 
   &__image {
-    @include a.border-radius-top(8px);
     width: min(100%, 513px);
     aspect-ratio: 513 / 200;
   }
@@ -36,7 +36,7 @@
   }
 
   &__text {
-    border-top: 4px solid a.$color-grey-separator;
+    border-top: a.$line-thickness solid a.$color-grey-separator;
     padding-top: a.$space-sm;
     font-size: a.$font-size-caption;
     line-height: a.$line-height-tight;

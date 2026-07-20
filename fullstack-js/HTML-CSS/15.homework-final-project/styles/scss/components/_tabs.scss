@@ -8,7 +8,8 @@
   &__list {
     padding-block: a.$space-sm;
     padding-inline: 0 a.$space-lg;
-    border-right: 4px solid color.adjust(a.$color-basic, $alpha: -0.7);
+    border-right: a.$line-thickness solid
+      color.adjust(a.$color-basic, $alpha: -0.7);
   }
 
   &__item:not(:last-child) {

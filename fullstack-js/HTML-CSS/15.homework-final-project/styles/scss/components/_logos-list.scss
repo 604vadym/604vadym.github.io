@@ -2,6 +2,11 @@
 @use "sass:list";
 
 .logos-list {
+  @media (min-width: a.$container-width) {
+    border-radius: a.$border-radius;
+    overflow: hidden;
+  }
+
   &__item {
     @include a.flex-center;
     width: min(100%, 430px);
@@ -25,25 +30,5 @@
     grid-template-columns: repeat(4, 1fr);
     justify-items: center;
     margin-inline: -(a.$space-lg);
-
-    @media (min-width: a.$container-width) {
-      .logos-list__item {
-        &:first-child {
-          border-top-left-radius: a.$border-radius;
-        }
-
-        &:nth-child(4) {
-          border-top-right-radius: a.$border-radius;
-        }
-
-        &:nth-child(9) {
-          border-bottom-left-radius: a.$border-radius;
-        }
-
-        &:last-child {
-          border-bottom-right-radius: a.$border-radius;
-        }
-      }
-    }
   }
 }
