@@ -117,7 +117,7 @@ console.log(
     const result = findNegativeNumbers(numbers);
 
     console.log(numbers);
-    console.log("Count of negative numbers in array:", result);
+    console.log("Count of negative numbers in array:", result); // Очікуємий результат: 3
 }
 
 console.log("******************************");
@@ -135,7 +135,7 @@ console.log("******************************");
     const result = findNegativeNumbers(numbers);
 
     console.log(numbers);
-    console.log("Count of negative numbers in array:", result);
+    console.log("Count of negative numbers in array:", result); // Очікуємий результат: 3
 }
 
 console.log("******************************");
@@ -154,7 +154,7 @@ console.log("******************************");
     const result = findNegativeNumbers(numbers);
 
     console.log(numbers);
-    console.log("Count of negative numbers in array:", result);
+    console.log("Count of negative numbers in array:", result); // Очікуємий результат: 3
 }
 
 console.log("******************************");
@@ -173,5 +173,46 @@ console.log("******************************");
     const result = findNegativeNumbers(numbers);
 
     console.log(numbers);
-    console.log("Count of negative numbers in array:", result);
+    console.log("Count of negative numbers in array:", result); // Очікуємий результат: 3
 }
+
+/**
+ * Завдання
+ * Створити функцію even() яка приймає “…args” на вхід
+ * Функція має визначати чи є параметр числом
+ * Якщо параметр є позитивним парним числом - він має додаватися в масив result
+ * Функція має повертати масив заповнений тільки парними числами (2,4,6,8,10, …)
+ * Отриманий масив вивести на екран
+ * Приклад 1:
+ *
+ * Вхідні параметри:
+ *
+ * let array = even(4, 9, 16, 25, 29, 180, 66, 77, “hello”, true, 0, 128, 11);
+ * Результат:
+ * { 4, 16, 180, 66, 128 }
+ * Приклад 2:
+ *
+ * Вхідні параметри:
+ *
+ * let array = even(-5, 7, undefined, null, 1024, “$”, “(”, “)”, 0, 64, {age: 12});
+ * Результат:
+ * { 1024, 64 }
+ */
+
+console.log(
+    "******************************\n" +
+        "Task 3\n" +
+        "******************************",
+);
+
+function even(...args) {
+    return args.filter(
+        (arg) => typeof arg == "number" && arg > 0 && arg % 2 === 0,
+    );
+}
+
+let array = even(4, 9, 16, 25, 29, 180, 66, 77, "hello", true, 0, 128, 11); // Результат: [ 4, 16, 180, 66, 128 ]
+console.log(array);
+
+array = even(-5, 7, undefined, null, 1024, "$", "(", ")", 0, 64, { age: 12 }); // Результат: { 1024, 64 }
+console.log(array);
