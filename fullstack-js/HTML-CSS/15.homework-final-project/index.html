@@ -268,7 +268,12 @@
           <div class="team__content container">
             <div class="slider team__slider">
               <div class="slider__body">
-                <div class="slider__slide slider__slide--active">
+                <div
+                  class="slider__slide slider__slide--active"
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label="1 of 3"
+                >
                   <div class="image slider__image">
                     <img
                       class="image__img"
@@ -306,23 +311,29 @@
                 </div>
               </div>
 
-              <div class="pagination slider__pagination">
+              <nav
+                class="pagination slider__pagination"
+                aria-label="Slider navigation"
+              >
                 <button
                   class="button pagination__dot pagination__dot--active"
                   type="button"
                   aria-label="Go to slide 1"
+                  aria-current="true"
                 ></button>
                 <button
                   class="button pagination__dot"
                   type="button"
                   aria-label="Go to slide 2"
+                  aria-current="false"
                 ></button>
                 <button
                   class="button pagination__dot"
                   type="button"
                   aria-label="Go to slide 3"
+                  aria-current="false"
                 ></button>
-              </div>
+              </nav>
             </div>
           </div>
         </div>
