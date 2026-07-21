@@ -28,12 +28,24 @@
 }
 
 .slider {
+  width: min(100%, 600px);
+  aspect-ratio: 600 / 534;
+  overflow: hidden;
+
   .slider__track {
     display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slider__slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .slider__image {
-    width: min(100%, 600px);
-    aspect-ratio: 600 / 534;
+    width: 100%;
+    height: 100%;
   }
 }
