@@ -42,8 +42,10 @@
       transform 0.1s;
 
     &:not(.pagination__dot--active) {
-      &:hover {
-        transform: scale(1.15);
+      @media (hover: hover) {
+        &:hover {
+          transform: scale(1.15);
+        }
       }
 
       &:active {
@@ -101,11 +103,13 @@
     opacity: 0.6;
     transition: opacity 0.2s;
 
-    &:hover {
-      opacity: 1;
+    @media (hover: hover) {
+      &:hover {
+        opacity: 1;
 
-      & > svg {
-        transform: scale(1.15);
+        & > svg {
+          transform: scale(1.15);
+        }
       }
     }
 
