@@ -21,3 +21,30 @@ console.log(
  * слайдера на чистому JavaScript та ефективна взаємодія з DOM, щоб забезпечити його плавну та інтуїтивно зрозумілу функціональність у різноманітних середовищах.
  *
  */
+
+function isDOMElementsFound({ elements = null, collections = null } = {}) {
+    if (!elements && !collections) {
+        console.warn(`isDOMElementsFound(): invalid function call`);
+        return false;
+    }
+
+    if (elements) {
+        for (const [name, element] of Object.entries(elements)) {
+            if (!element) {
+                console.error(`DOM Error: element ${name} not found`);
+                return false;
+            }
+        }
+    }
+
+    if (collections) {
+        for (const [name, element] of Object.entries(collections)) {
+            if (element.length === 0) {
+                console.error(`DOM Error: elements ${name} not found`);
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
