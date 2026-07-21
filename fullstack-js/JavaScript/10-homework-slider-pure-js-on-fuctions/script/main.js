@@ -49,6 +49,27 @@ function isDOMElementsFound({ elements = null, collections = null } = {}) {
     return true;
 }
 
+function initPagination(slidesCount, pagination) {
+    const paginationDots = [];
+
+    for (let i = 0; i < slidesCount; i++) {
+        const paginationDot = document.createElement("button");
+        paginationDot.classList.add("button");
+        paginationDot.classList.add("pagination__dot");
+        paginationDots.push(pagination.appendChild(paginationDot));
+        paginationDots[i].addEventListener("click", () =>
+            console.log(`clickDot${i}`),
+        );
+    }
+    paginationDots[0].classList.add("pagination__dot--active");
+
+    return paginationDots;
+}
+
+function MoveSlide(track, slideIndex, slideWidth) {
+    track.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+}
+
 function initSlider() {
     const slides = document.querySelectorAll(".slider__slide");
     const pagination = document.querySelector(".slider__pagination");
@@ -68,18 +89,8 @@ function initSlider() {
 
 function startSlider(slides, pagination, btnPrev, btnNext) {
     const SLIDES_COUNT = slides.length;
-    const paginationDots = [];
 
-    for (let i = 0; i < SLIDES_COUNT; i++) {
-        const paginationDot = document.createElement("button");
-        paginationDot.classList.add("button");
-        paginationDot.classList.add("pagination__dot");
-        paginationDots.push(pagination.appendChild(paginationDot));
-        paginationDots[i].addEventListener("click", () =>
-            console.log(`clickDot${i}`),
-        );
-    }
-    paginationDots[0].classList.add("pagination__dot--active");
+    const paginationDots = initPagination(SLIDES_COUNT, pagination);
 
     btnPrev.addEventListener("click", () => console.log("clickPrev"));
     btnNext.addEventListener("click", () => console.log("clickNext"));
