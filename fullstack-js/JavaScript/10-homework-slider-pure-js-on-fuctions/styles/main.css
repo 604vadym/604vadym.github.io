@@ -27,6 +27,37 @@
   }
 }
 
+.pagination {
+  display: flex;
+  gap: 15px;
+
+  .pagination__dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: black;
+    opacity: 0.6;
+    transition:
+      opacity 0.2s,
+      transform 0.1s;
+
+    &:not(.pagination__dot--active) {
+      &:hover {
+        transform: scale(1.15);
+      }
+
+      &:active {
+        transform: scale(1);
+      }
+    }
+  }
+
+  .pagination__dot--active {
+    pointer-events: none;
+    opacity: 1;
+  }
+}
+
 /**************************************************/
 /*                     SLIDER                      /
 /**************************************************/
@@ -39,6 +70,7 @@
     width: 100%;
     aspect-ratio: 600 / 534;
     overflow: hidden;
+    margin-bottom: 40px;
   }
 
   .slider__track {
@@ -97,5 +129,10 @@
 
   .slider__btn--next {
     right: -100px;
+  }
+
+  .slider__pagination {
+    display: flex;
+    justify-content: center;
   }
 }
