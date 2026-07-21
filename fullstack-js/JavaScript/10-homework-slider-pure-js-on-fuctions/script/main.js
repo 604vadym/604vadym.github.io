@@ -67,7 +67,7 @@ function initPagination(slidesCount, pagination) {
 }
 
 function MoveSlide(track, slideIndex, slideWidth) {
-    track.style.transform = `translateX(${-slideIndex * slideWidth}px)`;
+    track.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
 }
 
 function initSlider() {
@@ -97,16 +97,16 @@ function startSlider(slides, pagination, btnPrev, btnNext) {
 
     function nextSlide() {
         currentIndex = (currentIndex + 1) % SLIDES_COUNT;
-        MoveSlide(track, currentIndex, track.clientWidth);
+        MoveSlide(track, currentIndex, slides[0].clientWidth);
     }
 
     function prevSlide() {
-        currentIndex = (currentIndex - 1) % SLIDES_COUNT;
-        MoveSlide(track, currentIndex, track.clientWidth);
+        currentIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+        MoveSlide(track, currentIndex, slides[0].clientWidth);
     }
 
-    btnNext.addEventListener("click", () => nextSlide());
-    btnPrev.addEventListener("click", () => prevSlide());
+    btnNext.addEventListener("click", nextSlide);
+    btnPrev.addEventListener("click", prevSlide);
 }
 
 initSlider();
