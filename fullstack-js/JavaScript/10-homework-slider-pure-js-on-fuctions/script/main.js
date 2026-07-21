@@ -48,3 +48,20 @@ function isDOMElementsFound({ elements = null, collections = null } = {}) {
 
     return true;
 }
+
+function initSlider() {
+    const slides = document.querySelectorAll(".slider__slide");
+    const pagination = document.querySelector(".slider__pagination");
+    const btnPrev = document.querySelector(".slider__btn--prev");
+    const btnNext = document.querySelector(".slider__btn--next");
+
+    if (
+        !isDOMElementsFound({
+            elements: { pagination, btnPrev, btnNext },
+            collections: { slides },
+        })
+    )
+        return;
+}
+
+initSlider();
