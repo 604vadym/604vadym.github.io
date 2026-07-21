@@ -27,15 +27,25 @@
   }
 }
 
+/**************************************************/
+/*                     SLIDER                      /
+/**************************************************/
+
 .slider {
+  position: relative;
   width: min(100%, 600px);
-  aspect-ratio: 600 / 534;
-  overflow: hidden;
+
+  .slider__viewport {
+    width: 100%;
+    aspect-ratio: 600 / 534;
+    overflow: hidden;
+  }
 
   .slider__track {
     display: flex;
     width: 100%;
     height: 100%;
+    transition: transform 0.4s;
   }
 
   .slider__slide {
@@ -47,5 +57,45 @@
   .slider__image {
     width: 100%;
     height: 100%;
+  }
+
+  .slider__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    color: black;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+
+      & > svg {
+        transform: scale(1.15);
+      }
+    }
+
+    &:active {
+      & > svg {
+        transform: scale(1);
+      }
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+      transition: transform 0.2s;
+    }
+  }
+
+  .slider__btn--prev {
+    left: -100px;
+  }
+
+  .slider__btn--next {
+    right: -100px;
   }
 }
