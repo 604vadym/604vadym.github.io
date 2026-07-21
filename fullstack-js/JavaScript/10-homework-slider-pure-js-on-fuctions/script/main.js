@@ -66,8 +66,8 @@ function initPagination(slidesCount, pagination) {
     return paginationDots;
 }
 
-function MoveSlide(track, slideIndex, slideWidth, direction) {
-    track.style.transform = `translateX(${direction}${slideIndex * slideWidth}px)`;
+function MoveSlide(track, slideIndex, slideWidth) {
+    track.style.transform = `translateX(${-slideIndex * slideWidth}px)`;
 }
 
 function initSlider() {
@@ -94,13 +94,19 @@ function startSlider(slides, pagination, btnPrev, btnNext) {
 
     let currentIndex = 0;
 
-    btnPrev.addEventListener("click", () => console.log("clickPrev"));
+    btnPrev.addEventListener("click", () => prevSlide());
     btnNext.addEventListener("click", () => nextSlide());
 
     function nextSlide() {
         currentIndex = (currentIndex + 1) % SLIDES_COUNT;
         const track = document.getElementsByClassName("slider__track")[0];
-        MoveSlide(track, currentIndex, track.clientWidth, "-");
+        MoveSlide(track, currentIndex, track.clientWidth);
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1) % SLIDES_COUNT;
+        const track = document.getElementsByClassName("slider__track")[0];
+        MoveSlide(track, currentIndex, track.clientWidth);
     }
 }
 
