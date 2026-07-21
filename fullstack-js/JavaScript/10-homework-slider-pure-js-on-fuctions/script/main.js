@@ -93,21 +93,20 @@ function startSlider(slides, pagination, btnPrev, btnNext) {
     const paginationDots = initPagination(SLIDES_COUNT, pagination);
 
     let currentIndex = 0;
-
-    btnPrev.addEventListener("click", () => prevSlide());
-    btnNext.addEventListener("click", () => nextSlide());
+    const track = document.querySelector(".slider__track");
 
     function nextSlide() {
         currentIndex = (currentIndex + 1) % SLIDES_COUNT;
-        const track = document.getElementsByClassName("slider__track")[0];
         MoveSlide(track, currentIndex, track.clientWidth);
     }
 
     function prevSlide() {
         currentIndex = (currentIndex - 1) % SLIDES_COUNT;
-        const track = document.getElementsByClassName("slider__track")[0];
         MoveSlide(track, currentIndex, track.clientWidth);
     }
+
+    btnNext.addEventListener("click", () => nextSlide());
+    btnPrev.addEventListener("click", () => prevSlide());
 }
 
 initSlider();
