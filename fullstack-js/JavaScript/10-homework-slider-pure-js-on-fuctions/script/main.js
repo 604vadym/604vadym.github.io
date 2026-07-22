@@ -90,7 +90,7 @@ function initSlider() {
     const SLIDES_COUNT = slides.length;
     const TRACK_TRANSITION = track.style.transition;
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
-    const paginationDotsMap = { [SLIDES_COUNT]: 0, 1: SLIDES_COUNT - 1 };
+    const paginationDotsMap = { 0: 1, [SLIDES_COUNT + 1]: SLIDES_COUNT };
     let currentIndex = 1;
 
     const paginationDots = initPagination(pagination, SLIDES_COUNT);
@@ -117,7 +117,12 @@ function initSlider() {
 
         if (currentIndex !== oldIndex) {
             updateSlider();
-            if (!teleportMap[currentIndex]) {
+            if (currentIndex in teleportMap) {
+                updatePagination(
+                    teleportMap[currentIndex] - 1,
+                    paginationDotsMap[currentIndex] - 1,
+                );
+            } else {
                 updatePagination(currentIndex - 1, oldIndex - 1);
             }
         }
@@ -127,7 +132,6 @@ function initSlider() {
         if (currentIndex in teleportMap) {
             currentIndex = teleportMap[currentIndex];
             teleportSlides();
-            updatePagination(currentIndex - 1, paginationDotsMap[currentIndex]);
         }
     }
 
@@ -138,6 +142,7 @@ function initSlider() {
     }
 
     function updatePagination(newIndex, oldIndex) {
+        console.log(newIndex, oldIndex);
         paginationDots[oldIndex].classList.remove("pagination__dot--active");
         paginationDots[newIndex].classList.add("pagination__dot--active");
     }
