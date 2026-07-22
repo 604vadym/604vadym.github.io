@@ -90,7 +90,6 @@ function initSlider() {
     const SLIDES_COUNT = slides.length;
     const TRACK_TRANSITION = track.style.transition;
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
-    const paginationDotsMap = { 0: 1, [SLIDES_COUNT + 1]: SLIDES_COUNT };
     let currentIndex = 1;
 
     const paginationDots = initPagination(pagination, SLIDES_COUNT);
@@ -108,23 +107,15 @@ function initSlider() {
         let oldIndex = currentIndex;
 
         if (button.classList.contains("slider__btn--next")) {
-            currentIndex = (currentIndex + 1) % (SLIDES_COUNT + 2);
+            ++currentIndex;
         } else if (button.classList.contains("slider__btn--prev")) {
-            currentIndex = (currentIndex + SLIDES_COUNT) % (SLIDES_COUNT + 1);
+            --currentIndex;
         } else if (button.classList.contains("pagination__dot")) {
             currentIndex = paginationDots.indexOf(button);
         }
 
         if (currentIndex !== oldIndex) {
             updateSlider();
-            if (currentIndex in teleportMap) {
-                updatePagination(
-                    teleportMap[currentIndex] - 1,
-                    paginationDotsMap[currentIndex] - 1,
-                );
-            } else {
-                updatePagination(currentIndex - 1, oldIndex - 1);
-            }
         }
     }
 
@@ -139,12 +130,14 @@ function initSlider() {
         const slideWidth = slides[0].clientWidth;
         const offset = currentIndex * slideWidth;
         track.style.transform = `translateX(-${offset}px)`;
+        updatePagination();
     }
 
-    function updatePagination(newIndex, oldIndex) {
-        console.log(newIndex, oldIndex);
-        paginationDots[oldIndex].classList.remove("pagination__dot--active");
-        paginationDots[newIndex].classList.add("pagination__dot--active");
+    function updatePagination() {
+        const activeDot = document.querySelector(".pagination__dot--active");
+        activeDot.classList.remove("pagination__dot--active");
+        let dotIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+        paginationDots[dotIndex].classList.add("pagination__dot--active");
     }
 
     function teleportSlides() {
