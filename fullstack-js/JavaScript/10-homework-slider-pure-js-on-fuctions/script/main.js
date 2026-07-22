@@ -57,9 +57,6 @@ function initPagination(slidesCount, pagination) {
         paginationDot.classList.add("button");
         paginationDot.classList.add("pagination__dot");
         paginationDots.push(pagination.appendChild(paginationDot));
-        paginationDots[i].addEventListener("click", () =>
-            console.log(`clickDot${i}`),
-        );
     }
     paginationDots[0].classList.add("pagination__dot--active");
 
@@ -73,8 +70,8 @@ function MoveSlide(track, slideIndex, slideWidth) {
 function initSlider() {
     const slides = document.querySelectorAll(".slider__slide");
     const pagination = document.querySelector(".slider__pagination");
-    const btnPrev = document.querySelector(".slider__btn--prev");
-    const btnNext = document.querySelector(".slider__btn--next");
+    const btnPrev = document.querySelector(".slider__btn--next");
+    const btnNext = document.querySelector(".slider__btn--prev");
 
     if (
         !isDOMElementsFound({
@@ -88,25 +85,41 @@ function initSlider() {
 }
 
 function startSlider(slides, pagination, btnPrev, btnNext) {
+    let currentIndex = 0;
     const SLIDES_COUNT = slides.length;
-
+    const slider = document.querySelector(".slider");
+    const track = document.querySelector(".slider__track");
     const paginationDots = initPagination(SLIDES_COUNT, pagination);
 
-    let currentIndex = 0;
-    const track = document.querySelector(".slider__track");
+    if (
+        !isDOMElementsFound({
+            elements: { slider, track },
+        })
+    )
+        return;
+
+    slider.addEventListener("click", handleClick);
+
+    function handleClick(e) {
+        const button = e.target.closest(".slider__btn");
+        if (!button) return;
+
+        if (button.classList.contains("slider__btn--next")) {
+            nextSlide();
+        } else if (button.classList.contains("slider__btn--prev")) {
+            prevSlide();
+        }
+
+        MoveSlide(track, currentIndex, slides[0].clientWidth);
+    }
 
     function nextSlide() {
         currentIndex = (currentIndex + 1) % SLIDES_COUNT;
-        MoveSlide(track, currentIndex, slides[0].clientWidth);
     }
 
     function prevSlide() {
         currentIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
-        MoveSlide(track, currentIndex, slides[0].clientWidth);
     }
-
-    btnNext.addEventListener("click", nextSlide);
-    btnPrev.addEventListener("click", prevSlide);
 }
 
 initSlider();
