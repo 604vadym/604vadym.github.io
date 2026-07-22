@@ -63,40 +63,26 @@ function initPagination(slidesCount, pagination) {
     return paginationDots;
 }
 
-function MoveSlide(track, slideIndex, slideWidth) {
-    track.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
-}
-
 function initSlider() {
+    const slider = document.querySelector(".slider");
+    const track = document.querySelector(".slider__track");
     const slides = document.querySelectorAll(".slider__slide");
+    const btnPrev = document.querySelector(".slider__btn--prev");
+    const btnNext = document.querySelector(".slider__btn--next");
     const pagination = document.querySelector(".slider__pagination");
-    const btnPrev = document.querySelector(".slider__btn--next");
-    const btnNext = document.querySelector(".slider__btn--prev");
+
+    const SLIDES_COUNT = slides.length;
+    let currentIndex = 0;
 
     if (
         !isDOMElementsFound({
-            elements: { pagination, btnPrev, btnNext },
+            elements: { slider, track, btnPrev, btnNext, pagination },
             collections: { slides },
         })
     )
         return;
 
-    startSlider(slides, pagination, btnPrev, btnNext);
-}
-
-function startSlider(slides, pagination, btnPrev, btnNext) {
-    let currentIndex = 0;
-    const SLIDES_COUNT = slides.length;
-    const slider = document.querySelector(".slider");
-    const track = document.querySelector(".slider__track");
     const paginationDots = initPagination(SLIDES_COUNT, pagination);
-
-    if (
-        !isDOMElementsFound({
-            elements: { slider, track },
-        })
-    )
-        return;
 
     slider.addEventListener("click", handleClick);
 
@@ -110,7 +96,7 @@ function startSlider(slides, pagination, btnPrev, btnNext) {
             prevSlide();
         }
 
-        MoveSlide(track, currentIndex, slides[0].clientWidth);
+        moveSlide();
     }
 
     function nextSlide() {
@@ -119,6 +105,10 @@ function startSlider(slides, pagination, btnPrev, btnNext) {
 
     function prevSlide() {
         currentIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+    }
+
+    function moveSlide() {
+        track.style.transform = `translateX(-${currentIndex * slides[0].clientWidth}px)`;
     }
 }
 
