@@ -77,11 +77,21 @@ function initSlider() {
     const track = document.querySelector(".slider__track");
     const btnNext = document.querySelector(".slider__btn--next");
     const btnPrev = document.querySelector(".slider__btn--prev");
+    const btnPlay = document.querySelector(".slider__btn--play");
+    const btnPause = document.querySelector(".slider__btn--pause");
     const pagination = document.querySelector(".slider__pagination");
 
     if (
         !isDOMElementsFound({
-            elements: { slider, track, btnNext, btnPrev, pagination },
+            elements: {
+                slider,
+                track,
+                btnNext,
+                btnPrev,
+                btnPlay,
+                btnPause,
+                pagination,
+            },
             collections: { slides },
         })
     )
@@ -98,12 +108,13 @@ function initSlider() {
     slides = initInfiniteLoop(track, slides, SLIDES_COUNT);
     teleportSlides();
     updateSlider();
-    startAutoScroll();
 
-    document.addEventListener("visibilitychange", () => {
+    document.addEventListener("visibilitychange", handleVisibilitychange);
+
+    function handleVisibilitychange() {
         if (document.hidden === true) stopAutoScroll();
         else startAutoScroll();
-    });
+    }
 
     slider.addEventListener("mouseenter", stopAutoScroll);
     slider.addEventListener("mouseleave", startAutoScroll);
@@ -123,6 +134,24 @@ function initSlider() {
             --currentIndex;
         } else if (button.classList.contains("pagination__dot")) {
             currentIndex = paginationDots.indexOf(button) + 1;
+        } else if (button.classList.contains("slider__btn--play")) {
+            slider.classList.add("slider--autoplay");
+            startAutoScroll();
+            document.addEventListener(
+                "visibilitychange",
+                handleVisibilitychange,
+            );
+            slider.addEventListener("mouseleave", startAutoScroll);
+            slider.addEventListener("mouseenter", stopAutoScroll);
+        } else if (button.classList.contains("slider__btn--pause")) {
+            slider.classList.remove("slider--autoplay");
+            stopAutoScroll();
+            document.removeEventListener(
+                "visibilitychange",
+                handleVisibilitychange,
+            );
+            slider.removeEventListener("mouseleave", startAutoScroll);
+            slider.removeEventListener("mouseenter", stopAutoScroll);
         }
 
         if (currentIndex !== oldIndex) {

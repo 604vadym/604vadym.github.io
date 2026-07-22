@@ -139,14 +139,33 @@
     right: -100px;
   }
 
-  .slider__btn--pause {
+  .slider__btn--pause,
+  .slider__btn--play {
     top: 0;
     right: -40px;
     transform: translateX(50%);
   }
 
+  .slider__btn--play {
+    display: inline-flex;
+  }
+
+  .slider__btn--pause {
+    display: none;
+  }
+
   .slider__pagination {
     display: flex;
     justify-content: center;
+  }
+}
+
+.slider--autoplay {
+  .slider__btn--play {
+    display: none;
+  }
+
+  .slider__btn--pause {
+    display: inline-flex;
   }
 }
