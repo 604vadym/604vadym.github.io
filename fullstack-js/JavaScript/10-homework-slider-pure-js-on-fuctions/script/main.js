@@ -120,6 +120,7 @@ function initSlider() {
     slider.addEventListener("mouseleave", tryStartAutoScroll);
     slider.addEventListener("mouseenter", tryStopAutoScroll);
     track.addEventListener("transitionend", tryTeleportation);
+    document.addEventListener("keydown", handleKeyboard);
     document.addEventListener("visibilitychange", handleVisibilitychange);
 
     function handleClick(e) {
@@ -151,6 +152,27 @@ function initSlider() {
         if (currentIndex !== oldIndex) {
             updateSlider();
         }
+    }
+
+    function handleKeyboard(e) {
+        if (isMoving) return;
+
+        if (e.key === "ArrowRight") {
+            stopAutoScroll();
+            isMoving = true;
+            ++currentIndex;
+        } else if (e.key === "ArrowLeft") {
+            stopAutoScroll();
+            isMoving = true;
+            --currentIndex;
+        } else if (e.key === " ") {
+            e.preventDefault();
+        } else {
+            return;
+        }
+
+        updateSlider();
+        startAutoScroll();
     }
 
     function updateSlider() {
