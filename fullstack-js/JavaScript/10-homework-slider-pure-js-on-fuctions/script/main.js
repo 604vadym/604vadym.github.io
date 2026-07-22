@@ -119,6 +119,7 @@ function initSlider() {
     slider.addEventListener("click", handleClick);
     slider.addEventListener("mouseleave", tryStartAutoScroll);
     slider.addEventListener("mouseenter", tryStopAutoScroll);
+    slider.addEventListener("dragstart", (e) => e.preventDefault());
     track.addEventListener("transitionend", tryTeleportation);
     document.addEventListener("keydown", handleKeyboard);
     document.addEventListener("visibilitychange", handleVisibilitychange);
