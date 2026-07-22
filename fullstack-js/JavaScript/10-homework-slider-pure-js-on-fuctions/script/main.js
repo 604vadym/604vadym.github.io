@@ -105,6 +105,8 @@ function initSlider() {
         else startAutoScroll();
     });
 
+    slider.addEventListener("mouseenter", stopAutoScroll);
+    slider.addEventListener("mouseleave", startAutoScroll);
     slider.addEventListener("click", handleClick);
     track.addEventListener("transitionend", handleTransitionend);
 
