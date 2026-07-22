@@ -92,12 +92,18 @@ function initSlider() {
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
     let currentIndex = 1;
     let isMoving = false;
+    let autoScrollId = null;
 
     const paginationDots = initPagination(pagination, SLIDES_COUNT);
     slides = initInfiniteLoop(track, slides, SLIDES_COUNT);
     teleportSlides();
     updateSlider();
-    runSlider();
+    startAutoScroll();
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden === true) stopAutoScroll();
+        else startAutoScroll();
+    });
 
     slider.addEventListener("click", handleClick);
     track.addEventListener("transitionend", handleTransitionend);
@@ -147,11 +153,19 @@ function initSlider() {
         setTimeout(() => (track.style.transition = TRACK_TRANSITION), 0);
     }
 
-    function runSlider() {
-        setInterval(() => {
+    function startAutoScroll() {
+        if (autoScrollId) {
+            stopAutoScroll();
+        }
+        autoScrollId = setInterval(() => {
             ++currentIndex;
             updateSlider();
         }, 3000);
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollId);
+        autoScrollId = null;
     }
 }
 
