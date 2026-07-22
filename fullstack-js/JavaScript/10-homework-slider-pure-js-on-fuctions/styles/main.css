@@ -95,8 +95,6 @@
 
   .slider__btn {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     width: 60px;
     height: 60px;
     color: black;
@@ -127,12 +125,24 @@
     }
   }
 
+  .slider__btn--prev,
+  .slider__btn--next {
+    top: calc(50% - 28px);
+    transform: translateY(-50%);
+  }
+
   .slider__btn--prev {
     left: -100px;
   }
 
   .slider__btn--next {
     right: -100px;
+  }
+
+  .slider__btn--pause {
+    top: 0;
+    right: -40px;
+    transform: translateX(50%);
   }
 
   .slider__pagination {
