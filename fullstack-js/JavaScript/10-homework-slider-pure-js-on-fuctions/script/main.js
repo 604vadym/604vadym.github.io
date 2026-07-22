@@ -108,7 +108,7 @@ function initSlider() {
     slider.addEventListener("mouseenter", stopAutoScroll);
     slider.addEventListener("mouseleave", startAutoScroll);
     slider.addEventListener("click", handleClick);
-    track.addEventListener("transitionend", handleTransitionend);
+    track.addEventListener("transitionend", tryTeleportation);
 
     function handleClick(e) {
         const button = e.target.closest("button");
@@ -130,14 +130,6 @@ function initSlider() {
         }
     }
 
-    function handleTransitionend() {
-        if (currentIndex in teleportMap) {
-            currentIndex = teleportMap[currentIndex];
-            teleportSlides();
-        }
-        isMoving = false;
-    }
-
     function updateSlider() {
         const slideWidth = slides[0].clientWidth;
         const offset = currentIndex * slideWidth;
@@ -147,6 +139,14 @@ function initSlider() {
         activeDot.classList.remove("pagination__dot--active");
         let dotIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
         paginationDots[dotIndex].classList.add("pagination__dot--active");
+    }
+
+    function tryTeleportation() {
+        isMoving = false;
+        if (currentIndex in teleportMap) {
+            currentIndex = teleportMap[currentIndex];
+            teleportSlides();
+        }
     }
 
     function teleportSlides() {
@@ -160,6 +160,8 @@ function initSlider() {
             stopAutoScroll();
         }
         autoScrollId = setInterval(() => {
+            if (isMoving) return;
+            isMoving = true;
             ++currentIndex;
             updateSlider();
         }, 3000);
@@ -168,6 +170,7 @@ function initSlider() {
     function stopAutoScroll() {
         clearInterval(autoScrollId);
         autoScrollId = null;
+        tryTeleportation();
     }
 }
 
