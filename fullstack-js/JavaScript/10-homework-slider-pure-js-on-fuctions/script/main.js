@@ -97,6 +97,7 @@ function initSlider() {
     slides = initInfiniteLoop(track, slides, SLIDES_COUNT);
     teleportSlides();
     updateSlider();
+    runSlider();
 
     slider.addEventListener("click", handleClick);
     track.addEventListener("transitionend", handleTransitionend);
@@ -144,6 +145,13 @@ function initSlider() {
         track.style.transition = "none";
         updateSlider();
         setTimeout(() => (track.style.transition = TRACK_TRANSITION), 0);
+    }
+
+    function runSlider() {
+        setInterval(() => {
+            ++currentIndex;
+            updateSlider();
+        }, 3000);
     }
 }
 
