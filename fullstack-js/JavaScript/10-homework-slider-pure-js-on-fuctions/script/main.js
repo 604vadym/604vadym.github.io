@@ -111,7 +111,7 @@ function initSlider() {
         } else if (button.classList.contains("slider__btn--prev")) {
             --currentIndex;
         } else if (button.classList.contains("pagination__dot")) {
-            currentIndex = paginationDots.indexOf(button);
+            currentIndex = paginationDots.indexOf(button) + 1;
         }
 
         if (currentIndex !== oldIndex) {
