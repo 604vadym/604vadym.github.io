@@ -49,18 +49,18 @@ function isDOMElementsFound({ elements = null, collections = null } = {}) {
     return true;
 }
 
-function initPagination(slidesCount, pagination) {
-    const paginationDots = [];
+function initPagination(pagination, slidesCount) {
+    const dots = [];
 
     for (let i = 0; i < slidesCount; i++) {
-        const paginationDot = document.createElement("button");
-        paginationDot.classList.add("button");
-        paginationDot.classList.add("pagination__dot");
-        paginationDots.push(pagination.appendChild(paginationDot));
+        const dot = document.createElement("button");
+        dot.classList.add("button");
+        dot.classList.add("pagination__dot");
+        dots.push(pagination.appendChild(dot));
     }
-    paginationDots[0].classList.add("pagination__dot--active");
+    dots[0].classList.add("pagination__dot--active");
 
-    return paginationDots;
+    return dots;
 }
 
 function initSlider() {
@@ -82,33 +82,37 @@ function initSlider() {
     )
         return;
 
-    const paginationDots = initPagination(SLIDES_COUNT, pagination);
+    const paginationDots = initPagination(pagination, SLIDES_COUNT);
 
     slider.addEventListener("click", handleClick);
 
     function handleClick(e) {
-        const button = e.target.closest(".slider__btn");
+        const button = e.target.closest("button");
         if (!button) return;
 
+        let oldIndex = currentIndex;
+
         if (button.classList.contains("slider__btn--next")) {
-            nextSlide();
+            currentIndex = (currentIndex + 1) % SLIDES_COUNT;
         } else if (button.classList.contains("slider__btn--prev")) {
-            prevSlide();
+            currentIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+        } else if (button.classList.contains("pagination__dot")) {
+            currentIndex = paginationDots.indexOf(button);
         }
 
-        moveSlide();
-    }
-
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % SLIDES_COUNT;
-    }
-
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+        if (currentIndex !== oldIndex) {
+            updatePagination(currentIndex, oldIndex);
+            moveSlide();
+        }
     }
 
     function moveSlide() {
         track.style.transform = `translateX(-${currentIndex * slides[0].clientWidth}px)`;
+    }
+
+    function updatePagination(newIndex, oldIndex) {
+        paginationDots[oldIndex].classList.remove("pagination__dot--active");
+        paginationDots[currentIndex].classList.add("pagination__dot--active");
     }
 }
 
