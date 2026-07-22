@@ -102,6 +102,7 @@ function initSlider() {
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
     let currentIndex = 1;
     let isMoving = false;
+    let isPlayBtnOn = false;
     let autoScrollId = null;
 
     const paginationDots = initPagination(pagination, SLIDES_COUNT);
@@ -116,8 +117,6 @@ function initSlider() {
         else startAutoScroll();
     }
 
-    slider.addEventListener("mouseenter", stopAutoScroll);
-    slider.addEventListener("mouseleave", startAutoScroll);
     slider.addEventListener("click", handleClick);
     track.addEventListener("transitionend", tryTeleportation);
 
@@ -135,6 +134,7 @@ function initSlider() {
         } else if (button.classList.contains("pagination__dot")) {
             currentIndex = paginationDots.indexOf(button) + 1;
         } else if (button.classList.contains("slider__btn--play")) {
+            isPlayBtnOn = true;
             slider.classList.add("slider--autoplay");
             startAutoScroll();
             document.addEventListener(
@@ -144,6 +144,7 @@ function initSlider() {
             slider.addEventListener("mouseleave", startAutoScroll);
             slider.addEventListener("mouseenter", stopAutoScroll);
         } else if (button.classList.contains("slider__btn--pause")) {
+            isPlayBtnOn = false;
             slider.classList.remove("slider--autoplay");
             stopAutoScroll();
             document.removeEventListener(
@@ -189,7 +190,7 @@ function initSlider() {
             stopAutoScroll();
         }
         autoScrollId = setInterval(() => {
-            if (isMoving) return;
+            if (isMoving && !isPlayBtnOn) return;
             isMoving = true;
             ++currentIndex;
             updateSlider();
