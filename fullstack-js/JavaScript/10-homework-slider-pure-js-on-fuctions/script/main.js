@@ -110,15 +110,17 @@ function initSlider() {
     teleportSlides();
     updateSlider();
 
-    document.addEventListener("visibilitychange", handleVisibilitychange);
-
     function handleVisibilitychange() {
+        if (!isPlayBtnOn) return;
         if (document.hidden === true) stopAutoScroll();
         else startAutoScroll();
     }
 
     slider.addEventListener("click", handleClick);
+    slider.addEventListener("mouseleave", tryStartAutoScroll);
+    slider.addEventListener("mouseenter", tryStopAutoScroll);
     track.addEventListener("transitionend", tryTeleportation);
+    document.addEventListener("visibilitychange", handleVisibilitychange);
 
     function handleClick(e) {
         const button = e.target.closest("button");
@@ -136,23 +138,14 @@ function initSlider() {
         } else if (button.classList.contains("slider__btn--play")) {
             isPlayBtnOn = true;
             slider.classList.add("slider--autoplay");
+            isMoving = true;
+            ++currentIndex;
+            updateSlider();
             startAutoScroll();
-            document.addEventListener(
-                "visibilitychange",
-                handleVisibilitychange,
-            );
-            slider.addEventListener("mouseleave", startAutoScroll);
-            slider.addEventListener("mouseenter", stopAutoScroll);
         } else if (button.classList.contains("slider__btn--pause")) {
             isPlayBtnOn = false;
             slider.classList.remove("slider--autoplay");
             stopAutoScroll();
-            document.removeEventListener(
-                "visibilitychange",
-                handleVisibilitychange,
-            );
-            slider.removeEventListener("mouseleave", startAutoScroll);
-            slider.removeEventListener("mouseenter", stopAutoScroll);
         }
 
         if (currentIndex !== oldIndex) {
@@ -169,6 +162,16 @@ function initSlider() {
         activeDot.classList.remove("pagination__dot--active");
         let dotIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
         paginationDots[dotIndex].classList.add("pagination__dot--active");
+    }
+
+    function tryStartAutoScroll() {
+        if (!isPlayBtnOn) return;
+        startAutoScroll();
+    }
+
+    function tryStopAutoScroll() {
+        if (!isPlayBtnOn) return;
+        stopAutoScroll();
     }
 
     function tryTeleportation() {
