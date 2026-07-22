@@ -91,6 +91,7 @@ function initSlider() {
     const TRACK_TRANSITION = track.style.transition;
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
     let currentIndex = 1;
+    let isMoving = false;
 
     const paginationDots = initPagination(pagination, SLIDES_COUNT);
     slides = initInfiniteLoop(track, slides, SLIDES_COUNT);
@@ -102,8 +103,9 @@ function initSlider() {
 
     function handleClick(e) {
         const button = e.target.closest("button");
-        if (!button) return;
+        if (!button || isMoving) return;
 
+        isMoving = true;
         let oldIndex = currentIndex;
 
         if (button.classList.contains("slider__btn--next")) {
@@ -124,6 +126,7 @@ function initSlider() {
             currentIndex = teleportMap[currentIndex];
             teleportSlides();
         }
+        isMoving = false;
     }
 
     function updateSlider() {
