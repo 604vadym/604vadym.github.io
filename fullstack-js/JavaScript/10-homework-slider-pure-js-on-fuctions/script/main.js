@@ -133,10 +133,7 @@ function initSlider() {
         const slideWidth = slides[0].clientWidth;
         const offset = currentIndex * slideWidth;
         track.style.transform = `translateX(-${offset}px)`;
-        updatePagination();
-    }
 
-    function updatePagination() {
         const activeDot = document.querySelector(".pagination__dot--active");
         activeDot.classList.remove("pagination__dot--active");
         let dotIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
