@@ -63,28 +63,43 @@ function initPagination(pagination, slidesCount) {
     return dots;
 }
 
+function initInfiniteLoop(track, slides, slidesCount) {
+    const cloneOfFirst = slides[0].cloneNode(true);
+    const cloneOfLast = slides[slidesCount - 1].cloneNode(true);
+    track.append(cloneOfFirst);
+    track.prepend(cloneOfLast);
+    return document.querySelectorAll(".slider__slide");
+}
+
 function initSlider() {
+    let slides = document.querySelectorAll(".slider__slide");
     const slider = document.querySelector(".slider");
     const track = document.querySelector(".slider__track");
-    const slides = document.querySelectorAll(".slider__slide");
-    const btnPrev = document.querySelector(".slider__btn--prev");
     const btnNext = document.querySelector(".slider__btn--next");
+    const btnPrev = document.querySelector(".slider__btn--prev");
     const pagination = document.querySelector(".slider__pagination");
-
-    const SLIDES_COUNT = slides.length;
-    let currentIndex = 0;
 
     if (
         !isDOMElementsFound({
-            elements: { slider, track, btnPrev, btnNext, pagination },
+            elements: { slider, track, btnNext, btnPrev, pagination },
             collections: { slides },
         })
     )
         return;
 
+    const SLIDES_COUNT = slides.length;
+    const TRACK_TRANSITION = track.style.transition;
+    const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
+    const paginationDotsMap = { [SLIDES_COUNT]: 0, 1: SLIDES_COUNT - 1 };
+    let currentIndex = 1;
+
     const paginationDots = initPagination(pagination, SLIDES_COUNT);
+    slides = initInfiniteLoop(track, slides, SLIDES_COUNT);
+    teleportSlides();
+    updateSlider();
 
     slider.addEventListener("click", handleClick);
+    track.addEventListener("transitionend", handleTransitionend);
 
     function handleClick(e) {
         const button = e.target.closest("button");
@@ -93,26 +108,44 @@ function initSlider() {
         let oldIndex = currentIndex;
 
         if (button.classList.contains("slider__btn--next")) {
-            currentIndex = (currentIndex + 1) % SLIDES_COUNT;
+            currentIndex = (currentIndex + 1) % (SLIDES_COUNT + 2);
         } else if (button.classList.contains("slider__btn--prev")) {
-            currentIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+            currentIndex = (currentIndex + SLIDES_COUNT) % (SLIDES_COUNT + 1);
         } else if (button.classList.contains("pagination__dot")) {
             currentIndex = paginationDots.indexOf(button);
         }
 
         if (currentIndex !== oldIndex) {
-            updatePagination(currentIndex, oldIndex);
-            moveSlide();
+            updateSlider();
+            if (!teleportMap[currentIndex]) {
+                updatePagination(currentIndex - 1, oldIndex - 1);
+            }
         }
     }
 
-    function moveSlide() {
-        track.style.transform = `translateX(-${currentIndex * slides[0].clientWidth}px)`;
+    function handleTransitionend() {
+        if (currentIndex in teleportMap) {
+            currentIndex = teleportMap[currentIndex];
+            teleportSlides();
+            updatePagination(currentIndex - 1, paginationDotsMap[currentIndex]);
+        }
+    }
+
+    function updateSlider() {
+        const slideWidth = slides[0].clientWidth;
+        const offset = currentIndex * slideWidth;
+        track.style.transform = `translateX(-${offset}px)`;
     }
 
     function updatePagination(newIndex, oldIndex) {
         paginationDots[oldIndex].classList.remove("pagination__dot--active");
-        paginationDots[currentIndex].classList.add("pagination__dot--active");
+        paginationDots[newIndex].classList.add("pagination__dot--active");
+    }
+
+    function teleportSlides() {
+        track.style.transition = "none";
+        updateSlider();
+        setTimeout(() => (track.style.transition = TRACK_TRANSITION), 0);
     }
 }
 
