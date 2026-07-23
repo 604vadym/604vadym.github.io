@@ -119,8 +119,8 @@ function initSlider() {
     }
 
     slider.addEventListener("click", handleClick);
-    slider.addEventListener("mouseleave", tryStartAutoScroll);
-    slider.addEventListener("mouseenter", tryStopAutoScroll);
+    slider.addEventListener("mouseleave", tryResurrectAutoscroll);
+    slider.addEventListener("mouseenter", tryKillAutoScroll);
     slider.addEventListener("mousedown", handleMouseDown);
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
@@ -164,11 +164,11 @@ function initSlider() {
         if (isMoving) return;
 
         if (e.key === "ArrowRight") {
-            tryStopAutoScroll();
+            tryKillAutoScroll();
             isMoving = true;
             ++currentIndex;
         } else if (e.key === "ArrowLeft") {
-            tryStopAutoScroll();
+            tryKillAutoScroll();
             isMoving = true;
             --currentIndex;
         } else if (e.key === "Enter") {
@@ -190,7 +190,7 @@ function initSlider() {
         }
 
         updateSlider();
-        tryStartAutoScroll();
+        tryResurrectAutoscroll();
     }
 
     function handleMouseDown(e) {
@@ -198,8 +198,8 @@ function initSlider() {
 
         if (e.target.closest(".slider__track")) {
             isDragging = true;
-            tryStopAutoScroll();
             mouseX = e.clientX;
+            killAutoscroll();
             track.style.transition = "none";
         }
     }
@@ -242,8 +242,10 @@ function initSlider() {
         }
         if (offset) {
             updateSlider();
+        } else {
+            isMoving = false;
         }
-        tryStartAutoScroll();
+        tryResurrectAutoscroll();
     }
 
     function updateSlider() {
@@ -257,14 +259,15 @@ function initSlider() {
         paginationDots[dotIndex].classList.add("pagination__dot--active");
     }
 
-    function tryStartAutoScroll() {
+    function tryResurrectAutoscroll() {
         if (!isPlayBtnOn || isDragging) return;
+        killAutoscroll();
         startAutoScroll();
     }
 
-    function tryStopAutoScroll() {
+    function tryKillAutoScroll() {
         if (!isPlayBtnOn) return;
-        stopAutoScroll();
+        killAutoscroll();
     }
 
     function tryTeleportation() {
@@ -272,6 +275,8 @@ function initSlider() {
         if (currentIndex in teleportMap) {
             currentIndex = teleportMap[currentIndex];
             teleportSlides();
+        } else {
+            isMoving = false;
         }
     }
 
@@ -298,9 +303,13 @@ function initSlider() {
     }
 
     function stopAutoScroll() {
+        killAutoscroll();
+        tryTeleportation();
+    }
+
+    function killAutoscroll() {
         clearInterval(autoScrollId);
         autoScrollId = null;
-        tryTeleportation();
     }
 }
 
