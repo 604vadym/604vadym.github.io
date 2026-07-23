@@ -197,8 +197,9 @@ function initSlider() {
         if (isMoving) return;
 
         if (e.target.closest(".slider__track")) {
-            mouseX = e.clientX;
             isDragging = true;
+            tryStopAutoScroll();
+            mouseX = e.clientX;
             track.style.transition = "none";
         }
     }
@@ -240,6 +241,7 @@ function initSlider() {
             }
         }
         updateSlider();
+        tryStartAutoScroll();
     }
 
     function updateSlider() {
@@ -254,7 +256,7 @@ function initSlider() {
     }
 
     function tryStartAutoScroll() {
-        if (!isPlayBtnOn) return;
+        if (!isPlayBtnOn || isDragging) return;
         startAutoScroll();
     }
 
