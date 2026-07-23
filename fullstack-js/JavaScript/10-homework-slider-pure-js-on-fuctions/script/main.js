@@ -276,7 +276,11 @@ function initSlider() {
     function teleportSlides() {
         track.style.transition = "none";
         updateSlider();
-        setTimeout(() => (track.style.transition = TRACK_TRANSITION), 0);
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                track.style.transition = TRACK_TRANSITION;
+            });
+        });
     }
 
     function startAutoScroll() {
