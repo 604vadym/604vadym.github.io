@@ -240,7 +240,9 @@ function initSlider() {
                 --currentIndex;
             }
         }
-        updateSlider();
+        if (offset) {
+            updateSlider();
+        }
         tryStartAutoScroll();
     }
 
