@@ -101,6 +101,8 @@ function initSlider() {
     const TRACK_TRANSITION = track.style.transition;
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
     let currentIndex = 1;
+    let mouseX = 0;
+    let isDragging = false;
     let isMoving = false;
     let isPlayBtnOn = false;
     let autoScrollId = null;
@@ -119,6 +121,9 @@ function initSlider() {
     slider.addEventListener("click", handleClick);
     slider.addEventListener("mouseleave", tryStartAutoScroll);
     slider.addEventListener("mouseenter", tryStopAutoScroll);
+    slider.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
     slider.addEventListener("dragstart", (e) => e.preventDefault());
     track.addEventListener("transitionend", tryTeleportation);
     document.addEventListener("keydown", handleKeyboard);
@@ -159,21 +164,82 @@ function initSlider() {
         if (isMoving) return;
 
         if (e.key === "ArrowRight") {
-            stopAutoScroll();
+            tryStopAutoScroll();
             isMoving = true;
             ++currentIndex;
         } else if (e.key === "ArrowLeft") {
-            stopAutoScroll();
+            tryStopAutoScroll();
             isMoving = true;
             --currentIndex;
+        } else if (e.key === "Enter") {
+            if (e.target.closest("button")) {
+                return;
+            } else {
+                e.preventDefault();
+                return;
+            }
         } else if (e.key === " ") {
-            e.preventDefault();
+            if (e.target.closest("button")) {
+                return;
+            } else {
+                e.preventDefault();
+                return;
+            }
         } else {
             return;
         }
 
         updateSlider();
-        startAutoScroll();
+        tryStartAutoScroll();
+    }
+
+    function handleMouseDown(e) {
+        if (isMoving) return;
+
+        if (e.target.closest(".slider__track")) {
+            mouseX = e.clientX;
+            isDragging = true;
+            track.style.transition = "none";
+        }
+    }
+
+    function handleMouseMove(e) {
+        if (!isDragging) return;
+
+        const slideWidth = slides[0].clientWidth;
+        const offset = currentIndex * slideWidth - (e.clientX - mouseX);
+        if (Math.abs(e.clientX - mouseX) < slideWidth) {
+            track.style.transform = `translateX(-${offset}px)`;
+        } else {
+            isMoving = true;
+            isDragging = false;
+            track.style.transition = TRACK_TRANSITION;
+
+            if (e.clientX - mouseX < 0) {
+                ++currentIndex;
+            } else {
+                --currentIndex;
+            }
+            updateSlider();
+        }
+    }
+
+    function handleMouseUp(e) {
+        if (!isDragging) return;
+
+        isDragging = false;
+        track.style.transition = TRACK_TRANSITION;
+
+        const offset = e.clientX - mouseX;
+        if (Math.abs(offset) > 100) {
+            isMoving = true;
+            if (offset < 0) {
+                ++currentIndex;
+            } else {
+                --currentIndex;
+            }
+        }
+        updateSlider();
     }
 
     function updateSlider() {

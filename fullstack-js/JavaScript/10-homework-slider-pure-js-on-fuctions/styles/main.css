@@ -67,6 +67,7 @@
 .slider {
   position: relative;
   width: min(100%, 600px);
+  user-select: none;
 
   .slider__viewport {
     width: 100%;
