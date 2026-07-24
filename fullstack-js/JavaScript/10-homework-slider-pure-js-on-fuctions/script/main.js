@@ -105,6 +105,7 @@ function initSlider() {
     let isDragging = false;
     let isMoving = false;
     let isPlayBtnOn = false;
+    let isTabActive = true;
     let autoScrollId = null;
 
     const paginationDots = initPagination(pagination, SLIDES_COUNT);
@@ -114,8 +115,17 @@ function initSlider() {
 
     function handleVisibilitychange() {
         if (!isPlayBtnOn) return;
-        if (document.hidden === true) stopAutoScroll();
-        else startAutoScroll();
+        if (document.hidden === true) {
+            isTabActive = false;
+            killAutoscroll();
+            track.style.transition = "none";
+            currentIndex = 1;
+            updateSlider();
+        } else {
+            isTabActive = true;
+            track.style.transition = TRACK_TRANSITION;
+            tryResurrectAutoscroll();
+        }
     }
 
     slider.addEventListener("click", handleClick);
@@ -260,7 +270,7 @@ function initSlider() {
     }
 
     function tryResurrectAutoscroll() {
-        if (!isPlayBtnOn || isDragging) return;
+        if (!isPlayBtnOn || isDragging || !isTabActive) return;
         killAutoscroll();
         startAutoScroll();
     }
@@ -271,7 +281,6 @@ function initSlider() {
     }
 
     function tryTeleportation() {
-        isMoving = false;
         if (currentIndex in teleportMap) {
             currentIndex = teleportMap[currentIndex];
             teleportSlides();
@@ -286,6 +295,7 @@ function initSlider() {
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 track.style.transition = TRACK_TRANSITION;
+                isMoving = false;
             });
         });
     }
@@ -295,7 +305,7 @@ function initSlider() {
             stopAutoScroll();
         }
         autoScrollId = setInterval(() => {
-            if (isMoving && !isPlayBtnOn) return;
+            if (isMoving || !isPlayBtnOn) return;
             isMoving = true;
             ++currentIndex;
             updateSlider();
