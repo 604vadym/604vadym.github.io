@@ -104,6 +104,7 @@ function initSlider() {
     let pointerStartX = 0;
     let isDragging = false;
     let isDraggingInterrupted = false;
+    let isMouseOver = false;
     let isMoving = false;
     let isPlayBtnOn = false;
     let isTabActive = true;
@@ -137,8 +138,8 @@ function initSlider() {
     }
 
     slider.addEventListener("click", handleClick);
-    slider.addEventListener("mouseleave", tryResurrectAutoscroll);
-    slider.addEventListener("mouseenter", tryKillAutoScroll);
+    slider.addEventListener("mouseenter", handleMouseEnter);
+    slider.addEventListener("mouseleave", handleMouseLeave);
     slider.addEventListener("mousedown", handleMouseDown);
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
@@ -211,7 +212,9 @@ function initSlider() {
         }
 
         updateSlider();
-        tryResurrectAutoscroll();
+        if (!isMouseOver) {
+            tryResurrectAutoscroll();
+        }
     }
 
     function handleMouseDown(e) {
@@ -269,6 +272,16 @@ function initSlider() {
 
         const pointerOffset = getClientX(e) - pointerStartX;
         stopDragging(pointerOffset);
+    }
+
+    function handleMouseEnter() {
+        isMouseOver = true;
+        tryKillAutoScroll();
+    }
+
+    function handleMouseLeave() {
+        isMouseOver = false;
+        tryResurrectAutoscroll();
     }
 
     function getClientX(e) {
