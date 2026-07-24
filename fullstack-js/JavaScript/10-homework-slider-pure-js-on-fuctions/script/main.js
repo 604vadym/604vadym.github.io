@@ -124,7 +124,14 @@ function initSlider() {
             updateSlider();
         } else {
             isTabActive = true;
-            track.style.transition = TRACK_TRANSITION;
+            // track.style.transition = TRACK_TRANSITION; <-- uncomment if remove code below
+
+            track.style.transition = "none"; //
+            currentIndex = 1; // Optional code, marked by //
+            updateSlider(); // May be removed in future in case of uselessness
+            track.offsetHeight; // Need to think about necessity
+            track.style.transition = TRACK_TRANSITION; //
+
             tryResurrectAutoscroll();
         }
     }
