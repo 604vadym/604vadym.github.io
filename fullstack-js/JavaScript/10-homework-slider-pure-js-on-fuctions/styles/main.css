@@ -29,11 +29,11 @@
 
 .pagination {
   display: flex;
-  gap: 15px;
+  gap: clamp(8px, calc(5px + 1vw), 15px);
 
   .pagination__dot {
-    width: 16px;
-    height: 16px;
+    width: clamp(10px, calc(6px + 1vw), 16px);
+    height: clamp(10px, calc(6px + 1vw), 16px);
     border-radius: 50%;
     background-color: black;
     opacity: 0.6;
@@ -66,14 +66,15 @@
 
 .slider {
   position: relative;
-  width: min(100%, 600px);
+  width: min(calc(100% - clamp(100px, calc(53px + 14.7vw), 200px)), 600px);
   user-select: none;
+  margin-inline: auto;
 
   .slider__viewport {
     width: 100%;
     aspect-ratio: 600 / 534;
     overflow: hidden;
-    margin-bottom: 40px;
+    margin-bottom: clamp(20px, calc(10px + 3vw), 40px);
   }
 
   .slider__track {
@@ -101,8 +102,8 @@
 
   .slider__btn {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: clamp(25px, calc(10px + 4.5vw), 60px);
+    height: clamp(25px, calc(10px + 4.5vw), 60px);
     color: black;
     opacity: 0.6;
     transition: opacity 0.2s;
@@ -133,22 +134,22 @@
 
   .slider__btn--prev,
   .slider__btn--next {
-    top: calc(50% - 28px);
+    top: calc(50% - clamp(15px, calc(8px + 2vw), 28px));
     transform: translateY(-50%);
   }
 
   .slider__btn--prev {
-    left: -100px;
+    left: clamp(-100px, calc(-30px - 6vw), -50px);
   }
 
   .slider__btn--next {
-    right: -100px;
+    right: clamp(-100px, calc(-30px - 6vw), -50px);
   }
 
   .slider__btn--pause,
   .slider__btn--play {
     top: 0;
-    right: -40px;
+    right: clamp(-40px, calc(-10px - 3vw), -20px);
     transform: translateX(50%);
   }
 
@@ -161,7 +162,6 @@
   }
 
   .slider__pagination {
-    display: flex;
     justify-content: center;
   }
 }
