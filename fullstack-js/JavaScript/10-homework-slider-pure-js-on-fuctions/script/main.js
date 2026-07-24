@@ -302,8 +302,10 @@ function initSlider() {
         track.style.transition = TRACK_TRANSITION;
 
         const offset = pointerOffset || 0;
+        const slideWidth = slides[0].clientWidth;
+        const triggerThreshold = slideWidth * 0.2;
 
-        if (Math.abs(offset) > 100) {
+        if (Math.abs(offset) > triggerThreshold) {
             isMoving = true;
             if (offset < 0) {
                 ++currentIndex;
