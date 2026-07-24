@@ -101,8 +101,7 @@ function initSlider() {
     const TRACK_TRANSITION = track.style.transition;
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
     let currentIndex = 1;
-    let mouseX = 0;
-    let touchX = 0;
+    let pointerStartX = 0;
     let isDragging = false;
     let isMoving = false;
     let isPlayBtnOn = false;
@@ -211,83 +210,67 @@ function initSlider() {
         if (isMoving) return;
 
         if (e.target.closest(".slider__track")) {
-            isDragging = true;
-            mouseX = e.clientX;
-            killAutoscroll();
-            track.style.transition = "none";
+            startDragging(e);
         }
     }
 
     function handleMouseMove(e) {
         if (!isDragging) return;
 
-        const slideWidth = slides[0].clientWidth;
-        const offset = currentIndex * slideWidth - (e.clientX - mouseX);
-        if (Math.abs(e.clientX - mouseX) < slideWidth) {
-            track.style.transform = `translateX(-${offset}px)`;
-        } else {
-            isMoving = true;
-            isDragging = false;
-            track.style.transition = TRACK_TRANSITION;
-
-            if (e.clientX - mouseX < 0) {
-                ++currentIndex;
-            } else {
-                --currentIndex;
-            }
-            updateSlider();
-        }
+        moveConveyor(e);
     }
 
     function handleMouseUp(e) {
         if (!isDragging) return;
 
-        isDragging = false;
-        track.style.transition = TRACK_TRANSITION;
-
-        const offset = e.clientX - mouseX;
-        if (Math.abs(offset) > 100) {
-            isMoving = true;
-            if (offset < 0) {
-                ++currentIndex;
-            } else {
-                --currentIndex;
-            }
-        }
-        if (offset) {
-            updateSlider();
-        } else {
-            isMoving = false;
-        }
-        tryResurrectAutoscroll();
+        stopDragging(e);
     }
 
     function handleTouchStart(e) {
         if (isMoving) return;
 
         if (e.target.closest(".slider__track")) {
-            isDragging = true;
-            touchX = e.changedTouches[0].clientX;
-            killAutoscroll();
-            track.style.transition = "none";
+            startDragging(e);
         }
     }
 
     function handleTouchMove(e) {
         if (!isDragging) return;
 
-        const slideWidth = slides[0].clientWidth;
-        const offset =
-            currentIndex * slideWidth - (e.changedTouches[0].clientX - touchX);
+        moveConveyor(e);
+    }
 
-        if (Math.abs(e.changedTouches[0].clientX - touchX) < slideWidth) {
-            track.style.transform = `translateX(-${offset}px)`;
+    function handleTouchEnd(e) {
+        if (!isDragging) return;
+
+        stopDragging(e);
+    }
+
+    function getClientX(e) {
+        return e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    }
+
+    function startDragging(e) {
+        isDragging = true;
+        pointerStartX = getClientX(e);
+        killAutoscroll();
+        track.style.transition = "none";
+    }
+
+    function moveConveyor(e) {
+        const slideWidth = slides[0].clientWidth;
+        const currentPointerX = getClientX(e);
+        const pointerOffset = currentPointerX - pointerStartX;
+        const trackOffset = currentIndex * slideWidth - pointerOffset;
+
+        if (Math.abs(pointerOffset) < slideWidth) {
+            track.style.transform = `translateX(-${trackOffset}px)`;
         } else {
             isMoving = true;
             isDragging = false;
             track.style.transition = TRACK_TRANSITION;
 
-            if (e.changedTouches[0].clientX - touchX < 0) {
+            if (pointerOffset < 0) {
                 ++currentIndex;
             } else {
                 --currentIndex;
@@ -296,22 +279,20 @@ function initSlider() {
         }
     }
 
-    function handleTouchEnd(e) {
-        if (!isDragging) return;
-
+    function stopDragging(e) {
         isDragging = false;
         track.style.transition = TRACK_TRANSITION;
 
-        const offset = e.changedTouches[0].clientX - touchX;
-        if (Math.abs(offset) > 100) {
+        const pointerOffset = getClientX(e) - pointerStartX;
+        if (Math.abs(pointerOffset) > 100) {
             isMoving = true;
-            if (offset < 0) {
+            if (pointerOffset < 0) {
                 ++currentIndex;
             } else {
                 --currentIndex;
             }
         }
-        if (offset) {
+        if (pointerOffset) {
             updateSlider();
         } else {
             isMoving = false;
