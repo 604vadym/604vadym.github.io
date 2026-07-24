@@ -100,6 +100,7 @@ function initSlider() {
     const SLIDES_COUNT = slides.length;
     const TRACK_TRANSITION = track.style.transition;
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
+    let slideWidth = slides[0].getBoundingClientRect().width;
     let currentIndex = 1;
     let pointerStartX = 0;
     let isDragging = false;
@@ -291,12 +292,12 @@ function initSlider() {
     function startDragging(e) {
         isDragging = true;
         pointerStartX = getClientX(e);
+        slideWidth = slides[0].getBoundingClientRect().width;
         killAutoscroll();
         track.style.transition = "none";
     }
 
     function moveConveyor(currentPointerX) {
-        const slideWidth = slides[0].clientWidth;
         const pointerOffset = currentPointerX - pointerStartX;
         const trackOffset = currentIndex * slideWidth - pointerOffset;
 
@@ -322,7 +323,6 @@ function initSlider() {
         track.style.transition = TRACK_TRANSITION;
 
         const offset = pointerOffset || 0;
-        const slideWidth = slides[0].clientWidth;
         const triggerThreshold = slideWidth * 0.2;
 
         if (Math.abs(offset) > triggerThreshold) {
@@ -342,7 +342,6 @@ function initSlider() {
     }
 
     function updateSlider() {
-        const slideWidth = slides[0].clientWidth;
         const offset = currentIndex * slideWidth;
         track.style.transform = `translateX(-${offset}px)`;
 
