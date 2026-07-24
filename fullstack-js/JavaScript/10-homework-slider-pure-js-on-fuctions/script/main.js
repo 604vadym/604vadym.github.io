@@ -103,6 +103,7 @@ function initSlider() {
     let currentIndex = 1;
     let pointerStartX = 0;
     let isDragging = false;
+    let isDraggingInterrupted = false;
     let isMoving = false;
     let isPlayBtnOn = false;
     let isTabActive = true;
@@ -221,6 +222,11 @@ function initSlider() {
     }
 
     function handleMouseUp(e) {
+        if (isDraggingInterrupted) {
+            tryResurrectAutoscroll();
+            isDraggingInterrupted = false;
+            return;
+        }
         if (!isDragging) return;
 
         const pointerOffset = getClientX(e) - pointerStartX;
@@ -247,6 +253,11 @@ function initSlider() {
     }
 
     function handleTouchEnd(e) {
+        if (isDraggingInterrupted) {
+            tryResurrectAutoscroll();
+            isDraggingInterrupted = false;
+            return;
+        }
         if (!isDragging) return;
 
         const pointerOffset = getClientX(e) - pointerStartX;
@@ -274,6 +285,7 @@ function initSlider() {
         } else {
             isMoving = true;
             isDragging = false;
+            isDraggingInterrupted = true;
             track.style.transition = TRACK_TRANSITION;
 
             if (pointerOffset < 0) {
