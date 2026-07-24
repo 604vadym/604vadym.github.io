@@ -217,33 +217,40 @@ function initSlider() {
     function handleMouseMove(e) {
         if (!isDragging) return;
 
-        moveConveyor(e);
+        moveConveyor(getClientX(e));
     }
 
     function handleMouseUp(e) {
         if (!isDragging) return;
 
-        stopDragging(e);
+        const pointerOffset = getClientX(e) - pointerStartX;
+        stopDragging(pointerOffset);
     }
 
     function handleTouchStart(e) {
         if (isMoving) return;
 
         if (e.target.closest(".slider__track")) {
+            if (e.touches.length > 1) return;
             startDragging(e);
         }
     }
 
     function handleTouchMove(e) {
         if (!isDragging) return;
+        if (e.touches.length > 1) {
+            stopDragging(0); // TODO: Test on real mobile device
+            return;
+        }
 
-        moveConveyor(e);
+        moveConveyor(getClientX(e));
     }
 
     function handleTouchEnd(e) {
         if (!isDragging) return;
 
-        stopDragging(e);
+        const pointerOffset = getClientX(e) - pointerStartX;
+        stopDragging(pointerOffset);
     }
 
     function getClientX(e) {
@@ -257,9 +264,8 @@ function initSlider() {
         track.style.transition = "none";
     }
 
-    function moveConveyor(e) {
+    function moveConveyor(currentPointerX) {
         const slideWidth = slides[0].clientWidth;
-        const currentPointerX = getClientX(e);
         const pointerOffset = currentPointerX - pointerStartX;
         const trackOffset = currentIndex * slideWidth - pointerOffset;
 
@@ -279,20 +285,21 @@ function initSlider() {
         }
     }
 
-    function stopDragging(e) {
+    function stopDragging(pointerOffset) {
         isDragging = false;
         track.style.transition = TRACK_TRANSITION;
 
-        const pointerOffset = getClientX(e) - pointerStartX;
-        if (Math.abs(pointerOffset) > 100) {
+        const offset = pointerOffset || 0;
+
+        if (Math.abs(offset) > 100) {
             isMoving = true;
-            if (pointerOffset < 0) {
+            if (offset < 0) {
                 ++currentIndex;
             } else {
                 --currentIndex;
             }
         }
-        if (pointerOffset) {
+        if (offset) {
             updateSlider();
         } else {
             isMoving = false;
