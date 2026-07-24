@@ -102,6 +102,7 @@ function initSlider() {
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
     let currentIndex = 1;
     let mouseX = 0;
+    let touchX = 0;
     let isDragging = false;
     let isMoving = false;
     let isPlayBtnOn = false;
@@ -137,6 +138,9 @@ function initSlider() {
     slider.addEventListener("dragstart", (e) => e.preventDefault());
     track.addEventListener("transitionend", tryTeleportation);
     document.addEventListener("keydown", handleKeyboard);
+    slider.addEventListener("touchstart", handleTouchStart);
+    slider.addEventListener("touchmove", handleTouchMove);
+    slider.addEventListener("touchend", handleTouchEnd);
     document.addEventListener("visibilitychange", handleVisibilitychange);
 
     function handleClick(e) {
@@ -242,6 +246,63 @@ function initSlider() {
         track.style.transition = TRACK_TRANSITION;
 
         const offset = e.clientX - mouseX;
+        if (Math.abs(offset) > 100) {
+            isMoving = true;
+            if (offset < 0) {
+                ++currentIndex;
+            } else {
+                --currentIndex;
+            }
+        }
+        if (offset) {
+            updateSlider();
+        } else {
+            isMoving = false;
+        }
+        tryResurrectAutoscroll();
+    }
+
+    function handleTouchStart(e) {
+        if (isMoving) return;
+
+        if (e.target.closest(".slider__track")) {
+            isDragging = true;
+            touchX = e.changedTouches[0].clientX;
+            killAutoscroll();
+            track.style.transition = "none";
+        }
+    }
+
+    function handleTouchMove(e) {
+        if (!isDragging) return;
+
+        const slideWidth = slides[0].clientWidth;
+        const offset =
+            currentIndex * slideWidth - (e.changedTouches[0].clientX - touchX);
+
+        if (Math.abs(e.changedTouches[0].clientX - touchX) < slideWidth) {
+            track.style.transform = `translateX(-${offset}px)`;
+        } else {
+            isMoving = true;
+            isDragging = false;
+            track.style.transition = TRACK_TRANSITION;
+
+            if (e.changedTouches[0].clientX - touchX < 0) {
+                ++currentIndex;
+            } else {
+                --currentIndex;
+            }
+            updateSlider();
+        }
+    }
+
+    function handleTouchEnd(e) {
+        if (!isDragging) return;
+
+        isDragging = false;
+        track.style.transition = TRACK_TRANSITION;
+
+        const offset = e.changedTouches[0].clientX - touchX;
         if (Math.abs(offset) > 100) {
             isMoving = true;
             if (offset < 0) {

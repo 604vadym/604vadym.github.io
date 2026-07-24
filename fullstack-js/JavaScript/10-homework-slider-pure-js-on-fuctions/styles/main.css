@@ -85,6 +85,7 @@
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     transform-style: preserve-3d;
+    touch-action: pan-y;
   }
 
   .slider__slide {
