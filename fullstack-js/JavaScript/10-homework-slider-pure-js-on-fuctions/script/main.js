@@ -213,9 +213,7 @@ function initSlider() {
         }
 
         updateSlider();
-        if (!isMouseOver) {
-            tryResurrectAutoscroll();
-        }
+        tryResurrectAutoscroll();
     }
 
     function handleMouseDown(e) {
@@ -352,7 +350,7 @@ function initSlider() {
     }
 
     function tryResurrectAutoscroll() {
-        if (!isPlayBtnOn || isDragging || !isTabActive) return;
+        if (!isPlayBtnOn || !isTabActive || isDragging || isMouseOver) return;
         killAutoscroll();
         startAutoScroll();
     }
