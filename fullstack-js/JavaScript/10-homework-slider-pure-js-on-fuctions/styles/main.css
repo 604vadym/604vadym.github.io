@@ -318,10 +318,6 @@
       &:hover {
         opacity: 1;
         transform: translate(1px, 7px) scale(1.15);
-
-        svg {
-          transform: scale(1);
-        }
       }
     }
 
@@ -338,6 +334,10 @@
 
     &:active {
       transform: translate(1px, 7px) scale(1);
+
+      svg {
+        transform: scale(1);
+      }
     }
   }
 
@@ -346,10 +346,6 @@
       &:hover {
         opacity: 1;
         transform: translate(-3px, 7px) scale(1.15);
-
-        svg {
-          transform: scale(1);
-        }
       }
     }
 
@@ -366,6 +362,23 @@
 
     &:active {
       transform: translate(-3px, 7px) scale(1);
+
+      svg {
+        transform: scale(1);
+      }
     }
   }
+}
+
+.slider__btn.is-pressed svg,
+.slider__btn-audio.is-pressed svg {
+  transform: scale(1);
+}
+
+.slider--audio-play .slider__btn-audio--next.is-pressed {
+  transform: translate(1px, 7px) scale(1);
+}
+
+.slider--audio-play .slider__btn-audio--prev.is-pressed {
+  transform: translate(-3px, 7px) scale(1);
 }

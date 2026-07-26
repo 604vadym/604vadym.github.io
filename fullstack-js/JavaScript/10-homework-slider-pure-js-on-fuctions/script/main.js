@@ -217,7 +217,8 @@ function initSlider() {
     document.addEventListener("mouseup", handleMouseUp);
     slider.addEventListener("dragstart", (e) => e.preventDefault());
     track.addEventListener("transitionend", handleTransitionEnd);
-    document.addEventListener("keydown", handleKeyboard);
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
     slider.addEventListener("touchstart", handleTouchStart);
     slider.addEventListener("touchmove", handleTouchMove);
     slider.addEventListener("touchend", handleTouchEnd);
@@ -293,8 +294,19 @@ function initSlider() {
         }
     }
 
-    function handleKeyboard(e) {
+    function handleKeyDown(e) {
         if (isMoving) return;
+
+        if (e.key === " " || e.key === "Enter") {
+            const targetButton = document.activeElement;
+            if (
+                targetButton &&
+                (targetButton.classList.contains("slider__btn") ||
+                    targetButton.classList.contains("slider__btn-audio"))
+            ) {
+                targetButton.classList.add("is-pressed");
+            }
+        }
 
         if (e.key === "ArrowRight") {
             tryKillAutoScroll();
@@ -324,6 +336,13 @@ function initSlider() {
 
         updateSlider();
         tryResurrectAutoscroll();
+    }
+
+    function handleKeyUp() {
+        const pressedBtn = document.querySelector(".is-pressed");
+        if (pressedBtn) {
+            pressedBtn.classList.remove("is-pressed");
+        }
     }
 
     function handleMouseDown(e) {
