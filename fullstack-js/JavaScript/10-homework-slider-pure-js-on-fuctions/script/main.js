@@ -240,6 +240,10 @@ function initSlider() {
         } else if (button.classList.contains("pagination__dot")) {
             currentIndex = paginationDots.indexOf(button) + 1;
         } else if (button.classList.contains("slider__btn--play")) {
+            if (!audioPlayer.paused) {
+                isMoving = false;
+                return;
+            }
             isPlayBtnOn = true;
             slider.classList.add("slider--autoplay");
             isMoving = true;

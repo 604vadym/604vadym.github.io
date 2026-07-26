@@ -206,6 +206,12 @@
   }
 }
 
+.slider__btn-audio--next,
+.slider__btn-audio--prev {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
 .slider__btn-audio--next {
   transform: translate(1px, 7px);
 }
@@ -245,5 +251,16 @@
 
   .slider__btn-audio--pause {
     display: inline-flex;
+  }
+
+  .slider__btn--play {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  .slider__btn-audio--next,
+  .slider__btn-audio--prev {
+    opacity: 0.6;
+    pointer-events: all;
   }
 }
