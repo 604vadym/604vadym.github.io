@@ -246,7 +246,6 @@ function initSlider() {
             }
             isPlayBtnOn = true;
             slider.classList.add("slider--autoplay");
-            isMoving = true;
             ++currentIndex;
             updateSlider();
             startAutoScroll();
@@ -283,6 +282,8 @@ function initSlider() {
 
         if (currentIndex !== oldIndex) {
             updateSlider();
+        } else {
+            isMoving = false;
         }
     }
 

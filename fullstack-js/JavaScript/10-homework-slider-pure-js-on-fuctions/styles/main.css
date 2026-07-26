@@ -38,15 +38,22 @@
   border-radius: 50%;
   background-color: black;
   opacity: 0.6;
+  outline: none;
   transition:
     opacity 0.2s,
-    transform 0.1s;
+    transform 0.2s;
 
   &:not(.pagination__dot--active) {
     @media (hover: hover) {
       &:hover {
         transform: scale(1.15);
       }
+    }
+
+    &:focus-visible {
+      transform: scale(1.15);
+      outline: 2px solid black;
+      outline-offset: 4px;
     }
 
     &:active {
@@ -56,8 +63,13 @@
 }
 
 .pagination__dot--active {
-  pointer-events: none;
   opacity: 1;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid black;
+    outline-offset: 4px;
+  }
 }
 
 /**************************************************/
@@ -101,26 +113,42 @@
   height: 100%;
 }
 
+/**************************************************/
+/*                 SLIDER BUTTONS                  /
+/**************************************************/
+
 .slider__btn {
   position: absolute;
   width: clamp(25px, calc(10px + 4.5vw), 60px);
   height: clamp(25px, calc(10px + 4.5vw), 60px);
   color: black;
   opacity: 0.6;
-  transition: opacity 0.2s;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
 
   @media (hover: hover) {
     &:hover {
       opacity: 1;
 
-      & > svg {
+      svg {
         transform: scale(1.15);
       }
     }
   }
 
+  &:focus-visible {
+    opacity: 1;
+    outline: 2px solid black;
+    outline-offset: 6px;
+
+    svg {
+      transform: scale(1.15);
+    }
+  }
+
   &:active {
-    & > svg {
+    svg {
       transform: scale(1);
     }
   }
@@ -142,7 +170,6 @@
 .slider__btn--prev {
   left: clamp(-100px, calc(-30px - 6vw), -50px);
 }
-
 .slider__btn--next {
   right: clamp(-100px, calc(-30px - 6vw), -50px);
 }
@@ -157,7 +184,6 @@
 .slider__btn--play {
   display: inline-flex;
 }
-
 .slider__btn--pause {
   display: none;
 }
@@ -165,6 +191,10 @@
 .slider__pagination {
   justify-content: center;
 }
+
+/**************************************************/
+/*              SLIDER AUDIO BUTTONS               /
+/**************************************************/
 
 .slider__audio-btns {
   display: flex;
@@ -186,14 +216,24 @@
     &:hover {
       opacity: 1;
 
-      & > svg {
+      svg {
         transform: scale(1.15);
       }
     }
   }
 
+  &:focus-visible {
+    opacity: 1;
+    outline: 2px solid black;
+    outline-offset: 4px;
+
+    svg {
+      transform: scale(1.15);
+    }
+  }
+
   &:active {
-    & > svg {
+    svg {
       transform: scale(1);
     }
   }
@@ -210,14 +250,17 @@
 .slider__btn-audio--prev {
   opacity: 0.2;
   pointer-events: none;
+  outline: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
 }
 
 .slider__btn-audio--next {
-  transform: translate(1px, 7px);
+  transform: translate(1px, 7px) scale(1);
 }
-
 .slider__btn-audio--prev {
-  transform: translate(-3px, 7px);
+  transform: translate(-3px, 7px) scale(1);
 }
 
 .slider__btn-audio--play,
@@ -229,26 +272,31 @@
 .slider__btn-audio--pause {
   display: none;
 }
-
 .slider__btn-audio--play {
   display: inline-flex;
 }
+
+/**************************************************/
+/*              SLIDER AUTOPLAY STATE              /
+/**************************************************/
 
 .slider--autoplay {
   .slider__btn--play {
     display: none;
   }
-
   .slider__btn--pause {
     display: inline-flex;
   }
 }
 
+/**************************************************/
+/*              SLIDER AUDIOPLAY STATE             /
+/**************************************************/
+
 .slider--audio-play {
   .slider__btn-audio--play {
     display: none;
   }
-
   .slider__btn-audio--pause {
     display: inline-flex;
   }
@@ -256,11 +304,60 @@
   .slider__btn--play {
     opacity: 0.2;
     pointer-events: none;
+    outline: none;
   }
 
   .slider__btn-audio--next,
   .slider__btn-audio--prev {
     opacity: 0.6;
-    pointer-events: all;
+    pointer-events: auto;
+  }
+
+  .slider__btn-audio--next {
+    @media (hover: hover) {
+      &:hover {
+        opacity: 1;
+        transform: translate(1px, 7px) scale(1.15);
+
+        svg {
+          transform: scale(1);
+        }
+      }
+    }
+
+    &:focus-visible {
+      opacity: 1;
+      transform: translate(1px, 7px) scale(1.15);
+      outline: 2px solid black;
+      outline-offset: 4px;
+
+      svg {
+        transform: scale(1);
+      }
+    }
+  }
+
+  .slider__btn-audio--prev {
+    @media (hover: hover) {
+      &:hover {
+        opacity: 1;
+        transform: translate(-3px, 7px) scale(1.15);
+
+        svg {
+          transform: scale(1);
+        }
+      }
+    }
+
+    &:focus-visible {
+      opacity: 1;
+      transform: translate(-3px, 7px) scale(1.15);
+      outline: 2px solid black;
+      outline-offset: 4px;
+
+      svg {
+        transform: scale(1);
+      }
+    }
   }
 }
