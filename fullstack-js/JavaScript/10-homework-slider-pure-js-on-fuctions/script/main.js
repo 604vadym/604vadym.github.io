@@ -80,10 +80,10 @@ function initSlider() {
     const btnPlay = document.querySelector(".slider__btn--play");
     const btnPause = document.querySelector(".slider__btn--pause");
     const pagination = document.querySelector(".slider__pagination");
-    const btnAudioPlay = document.querySelector(".slider__btn--audio-play");
-    const btnAudioPause = document.querySelector(".slider__btn--audio-pause");
-    const btnAudioNext = document.querySelector(".slider__btn--audio-next");
-    const btnAudioPrev = document.querySelector(".slider__btn--audio-prev");
+    const btnAudioPlay = document.querySelector(".slider__btn-audio--play");
+    const btnAudioPause = document.querySelector(".slider__btn-audio--pause");
+    const btnAudioNext = document.querySelector(".slider__btn-audio--next");
+    const btnAudioPrev = document.querySelector(".slider__btn-audio--prev");
 
     if (
         !isDOMElementsFound({
@@ -210,8 +210,8 @@ function initSlider() {
     }
 
     slider.addEventListener("click", handleClick);
-    slider.addEventListener("mouseenter", handleMouseEnter);
-    slider.addEventListener("mouseleave", handleMouseLeave);
+    slider.addEventListener("mouseover", handleMouseOver);
+    slider.addEventListener("mouseout", handleMouseOut);
     slider.addEventListener("mousedown", handleMouseDown);
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
@@ -222,10 +222,7 @@ function initSlider() {
     slider.addEventListener("touchmove", handleTouchMove);
     slider.addEventListener("touchend", handleTouchEnd);
     audioPlayer.addEventListener("play", killAutoScroll);
-    audioPlayer.addEventListener("pause", () => {
-        isMouseOver = false;
-        tryResurrectAutoscroll();
-    });
+    audioPlayer.addEventListener("pause", tryResurrectAutoscroll);
     audioPlayer.addEventListener("ended", handleEnded);
     document.addEventListener("visibilitychange", handleVisibilitychange);
 
@@ -253,13 +250,14 @@ function initSlider() {
             isPlayBtnOn = false;
             slider.classList.remove("slider--autoplay");
             stopAutoScroll();
-        } else if (button.classList.contains("slider__btn--audio-play")) {
+        } else if (button.classList.contains("slider__btn-audio--play")) {
+            console.log("777");
             slider.classList.add("slider--audio-play");
             startAudio();
-        } else if (button.classList.contains("slider__btn--audio-pause")) {
+        } else if (button.classList.contains("slider__btn-audio--pause")) {
             slider.classList.remove("slider--audio-play");
             stopAudio();
-        } else if (button.classList.contains("slider__btn--audio-next")) {
+        } else if (button.classList.contains("slider__btn-audio--next")) {
             if (audioPlayer.paused) {
                 isMoving = false;
                 return;
@@ -268,7 +266,7 @@ function initSlider() {
                 ASURA_MASTERPIECES[activeAudioAlbumIndex].tracks.length;
             currentTrackIndex = (currentTrackIndex + 1) % totalTracks;
             startAudio();
-        } else if (button.classList.contains("slider__btn--audio-prev")) {
+        } else if (button.classList.contains("slider__btn-audio--prev")) {
             if (audioPlayer.paused) {
                 isMoving = false;
                 return;
@@ -386,14 +384,31 @@ function initSlider() {
         stopDragging(pointerOffset);
     }
 
-    function handleMouseEnter() {
-        isMouseOver = true;
-        tryKillAutoScroll();
+    function handleMouseOver(e) {
+        const isTargetValid =
+            e.target.closest(".slider__viewport") ||
+            e.target.closest(".slider__btn") ||
+            e.target.closest(".slider__btn-audio") ||
+            e.target.closest(".pagination__dot");
+
+        const isAudioNavBtn =
+            e.target.closest(".slider__btn-audio--next") ||
+            e.target.closest(".slider__btn-audio--prev");
+
+        if (isTargetValid && !isAudioNavBtn) {
+            isMouseOver = true;
+            tryKillAutoScroll();
+        } else {
+            isMouseOver = false;
+            tryResurrectAutoscroll();
+        }
     }
 
-    function handleMouseLeave() {
-        isMouseOver = false;
-        tryResurrectAutoscroll();
+    function handleMouseOut(e) {
+        if (!slider.contains(e.relatedTarget)) {
+            isMouseOver = false;
+            tryResurrectAutoscroll();
+        }
     }
 
     function getClientX(e) {
@@ -447,6 +462,7 @@ function initSlider() {
                 startAudio();
             }
         }
+
         if (offset) {
             updateSlider();
         } else {
@@ -459,6 +475,7 @@ function initSlider() {
             }
             isMoving = false;
         }
+
         tryResurrectAutoscroll();
     }
 
