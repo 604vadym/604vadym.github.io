@@ -255,9 +255,15 @@ function initSlider() {
             stopAutoScroll();
         } else if (button.classList.contains("slider__btn-audio--play")) {
             slider.classList.add("slider--audio-play");
+            btnAudioNext.tabIndex = 0;
+            btnAudioPrev.tabIndex = 0;
+            btnPlay.tabIndex = -1;
             startAudio();
         } else if (button.classList.contains("slider__btn-audio--pause")) {
             slider.classList.remove("slider--audio-play");
+            btnAudioNext.tabIndex = -1;
+            btnAudioPrev.tabIndex = -1;
+            btnPlay.tabIndex = 0;
             stopAudio();
         } else if (button.classList.contains("slider__btn-audio--next")) {
             if (audioPlayer.paused) {

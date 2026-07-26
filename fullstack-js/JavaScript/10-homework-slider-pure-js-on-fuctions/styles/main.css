@@ -335,6 +335,10 @@
         transform: scale(1);
       }
     }
+
+    &:active {
+      transform: translate(1px, 7px) scale(1);
+    }
   }
 
   .slider__btn-audio--prev {
@@ -358,6 +362,10 @@
       svg {
         transform: scale(1);
       }
+    }
+
+    &:active {
+      transform: translate(-3px, 7px) scale(1);
     }
   }
 }
