@@ -190,20 +190,21 @@ function initSlider() {
         if (!isPlayBtnOn) return;
         if (document.hidden === true) {
             isTabActive = false;
-            killAutoscroll();
+            killAutoScroll();
             track.style.transition = "none";
-            currentIndex = 1;
+            if (audioPlayer.paused) {
+                currentIndex = 1;
+            }
             updateSlider();
         } else {
             isTabActive = true;
-            // track.style.transition = TRACK_TRANSITION; <-- uncomment if remove code below
-
-            track.style.transition = "none"; //
-            currentIndex = 1; // Optional code, marked by //
-            updateSlider(); // May be removed in future in case of uselessness
-            track.offsetHeight; // Need to think about necessity
-            track.style.transition = TRACK_TRANSITION; //
-
+            track.style.transition = "none";
+            if (audioPlayer.paused) {
+                currentIndex = 1;
+            }
+            updateSlider();
+            track.offsetHeight;
+            track.style.transition = TRACK_TRANSITION;
             tryResurrectAutoscroll();
         }
     }
@@ -220,7 +221,7 @@ function initSlider() {
     slider.addEventListener("touchstart", handleTouchStart);
     slider.addEventListener("touchmove", handleTouchMove);
     slider.addEventListener("touchend", handleTouchEnd);
-    audioPlayer.addEventListener("play", tryKillAutoScroll);
+    audioPlayer.addEventListener("play", killAutoScroll);
     audioPlayer.addEventListener("pause", () => {
         isMouseOver = false;
         tryResurrectAutoscroll();
@@ -403,7 +404,7 @@ function initSlider() {
         isDragging = true;
         pointerStartX = getClientX(e);
         slideWidth = slides[0].getBoundingClientRect().width;
-        killAutoscroll();
+        killAutoScroll();
         track.style.transition = "none";
     }
 
@@ -526,13 +527,13 @@ function initSlider() {
             !audioPlayer.paused
         )
             return;
-        killAutoscroll();
+        killAutoScroll();
         startAutoScroll();
     }
 
     function tryKillAutoScroll() {
         if (!isPlayBtnOn) return;
-        killAutoscroll();
+        killAutoScroll();
     }
 
     function tryTeleportation() {
@@ -561,6 +562,13 @@ function initSlider() {
         }
         autoScrollId = setInterval(() => {
             if (isMoving || !isPlayBtnOn) return;
+            if (currentIndex === SLIDES_COUNT) {
+                currentIndex = 0;
+                track.style.transition = "none";
+                updateSlider();
+                track.offsetHeight;
+                track.style.transition = TRACK_TRANSITION;
+            }
             isMoving = true;
             ++currentIndex;
             updateSlider();
@@ -568,11 +576,11 @@ function initSlider() {
     }
 
     function stopAutoScroll() {
-        killAutoscroll();
+        killAutoScroll();
         tryTeleportation();
     }
 
-    function killAutoscroll() {
+    function killAutoScroll() {
         clearInterval(autoScrollId);
         autoScrollId = null;
     }
