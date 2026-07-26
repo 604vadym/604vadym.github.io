@@ -80,6 +80,10 @@ function initSlider() {
     const btnPlay = document.querySelector(".slider__btn--play");
     const btnPause = document.querySelector(".slider__btn--pause");
     const pagination = document.querySelector(".slider__pagination");
+    const btnAudioPlay = document.querySelector(".slider__btn--audio-play");
+    const btnAudioPause = document.querySelector(".slider__btn--audio-pause");
+    const btnAudioNext = document.querySelector(".slider__btn--audio-next");
+    const btnAudioPrev = document.querySelector(".slider__btn--audio-prev");
 
     if (
         !isDOMElementsFound({
@@ -91,6 +95,10 @@ function initSlider() {
                 btnPlay,
                 btnPause,
                 pagination,
+                btnAudioPlay,
+                btnAudioPause,
+                btnAudioNext,
+                btnAudioPrev,
             },
             collections: { slides },
         })
@@ -250,6 +258,15 @@ function initSlider() {
         } else if (button.classList.contains("slider__btn--audio-pause")) {
             slider.classList.remove("slider--audio-play");
             stopAudio();
+        } else if (button.classList.contains("slider__btn--audio-next")) {
+            if (audioPlayer.paused) {
+                isMoving = false;
+                return;
+            }
+            const totalTracks =
+                ASURA_MASTERPIECES[activeAudioAlbumIndex].tracks.length;
+            currentTrackIndex = (currentTrackIndex + 1) % totalTracks;
+            startAudio();
         } else if (button.classList.contains("slider__btn--audio-prev")) {
             if (audioPlayer.paused) {
                 isMoving = false;
@@ -259,15 +276,6 @@ function initSlider() {
                 ASURA_MASTERPIECES[activeAudioAlbumIndex].tracks.length;
             currentTrackIndex =
                 (currentTrackIndex - 1 + totalTracks) % totalTracks;
-            startAudio();
-        } else if (button.classList.contains("slider__btn--audio-next")) {
-            if (audioPlayer.paused) {
-                isMoving = false;
-                return;
-            }
-            const totalTracks =
-                ASURA_MASTERPIECES[activeAudioAlbumIndex].tracks.length;
-            currentTrackIndex = (currentTrackIndex + 1) % totalTracks;
             startAudio();
         }
 
