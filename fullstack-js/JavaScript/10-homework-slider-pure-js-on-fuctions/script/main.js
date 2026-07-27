@@ -325,6 +325,9 @@ function initSlider() {
                     btnPlay.tabIndex = -1;
                     startAudio();
                 } else {
+                    if (document.activeElement) {
+                        document.activeElement.blur();
+                    }
                     slider.classList.remove("slider--audio-play");
                     btnAudioNext.tabIndex = -1;
                     btnAudioPrev.tabIndex = -1;
