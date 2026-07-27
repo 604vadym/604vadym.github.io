@@ -223,6 +223,7 @@ function initSlider() {
         const button = e.target.closest("button");
         if (!button || isMoving) return;
 
+        button.blur();
         isMoving = true;
         let oldIndex = currentIndex;
 
@@ -298,6 +299,18 @@ function initSlider() {
             ) {
                 targetButton.classList.add("is-pressed");
             }
+
+            if (e.key === "Enter") {
+                if (
+                    targetButton &&
+                    !targetButton.classList.contains("slider__btn") &&
+                    !targetButton.classList.contains("slider__btn-audio") &&
+                    !targetButton.classList.contains("pagination__dot")
+                ) {
+                    e.preventDefault();
+                    window.open(linkShop.getAttribute("href"), "_blank");
+                }
+            }
         }
 
         if (e.key === "ArrowRight") {
@@ -308,20 +321,6 @@ function initSlider() {
             tryKillAutoScroll();
             isMoving = true;
             --currentIndex;
-        } else if (e.key === "Enter") {
-            if (e.target.closest("button")) {
-                return;
-            } else {
-                e.preventDefault();
-                return;
-            }
-        } else if (e.key === " ") {
-            if (e.target.closest("button")) {
-                return;
-            } else {
-                e.preventDefault();
-                return;
-            }
         } else {
             return;
         }
