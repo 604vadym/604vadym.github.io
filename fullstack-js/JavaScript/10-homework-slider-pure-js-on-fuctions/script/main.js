@@ -420,13 +420,10 @@ function initSlider() {
             e.target.closest(".slider__viewport") ||
             e.target.closest(".slider__btn") ||
             e.target.closest(".slider__btn-audio") ||
-            e.target.closest(".pagination__dot");
+            e.target.closest(".pagination__dot") ||
+            e.target.closest(".slider__link-shop");
 
-        const isAudioNavBtn =
-            e.target.closest(".slider__btn-audio--next") ||
-            e.target.closest(".slider__btn-audio--prev");
-
-        if (isTargetValid && !isAudioNavBtn) {
+        if (isTargetValid) {
             isMouseOver = true;
             tryKillAutoScroll();
         } else {
