@@ -134,6 +134,32 @@
   transition: opacity 1s;
 }
 
+.slider__track-time {
+  position: absolute;
+  bottom: 56px;
+  right: 50%;
+  transform: translateX(48.75%);
+  width: 125px;
+  height: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slider__track-full-time,
+.slider__track-current-time {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  background-color: black;
+  height: 100%;
+  transition: opacity 1s;
+}
+
+.slider__track-full-time {
+  width: 100%;
+}
+
 /**************************************************/
 /*                 SLIDER BUTTONS                  /
 /**************************************************/
@@ -369,6 +395,14 @@
   }
 
   .slider__track-title {
+    opacity: 0.6;
+  }
+
+  .slider__track-full-time {
+    opacity: 0.2;
+  }
+
+  .slider__track-current-time {
     opacity: 0.6;
   }
 }

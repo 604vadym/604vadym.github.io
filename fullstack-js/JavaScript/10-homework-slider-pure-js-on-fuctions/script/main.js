@@ -85,6 +85,10 @@ function initSlider() {
     const btnAudioNext = document.querySelector(".slider__btn-audio--next");
     const btnAudioPrev = document.querySelector(".slider__btn-audio--prev");
     const trackTitle = document.querySelector(".slider__track-title");
+    const trackFullTime = document.querySelector(".slider__track-full-time");
+    const trackCurrentTime = document.querySelector(
+        ".slider__track-current-time",
+    );
 
     if (
         !isDOMElementsFound({
@@ -101,6 +105,8 @@ function initSlider() {
                 btnAudioNext,
                 btnAudioPrev,
                 trackTitle,
+                trackFullTime,
+                trackCurrentTime,
             },
             collections: { slides },
         })
@@ -203,6 +209,7 @@ function initSlider() {
     audioPlayer.addEventListener("play", killAutoScroll);
     audioPlayer.addEventListener("pause", tryResurrectAutoscroll);
     audioPlayer.addEventListener("ended", handleEnded);
+    audioPlayer.addEventListener("timeupdate", handleTimeUpdate);
     document.addEventListener("visibilitychange", handleVisibilitychange);
 
     function handleClick(e) {
@@ -428,6 +435,10 @@ function initSlider() {
         trackTitle.textContent = `${(currentTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentTrackIndex].name}`;
         audioPlayer.src = currentAlbum.tracks[currentTrackIndex].src;
         audioPlayer.play();
+    }
+
+    function handleTimeUpdate() {
+        trackCurrentTime.style.width = `${Math.round((audioPlayer.currentTime / audioPlayer.duration) * 100)}%`;
     }
 
     function handleTransitionEnd() {
