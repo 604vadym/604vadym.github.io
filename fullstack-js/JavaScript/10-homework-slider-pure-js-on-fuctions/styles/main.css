@@ -123,10 +123,10 @@
   height: clamp(25px, calc(10px + 4.5vw), 60px);
   color: black;
   opacity: 0.6;
+  outline: none;
   transition:
     opacity 0.2s,
-    transform 0.2s,
-    outline-offset 0.2s;
+    transform 0.2s;
 
   @media (hover: hover) {
     &:hover {
@@ -136,8 +136,6 @@
 
   &:focus-visible {
     opacity: 1;
-    outline: 2px solid black;
-    outline-offset: 2px;
   }
 
   svg {
@@ -224,10 +222,10 @@
   height: 25px;
   color: black;
   opacity: 0.6;
+  outline: none;
   transition:
     opacity 0.2s,
-    transform 0.2s,
-    outline-offset 0.2s;
+    transform 0.2s;
 
   @media (hover: hover) {
     &:hover {
@@ -238,7 +236,6 @@
 
   &:focus-visible {
     opacity: 1;
-    outline: 2px solid black;
     transform: scale(1.15);
   }
 
@@ -253,7 +250,6 @@
 .slider__btn-audio--prev {
   opacity: 0.2;
   pointer-events: none;
-  outline: none;
   transition:
     opacity 0.2s,
     transform 0.2s;
@@ -307,7 +303,6 @@
   .slider__btn--play {
     opacity: 0.2;
     pointer-events: none;
-    outline: none;
   }
 
   .slider__btn-audio--next,
@@ -327,8 +322,6 @@
     &:focus-visible {
       opacity: 1;
       transform: translate(1px, 7px) scale(1.15);
-      outline: 2px solid black;
-      outline-offset: 2px;
     }
 
     &:active {
@@ -347,8 +340,6 @@
     &:focus-visible {
       opacity: 1;
       transform: translate(-3px, 7px) scale(1.15);
-      outline: 2px solid black;
-      outline-offset: 2px;
     }
 
     &:active {
