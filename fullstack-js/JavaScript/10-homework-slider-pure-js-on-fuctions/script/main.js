@@ -458,7 +458,16 @@ function initSlider() {
 
             isMoving = true;
             ++currentIndex;
-            updateSlider();
+
+            if (!isTabActive) {
+                track.style.transition = "none";
+                updateSlider();
+                track.offsetHeight;
+                track.style.transition = TRACK_TRANSITION;
+                isMoving = false;
+            } else {
+                updateSlider();
+            }
         } else {
             currentTrackIndex = (currentTrackIndex + 1) % totalTracks;
         }
