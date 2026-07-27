@@ -225,7 +225,10 @@ function initSlider() {
         const button = e.target.closest("button");
         if (!button || isMoving) return;
 
-        button.blur();
+        if (e.pointerType === "mouse" || e.pointerType === "touch") {
+            button.blur();
+        }
+
         isMoving = true;
         let oldIndex = currentIndex;
 
@@ -294,15 +297,15 @@ function initSlider() {
 
         if (e.key === " " || e.key === "Enter") {
             const targetButton = document.activeElement;
-            if (
-                targetButton &&
-                (targetButton.classList.contains("slider__btn") ||
-                    targetButton.classList.contains("slider__btn-audio"))
-            ) {
-                targetButton.classList.add("is-pressed");
-            }
-
             if (e.key === "Enter") {
+                if (
+                    targetButton &&
+                    (targetButton.classList.contains("slider__btn") ||
+                        targetButton.classList.contains("slider__btn-audio"))
+                ) {
+                    targetButton.classList.add("is-pressed");
+                }
+
                 if (
                     targetButton &&
                     !targetButton.classList.contains("slider__btn") &&
@@ -312,6 +315,23 @@ function initSlider() {
                     e.preventDefault();
                     window.open(linkShop.getAttribute("href"), "_blank");
                 }
+                return;
+            } else if (e.key === " ") {
+                e.preventDefault();
+                if (audioPlayer.paused) {
+                    slider.classList.add("slider--audio-play");
+                    btnAudioNext.tabIndex = 0;
+                    btnAudioPrev.tabIndex = 0;
+                    btnPlay.tabIndex = -1;
+                    startAudio();
+                } else {
+                    slider.classList.remove("slider--audio-play");
+                    btnAudioNext.tabIndex = -1;
+                    btnAudioPrev.tabIndex = -1;
+                    btnPlay.tabIndex = 0;
+                    stopAudio();
+                }
+                return;
             }
         }
 
