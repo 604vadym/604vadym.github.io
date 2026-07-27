@@ -425,7 +425,7 @@ function initSlider() {
             currentTrackIndex = (currentTrackIndex + 1) % totalTracks;
         }
 
-        trackTitle.textContent = currentAlbum.tracks[currentTrackIndex].name;
+        trackTitle.textContent = `${(currentTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentTrackIndex].name}`;
         audioPlayer.src = currentAlbum.tracks[currentTrackIndex].src;
         audioPlayer.play();
     }
@@ -542,8 +542,7 @@ function initSlider() {
                 audioPlayer.pause();
             }
         } else {
-            trackTitle.textContent =
-                currentAlbum.tracks[currentTrackIndex].name;
+            trackTitle.textContent = `${(currentTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentTrackIndex].name}`;
             audioPlayer.src = currentAlbum.tracks[currentTrackIndex].src;
             audioPlayer.play();
         }
