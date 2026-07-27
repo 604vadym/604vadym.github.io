@@ -89,6 +89,7 @@ function initSlider() {
     const trackCurrentTime = document.querySelector(
         ".slider__track-current-time",
     );
+    const linkShop = document.querySelector(".slider__link-shop");
 
     if (
         !isDOMElementsFound({
@@ -107,6 +108,7 @@ function initSlider() {
                 trackTitle,
                 trackFullTime,
                 trackCurrentTime,
+                linkShop,
             },
             collections: { slides },
         })
@@ -120,6 +122,7 @@ function initSlider() {
         {
             title: "Code Eternity",
             year: 2000,
+            shopUrl: "https://ultimae.bandcamp.com/album/code-eternity",
             tracks: [
                 {
                     name: "Raindust1",
@@ -134,6 +137,7 @@ function initSlider() {
         {
             title: "Lost Eden",
             year: 2003,
+            shopUrl: "https://www.discogs.com/sell/release/419254",
             tracks: [
                 {
                     name: "Raindust3",
@@ -148,6 +152,7 @@ function initSlider() {
         {
             title: "Life²",
             year: 2007,
+            shopUrl: "https://ultimae.bandcamp.com/album/life",
             tracks: [
                 {
                     name: "Raindust5",
@@ -162,6 +167,7 @@ function initSlider() {
         {
             title: "360",
             year: 2010,
+            shopUrl: "https://ultimae.bandcamp.com/album/360",
             tracks: [
                 {
                     name: "Raindust7",
@@ -188,6 +194,7 @@ function initSlider() {
     let isAutoScrollOn = false;
     let autoScrollId = null;
 
+    linkShop.setAttribute("href", ASURA_MASTERPIECES[0].shopUrl);
     const paginationDots = initPagination(pagination, SLIDES_COUNT);
     slides = initInfiniteLoop(track, slides, SLIDES_COUNT);
     teleportSlides();
@@ -425,6 +432,7 @@ function initSlider() {
             activeAudioAlbumIndex =
                 (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
             currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
+            linkShop.setAttribute("href", currentAlbum.shopUrl);
             isMoving = true;
             updateSlider();
             currentTrackIndex = 0;
@@ -452,6 +460,11 @@ function initSlider() {
         if (!audioPlayer.paused && activeAudioAlbumIndex !== currentIndex - 1) {
             currentTrackIndex = 0;
             startAudio();
+        } else {
+            activeAudioAlbumIndex =
+                (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+            const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
+            linkShop.setAttribute("href", currentAlbum.shopUrl);
         }
     }
 
@@ -553,6 +566,7 @@ function initSlider() {
                 audioPlayer.pause();
             }
         } else {
+            linkShop.setAttribute("href", currentAlbum.shopUrl);
             trackTitle.textContent = `${(currentTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentTrackIndex].name}`;
             audioPlayer.src = currentAlbum.tracks[currentTrackIndex].src;
             audioPlayer.play();
