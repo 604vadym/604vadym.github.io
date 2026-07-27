@@ -84,6 +84,7 @@ function initSlider() {
     const btnAudioPause = document.querySelector(".slider__btn-audio--pause");
     const btnAudioNext = document.querySelector(".slider__btn-audio--next");
     const btnAudioPrev = document.querySelector(".slider__btn-audio--prev");
+    const trackTitle = document.querySelector(".slider__track-title");
 
     if (
         !isDOMElementsFound({
@@ -99,6 +100,7 @@ function initSlider() {
                 btnAudioPause,
                 btnAudioNext,
                 btnAudioPrev,
+                trackTitle,
             },
             collections: { slides },
         })
@@ -423,6 +425,7 @@ function initSlider() {
             currentTrackIndex = (currentTrackIndex + 1) % totalTracks;
         }
 
+        trackTitle.textContent = currentAlbum.tracks[currentTrackIndex].name;
         audioPlayer.src = currentAlbum.tracks[currentTrackIndex].src;
         audioPlayer.play();
     }
@@ -539,6 +542,8 @@ function initSlider() {
                 audioPlayer.pause();
             }
         } else {
+            trackTitle.textContent =
+                currentAlbum.tracks[currentTrackIndex].name;
             audioPlayer.src = currentAlbum.tracks[currentTrackIndex].src;
             audioPlayer.play();
         }
