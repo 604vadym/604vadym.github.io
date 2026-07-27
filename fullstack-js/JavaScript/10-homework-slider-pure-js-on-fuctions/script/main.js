@@ -177,37 +177,13 @@ function initSlider() {
     let isDraggingInterrupted = false;
     let isMouseOver = false;
     let isMoving = false;
-    let isPlayBtnOn = false;
-    let isTabActive = true;
+    let isAutoScrollOn = false;
     let autoScrollId = null;
 
     const paginationDots = initPagination(pagination, SLIDES_COUNT);
     slides = initInfiniteLoop(track, slides, SLIDES_COUNT);
     teleportSlides();
     updateSlider();
-
-    function handleVisibilitychange() {
-        if (!isPlayBtnOn) return;
-        if (document.hidden === true) {
-            isTabActive = false;
-            killAutoScroll();
-            track.style.transition = "none";
-            if (audioPlayer.paused) {
-                currentIndex = 1;
-            }
-            updateSlider();
-        } else {
-            isTabActive = true;
-            track.style.transition = "none";
-            if (audioPlayer.paused) {
-                currentIndex = 1;
-            }
-            updateSlider();
-            track.offsetHeight;
-            track.style.transition = TRACK_TRANSITION;
-            tryResurrectAutoscroll();
-        }
-    }
 
     slider.addEventListener("click", handleClick);
     slider.addEventListener("mouseover", handleMouseOver);
@@ -245,13 +221,13 @@ function initSlider() {
                 isMoving = false;
                 return;
             }
-            isPlayBtnOn = true;
+            isAutoScrollOn = true;
             slider.classList.add("slider--autoplay");
             ++currentIndex;
             updateSlider();
             startAutoScroll();
         } else if (button.classList.contains("slider__btn--pause")) {
-            isPlayBtnOn = false;
+            isAutoScrollOn = false;
             slider.classList.remove("slider--autoplay");
             stopAutoScroll();
         } else if (button.classList.contains("slider__btn-audio--play")) {
@@ -465,6 +441,14 @@ function initSlider() {
         }
     }
 
+    function handleVisibilitychange() {
+        if (document.hidden === true) {
+            tryKillAutoScroll();
+        } else {
+            tryResurrectAutoscroll();
+        }
+    }
+
     function getClientX(e) {
         return e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
     }
@@ -567,20 +551,14 @@ function initSlider() {
     }
 
     function tryResurrectAutoscroll() {
-        if (
-            !isPlayBtnOn ||
-            !isTabActive ||
-            isDragging ||
-            isMouseOver ||
-            !audioPlayer.paused
-        )
+        if (!isAutoScrollOn || isDragging || isMouseOver || !audioPlayer.paused)
             return;
         killAutoScroll();
         startAutoScroll();
     }
 
     function tryKillAutoScroll() {
-        if (!isPlayBtnOn) return;
+        if (!isAutoScrollOn) return;
         killAutoScroll();
     }
 
@@ -600,14 +578,7 @@ function initSlider() {
             stopAutoScroll();
         }
         autoScrollId = setInterval(() => {
-            if (isMoving || !isPlayBtnOn) return;
-            if (currentIndex === SLIDES_COUNT) {
-                currentIndex = 0;
-                track.style.transition = "none";
-                updateSlider();
-                track.offsetHeight;
-                track.style.transition = TRACK_TRANSITION;
-            }
+            if (isMoving || !isAutoScrollOn) return;
             isMoving = true;
             ++currentIndex;
             updateSlider();
