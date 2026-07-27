@@ -192,6 +192,7 @@ function initSlider() {
     let isMouseOver = false;
     let isMoving = false;
     let isAutoScrollOn = false;
+    let isTabActive = true;
     let autoScrollId = null;
 
     linkShop.setAttribute("href", ASURA_MASTERPIECES[0].shopUrl);
@@ -218,6 +219,7 @@ function initSlider() {
     audioPlayer.addEventListener("ended", handleEnded);
     audioPlayer.addEventListener("timeupdate", handleTimeUpdate);
     document.addEventListener("visibilitychange", handleVisibilitychange);
+    window.addEventListener("resize", handleResize);
 
     function handleClick(e) {
         const button = e.target.closest("button");
@@ -427,14 +429,16 @@ function initSlider() {
         const totalTracks = currentAlbum.tracks.length;
 
         if (currentTrackIndex === totalTracks - 1) {
-            ++currentIndex;
+            currentTrackIndex = 0;
+
             activeAudioAlbumIndex =
                 (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
             currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
             linkShop.setAttribute("href", currentAlbum.shopUrl);
+
             isMoving = true;
+            ++currentIndex;
             updateSlider();
-            currentTrackIndex = 0;
         } else {
             currentTrackIndex = (currentTrackIndex + 1) % totalTracks;
         }
@@ -469,10 +473,20 @@ function initSlider() {
 
     function handleVisibilitychange() {
         if (document.hidden === true) {
+            isTabActive = false;
             tryKillAutoScroll();
         } else {
+            isTabActive = true;
             tryResurrectAutoscroll();
         }
+    }
+
+    function handleResize() {
+        track.style.transition = "none";
+        slideWidth = slides[0].getBoundingClientRect().width;
+        updateSlider();
+        track.offsetHeight;
+        track.style.transition = TRACK_TRANSITION;
     }
 
     function getClientX(e) {
@@ -579,7 +593,13 @@ function initSlider() {
     }
 
     function tryResurrectAutoscroll() {
-        if (!isAutoScrollOn || isDragging || isMouseOver || !audioPlayer.paused)
+        if (
+            !isAutoScrollOn ||
+            !isTabActive ||
+            isDragging ||
+            isMouseOver ||
+            !audioPlayer.paused
+        )
             return;
         killAutoScroll();
         startAutoScroll();
