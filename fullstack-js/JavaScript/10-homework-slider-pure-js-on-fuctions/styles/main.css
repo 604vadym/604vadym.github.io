@@ -217,7 +217,7 @@
 
 .slider__btn--prev,
 .slider__btn--next {
-  top: calc(50% - clamp(15px, calc(8px + 2vw), 28px));
+  top: calc(50% - clamp(28px, calc(21px + 2vw), 41px));
   transform: translateY(-50%);
 
   @media (hover: hover) {
