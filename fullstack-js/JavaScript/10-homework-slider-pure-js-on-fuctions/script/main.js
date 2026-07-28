@@ -198,6 +198,7 @@ function initSlider() {
     let isMouseOver = false;
     let isMoving = false;
     let isAutoScrollOn = false;
+    let autoscrollPauseTimestamp = 0;
     let isTabActive = true;
     let autoScrollId = null;
 
@@ -253,20 +254,21 @@ function initSlider() {
             ++currentIndex;
             updateSlider();
             startAutoScroll();
-
             if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
                 audioPlayer.src = mainThemeSrc;
             }
+            if (
+                autoscrollPauseTimestamp > 0 &&
+                Date.now() - autoscrollPauseTimestamp > 180000
+            ) {
+                audioPlayer.currentTime = 0;
+            }
             audioPlayer.play();
         } else if (button.classList.contains("slider__btn--auto-scroll-off")) {
-            isAutoScrollOn = false;
-            slider.classList.remove("slider--auto-scroll-on");
             stopAutoScroll();
-
             if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
                 return;
             }
-
             audioPlayer.pause();
         } else if (button.classList.contains("slider__btn-audio--play")) {
             slider.classList.add("slider--audio-play");
@@ -350,8 +352,6 @@ function initSlider() {
                 if (document.activeElement) {
                     document.activeElement.blur();
                 }
-                isAutoScrollOn = false;
-                slider.classList.remove("slider--auto-scroll-on");
                 stopAutoScroll();
                 return;
             }
@@ -366,16 +366,21 @@ function initSlider() {
                 if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
                     audioPlayer.src = mainThemeSrc;
                 }
+
+                if (
+                    autoscrollPauseTimestamp > 0 &&
+                    Date.now() - autoscrollPauseTimestamp > 180000
+                ) {
+                    audioPlayer.currentTime = 0;
+                }
+
                 audioPlayer.play();
                 return;
             } else {
                 if (document.activeElement) {
                     document.activeElement.blur();
                 }
-                isAutoScrollOn = false;
-                slider.classList.remove("slider--auto-scroll-on");
                 stopAutoScroll();
-
                 audioPlayer.pause();
                 return;
             }
@@ -726,7 +731,7 @@ function initSlider() {
 
     function startAutoScroll() {
         if (autoScrollId) {
-            stopAutoScroll();
+            killAutoScroll();
         }
         autoScrollId = setInterval(() => {
             if (isMoving || !isAutoScrollOn) return;
@@ -737,8 +742,11 @@ function initSlider() {
     }
 
     function stopAutoScroll() {
-        killAutoScroll();
+        isAutoScrollOn = false;
         isMoving = false;
+        slider.classList.remove("slider--auto-scroll-on");
+        autoscrollPauseTimestamp = Date.now();
+        killAutoScroll();
     }
 
     function killAutoScroll() {
