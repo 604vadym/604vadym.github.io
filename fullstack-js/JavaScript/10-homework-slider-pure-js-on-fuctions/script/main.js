@@ -77,8 +77,8 @@ function initSlider() {
     const track = document.querySelector(".slider__track");
     const btnNext = document.querySelector(".slider__btn--next");
     const btnPrev = document.querySelector(".slider__btn--prev");
-    const btnPlay = document.querySelector(".slider__btn--play");
-    const btnPause = document.querySelector(".slider__btn--pause");
+    const btnAutoScrollOn = document.querySelector(".slider__btn--play");
+    const btnAutoScrollOff = document.querySelector(".slider__btn--pause");
     const pagination = document.querySelector(".slider__pagination");
     const btnAudioPlay = document.querySelector(".slider__btn-audio--play");
     const btnAudioPause = document.querySelector(".slider__btn-audio--pause");
@@ -98,8 +98,8 @@ function initSlider() {
                 track,
                 btnNext,
                 btnPrev,
-                btnPlay,
-                btnPause,
+                btnAutoScrollOn,
+                btnAutoScrollOff,
                 pagination,
                 btnAudioPlay,
                 btnAudioPause,
@@ -256,13 +256,13 @@ function initSlider() {
             slider.classList.add("slider--audio-play");
             btnAudioNext.tabIndex = 0;
             btnAudioPrev.tabIndex = 0;
-            btnPlay.tabIndex = -1;
+            btnAutoScrollOn.tabIndex = -1;
             startAudio();
         } else if (button.classList.contains("slider__btn-audio--pause")) {
             slider.classList.remove("slider--audio-play");
             btnAudioNext.tabIndex = -1;
             btnAudioPrev.tabIndex = -1;
-            btnPlay.tabIndex = 0;
+            btnAutoScrollOn.tabIndex = 0;
             stopAudio();
         } else if (button.classList.contains("slider__btn-audio--next")) {
             if (audioPlayer.paused) {
@@ -295,47 +295,47 @@ function initSlider() {
     function handleKeyDown(e) {
         if (isMoving) return;
 
-        if (e.key === " " || e.key === "Enter") {
-            const targetButton = document.activeElement;
-            if (e.key === "Enter") {
-                if (
-                    targetButton &&
-                    (targetButton.classList.contains("slider__btn") ||
-                        targetButton.classList.contains("slider__btn-audio"))
-                ) {
-                    targetButton.classList.add("is-pressed");
-                }
+        const targetButton = document.activeElement;
 
-                if (
-                    targetButton &&
-                    !targetButton.classList.contains("slider__btn") &&
-                    !targetButton.classList.contains("slider__btn-audio") &&
-                    !targetButton.classList.contains("pagination__dot")
-                ) {
-                    e.preventDefault();
-                    window.open(linkShop.getAttribute("href"), "_blank");
-                }
-                return;
-            } else if (e.key === " ") {
-                e.preventDefault();
-                if (audioPlayer.paused) {
-                    slider.classList.add("slider--audio-play");
-                    btnAudioNext.tabIndex = 0;
-                    btnAudioPrev.tabIndex = 0;
-                    btnPlay.tabIndex = -1;
-                    startAudio();
-                } else {
-                    if (document.activeElement) {
-                        document.activeElement.blur();
-                    }
-                    slider.classList.remove("slider--audio-play");
-                    btnAudioNext.tabIndex = -1;
-                    btnAudioPrev.tabIndex = -1;
-                    btnPlay.tabIndex = 0;
-                    stopAudio();
-                }
+        if (e.key === "Enter") {
+            if (
+                targetButton &&
+                (targetButton.classList.contains("slider__btn") ||
+                    targetButton.classList.contains("slider__btn-audio"))
+            ) {
+                targetButton.classList.add("is-pressed");
                 return;
             }
+
+            if (
+                targetButton &&
+                !targetButton.classList.contains("pagination__dot")
+            ) {
+                e.preventDefault();
+                window.open(linkShop.getAttribute("href"), "_blank");
+            }
+            return;
+        }
+
+        if (e.key === " ") {
+            e.preventDefault();
+            if (audioPlayer.paused) {
+                slider.classList.add("slider--audio-play");
+                btnAudioNext.tabIndex = 0;
+                btnAudioPrev.tabIndex = 0;
+                btnAutoScrollOn.tabIndex = -1;
+                startAudio();
+            } else {
+                if (document.activeElement) {
+                    document.activeElement.blur();
+                }
+                slider.classList.remove("slider--audio-play");
+                btnAudioNext.tabIndex = -1;
+                btnAudioPrev.tabIndex = -1;
+                btnAutoScrollOn.tabIndex = 0;
+                stopAudio();
+            }
+            return;
         }
 
         if (e.key === "ArrowRight") {
