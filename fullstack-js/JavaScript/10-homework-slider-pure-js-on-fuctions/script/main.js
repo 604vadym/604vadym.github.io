@@ -116,8 +116,10 @@ function initSlider() {
         return;
 
     const audioPlayer = new Audio();
+    audioPlayer.preload = "none";
     let currentTrackIndex = 0;
     let activeAudioAlbumIndex = 0;
+    const mainThemeSrc = "../assets/audio/asura-main-theme.mp3";
     const ASURA_MASTERPIECES = [
         {
             title: "Code Eternity",
@@ -214,7 +216,6 @@ function initSlider() {
     slider.addEventListener("touchstart", handleTouchStart);
     slider.addEventListener("touchmove", handleTouchMove);
     slider.addEventListener("touchend", handleTouchEnd);
-    audioPlayer.addEventListener("play", killAutoScroll);
     audioPlayer.addEventListener("pause", tryResurrectAutoscroll);
     audioPlayer.addEventListener("ended", handleEnded);
     audioPlayer.addEventListener("timeupdate", handleTimeUpdate);
@@ -248,10 +249,22 @@ function initSlider() {
             ++currentIndex;
             updateSlider();
             startAutoScroll();
+
+            if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
+                audioPlayer.src = mainThemeSrc;
+            }
+            trackTitle.textContent = "00 / 00 • ASURA MAIN THEME • RARE";
+            audioPlayer.play();
         } else if (button.classList.contains("slider__btn--pause")) {
             isAutoScrollOn = false;
             slider.classList.remove("slider--autoplay");
             stopAutoScroll();
+
+            if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
+                return;
+            }
+
+            audioPlayer.pause();
         } else if (button.classList.contains("slider__btn-audio--play")) {
             slider.classList.add("slider--audio-play");
             btnAudioNext.tabIndex = 0;
@@ -319,23 +332,44 @@ function initSlider() {
 
         if (e.key === " ") {
             e.preventDefault();
-            if (audioPlayer.paused) {
-                slider.classList.add("slider--audio-play");
-                btnAudioNext.tabIndex = 0;
-                btnAudioPrev.tabIndex = 0;
-                btnAutoScrollOn.tabIndex = -1;
-                startAudio();
+            if (
+                !audioPlayer.paused &&
+                !audioPlayer.src.includes(mainThemeSrc.substring(2))
+            ) {
+                if (document.activeElement) {
+                    document.activeElement.blur();
+                }
+                isAutoScrollOn = false;
+                slider.classList.remove("slider--autoplay");
+                stopAutoScroll();
+                return;
+            }
+
+            if (!isAutoScrollOn) {
+                isAutoScrollOn = true;
+                slider.classList.add("slider--autoplay");
+                ++currentIndex;
+                updateSlider();
+                startAutoScroll();
+
+                if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
+                    audioPlayer.src = mainThemeSrc;
+                }
+                trackTitle.textContent = "00 / 00 • ASURA MAIN THEME • RARE";
+                audioPlayer.play();
+                return;
             } else {
                 if (document.activeElement) {
                     document.activeElement.blur();
                 }
-                slider.classList.remove("slider--audio-play");
-                btnAudioNext.tabIndex = -1;
-                btnAudioPrev.tabIndex = -1;
-                btnAutoScrollOn.tabIndex = 0;
-                stopAudio();
+                isAutoScrollOn = false;
+                slider.classList.remove("slider--autoplay");
+                stopAutoScroll();
+
+                // trackTitle.textContent = "";
+                audioPlayer.pause();
+                return;
             }
-            return;
         }
 
         if (e.key === "ArrowRight") {
@@ -443,6 +477,15 @@ function initSlider() {
     }
 
     function handleEnded() {
+        const isRealAlbumPlaying =
+            !audioPlayer.paused &&
+            !audioPlayer.src.includes(mainThemeSrc.substring(2));
+
+        if (!isRealAlbumPlaying) {
+            audioPlayer.play();
+            return;
+        }
+
         activeAudioAlbumIndex =
             (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
         let currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
@@ -488,6 +531,12 @@ function initSlider() {
         } else {
             isMoving = false;
         }
+
+        const isRealAlbumPlaying =
+            !audioPlayer.paused &&
+            !audioPlayer.src.includes(mainThemeSrc.substring(2));
+
+        if (!isRealAlbumPlaying) return;
 
         if (!audioPlayer.paused && activeAudioAlbumIndex !== currentIndex - 1) {
             currentTrackIndex = 0;
@@ -622,12 +671,16 @@ function initSlider() {
     }
 
     function tryResurrectAutoscroll() {
+        const isRealAlbumPlaying =
+            !audioPlayer.paused &&
+            !audioPlayer.src.includes(mainThemeSrc.substring(2));
+
         if (
             !isAutoScrollOn ||
             !isTabActive ||
             isDragging ||
             isMouseOver ||
-            !audioPlayer.paused
+            isRealAlbumPlaying
         )
             return;
         killAutoScroll();
