@@ -95,7 +95,7 @@
   width: 100%;
   aspect-ratio: 600 / 534;
   overflow: hidden;
-  margin-bottom: clamp(45px, calc(35px + 3vw), 65px);
+  margin-bottom: clamp(55px, calc(41px + 4vw), 81px);
 }
 
 .slider__track {
@@ -183,6 +183,29 @@
   margin-right: auto;
   text-transform: uppercase;
 }
+
+.slider__nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(
+    231px,
+    calc(100vw - clamp(100px, calc(53px + 14.7vw), 200px) * 534 / 600),
+    534px
+  );
+  pointer-events: none;
+}
+
+.slider__pagination {
+  position: absolute;
+  top: calc(100% + clamp(47px, calc(37px + 3vw), 67px));
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+  pointer-events: auto;
+}
+
 /**************************************************/
 /*                 SLIDER BUTTONS                  /
 /**************************************************/
@@ -217,8 +240,10 @@
 
 .slider__btn--prev,
 .slider__btn--next {
-  top: calc(50% - clamp(28px, calc(21px + 2vw), 41px));
+  position: absolute;
+  top: 50%;
   transform: translateY(-50%);
+  pointer-events: auto;
 
   @media (hover: hover) {
     &:hover {
@@ -268,11 +293,6 @@
 }
 .slider__btn--auto-scroll-off {
   display: none;
-}
-
-.slider__pagination {
-  justify-content: center;
-  transform: translateY(2px);
 }
 
 /**************************************************/
