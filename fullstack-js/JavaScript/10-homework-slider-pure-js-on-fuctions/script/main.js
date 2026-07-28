@@ -328,7 +328,10 @@ function initSlider() {
                 !targetButton.classList.contains("pagination__dot")
             ) {
                 e.preventDefault();
-                window.open(linkShop.getAttribute("href"), "_blank");
+                window.open(
+                    ASURA_MASTERPIECES[activeAudioAlbumIndex].shopUrl,
+                    "_blank",
+                );
             }
             return;
         }
@@ -533,6 +536,11 @@ function initSlider() {
             isMoving = false;
         }
 
+        activeAudioAlbumIndex =
+            (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+        const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
+        linkShop.setAttribute("href", currentAlbum.shopUrl);
+
         const isRealAlbumPlaying =
             !audioPlayer.paused &&
             !audioPlayer.src.includes(mainThemeSrc.substring(2));
@@ -542,11 +550,6 @@ function initSlider() {
         if (!audioPlayer.paused && activeAudioAlbumIndex !== currentIndex - 1) {
             currentTrackIndex = 0;
             startAudio();
-        } else {
-            activeAudioAlbumIndex =
-                (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
-            const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-            linkShop.setAttribute("href", currentAlbum.shopUrl);
         }
     }
 
