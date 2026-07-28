@@ -220,7 +220,7 @@ function initSlider() {
     slider.addEventListener("touchstart", handleTouchStart);
     slider.addEventListener("touchmove", handleTouchMove);
     slider.addEventListener("touchend", handleTouchEnd);
-    audioPlayer.addEventListener("pause", tryResurrectAutoscroll);
+    audioPlayer.addEventListener("pause", handlePause);
     audioPlayer.addEventListener("ended", handleEnded);
     audioPlayer.addEventListener("timeupdate", handleTimeUpdate);
     document.addEventListener("visibilitychange", handleVisibilitychange);
@@ -315,9 +315,8 @@ function initSlider() {
 
         if (e.key === "Enter") {
             if (
-                targetButton &&
-                (targetButton.classList.contains("slider__btn") ||
-                    targetButton.classList.contains("slider__btn-audio"))
+                targetButton.classList.contains("slider__btn") ||
+                targetButton.classList.contains("slider__btn-audio")
             ) {
                 targetButton.classList.add("is-pressed");
                 tryKillAutoScroll();
@@ -484,6 +483,14 @@ function initSlider() {
             isMouseOver = false;
             tryResurrectAutoscroll();
         }
+    }
+
+    function handlePause() {
+        if (isAutoScrollOn) {
+            audioPlayer.src = mainThemeSrc;
+            audioPlayer.play();
+        }
+        tryResurrectAutoscroll();
     }
 
     function handleEnded() {
@@ -696,6 +703,7 @@ function initSlider() {
             isRealAlbumPlaying
         )
             return;
+
         killAutoScroll();
         startAutoScroll();
     }
