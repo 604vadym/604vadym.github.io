@@ -320,19 +320,25 @@ function initSlider() {
                     targetButton.classList.contains("slider__btn-audio"))
             ) {
                 targetButton.classList.add("is-pressed");
+                tryKillAutoScroll();
+                tryResurrectAutoscroll();
                 return;
             }
 
             if (
                 targetButton &&
-                !targetButton.classList.contains("pagination__dot")
+                targetButton.classList.contains("pagination__dot")
             ) {
-                e.preventDefault();
-                window.open(
-                    ASURA_MASTERPIECES[activeAudioAlbumIndex].shopUrl,
-                    "_blank",
-                );
+                tryKillAutoScroll();
+                tryResurrectAutoscroll();
+                return;
             }
+
+            e.preventDefault();
+            window.open(
+                ASURA_MASTERPIECES[activeAudioAlbumIndex].shopUrl,
+                "_blank",
+            );
             return;
         }
 
