@@ -77,8 +77,12 @@ function initSlider() {
     const track = document.querySelector(".slider__track");
     const btnNext = document.querySelector(".slider__btn--next");
     const btnPrev = document.querySelector(".slider__btn--prev");
-    const btnAutoScrollOn = document.querySelector(".slider__btn--play");
-    const btnAutoScrollOff = document.querySelector(".slider__btn--pause");
+    const btnAutoScrollOn = document.querySelector(
+        ".slider__btn--auto-scroll-on",
+    );
+    const btnAutoScrollOff = document.querySelector(
+        ".slider__btn--auto-scroll-off",
+    );
     const pagination = document.querySelector(".slider__pagination");
     const btnAudioPlay = document.querySelector(".slider__btn-audio--play");
     const btnAudioPause = document.querySelector(".slider__btn-audio--pause");
@@ -239,13 +243,13 @@ function initSlider() {
             --currentIndex;
         } else if (button.classList.contains("pagination__dot")) {
             currentIndex = paginationDots.indexOf(button) + 1;
-        } else if (button.classList.contains("slider__btn--play")) {
+        } else if (button.classList.contains("slider__btn--auto-scroll-on")) {
             if (!audioPlayer.paused) {
                 isMoving = false;
                 return;
             }
             isAutoScrollOn = true;
-            slider.classList.add("slider--autoplay");
+            slider.classList.add("slider--auto-scroll-on");
             ++currentIndex;
             updateSlider();
             startAutoScroll();
@@ -253,11 +257,10 @@ function initSlider() {
             if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
                 audioPlayer.src = mainThemeSrc;
             }
-            trackTitle.textContent = "00 / 00 • ASURA MAIN THEME • RARE";
             audioPlayer.play();
-        } else if (button.classList.contains("slider__btn--pause")) {
+        } else if (button.classList.contains("slider__btn--auto-scroll-off")) {
             isAutoScrollOn = false;
-            slider.classList.remove("slider--autoplay");
+            slider.classList.remove("slider--auto-scroll-on");
             stopAutoScroll();
 
             if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
@@ -340,14 +343,14 @@ function initSlider() {
                     document.activeElement.blur();
                 }
                 isAutoScrollOn = false;
-                slider.classList.remove("slider--autoplay");
+                slider.classList.remove("slider--auto-scroll-on");
                 stopAutoScroll();
                 return;
             }
 
             if (!isAutoScrollOn) {
                 isAutoScrollOn = true;
-                slider.classList.add("slider--autoplay");
+                slider.classList.add("slider--auto-scroll-on");
                 ++currentIndex;
                 updateSlider();
                 startAutoScroll();
@@ -355,7 +358,6 @@ function initSlider() {
                 if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
                     audioPlayer.src = mainThemeSrc;
                 }
-                trackTitle.textContent = "00 / 00 • ASURA MAIN THEME • RARE";
                 audioPlayer.play();
                 return;
             } else {
@@ -363,10 +365,9 @@ function initSlider() {
                     document.activeElement.blur();
                 }
                 isAutoScrollOn = false;
-                slider.classList.remove("slider--autoplay");
+                slider.classList.remove("slider--auto-scroll-on");
                 stopAutoScroll();
 
-                // trackTitle.textContent = "";
                 audioPlayer.pause();
                 return;
             }
@@ -623,6 +624,9 @@ function initSlider() {
                 slider.classList.add("slider--audio-play");
                 startAudio();
             } else {
+                if (audioPlayer.src.includes(mainThemeSrc.substring(2))) {
+                    return;
+                }
                 slider.classList.remove("slider--audio-play");
                 stopAudio();
             }
