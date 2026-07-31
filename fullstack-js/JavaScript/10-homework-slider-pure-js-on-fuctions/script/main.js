@@ -88,10 +88,14 @@ function initSlider() {
     const btnAudioPause = document.querySelector(".slider__btn-audio--pause");
     const btnAudioNext = document.querySelector(".slider__btn-audio--next");
     const btnAudioPrev = document.querySelector(".slider__btn-audio--prev");
-    const trackTitle = document.querySelector(".slider__track-title");
-    const trackFullTime = document.querySelector(".slider__track-full-time");
-    const trackCurrentTime = document.querySelector(
-        ".slider__track-current-time",
+    const audioTrackTitle = document.querySelector(
+        ".slider__audio-track-title",
+    );
+    const audioTrackFullTime = document.querySelector(
+        ".slider__audio-track-full-time",
+    );
+    const audioTrackCurrentTime = document.querySelector(
+        ".slider__audio-track-current-time",
     );
     const linkShop = document.querySelector(".slider__link-shop");
 
@@ -109,9 +113,9 @@ function initSlider() {
                 btnAudioPause,
                 btnAudioNext,
                 btnAudioPrev,
-                trackTitle,
-                trackFullTime,
-                trackCurrentTime,
+                audioTrackTitle,
+                audioTrackFullTime,
+                audioTrackCurrentTime,
                 linkShop,
             },
             collections: { slides },
@@ -121,7 +125,7 @@ function initSlider() {
 
     const audioPlayer = new Audio();
     audioPlayer.preload = "none";
-    let currentTrackIndex = 0;
+    let currentAudioTrackIndex = 0;
     let activeAudioAlbumIndex = null;
     const mainThemeSrc = "../assets/audio/asura-main-theme.mp3";
     audioPlayer.src = mainThemeSrc;
@@ -293,19 +297,21 @@ function initSlider() {
                 isMoving = false;
                 return;
             }
-            const totalTracks =
+            const totalAudioTracks =
                 ASURA_MASTERPIECES[activeAudioAlbumIndex].tracks.length;
-            currentTrackIndex = (currentTrackIndex + 1) % totalTracks;
+            currentAudioTrackIndex =
+                (currentAudioTrackIndex + 1) % totalAudioTracks;
             startAudio();
         } else if (button.classList.contains("slider__btn-audio--prev")) {
             if (audioPlayer.paused) {
                 isMoving = false;
                 return;
             }
-            const totalTracks =
+            const totalAudioTracks =
                 ASURA_MASTERPIECES[activeAudioAlbumIndex].tracks.length;
-            currentTrackIndex =
-                (currentTrackIndex - 1 + totalTracks) % totalTracks;
+            currentAudioTrackIndex =
+                (currentAudioTrackIndex - 1 + totalAudioTracks) %
+                totalAudioTracks;
             startAudio();
         }
 
@@ -505,9 +511,9 @@ function initSlider() {
         }
 
         let currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-        const totalTracks = currentAlbum.tracks.length;
+        const totalAudioTracks = currentAlbum.tracks.length;
 
-        if (currentTrackIndex === totalTracks - 1) {
+        if (currentAudioTrackIndex === totalAudioTracks - 1) {
             isMoving = true;
             ++currentIndex;
 
@@ -522,13 +528,13 @@ function initSlider() {
                 updateSlider();
             }
         } else {
-            ++currentTrackIndex;
+            ++currentAudioTrackIndex;
             startAudio();
         }
     }
 
     function handleTimeUpdate() {
-        trackCurrentTime.style.width = `${Math.round((audioPlayer.currentTime / audioPlayer.duration) * 100)}%`;
+        audioTrackCurrentTime.style.width = `${Math.round((audioPlayer.currentTime / audioPlayer.duration) * 100)}%`;
     }
 
     function handleTransitionEnd() {
@@ -542,7 +548,7 @@ function initSlider() {
         if (audioPlayer.src.includes(mainThemeSrc.substring(2))) return;
 
         if (activeAudioAlbumIndex !== currentIndex - 1) {
-            currentTrackIndex = 0;
+            currentAudioTrackIndex = 0;
             startAudio();
         }
     }
@@ -641,25 +647,25 @@ function initSlider() {
 
     function startAudio() {
         if (activeAudioAlbumIndex !== currentIndex - 1) {
-            currentTrackIndex = 0;
+            currentAudioTrackIndex = 0;
             activeAudioAlbumIndex =
                 (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
         }
 
         const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-        const isSameTrack = audioPlayer.src.includes(
-            currentAlbum.tracks[currentTrackIndex].src.substring(2),
+        const isSameAudioTrack = audioPlayer.src.includes(
+            currentAlbum.tracks[currentAudioTrackIndex].src.substring(2),
         );
 
-        if (isSameTrack) {
+        if (isSameAudioTrack) {
             if (audioPlayer.paused) {
                 audioPlayer.play();
             } else {
                 audioPlayer.pause();
             }
         } else {
-            trackTitle.textContent = `${(currentTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentTrackIndex].name}`;
-            audioPlayer.src = currentAlbum.tracks[currentTrackIndex].src;
+            audioTrackTitle.textContent = `${(currentAudioTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentAudioTrackIndex].name}`;
+            audioPlayer.src = currentAlbum.tracks[currentAudioTrackIndex].src;
             audioPlayer.play();
         }
         isMoving = false;
