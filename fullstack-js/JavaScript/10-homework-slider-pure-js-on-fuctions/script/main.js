@@ -709,7 +709,7 @@ function initSlider() {
             isMoving = true;
             ++currentIndex;
             updateSlider();
-        }, 3000);
+        }, 4500);
     }
 
     function stopAutoScroll() {
