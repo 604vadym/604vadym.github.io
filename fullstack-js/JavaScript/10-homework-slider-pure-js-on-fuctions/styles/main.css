@@ -445,15 +445,6 @@
   transform: translateY(-50%) scale(1);
 }
 
-.slider__btn--auto-scroll-on.is-pressed,
-.slider__btn--auto-scroll-off.is-pressed {
-  transform: translateX(50%) scale(1);
-}
-
-.slider__btn-audio.is-pressed {
-  transform: scale(1);
-}
-
 .slider--audio-play .slider__btn-audio--next.is-pressed {
   transform: translate(1px, 7px) scale(1);
 }

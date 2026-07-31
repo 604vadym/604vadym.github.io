@@ -237,27 +237,22 @@ function initSlider() {
     function handleKeyDown(e) {
         if (isMoving) return;
 
-        const targetButton = document.activeElement;
-
         if (e.key === "Enter") {
-            if (
-                targetButton.classList.contains("slider__btn") ||
-                targetButton.classList.contains("slider__btn-audio")
-            ) {
+            const targetButton = document.activeElement;
+
+            const isPressTarget = targetButton?.closest(".js-pressed-target");
+            if (isPressTarget) {
                 targetButton.classList.add("is-pressed");
-                tryKillAutoScroll();
-                tryResurrectAutoscroll();
-                return;
             }
 
-            if (
-                targetButton &&
-                targetButton.classList.contains("pagination__dot")
-            ) {
+            const isResetTarget = targetButton?.closest(".js-autoscroll-reset");
+            if (isResetTarget) {
                 tryKillAutoScroll();
                 tryResurrectAutoscroll();
-                return;
             }
+
+            const isButton = targetButton?.closest(".button");
+            if (isButton) return;
 
             e.preventDefault();
             openLinkShop();
@@ -375,14 +370,9 @@ function initSlider() {
     }
 
     function handleMouseOver(e) {
-        const isTargetValid =
-            e.target.closest(".slider__viewport") ||
-            e.target.closest(".slider__btn") ||
-            e.target.closest(".slider__btn-audio") ||
-            e.target.closest(".pagination__dot") ||
-            e.target.closest(".slider__link-shop");
+        const isPauseTarget = e.target.closest(".js-autoscroll-pause");
 
-        if (isTargetValid) {
+        if (isPauseTarget) {
             isMouseOver = true;
             tryKillAutoScroll();
         } else {
@@ -679,6 +669,8 @@ function initSlider() {
             const dot = document.createElement("button");
             dot.classList.add("button");
             dot.classList.add("pagination__dot");
+            dot.classList.add("js-autoscroll-pause");
+            dot.classList.add("js-autoscroll-reset");
             dots.push(pagination.appendChild(dot));
         }
         dots[0].classList.add("pagination__dot--active");
