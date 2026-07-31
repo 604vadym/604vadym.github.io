@@ -122,8 +122,9 @@ function initSlider() {
     const audioPlayer = new Audio();
     audioPlayer.preload = "none";
     let currentTrackIndex = 0;
-    let activeAudioAlbumIndex = 0;
+    let activeAudioAlbumIndex = null;
     const mainThemeSrc = "../assets/audio/asura-main-theme.mp3";
+    audioPlayer.src = mainThemeSrc;
     const ASURA_MASTERPIECES = [
         {
             title: "Code Eternity",
@@ -202,7 +203,6 @@ function initSlider() {
     let isTabActive = true;
     let autoScrollId = null;
 
-    linkShop.setAttribute("href", ASURA_MASTERPIECES[0].shopUrl);
     const paginationDots = initPagination(pagination, SLIDES_COUNT);
     slides = initInfiniteLoop(track, slides, SLIDES_COUNT);
     teleportSlides();
@@ -228,6 +228,12 @@ function initSlider() {
     window.addEventListener("resize", handleResize);
 
     function handleClick(e) {
+        if (e.target.closest(".slider__link-shop")) {
+            e.preventDefault();
+            openLinkShop();
+            return;
+        }
+
         const button = e.target.closest("button");
         if (!button || isMoving) return;
 
@@ -336,19 +342,13 @@ function initSlider() {
             }
 
             e.preventDefault();
-            window.open(
-                ASURA_MASTERPIECES[activeAudioAlbumIndex].shopUrl,
-                "_blank",
-            );
+            openLinkShop();
             return;
         }
 
         if (e.key === " ") {
             e.preventDefault();
-            if (
-                !audioPlayer.paused &&
-                !audioPlayer.src.includes(mainThemeSrc.substring(2))
-            ) {
+            if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
                 if (document.activeElement) {
                     document.activeElement.blur();
                 }
@@ -499,28 +499,15 @@ function initSlider() {
     }
 
     function handleEnded() {
-        const isRealAlbumPlaying =
-            !audioPlayer.paused &&
-            !audioPlayer.src.includes(mainThemeSrc.substring(2));
-
-        if (!isRealAlbumPlaying) {
+        if (audioPlayer.src.includes(mainThemeSrc.substring(2))) {
             audioPlayer.play();
             return;
         }
 
-        activeAudioAlbumIndex =
-            (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
         let currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
         const totalTracks = currentAlbum.tracks.length;
 
         if (currentTrackIndex === totalTracks - 1) {
-            currentTrackIndex = 0;
-
-            activeAudioAlbumIndex =
-                (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
-            currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-            linkShop.setAttribute("href", currentAlbum.shopUrl);
-
             isMoving = true;
             ++currentIndex;
 
@@ -530,16 +517,14 @@ function initSlider() {
                 track.offsetHeight;
                 track.style.transition = TRACK_TRANSITION;
                 isMoving = false;
+                startAudio();
             } else {
                 updateSlider();
             }
         } else {
-            currentTrackIndex = (currentTrackIndex + 1) % totalTracks;
+            ++currentTrackIndex;
+            startAudio();
         }
-
-        trackTitle.textContent = `${(currentTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentTrackIndex].name}`;
-        audioPlayer.src = currentAlbum.tracks[currentTrackIndex].src;
-        audioPlayer.play();
     }
 
     function handleTimeUpdate() {
@@ -554,18 +539,9 @@ function initSlider() {
             isMoving = false;
         }
 
-        activeAudioAlbumIndex =
-            (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
-        const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-        linkShop.setAttribute("href", currentAlbum.shopUrl);
+        if (audioPlayer.src.includes(mainThemeSrc.substring(2))) return;
 
-        const isRealAlbumPlaying =
-            !audioPlayer.paused &&
-            !audioPlayer.src.includes(mainThemeSrc.substring(2));
-
-        if (!isRealAlbumPlaying) return;
-
-        if (!audioPlayer.paused && activeAudioAlbumIndex !== currentIndex - 1) {
+        if (activeAudioAlbumIndex !== currentIndex - 1) {
             currentTrackIndex = 0;
             startAudio();
         }
@@ -587,10 +563,6 @@ function initSlider() {
         updateSlider();
         track.offsetHeight;
         track.style.transition = TRACK_TRANSITION;
-    }
-
-    function getClientX(e) {
-        return e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
     }
 
     function startDragging(e) {
@@ -668,8 +640,12 @@ function initSlider() {
     }
 
     function startAudio() {
-        activeAudioAlbumIndex =
-            (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+        if (activeAudioAlbumIndex !== currentIndex - 1) {
+            currentTrackIndex = 0;
+            activeAudioAlbumIndex =
+                (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+        }
+
         const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
         const isSameTrack = audioPlayer.src.includes(
             currentAlbum.tracks[currentTrackIndex].src.substring(2),
@@ -682,7 +658,6 @@ function initSlider() {
                 audioPlayer.pause();
             }
         } else {
-            linkShop.setAttribute("href", currentAlbum.shopUrl);
             trackTitle.textContent = `${(currentTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentTrackIndex].name}`;
             audioPlayer.src = currentAlbum.tracks[currentTrackIndex].src;
             audioPlayer.play();
@@ -696,16 +671,12 @@ function initSlider() {
     }
 
     function tryResurrectAutoscroll() {
-        const isRealAlbumPlaying =
-            !audioPlayer.paused &&
-            !audioPlayer.src.includes(mainThemeSrc.substring(2));
-
         if (
             !isAutoScrollOn ||
             !isTabActive ||
             isDragging ||
             isMouseOver ||
-            isRealAlbumPlaying
+            !audioPlayer.src.includes(mainThemeSrc.substring(2))
         )
             return;
 
@@ -752,6 +723,19 @@ function initSlider() {
     function killAutoScroll() {
         clearInterval(autoScrollId);
         autoScrollId = null;
+    }
+
+    function getClientX(e) {
+        return e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    }
+
+    function openLinkShop() {
+        const activeVisualAlbumIndex =
+            (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+        window.open(
+            ASURA_MASTERPIECES[activeVisualAlbumIndex].shopUrl,
+            "_blank",
+        );
     }
 }
 
