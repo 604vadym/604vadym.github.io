@@ -49,28 +49,6 @@ function isDOMElementsFound({ elements = null, collections = null } = {}) {
     return true;
 }
 
-function initPagination(pagination, slidesCount) {
-    const dots = [];
-
-    for (let i = 0; i < slidesCount; i++) {
-        const dot = document.createElement("button");
-        dot.classList.add("button");
-        dot.classList.add("pagination__dot");
-        dots.push(pagination.appendChild(dot));
-    }
-    dots[0].classList.add("pagination__dot--active");
-
-    return dots;
-}
-
-function initInfiniteLoop(track, slides, slidesCount) {
-    const cloneOfFirst = slides[0].cloneNode(true);
-    const cloneOfLast = slides[slidesCount - 1].cloneNode(true);
-    track.append(cloneOfFirst);
-    track.prepend(cloneOfLast);
-    return document.querySelectorAll(".slider__slide");
-}
-
 function initSlider() {
     let slides = document.querySelectorAll(".slider__slide");
     const slider = document.querySelector(".slider");
@@ -127,88 +105,29 @@ function initSlider() {
     audioPlayer.preload = "none";
     let currentAudioTrackIndex = 0;
     let activeAudioAlbumIndex = null;
-    const mainThemeSrc = "../assets/audio/asura-main-theme.mp3";
-    audioPlayer.src = mainThemeSrc;
-    const ASURA_MASTERPIECES = [
-        {
-            title: "Code Eternity",
-            year: 2000,
-            shopUrl: "https://ultimae.bandcamp.com/album/code-eternity",
-            tracks: [
-                {
-                    name: "Raindust1",
-                    src: "../assets/audio/2000-code-eternity/04.raindust-preview.mp3",
-                },
-                {
-                    name: "Raindust2",
-                    src: "../assets/audio/2000-code-eternity/raindust-final.mp3",
-                },
-            ],
-        },
-        {
-            title: "Lost Eden",
-            year: 2003,
-            shopUrl: "https://www.discogs.com/sell/release/419254",
-            tracks: [
-                {
-                    name: "Raindust3",
-                    src: "../assets/audio/2003-lost-eden/04.raindust-preview.mp3",
-                },
-                {
-                    name: "Raindust4",
-                    src: "../assets/audio/2003-lost-eden/raindust-final.mp3",
-                },
-            ],
-        },
-        {
-            title: "Life²",
-            year: 2007,
-            shopUrl: "https://ultimae.bandcamp.com/album/life",
-            tracks: [
-                {
-                    name: "Raindust5",
-                    src: "../assets/audio/2007-life-squared/04.raindust-preview.mp3",
-                },
-                {
-                    name: "Raindust6",
-                    src: "../assets/audio/2007-life-squared/raindust-final.mp3",
-                },
-            ],
-        },
-        {
-            title: "360",
-            year: 2010,
-            shopUrl: "https://ultimae.bandcamp.com/album/360",
-            tracks: [
-                {
-                    name: "Raindust7",
-                    src: "../assets/audio/2010-360/04.raindust-preview.mp3",
-                },
-                {
-                    name: "Raindust8",
-                    src: "../assets/audio/2010-360/raindust-final.mp3",
-                },
-            ],
-        },
-    ];
+    const MAIN_THEME_SRC = "../assets/audio/asura-main-theme.mp3";
+    audioPlayer.src = MAIN_THEME_SRC;
+    const ASURA_MASTERPIECES = initAudioData();
 
     const SLIDES_COUNT = slides.length;
     const TRACK_TRANSITION = track.style.transition;
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
-    let slideWidth = slides[0].getBoundingClientRect().width;
     let currentIndex = 1;
+    let slideWidth = 0;
     let pointerStartX = 0;
+    let autoscrollPauseTimestamp = 0;
+    let isTabActive = true;
     let isDragging = false;
     let isDraggingInterrupted = false;
     let isMouseOver = false;
     let isMoving = false;
     let isAutoScrollOn = false;
-    let autoscrollPauseTimestamp = 0;
-    let isTabActive = true;
     let autoScrollId = null;
 
-    const paginationDots = initPagination(pagination, SLIDES_COUNT);
-    slides = initInfiniteLoop(track, slides, SLIDES_COUNT);
+    const paginationDots = initPagination();
+    slides = initInfiniteLoop();
+
+    updateSlideWidth();
     teleportSlides();
     updateSlider();
 
@@ -219,7 +138,6 @@ function initSlider() {
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
     slider.addEventListener("dragstart", (e) => e.preventDefault());
-    track.addEventListener("transitionend", handleTransitionEnd);
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
     slider.addEventListener("touchstart", handleTouchStart);
@@ -228,6 +146,7 @@ function initSlider() {
     audioPlayer.addEventListener("pause", handlePause);
     audioPlayer.addEventListener("ended", handleEnded);
     audioPlayer.addEventListener("timeupdate", handleTimeUpdate);
+    track.addEventListener("transitionend", handleTransitionEnd);
     document.addEventListener("visibilitychange", handleVisibilitychange);
     window.addEventListener("resize", handleResize);
 
@@ -259,24 +178,21 @@ function initSlider() {
                 isMoving = false;
                 return;
             }
+
             isAutoScrollOn = true;
             slider.classList.add("slider--auto-scroll-on");
             ++currentIndex;
             updateSlider();
             startAutoScroll();
-            if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
-                audioPlayer.src = mainThemeSrc;
+
+            if (!isMainThemeLoaded()) {
+                audioPlayer.src = MAIN_THEME_SRC;
             }
-            if (
-                autoscrollPauseTimestamp > 0 &&
-                Date.now() - autoscrollPauseTimestamp > 180000
-            ) {
-                audioPlayer.currentTime = 0;
-            }
+            tryResetMainThemeTime();
             audioPlayer.play();
         } else if (button.classList.contains("slider__btn--auto-scroll-off")) {
             stopAutoScroll();
-            if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
+            if (!isMainThemeLoaded()) {
                 return;
             }
             audioPlayer.pause();
@@ -297,21 +213,17 @@ function initSlider() {
                 isMoving = false;
                 return;
             }
-            const totalAudioTracks =
-                ASURA_MASTERPIECES[activeAudioAlbumIndex].tracks.length;
             currentAudioTrackIndex =
-                (currentAudioTrackIndex + 1) % totalAudioTracks;
+                (currentAudioTrackIndex + 1) % getTotalAudioTracks();
             startAudio();
         } else if (button.classList.contains("slider__btn-audio--prev")) {
             if (audioPlayer.paused) {
                 isMoving = false;
                 return;
             }
-            const totalAudioTracks =
-                ASURA_MASTERPIECES[activeAudioAlbumIndex].tracks.length;
             currentAudioTrackIndex =
-                (currentAudioTrackIndex - 1 + totalAudioTracks) %
-                totalAudioTracks;
+                (currentAudioTrackIndex - 1 + getTotalAudioTracks()) %
+                getTotalAudioTracks();
             startAudio();
         }
 
@@ -354,10 +266,8 @@ function initSlider() {
 
         if (e.key === " ") {
             e.preventDefault();
-            if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
-                if (document.activeElement) {
-                    document.activeElement.blur();
-                }
+            if (!isMainThemeLoaded()) {
+                tryClearFocus();
                 stopAutoScroll();
                 return;
             }
@@ -369,23 +279,15 @@ function initSlider() {
                 updateSlider();
                 startAutoScroll();
 
-                if (!audioPlayer.src.includes(mainThemeSrc.substring(2))) {
-                    audioPlayer.src = mainThemeSrc;
+                if (!isMainThemeLoaded()) {
+                    audioPlayer.src = MAIN_THEME_SRC;
                 }
 
-                if (
-                    autoscrollPauseTimestamp > 0 &&
-                    Date.now() - autoscrollPauseTimestamp > 180000
-                ) {
-                    audioPlayer.currentTime = 0;
-                }
-
+                tryResetMainThemeTime();
                 audioPlayer.play();
                 return;
             } else {
-                if (document.activeElement) {
-                    document.activeElement.blur();
-                }
+                tryClearFocus();
                 stopAutoScroll();
                 audioPlayer.pause();
                 return;
@@ -498,22 +400,19 @@ function initSlider() {
 
     function handlePause() {
         if (isAutoScrollOn) {
-            audioPlayer.src = mainThemeSrc;
+            audioPlayer.src = MAIN_THEME_SRC;
             audioPlayer.play();
         }
         tryResurrectAutoscroll();
     }
 
     function handleEnded() {
-        if (audioPlayer.src.includes(mainThemeSrc.substring(2))) {
+        if (isMainThemeLoaded()) {
             audioPlayer.play();
             return;
         }
 
-        let currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-        const totalAudioTracks = currentAlbum.tracks.length;
-
-        if (currentAudioTrackIndex === totalAudioTracks - 1) {
+        if (currentAudioTrackIndex === getTotalAudioTracks() - 1) {
             isMoving = true;
             ++currentIndex;
 
@@ -545,7 +444,7 @@ function initSlider() {
             isMoving = false;
         }
 
-        if (audioPlayer.src.includes(mainThemeSrc.substring(2))) return;
+        if (isMainThemeLoaded()) return;
 
         if (activeAudioAlbumIndex !== currentIndex - 1) {
             currentAudioTrackIndex = 0;
@@ -565,7 +464,7 @@ function initSlider() {
 
     function handleResize() {
         track.style.transition = "none";
-        slideWidth = slides[0].getBoundingClientRect().width;
+        updateSlideWidth();
         updateSlider();
         track.offsetHeight;
         track.style.transition = TRACK_TRANSITION;
@@ -574,7 +473,7 @@ function initSlider() {
     function startDragging(e) {
         isDragging = true;
         pointerStartX = getClientX(e);
-        slideWidth = slides[0].getBoundingClientRect().width;
+        updateSlideWidth();
         killAutoScroll();
         track.style.transition = "none";
     }
@@ -623,7 +522,7 @@ function initSlider() {
                 slider.classList.add("slider--audio-play");
                 startAudio();
             } else {
-                if (audioPlayer.src.includes(mainThemeSrc.substring(2))) {
+                if (isMainThemeLoaded()) {
                     return;
                 }
                 slider.classList.remove("slider--audio-play");
@@ -635,29 +534,15 @@ function initSlider() {
         tryResurrectAutoscroll();
     }
 
-    function updateSlider() {
-        const offset = currentIndex * slideWidth;
-        track.style.transform = `translateX(-${offset}px)`;
-
-        const activeDot = document.querySelector(".pagination__dot--active");
-        activeDot.classList.remove("pagination__dot--active");
-        let dotIndex = (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
-        paginationDots[dotIndex].classList.add("pagination__dot--active");
-    }
-
     function startAudio() {
         if (activeAudioAlbumIndex !== currentIndex - 1) {
             currentAudioTrackIndex = 0;
-            activeAudioAlbumIndex =
-                (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+            activeAudioAlbumIndex = getAlbumIndex();
         }
 
         const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-        const isSameAudioTrack = audioPlayer.src.includes(
-            currentAlbum.tracks[currentAudioTrackIndex].src.substring(2),
-        );
 
-        if (isSameAudioTrack) {
+        if (isSameAudioTrack(currentAlbum)) {
             if (audioPlayer.paused) {
                 audioPlayer.play();
             } else {
@@ -676,13 +561,39 @@ function initSlider() {
         audioPlayer.pause();
     }
 
+    function updateSlider() {
+        const offset = currentIndex * slideWidth;
+        track.style.transform = `translateX(-${offset}px)`;
+
+        const activeDot = document.querySelector(".pagination__dot--active");
+        activeDot.classList.remove("pagination__dot--active");
+        paginationDots[getAlbumIndex()].classList.add(
+            "pagination__dot--active",
+        );
+    }
+
+    function teleportSlides() {
+        track.style.transition = "none";
+        updateSlider();
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                track.style.transition = TRACK_TRANSITION;
+                isMoving = false;
+            });
+        });
+    }
+
+    function openLinkShop() {
+        window.open(ASURA_MASTERPIECES[getAlbumIndex()].shopUrl, "_blank");
+    }
+
     function tryResurrectAutoscroll() {
         if (
             !isAutoScrollOn ||
             !isTabActive ||
             isDragging ||
             isMouseOver ||
-            !audioPlayer.src.includes(mainThemeSrc.substring(2))
+            !isMainThemeLoaded()
         )
             return;
 
@@ -695,15 +606,9 @@ function initSlider() {
         killAutoScroll();
     }
 
-    function teleportSlides() {
-        track.style.transition = "none";
-        updateSlider();
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                track.style.transition = TRACK_TRANSITION;
-                isMoving = false;
-            });
-        });
+    function killAutoScroll() {
+        clearInterval(autoScrollId);
+        autoScrollId = null;
     }
 
     function startAutoScroll() {
@@ -726,22 +631,132 @@ function initSlider() {
         killAutoScroll();
     }
 
-    function killAutoScroll() {
-        clearInterval(autoScrollId);
-        autoScrollId = null;
+    function tryResetMainThemeTime() {
+        if (
+            autoscrollPauseTimestamp > 0 &&
+            Date.now() - autoscrollPauseTimestamp > 300000
+        ) {
+            audioPlayer.currentTime = 0;
+        }
+    }
+
+    function tryClearFocus() {
+        if (document.activeElement) {
+            document.activeElement.blur();
+        }
+    }
+
+    function updateSlideWidth() {
+        slideWidth = slides[0].getBoundingClientRect().width;
     }
 
     function getClientX(e) {
         return e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
     }
 
-    function openLinkShop() {
-        const activeVisualAlbumIndex =
-            (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
-        window.open(
-            ASURA_MASTERPIECES[activeVisualAlbumIndex].shopUrl,
-            "_blank",
+    function getAlbumIndex() {
+        return (currentIndex - 1 + SLIDES_COUNT) % SLIDES_COUNT;
+    }
+
+    function getTotalAudioTracks() {
+        return ASURA_MASTERPIECES[activeAudioAlbumIndex].tracks.length;
+    }
+
+    function isMainThemeLoaded() {
+        return audioPlayer.src.includes(MAIN_THEME_SRC.substring(2));
+    }
+
+    function isSameAudioTrack(currentAlbum) {
+        return audioPlayer.src.includes(
+            currentAlbum.tracks[currentAudioTrackIndex].src.substring(2),
         );
+    }
+
+    function initPagination() {
+        const dots = [];
+
+        for (let i = 0; i < SLIDES_COUNT; i++) {
+            const dot = document.createElement("button");
+            dot.classList.add("button");
+            dot.classList.add("pagination__dot");
+            dots.push(pagination.appendChild(dot));
+        }
+        dots[0].classList.add("pagination__dot--active");
+
+        return dots;
+    }
+
+    function initInfiniteLoop() {
+        const cloneOfFirst = slides[0].cloneNode(true);
+        const cloneOfLast = slides[SLIDES_COUNT - 1].cloneNode(true);
+        track.append(cloneOfFirst);
+        track.prepend(cloneOfLast);
+        return document.querySelectorAll(".slider__slide");
+    }
+
+    function initAudioData() {
+        return [
+            {
+                title: "Code Eternity",
+                year: 2000,
+                shopUrl: "https://ultimae.bandcamp.com/album/code-eternity",
+                tracks: [
+                    {
+                        name: "Raindust1",
+                        src: "../assets/audio/2000-code-eternity/04.raindust-preview.mp3",
+                    },
+                    {
+                        name: "Raindust2",
+                        src: "../assets/audio/2000-code-eternity/raindust-final.mp3",
+                    },
+                ],
+            },
+            {
+                title: "Lost Eden",
+                year: 2003,
+                shopUrl: "https://www.discogs.com/sell/release/419254",
+                tracks: [
+                    {
+                        name: "Raindust3",
+                        src: "../assets/audio/2003-lost-eden/04.raindust-preview.mp3",
+                    },
+                    {
+                        name: "Raindust4",
+                        src: "../assets/audio/2003-lost-eden/raindust-final.mp3",
+                    },
+                ],
+            },
+            {
+                title: "Life²",
+                year: 2007,
+                shopUrl: "https://ultimae.bandcamp.com/album/life",
+                tracks: [
+                    {
+                        name: "Raindust5",
+                        src: "../assets/audio/2007-life-squared/04.raindust-preview.mp3",
+                    },
+                    {
+                        name: "Raindust6",
+                        src: "../assets/audio/2007-life-squared/raindust-final.mp3",
+                    },
+                ],
+            },
+            {
+                title: "360",
+                year: 2010,
+                shopUrl: "https://ultimae.bandcamp.com/album/360",
+                tracks: [
+                    {
+                        name: "Raindust7",
+                        src: "../assets/audio/2010-360/04.raindust-preview.mp3",
+                    },
+                    {
+                        name: "Raindust8",
+                        src: "../assets/audio/2010-360/raindust-final.mp3",
+                    },
+                ],
+            },
+        ];
     }
 }
 
