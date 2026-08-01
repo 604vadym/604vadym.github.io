@@ -173,19 +173,13 @@ function initSlider() {
         } else if (button.classList.contains("pagination__dot")) {
             currentIndex = paginationDots.indexOf(button) + 1;
         } else if (button.classList.contains("slider__btn--autoscroll-on")) {
-            if (!audioPlayer.paused) {
-                return;
-            }
-            ++currentIndex;
-            updateSlider();
-            startAutoscroll();
-            startAudio("theme");
+            toggleAutoscrollMode();
         } else if (button.classList.contains("slider__btn--autoscroll-off")) {
-            stopAutoscroll();
             if (!isMainThemeLoaded()) {
+                stopAutoscroll();
                 return;
             }
-            stopAudio();
+            toggleAutoscrollMode();
         } else if (button.classList.contains("slider__btn-audio--play")) {
             startAudio("album");
         } else if (button.classList.contains("slider__btn-audio--pause")) {
@@ -239,18 +233,8 @@ function initSlider() {
                 return;
             }
 
-            if (!isAutoscrollOn) {
-                ++currentIndex;
-                updateSlider();
-                startAutoscroll();
-                startAudio("theme");
-                return;
-            } else {
-                tryClearFocus();
-                stopAutoscroll();
-                stopAudio();
-                return;
-            }
+            toggleAutoscrollMode();
+            return;
         }
 
         if (e.key === "ArrowRight") {
@@ -644,6 +628,19 @@ function initSlider() {
         btnAudioNext.tabIndex = isActive ? 0 : -1;
         btnAudioPrev.tabIndex = isActive ? 0 : -1;
         btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
+    }
+
+    function toggleAutoscrollMode() {
+        if (!isAutoscrollOn) {
+            ++currentIndex;
+            updateSlider();
+            startAutoscroll();
+            startAudio("theme");
+        } else {
+            tryClearFocus();
+            stopAutoscroll();
+            stopAudio();
+        }
     }
 
     function initPagination() {
