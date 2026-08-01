@@ -498,7 +498,7 @@ function initSlider() {
             }
 
             const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-            audioTrackTitle.textContent = `${(currentAudioTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentAudioTrackIndex].name}`;
+            updateAudioTrackTitle(currentAlbum, currentAudioTrackIndex);
             audioPlayer.src = currentAlbum.tracks[currentAudioTrackIndex].src;
             audioPlayer.play();
         }
@@ -629,6 +629,14 @@ function initSlider() {
 
     function isMainThemeLoaded() {
         return audioPlayer.src.includes(MAIN_THEME_SRC.substring(2));
+    }
+
+    function updateAudioTrackTitle(album, trackIndex) {
+        const trackNumber = (trackIndex + 1).toString().padStart(2, `0`);
+        const totalTracks = album.tracks.length.toString().padStart(2, `0`);
+        const trackName = album.tracks[trackIndex].name;
+
+        audioTrackTitle.textContent = `${trackNumber} / ${totalTracks} • ${trackName}`;
     }
 
     function toggleAudioMode(isActive) {
