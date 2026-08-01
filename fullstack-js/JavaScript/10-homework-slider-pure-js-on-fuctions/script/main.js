@@ -631,12 +631,6 @@ function initSlider() {
         return audioPlayer.src.includes(MAIN_THEME_SRC.substring(2));
     }
 
-    function isSameAudioTrack(currentAlbum) {
-        return audioPlayer.src.includes(
-            currentAlbum.tracks[currentAudioTrackIndex].src.substring(2),
-        );
-    }
-
     function toggleAudioMode(isActive) {
         slider.classList.toggle("slider--audio-play", isActive);
         btnAudioNext.tabIndex = isActive ? 0 : -1;
