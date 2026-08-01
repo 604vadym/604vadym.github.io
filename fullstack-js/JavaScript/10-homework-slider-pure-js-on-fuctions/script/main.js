@@ -136,13 +136,13 @@ function initSlider() {
     slider.addEventListener("mouseout", handleMouseOut);
     slider.addEventListener("mousedown", handleMouseDown);
     document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mouseup", handleMouseUpTouchEnd);
     slider.addEventListener("dragstart", (e) => e.preventDefault());
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
     slider.addEventListener("touchstart", handleTouchStart);
     slider.addEventListener("touchmove", handleTouchMove);
-    slider.addEventListener("touchend", handleTouchEnd);
+    slider.addEventListener("touchend", handleMouseUpTouchEnd);
     audioPlayer.addEventListener("pause", handlePause);
     audioPlayer.addEventListener("ended", handleEnded);
     audioPlayer.addEventListener("timeupdate", handleTimeUpdate);
@@ -175,7 +175,7 @@ function initSlider() {
         } else if (button.classList.contains("slider__btn--autoscroll-on")) {
             toggleAutoscrollMode();
         } else if (button.classList.contains("slider__btn--autoscroll-off")) {
-            if (!isMainThemeLoaded()) {
+            if (!isAudioModeActive()) {
                 stopAutoscroll();
                 return;
             }
@@ -272,7 +272,7 @@ function initSlider() {
         moveConveyor(getClientX(e));
     }
 
-    function handleMouseUp(e) {
+    function handleMouseUpTouchEnd(e) {
         if (isDraggingInterrupted) {
             tryResurrectAutoscroll();
             isDraggingInterrupted = false;
@@ -301,18 +301,6 @@ function initSlider() {
         }
 
         moveConveyor(getClientX(e));
-    }
-
-    function handleTouchEnd(e) {
-        if (isDraggingInterrupted) {
-            tryResurrectAutoscroll();
-            isDraggingInterrupted = false;
-            return;
-        }
-        if (!isDragging) return;
-
-        const pointerOffset = getClientX(e) - pointerStartX;
-        stopDragging(pointerOffset);
     }
 
     function handleMouseOver(e) {
