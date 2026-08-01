@@ -488,10 +488,7 @@ function initSlider() {
 
         if (context === "album") {
             if (!isAudioModeActive()) {
-                slider.classList.add("slider--audio-play");
-                btnAudioNext.tabIndex = 0;
-                btnAudioPrev.tabIndex = 0;
-                btnAutoscrollOn.tabIndex = -1;
+                toggleAudioMode(true);
                 killAutoscroll();
             }
 
@@ -509,10 +506,7 @@ function initSlider() {
 
     function stopAudio() {
         if (isAudioModeActive()) {
-            slider.classList.remove("slider--audio-play");
-            btnAudioNext.tabIndex = -1;
-            btnAudioPrev.tabIndex = -1;
-            btnAutoscrollOn.tabIndex = 0;
+            toggleAudioMode(false);
         }
         audioPlayer.pause();
     }
@@ -641,6 +635,13 @@ function initSlider() {
         return audioPlayer.src.includes(
             currentAlbum.tracks[currentAudioTrackIndex].src.substring(2),
         );
+    }
+
+    function toggleAudioMode(isActive) {
+        slider.classList.toggle("slider--audio-play", isActive);
+        btnAudioNext.tabIndex = isActive ? 0 : -1;
+        btnAudioPrev.tabIndex = isActive ? 0 : -1;
+        btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
     }
 
     function initPagination() {
