@@ -389,6 +389,7 @@ function initSlider() {
     }
 
     function handlePause() {
+        if (slider.classList.contains("slider--audio-play")) return;
         if (isAutoscrollOn) {
             audioPlayer.src = MAIN_THEME_SRC;
             audioPlayer.play();
@@ -401,7 +402,6 @@ function initSlider() {
             audioPlayer.play();
             return;
         }
-
         if (currentAudioTrackIndex === getTotalAudioTracks() - 1) {
             isMoving = true;
             ++currentIndex;
@@ -529,7 +529,6 @@ function initSlider() {
             currentAudioTrackIndex = 0;
             activeAudioAlbumIndex = getAlbumIndex();
         }
-
         const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
 
         if (isSameAudioTrack(currentAlbum)) {
