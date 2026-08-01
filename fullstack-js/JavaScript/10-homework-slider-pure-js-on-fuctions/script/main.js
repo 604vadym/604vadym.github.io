@@ -176,18 +176,12 @@ function initSlider() {
             if (!audioPlayer.paused) {
                 return;
             }
-
             isAutoscrollOn = true;
             slider.classList.add("slider--autoscroll-on");
             ++currentIndex;
             updateSlider();
             startAutoscroll();
-
-            if (!isMainThemeLoaded()) {
-                audioPlayer.src = MAIN_THEME_SRC;
-            }
-            tryResetMainThemeTime();
-            audioPlayer.play();
+            startAudio("theme");
         } else if (button.classList.contains("slider__btn--autoscroll-off")) {
             stopAutoscroll();
             if (!isMainThemeLoaded()) {
@@ -195,7 +189,7 @@ function initSlider() {
             }
             audioPlayer.pause();
         } else if (button.classList.contains("slider__btn-audio--play")) {
-            startAudio();
+            startAudio("album");
         } else if (button.classList.contains("slider__btn-audio--pause")) {
             stopAudio();
         } else if (button.classList.contains("slider__btn-audio--next")) {
@@ -204,7 +198,7 @@ function initSlider() {
             }
             currentAudioTrackIndex =
                 (currentAudioTrackIndex + 1) % getTotalAudioTracks();
-            startAudio();
+            startAudio("album");
         } else if (button.classList.contains("slider__btn-audio--prev")) {
             if (audioPlayer.paused) {
                 return;
@@ -212,7 +206,7 @@ function initSlider() {
             currentAudioTrackIndex =
                 (currentAudioTrackIndex - 1 + getTotalAudioTracks()) %
                 getTotalAudioTracks();
-            startAudio();
+            startAudio("album");
         }
 
         if (currentIndex !== oldIndex) {
@@ -259,12 +253,7 @@ function initSlider() {
                 ++currentIndex;
                 updateSlider();
                 startAutoscroll();
-
-                if (!isMainThemeLoaded()) {
-                    audioPlayer.src = MAIN_THEME_SRC;
-                }
-                tryResetMainThemeTime();
-                audioPlayer.play();
+                startAudio("theme");
                 return;
             } else {
                 tryClearFocus();
@@ -374,15 +363,14 @@ function initSlider() {
     function handlePause() {
         if (isAudioModeActive()) return;
         if (isAutoscrollOn) {
-            audioPlayer.src = MAIN_THEME_SRC;
-            audioPlayer.play();
+            startAudio("theme");
         }
         tryResurrectAutoscroll();
     }
 
     function handleEnded() {
         if (isMainThemeLoaded()) {
-            audioPlayer.play();
+            startAudio("theme");
             return;
         }
         if (currentAudioTrackIndex === getTotalAudioTracks() - 1) {
@@ -393,13 +381,13 @@ function initSlider() {
                 updateSlider();
                 track.offsetHeight;
                 track.style.transition = TRACK_TRANSITION;
-                startAudio();
+                startAudio("album");
             } else {
                 updateSlider();
             }
         } else {
             ++currentAudioTrackIndex;
-            startAudio();
+            startAudio("album");
         }
     }
 
@@ -419,7 +407,7 @@ function initSlider() {
 
         if (activeAudioAlbumIndex !== currentIndex - 1) {
             currentAudioTrackIndex = 0;
-            startAudio();
+            startAudio("album");
         }
     }
 
@@ -487,7 +475,7 @@ function initSlider() {
             updateSlider();
         } else {
             if (audioPlayer.paused) {
-                startAudio();
+                startAudio("album");
             } else {
                 if (isMainThemeLoaded()) {
                     return;
@@ -498,29 +486,42 @@ function initSlider() {
         tryResurrectAutoscroll();
     }
 
-    function startAudio() {
-        if (!isAudioModeActive()) {
-            slider.classList.add("slider--audio-play");
-            btnAudioNext.tabIndex = 0;
-            btnAudioPrev.tabIndex = 0;
-            btnAutoscrollOn.tabIndex = -1;
-        }
-
-        if (activeAudioAlbumIndex !== currentIndex - 1) {
-            currentAudioTrackIndex = 0;
-            activeAudioAlbumIndex = getAlbumIndex();
-        }
-        const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-
-        if (isSameAudioTrack(currentAlbum)) {
-            if (audioPlayer.paused) {
-                audioPlayer.play();
-            } else {
-                audioPlayer.pause();
+    function startAudio(context) {
+        if (context === "album") {
+            if (!isAudioModeActive()) {
+                slider.classList.add("slider--audio-play");
+                btnAudioNext.tabIndex = 0;
+                btnAudioPrev.tabIndex = 0;
+                btnAutoscrollOn.tabIndex = -1;
+                killAutoscroll();
             }
-        } else {
-            audioTrackTitle.textContent = `${(currentAudioTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentAudioTrackIndex].name}`;
-            audioPlayer.src = currentAlbum.tracks[currentAudioTrackIndex].src;
+
+            if (activeAudioAlbumIndex !== currentIndex - 1) {
+                currentAudioTrackIndex = 0;
+                activeAudioAlbumIndex = getAlbumIndex();
+            }
+            const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
+
+            if (isSameAudioTrack(currentAlbum)) {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                } else {
+                    audioPlayer.pause();
+                }
+            } else {
+                audioTrackTitle.textContent = `${(currentAudioTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentAudioTrackIndex].name}`;
+                audioPlayer.src =
+                    currentAlbum.tracks[currentAudioTrackIndex].src;
+                audioPlayer.play();
+            }
+            return;
+        }
+
+        if (context === "theme") {
+            if (!isMainThemeLoaded()) {
+                audioPlayer.src = MAIN_THEME_SRC;
+            }
+            tryResetMainThemeTime();
             audioPlayer.play();
         }
     }
