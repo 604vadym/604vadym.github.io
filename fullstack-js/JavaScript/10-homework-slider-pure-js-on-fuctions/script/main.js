@@ -55,11 +55,11 @@ function initSlider() {
     const track = document.querySelector(".slider__track");
     const btnNext = document.querySelector(".slider__btn--next");
     const btnPrev = document.querySelector(".slider__btn--prev");
-    const btnAutoScrollOn = document.querySelector(
-        ".slider__btn--auto-scroll-on",
+    const btnAutoscrollOn = document.querySelector(
+        ".slider__btn--autoscroll-on",
     );
-    const btnAutoScrollOff = document.querySelector(
-        ".slider__btn--auto-scroll-off",
+    const btnAutoscrollOff = document.querySelector(
+        ".slider__btn--autoscroll-off",
     );
     const pagination = document.querySelector(".slider__pagination");
     const btnAudioPlay = document.querySelector(".slider__btn-audio--play");
@@ -84,8 +84,8 @@ function initSlider() {
                 track,
                 btnNext,
                 btnPrev,
-                btnAutoScrollOn,
-                btnAutoScrollOff,
+                btnAutoscrollOn,
+                btnAutoscrollOff,
                 pagination,
                 btnAudioPlay,
                 btnAudioPause,
@@ -121,8 +121,8 @@ function initSlider() {
     let isDraggingInterrupted = false;
     let isMouseOver = false;
     let isMoving = false;
-    let isAutoScrollOn = false;
-    let autoScrollId = null;
+    let isAutoscrollOn = false;
+    let autoscrollId = null;
 
     const paginationDots = initPagination();
     slides = initInfiniteLoop();
@@ -173,25 +173,25 @@ function initSlider() {
             --currentIndex;
         } else if (button.classList.contains("pagination__dot")) {
             currentIndex = paginationDots.indexOf(button) + 1;
-        } else if (button.classList.contains("slider__btn--auto-scroll-on")) {
+        } else if (button.classList.contains("slider__btn--autoscroll-on")) {
             if (!audioPlayer.paused) {
                 isMoving = false;
                 return;
             }
 
-            isAutoScrollOn = true;
-            slider.classList.add("slider--auto-scroll-on");
+            isAutoscrollOn = true;
+            slider.classList.add("slider--autoscroll-on");
             ++currentIndex;
             updateSlider();
-            startAutoScroll();
+            startAutoscroll();
 
             if (!isMainThemeLoaded()) {
                 audioPlayer.src = MAIN_THEME_SRC;
             }
             tryResetMainThemeTime();
             audioPlayer.play();
-        } else if (button.classList.contains("slider__btn--auto-scroll-off")) {
-            stopAutoScroll();
+        } else if (button.classList.contains("slider__btn--autoscroll-off")) {
+            stopAutoscroll();
             if (!isMainThemeLoaded()) {
                 return;
             }
@@ -200,13 +200,13 @@ function initSlider() {
             slider.classList.add("slider--audio-play");
             btnAudioNext.tabIndex = 0;
             btnAudioPrev.tabIndex = 0;
-            btnAutoScrollOn.tabIndex = -1;
+            btnAutoscrollOn.tabIndex = -1;
             startAudio();
         } else if (button.classList.contains("slider__btn-audio--pause")) {
             slider.classList.remove("slider--audio-play");
             btnAudioNext.tabIndex = -1;
             btnAudioPrev.tabIndex = -1;
-            btnAutoScrollOn.tabIndex = 0;
+            btnAutoscrollOn.tabIndex = 0;
             stopAudio();
         } else if (button.classList.contains("slider__btn-audio--next")) {
             if (audioPlayer.paused) {
@@ -247,7 +247,7 @@ function initSlider() {
 
             const isResetTarget = targetButton?.closest(".js-autoscroll-reset");
             if (isResetTarget) {
-                tryKillAutoScroll();
+                tryKillAutoscroll();
                 tryResurrectAutoscroll();
             }
 
@@ -263,16 +263,16 @@ function initSlider() {
             e.preventDefault();
             if (!isMainThemeLoaded()) {
                 tryClearFocus();
-                stopAutoScroll();
+                stopAutoscroll();
                 return;
             }
 
-            if (!isAutoScrollOn) {
-                isAutoScrollOn = true;
-                slider.classList.add("slider--auto-scroll-on");
+            if (!isAutoscrollOn) {
+                isAutoscrollOn = true;
+                slider.classList.add("slider--autoscroll-on");
                 ++currentIndex;
                 updateSlider();
-                startAutoScroll();
+                startAutoscroll();
 
                 if (!isMainThemeLoaded()) {
                     audioPlayer.src = MAIN_THEME_SRC;
@@ -283,18 +283,18 @@ function initSlider() {
                 return;
             } else {
                 tryClearFocus();
-                stopAutoScroll();
+                stopAutoscroll();
                 audioPlayer.pause();
                 return;
             }
         }
 
         if (e.key === "ArrowRight") {
-            tryKillAutoScroll();
+            tryKillAutoscroll();
             isMoving = true;
             ++currentIndex;
         } else if (e.key === "ArrowLeft") {
-            tryKillAutoScroll();
+            tryKillAutoscroll();
             isMoving = true;
             --currentIndex;
         } else {
@@ -374,7 +374,7 @@ function initSlider() {
 
         if (isPauseTarget) {
             isMouseOver = true;
-            tryKillAutoScroll();
+            tryKillAutoscroll();
         } else {
             isMouseOver = false;
             tryResurrectAutoscroll();
@@ -389,7 +389,7 @@ function initSlider() {
     }
 
     function handlePause() {
-        if (isAutoScrollOn) {
+        if (isAutoscrollOn) {
             audioPlayer.src = MAIN_THEME_SRC;
             audioPlayer.play();
         }
@@ -445,7 +445,7 @@ function initSlider() {
     function handleVisibilitychange() {
         if (document.hidden === true) {
             isTabActive = false;
-            tryKillAutoScroll();
+            tryKillAutoscroll();
         } else {
             isTabActive = true;
             tryResurrectAutoscroll();
@@ -464,7 +464,7 @@ function initSlider() {
         isDragging = true;
         pointerStartX = getClientX(e);
         updateSlideWidth();
-        killAutoScroll();
+        killAutoscroll();
         track.style.transition = "none";
     }
 
@@ -579,7 +579,7 @@ function initSlider() {
 
     function tryResurrectAutoscroll() {
         if (
-            !isAutoScrollOn ||
+            !isAutoscrollOn ||
             !isTabActive ||
             isDragging ||
             isMouseOver ||
@@ -587,38 +587,38 @@ function initSlider() {
         )
             return;
 
-        killAutoScroll();
-        startAutoScroll();
+        killAutoscroll();
+        startAutoscroll();
     }
 
-    function tryKillAutoScroll() {
-        if (!isAutoScrollOn) return;
-        killAutoScroll();
+    function tryKillAutoscroll() {
+        if (!isAutoscrollOn) return;
+        killAutoscroll();
     }
 
-    function killAutoScroll() {
-        clearInterval(autoScrollId);
-        autoScrollId = null;
+    function killAutoscroll() {
+        clearInterval(autoscrollId);
+        autoscrollId = null;
     }
 
-    function startAutoScroll() {
-        if (autoScrollId) {
-            killAutoScroll();
+    function startAutoscroll() {
+        if (autoscrollId) {
+            killAutoscroll();
         }
-        autoScrollId = setInterval(() => {
-            if (isMoving || !isAutoScrollOn) return;
+        autoscrollId = setInterval(() => {
+            if (isMoving || !isAutoscrollOn) return;
             isMoving = true;
             ++currentIndex;
             updateSlider();
         }, 4500);
     }
 
-    function stopAutoScroll() {
-        isAutoScrollOn = false;
+    function stopAutoscroll() {
+        isAutoscrollOn = false;
         isMoving = false;
-        slider.classList.remove("slider--auto-scroll-on");
+        slider.classList.remove("slider--autoscroll-on");
         autoscrollPauseTimestamp = Date.now();
-        killAutoScroll();
+        killAutoscroll();
     }
 
     function tryResetMainThemeTime() {
