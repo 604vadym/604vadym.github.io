@@ -187,7 +187,7 @@ function initSlider() {
             if (!isMainThemeLoaded()) {
                 return;
             }
-            audioPlayer.pause();
+            stopAudio();
         } else if (button.classList.contains("slider__btn-audio--play")) {
             startAudio("album");
         } else if (button.classList.contains("slider__btn-audio--pause")) {
@@ -258,7 +258,7 @@ function initSlider() {
             } else {
                 tryClearFocus();
                 stopAutoscroll();
-                audioPlayer.pause();
+                stopAudio();
                 return;
             }
         }
@@ -487,6 +487,15 @@ function initSlider() {
     }
 
     function startAudio(context) {
+        if (context === "theme") {
+            if (!isMainThemeLoaded()) {
+                audioPlayer.src = MAIN_THEME_SRC;
+            }
+            tryResetMainThemeTime();
+            audioPlayer.play();
+            return;
+        }
+
         if (context === "album") {
             if (!isAudioModeActive()) {
                 slider.classList.add("slider--audio-play");
@@ -500,37 +509,21 @@ function initSlider() {
                 currentAudioTrackIndex = 0;
                 activeAudioAlbumIndex = getAlbumIndex();
             }
+
             const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-
-            if (isSameAudioTrack(currentAlbum)) {
-                if (audioPlayer.paused) {
-                    audioPlayer.play();
-                } else {
-                    audioPlayer.pause();
-                }
-            } else {
-                audioTrackTitle.textContent = `${(currentAudioTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentAudioTrackIndex].name}`;
-                audioPlayer.src =
-                    currentAlbum.tracks[currentAudioTrackIndex].src;
-                audioPlayer.play();
-            }
-            return;
-        }
-
-        if (context === "theme") {
-            if (!isMainThemeLoaded()) {
-                audioPlayer.src = MAIN_THEME_SRC;
-            }
-            tryResetMainThemeTime();
+            audioTrackTitle.textContent = `${(currentAudioTrackIndex + 1).toString().padStart(2, `0`)} / ${currentAlbum.tracks.length.toString().padStart(2, `0`)} • ${currentAlbum.tracks[currentAudioTrackIndex].name}`;
+            audioPlayer.src = currentAlbum.tracks[currentAudioTrackIndex].src;
             audioPlayer.play();
         }
     }
 
     function stopAudio() {
-        slider.classList.remove("slider--audio-play");
-        btnAudioNext.tabIndex = -1;
-        btnAudioPrev.tabIndex = -1;
-        btnAutoscrollOn.tabIndex = 0;
+        if (isAudioModeActive()) {
+            slider.classList.remove("slider--audio-play");
+            btnAudioNext.tabIndex = -1;
+            btnAudioPrev.tabIndex = -1;
+            btnAutoscrollOn.tabIndex = 0;
+        }
         audioPlayer.pause();
     }
 
