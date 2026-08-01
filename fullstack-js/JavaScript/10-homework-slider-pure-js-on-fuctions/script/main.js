@@ -233,7 +233,7 @@ function initSlider() {
 
         if (e.key === " ") {
             e.preventDefault();
-            if (!isMainThemeLoaded()) {
+            if (isAudioModeActive()) {
                 tryClearFocus();
                 stopAutoscroll();
                 return;
