@@ -176,8 +176,6 @@ function initSlider() {
             if (!audioPlayer.paused) {
                 return;
             }
-            isAutoscrollOn = true;
-            slider.classList.add("slider--autoscroll-on");
             ++currentIndex;
             updateSlider();
             startAutoscroll();
@@ -193,16 +191,10 @@ function initSlider() {
         } else if (button.classList.contains("slider__btn-audio--pause")) {
             stopAudio();
         } else if (button.classList.contains("slider__btn-audio--next")) {
-            if (audioPlayer.paused) {
-                return;
-            }
             currentAudioTrackIndex =
                 (currentAudioTrackIndex + 1) % getTotalAudioTracks();
             startAudio("album");
         } else if (button.classList.contains("slider__btn-audio--prev")) {
-            if (audioPlayer.paused) {
-                return;
-            }
             currentAudioTrackIndex =
                 (currentAudioTrackIndex - 1 + getTotalAudioTracks()) %
                 getTotalAudioTracks();
@@ -248,8 +240,6 @@ function initSlider() {
             }
 
             if (!isAutoscrollOn) {
-                isAutoscrollOn = true;
-                slider.classList.add("slider--autoscroll-on");
                 ++currentIndex;
                 updateSlider();
                 startAutoscroll();
@@ -588,6 +578,8 @@ function initSlider() {
     }
 
     function startAutoscroll() {
+        isAutoscrollOn = true;
+        slider.classList.add("slider--autoscroll-on");
         if (autoscrollId) {
             killAutoscroll();
         }
