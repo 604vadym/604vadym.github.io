@@ -134,20 +134,20 @@ function initSlider() {
     slider.addEventListener("click", handleClick);
     slider.addEventListener("mouseover", handleMouseOver);
     slider.addEventListener("mouseout", handleMouseOut);
-    slider.addEventListener("mousedown", handleMouseDown);
-    document.addEventListener("mousemove", handleMouseMove);
+    slider.addEventListener("mousedown", handleMouseDownTouchStart);
+    slider.addEventListener("touchstart", handleMouseDownTouchStart);
+    document.addEventListener("mousemove", handleMouseMoveTouchMove);
+    slider.addEventListener("touchmove", handleMouseMoveTouchMove);
     document.addEventListener("mouseup", handleMouseUpTouchEnd);
+    slider.addEventListener("touchend", handleMouseUpTouchEnd);
     slider.addEventListener("dragstart", (e) => e.preventDefault());
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
-    slider.addEventListener("touchstart", handleTouchStart);
-    slider.addEventListener("touchmove", handleTouchMove);
-    slider.addEventListener("touchend", handleMouseUpTouchEnd);
     audioPlayer.addEventListener("pause", handlePause);
     audioPlayer.addEventListener("ended", handleEnded);
     audioPlayer.addEventListener("timeupdate", handleTimeUpdate);
     track.addEventListener("transitionend", handleTransitionEnd);
-    document.addEventListener("visibilitychange", handleVisibilitychange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("resize", handleResize);
 
     function handleClick(e) {
@@ -248,16 +248,22 @@ function initSlider() {
         }
     }
 
-    function handleMouseDown(e) {
+    function handleMouseDownTouchStart(e) {
         if (isMoving) return;
 
         if (e.target.closest(".slider__track")) {
+            if (e.touches && e.touches.length > 1) return;
             startDragging(e);
         }
     }
 
-    function handleMouseMove(e) {
+    function handleMouseMoveTouchMove(e) {
         if (!isDragging) return;
+
+        if (e.touches && e.touches.length > 1) {
+            stopDragging(0); // TODO: Test on real mobile device
+            return;
+        }
 
         moveConveyor(getClientX(e));
     }
@@ -268,29 +274,9 @@ function initSlider() {
             isDraggingInterrupted = false;
             return;
         }
-        if (!isDragging) return;
 
         const pointerOffset = getClientX(e) - pointerStartX;
         stopDragging(pointerOffset);
-    }
-
-    function handleTouchStart(e) {
-        if (isMoving) return;
-
-        if (e.target.closest(".slider__track")) {
-            if (e.touches.length > 1) return;
-            startDragging(e);
-        }
-    }
-
-    function handleTouchMove(e) {
-        if (!isDragging) return;
-        if (e.touches.length > 1) {
-            stopDragging(0); // TODO: Test on real mobile device
-            return;
-        }
-
-        moveConveyor(getClientX(e));
     }
 
     function handleMouseOver(e) {
@@ -363,7 +349,7 @@ function initSlider() {
         }
     }
 
-    function handleVisibilitychange() {
+    function handleVisibilityChange() {
         if (document.hidden === true) {
             isTabActive = false;
             tryKillAutoscroll();
