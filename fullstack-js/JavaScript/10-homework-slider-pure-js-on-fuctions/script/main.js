@@ -372,7 +372,7 @@ function initSlider() {
         isDragging = true;
         pointerStartX = getClientX(e);
         updateSlideWidth();
-        killAutoscroll();
+        tryKillAutoscroll();
         track.style.transition = "none";
     }
 
@@ -438,7 +438,7 @@ function initSlider() {
         if (context === "album") {
             if (!isAudioModeActive()) {
                 toggleAudioMode(true);
-                killAutoscroll();
+                tryKillAutoscroll();
             }
 
             if (activeAudioAlbumIndex !== currentIndex - 1) {
@@ -528,16 +528,17 @@ function initSlider() {
     }
 
     function killAutoscroll() {
-        clearInterval(autoscrollId);
-        autoscrollId = null;
+        if (autoscrollId) {
+            clearInterval(autoscrollId);
+            autoscrollId = null;
+        }
     }
 
     function startAutoscroll() {
         isAutoscrollOn = true;
         slider.classList.add("slider--autoscroll-on");
-        if (autoscrollId) {
-            killAutoscroll();
-        }
+        killAutoscroll();
+
         autoscrollId = setInterval(() => {
             if (isMoving || !isAutoscrollOn) return;
 
