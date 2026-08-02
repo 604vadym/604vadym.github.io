@@ -274,6 +274,7 @@ function initSlider() {
             isDraggingInterrupted = false;
             return;
         }
+        if (!isDragging) return;
 
         const pointerOffset = getClientX(e) - pointerStartX;
         stopDragging(pointerOffset);
