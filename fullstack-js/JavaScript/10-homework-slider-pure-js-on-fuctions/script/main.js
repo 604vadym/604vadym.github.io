@@ -109,6 +109,7 @@ function initSlider() {
     audioPlayer.src = MAIN_THEME_SRC;
     const ASURA_MASTERPIECES = initAudioData();
 
+    const AUTOSCROLL_DELAY = 4500;
     const SLIDES_COUNT = slides.length;
     const TRACK_TRANSITION = track.style.transition;
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
@@ -116,6 +117,7 @@ function initSlider() {
     let slideWidth = 0;
     let pointerStartX = 0;
     let autoscrollPauseTimestamp = 0;
+    let autoscrollStartTimestamp = 0;
     let isTabActive = true;
     let isDragging = false;
     let isDraggingInterrupted = false;
@@ -284,15 +286,30 @@ function initSlider() {
         const isPauseTarget = e.target.closest(".js-autoscroll-pause");
 
         if (isPauseTarget) {
+            const msSinceStart = Date.now() - autoscrollStartTimestamp;
+            if (msSinceStart < 100) {
+                isMouseOver = true;
+                return;
+            }
+            if (isMouseOver) return;
+
             isMouseOver = true;
             tryKillAutoscroll();
         } else {
+            if (!isMouseOver) return;
             isMouseOver = false;
             tryResurrectAutoscroll();
         }
     }
 
     function handleMouseOut(e) {
+        if (
+            e.relatedTarget &&
+            e.relatedTarget.closest(".js-autoscroll-pause")
+        ) {
+            return;
+        }
+
         if (!slider.contains(e.relatedTarget)) {
             isMouseOver = false;
             tryResurrectAutoscroll();
@@ -519,7 +536,7 @@ function initSlider() {
             return;
 
         killAutoscroll();
-        startAutoscroll();
+        startAutoscroll(1500);
     }
 
     function tryKillAutoscroll() {
@@ -534,10 +551,12 @@ function initSlider() {
         }
     }
 
-    function startAutoscroll() {
+    function startAutoscroll(delay) {
         isAutoscrollOn = true;
         slider.classList.add("slider--autoscroll-on");
         killAutoscroll();
+
+        const currentDelay = delay || AUTOSCROLL_DELAY;
 
         autoscrollId = setInterval(() => {
             if (isMoving || !isAutoscrollOn) return;
@@ -549,7 +568,11 @@ function initSlider() {
 
             ++currentIndex;
             updateSlider();
-        }, 4500);
+
+            if (currentDelay !== AUTOSCROLL_DELAY) {
+                startAutoscroll();
+            }
+        }, currentDelay);
     }
 
     function stopAutoscroll() {
@@ -631,6 +654,7 @@ function initSlider() {
             ++currentIndex;
             updateSlider();
             startAutoscroll();
+            autoscrollStartTimestamp = Date.now();
             startAudio("theme");
             return true;
         } else {
