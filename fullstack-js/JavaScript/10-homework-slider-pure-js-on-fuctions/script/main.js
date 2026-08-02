@@ -316,10 +316,7 @@ function initSlider() {
             ++currentIndex;
 
             if (!isTabActive) {
-                track.style.transition = "none";
-                updateSlider();
-                track.offsetHeight;
-                track.style.transition = TRACK_TRANSITION;
+                updateSliderInstantly();
                 startAudio("album");
             } else {
                 updateSlider();
@@ -361,11 +358,8 @@ function initSlider() {
     }
 
     function handleResize() {
-        track.style.transition = "none";
         updateSlideWidth();
-        updateSlider();
-        track.offsetHeight;
-        track.style.transition = TRACK_TRANSITION;
+        updateSliderInstantly();
     }
 
     function startDragging(e) {
@@ -479,6 +473,13 @@ function initSlider() {
         paginationDots[getAlbumIndex()].classList.add(
             "pagination__dot--active",
         );
+    }
+
+    function updateSliderInstantly() {
+        track.style.transition = "none";
+        updateSlider();
+        track.offsetHeight;
+        track.style.transition = TRACK_TRANSITION;
     }
 
     function teleportSlides() {
