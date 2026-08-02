@@ -321,7 +321,7 @@ function initSlider() {
     }
 
     function handleEnded() {
-        if (isMainThemeLoaded()) {
+        if (!isAudioModeActive()) {
             startAudio("theme");
             return;
         }
@@ -355,7 +355,7 @@ function initSlider() {
             isMoving = false;
         }
 
-        if (isMainThemeLoaded()) return;
+        if (!isAudioModeActive()) return;
 
         if (activeAudioAlbumIndex !== currentIndex - 1) {
             currentAudioTrackIndex = 0;
@@ -429,7 +429,7 @@ function initSlider() {
             if (audioPlayer.paused) {
                 startAudio("album");
             } else {
-                if (isMainThemeLoaded()) {
+                if (!isAudioModeActive()) {
                     return;
                 }
                 stopAudio();
@@ -515,7 +515,7 @@ function initSlider() {
             !isTabActive ||
             isDragging ||
             isMouseOver ||
-            !isMainThemeLoaded()
+            isAudioModeActive()
         )
             return;
 
