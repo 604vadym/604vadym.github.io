@@ -130,7 +130,6 @@ function initSlider() {
 
     updateSlideWidth();
     teleportSlides();
-    updateSlider();
 
     slider.addEventListener("click", handleClick);
     slider.addEventListener("mouseover", handleMouseOver);
