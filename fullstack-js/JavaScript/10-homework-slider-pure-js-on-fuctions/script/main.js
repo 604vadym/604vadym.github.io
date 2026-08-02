@@ -123,6 +123,7 @@ function initSlider() {
     let isMoving = false;
     let isAutoscrollOn = false;
     let autoscrollId = null;
+    let resizeTimeoutId = null;
 
     const paginationDots = initPagination();
     slides = initInfiniteLoop();
@@ -358,8 +359,14 @@ function initSlider() {
     }
 
     function handleResize() {
-        updateSlideWidth();
-        updateSliderInstantly();
+        clearTimeout(resizeTimeoutId);
+        tryKillAutoscroll();
+
+        resizeTimeoutId = setTimeout(() => {
+            updateSlideWidth();
+            updateSliderInstantly();
+            tryResurrectAutoscroll();
+        }, 20);
     }
 
     function startDragging(e) {
@@ -480,6 +487,7 @@ function initSlider() {
         updateSlider();
         track.offsetHeight;
         track.style.transition = TRACK_TRANSITION;
+        isMoving = false;
     }
 
     function teleportSlides() {
