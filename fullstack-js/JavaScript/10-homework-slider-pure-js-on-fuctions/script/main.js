@@ -447,8 +447,12 @@ function initSlider() {
             }
 
             const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
-            updateAudioTrackTitle(currentAlbum, currentAudioTrackIndex);
-            audioPlayer.src = currentAlbum.tracks[currentAudioTrackIndex].src;
+            if (!isSameAudioTrack(currentAlbum, audioPlayer.src)) {
+                updateAudioTrackTitle(currentAlbum);
+                audioPlayer.src =
+                    currentAlbum.tracks[currentAudioTrackIndex].src;
+            }
+
             audioPlayer.play();
         }
     }
@@ -593,10 +597,18 @@ function initSlider() {
         return audioPlayer.src.includes(MAIN_THEME_SRC.substring(2));
     }
 
-    function updateAudioTrackTitle(album, trackIndex) {
-        const trackNumber = (trackIndex + 1).toString().padStart(2, `0`);
+    function isSameAudioTrack(album, src) {
+        return src.includes(
+            album.tracks[currentAudioTrackIndex].src.substring(2),
+        );
+    }
+
+    function updateAudioTrackTitle(album) {
+        const trackNumber = (currentAudioTrackIndex + 1)
+            .toString()
+            .padStart(2, `0`);
         const totalTracks = album.tracks.length.toString().padStart(2, `0`);
-        const trackName = album.tracks[trackIndex].name;
+        const trackName = album.tracks[currentAudioTrackIndex].name;
 
         audioTrackTitle.textContent = `${trackNumber} / ${totalTracks} • ${trackName}`;
     }
