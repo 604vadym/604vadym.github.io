@@ -366,7 +366,7 @@ function initSlider() {
             updateSlideWidth();
             updateSliderInstantly();
             tryResurrectAutoscroll();
-        }, 20);
+        }, 8);
     }
 
     function startDragging(e) {
@@ -537,6 +537,11 @@ function initSlider() {
         }
         autoscrollId = setInterval(() => {
             if (isMoving || !isAutoscrollOn) return;
+
+            if (currentIndex === SLIDES_COUNT) {
+                currentIndex = 0;
+                updateSliderInstantly();
+            }
 
             ++currentIndex;
             updateSlider();
