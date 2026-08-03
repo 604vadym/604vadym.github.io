@@ -232,6 +232,34 @@ function initSlider() {
             return;
         }
 
+        if (e.key === "ArrowUp") {
+            e.preventDefault();
+            if (!isAutoscrollOn && audioPlayer.paused) {
+                startAudio("album");
+            }
+            return;
+        }
+
+        if (e.key === "ArrowDown") {
+            e.preventDefault();
+            if (!isAutoscrollOn && !audioPlayer.paused) {
+                stopAudio();
+            }
+            return;
+        }
+
+        if (e.key === "MediaPlayPause") {
+            e.preventDefault();
+            if (!isAutoscrollOn) {
+                if (audioPlayer.paused) {
+                    startAudio("album");
+                } else {
+                    stopAudio();
+                }
+            }
+            return;
+        }
+
         if (e.key === "ArrowRight") {
             tryKillAutoscroll();
             ++currentIndex;
