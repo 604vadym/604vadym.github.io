@@ -316,6 +316,7 @@ function initSlider() {
     }
 
     function handleMouseOver(e) {
+        if (!hasFinePointer()) return;
         const isPauseTarget = e.target.closest(".js-autoscroll-pause");
 
         if (isPauseTarget) {
@@ -336,6 +337,7 @@ function initSlider() {
     }
 
     function handleMouseOut(e) {
+        if (!hasFinePointer()) return;
         if (
             e.relatedTarget &&
             e.relatedTarget.closest(".js-autoscroll-pause")
@@ -578,7 +580,7 @@ function initSlider() {
         }
 
         killAutoscroll();
-        if (context === "hover") {
+        if (context === "hover" && hasFinePointer()) {
             startAutoscroll(getAdaptiveWakeUpDelay());
         } else {
             startAutoscroll();
@@ -622,9 +624,9 @@ function initSlider() {
 
             slideStandTimestamp = Date.now();
 
-            const isMouseStillOver = document.querySelector(
-                ".js-autoscroll-pause:hover",
-            );
+            const isMouseStillOver =
+                hasFinePointer() &&
+                document.querySelector(".js-autoscroll-pause:hover");
 
             if (isMouseStillOver) {
                 isMouseOver = true;
@@ -663,6 +665,10 @@ function initSlider() {
 
     function updateSlideWidth() {
         slideWidth = slides[0].getBoundingClientRect().width;
+    }
+
+    function hasFinePointer() {
+        return window.matchMedia("(pointer: fine)").matches;
     }
 
     function getClientX(e) {
