@@ -110,6 +110,7 @@ function initSlider() {
     const ASURA_MASTERPIECES = initAudioData();
 
     const AUTOSCROLL_DELAY = 4500;
+    const AUTOSCROLL_WAKE_UP_DELAY = 1500;
     const SLIDES_COUNT = slides.length;
     const TRACK_TRANSITION = track.style.transition;
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
@@ -118,6 +119,7 @@ function initSlider() {
     let pointerStartX = 0;
     let autoscrollPauseTimestamp = 0;
     let autoscrollStartTimestamp = 0;
+    let slideStandTimestamp = 0;
     let isTabActive = true;
     let isDragging = false;
     let isDraggingInterrupted = false;
@@ -177,7 +179,7 @@ function initSlider() {
         } else if (button.classList.contains("slider__btn--autoscroll-on")) {
             if (toggleAutoscrollMode()) return;
         } else if (button.classList.contains("slider__btn--autoscroll-off")) {
-            toggleAutoscrollMode();
+            if (!toggleAutoscrollMode()) return;
         } else if (button.classList.contains("slider__btn-audio--play")) {
             startAudio("album");
         } else if (button.classList.contains("slider__btn-audio--pause")) {
@@ -238,7 +240,6 @@ function initSlider() {
         } else {
             return;
         }
-
         updateSlider();
         tryResurrectAutoscroll();
     }
@@ -535,12 +536,26 @@ function initSlider() {
         )
             return;
 
+        const msSinceStart = Date.now() - autoscrollStartTimestamp;
+        if (msSinceStart < AUTOSCROLL_DELAY) return;
+
+        const msSlideStand = Date.now() - slideStandTimestamp;
+
+        let adaptiveDelay = AUTOSCROLL_WAKE_UP_DELAY;
+        if (msSlideStand < AUTOSCROLL_DELAY - AUTOSCROLL_WAKE_UP_DELAY) {
+            adaptiveDelay = AUTOSCROLL_DELAY - msSlideStand;
+        }
+
         killAutoscroll();
-        startAutoscroll(1500);
+        startAutoscroll(adaptiveDelay);
     }
 
     function tryKillAutoscroll() {
         if (!isAutoscrollOn) return;
+
+        const msSinceStart = Date.now() - autoscrollStartTimestamp;
+        if (msSinceStart < AUTOSCROLL_DELAY) return;
+
         killAutoscroll();
     }
 
@@ -568,6 +583,19 @@ function initSlider() {
 
             ++currentIndex;
             updateSlider();
+
+            slideStandTimestamp = Date.now();
+
+            const isMouseStillOver = document.querySelector(
+                ".js-autoscroll-pause:hover",
+            );
+
+            if (isMouseStillOver) {
+                isMouseOver = true;
+                tryKillAutoscroll();
+            } else {
+                isMouseOver = false;
+            }
 
             if (currentDelay !== AUTOSCROLL_DELAY) {
                 startAutoscroll();
@@ -655,6 +683,7 @@ function initSlider() {
             updateSlider();
             startAutoscroll();
             autoscrollStartTimestamp = Date.now();
+            slideStandTimestamp = Date.now();
             startAudio("theme");
             return true;
         } else {
