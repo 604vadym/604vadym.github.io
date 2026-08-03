@@ -328,7 +328,7 @@ function initSlider() {
         } else {
             if (!isMouseOver) return;
             isMouseOver = false;
-            tryResurrectAutoscroll();
+            tryResurrectAutoscroll("hover");
         }
     }
 
@@ -342,7 +342,7 @@ function initSlider() {
 
         if (!slider.contains(e.relatedTarget)) {
             isMouseOver = false;
-            tryResurrectAutoscroll();
+            tryResurrectAutoscroll("hover");
         }
     }
 
@@ -555,7 +555,7 @@ function initSlider() {
         window.open(ASURA_MASTERPIECES[getAlbumIndex()].shopUrl, "_blank");
     }
 
-    function tryResurrectAutoscroll() {
+    function tryResurrectAutoscroll(context) {
         if (
             !isAutoscrollOn ||
             !isTabActive ||
@@ -568,7 +568,9 @@ function initSlider() {
         if (isAutoscrollFirstCycle()) return;
 
         killAutoscroll();
-        startAutoscroll(getAdaptiveWakeUpDelay());
+        context === "hover"
+            ? startAutoscroll(getAdaptiveWakeUpDelay())
+            : startAutoscroll();
     }
 
     function tryKillAutoscroll() {
