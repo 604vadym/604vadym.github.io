@@ -128,6 +128,7 @@ function initSlider() {
     let isMouseOver = false;
     let isMoving = false;
     let isAutoscrollOn = false;
+    let isResizing = false;
     let autoscrollId = null;
     let resizeTimeoutId = null;
 
@@ -364,6 +365,7 @@ function initSlider() {
             startAudio("theme");
             return;
         }
+
         if (currentAudioTrackIndex === getTotalAudioTracks() - 1) {
             ++currentIndex;
 
@@ -413,7 +415,13 @@ function initSlider() {
         clearTimeout(resizeTimeoutId);
         tryKillAutoscroll();
 
+        isResizing = true;
+        slider.classList.add("slider--resizing");
+        updateSliderInstantly();
+
         resizeTimeoutId = setTimeout(() => {
+            isResizing = false;
+            slider.classList.remove("slider--resizing");
             updateSlideWidth();
             updateSliderInstantly();
             tryResurrectAutoscroll();
@@ -521,8 +529,12 @@ function initSlider() {
             isMoving = true;
         }
 
-        const offset = currentIndex * slideWidth;
-        track.style.transform = `translateX(-${offset}px)`;
+        if (hasFinePointer() || isResizing) {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        } else {
+            const offset = currentIndex * slideWidth;
+            track.style.transform = `translateX(-${offset}px)`;
+        }
 
         updatePagination();
     }
