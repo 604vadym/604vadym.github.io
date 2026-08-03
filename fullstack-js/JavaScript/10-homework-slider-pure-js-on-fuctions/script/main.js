@@ -121,6 +121,7 @@ function initSlider() {
     let autoscrollPauseTimestamp = 0;
     let autoscrollStartTimestamp = 0;
     let slideStandTimestamp = 0;
+    let lastClickTimestamp = 0;
     let isTabActive = true;
     let isDragging = false;
     let isDraggingInterrupted = false;
@@ -164,6 +165,8 @@ function initSlider() {
 
         const button = e.target.closest("button");
         if (!button || isMoving) return;
+
+        lastClickTimestamp = Date.now();
 
         if (e.pointerType === "mouse" || e.pointerType === "touch") {
             button.blur();
@@ -567,8 +570,12 @@ function initSlider() {
 
         if (isAutoscrollFirstCycle()) return;
 
+        const msSinceLastClick = Date.now() - lastClickTimestamp;
+        const finalContext =
+            msSinceLastClick < AUTOSCROLL_WAKE_UP_DELAY ? null : context;
+
         killAutoscroll();
-        if (context === "hover") {
+        if (finalContext === "hover") {
             startAutoscroll(getAdaptiveWakeUpDelay());
         } else {
             startAutoscroll();
