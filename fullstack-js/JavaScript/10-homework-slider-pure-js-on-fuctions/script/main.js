@@ -111,6 +111,7 @@ function initSlider() {
 
     const AUTOSCROLL_DELAY = 4500;
     const AUTOSCROLL_WAKE_UP_DELAY = 1500;
+    const THEME_RESET_PAUSE_THRESHOLD = 300000;
     const SLIDES_COUNT = slides.length;
     const TRACK_TRANSITION = track.style.transition;
     const teleportMap = { 0: SLIDES_COUNT, [SLIDES_COUNT + 1]: 1 };
@@ -536,25 +537,16 @@ function initSlider() {
         )
             return;
 
-        const msSinceStart = Date.now() - autoscrollStartTimestamp;
-        if (msSinceStart < AUTOSCROLL_DELAY) return;
-
-        const msSlideStand = Date.now() - slideStandTimestamp;
-
-        let adaptiveDelay = AUTOSCROLL_WAKE_UP_DELAY;
-        if (msSlideStand < AUTOSCROLL_DELAY - AUTOSCROLL_WAKE_UP_DELAY) {
-            adaptiveDelay = AUTOSCROLL_DELAY - msSlideStand;
-        }
+        if (isAutoscrollFirstCycle()) return;
 
         killAutoscroll();
-        startAutoscroll(adaptiveDelay);
+        startAutoscroll(getAdaptiveWakeUpDelay());
     }
 
     function tryKillAutoscroll() {
         if (!isAutoscrollOn) return;
 
-        const msSinceStart = Date.now() - autoscrollStartTimestamp;
-        if (msSinceStart < AUTOSCROLL_DELAY) return;
+        if (isAutoscrollFirstCycle()) return;
 
         killAutoscroll();
     }
@@ -613,7 +605,7 @@ function initSlider() {
     function tryResetMainThemeTime() {
         if (
             autoscrollPauseTimestamp > 0 &&
-            Date.now() - autoscrollPauseTimestamp > 300000
+            Date.now() - autoscrollPauseTimestamp > THEME_RESET_PAUSE_THRESHOLD
         ) {
             audioPlayer.currentTime = 0;
         }
@@ -653,6 +645,19 @@ function initSlider() {
         return src.includes(
             album.tracks[currentAudioTrackIndex].src.substring(2),
         );
+    }
+
+    function isAutoscrollFirstCycle() {
+        const msSinceStart = Date.now() - autoscrollStartTimestamp;
+        return msSinceStart < AUTOSCROLL_DELAY;
+    }
+
+    function getAdaptiveWakeUpDelay() {
+        const msSlideStand = Date.now() - slideStandTimestamp;
+        if (msSlideStand < AUTOSCROLL_DELAY - AUTOSCROLL_WAKE_UP_DELAY) {
+            return AUTOSCROLL_DELAY - msSlideStand;
+        }
+        return AUTOSCROLL_WAKE_UP_DELAY;
     }
 
     function updateAudioTrackTitle(album) {
