@@ -588,7 +588,9 @@ function initSlider() {
     function tryKillAutoscroll() {
         if (!isAutoscrollOn) return;
 
-        if (isAutoscrollFirstCycle()) return;
+        if (isTabActive) {
+            if (isAutoscrollFirstCycle()) return;
+        }
 
         killAutoscroll();
     }
