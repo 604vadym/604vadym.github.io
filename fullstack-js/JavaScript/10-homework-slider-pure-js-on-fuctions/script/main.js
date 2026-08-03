@@ -573,8 +573,7 @@ function initSlider() {
         if (isAutoscrollFirstCycle()) return;
 
         if (context === "hover" && hasFinePointer()) {
-            const msSinceLastClick = Date.now() - lastClickTimestamp;
-            if (msSinceLastClick < AUTOSCROLL_WAKE_UP_DELAY) {
+            if (isPostClickDriftActive()) {
                 context = null;
             }
         } else {
@@ -702,6 +701,11 @@ function initSlider() {
     function isAutoscrollFirstCycle() {
         const msSinceStart = Date.now() - autoscrollStartTimestamp;
         return msSinceStart < AUTOSCROLL_DELAY;
+    }
+
+    function isPostClickDriftActive() {
+        const msSinceLastClick = Date.now() - lastClickTimestamp;
+        return msSinceLastClick < AUTOSCROLL_WAKE_UP_DELAY;
     }
 
     function getAdaptiveWakeUpDelay() {
