@@ -570,12 +570,15 @@ function initSlider() {
 
         if (isAutoscrollFirstCycle()) return;
 
-        const msSinceLastClick = Date.now() - lastClickTimestamp;
-        const finalContext =
-            msSinceLastClick < AUTOSCROLL_WAKE_UP_DELAY ? null : context;
+        if (context === "hover") {
+            const msSinceLastClick = Date.now() - lastClickTimestamp;
+            if (msSinceLastClick < AUTOSCROLL_WAKE_UP_DELAY) {
+                context = null;
+            }
+        }
 
         killAutoscroll();
-        if (finalContext === "hover") {
+        if (context === "hover") {
             startAutoscroll(getAdaptiveWakeUpDelay());
         } else {
             startAutoscroll();
