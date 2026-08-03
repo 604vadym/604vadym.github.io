@@ -568,9 +568,11 @@ function initSlider() {
         if (isAutoscrollFirstCycle()) return;
 
         killAutoscroll();
-        context === "hover"
-            ? startAutoscroll(getAdaptiveWakeUpDelay())
-            : startAutoscroll();
+        if (context === "hover") {
+            startAutoscroll(getAdaptiveWakeUpDelay());
+        } else {
+            startAutoscroll();
+        }
     }
 
     function tryKillAutoscroll() {
