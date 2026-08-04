@@ -186,17 +186,19 @@ function initSlider() {
         } else if (button.classList.contains("slider__btn--autoscroll-off")) {
             if (!toggleAutoscrollMode()) return;
         } else if (button.classList.contains("slider__btn-audio--play")) {
+            if (e.shiftKey) {
+                if (isAutoscrollOn) {
+                    toggleAutoscrollMode();
+                }
+            }
             startAudio("album");
         } else if (button.classList.contains("slider__btn-audio--pause")) {
             stopAudio();
         } else if (button.classList.contains("slider__btn-audio--next")) {
-            currentAudioTrackIndex =
-                (currentAudioTrackIndex + 1) % getTotalAudioTracks();
+            nextAudioTrack();
             startAudio("album");
         } else if (button.classList.contains("slider__btn-audio--prev")) {
-            currentAudioTrackIndex =
-                (currentAudioTrackIndex - 1 + getTotalAudioTracks()) %
-                getTotalAudioTracks();
+            prevAudioTrack();
             startAudio("album");
         }
 
@@ -206,9 +208,12 @@ function initSlider() {
     }
 
     function handleKeyDown(e) {
-        if (isMoving) return;
-
         if (e.key === "Enter") {
+            if (isMoving) {
+                e.preventDefault();
+                return;
+            }
+
             const targetButton = document.activeElement;
 
             const isPressTarget = targetButton?.closest(".js-pressed-target");
@@ -230,23 +235,85 @@ function initSlider() {
             return;
         }
 
-        if (e.key === " ") {
+        if (e.repeat && e.shiftKey) {
             e.preventDefault();
-            toggleAutoscrollMode();
             return;
         }
 
-        if (e.key === "ArrowUp") {
+        let oldIndex = currentIndex;
+
+        if (e.code === "ArrowRight" || e.code === "KeyD") {
             e.preventDefault();
+            if (isMoving) return;
+
+            if (e.shiftKey) {
+                if (isAudioModeActive()) {
+                    nextAudioTrack();
+                    startAudio("album");
+                    return;
+                }
+            }
+            tryKillAutoscroll();
+            ++currentIndex;
+        } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
+            e.preventDefault();
+            if (isMoving) return;
+
+            if (e.shiftKey) {
+                if (isAudioModeActive()) {
+                    prevAudioTrack();
+                    startAudio("album");
+                    return;
+                }
+            }
+            tryKillAutoscroll();
+            --currentIndex;
+        }
+
+        if (currentIndex !== oldIndex) {
+            updateSlider();
+            tryResurrectAutoscroll();
+            return;
+        }
+
+        if (e.repeat) {
+            e.preventDefault();
+            return;
+        }
+
+        if (e.key === " ") {
+            e.preventDefault();
+            if (e.shiftKey) {
+                if (isAutoscrollOn) {
+                    toggleAutoscrollMode();
+                }
+                if (audioPlayer.paused) {
+                    startAudio("album");
+                } else {
+                    stopAudio();
+                }
+            } else {
+                toggleAutoscrollMode();
+            }
+            return;
+        }
+
+        if (e.key === "ArrowUp" || e.code === "KeyW") {
+            e.preventDefault();
+            if (e.shiftKey) {
+                if (isAutoscrollOn) {
+                    toggleAutoscrollMode();
+                }
+            }
             if (!isAutoscrollOn && audioPlayer.paused) {
                 startAudio("album");
             }
             return;
         }
 
-        if (e.key === "ArrowDown") {
+        if (e.key === "ArrowDown" || e.code === "KeyS" || e.code === "Pause") {
             e.preventDefault();
-            if (!isAutoscrollOn && !audioPlayer.paused) {
+            if (!audioPlayer.paused) {
                 stopAudio();
             }
             return;
@@ -264,17 +331,95 @@ function initSlider() {
             return;
         }
 
-        if (e.key === "ArrowRight") {
-            tryKillAutoscroll();
-            ++currentIndex;
-        } else if (e.key === "ArrowLeft") {
-            tryKillAutoscroll();
-            --currentIndex;
-        } else {
+        if (
+            e.key === "MediaTrackPrevious" ||
+            e.key === "-" ||
+            e.key === "_" ||
+            e.code === "BracketLeft" ||
+            e.code === "KeyP"
+        ) {
+            e.preventDefault();
+            if (isAudioModeActive()) {
+                prevAudioTrack();
+                startAudio("album");
+            }
             return;
         }
-        updateSlider();
-        tryResurrectAutoscroll();
+
+        if (
+            e.key === "MediaTrackNext" ||
+            e.key === "+" ||
+            e.key === "=" ||
+            e.code === "BracketRight" ||
+            e.code === "KeyN"
+        ) {
+            e.preventDefault();
+            if (isAudioModeActive()) {
+                nextAudioTrack();
+                startAudio("album");
+            }
+            return;
+        }
+
+        if (e.key >= "1" && e.key <= "9") {
+            if (isAudioModeActive()) {
+                if (parseInt(e.key, 10) <= getTotalAudioTracks()) {
+                    currentAudioTrackIndex = parseInt(e.key, 10) - 1;
+                    startAudio("album");
+                }
+            }
+            return;
+        }
+
+        if (e.key === "0" || e.code === "Home") {
+            e.preventDefault();
+            if (isAudioModeActive()) {
+                audioPlayer.currentTime = 0;
+            }
+            return;
+        }
+
+        if (e.code === "Backspace") {
+            e.preventDefault();
+            if (isAudioModeActive()) {
+                currentAudioTrackIndex = 0;
+                audioPlayer.currentTime = 0;
+                startAudio("album");
+            }
+            return;
+        }
+
+        if (e.code === "Escape") {
+            e.preventDefault();
+            if (isAutoscrollOn) {
+                toggleAutoscrollMode();
+            }
+            stopAudio();
+            if (e.shiftKey) {
+                audioPlayer.src = MAIN_THEME_SRC;
+                activeAudioAlbumIndex = null;
+                currentAudioTrackIndex = 0;
+
+                currentIndex = 1;
+                pointerStartX = 0;
+                autoscrollPauseTimestamp = 0;
+                autoscrollStartTimestamp = 0;
+                slideStandTimestamp = 0;
+                lastClickTimestamp = 0;
+                isDragging = false;
+                isDraggingInterrupted = false;
+                isMouseOver = false;
+                isResizing = false;
+                clearTimeout(resizeTimeoutId);
+                slider.classList.remove("slider--resizing");
+                updateSliderInstantly();
+            }
+            return;
+        }
+
+        if (e.code === "PageDown" || e.code === "PageUp" || e.code === "End") {
+            e.preventDefault();
+        }
     }
 
     function handleKeyUp() {
@@ -313,7 +458,7 @@ function initSlider() {
         if (!isDragging) return;
 
         const pointerOffset = getClientX(e) - pointerStartX;
-        stopDragging(pointerOffset);
+        stopDragging(pointerOffset, e);
     }
 
     function handleMouseOver(e) {
@@ -456,7 +601,7 @@ function initSlider() {
         }
     }
 
-    function stopDragging(pointerOffset) {
+    function stopDragging(pointerOffset, e = null) {
         isDragging = false;
         track.style.transition = TRACK_TRANSITION;
 
@@ -473,6 +618,11 @@ function initSlider() {
             }
             updateSlider();
         } else {
+            if (e && e.shiftKey) {
+                if (isAutoscrollOn) {
+                    toggleAutoscrollMode();
+                }
+            }
             if (audioPlayer.paused) {
                 startAudio("album");
             } else {
@@ -678,6 +828,17 @@ function initSlider() {
 
     function updateSlideWidth() {
         slideWidth = slides[0].getBoundingClientRect().width;
+    }
+
+    function nextAudioTrack() {
+        currentAudioTrackIndex =
+            (currentAudioTrackIndex + 1) % getTotalAudioTracks();
+    }
+
+    function prevAudioTrack() {
+        currentAudioTrackIndex =
+            (currentAudioTrackIndex - 1 + getTotalAudioTracks()) %
+            getTotalAudioTracks();
     }
 
     function hasFinePointer() {
