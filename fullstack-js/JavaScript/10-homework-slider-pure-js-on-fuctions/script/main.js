@@ -144,9 +144,9 @@ function initSlider() {
     slider.addEventListener("mousedown", handleMouseDownTouchStart);
     slider.addEventListener("touchstart", handleMouseDownTouchStart);
     document.addEventListener("mousemove", handleMouseMoveTouchMove);
-    slider.addEventListener("touchmove", handleMouseMoveTouchMove);
+    document.addEventListener("touchmove", handleMouseMoveTouchMove);
     document.addEventListener("mouseup", handleMouseUpTouchEnd);
-    slider.addEventListener("touchend", handleMouseUpTouchEnd);
+    document.addEventListener("touchend", handleMouseUpTouchEnd);
     slider.addEventListener("dragstart", (e) => e.preventDefault());
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
