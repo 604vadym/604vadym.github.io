@@ -139,6 +139,7 @@ function initSlider() {
     teleportSlides();
 
     slider.addEventListener("click", handleClick);
+    slider.addEventListener("auxclick", handleClick);
     slider.addEventListener("mouseover", handleMouseOver);
     slider.addEventListener("mouseout", handleMouseOut);
     slider.addEventListener("mousedown", handleMouseDownTouchStart);
@@ -154,17 +155,12 @@ function initSlider() {
     audioPlayer.addEventListener("pause", handlePause);
     audioPlayer.addEventListener("ended", handleEnded);
     audioPlayer.addEventListener("timeupdate", handleTimeUpdate);
+    linkShop.addEventListener("pointerover", handlePointerOver);
     track.addEventListener("transitionend", handleTransitionEnd);
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("resize", handleResize);
 
     function handleClick(e) {
-        if (e.target.closest(".slider__link-shop")) {
-            e.preventDefault();
-            openLinkShop();
-            return;
-        }
-
         const button = e.target.closest("button");
         if (!button || isMoving) return;
 
@@ -464,6 +460,12 @@ function initSlider() {
 
     function handleDocumentMouseDown(e) {
         if (e.button === 1) {
+            const isInteractiveTarget =
+                e.target.closest(".slider__link-shop") ||
+                e.target.closest("button") ||
+                e.target.closest("a");
+            if (isInteractiveTarget) return;
+
             e.preventDefault();
             if (isAutoscrollOn) {
                 toggleAutoscrollMode();
@@ -472,6 +474,18 @@ function initSlider() {
                 startAudio("album");
             } else {
                 stopAudio();
+            }
+        }
+    }
+
+    function handlePointerOver(e) {
+        const linkShop = e.target.closest(".slider__link-shop");
+
+        if (linkShop) {
+            const currentShopUrl = ASURA_MASTERPIECES[getAlbumIndex()].shopUrl;
+
+            if (linkShop.getAttribute("href") !== currentShopUrl) {
+                linkShop.setAttribute("href", currentShopUrl);
             }
         }
     }
