@@ -462,6 +462,10 @@ function initSlider() {
 
     function handleDocumentMouseDown(e) {
         if (e.button === 1) {
+            if (isMoving) {
+                e.preventDefault();
+                return;
+            }
             const isInteractiveTarget =
                 e.target.closest(".slider__link-shop") ||
                 e.target.closest(".button") ||
