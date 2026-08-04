@@ -161,7 +161,7 @@ function initSlider() {
     window.addEventListener("resize", handleResize);
 
     function handleClick(e) {
-        const button = e.target.closest("button");
+        const button = e.target.closest(".button");
         if (!button || isMoving) return;
 
         lastClickTimestamp = Date.now();
@@ -206,25 +206,27 @@ function initSlider() {
 
     function handleKeyDown(e) {
         if (e.key === "Enter") {
-            if (isMoving) {
+            const activeElement = document.activeElement;
+            const isButton = activeElement?.closest(".button");
+
+            if (isButton && isMoving) {
                 e.preventDefault();
                 return;
             }
 
-            const targetButton = document.activeElement;
-
-            const isPressTarget = targetButton?.closest(".js-pressed-target");
+            const isPressTarget = activeElement?.closest(".js-pressed-target");
             if (isPressTarget) {
-                targetButton.classList.add("is-pressed");
+                activeElement.classList.add("is-pressed");
             }
 
-            const isResetTarget = targetButton?.closest(".js-autoscroll-reset");
+            const isResetTarget = activeElement?.closest(
+                ".js-autoscroll-reset",
+            );
             if (isResetTarget) {
                 tryKillAutoscroll();
                 tryResurrectAutoscroll();
             }
 
-            const isButton = targetButton?.closest(".button");
             if (isButton) return;
 
             e.preventDefault();
@@ -462,7 +464,7 @@ function initSlider() {
         if (e.button === 1) {
             const isInteractiveTarget =
                 e.target.closest(".slider__link-shop") ||
-                e.target.closest("button") ||
+                e.target.closest(".button") ||
                 e.target.closest("a");
             if (isInteractiveTarget) return;
 
