@@ -148,6 +148,7 @@ function initSlider() {
     document.addEventListener("mouseup", handleMouseUpTouchEnd);
     document.addEventListener("touchend", handleMouseUpTouchEnd);
     slider.addEventListener("dragstart", (e) => e.preventDefault());
+    document.addEventListener("mousedown", handleDocumentMouseDown);
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
     audioPlayer.addEventListener("pause", handlePause);
@@ -461,6 +462,20 @@ function initSlider() {
         stopDragging(pointerOffset, e);
     }
 
+    function handleDocumentMouseDown(e) {
+        if (e.button === 1) {
+            e.preventDefault();
+            if (isAutoscrollOn) {
+                toggleAutoscrollMode();
+            }
+            if (audioPlayer.paused) {
+                startAudio("album");
+            } else {
+                stopAudio();
+            }
+        }
+    }
+
     function handleMouseOver(e) {
         if (!hasFinePointer()) return;
         const isPauseTarget = e.target.closest(".js-autoscroll-pause");
@@ -618,7 +633,11 @@ function initSlider() {
             }
             updateSlider();
         } else {
-            if (e && e.shiftKey) {
+            if (e && hasFinePointer() && e.button === 1) {
+                e.preventDefault();
+                return;
+            }
+            if (e && hasFinePointer() && e.shiftKey) {
                 if (isAutoscrollOn) {
                     toggleAutoscrollMode();
                 }
