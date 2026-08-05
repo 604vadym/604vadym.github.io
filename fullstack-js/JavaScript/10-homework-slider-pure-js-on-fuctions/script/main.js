@@ -104,6 +104,7 @@ function initSlider() {
     const audioPlayer = new Audio();
     audioPlayer.preload = "none";
     let currentAudioTrackIndex = 0;
+    let activeVisualAlbumIndex = 0;
     let activeAudioAlbumIndex = null;
     const MAIN_THEME_SRC = "../assets/audio/asura-main-theme.mp3";
     audioPlayer.src = MAIN_THEME_SRC;
@@ -156,6 +157,7 @@ function initSlider() {
     audioPlayer.addEventListener("ended", handleEnded);
     audioPlayer.addEventListener("timeupdate", handleTimeUpdate);
     linkShop.addEventListener("pointerover", handlePointerOver);
+    linkShop.addEventListener("pointerdown", handlePointerOver);
     track.addEventListener("transitionend", handleTransitionEnd);
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("resize", handleResize);
@@ -230,7 +232,7 @@ function initSlider() {
             if (isButton) return;
 
             e.preventDefault();
-            openLinkShop();
+            window.open(getCurrentShopUrl(), "_blank");
             return;
         }
 
@@ -395,9 +397,10 @@ function initSlider() {
             }
             stopAudio();
             if (e.shiftKey) {
-                audioPlayer.src = MAIN_THEME_SRC;
-                activeAudioAlbumIndex = null;
                 currentAudioTrackIndex = 0;
+                activeVisualAlbumIndex = 0;
+                activeAudioAlbumIndex = null;
+                audioPlayer.src = MAIN_THEME_SRC;
 
                 currentIndex = 1;
                 pointerStartX = 0;
@@ -488,7 +491,7 @@ function initSlider() {
         const linkShop = e.target.closest(".slider__link-shop");
 
         if (linkShop) {
-            const currentShopUrl = ASURA_MASTERPIECES[getAlbumIndex()].shopUrl;
+            const currentShopUrl = getCurrentShopUrl();
 
             if (linkShop.getAttribute("href") !== currentShopUrl) {
                 linkShop.setAttribute("href", currentShopUrl);
@@ -572,6 +575,8 @@ function initSlider() {
         } else {
             isMoving = false;
         }
+
+        activeVisualAlbumIndex = getAlbumIndex();
 
         if (!isAudioModeActive()) return;
 
@@ -757,10 +762,6 @@ function initSlider() {
         });
     }
 
-    function openLinkShop() {
-        window.open(ASURA_MASTERPIECES[getAlbumIndex()].shopUrl, "_blank");
-    }
-
     function tryResurrectAutoscroll(context) {
         if (
             !isAutoscrollOn ||
@@ -882,6 +883,10 @@ function initSlider() {
 
     function hasFinePointer() {
         return window.matchMedia("(pointer: fine)").matches;
+    }
+
+    function getCurrentShopUrl() {
+        return ASURA_MASTERPIECES[activeVisualAlbumIndex].shopUrl;
     }
 
     function getClientX(e) {
