@@ -578,10 +578,7 @@ function initSlider() {
 
         activeVisualAlbumIndex = getAlbumIndex();
 
-        if (!isAudioModeActive()) return;
-
-        if (activeAudioAlbumIndex !== currentIndex - 1) {
-            currentAudioTrackIndex = 0;
+        if (isAudioModeActive()) {
             startAudio("album");
         }
     }
@@ -695,9 +692,9 @@ function initSlider() {
                 tryKillAutoscroll();
             }
 
-            if (activeAudioAlbumIndex !== currentIndex - 1) {
+            if (activeAudioAlbumIndex !== activeVisualAlbumIndex) {
                 currentAudioTrackIndex = 0;
-                activeAudioAlbumIndex = getAlbumIndex();
+                activeAudioAlbumIndex = activeVisualAlbumIndex;
             }
 
             const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
