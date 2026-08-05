@@ -683,7 +683,7 @@ function initSlider() {
             }
 
             const currentAlbum = ASURA_MASTERPIECES[activeAlbumIndex];
-            if (!isSameAudioTrack(currentAlbum, audioPlayer.src)) {
+            if (isNewAudioTrack(currentAlbum, audioPlayer.src)) {
                 updateAudioTrackTitle(currentAlbum);
                 audioPlayer.src =
                     currentAlbum.tracks[currentAudioTrackIndex].src;
@@ -891,9 +891,9 @@ function initSlider() {
         return audioPlayer.src.includes(MAIN_THEME_SRC.substring(2));
     }
 
-    function isSameAudioTrack(album, src) {
-        return src.includes(
-            album.tracks[currentAudioTrackIndex].src.substring(2),
+    function isNewAudioTrack(currentAlbum, currentSrc) {
+        return !currentSrc.includes(
+            currentAlbum.tracks[currentAudioTrackIndex].src.substring(2),
         );
     }
 
