@@ -240,40 +240,42 @@ function initSlider() {
             return;
         }
 
-        let oldIndex = currentIndex;
+        {
+            let oldIndex = currentIndex;
 
-        if (e.code === "ArrowRight" || e.code === "KeyD") {
-            e.preventDefault();
-            if (isMoving) return;
+            if (e.code === "ArrowRight" || e.code === "KeyD") {
+                e.preventDefault();
+                if (isMoving) return;
 
-            if (e.shiftKey) {
-                if (isAudioModeActive()) {
-                    nextAudioTrack();
-                    startAudio("album");
-                    return;
+                if (e.shiftKey) {
+                    if (isAudioModeActive()) {
+                        nextAudioTrack();
+                        startAudio("album");
+                        return;
+                    }
                 }
-            }
-            tryKillAutoscroll();
-            ++currentIndex;
-        } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
-            e.preventDefault();
-            if (isMoving) return;
+                tryKillAutoscroll();
+                ++currentIndex;
+            } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
+                e.preventDefault();
+                if (isMoving) return;
 
-            if (e.shiftKey) {
-                if (isAudioModeActive()) {
-                    prevAudioTrack();
-                    startAudio("album");
-                    return;
+                if (e.shiftKey) {
+                    if (isAudioModeActive()) {
+                        prevAudioTrack();
+                        startAudio("album");
+                        return;
+                    }
                 }
+                tryKillAutoscroll();
+                --currentIndex;
             }
-            tryKillAutoscroll();
-            --currentIndex;
-        }
 
-        if (currentIndex !== oldIndex) {
-            updateSlider();
-            tryResurrectAutoscroll();
-            return;
+            if (currentIndex !== oldIndex) {
+                updateSlider();
+                tryResurrectAutoscroll();
+                return;
+            }
         }
 
         if (e.repeat) {
@@ -305,17 +307,19 @@ function initSlider() {
                     toggleAutoscrollMode();
                 }
             }
-            if (!isAutoscrollOn && audioPlayer.paused) {
-                startAudio("album");
+            if (!isAutoscrollOn) {
+                if (audioPlayer.paused) {
+                    startAudio("album");
+                }
             }
             return;
         }
 
         if (
-            e.key === "Pause" ||
-            e.code === "Pause" ||
             e.code === "ArrowDown" ||
-            e.code === "KeyS"
+            e.code === "KeyS" ||
+            e.code === "Pause" ||
+            e.key === "Pause"
         ) {
             e.preventDefault();
             if (!audioPlayer.paused) {
@@ -370,9 +374,9 @@ function initSlider() {
 
         if (e.key >= "1" && e.key <= "9") {
             if (isAudioModeActive()) {
-                const targetTrack = parseInt(e.key, 10);
-                if (targetTrack <= getTotalAudioTracks()) {
-                    currentAudioTrackIndex = targetTrack - 1;
+                const targetAudioTrack = parseInt(e.key, 10);
+                if (targetAudioTrack <= getTotalAudioTracks()) {
+                    currentAudioTrackIndex = targetAudioTrack - 1;
                     startAudio("album");
                 }
             }
@@ -404,23 +408,7 @@ function initSlider() {
             }
             stopAudio();
             if (e.shiftKey) {
-                currentAudioTrackIndex = 0;
-                activeAlbumIndex = 0;
-                audioPlayer.src = MAIN_THEME_SRC;
-
-                currentIndex = 1;
-                pointerStartX = 0;
-                autoscrollPauseTimestamp = 0;
-                autoscrollStartTimestamp = 0;
-                slideStandTimestamp = 0;
-                lastClickTimestamp = 0;
-                isDragging = false;
-                isDraggingInterrupted = false;
-                isMouseOver = false;
-                isResizing = false;
-                clearTimeout(resizeTimeoutId);
-                slider.classList.remove("slider--resizing");
-                updateSliderInstantly();
+                hardResetSlider();
             }
             return;
         }
@@ -975,6 +963,27 @@ function initSlider() {
             stopAudio();
             return false;
         }
+    }
+
+    function hardResetSlider() {
+        currentAudioTrackIndex = 0;
+        activeAlbumIndex = 0;
+        audioPlayer.src = MAIN_THEME_SRC;
+
+        currentIndex = 1;
+        pointerStartX = 0;
+        autoscrollPauseTimestamp = 0;
+        autoscrollStartTimestamp = 0;
+        slideStandTimestamp = 0;
+        lastClickTimestamp = 0;
+        isDragging = false;
+        isDraggingInterrupted = false;
+        isMouseOver = false;
+        isResizing = false;
+
+        clearTimeout(resizeTimeoutId);
+        slider.classList.remove("slider--resizing");
+        updateSliderInstantly();
     }
 
     function initPagination() {
