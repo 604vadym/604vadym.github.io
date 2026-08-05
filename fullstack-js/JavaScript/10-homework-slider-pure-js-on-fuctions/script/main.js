@@ -576,10 +576,12 @@ function initSlider() {
             isMoving = false;
         }
 
-        activeVisualAlbumIndex = getAlbumIndex();
-
-        if (isAudioModeActive()) {
-            startAudio("album");
+        let albumIndex = getAlbumIndex();
+        if (activeVisualAlbumIndex !== albumIndex) {
+            activeVisualAlbumIndex = albumIndex;
+            if (isAudioModeActive()) {
+                startAudio("album");
+            }
         }
     }
 
