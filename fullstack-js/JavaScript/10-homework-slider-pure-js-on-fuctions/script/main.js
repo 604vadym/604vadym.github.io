@@ -180,9 +180,10 @@ function initSlider() {
         } else if (button.classList.contains("pagination__dot")) {
             currentIndex = paginationDots.indexOf(button) + 1;
         } else if (button.classList.contains("slider__btn--autoscroll-on")) {
-            if (toggleAutoscrollMode()) return;
+            toggleAutoscrollMode();
+            return;
         } else if (button.classList.contains("slider__btn--autoscroll-off")) {
-            if (!toggleAutoscrollMode()) return;
+            toggleAutoscrollMode();
         } else if (button.classList.contains("slider__btn-audio--play")) {
             if (e.shiftKey) {
                 if (isAutoscrollOn) {
@@ -947,7 +948,7 @@ function initSlider() {
         if (isAudioModeActive()) {
             tryClearFocus();
             stopAutoscroll();
-            return false;
+            return;
         }
         if (!isAutoscrollOn) {
             ++currentIndex;
@@ -956,12 +957,10 @@ function initSlider() {
             autoscrollStartTimestamp = Date.now();
             slideStandTimestamp = Date.now();
             startAudio("theme");
-            return true;
         } else {
             tryClearFocus();
             stopAutoscroll();
             stopAudio();
-            return false;
         }
     }
 
