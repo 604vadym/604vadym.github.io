@@ -298,7 +298,7 @@ function initSlider() {
             return;
         }
 
-        if (e.key === "ArrowUp" || e.code === "KeyW") {
+        if (e.code === "ArrowUp" || e.code === "KeyW") {
             e.preventDefault();
             if (e.shiftKey) {
                 if (isAutoscrollOn) {
@@ -311,7 +311,12 @@ function initSlider() {
             return;
         }
 
-        if (e.key === "ArrowDown" || e.code === "KeyS" || e.code === "Pause") {
+        if (
+            e.key === "Pause" ||
+            e.code === "Pause" ||
+            e.code === "ArrowDown" ||
+            e.code === "KeyS"
+        ) {
             e.preventDefault();
             if (!audioPlayer.paused) {
                 stopAudio();
@@ -333,8 +338,9 @@ function initSlider() {
 
         if (
             e.key === "MediaTrackPrevious" ||
-            e.key === "-" ||
             e.key === "_" ||
+            e.key === "-" ||
+            e.code === "NumpadMinus" ||
             e.code === "BracketLeft" ||
             e.code === "KeyP"
         ) {
@@ -348,8 +354,9 @@ function initSlider() {
 
         if (
             e.key === "MediaTrackNext" ||
-            e.key === "+" ||
             e.key === "=" ||
+            e.key === "+" ||
+            e.code === "NumpadAdd" ||
             e.code === "BracketRight" ||
             e.code === "KeyN"
         ) {
@@ -363,8 +370,9 @@ function initSlider() {
 
         if (e.key >= "1" && e.key <= "9") {
             if (isAudioModeActive()) {
-                if (parseInt(e.key, 10) <= getTotalAudioTracks()) {
-                    currentAudioTrackIndex = parseInt(e.key, 10) - 1;
+                const targetTrack = parseInt(e.key, 10);
+                if (targetTrack <= getTotalAudioTracks()) {
+                    currentAudioTrackIndex = targetTrack - 1;
                     startAudio("album");
                 }
             }
