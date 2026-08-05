@@ -570,13 +570,7 @@ function initSlider() {
             isMoving = false;
         }
 
-        let albumIndex = getAlbumIndex();
-        if (activeAlbumIndex !== albumIndex) {
-            activeAlbumIndex = albumIndex;
-            if (isAudioModeActive()) {
-                startAudio("transitionend");
-            }
-        }
+        onAlbumViewChanged(getAlbumIndex());
     }
 
     function handleVisibilityChange() {
@@ -680,11 +674,6 @@ function initSlider() {
             tryResetMainThemeTime();
             audioPlayer.play();
             return;
-        }
-
-        if (context === "transitionend") {
-            currentAudioTrackIndex = 0;
-            context = "album";
         }
 
         if (context === "album") {
@@ -934,6 +923,17 @@ function initSlider() {
         const trackName = album.tracks[currentAudioTrackIndex].name;
 
         audioTrackTitle.textContent = `${trackNumber} / ${totalTracks} • ${trackName}`;
+    }
+
+    function onAlbumViewChanged(nextAlbumIndex) {
+        if (activeAlbumIndex !== nextAlbumIndex) {
+            activeAlbumIndex = nextAlbumIndex;
+            currentAudioTrackIndex = 0;
+
+            if (isAudioModeActive()) {
+                startAudio("album");
+            }
+        }
     }
 
     function toggleAudioMode(isActive) {
