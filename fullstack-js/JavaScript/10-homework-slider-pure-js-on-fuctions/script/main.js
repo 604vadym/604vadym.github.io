@@ -104,8 +104,7 @@ function initSlider() {
     const audioPlayer = new Audio();
     audioPlayer.preload = "none";
     let currentAudioTrackIndex = 0;
-    let activeVisualAlbumIndex = 0;
-    let activeAudioAlbumIndex = null;
+    let activeAlbumIndex = 0;
     const MAIN_THEME_SRC = "../assets/audio/asura-main-theme.mp3";
     audioPlayer.src = MAIN_THEME_SRC;
     const ASURA_MASTERPIECES = initAudioData();
@@ -398,8 +397,7 @@ function initSlider() {
             stopAudio();
             if (e.shiftKey) {
                 currentAudioTrackIndex = 0;
-                activeVisualAlbumIndex = 0;
-                activeAudioAlbumIndex = null;
+                activeAlbumIndex = 0;
                 audioPlayer.src = MAIN_THEME_SRC;
 
                 currentIndex = 1;
@@ -577,10 +575,10 @@ function initSlider() {
         }
 
         let albumIndex = getAlbumIndex();
-        if (activeVisualAlbumIndex !== albumIndex) {
-            activeVisualAlbumIndex = albumIndex;
+        if (activeAlbumIndex !== albumIndex) {
+            activeAlbumIndex = albumIndex;
             if (isAudioModeActive()) {
-                startAudio("album");
+                startAudio("transitionend");
             }
         }
     }
@@ -688,18 +686,18 @@ function initSlider() {
             return;
         }
 
+        if (context === "transitionend") {
+            currentAudioTrackIndex = 0;
+            context = "album";
+        }
+
         if (context === "album") {
             if (!isAudioModeActive()) {
                 toggleAudioMode(true);
                 tryKillAutoscroll();
             }
 
-            if (activeAudioAlbumIndex !== activeVisualAlbumIndex) {
-                currentAudioTrackIndex = 0;
-                activeAudioAlbumIndex = activeVisualAlbumIndex;
-            }
-
-            const currentAlbum = ASURA_MASTERPIECES[activeAudioAlbumIndex];
+            const currentAlbum = ASURA_MASTERPIECES[activeAlbumIndex];
             if (!isSameAudioTrack(currentAlbum, audioPlayer.src)) {
                 updateAudioTrackTitle(currentAlbum);
                 audioPlayer.src =
@@ -885,7 +883,7 @@ function initSlider() {
     }
 
     function getCurrentShopUrl() {
-        return ASURA_MASTERPIECES[activeVisualAlbumIndex].shopUrl;
+        return ASURA_MASTERPIECES[activeAlbumIndex].shopUrl;
     }
 
     function getClientX(e) {
@@ -897,7 +895,7 @@ function initSlider() {
     }
 
     function getTotalAudioTracks() {
-        return ASURA_MASTERPIECES[activeAudioAlbumIndex].tracks.length;
+        return ASURA_MASTERPIECES[activeAlbumIndex].tracks.length;
     }
 
     function isAudioModeActive() {
