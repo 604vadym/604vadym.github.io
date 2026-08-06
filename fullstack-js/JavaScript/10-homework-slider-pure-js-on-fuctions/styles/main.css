@@ -196,6 +196,7 @@
   margin-left: auto;
   margin-right: auto;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .slider__nav {
@@ -213,11 +214,23 @@
 
 .slider__pagination {
   position: absolute;
-  top: calc(100% + clamp(47px, calc(37px + 3vw), 67px));
+  top: calc(100% - 2.6%);
   left: 50%;
   transform: translateX(-50%);
   justify-content: center;
   pointer-events: auto;
+}
+
+@media (max-width: 1134px) {
+  .slider__pagination {
+    top: calc(100% - 2.5%);
+  }
+}
+
+@media (max-width: 834px) {
+  .slider__pagination {
+    top: calc(100% - 1.9%);
+  }
 }
 
 /**************************************************/
