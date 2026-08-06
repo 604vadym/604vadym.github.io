@@ -571,7 +571,10 @@ function initSlider() {
             isMoving = false;
         }
 
-        onAlbumViewChanged(getAlbumIndex());
+        let albumIndex = getAlbumIndex();
+        if (activeAlbumIndex !== albumIndex) {
+            onAlbumChanged(albumIndex);
+        }
     }
 
     function handleVisibilityChange() {
@@ -926,14 +929,12 @@ function initSlider() {
         audioTrackTitle.textContent = `${trackNumber} / ${totalTracks} • ${trackName}`;
     }
 
-    function onAlbumViewChanged(nextAlbumIndex) {
-        if (activeAlbumIndex !== nextAlbumIndex) {
-            activeAlbumIndex = nextAlbumIndex;
-            currentAudioTrackIndex = 0;
+    function onAlbumChanged(newAlbumIndex) {
+        activeAlbumIndex = newAlbumIndex;
+        currentAudioTrackIndex = 0;
 
-            if (isAudioModeActive()) {
-                startAudio("album");
-            }
+        if (isAudioModeActive()) {
+            startAudio("album");
         }
     }
 
