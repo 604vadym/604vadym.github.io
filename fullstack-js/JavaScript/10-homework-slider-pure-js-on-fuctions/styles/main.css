@@ -204,11 +204,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: clamp(
-    231px,
-    calc(100vw - clamp(100px, calc(53px + 14.7vw), 200px) * 534 / 600),
-    534px
-  );
+  bottom: clamp(57px, calc(43px + 4vw), 83px);
   pointer-events: none;
 }
 
