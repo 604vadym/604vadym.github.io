@@ -394,6 +394,7 @@ function initSlider() {
         }
 
         if (e.key === "0" || e.code === "Home") {
+            if (e.ctrlKey || e.altKey || e.metaKey) return;
             e.preventDefault();
             if (isAudioModeActive()) {
                 audioPlayer.currentTime = 0;
@@ -402,6 +403,7 @@ function initSlider() {
         }
 
         if (e.code === "Backspace") {
+            if (e.ctrlKey || e.altKey || e.metaKey) return;
             e.preventDefault();
             if (isAudioModeActive()) {
                 currentAudioTrackIndex = 0;
@@ -412,6 +414,7 @@ function initSlider() {
         }
 
         if (e.code === "Escape") {
+            if (e.ctrlKey || e.altKey || e.metaKey) return;
             e.preventDefault();
             if (isAutoscrollOn) {
                 toggleAutoscrollMode();
