@@ -236,12 +236,21 @@ function initSlider() {
             return;
         }
 
-        if (e.repeat && e.shiftKey) {
-            e.preventDefault();
-            return;
-        }
-
         {
+            if (
+                e.repeat &&
+                e.shiftKey &&
+                (e.code === "ArrowRight" ||
+                    e.code === "KeyD" ||
+                    e.code === "ArrowLeft" ||
+                    e.code === "KeyA")
+            ) {
+                if (isAudioModeActive()) {
+                    e.preventDefault();
+                    return;
+                }
+            }
+
             let oldIndex = currentIndex;
 
             if (e.code === "ArrowRight" || e.code === "KeyD") {
