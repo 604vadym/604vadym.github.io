@@ -572,6 +572,7 @@ function initSlider() {
     }
 
     function handleTimeUpdate() {
+        if (!audioPlayer.duration || isNaN(audioPlayer.duration)) return;
         audioTrackCurrentTime.style.width = `${Math.round((audioPlayer.currentTime / audioPlayer.duration) * 100)}%`;
     }
 
