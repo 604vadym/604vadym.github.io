@@ -144,9 +144,9 @@
   color: black;
   text-align: center;
   position: absolute;
-  bottom: clamp(35px, calc(33px + 2vw), 60px);
+  bottom: clamp(39px, calc(37px + 2vw), 63px);
   right: 50%;
-  transform: translateX(50%);
+  transform: translateX(48.2%);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -158,7 +158,7 @@
 
 .slider__audio-track-time {
   position: absolute;
-  bottom: clamp(33px, calc(31px + 2vw), 58px);
+  bottom: clamp(35px, calc(33px + 2vw), 59px);
   right: 50%;
   transform: translateX(48.75%);
   width: clamp(98px, calc(73px + 5.4vw), 127px);
@@ -322,7 +322,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: clamp(7px, calc(3px + 1.5vw), 23px);
+  bottom: clamp(7px, calc(3px + 1.5vw), 20px);
 }
 
 .slider__btn-audio {
