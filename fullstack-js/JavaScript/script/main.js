@@ -11,6 +11,7 @@ const homeworkMap = {
     hw7: "07.homework-arrays-date/script/main.js",
     hw8: "08.homework-DOM-cookie-session-storage/index.html",
     hw9: "09.homework-events/index.html",
+    hw10: "10-homework-slider-pure-js-on-fuctions/index.html",
 };
 
 function logToTerminal(...args) {
