@@ -105,7 +105,8 @@ function initSlider() {
     audioPlayer.preload = "none";
     let currentAudioTrackIndex = 0;
     let activeAlbumIndex = 0;
-    const MAIN_THEME_SRC = "../assets/audio/asura-main-theme.mp3";
+    const MAIN_THEME_SRC =
+        "../assets/audio/asura/main-theme-rare-mix-preview.mp3";
     audioPlayer.src = MAIN_THEME_SRC;
     const ASURA_MASTERPIECES = initAudioData();
 
@@ -1031,12 +1032,32 @@ function initSlider() {
                 shopUrl: "https://ultimae.bandcamp.com/album/code-eternity",
                 tracks: [
                     {
-                        name: "Raindust1",
-                        src: "../assets/audio/2000-code-eternity/04.raindust-preview.mp3",
+                        name: "Like a Summer Day",
+                        src: "../assets/audio/asura/2000-code-eternity/01-like-a-summer-day-preview.mp3",
                     },
                     {
-                        name: "Raindust2",
-                        src: "../assets/audio/2000-code-eternity/raindust-final.mp3",
+                        name: "Trinity",
+                        src: "../assets/audio/asura/2000-code-eternity/02-trinity-preview.mp3",
+                    },
+                    {
+                        name: "Simply Blue",
+                        src: "../assets/audio/asura/2000-code-eternity/03-simply-blue-preview.mp3",
+                    },
+                    {
+                        name: "Phoenix",
+                        src: "../assets/audio/asura/2000-code-eternity/04-phoenix-preview.mp3",
+                    },
+                    {
+                        name: "Code Eternity",
+                        src: "../assets/audio/asura/2000-code-eternity/05-code-eternity-preview.mp3",
+                    },
+                    {
+                        name: "Territories Part One",
+                        src: "../assets/audio/asura/2000-code-eternity/06-territories-part-one-preview.mp3",
+                    },
+                    {
+                        name: "XP Continuum",
+                        src: "../assets/audio/asura/2000-code-eternity/07-xp-continuum-preview.mp3",
                     },
                 ],
             },
@@ -1046,12 +1067,40 @@ function initSlider() {
                 shopUrl: "https://www.discogs.com/sell/release/419254",
                 tracks: [
                     {
-                        name: "Raindust3",
-                        src: "../assets/audio/2003-lost-eden/04.raindust-preview.mp3",
+                        name: "Lost Eden",
+                        src: "../assets/audio/asura/2003-lost-eden/01-lost-eden-preview.mp3",
                     },
                     {
-                        name: "Raindust4",
-                        src: "../assets/audio/2003-lost-eden/raindust-final.mp3",
+                        name: "From the Abyss",
+                        src: "../assets/audio/asura/2003-lost-eden/02-from-the-abyss-preview.mp3",
+                    },
+                    {
+                        name: "Raindust",
+                        src: "../assets/audio/asura/2003-lost-eden/03-raindust-preview.mp3",
+                    },
+                    {
+                        name: "Land & Freedom",
+                        src: "../assets/audio/asura/2003-lost-eden/04-land-and-freedom-preview.mp3",
+                    },
+                    {
+                        name: "Fahrenheit",
+                        src: "../assets/audio/asura/2003-lost-eden/05-fahrenheit-preview.mp3",
+                    },
+                    {
+                        name: "Requiem from Nowhere",
+                        src: "../assets/audio/asura/2003-lost-eden/06-requiem-from-nowhere-preview.mp3",
+                    },
+                    {
+                        name: "Incoming",
+                        src: "../assets/audio/asura/2003-lost-eden/07-incoming-preview.mp3",
+                    },
+                    {
+                        name: "The Battle of Devas",
+                        src: "../assets/audio/asura/2003-lost-eden/08-the-battle-of-devas-preview.mp3",
+                    },
+                    {
+                        name: "Le Vol d'Icare",
+                        src: "../assets/audio/asura/2003-lost-eden/09-le-vol-d'icare-preview.mp3",
                     },
                 ],
             },
@@ -1061,12 +1110,44 @@ function initSlider() {
                 shopUrl: "https://ultimae.bandcamp.com/album/life",
                 tracks: [
                     {
-                        name: "Raindust5",
-                        src: "../assets/audio/2007-life-squared/04.raindust-preview.mp3",
+                        name: "Golgotha",
+                        src: "../assets/audio/asura/2007-life-squared/01-golgotha-preview.mp3",
                     },
                     {
-                        name: "Raindust6",
-                        src: "../assets/audio/2007-life-squared/raindust-final.mp3",
+                        name: "Back to Light",
+                        src: "../assets/audio/asura/2007-life-squared/02-back-to-light-preview.mp3",
+                    },
+                    {
+                        name: "Galaxies Part One",
+                        src: "../assets/audio/asura/2007-life-squared/03-galaxies-part-one-preview.mp3",
+                    },
+                    {
+                        name: "Celestial Tendencies",
+                        src: "../assets/audio/asura/2007-life-squared/04-celestial-tendencies-preview.mp3",
+                    },
+                    {
+                        name: "The Prophecy",
+                        src: "../assets/audio/asura/2007-life-squared/05-the-prophecy-preview.mp3",
+                    },
+                    {
+                        name: "Five Lines",
+                        src: "../assets/audio/asura/2007-life-squared/06-five-lines-preview.mp3",
+                    },
+                    {
+                        name: "Life²",
+                        src: "../assets/audio/asura/2007-life-squared/07-life-squared-preview.mp3",
+                    },
+                    {
+                        name: "Galaxies Part Two",
+                        src: "../assets/audio/asura/2007-life-squared/08-galaxies-part-two-preview.mp3",
+                    },
+                    {
+                        name: "Butterfly FX",
+                        src: "../assets/audio/asura/2007-life-squared/09-butterfly-fx-preview.mp3",
+                    },
+                    {
+                        name: "La Chanson de Carla",
+                        src: "../assets/audio/asura/2007-life-squared/10-la-chanson-de-carla-preview.mp3",
                     },
                 ],
             },
@@ -1076,12 +1157,44 @@ function initSlider() {
                 shopUrl: "https://ultimae.bandcamp.com/album/360",
                 tracks: [
                     {
-                        name: "Raindust7",
-                        src: "../assets/audio/2010-360/04.raindust-preview.mp3",
+                        name: "El Hai",
+                        src: "../assets/audio/asura/2010-360/01-el-hai-preview.mp3",
                     },
                     {
-                        name: "Raindust8",
-                        src: "../assets/audio/2010-360/raindust-final.mp3",
+                        name: "Regenesis",
+                        src: "../assets/audio/asura/2010-360/02-regenesis-preview.mp3",
+                    },
+                    {
+                        name: "Altered State",
+                        src: "../assets/audio/asura/2010-360/03-altered-state-preview.mp3",
+                    },
+                    {
+                        name: "Atlantis Child",
+                        src: "../assets/audio/asura/2010-360/04-atlantis-child-preview.mp3",
+                    },
+                    {
+                        name: "Erase",
+                        src: "../assets/audio/asura/2010-360/05-erase-preview.mp3",
+                    },
+                    {
+                        name: "Halley Road",
+                        src: "../assets/audio/asura/2010-360/06-halley-road-preview.mp3",
+                    },
+                    {
+                        name: "Longing for Silence",
+                        src: "../assets/audio/asura/2010-360/07-longing-for-silence-preview.mp3",
+                    },
+                    {
+                        name: "Getsemani",
+                        src: "../assets/audio/asura/2010-360/08-getsemani-preview.mp3",
+                    },
+                    {
+                        name: "Le Dernier Voyage",
+                        src: "../assets/audio/asura/2010-360/09-le-dernier-voyage-preview.mp3",
+                    },
+                    {
+                        name: "Virgin Delight",
+                        src: "../assets/audio/asura/2010-360/10-virgin-delight-preview.mp3",
                     },
                 ],
             },
