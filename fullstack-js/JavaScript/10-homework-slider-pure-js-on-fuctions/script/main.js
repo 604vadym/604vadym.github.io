@@ -112,12 +112,12 @@ function initSlider() {
         return;
 
     const audioPlayer = new Audio();
-    audioPlayer.preload = "none";
     let currentAudioTrackIndex = 0;
     let activeAlbumIndex = 0;
     const MAIN_THEME_SRC =
         "./assets/audio/asura/main-theme-rare-mix-preview.mp3";
     audioPlayer.src = MAIN_THEME_SRC;
+    audioPlayer.preload = "none";
     const ASURA_MASTERPIECES = initAudioData();
 
     const AUTOSCROLL_DELAY = 4500;
