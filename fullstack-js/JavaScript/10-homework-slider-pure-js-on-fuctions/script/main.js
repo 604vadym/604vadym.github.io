@@ -572,7 +572,7 @@ function initSlider() {
 
             if (!isTabActive) {
                 updateSliderInstantly();
-                startAudio("album");
+                onAlbumChanged(getAlbumIndex());
             } else {
                 updateSlider();
             }
