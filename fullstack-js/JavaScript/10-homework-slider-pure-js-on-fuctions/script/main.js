@@ -571,6 +571,7 @@ function initSlider() {
             ++currentIndex;
 
             if (!isTabActive) {
+                resetLoop();
                 updateSliderInstantly();
                 onAlbumChanged(getAlbumIndex());
             } else {
@@ -588,8 +589,7 @@ function initSlider() {
     }
 
     function handleTransitionEnd() {
-        if (currentIndex in teleportMap) {
-            currentIndex = teleportMap[currentIndex];
+        if (resetLoop()) {
             teleportSlides();
         } else {
             isMoving = false;
@@ -859,6 +859,14 @@ function initSlider() {
         slider.classList.remove("slider--autoscroll-on");
         autoscrollPauseTimestamp = Date.now();
         killAutoscroll();
+    }
+
+    function resetLoop() {
+        if (currentIndex in teleportMap) {
+            currentIndex = teleportMap[currentIndex];
+            return true;
+        }
+        return false;
     }
 
     function tryResetMainThemeTime() {
