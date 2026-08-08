@@ -182,7 +182,7 @@ function initSlider() {
             button.blur();
         }
 
-        let oldIndex = currentIndex;
+        const oldIndex = currentIndex;
 
         if (button.classList.contains("slider__btn--next")) {
             ++currentIndex;
@@ -262,7 +262,7 @@ function initSlider() {
                 }
             }
 
-            let oldIndex = currentIndex;
+            const oldIndex = currentIndex;
 
             if (e.code === "ArrowRight" || e.code === "KeyD") {
                 e.preventDefault();
@@ -595,7 +595,7 @@ function initSlider() {
             isMoving = false;
         }
 
-        let albumIndex = getAlbumIndex();
+        const albumIndex = getAlbumIndex();
         if (activeAlbumIndex !== albumIndex) {
             onAlbumChanged(albumIndex);
         }
