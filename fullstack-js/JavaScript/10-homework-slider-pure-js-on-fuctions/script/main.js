@@ -715,6 +715,7 @@ function initSlider() {
                 updateAudioTrackTitle(currentAlbum);
                 audioPlayer.src =
                     currentAlbum.tracks[currentAudioTrackIndex].src;
+                audioTrackCurrentTime.style.width = "0";
             }
 
             audioPlayer.play();
