@@ -1,5 +1,15 @@
 "use strict";
 
+/* 
+  ============================================================================
+  ⚠️ COPYRIGHT NOTICE & DISCLAIMER (Non-Commercial Educational Fan Project)
+  All media assets (short audio previews, album covers) are property of Asura,
+  Ultimae Records and E-FrenchSound Records. Created strictly for portfolio
+  presentation. If requested by the author or copyright owners, any materials
+  will be removed immediately.
+  =============================================================================
+*/
+
 console.log(
     "JS #10. Розробка повнофункціонального слайдера на чистому JavaScript з використанням функціонального підходу",
 );
