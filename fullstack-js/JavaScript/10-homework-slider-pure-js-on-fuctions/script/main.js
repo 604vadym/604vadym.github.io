@@ -665,6 +665,7 @@ function initSlider() {
         track.style.transition = TRACK_TRANSITION;
 
         if (pointerOffset === null) {
+            updateSlider();
             tryResurrectAutoscroll();
             return;
         }
