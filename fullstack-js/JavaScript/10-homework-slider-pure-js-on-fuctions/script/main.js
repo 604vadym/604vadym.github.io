@@ -163,6 +163,7 @@ function initSlider() {
     document.addEventListener("touchmove", handleMouseMoveTouchMove);
     document.addEventListener("mouseup", handleMouseUpTouchEnd);
     document.addEventListener("touchend", handleMouseUpTouchEnd);
+    slider.addEventListener("touchcancel", () => stopDragging());
     slider.addEventListener("dragstart", (e) => e.preventDefault());
     document.addEventListener("mousedown", handleDocumentMouseDown);
     document.addEventListener("keydown", handleKeyDown);
