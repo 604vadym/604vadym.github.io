@@ -512,6 +512,10 @@ function initSlider() {
     function handleMouseDownTouchStart(e) {
         if (isMoving) return;
 
+        if (e.type === "mousedown" && !hasFinePointer()) {
+            return;
+        }
+
         if (e.target.closest(".slider__track")) {
             if (e.touches && e.touches.length > 1) {
                 stopDragging();
