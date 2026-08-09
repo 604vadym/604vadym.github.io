@@ -397,6 +397,64 @@ function initSlider() {
             return;
         }
 
+        {
+            // prettier-ignore
+            const shiftAudioTrackMap = {
+                ")": 10,
+                "!": 11,
+                "@": 12,
+                "#": 13,
+                "$": 14,
+                "%": 15,
+                "^": 16,
+                "&": 17,
+                "*": 18,
+                "(": 19,
+            };
+
+            if (e.shiftKey && e.key in shiftAudioTrackMap) {
+                if (isAudioModeActive()) {
+                    const targetAudioTrack = shiftAudioTrackMap[e.key];
+                    if (targetAudioTrack <= getTotalAudioTracks()) {
+                        currentAudioTrackIndex = targetAudioTrack - 1;
+                        startAudio("album");
+                    }
+                }
+                return;
+            }
+        }
+
+        {
+            const numpadKeys = [
+                "Insert",
+                "End",
+                "ArrowDown",
+                "PageDown",
+                "ArrowLeft",
+                "Clear",
+                "ArrowRight",
+                "Home",
+                "ArrowUp",
+                "PageUp",
+            ];
+
+            if (e.code.startsWith("Numpad") && numpadKeys.includes(e.key)) {
+                e.preventDefault();
+                if (isAudioModeActive()) {
+                    const numpadDigit = parseInt(
+                        e.code.replace("Numpad", ""),
+                        10,
+                    );
+                    const targetAudioTrack = numpadDigit + 10;
+                    if (targetAudioTrack <= getTotalAudioTracks()) {
+                        currentAudioTrackIndex = targetAudioTrack - 1;
+                        startAudio("album");
+                    }
+                }
+                return;
+            }
+        }
+
         if (e.key >= "1" && e.key <= "9") {
             if (isAudioModeActive()) {
                 const targetAudioTrack = parseInt(e.key, 10);
