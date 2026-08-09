@@ -466,7 +466,7 @@ function initSlider() {
         if (!isDragging) return;
 
         if (e.touches && e.touches.length > 1) {
-            stopDragging(0); // TODO: Test on real mobile device
+            stopDragging();
             return;
         }
 
@@ -660,16 +660,20 @@ function initSlider() {
         }
     }
 
-    function stopDragging(pointerOffset, e = null) {
+    function stopDragging(pointerOffset = null, e = null) {
         isDragging = false;
         track.style.transition = TRACK_TRANSITION;
 
-        const offset = pointerOffset || 0;
+        if (pointerOffset === null) {
+            tryResurrectAutoscroll();
+            return;
+        }
+
         const triggerThreshold = slideWidth * 0.2;
 
-        if (offset) {
-            if (Math.abs(offset) > triggerThreshold) {
-                if (offset < 0) {
+        if (pointerOffset) {
+            if (Math.abs(pointerOffset) > triggerThreshold) {
+                if (pointerOffset < 0) {
                     ++currentIndex;
                 } else {
                     --currentIndex;
