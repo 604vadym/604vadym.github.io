@@ -147,6 +147,7 @@ function initSlider() {
     let autoscrollId = null;
     let resizeTimeoutId = null;
 
+    const CLICK_ACTION_TABLE = initClickActionTable();
     const paginationDots = initPagination();
     slides = initInfiniteLoop();
 
@@ -187,37 +188,9 @@ function initSlider() {
             button.blur();
         }
 
-        const oldIndex = currentIndex;
+        const clickAction = getClickAction(button);
 
-        if (button.classList.contains("slider__btn--next")) {
-            ++currentIndex;
-        } else if (button.classList.contains("slider__btn--prev")) {
-            --currentIndex;
-        } else if (button.classList.contains("pagination__dot")) {
-            currentIndex = paginationDots.indexOf(button) + 1;
-        } else if (button.classList.contains("slider__btn--autoscroll-on")) {
-            toggleAutoscrollMode();
-            return;
-        } else if (button.classList.contains("slider__btn--autoscroll-off")) {
-            toggleAutoscrollMode();
-        } else if (button.classList.contains("slider__btn-audio--play")) {
-            if (e.shiftKey) {
-                if (isAutoscrollOn) {
-                    toggleAutoscrollMode();
-                }
-            }
-            startAudio("album");
-        } else if (button.classList.contains("slider__btn-audio--pause")) {
-            stopAudio();
-        } else if (button.classList.contains("slider__btn-audio--next")) {
-            nextAudioTrack();
-            startAudio("album");
-        } else if (button.classList.contains("slider__btn-audio--prev")) {
-            prevAudioTrack();
-            startAudio("album");
-        }
-
-        if (currentIndex !== oldIndex) {
+        if (clickAction && clickAction(button, e)) {
             updateSlider();
         }
     }
@@ -1106,6 +1079,18 @@ function initSlider() {
         updateSliderInstantly();
     }
 
+    function getClickAction(button) {
+        const classList = button.classList;
+
+        const actionIndex = CLICK_ACTION_TABLE.findIndex((entry) =>
+            classList.contains(entry.className),
+        );
+
+        return actionIndex !== -1
+            ? CLICK_ACTION_TABLE[actionIndex].action
+            : null;
+    }
+
     function initPagination() {
         const dots = [];
 
@@ -1128,6 +1113,78 @@ function initSlider() {
         track.append(cloneOfFirst);
         track.prepend(cloneOfLast);
         return document.querySelectorAll(".slider__slide");
+    }
+
+    function initClickActionTable() {
+        return [
+            {
+                className: "slider__btn--next",
+                action: () => {
+                    ++currentIndex;
+                    return true;
+                },
+            },
+            {
+                className: "slider__btn--prev",
+                action: () => {
+                    --currentIndex;
+                    return true;
+                },
+            },
+            {
+                className: "pagination__dot",
+                action: (button) => {
+                    const oldIndex = currentIndex;
+                    currentIndex = paginationDots.indexOf(button) + 1;
+                    return currentIndex !== oldIndex;
+                },
+            },
+            {
+                className: "slider__btn--autoscroll-on",
+                action: () => {
+                    toggleAutoscrollMode();
+                    return false;
+                },
+            },
+            {
+                className: "slider__btn--autoscroll-off",
+                action: () => {
+                    toggleAutoscrollMode();
+                    return false;
+                },
+            },
+            {
+                className: "slider__btn-audio--play",
+                action: (button, e) => {
+                    if (e.shiftKey && isAutoscrollOn) toggleAutoscrollMode();
+                    startAudio("album");
+                    return false;
+                },
+            },
+            {
+                className: "slider__btn-audio--pause",
+                action: () => {
+                    stopAudio();
+                    return false;
+                },
+            },
+            {
+                className: "slider__btn-audio--next",
+                action: () => {
+                    nextAudioTrack();
+                    startAudio("album");
+                    return false;
+                },
+            },
+            {
+                className: "slider__btn-audio--prev",
+                action: () => {
+                    prevAudioTrack();
+                    startAudio("album");
+                    return false;
+                },
+            },
+        ];
     }
 
     function initAudioData() {
