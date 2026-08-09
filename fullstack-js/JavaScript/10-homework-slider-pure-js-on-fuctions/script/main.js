@@ -415,8 +415,7 @@ function initSlider() {
             if (e.shiftKey && e.key in shiftAudioTrackMap) {
                 if (isAudioModeActive()) {
                     const targetAudioTrack = shiftAudioTrackMap[e.key];
-                    if (targetAudioTrack <= getTotalAudioTracks()) {
-                        currentAudioTrackIndex = targetAudioTrack - 1;
+                    if (givenAudioTrack(targetAudioTrack)) {
                         startAudio("album");
                     }
                 }
@@ -446,8 +445,7 @@ function initSlider() {
                         10,
                     );
                     const targetAudioTrack = numpadDigit + 10;
-                    if (targetAudioTrack <= getTotalAudioTracks()) {
-                        currentAudioTrackIndex = targetAudioTrack - 1;
+                    if (givenAudioTrack(targetAudioTrack)) {
                         startAudio("album");
                     }
                 }
@@ -458,8 +456,7 @@ function initSlider() {
         if (e.key >= "1" && e.key <= "9") {
             if (isAudioModeActive()) {
                 const targetAudioTrack = parseInt(e.key, 10);
-                if (targetAudioTrack <= getTotalAudioTracks()) {
-                    currentAudioTrackIndex = targetAudioTrack - 1;
+                if (givenAudioTrack(targetAudioTrack)) {
                     startAudio("album");
                 }
             }
@@ -967,6 +964,14 @@ function initSlider() {
         currentAudioTrackIndex =
             (currentAudioTrackIndex - 1 + getTotalAudioTracks()) %
             getTotalAudioTracks();
+    }
+
+    function givenAudioTrack(targetAudioTrack) {
+        if (targetAudioTrack <= getTotalAudioTracks()) {
+            currentAudioTrackIndex = targetAudioTrack - 1;
+            return true;
+        }
+        return false;
     }
 
     function hasFinePointer() {
