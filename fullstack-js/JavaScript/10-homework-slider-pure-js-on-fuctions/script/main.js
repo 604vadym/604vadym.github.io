@@ -732,6 +732,10 @@ function initSlider() {
 
         const triggerThreshold = slideWidth * 0.2;
 
+        if (!hasFinePointer() && Math.abs(pointerOffset) < 6) {
+            pointerOffset = 0;
+        }
+
         if (pointerOffset) {
             if (Math.abs(pointerOffset) > triggerThreshold) {
                 if (pointerOffset < 0) {
