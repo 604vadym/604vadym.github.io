@@ -721,6 +721,7 @@ function initSlider() {
 
     function stopDragging(pointerOffset = null, e = null) {
         isDragging = false;
+        isMoving = false;
         track.style.transition = TRACK_TRANSITION;
 
         if (pointerOffset === null) {
