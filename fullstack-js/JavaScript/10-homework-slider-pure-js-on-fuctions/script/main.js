@@ -750,7 +750,7 @@ function initSlider() {
                 audioPlayer.src = MAIN_THEME_SRC;
             }
             tryResetMainThemeTime();
-            audioPlayer.play();
+            audioPlayer.play().catch(() => {});
             return;
         }
 
@@ -768,7 +768,7 @@ function initSlider() {
                 audioTrackCurrentTime.style.width = "0";
             }
 
-            audioPlayer.play();
+            audioPlayer.play().catch(() => {});
         }
     }
 
