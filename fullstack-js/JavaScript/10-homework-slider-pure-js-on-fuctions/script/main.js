@@ -512,7 +512,10 @@ function initSlider() {
         if (isMoving) return;
 
         if (e.target.closest(".slider__track")) {
-            if (e.touches && e.touches.length > 1) return;
+            if (e.touches && e.touches.length > 1) {
+                stopDragging();
+                return;
+            }
             startDragging(e);
         }
     }
