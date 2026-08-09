@@ -844,7 +844,9 @@ function initSlider() {
 
             const isMouseStillOver =
                 hasFinePointer() &&
-                document.querySelector(".js-autoscroll-pause:hover");
+                document.querySelector(
+                    ".js-autoscroll-pause:not(.slider__btn--autoscroll-off):hover",
+                );
 
             if (isMouseStillOver) {
                 isMouseOver = true;

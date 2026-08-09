@@ -475,3 +475,8 @@
 .slider--audio-play .slider__btn-audio--prev.is-pressed {
   transform: translate(-3px, 7px) scale(1);
 }
+
+.slider__btn svg,
+.slider__btn use {
+  pointer-events: none;
+}
