@@ -760,12 +760,12 @@ function initSlider() {
                 tryKillAutoscroll();
             }
 
-            const currentAlbum = ASURA_MASTERPIECES[activeAlbumIndex];
-            if (isNewAudioTrack(currentAlbum, audioPlayer.src)) {
-                updateAudioTrackTitle(currentAlbum);
+            if (isNewAudioTrack(audioPlayer.src)) {
+                updateAudioTrackTitle();
+                audioTrackCurrentTime.style.width = "0";
+                const currentAlbum = ASURA_MASTERPIECES[activeAlbumIndex];
                 audioPlayer.src =
                     currentAlbum.tracks[currentAudioTrackIndex].src;
-                audioTrackCurrentTime.style.width = "0";
             }
 
             audioPlayer.play().catch(() => {});
@@ -988,9 +988,11 @@ function initSlider() {
         return audioPlayer.src.includes(MAIN_THEME_SRC.substring(2));
     }
 
-    function isNewAudioTrack(currentAlbum, currentSrc) {
+    function isNewAudioTrack(currentSrc) {
         return !currentSrc.includes(
-            currentAlbum.tracks[currentAudioTrackIndex].src.substring(2),
+            ASURA_MASTERPIECES[activeAlbumIndex].tracks[
+                currentAudioTrackIndex
+            ].src.substring(2),
         );
     }
 
@@ -1012,12 +1014,16 @@ function initSlider() {
         return AUTOSCROLL_WAKE_UP_DELAY;
     }
 
-    function updateAudioTrackTitle(album) {
+    function updateAudioTrackTitle() {
         const trackNumber = (currentAudioTrackIndex + 1)
             .toString()
             .padStart(2, `0`);
-        const totalTracks = album.tracks.length.toString().padStart(2, `0`);
-        const trackName = album.tracks[currentAudioTrackIndex].name;
+        const totalTracks = ASURA_MASTERPIECES[activeAlbumIndex].tracks.length
+            .toString()
+            .padStart(2, `0`);
+        const trackName =
+            ASURA_MASTERPIECES[activeAlbumIndex].tracks[currentAudioTrackIndex]
+                .name;
 
         audioTrackTitle.textContent = `${trackNumber} / ${totalTracks} • ${trackName}`;
     }
