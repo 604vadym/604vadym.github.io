@@ -647,7 +647,7 @@ function initSlider() {
             tryKillAutoscroll();
         } else {
             isTabActive = true;
-            tryResurrectAutoscroll();
+            tryResurrectAutoscroll("visibility");
         }
     }
 
@@ -826,7 +826,7 @@ function initSlider() {
         if (
             !isAutoscrollOn ||
             !isTabActive ||
-            isDragging ||
+            (context !== "visibility" && isDragging) ||
             isMouseOver ||
             isAudioModeActive()
         )
@@ -838,7 +838,7 @@ function initSlider() {
             if (isPostClickDriftActive()) {
                 context = null;
             }
-        } else {
+        } else if (context !== "visibility") {
             context = null;
         }
 
@@ -846,7 +846,7 @@ function initSlider() {
         if (context === "hover") {
             startAutoscroll(getAdaptiveWakeUpDelay());
         } else {
-            startAutoscroll();
+            startAutoscroll(null, context);
         }
     }
 
@@ -867,10 +867,15 @@ function initSlider() {
         }
     }
 
-    function startAutoscroll(delay) {
+    function startAutoscroll(delay, context) {
         isAutoscrollOn = true;
         slider.classList.add("slider--autoscroll-on");
         killAutoscroll();
+
+        if (context === "visibility") {
+            isMoving = false;
+            isDragging = false;
+        }
 
         const currentDelay = delay || AUTOSCROLL_DELAY;
 
