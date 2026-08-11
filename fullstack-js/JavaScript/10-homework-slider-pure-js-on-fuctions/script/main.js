@@ -182,6 +182,10 @@ function initSlider() {
     window.addEventListener("resize", handleResize);
 
     function handleClick(e) {
+        if (e.button === 2) {
+            e.preventDefault();
+            return;
+        }
         const button = e.target.closest(".button");
         if (!button || isMoving) return;
 
@@ -489,6 +493,11 @@ function initSlider() {
         if (isMoving) return;
 
         if (e.type === "mousedown" && !hasFinePointer()) {
+            return;
+        }
+
+        if (e.button === 2 || e.button === 1) {
+            e.preventDefault();
             return;
         }
 
