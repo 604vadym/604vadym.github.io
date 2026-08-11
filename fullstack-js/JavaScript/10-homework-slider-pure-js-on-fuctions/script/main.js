@@ -61,6 +61,9 @@ function initSlider() {
     const btnAutoscrollOn = document.querySelector(
         ".slider__btn--autoscroll-on",
     );
+    const btnAutoscrollOff = document.querySelector(
+        ".slider__btn--autoscroll-off",
+    );
     const pagination = document.querySelector(".slider__pagination");
     const btnAudioNext = document.querySelector(".slider__btn-audio--next");
     const btnAudioPrev = document.querySelector(".slider__btn-audio--prev");
@@ -89,9 +92,6 @@ function initSlider() {
                 viewport: document.querySelector(".slider__viewport"),
                 btnNext: document.querySelector(".slider__btn--next"),
                 btnPrev: document.querySelector(".slider__btn--prev"),
-                btnAutoscrollOff: document.querySelector(
-                    ".slider__btn--autoscroll-off",
-                ),
                 btnAudioPlay: document.querySelector(
                     ".slider__btn-audio--play",
                 ),
@@ -141,6 +141,7 @@ function initSlider() {
     let isDragging = false;
     let isDraggingInterrupted = false;
     let isMouseOver = false;
+    let isKeyboardFocused = false;
     let isMoving = false;
     let isAutoscrollOn = false;
     let isResizing = false;
@@ -164,6 +165,8 @@ function initSlider() {
     document.addEventListener("touchmove", handleMouseMoveTouchMove);
     document.addEventListener("mouseup", handleMouseUpTouchEnd);
     document.addEventListener("touchend", handleMouseUpTouchEnd);
+    slider.addEventListener("focus", handleFocus, { capture: true });
+    slider.addEventListener("blur", handleBlur, { capture: true });
     slider.addEventListener("touchcancel", () => stopDragging());
     slider.addEventListener("dragstart", (e) => e.preventDefault());
     document.addEventListener("mousedown", handleDocumentMouseDown);
@@ -521,6 +524,20 @@ function initSlider() {
         stopDragging(pointerOffset, e);
     }
 
+    function handleFocus(e) {
+        if (e.target.closest(".js-autoscroll-pause")) {
+            isKeyboardFocused = true;
+            tryKillAutoscroll();
+        }
+    }
+
+    function handleBlur(e) {
+        if (e.target.closest(".js-autoscroll-pause")) {
+            isKeyboardFocused = false;
+            tryResurrectAutoscroll("hover");
+        }
+    }
+
     function handleDocumentMouseDown(e) {
         if (e.button === 1) {
             if (isMoving) {
@@ -828,6 +845,7 @@ function initSlider() {
             !isTabActive ||
             (context !== "visibility" && isDragging) ||
             isMouseOver ||
+            isKeyboardFocused ||
             isAudioModeActive()
         )
             return;
@@ -853,7 +871,7 @@ function initSlider() {
     function tryKillAutoscroll() {
         if (!isAutoscrollOn) return;
 
-        if (isTabActive && !isAudioModeActive()) {
+        if (isTabActive && !isAudioModeActive() && !isKeyboardFocused) {
             if (isAutoscrollFirstCycle()) return;
         }
 
@@ -870,6 +888,7 @@ function initSlider() {
     function startAutoscroll(delay = null, context = null) {
         isAutoscrollOn = true;
         slider.classList.add("slider--autoscroll-on");
+        btnAutoscrollOff.tabIndex = 0;
         killAutoscroll();
 
         if (context === "visibility") {
@@ -914,6 +933,7 @@ function initSlider() {
     function stopAutoscroll() {
         isAutoscrollOn = false;
         slider.classList.remove("slider--autoscroll-on");
+        btnAutoscrollOff.tabIndex = -1;
         autoscrollPauseTimestamp = Date.now();
         killAutoscroll();
     }
@@ -1082,6 +1102,7 @@ function initSlider() {
         isDragging = false;
         isDraggingInterrupted = false;
         isMouseOver = false;
+        isKeyboardFocused = false;
         isResizing = false;
 
         clearTimeout(resizeTimeoutId);
