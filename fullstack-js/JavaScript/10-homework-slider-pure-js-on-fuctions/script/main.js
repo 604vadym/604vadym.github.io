@@ -142,6 +142,7 @@ function initSlider() {
     let isDraggingInterrupted = false;
     let isMouseOver = false;
     let isKeyboardFocused = false;
+    let isKeyboardDynamicFocused = false;
     let isMoving = false;
     let isAutoscrollOn = false;
     let isResizing = false;
@@ -198,6 +199,7 @@ function initSlider() {
         const clickAction = getClickAction(button);
 
         if (clickAction && clickAction(button, e)) {
+            tryKillAutoscroll();
             updateSlider();
         }
     }
@@ -219,6 +221,7 @@ function initSlider() {
 
             const isResetTarget = activeElement?.closest(".js-dynamic-focus");
             if (isResetTarget) {
+                isKeyboardDynamicFocused = true;
                 tryKillAutoscroll();
                 tryResurrectAutoscroll();
             }
@@ -494,7 +497,7 @@ function initSlider() {
             return;
         }
 
-        if (e.button === 2 || e.button === 1) {
+        if (e.button === 1 || e.button === 2) {
             e.preventDefault();
             return;
         }
@@ -547,7 +550,7 @@ function initSlider() {
             !e.target.closest(".js-dynamic-focus")
         ) {
             isKeyboardFocused = false;
-            tryResurrectAutoscroll("hover");
+            tryResurrectAutoscroll();
         }
     }
 
@@ -600,7 +603,7 @@ function initSlider() {
             if (isMouseOver) return;
 
             isMouseOver = true;
-            tryKillAutoscroll();
+            tryKillAutoscroll("hover");
         } else {
             if (!isMouseOver) return;
             isMouseOver = false;
@@ -668,6 +671,11 @@ function initSlider() {
         const albumIndex = getAlbumIndex();
         if (activeAlbumIndex !== albumIndex) {
             onAlbumChanged(albumIndex);
+        }
+
+        if (isKeyboardDynamicFocused) {
+            isKeyboardDynamicFocused = false;
+            tryResurrectAutoscroll();
         }
     }
 
@@ -853,20 +861,26 @@ function initSlider() {
     }
 
     function tryResurrectAutoscroll(context = null) {
+        const isDriftingAfterClick = isPostClickDriftActive();
         if (
             !isAutoscrollOn ||
             !isTabActive ||
             (context !== "visibility" && isDragging) ||
-            isMouseOver ||
             isKeyboardFocused ||
-            isAudioModeActive()
+            isAudioModeActive() ||
+            (isMouseOver && !isDriftingAfterClick)
         )
             return;
 
-        if (isAutoscrollFirstCycle()) return;
+        if (
+            context === "hover" &&
+            isAutoscrollFirstCycle() &&
+            !isDriftingAfterClick
+        )
+            return;
 
         if (context === "hover" && hasFinePointer()) {
-            if (isPostClickDriftActive()) {
+            if (isDriftingAfterClick) {
                 context = null;
             }
         } else if (context !== "visibility") {
@@ -881,11 +895,11 @@ function initSlider() {
         }
     }
 
-    function tryKillAutoscroll() {
+    function tryKillAutoscroll(context = null) {
         if (!isAutoscrollOn) return;
 
         if (isTabActive && !isAudioModeActive() && !isKeyboardFocused) {
-            if (isAutoscrollFirstCycle()) return;
+            if (context === "hover" && isAutoscrollFirstCycle()) return;
         }
 
         killAutoscroll();
@@ -932,7 +946,7 @@ function initSlider() {
 
             if (isMouseStillOver) {
                 isMouseOver = true;
-                tryKillAutoscroll();
+                tryKillAutoscroll("hover");
             } else {
                 isMouseOver = false;
             }
