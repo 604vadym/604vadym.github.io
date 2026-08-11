@@ -134,7 +134,7 @@ function initSlider() {
     let slideWidth = 0;
     let pointerStartX = 0;
     let autoscrollPauseTimestamp = 0;
-    let autoscrollStartTimestamp = 0;
+    let autoscrollManualStartTimestamp = 0;
     let slideStandTimestamp = 0;
     let lastClickTimestamp = 0;
     let isTabActive = true;
@@ -595,7 +595,7 @@ function initSlider() {
         const isPauseTarget = e.target.closest(".js-autoscroll-pause");
 
         if (isPauseTarget) {
-            const msSinceStart = Date.now() - autoscrollStartTimestamp;
+            const msSinceStart = Date.now() - autoscrollManualStartTimestamp;
             if (msSinceStart < 100) {
                 isMouseOver = true;
                 return;
@@ -889,7 +889,6 @@ function initSlider() {
             context = null;
         }
 
-        killAutoscroll();
         if (context === "hover") {
             startAutoscroll(getAdaptiveWakeUpDelay());
         } else {
@@ -1048,7 +1047,7 @@ function initSlider() {
     }
 
     function isAutoscrollFirstCycle() {
-        const msSinceStart = Date.now() - autoscrollStartTimestamp;
+        const msSinceStart = Date.now() - autoscrollManualStartTimestamp;
         return msSinceStart < AUTOSCROLL_DELAY;
     }
 
@@ -1105,7 +1104,7 @@ function initSlider() {
             ++currentIndex;
             updateSlider();
             startAutoscroll();
-            autoscrollStartTimestamp = Date.now();
+            autoscrollManualStartTimestamp = Date.now();
             startAudio("theme");
         } else {
             tryClearFocus();
@@ -1122,7 +1121,7 @@ function initSlider() {
         currentIndex = 1;
         pointerStartX = 0;
         autoscrollPauseTimestamp = 0;
-        autoscrollStartTimestamp = 0;
+        autoscrollManualStartTimestamp = 0;
         slideStandTimestamp = 0;
         lastClickTimestamp = 0;
         isDragging = false;
