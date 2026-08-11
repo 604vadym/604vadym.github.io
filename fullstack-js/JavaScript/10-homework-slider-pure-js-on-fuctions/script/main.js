@@ -10,12 +10,8 @@
   =============================================================================
 */
 
-console.log(
-    "JS #10. Розробка повнофункціонального слайдера на чистому JavaScript з використанням функціонального підходу",
-);
-
 /*
- * #1
+ * JS #10. Розробка повнофункціонального слайдера на чистому JavaScript з використанням функціонального підходу
  *
  * Опис функціональності для розробки
  *
@@ -60,53 +56,57 @@ function isDOMElementsFound({ elements = null, collections = null } = {}) {
 }
 
 function initSlider() {
-    let slides = document.querySelectorAll(".slider__slide");
     const slider = document.querySelector(".slider");
     const track = document.querySelector(".slider__track");
-    const btnNext = document.querySelector(".slider__btn--next");
-    const btnPrev = document.querySelector(".slider__btn--prev");
     const btnAutoscrollOn = document.querySelector(
         ".slider__btn--autoscroll-on",
     );
-    const btnAutoscrollOff = document.querySelector(
-        ".slider__btn--autoscroll-off",
-    );
     const pagination = document.querySelector(".slider__pagination");
-    const btnAudioPlay = document.querySelector(".slider__btn-audio--play");
-    const btnAudioPause = document.querySelector(".slider__btn-audio--pause");
     const btnAudioNext = document.querySelector(".slider__btn-audio--next");
     const btnAudioPrev = document.querySelector(".slider__btn-audio--prev");
     const audioTrackTitle = document.querySelector(
         ".slider__audio-track-title",
     );
-    const audioTrackFullTime = document.querySelector(
-        ".slider__audio-track-full-time",
-    );
     const audioTrackCurrentTime = document.querySelector(
         ".slider__audio-track-current-time",
     );
     const linkShop = document.querySelector(".slider__link-shop");
+    let slides = document.querySelectorAll(".slider__slide");
 
     if (
         !isDOMElementsFound({
             elements: {
                 slider,
                 track,
-                btnNext,
-                btnPrev,
                 btnAutoscrollOn,
-                btnAutoscrollOff,
                 pagination,
-                btnAudioPlay,
-                btnAudioPause,
                 btnAudioNext,
                 btnAudioPrev,
                 audioTrackTitle,
-                audioTrackFullTime,
                 audioTrackCurrentTime,
                 linkShop,
+
+                viewport: document.querySelector(".slider__viewport"),
+                btnNext: document.querySelector(".slider__btn--next"),
+                btnPrev: document.querySelector(".slider__btn--prev"),
+                btnAutoscrollOff: document.querySelector(
+                    ".slider__btn--autoscroll-off",
+                ),
+                btnAudioPlay: document.querySelector(
+                    ".slider__btn-audio--play",
+                ),
+                btnAudioPause: document.querySelector(
+                    ".slider__btn-audio--pause",
+                ),
+                audioTrackFullTime: document.querySelector(
+                    ".slider__audio-track-full-time",
+                ),
             },
-            collections: { slides },
+            collections: {
+                slides,
+
+                images: document.querySelectorAll(".slider__image"),
+            },
         })
     )
         return;
@@ -822,7 +822,7 @@ function initSlider() {
         });
     }
 
-    function tryResurrectAutoscroll(context) {
+    function tryResurrectAutoscroll(context = null) {
         if (
             !isAutoscrollOn ||
             !isTabActive ||
@@ -867,7 +867,7 @@ function initSlider() {
         }
     }
 
-    function startAutoscroll(delay, context) {
+    function startAutoscroll(delay = null, context = null) {
         isAutoscrollOn = true;
         slider.classList.add("slider--autoscroll-on");
         killAutoscroll();
