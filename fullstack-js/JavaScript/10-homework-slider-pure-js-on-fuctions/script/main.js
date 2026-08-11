@@ -668,6 +668,8 @@ function initSlider() {
             isMoving = false;
         }
 
+        slideStandTimestamp = Date.now();
+
         const albumIndex = getAlbumIndex();
         if (activeAlbumIndex !== albumIndex) {
             onAlbumChanged(albumIndex);
@@ -936,8 +938,6 @@ function initSlider() {
             ++currentIndex;
             updateSlider();
 
-            slideStandTimestamp = Date.now();
-
             const isMouseStillOver =
                 hasFinePointer() &&
                 document.querySelector(
@@ -1106,7 +1106,6 @@ function initSlider() {
             updateSlider();
             startAutoscroll();
             autoscrollStartTimestamp = Date.now();
-            slideStandTimestamp = Date.now();
             startAudio("theme");
         } else {
             tryClearFocus();
