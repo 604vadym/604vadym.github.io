@@ -217,9 +217,7 @@ function initSlider() {
                 activeElement.classList.add("is-pressed");
             }
 
-            const isResetTarget = activeElement?.closest(
-                ".js-autoscroll-reset",
-            );
+            const isResetTarget = activeElement?.closest(".js-dynamic-focus");
             if (isResetTarget) {
                 tryKillAutoscroll();
                 tryResurrectAutoscroll();
@@ -534,14 +532,20 @@ function initSlider() {
     }
 
     function handleFocus(e) {
-        if (e.target.closest(".js-autoscroll-pause")) {
+        if (
+            e.target.closest(".js-autoscroll-pause") &&
+            !e.target.closest(".js-dynamic-focus")
+        ) {
             isKeyboardFocused = true;
             tryKillAutoscroll();
         }
     }
 
     function handleBlur(e) {
-        if (e.target.closest(".js-autoscroll-pause")) {
+        if (
+            e.target.closest(".js-autoscroll-pause") &&
+            !e.target.closest(".js-dynamic-focus")
+        ) {
             isKeyboardFocused = false;
             tryResurrectAutoscroll("hover");
         }
@@ -1139,7 +1143,7 @@ function initSlider() {
             dot.classList.add("button");
             dot.classList.add("pagination__dot");
             dot.classList.add("js-autoscroll-pause");
-            dot.classList.add("js-autoscroll-reset");
+            dot.classList.add("js-dynamic-focus");
             dots.push(pagination.appendChild(dot));
         }
         dots[0].classList.add("pagination__dot--active");
