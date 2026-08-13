@@ -219,12 +219,8 @@ function initSlider() {
                 activeElement.classList.add("is-pressed");
             }
 
-            const isResetTarget = activeElement?.closest(".js-dynamic-focus");
-            if (isResetTarget) {
-                isKeyboardDynamicFocused = true;
-                tryKillAutoscroll();
-                tryResurrectAutoscroll();
-            }
+            isKeyboardDynamicFocused =
+                !!activeElement?.closest(".js-dynamic-focus");
 
             if (isButton) return;
 
@@ -677,6 +673,7 @@ function initSlider() {
 
         if (isKeyboardDynamicFocused) {
             isKeyboardDynamicFocused = false;
+            tryKillAutoscroll();
             tryResurrectAutoscroll();
         }
     }
@@ -922,6 +919,7 @@ function initSlider() {
         if (context === "visibility") {
             isMoving = false;
             isDragging = false;
+            isKeyboardDynamicFocused = false;
         }
 
         const currentDelay = delay || AUTOSCROLL_DELAY;
