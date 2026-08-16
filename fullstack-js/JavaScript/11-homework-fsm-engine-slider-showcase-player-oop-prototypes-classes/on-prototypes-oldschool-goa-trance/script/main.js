@@ -284,7 +284,7 @@ PaginationSlider.prototype._initDOMElements = function () {
 PaginationSlider.prototype._initClickActionTable = function () {
     BaseSlider.prototype._initClickActionTable.call(this);
     this._clickActionTable.push({
-        className: "pagination__dot",
+        className: this._options.paginationClasses.dot,
         action: (button) =>
             this._goToSlide(
                 this._normaliseIndex(this._paginationDots.indexOf(button)),
@@ -298,12 +298,14 @@ PaginationSlider.prototype._updateSlider = function () {
 };
 
 PaginationSlider.prototype._updatePagination = function () {
-    const activeDot = document.querySelector(".pagination__dot--active");
+    const activeDot = this._pagination.querySelector(
+        `.${this._options.paginationClasses.active}`,
+    );
     if (activeDot) {
-        activeDot.classList.remove("pagination__dot--active");
+        activeDot.classList.remove(this._options.paginationClasses.active);
     }
     this._paginationDots[this._normaliseIndex()].classList.add(
-        "pagination__dot--active",
+        this._options.paginationClasses.active,
     );
 };
 
@@ -312,13 +314,13 @@ PaginationSlider.prototype._initPagination = function () {
 
     for (let i = 0; i < this._slidesCount; i++) {
         const dot = document.createElement("button");
-        dot.classList.add("button");
-        dot.classList.add("pagination__dot");
-        dot.classList.add("js-autoscroll-pause");
-        dot.classList.add("js-dynamic-focus");
+        dot.classList.add(this._options.paginationClasses.button);
+        dot.classList.add(this._options.paginationClasses.dot);
         this._paginationDots.push(this._pagination.appendChild(dot));
     }
-    this._paginationDots[0].classList.add("pagination__dot--active");
+    this._paginationDots[0].classList.add(
+        this._options.paginationClasses.active,
+    );
 };
 
 const slider = new PaginationSlider({
@@ -342,6 +344,12 @@ const slider = new PaginationSlider({
     },
 
     groupSelectors: { slides: ".slider__slide", images: ".slider__image" },
+
+    paginationClasses: {
+        dot: "pagination__dot",
+        active: "pagination__dot--active",
+        button: "button",
+    },
 });
 
 slider.init();
