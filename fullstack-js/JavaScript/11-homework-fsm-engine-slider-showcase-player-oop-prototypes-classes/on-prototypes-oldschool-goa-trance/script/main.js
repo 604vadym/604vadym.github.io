@@ -87,9 +87,6 @@ BaseSlider.prototype = {
         // this._btnAutoscrollOff = document.querySelector(
         //     options.singleSelectors.btnAutoscrollOff,
         // );
-        // this._pagination = document.querySelector(
-        //     options.singleSelectors.pagination,
-        // );
         // this._btnAudioNext = document.querySelector(
         //     options.singleSelectors.btnAudioNext,
         // );
@@ -111,7 +108,6 @@ BaseSlider.prototype = {
                     track: this._track,
                     // btnAutoscrollOn: this._btnAutoscrollOn,
                     // btnAutoscrollOff: this._btnAutoscrollOff,
-                    // pagination: this._pagination,
                     // btnAudioNext: this._btnAudioNext,
                     // btnAudioPrev: this._btnAudioPrev,
                     // audioTrackTitle: this._audioTrackTitle,
@@ -152,7 +148,8 @@ BaseSlider.prototype = {
     _initProps() {
         this._slidesCount = this._slides.length;
         this._trackTransition = this._track.style.transition;
-        this._currentIndex = 0;
+        this._startIndex = 0;
+        this._currentIndex = this._startIndex;
         this._slideWidth = 0;
         this._isMoving = false;
     },
@@ -179,7 +176,7 @@ BaseSlider.prototype = {
 
         const clickAction = this._getClickAction(button);
 
-        clickAction?.action() && this._updateSlider();
+        clickAction?.action(button) && this._updateSlider();
     },
 
     _handleTransitionEnd() {
@@ -199,6 +196,12 @@ BaseSlider.prototype = {
 
     _updateSlideWidth() {
         this._slideWidth = this._slides[0].getBoundingClientRect().width;
+    },
+
+    _normaliseIndex(index = null) {
+        const sourceIndex = index !== null ? index : this._currentIndex;
+
+        return (sourceIndex + this._slidesCount) % this._slidesCount;
     },
 
     _getClickAction(button) {
@@ -222,6 +225,12 @@ BaseSlider.prototype = {
         return true;
     },
 
+    _goToSlide(index) {
+        const oldIndex = this._currentIndex;
+        this._currentIndex = (index + this._slidesCount) % this._slidesCount;
+        return this._currentIndex !== oldIndex;
+    },
+
     _initClickActionTable() {
         this._clickActionTable = [
             {
@@ -242,13 +251,83 @@ BaseSlider.prototype = {
     },
 };
 
-const slider = new BaseSlider({
+function PaginationSlider(options) {
+    BaseSlider.call(this, options);
+}
+
+PaginationSlider.prototype = Object.create(BaseSlider.prototype);
+
+PaginationSlider.prototype.constructor = PaginationSlider;
+
+PaginationSlider.prototype.init = function () {
+    BaseSlider.prototype.init.call(this);
+    this._initPagination();
+};
+
+PaginationSlider.prototype._initDOMElements = function () {
+    BaseSlider.prototype._initDOMElements.call(this);
+    this._pagination = document.querySelector(
+        this._options.singleSelectors.pagination,
+    );
+
+    if (
+        !isDOMElementsFound({
+            elements: {
+                pagination: this._pagination,
+            },
+            collections: {},
+        })
+    )
+        throw new Error("DOM elements validation failed");
+};
+
+PaginationSlider.prototype._initClickActionTable = function () {
+    BaseSlider.prototype._initClickActionTable.call(this);
+    this._clickActionTable.push({
+        className: "pagination__dot",
+        action: (button) =>
+            this._goToSlide(
+                this._normaliseIndex(this._paginationDots.indexOf(button)),
+            ),
+    });
+};
+
+PaginationSlider.prototype._updateSlider = function () {
+    BaseSlider.prototype._updateSlider.call(this);
+    this._updatePagination();
+};
+
+PaginationSlider.prototype._updatePagination = function () {
+    const activeDot = document.querySelector(".pagination__dot--active");
+    if (activeDot) {
+        activeDot.classList.remove("pagination__dot--active");
+    }
+    this._paginationDots[this._normaliseIndex()].classList.add(
+        "pagination__dot--active",
+    );
+};
+
+PaginationSlider.prototype._initPagination = function () {
+    this._paginationDots = [];
+
+    for (let i = 0; i < this._slidesCount; i++) {
+        const dot = document.createElement("button");
+        dot.classList.add("button");
+        dot.classList.add("pagination__dot");
+        dot.classList.add("js-autoscroll-pause");
+        dot.classList.add("js-dynamic-focus");
+        this._paginationDots.push(this._pagination.appendChild(dot));
+    }
+    this._paginationDots[0].classList.add("pagination__dot--active");
+};
+
+const slider = new PaginationSlider({
     singleSelectors: {
         slider: ".slider",
         track: ".slider__track",
         // btnAutoscrollOn: ".slider__btn--autoscroll-on",
         // btnAutoscrollOff: ".slider__btn--autoscroll-off",
-        // pagination: ".slider__pagination",
+        pagination: ".slider__pagination",
         // btnAudioNext: ".slider__btn-audio--next",
         // btnAudioPrev: ".slider__btn-audio--prev",
         // audioTrackTitle: ".slider__audio-track-title",
