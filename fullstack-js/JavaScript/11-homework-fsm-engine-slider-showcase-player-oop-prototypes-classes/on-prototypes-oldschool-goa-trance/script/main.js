@@ -166,7 +166,9 @@ BaseSlider.prototype = {
         const cloneOfLast = this._slides[this._slidesCount - 1].cloneNode(true);
         this._track.append(cloneOfFirst);
         this._track.prepend(cloneOfLast);
-        this._slides = document.querySelectorAll(".slider__slide");
+        this._slides = document.querySelectorAll(
+            this._options.groupSelectors.slides,
+        );
     },
 
     _updateSlider() {
@@ -188,7 +190,7 @@ BaseSlider.prototype = {
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 this._track.style.transition = this._trackTransition;
-                this._isMoving;
+                this._isMoving = false;
             });
         });
     },
