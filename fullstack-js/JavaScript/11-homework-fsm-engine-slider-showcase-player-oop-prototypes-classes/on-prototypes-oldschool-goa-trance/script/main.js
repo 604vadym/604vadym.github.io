@@ -57,20 +57,37 @@ function hasFinePointer() {
 
 function BaseSlider(options) {
     this._options = options;
+    this._DOMValidator = {
+        validate: (baseConfig, childConfig) => {
+            if (this.constructor !== BaseSlider && childConfig === null) {
+                throw new Error(
+                    `DOMValidator: Sub-class "${this.constructor.name}" must provide a validation config`,
+                );
+            }
+
+            if (!baseConfig) {
+                throw new Error("DOMValidator: Validation config is required");
+            }
+
+            if (!isDOMElementsFound(baseConfig)) {
+                throw new Error("DOMValidator: DOM elements validation failed");
+            }
+        },
+    };
 }
 
 BaseSlider.prototype = {
     constructor: BaseSlider,
 
     init() {
-        this._initDOMElements();
+        this._initDOMElements({ elements: {}, collections: {} });
         this._initProps();
         this._updateSlideWidth();
         this._initClickActionTable();
         this._initEventListeners();
     },
 
-    _initDOMElements() {
+    _initDOMElements(childConfig = null) {
         this._slider = document.querySelector(
             this._options.singleSelectors.slider,
         );
@@ -101,45 +118,58 @@ BaseSlider.prototype = {
         // );
         // this._linkShop = document.querySelector(options.singleSelectors.linkShop);
 
-        this._validateDOM({
-            elements: {
-                slider: this._slider,
-                track: this._track,
-                // btnAutoscrollOn: this._btnAutoscrollOn,
-                // btnAutoscrollOff: this._btnAutoscrollOff,
-                // btnAudioNext: this._btnAudioNext,
-                // btnAudioPrev: this._btnAudioPrev,
-                // audioTrackTitle: this._audioTrackTitle,
-                // audioTrackCurrentTime: this._audioTrackCurrentTime,
-                // linkShop: this._linkShop,
+        const safeChildConfig = childConfig || {
+            elements: {},
+            collections: {},
+        };
 
-                viewport: document.querySelector(
-                    this._options.singleSelectors.viewport,
-                ),
-                btnNext: document.querySelector(
-                    this._options.singleSelectors.btnNext,
-                ),
-                btnPrev: document.querySelector(
-                    this._options.singleSelectors.btnPrev,
-                ),
-                // btnAudioPlay: document.querySelector(
-                //     options.singleSelectors.btnAudioPlay,
-                // ),
-                // btnAudioPause: document.querySelector(
-                //     options.singleSelectors.btnAudioPause,
-                // ),
-                // audioTrackFullTime: document.querySelector(
-                //     options.singleSelectors.audioTrackFullTime,
-                // ),
-            },
-            collections: {
-                slides: this._slides,
+        this._DOMValidator.validate(
+            {
+                elements: {
+                    slider: this._slider,
+                    track: this._track,
+                    // btnAutoscrollOn: this._btnAutoscrollOn,
+                    // btnAutoscrollOff: this._btnAutoscrollOff,
+                    // btnAudioNext: this._btnAudioNext,
+                    // btnAudioPrev: this._btnAudioPrev,
+                    // audioTrackTitle: this._audioTrackTitle,
+                    // audioTrackCurrentTime: this._audioTrackCurrentTime,
+                    // linkShop: this._linkShop,
 
-                images: document.querySelectorAll(
-                    this._options.groupSelectors.images,
-                ),
+                    viewport: document.querySelector(
+                        this._options.singleSelectors.viewport,
+                    ),
+                    btnNext: document.querySelector(
+                        this._options.singleSelectors.btnNext,
+                    ),
+                    btnPrev: document.querySelector(
+                        this._options.singleSelectors.btnPrev,
+                    ),
+                    // btnAudioPlay: document.querySelector(
+                    //     options.singleSelectors.btnAudioPlay,
+                    // ),
+                    // btnAudioPause: document.querySelector(
+                    //     options.singleSelectors.btnAudioPause,
+                    // ),
+                    // audioTrackFullTime: document.querySelector(
+                    //     options.singleSelectors.audioTrackFullTime,
+                    // ),
+
+                    ...safeChildConfig.elements,
+                },
+                collections: {
+                    slides: this._slides,
+
+                    images: document.querySelectorAll(
+                        this._options.groupSelectors.images,
+                    ),
+
+                    ...safeChildConfig.collections,
+                },
             },
-        });
+
+            childConfig,
+        );
     },
 
     _initProps() {
@@ -228,12 +258,6 @@ BaseSlider.prototype = {
         return this._currentIndex !== oldIndex;
     },
 
-    _validateDOM(config) {
-        if (!isDOMElementsFound(config)) {
-            throw new Error("DOM elements validation failed");
-        }
-    },
-
     _initClickActionTable() {
         this._clickActionTable = [
             {
@@ -268,11 +292,10 @@ PaginationSlider.prototype.init = function () {
 };
 
 PaginationSlider.prototype._initDOMElements = function () {
-    BaseSlider.prototype._initDOMElements.call(this);
     this._pagination = document.querySelector(
         this._options.singleSelectors.pagination,
     );
-    this._validateDOM({
+    BaseSlider.prototype._initDOMElements.call(this, {
         elements: {
             pagination: this._pagination,
         },
