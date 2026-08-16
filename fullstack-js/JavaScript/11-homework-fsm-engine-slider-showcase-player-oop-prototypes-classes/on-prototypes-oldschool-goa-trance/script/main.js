@@ -101,48 +101,45 @@ BaseSlider.prototype = {
         // );
         // this._linkShop = document.querySelector(options.singleSelectors.linkShop);
 
-        if (
-            !isDOMElementsFound({
-                elements: {
-                    slider: this._slider,
-                    track: this._track,
-                    // btnAutoscrollOn: this._btnAutoscrollOn,
-                    // btnAutoscrollOff: this._btnAutoscrollOff,
-                    // btnAudioNext: this._btnAudioNext,
-                    // btnAudioPrev: this._btnAudioPrev,
-                    // audioTrackTitle: this._audioTrackTitle,
-                    // audioTrackCurrentTime: this._audioTrackCurrentTime,
-                    // linkShop: this._linkShop,
+        this._validateDOM({
+            elements: {
+                slider: this._slider,
+                track: this._track,
+                // btnAutoscrollOn: this._btnAutoscrollOn,
+                // btnAutoscrollOff: this._btnAutoscrollOff,
+                // btnAudioNext: this._btnAudioNext,
+                // btnAudioPrev: this._btnAudioPrev,
+                // audioTrackTitle: this._audioTrackTitle,
+                // audioTrackCurrentTime: this._audioTrackCurrentTime,
+                // linkShop: this._linkShop,
 
-                    viewport: document.querySelector(
-                        this._options.singleSelectors.viewport,
-                    ),
-                    btnNext: document.querySelector(
-                        this._options.singleSelectors.btnNext,
-                    ),
-                    btnPrev: document.querySelector(
-                        this._options.singleSelectors.btnPrev,
-                    ),
-                    // btnAudioPlay: document.querySelector(
-                    //     options.singleSelectors.btnAudioPlay,
-                    // ),
-                    // btnAudioPause: document.querySelector(
-                    //     options.singleSelectors.btnAudioPause,
-                    // ),
-                    // audioTrackFullTime: document.querySelector(
-                    //     options.singleSelectors.audioTrackFullTime,
-                    // ),
-                },
-                collections: {
-                    slides: this._slides,
+                viewport: document.querySelector(
+                    this._options.singleSelectors.viewport,
+                ),
+                btnNext: document.querySelector(
+                    this._options.singleSelectors.btnNext,
+                ),
+                btnPrev: document.querySelector(
+                    this._options.singleSelectors.btnPrev,
+                ),
+                // btnAudioPlay: document.querySelector(
+                //     options.singleSelectors.btnAudioPlay,
+                // ),
+                // btnAudioPause: document.querySelector(
+                //     options.singleSelectors.btnAudioPause,
+                // ),
+                // audioTrackFullTime: document.querySelector(
+                //     options.singleSelectors.audioTrackFullTime,
+                // ),
+            },
+            collections: {
+                slides: this._slides,
 
-                    images: document.querySelectorAll(
-                        this._options.groupSelectors.images,
-                    ),
-                },
-            })
-        )
-            throw new Error("DOM elements validation failed");
+                images: document.querySelectorAll(
+                    this._options.groupSelectors.images,
+                ),
+            },
+        });
     },
 
     _initProps() {
@@ -231,6 +228,12 @@ BaseSlider.prototype = {
         return this._currentIndex !== oldIndex;
     },
 
+    _validateDOM(config) {
+        if (!isDOMElementsFound(config)) {
+            throw new Error("DOM elements validation failed");
+        }
+    },
+
     _initClickActionTable() {
         this._clickActionTable = [
             {
@@ -269,16 +272,12 @@ PaginationSlider.prototype._initDOMElements = function () {
     this._pagination = document.querySelector(
         this._options.singleSelectors.pagination,
     );
-
-    if (
-        !isDOMElementsFound({
-            elements: {
-                pagination: this._pagination,
-            },
-            collections: {},
-        })
-    )
-        throw new Error("DOM elements validation failed");
+    this._validateDOM({
+        elements: {
+            pagination: this._pagination,
+        },
+        collections: {},
+    });
 };
 
 PaginationSlider.prototype._initClickActionTable = function () {
