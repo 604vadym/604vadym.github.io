@@ -29,25 +29,28 @@ function hasFinePointer() {
 }
 
 function DOMValidator(baseClass) {
-    this._baseClass = baseClass;
+    this._baseClass = baseClass.name;
 }
 
 DOMValidator.prototype = {
     constructor: DOMValidator,
 
     validate(baseConfig, childConfig, context) {
-        if (context.constructor !== this._baseClass && childConfig === null) {
+        const className = context.constructor.name;
+        if (className !== this._baseClass && childConfig === null) {
             throw new Error(
-                `DOMValidator: Sub-class "${context.constructor.name}" must provide a validation config`,
+                `DOMValidator: subclass "${className}" must provide validation config`,
             );
         }
 
         if (!baseConfig) {
-            throw new Error("DOMValidator: Validation config is required");
+            throw new Error(
+                `DOMValidator: base class [${className}] must provide validation config`,
+            );
         }
 
         if (!DOMValidator.isDOMElementsFound(baseConfig)) {
-            throw new Error("DOMValidator: DOM elements validation failed");
+            throw new Error(`DOMValidator: [${className}] validation failed`);
         }
     },
 };
@@ -57,8 +60,9 @@ DOMValidator.isDOMElementsFound = function ({
     collections = null,
 } = {}) {
     if (!elements && !collections) {
-        console.warn(`isDOMElementsFound(): invalid function call`);
-        return false;
+        console.warn(
+            `DOMValidator.isDOMElementsFound(): invalid function call`,
+        );
     }
 
     if (elements) {
