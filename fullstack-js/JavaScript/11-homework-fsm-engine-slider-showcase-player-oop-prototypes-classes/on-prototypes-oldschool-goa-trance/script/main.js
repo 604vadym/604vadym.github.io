@@ -195,9 +195,7 @@ BaseSlider.prototype = {
 
         const clickAction = this._getClickAction(button);
 
-        if (clickAction && clickAction()) {
-            this._updateSlider();
-        }
+        clickAction?.action() && this._updateSlider();
     },
 
     _handleTransitionEnd() {
@@ -251,10 +249,7 @@ BaseSlider.prototype = {
             classList.contains(entry.className),
         );
 
-        console.log(button.classList);
-        return actionIndex !== -1
-            ? this._clickActionTable[actionIndex].action
-            : null;
+        return actionIndex !== -1 ? this._clickActionTable[actionIndex] : null;
     },
 
     _initClickActionTable() {
