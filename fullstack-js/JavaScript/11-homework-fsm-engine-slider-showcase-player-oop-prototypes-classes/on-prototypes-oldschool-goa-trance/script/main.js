@@ -51,31 +51,31 @@ function isDOMElementsFound({ elements = null, collections = null } = {}) {
     return true;
 }
 
-function Slider(options) {
+function BaseSlider(options) {
     this._slider = document.querySelector(options.singleSelectors.slider);
     this._track = document.querySelector(options.singleSelectors.track);
-    this._btnAutoscrollOn = document.querySelector(
-        options.singleSelectors.btnAutoscrollOn,
-    );
-    this._btnAutoscrollOff = document.querySelector(
-        options.singleSelectors.btnAutoscrollOff,
-    );
-    this._pagination = document.querySelector(
-        options.singleSelectors.pagination,
-    );
-    this._btnAudioNext = document.querySelector(
-        options.singleSelectors.btnAudioNext,
-    );
-    this._btnAudioPrev = document.querySelector(
-        options.singleSelectors.btnAudioPrev,
-    );
-    this._audioTrackTitle = document.querySelector(
-        options.singleSelectors.audioTrackTitle,
-    );
-    this._audioTrackCurrentTime = document.querySelector(
-        options.singleSelectors.audioTrackCurrentTime,
-    );
-    this._linkShop = document.querySelector(options.singleSelectors.linkShop);
+    // this._btnAutoscrollOn = document.querySelector(
+    //     options.singleSelectors.btnAutoscrollOn,
+    // );
+    // this._btnAutoscrollOff = document.querySelector(
+    //     options.singleSelectors.btnAutoscrollOff,
+    // );
+    // this._pagination = document.querySelector(
+    //     options.singleSelectors.pagination,
+    // );
+    // this._btnAudioNext = document.querySelector(
+    //     options.singleSelectors.btnAudioNext,
+    // );
+    // this._btnAudioPrev = document.querySelector(
+    //     options.singleSelectors.btnAudioPrev,
+    // );
+    // this._audioTrackTitle = document.querySelector(
+    //     options.singleSelectors.audioTrackTitle,
+    // );
+    // this._audioTrackCurrentTime = document.querySelector(
+    //     options.singleSelectors.audioTrackCurrentTime,
+    // );
+    // this._linkShop = document.querySelector(options.singleSelectors.linkShop);
     this._slides = document.querySelectorAll(options.groupSelectors.slides);
 
     if (
@@ -83,14 +83,14 @@ function Slider(options) {
             elements: {
                 slider: this._slider,
                 track: this._track,
-                btnAutoscrollOn: this._btnAutoscrollOn,
-                btnAutoscrollOff: this._btnAutoscrollOff,
-                pagination: this._pagination,
-                btnAudioNext: this._btnAudioNext,
-                btnAudioPrev: this._btnAudioPrev,
-                audioTrackTitle: this._audioTrackTitle,
-                audioTrackCurrentTime: this._audioTrackCurrentTime,
-                linkShop: this._linkShop,
+                // btnAutoscrollOn: this._btnAutoscrollOn,
+                // btnAutoscrollOff: this._btnAutoscrollOff,
+                // pagination: this._pagination,
+                // btnAudioNext: this._btnAudioNext,
+                // btnAudioPrev: this._btnAudioPrev,
+                // audioTrackTitle: this._audioTrackTitle,
+                // audioTrackCurrentTime: this._audioTrackCurrentTime,
+                // linkShop: this._linkShop,
 
                 viewport: document.querySelector(
                     options.singleSelectors.viewport,
@@ -101,15 +101,15 @@ function Slider(options) {
                 btnPrev: document.querySelector(
                     options.singleSelectors.btnPrev,
                 ),
-                btnAudioPlay: document.querySelector(
-                    options.singleSelectors.btnAudioPlay,
-                ),
-                btnAudioPause: document.querySelector(
-                    options.singleSelectors.btnAudioPause,
-                ),
-                audioTrackFullTime: document.querySelector(
-                    options.singleSelectors.audioTrackFullTime,
-                ),
+                // btnAudioPlay: document.querySelector(
+                //     options.singleSelectors.btnAudioPlay,
+                // ),
+                // btnAudioPause: document.querySelector(
+                //     options.singleSelectors.btnAudioPause,
+                // ),
+                // audioTrackFullTime: document.querySelector(
+                //     options.singleSelectors.audioTrackFullTime,
+                // ),
             },
             collections: {
                 slides: this._slides,
@@ -123,24 +123,24 @@ function Slider(options) {
         throw new Error("DOM elements validation failed");
 }
 
-const slider = new Slider({
+const slider = new BaseSlider({
     singleSelectors: {
         slider: ".slider",
         track: ".slider__track",
-        btnAutoscrollOn: ".slider__btn--autoscroll-on",
-        btnAutoscrollOff: ".slider__btn--autoscroll-off",
-        pagination: ".slider__pagination",
-        btnAudioNext: ".slider__btn-audio--next",
-        btnAudioPrev: ".slider__btn-audio--prev",
-        audioTrackTitle: ".slider__audio-track-title",
-        audioTrackCurrentTime: ".slider__audio-track-current-time",
-        linkShop: ".slider__link-shop",
+        // btnAutoscrollOn: ".slider__btn--autoscroll-on",
+        // btnAutoscrollOff: ".slider__btn--autoscroll-off",
+        // pagination: ".slider__pagination",
+        // btnAudioNext: ".slider__btn-audio--next",
+        // btnAudioPrev: ".slider__btn-audio--prev",
+        // audioTrackTitle: ".slider__audio-track-title",
+        // audioTrackCurrentTime: ".slider__audio-track-current-time",
+        // linkShop: ".slider__link-shop",
         viewport: ".slider__viewport",
         btnNext: ".slider__btn--next",
         btnPrev: ".slider__btn--prev",
-        btnAudioPlay: ".slider__btn-audio--play",
-        btnAudioPause: ".slider__btn-audio--pause",
-        audioTrackFullTime: ".slider__audio-track-full-time",
+        // btnAudioPlay: ".slider__btn-audio--play",
+        // btnAudioPause: ".slider__btn-audio--pause",
+        // audioTrackFullTime: ".slider__audio-track-full-time",
     },
 
     groupSelectors: { slides: ".slider__slide", images: ".slider__image" },
