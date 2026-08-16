@@ -57,8 +57,21 @@ function hasFinePointer() {
 
 function BaseSlider(options) {
     this._options = options;
-    this._slider = document.querySelector(options.singleSelectors.slider);
-    this._track = document.querySelector(options.singleSelectors.track);
+
+    this._initDOMElements();
+    this._initProps();
+    this._initInfiniteLoop();
+    this._updateSlideWidth();
+    this._teleportSlides();
+}
+
+BaseSlider.prototype._initDOMElements = function () {
+    this._slider = document.querySelector(this._options.singleSelectors.slider);
+    this._track = document.querySelector(this._options.singleSelectors.track);
+    this._slides = document.querySelectorAll(
+        this._options.groupSelectors.slides,
+    );
+
     // this._btnAutoscrollOn = document.querySelector(
     //     options.singleSelectors.btnAutoscrollOn,
     // );
@@ -81,7 +94,6 @@ function BaseSlider(options) {
     //     options.singleSelectors.audioTrackCurrentTime,
     // );
     // this._linkShop = document.querySelector(options.singleSelectors.linkShop);
-    this._slides = document.querySelectorAll(options.groupSelectors.slides);
 
     if (
         !isDOMElementsFound({
@@ -98,13 +110,13 @@ function BaseSlider(options) {
                 // linkShop: this._linkShop,
 
                 viewport: document.querySelector(
-                    options.singleSelectors.viewport,
+                    this._options.singleSelectors.viewport,
                 ),
                 btnNext: document.querySelector(
-                    options.singleSelectors.btnNext,
+                    this._options.singleSelectors.btnNext,
                 ),
                 btnPrev: document.querySelector(
-                    options.singleSelectors.btnPrev,
+                    this._options.singleSelectors.btnPrev,
                 ),
                 // btnAudioPlay: document.querySelector(
                 //     options.singleSelectors.btnAudioPlay,
@@ -120,18 +132,13 @@ function BaseSlider(options) {
                 slides: this._slides,
 
                 images: document.querySelectorAll(
-                    options.groupSelectors.images,
+                    this._options.groupSelectors.images,
                 ),
             },
         })
     )
         throw new Error("DOM elements validation failed");
-
-    this._initProps();
-    this._initInfiniteLoop();
-    this._updateSlideWidth();
-    this._teleportSlides();
-}
+};
 
 BaseSlider.prototype._initProps = function () {
     this._slidesCount = this._slides.length;
