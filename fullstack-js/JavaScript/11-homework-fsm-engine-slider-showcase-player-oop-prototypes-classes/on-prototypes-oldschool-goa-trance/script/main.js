@@ -65,9 +65,7 @@ BaseSlider.prototype = {
     init() {
         this._initDOMElements();
         this._initProps();
-        this._initInfiniteLoop();
         this._updateSlideWidth();
-        this._teleportSlides();
         this._initClickActionTable();
         this._initEventListeners();
     },
@@ -154,23 +152,9 @@ BaseSlider.prototype = {
     _initProps() {
         this._slidesCount = this._slides.length;
         this._trackTransition = this._track.style.transition;
-        this._teleportMap = {
-            0: this._slidesCount,
-            [this._slidesCount + 1]: 1,
-        };
-        this._currentIndex = 1;
+        this._currentIndex = 0;
         this._slideWidth = 0;
         this._isMoving = false;
-    },
-
-    _initInfiniteLoop() {
-        const cloneOfFirst = this._slides[0].cloneNode(true);
-        const cloneOfLast = this._slides[this._slidesCount - 1].cloneNode(true);
-        this._track.append(cloneOfFirst);
-        this._track.prepend(cloneOfLast);
-        this._slides = document.querySelectorAll(
-            this._options.groupSelectors.slides,
-        );
     },
 
     _initEventListeners() {
@@ -199,17 +183,11 @@ BaseSlider.prototype = {
     },
 
     _handleTransitionEnd() {
-        if (this._resetLoop()) {
-            this._teleportSlides();
-        } else {
-            this._isMoving = false;
-        }
+        this._isMoving = false;
     },
 
     _updateSlider() {
-        if (this._track.style.transition !== "none") {
-            this._isMoving = true;
-        }
+        this._isMoving = true;
 
         if (hasFinePointer()) {
             this._track.style.transform = `translateX(-${this._currentIndex * 100}%)`;
@@ -217,25 +195,6 @@ BaseSlider.prototype = {
             const offset = this._currentIndex * this._slideWidth;
             this._track.style.transform = `translateX(-${offset}px)`;
         }
-    },
-
-    _teleportSlides() {
-        this._track.style.transition = "none";
-        this._updateSlider();
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                this._track.style.transition = this._trackTransition;
-                this._isMoving = false;
-            });
-        });
-    },
-
-    _resetLoop() {
-        if (this._currentIndex in this._teleportMap) {
-            this._currentIndex = this._teleportMap[this._currentIndex];
-            return true;
-        }
-        return false;
     },
 
     _updateSlideWidth() {
@@ -252,6 +211,17 @@ BaseSlider.prototype = {
         return actionIndex !== -1 ? this._clickActionTable[actionIndex] : null;
     },
 
+    _nextSlide() {
+        this._currentIndex = (this._currentIndex + 1) % this._slidesCount;
+        return true;
+    },
+
+    _prevSlide() {
+        this._currentIndex =
+            (this._currentIndex - 1 + this._slidesCount) % this._slidesCount;
+        return true;
+    },
+
     _initClickActionTable() {
         this._clickActionTable = [
             {
@@ -259,20 +229,14 @@ BaseSlider.prototype = {
                     /^\./,
                     "",
                 ),
-                action: () => {
-                    ++this._currentIndex;
-                    return true;
-                },
+                action: () => this._nextSlide(),
             },
             {
                 className: this._options.singleSelectors.btnPrev.replace(
                     /^\./,
                     "",
                 ),
-                action: () => {
-                    --this._currentIndex;
-                    return true;
-                },
+                action: () => this._prevSlide(),
             },
         ];
     },
