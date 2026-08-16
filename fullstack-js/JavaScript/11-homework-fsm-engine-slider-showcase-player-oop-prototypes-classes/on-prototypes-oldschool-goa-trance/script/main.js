@@ -68,6 +68,8 @@ BaseSlider.prototype = {
         this._initInfiniteLoop();
         this._updateSlideWidth();
         this._teleportSlides();
+        this._initClickActionTable();
+        this._initEventListeners();
     },
 
     _initDOMElements() {
@@ -171,6 +173,41 @@ BaseSlider.prototype = {
         );
     },
 
+    _initEventListeners() {
+        this._slider.addEventListener("click", this);
+        this._track.addEventListener("transitionend", this);
+    },
+
+    handleEvent(e) {
+        switch (e.type) {
+            case "click":
+                this._handleClick(e);
+                break;
+            case "transitionend":
+                this._handleTransitionEnd();
+                break;
+        }
+    },
+
+    _handleClick(e) {
+        const button = e.target.closest(".button");
+        if (!button || this._isMoving) return;
+
+        const clickAction = this._getClickAction(button);
+
+        if (clickAction && clickAction()) {
+            this._updateSlider();
+        }
+    },
+
+    _handleTransitionEnd() {
+        if (this._resetLoop()) {
+            this._teleportSlides();
+        } else {
+            this._isMoving = false;
+        }
+    },
+
     _updateSlider() {
         if (this._track.style.transition !== "none") {
             this._isMoving = true;
@@ -195,8 +232,54 @@ BaseSlider.prototype = {
         });
     },
 
+    _resetLoop() {
+        if (this._currentIndex in this._teleportMap) {
+            this._currentIndex = this._teleportMap[this._currentIndex];
+            return true;
+        }
+        return false;
+    },
+
     _updateSlideWidth() {
         this._slideWidth = this._slides[0].getBoundingClientRect().width;
+    },
+
+    _getClickAction(button) {
+        const classList = button.classList;
+
+        const actionIndex = this._clickActionTable.findIndex((entry) =>
+            classList.contains(entry.className),
+        );
+
+        console.log(button.classList);
+        return actionIndex !== -1
+            ? this._clickActionTable[actionIndex].action
+            : null;
+    },
+
+    _initClickActionTable() {
+        this._clickActionTable = [
+            {
+                className: this._options.singleSelectors.btnNext.replace(
+                    /^\./,
+                    "",
+                ),
+                action: () => {
+                    ++this._currentIndex;
+                    return true;
+                },
+            },
+            {
+                className: this._options.singleSelectors.btnPrev.replace(
+                    /^\./,
+                    "",
+                ),
+                action: () => {
+                    --this._currentIndex;
+                    return true;
+                },
+            },
+        ];
     },
 };
 
