@@ -12,6 +12,7 @@ const homeworkMap = {
     hw8: "08.homework-DOM-cookie-session-storage/index.html",
     hw9: "09.homework-events/index.html",
     hw10: "10-homework-slider-pure-js-on-fuctions/index.html",
+    hw11: "11-homework-fsm-engine-slider-showcase-player-oop-prototypes-classes/on-prototypes-oldschool-goa-trance/index.html",
 };
 
 function logToTerminal(...args) {
