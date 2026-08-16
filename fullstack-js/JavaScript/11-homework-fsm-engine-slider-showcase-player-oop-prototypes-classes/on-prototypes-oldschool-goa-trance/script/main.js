@@ -24,7 +24,38 @@
  *
  */
 
-function isDOMElementsFound({ elements = null, collections = null } = {}) {
+function hasFinePointer() {
+    return window.matchMedia("(pointer: fine)").matches;
+}
+
+function DOMValidator(baseClass) {
+    this._baseClass = baseClass;
+}
+
+DOMValidator.prototype = {
+    constructor: DOMValidator,
+
+    validate(baseConfig, childConfig, context) {
+        if (context.constructor !== this._baseClass && childConfig === null) {
+            throw new Error(
+                `DOMValidator: Sub-class "${context.constructor.name}" must provide a validation config`,
+            );
+        }
+
+        if (!baseConfig) {
+            throw new Error("DOMValidator: Validation config is required");
+        }
+
+        if (!DOMValidator.isDOMElementsFound(baseConfig)) {
+            throw new Error("DOMValidator: DOM elements validation failed");
+        }
+    },
+};
+
+DOMValidator.isDOMElementsFound = function ({
+    elements = null,
+    collections = null,
+} = {}) {
     if (!elements && !collections) {
         console.warn(`isDOMElementsFound(): invalid function call`);
         return false;
@@ -49,31 +80,16 @@ function isDOMElementsFound({ elements = null, collections = null } = {}) {
     }
 
     return true;
-}
-
-function hasFinePointer() {
-    return window.matchMedia("(pointer: fine)").matches;
-}
+};
 
 function BaseSlider(options) {
     this._options = options;
-    this._DOMValidator = {
-        validate: (baseConfig, childConfig) => {
-            if (this.constructor !== BaseSlider && childConfig === null) {
-                throw new Error(
-                    `DOMValidator: Sub-class "${this.constructor.name}" must provide a validation config`,
-                );
-            }
 
-            if (!baseConfig) {
-                throw new Error("DOMValidator: Validation config is required");
-            }
-
-            if (!isDOMElementsFound(baseConfig)) {
-                throw new Error("DOMValidator: DOM elements validation failed");
-            }
-        },
-    };
+    Object.defineProperty(this, "_DOMValidator", {
+        value: new DOMValidator(BaseSlider),
+        writable: false,
+        configurable: false,
+    });
 }
 
 BaseSlider.prototype = {
@@ -169,6 +185,7 @@ BaseSlider.prototype = {
             },
 
             childConfig,
+            this,
         );
     },
 
