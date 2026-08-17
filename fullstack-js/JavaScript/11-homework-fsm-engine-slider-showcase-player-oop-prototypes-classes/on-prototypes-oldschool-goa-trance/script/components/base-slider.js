@@ -17,7 +17,7 @@ BaseSlider.prototype = {
     constructor: BaseSlider,
 
     init() {
-        this._initDOMElements({ elements: {}, collections: {} });
+        this._initDOMElements();
         this._initProps();
         this._updateSlideWidth();
         this._initClickActionTable();
@@ -35,43 +35,36 @@ BaseSlider.prototype = {
             this._options.groupSelectors.slides,
         );
 
-        const safeChildConfig = childConfig || {
-            elements: {},
-            collections: {},
+        const safeChildConfig = childConfig || {};
+        const config = {
+            elements: {
+                slider: this._slider,
+                track: this._track,
+
+                viewport: document.querySelector(
+                    this._options.singleSelectors.viewport,
+                ),
+                btnNext: document.querySelector(
+                    this._options.singleSelectors.btnNext,
+                ),
+                btnPrev: document.querySelector(
+                    this._options.singleSelectors.btnPrev,
+                ),
+
+                ...safeChildConfig.elements,
+            },
+            collections: {
+                slides: this._slides,
+
+                images: document.querySelectorAll(
+                    this._options.groupSelectors.images,
+                ),
+
+                ...safeChildConfig.collections,
+            },
         };
 
-        this._DOMValidator.validate(
-            {
-                elements: {
-                    slider: this._slider,
-                    track: this._track,
-
-                    viewport: document.querySelector(
-                        this._options.singleSelectors.viewport,
-                    ),
-                    btnNext: document.querySelector(
-                        this._options.singleSelectors.btnNext,
-                    ),
-                    btnPrev: document.querySelector(
-                        this._options.singleSelectors.btnPrev,
-                    ),
-
-                    ...safeChildConfig.elements,
-                },
-                collections: {
-                    slides: this._slides,
-
-                    images: document.querySelectorAll(
-                        this._options.groupSelectors.images,
-                    ),
-
-                    ...safeChildConfig.collections,
-                },
-            },
-
-            childConfig,
-            this,
-        );
+        this._DOMValidator.validate(config, childConfig, this);
     },
 
     _initProps() {
@@ -156,7 +149,7 @@ BaseSlider.prototype = {
 
     _goToSlide(index) {
         const oldIndex = this._currentIndex;
-        this._currentIndex = (index + this._slidesCount) % this._slidesCount;
+        this._currentIndex = this._normaliseIndex(index);
         return this._currentIndex !== oldIndex;
     },
 

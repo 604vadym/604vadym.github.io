@@ -7,8 +7,8 @@ export default function DOMValidator(baseClass) {
 DOMValidator.prototype = {
     constructor: DOMValidator,
 
-    validate(config, childConfig, context) {
-        const className = context.constructor.name;
+    validate(config, childConfig, instance) {
+        const className = instance.constructor.name;
         if (className !== this._baseClass && childConfig === null) {
             throw new Error(
                 `DOMValidator: subclass "${className}" must provide validation config`,
