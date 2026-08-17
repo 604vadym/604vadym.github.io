@@ -3,6 +3,11 @@
 import * as helper from "../utils/helpers.js";
 import DOMValidator from "../services/dom-validator.js";
 
+BaseSlider.STATES = {
+    IDLE: "IDLE",
+    MOVING: "MOVING",
+};
+
 export default function BaseSlider(options) {
     this._options = options;
 
@@ -15,6 +20,10 @@ export default function BaseSlider(options) {
 
 BaseSlider.prototype = {
     constructor: BaseSlider,
+
+    get state() {
+        return this._state;
+    },
 
     init() {
         this._initDOMElements();
@@ -63,12 +72,12 @@ BaseSlider.prototype = {
     },
 
     _initProps() {
+        this._state = BaseSlider.STATES.IDLE;
         this._slidesCount = this._slides.length;
         this._trackTransition = this._track.style.transition;
         this._startIndex = 0;
         this._currentIndex = this._startIndex;
         this._slideWidth = 0;
-        this._isMoving = false;
     },
 
     _initEventListeners() {
@@ -89,7 +98,7 @@ BaseSlider.prototype = {
 
     _handleClick(e) {
         const button = e.target.closest(`.${this._options.classes.button}`);
-        if (!button || this._isMoving) return;
+        if (!button || this._state === BaseSlider.STATES.MOVING) return;
 
         const clickAction = this._getClickAction(button);
 
@@ -97,11 +106,11 @@ BaseSlider.prototype = {
     },
 
     _handleTransitionEnd() {
-        this._isMoving = false;
+        this._state = BaseSlider.STATES.IDLE;
     },
 
     _updateSlider() {
-        this._isMoving = true;
+        this._state = BaseSlider.STATES.MOVING;
 
         if (helper.hasFinePointer()) {
             this._track.style.transform = `translateX(-${this._currentIndex * 100}%)`;
