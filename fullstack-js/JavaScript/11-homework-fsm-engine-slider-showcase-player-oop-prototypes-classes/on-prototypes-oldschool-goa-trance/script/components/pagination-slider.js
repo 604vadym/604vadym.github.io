@@ -16,14 +16,15 @@ PaginationSlider.prototype.init = function () {
 };
 
 PaginationSlider.prototype._initDOMElements = function () {
-    this._pagination = document.querySelector(
+    const pagination = document.querySelector(
         this._options.singleSelectors.pagination,
     );
     BaseSlider.prototype._initDOMElements.call(this, {
         elements: {
-            pagination: this._pagination,
+            pagination,
         },
     });
+    this._pagination = pagination;
 };
 
 PaginationSlider.prototype._initClickActionTable = function () {

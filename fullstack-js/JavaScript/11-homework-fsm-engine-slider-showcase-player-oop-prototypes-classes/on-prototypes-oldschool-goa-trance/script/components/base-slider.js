@@ -28,10 +28,10 @@ BaseSlider.prototype = {
         this._slider = document.querySelector(
             this._options.singleSelectors.slider,
         );
-        this._track = document.querySelector(
+        this._track = this._slider.querySelector(
             this._options.singleSelectors.track,
         );
-        this._slides = document.querySelectorAll(
+        this._slides = this._slider.querySelectorAll(
             this._options.groupSelectors.slides,
         );
 
@@ -41,13 +41,13 @@ BaseSlider.prototype = {
                 slider: this._slider,
                 track: this._track,
 
-                viewport: document.querySelector(
+                viewport: this._slider.querySelector(
                     this._options.singleSelectors.viewport,
                 ),
-                btnNext: document.querySelector(
+                btnNext: this._slider.querySelector(
                     this._options.singleSelectors.btnNext,
                 ),
-                btnPrev: document.querySelector(
+                btnPrev: this._slider.querySelector(
                     this._options.singleSelectors.btnPrev,
                 ),
 
@@ -56,7 +56,7 @@ BaseSlider.prototype = {
             collections: {
                 slides: this._slides,
 
-                images: document.querySelectorAll(
+                images: this._slider.querySelectorAll(
                     this._options.groupSelectors.images,
                 ),
 
