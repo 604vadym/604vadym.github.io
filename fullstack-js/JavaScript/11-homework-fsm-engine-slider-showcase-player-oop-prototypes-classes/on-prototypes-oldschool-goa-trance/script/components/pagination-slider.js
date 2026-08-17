@@ -34,9 +34,7 @@ PaginationSlider.prototype._initClickActionTable = function () {
     this._clickActionTable.push({
         className: this._options.classes.paginationDot,
         action: (button) =>
-            this._goToSlide(
-                this._normaliseIndex(this._paginationDots.indexOf(button)),
-            ),
+            this._goToSlide(this._paginationDots.indexOf(button)),
     });
 };
 
