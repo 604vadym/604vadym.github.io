@@ -7,21 +7,36 @@ export default function DOMValidator(baseClass) {
 DOMValidator.prototype = {
     constructor: DOMValidator,
 
-    validate(config, childConfig, instance) {
+    validate(instance, childElements, ...elements) {
+        if (elements.length === 0) {
+            throw new Error(
+                `DOMValidator: base class [${this._baseClass}] must provide validation elements`,
+            );
+        }
+
         const className = instance.constructor.name;
-        if (className !== this._baseClass && childConfig === null) {
+        if (className !== this._baseClass && childElements === null) {
             throw new Error(
-                `DOMValidator: subclass "${className}" must provide validation config`,
+                `DOMValidator: subclass "${className}" must provide validation elements`,
             );
         }
 
-        if (!config) {
-            throw new Error(
-                `DOMValidator: base class [${className}] must provide validation config`,
-            );
-        }
+        const DOMElements = {
+            elements: {},
+            collections: {},
+        };
 
-        if (!DOMValidator.isDOMElementsFound(config)) {
+        const totalElements = Object.assign({}, childElements, ...elements);
+
+        Object.entries(totalElements).forEach(([key, value]) => {
+            if (!value || value instanceof Element) {
+                DOMElements.elements[key] = value;
+            } else {
+                DOMElements.collections[key] = value;
+            }
+        });
+
+        if (!DOMValidator.isDOMElementsFound(DOMElements)) {
             throw new Error(`DOMValidator: [${className}] validation failed`);
         }
     },

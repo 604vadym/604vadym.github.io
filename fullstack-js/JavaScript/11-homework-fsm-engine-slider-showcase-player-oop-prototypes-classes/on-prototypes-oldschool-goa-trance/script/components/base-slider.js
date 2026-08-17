@@ -24,44 +24,42 @@ BaseSlider.prototype = {
         this._initEventListeners();
     },
 
-    _initDOMElements(childConfig = null) {
-        this._slider = document.querySelector(
+    _initDOMElements(childElements = null) {
+        const slider = document.querySelector(
             this._options.singleSelectors.slider,
         );
-        this._track = this._slider.querySelector(
+        const track = slider?.querySelector(
             this._options.singleSelectors.track,
         );
-        this._slides = this._slider.querySelectorAll(
+        const viewport = slider?.querySelector(
+            this._options.singleSelectors.viewport,
+        );
+        const btnNext = slider?.querySelector(
+            this._options.singleSelectors.btnNext,
+        );
+        const btnPrev = slider?.querySelector(
+            this._options.singleSelectors.btnPrev,
+        );
+        const slides = slider?.querySelectorAll(
             this._options.groupSelectors.slides,
         );
+        const images = slider?.querySelectorAll(
+            this._options.groupSelectors.images,
+        );
 
-        const config = {
-            elements: {
-                slider: this._slider,
-                track: this._track,
+        this._DOMValidator.validate(this, childElements, {
+            slider,
+            track,
+            viewport,
+            btnNext,
+            btnPrev,
+            slides,
+            images,
+        });
 
-                viewport: this._slider.querySelector(
-                    this._options.singleSelectors.viewport,
-                ),
-                btnNext: this._slider.querySelector(
-                    this._options.singleSelectors.btnNext,
-                ),
-                btnPrev: this._slider.querySelector(
-                    this._options.singleSelectors.btnPrev,
-                ),
-            },
-            collections: {
-                slides: this._slides,
-
-                images: this._slider.querySelectorAll(
-                    this._options.groupSelectors.images,
-                ),
-            },
-        };
-
-        const mergedConfig = helper.mergeValidationConfigs(config, childConfig);
-
-        this._DOMValidator.validate(mergedConfig, childConfig, this);
+        this._slider = slider;
+        this._track = track;
+        this._slides = slides;
     },
 
     _initProps() {

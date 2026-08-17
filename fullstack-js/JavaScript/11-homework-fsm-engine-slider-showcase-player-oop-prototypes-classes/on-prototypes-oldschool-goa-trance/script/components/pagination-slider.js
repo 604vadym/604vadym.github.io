@@ -16,18 +16,15 @@ PaginationSlider.prototype.init = function () {
     this._initPagination();
 };
 
-PaginationSlider.prototype._initDOMElements = function (childConfig = null) {
+PaginationSlider.prototype._initDOMElements = function (childElements = null) {
     const pagination = document.querySelector(
         this._options.singleSelectors.pagination,
     );
 
-    const config = {
-        elements: {
-            pagination,
-        },
-    };
-    const mergedConfig = helper.mergeValidationConfigs(config, childConfig);
-    BaseSlider.prototype._initDOMElements.call(this, mergedConfig);
+    BaseSlider.prototype._initDOMElements.call(this, {
+        pagination,
+        ...childElements,
+    });
 
     this._pagination = pagination;
 };
