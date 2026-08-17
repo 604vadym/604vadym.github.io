@@ -1,5 +1,6 @@
 "use strict";
 
+import * as helper from "../utils/helpers.js";
 import BaseSlider from "./base-slider.js";
 
 export default function PaginationSlider(options) {
@@ -15,16 +16,18 @@ PaginationSlider.prototype.init = function () {
     this._initPagination();
 };
 
-PaginationSlider.prototype._initDOMElements = function () {
+PaginationSlider.prototype._initDOMElements = function (childConfig = null) {
     const pagination = document.querySelector(
         this._options.singleSelectors.pagination,
     );
 
-    BaseSlider.prototype._initDOMElements.call(this, {
+    const config = {
         elements: {
             pagination,
         },
-    });
+    };
+    const mergedConfig = helper.mergeValidationConfigs(config, childConfig);
+    BaseSlider.prototype._initDOMElements.call(this, mergedConfig);
 
     this._pagination = pagination;
 };
