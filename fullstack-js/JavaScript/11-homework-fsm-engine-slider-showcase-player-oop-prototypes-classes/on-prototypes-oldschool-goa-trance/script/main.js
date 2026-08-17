@@ -35,7 +35,7 @@ function DOMValidator(baseClass) {
 DOMValidator.prototype = {
     constructor: DOMValidator,
 
-    validate(baseConfig, childConfig, context) {
+    validate(config, childConfig, context) {
         const className = context.constructor.name;
         if (className !== this._baseClass && childConfig === null) {
             throw new Error(
@@ -43,13 +43,13 @@ DOMValidator.prototype = {
             );
         }
 
-        if (!baseConfig) {
+        if (!config) {
             throw new Error(
                 `DOMValidator: base class [${className}] must provide validation config`,
             );
         }
 
-        if (!DOMValidator.isDOMElementsFound(baseConfig)) {
+        if (!DOMValidator.isDOMElementsFound(config)) {
             throw new Error(`DOMValidator: [${className}] validation failed`);
         }
     },
@@ -219,7 +219,7 @@ BaseSlider.prototype = {
     },
 
     _handleClick(e) {
-        const button = e.target.closest(".button");
+        const button = e.target.closest(`.${this._options.classes.button}`);
         if (!button || this._isMoving) return;
 
         const clickAction = this._getClickAction(button);
@@ -320,14 +320,13 @@ PaginationSlider.prototype._initDOMElements = function () {
         elements: {
             pagination: this._pagination,
         },
-        collections: {},
     });
 };
 
 PaginationSlider.prototype._initClickActionTable = function () {
     BaseSlider.prototype._initClickActionTable.call(this);
     this._clickActionTable.push({
-        className: this._options.paginationClasses.dot,
+        className: this._options.classes.paginationDot,
         action: (button) =>
             this._goToSlide(
                 this._normaliseIndex(this._paginationDots.indexOf(button)),
@@ -342,13 +341,13 @@ PaginationSlider.prototype._updateSlider = function () {
 
 PaginationSlider.prototype._updatePagination = function () {
     const activeDot = this._pagination.querySelector(
-        `.${this._options.paginationClasses.active}`,
+        `.${this._options.classes.paginationDotActive}`,
     );
     if (activeDot) {
-        activeDot.classList.remove(this._options.paginationClasses.active);
+        activeDot.classList.remove(this._options.classes.paginationDotActive);
     }
     this._paginationDots[this._normaliseIndex()].classList.add(
-        this._options.paginationClasses.active,
+        this._options.classes.paginationDotActive,
     );
 };
 
@@ -357,12 +356,12 @@ PaginationSlider.prototype._initPagination = function () {
 
     for (let i = 0; i < this._slidesCount; i++) {
         const dot = document.createElement("button");
-        dot.classList.add(this._options.paginationClasses.button);
-        dot.classList.add(this._options.paginationClasses.dot);
+        dot.classList.add(this._options.classes.button);
+        dot.classList.add(this._options.classes.paginationDot);
         this._paginationDots.push(this._pagination.appendChild(dot));
     }
     this._paginationDots[0].classList.add(
-        this._options.paginationClasses.active,
+        this._options.classes.paginationDotActive,
     );
 };
 
@@ -388,10 +387,10 @@ const slider = new PaginationSlider({
 
     groupSelectors: { slides: ".slider__slide", images: ".slider__image" },
 
-    paginationClasses: {
-        dot: "pagination__dot",
-        active: "pagination__dot--active",
+    classes: {
         button: "button",
+        paginationDot: "pagination__dot",
+        paginationDotActive: "pagination__dot--active",
     },
 });
 
