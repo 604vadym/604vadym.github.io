@@ -35,7 +35,6 @@ BaseSlider.prototype = {
             this._options.groupSelectors.slides,
         );
 
-        const safeChildConfig = childConfig || {};
         const config = {
             elements: {
                 slider: this._slider,
@@ -50,8 +49,6 @@ BaseSlider.prototype = {
                 btnPrev: this._slider.querySelector(
                     this._options.singleSelectors.btnPrev,
                 ),
-
-                ...safeChildConfig.elements,
             },
             collections: {
                 slides: this._slides,
@@ -59,12 +56,12 @@ BaseSlider.prototype = {
                 images: this._slider.querySelectorAll(
                     this._options.groupSelectors.images,
                 ),
-
-                ...safeChildConfig.collections,
             },
         };
 
-        this._DOMValidator.validate(config, childConfig, this);
+        const mergedConfig = helper.mergeValidationConfigs(config, childConfig);
+
+        this._DOMValidator.validate(mergedConfig, childConfig, this);
     },
 
     _initProps() {
