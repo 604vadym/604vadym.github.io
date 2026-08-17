@@ -11,6 +11,8 @@ PaginationSlider.prototype = Object.create(BaseSlider.prototype);
 
 PaginationSlider.prototype.constructor = PaginationSlider;
 
+PaginationSlider.STATES = BaseSlider.STATES;
+
 PaginationSlider.prototype.init = function () {
     BaseSlider.prototype.init.call(this);
     this._initPagination();

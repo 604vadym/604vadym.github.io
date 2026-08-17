@@ -1,6 +1,6 @@
 "use strict";
 
-import Slider from "./components/pagination-slider.js";
+import Slider from "./components/keyboard-slider.js";
 
 /*
  * JS #11. Розробка повнофункціонального слайдера на чистому JavaScript з використанням прототипів, класів та наслідування
