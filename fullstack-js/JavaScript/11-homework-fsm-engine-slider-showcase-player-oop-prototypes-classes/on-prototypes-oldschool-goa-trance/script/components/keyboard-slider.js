@@ -20,16 +20,22 @@ KeyboardSlider.STATES = PaginationSlider.STATES;
 KeyboardSlider.prototype._handleKeyDown = function (e) {
     if (e.key === "Enter") {
         const activeElement = document.activeElement;
-        const isButton = activeElement?.closest(".button");
+        const isButton = activeElement?.closest(
+            `.${this._options.classes.button}`,
+        );
 
         if (isButton && this._state === this.constructor.STATES.MOVING) {
             e.preventDefault();
             return;
         }
 
-        const isPressTarget = activeElement?.closest(".js-pressed-target");
+        const isPressTarget = activeElement?.closest(
+            `.${this._options.jsClasses.keyboardPressBtn}`,
+        );
         if (isPressTarget) {
-            activeElement.classList.add("is-pressed");
+            activeElement.classList.add(
+                this._options.states.keyboardBtnPressed,
+            );
         }
 
         if (isButton) return;
@@ -62,9 +68,11 @@ KeyboardSlider.prototype._handleKeyDown = function (e) {
 };
 
 KeyboardSlider.prototype._handleKeyUp = function () {
-    const pressedBtn = document.querySelector(".is-pressed");
+    const pressedBtn = document.querySelector(
+        `.${this._options.states.keyboardBtnPressed}`,
+    );
     if (pressedBtn) {
-        pressedBtn.classList.remove("is-pressed");
+        pressedBtn.classList.remove(this._options.states.keyboardBtnPressed);
     }
 };
 

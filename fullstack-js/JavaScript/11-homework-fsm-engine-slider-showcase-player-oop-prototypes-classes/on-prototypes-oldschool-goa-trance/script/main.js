@@ -53,6 +53,14 @@ const slider = new Slider({
         paginationDot: "pagination__dot",
         paginationDotActive: "pagination__dot--active",
     },
+
+    jsClasses: {
+        keyboardPressBtn: "js-pressed-target",
+    },
+
+    states: {
+        keyboardBtnPressed: "is-pressed",
+    },
 });
 
 slider.init();

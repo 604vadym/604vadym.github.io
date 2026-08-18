@@ -52,7 +52,7 @@ EventManager.prototype = {
             if (typeof target !== "function" || typeof handler !== "function") {
                 throw new TypeError(
                     `EventManager: broken contract in "${className}"\n` +
-                        `event "${event}" must provide valid execution functions`,
+                        `event "${event}" must provide valid "target" and "handler" functions`,
                 );
             }
         });
