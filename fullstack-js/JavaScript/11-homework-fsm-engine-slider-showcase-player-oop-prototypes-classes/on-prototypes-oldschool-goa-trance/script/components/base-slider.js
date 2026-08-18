@@ -2,6 +2,7 @@
 
 import * as helper from "../utils/helpers.js";
 import DOMValidator from "../services/dom-validator.js";
+import EventManager from "../services/event-manager.js";
 
 BaseSlider.STATES = {
     IDLE: "IDLE",
@@ -18,6 +19,12 @@ export default function BaseSlider(options) {
 
     Object.defineProperty(this, "_DOMValidator", {
         value: new DOMValidator(BaseSlider),
+        writable: false,
+        configurable: false,
+    });
+
+    Object.defineProperty(this, "_EventManager", {
+        value: new EventManager(),
         writable: false,
         configurable: false,
     });
@@ -92,15 +99,15 @@ BaseSlider.prototype = {
     },
 
     _initEventHandlersTable() {
-        this._eventHandlersTable = {
+        this._eventTable = this._EventManager.createEventTable(this, {
             [BaseSlider.EVENTS.CLICK]: (e) => this._handleClick(e),
             [BaseSlider.EVENTS.TRANSITIONEND]: () =>
                 this._handleTransitionEnd(),
-        };
+        });
     },
 
     handleEvent(e) {
-        const handle = this._eventHandlersTable[e.type];
+        const handle = this._eventTable[e.type];
         if (handle) handle(e);
     },
 

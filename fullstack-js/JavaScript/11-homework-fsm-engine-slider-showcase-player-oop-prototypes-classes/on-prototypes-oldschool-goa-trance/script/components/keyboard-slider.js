@@ -23,14 +23,6 @@ KeyboardSlider.prototype._initEventListeners = function () {
     document.addEventListener(KeyboardSlider.EVENTS.KEYUP, this);
 };
 
-KeyboardSlider.prototype._initEventHandlersTable = function () {
-    PaginationSlider.prototype._initEventHandlersTable.call(this);
-    this._eventHandlersTable[KeyboardSlider.EVENTS.KEYDOWN] = (e) =>
-        this._handleKeyDown(e);
-    this._eventHandlersTable[KeyboardSlider.EVENTS.KEYUP] = () =>
-        this._handleKeyUp();
-};
-
 KeyboardSlider.prototype._handleKeyDown = function (e) {
     if (e.key === "Enter") {
         const activeElement = document.activeElement;
@@ -80,4 +72,9 @@ KeyboardSlider.prototype._handleKeyUp = function () {
     if (pressedBtn) {
         pressedBtn.classList.remove("is-pressed");
     }
+};
+
+KeyboardSlider.EVENT_MAP = {
+    [KeyboardSlider.EVENTS.KEYDOWN]: KeyboardSlider.prototype._handleKeyDown,
+    [KeyboardSlider.EVENTS.KEYUP]: KeyboardSlider.prototype._handleKeyUp,
 };
