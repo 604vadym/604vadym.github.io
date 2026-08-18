@@ -17,15 +17,6 @@ KeyboardSlider.prototype.constructor = KeyboardSlider;
 
 KeyboardSlider.STATES = PaginationSlider.STATES;
 
-KeyboardSlider.prototype._initEventListeners = function () {
-    PaginationSlider.prototype._initEventListeners.call(this);
-    document.addEventListener(
-        KeyboardSlider.EVENTS.KEYDOWN,
-        this._EventManager,
-    );
-    document.addEventListener(KeyboardSlider.EVENTS.KEYUP, this._EventManager);
-};
-
 KeyboardSlider.prototype._handleKeyDown = function (e) {
     if (e.key === "Enter") {
         const activeElement = document.activeElement;
@@ -78,6 +69,12 @@ KeyboardSlider.prototype._handleKeyUp = function () {
 };
 
 KeyboardSlider.EVENT_MAP = {
-    [KeyboardSlider.EVENTS.KEYDOWN]: KeyboardSlider.prototype._handleKeyDown,
-    [KeyboardSlider.EVENTS.KEYUP]: KeyboardSlider.prototype._handleKeyUp,
+    [KeyboardSlider.EVENTS.KEYDOWN]: {
+        target: () => document,
+        handler: KeyboardSlider.prototype._handleKeyDown,
+    },
+    [KeyboardSlider.EVENTS.KEYUP]: {
+        target: () => document,
+        handler: KeyboardSlider.prototype._handleKeyUp,
+    },
 };

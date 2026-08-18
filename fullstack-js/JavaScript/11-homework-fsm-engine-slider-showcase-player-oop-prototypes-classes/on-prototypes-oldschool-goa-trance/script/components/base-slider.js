@@ -42,7 +42,6 @@ BaseSlider.prototype = {
         this._initProps();
         this._updateSlideWidth();
         this._initClickActionTable();
-        this._initEventListeners();
         this._initEventManager();
     },
 
@@ -93,19 +92,9 @@ BaseSlider.prototype = {
         this._slideWidth = 0;
     },
 
-    _initEventListeners() {
-        this._slider.addEventListener(
-            BaseSlider.EVENTS.CLICK,
-            this._EventManager,
-        );
-        this._track.addEventListener(
-            BaseSlider.EVENTS.TRANSITIONEND,
-            this._EventManager,
-        );
-    },
-
     _initEventManager() {
         this._EventManager.createEventTable(this);
+        this._EventManager.initEventListeners(this);
     },
 
     _updateSlider() {
@@ -189,7 +178,12 @@ BaseSlider.prototype = {
 };
 
 BaseSlider.EVENT_MAP = {
-    [BaseSlider.EVENTS.CLICK]: BaseSlider.prototype._handleClick,
-    [BaseSlider.EVENTS.TRANSITIONEND]:
-        BaseSlider.prototype._handleTransitionEnd,
+    [BaseSlider.EVENTS.CLICK]: {
+        target: (instance) => instance._slider,
+        handler: BaseSlider.prototype._handleClick,
+    },
+    [BaseSlider.EVENTS.TRANSITIONEND]: {
+        target: (instance) => instance._track,
+        handler: BaseSlider.prototype._handleTransitionEnd,
+    },
 };
