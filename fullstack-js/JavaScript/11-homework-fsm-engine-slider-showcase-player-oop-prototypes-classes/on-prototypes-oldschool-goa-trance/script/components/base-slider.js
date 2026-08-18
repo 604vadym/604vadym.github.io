@@ -42,7 +42,7 @@ BaseSlider.prototype = {
         this._initProps();
         this._updateSlideWidth();
         this._initClickActionTable();
-        this._initEventManager();
+        this._EventManager.init(this);
     },
 
     _initDOMElements(childElements) {
@@ -90,11 +90,6 @@ BaseSlider.prototype = {
         this._startIndex = 0;
         this._currentIndex = this._startIndex;
         this._slideWidth = 0;
-    },
-
-    _initEventManager() {
-        this._EventManager.createEventTable(this);
-        this._EventManager.initEventListeners(this);
     },
 
     _updateSlider() {

@@ -12,7 +12,7 @@ EventManager.prototype = {
         if (handle) handle(e);
     },
 
-    createEventTable(instance) {
+    init(instance) {
         let proto = Object.getPrototypeOf(instance);
 
         while (proto && proto.constructor !== Object) {
@@ -23,23 +23,11 @@ EventManager.prototype = {
                         if (!this._eventTable[event]) {
                             this._eventTable[event] = (e) =>
                                 config.handler.call(instance, e);
+
+                            config
+                                .target(instance)
+                                .addEventListener(event, this);
                         }
-                    },
-                );
-            }
-            proto = Object.getPrototypeOf(proto);
-        }
-    },
-
-    initEventListeners(instance) {
-        let proto = Object.getPrototypeOf(instance);
-
-        while (proto && proto.constructor !== Object) {
-            const constructor = proto.constructor;
-            if (constructor.EVENT_MAP) {
-                Object.entries(constructor.EVENT_MAP).forEach(
-                    ([event, config]) => {
-                        config.target(instance).addEventListener(event, this);
                     },
                 );
             }
