@@ -2,6 +2,11 @@
 
 import PaginationSlider from "./pagination-slider.js";
 
+KeyboardSlider.EVENTS = {
+    KEYDOWN: "keydown",
+    KEYUP: "keyup",
+};
+
 export default function KeyboardSlider(options) {
     PaginationSlider.call(this, options);
 }
@@ -14,20 +19,16 @@ KeyboardSlider.STATES = PaginationSlider.STATES;
 
 KeyboardSlider.prototype._initEventListeners = function () {
     PaginationSlider.prototype._initEventListeners.call(this);
-    document.addEventListener("keydown", this);
-    document.addEventListener("keyup", this);
+    document.addEventListener(KeyboardSlider.EVENTS.KEYDOWN, this);
+    document.addEventListener(KeyboardSlider.EVENTS.KEYUP, this);
 };
 
-KeyboardSlider.prototype.handleEvent = function (e) {
-    PaginationSlider.prototype.handleEvent.call(this, e);
-    switch (e.type) {
-        case "keydown":
-            this._handleKeyDown(e);
-            break;
-        case "keyup":
-            this._handleKeyUp();
-            break;
-    }
+KeyboardSlider.prototype._initEventHandlersTable = function () {
+    PaginationSlider.prototype._initEventHandlersTable.call(this);
+    this._eventHandlersTable[KeyboardSlider.EVENTS.KEYDOWN] = (e) =>
+        this._handleKeyDown(e);
+    this._eventHandlersTable[KeyboardSlider.EVENTS.KEYUP] = () =>
+        this._handleKeyUp();
 };
 
 KeyboardSlider.prototype._handleKeyDown = function (e) {

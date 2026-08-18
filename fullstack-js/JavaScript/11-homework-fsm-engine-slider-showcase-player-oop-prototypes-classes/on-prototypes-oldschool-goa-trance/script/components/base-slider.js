@@ -8,6 +8,11 @@ BaseSlider.STATES = {
     MOVING: "MOVING",
 };
 
+BaseSlider.EVENTS = {
+    CLICK: "click",
+    TRANSITIONEND: "transitionend",
+};
+
 export default function BaseSlider(options) {
     this._options = options;
 
@@ -31,6 +36,7 @@ BaseSlider.prototype = {
         this._updateSlideWidth();
         this._initClickActionTable();
         this._initEventListeners();
+        this._initEventHandlersTable();
     },
 
     _initDOMElements(childElements) {
@@ -81,19 +87,21 @@ BaseSlider.prototype = {
     },
 
     _initEventListeners() {
-        this._slider.addEventListener("click", this);
-        this._track.addEventListener("transitionend", this);
+        this._slider.addEventListener(BaseSlider.EVENTS.CLICK, this);
+        this._track.addEventListener(BaseSlider.EVENTS.TRANSITIONEND, this);
+    },
+
+    _initEventHandlersTable() {
+        this._eventHandlersTable = {
+            [BaseSlider.EVENTS.CLICK]: (e) => this._handleClick(e),
+            [BaseSlider.EVENTS.TRANSITIONEND]: () =>
+                this._handleTransitionEnd(),
+        };
     },
 
     handleEvent(e) {
-        switch (e.type) {
-            case "click":
-                this._handleClick(e);
-                break;
-            case "transitionend":
-                this._handleTransitionEnd();
-                break;
-        }
+        const handle = this._eventHandlersTable[e.type];
+        if (handle) handle(e);
     },
 
     _handleClick(e) {
