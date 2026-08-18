@@ -94,12 +94,18 @@ BaseSlider.prototype = {
     },
 
     _initEventListeners() {
-        this._slider.addEventListener(BaseSlider.EVENTS.CLICK, this);
-        this._track.addEventListener(BaseSlider.EVENTS.TRANSITIONEND, this);
+        this._slider.addEventListener(
+            BaseSlider.EVENTS.CLICK,
+            this._EventManager,
+        );
+        this._track.addEventListener(
+            BaseSlider.EVENTS.TRANSITIONEND,
+            this._EventManager,
+        );
     },
 
     _initEventHandlersTable() {
-        this._eventTable = this._EventManager.createEventTable(this);
+        this._EventManager.createEventTable(this);
     },
 
     _updateSlider() {
@@ -166,11 +172,6 @@ BaseSlider.prototype = {
                 action: () => this._prevSlide(),
             },
         ];
-    },
-
-    handleEvent(e) {
-        const handle = this._eventTable[e.type];
-        if (handle) handle(e);
     },
 
     _handleClick(e) {

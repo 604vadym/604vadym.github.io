@@ -19,8 +19,11 @@ KeyboardSlider.STATES = PaginationSlider.STATES;
 
 KeyboardSlider.prototype._initEventListeners = function () {
     PaginationSlider.prototype._initEventListeners.call(this);
-    document.addEventListener(KeyboardSlider.EVENTS.KEYDOWN, this);
-    document.addEventListener(KeyboardSlider.EVENTS.KEYUP, this);
+    document.addEventListener(
+        KeyboardSlider.EVENTS.KEYDOWN,
+        this._EventManager,
+    );
+    document.addEventListener(KeyboardSlider.EVENTS.KEYUP, this._EventManager);
 };
 
 KeyboardSlider.prototype._handleKeyDown = function (e) {

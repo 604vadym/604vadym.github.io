@@ -1,12 +1,18 @@
 "use strict";
 
-export default function EventManager() {}
+export default function EventManager() {
+    this._eventTable = {};
+}
 
 EventManager.prototype = {
     constructor: EventManager,
 
+    handleEvent(e) {
+        const handle = this._eventTable[e.type];
+        if (handle) handle(e);
+    },
+
     createEventTable(instance) {
-        const eventTable = {};
         let proto = Object.getPrototypeOf(instance);
 
         while (proto && proto.constructor !== Object) {
@@ -14,8 +20,8 @@ EventManager.prototype = {
             if (constructor.EVENT_MAP) {
                 Object.entries(constructor.EVENT_MAP).forEach(
                     ([event, handler]) => {
-                        if (!eventTable[event]) {
-                            eventTable[event] = (e) =>
+                        if (!this._eventTable[event]) {
+                            this._eventTable[event] = (e) =>
                                 handler.call(instance, e);
                         }
                     },
@@ -23,7 +29,5 @@ EventManager.prototype = {
             }
             proto = Object.getPrototypeOf(proto);
         }
-
-        return eventTable;
     },
 };
