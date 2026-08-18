@@ -99,11 +99,7 @@ BaseSlider.prototype = {
     },
 
     _initEventHandlersTable() {
-        this._eventTable = this._EventManager.createEventTable(this, {
-            [BaseSlider.EVENTS.CLICK]: (e) => this._handleClick(e),
-            [BaseSlider.EVENTS.TRANSITIONEND]: () =>
-                this._handleTransitionEnd(),
-        });
+        this._eventTable = this._EventManager.createEventTable(this);
     },
 
     handleEvent(e) {
@@ -189,4 +185,10 @@ BaseSlider.prototype = {
             },
         ];
     },
+};
+
+BaseSlider.EVENT_MAP = {
+    [BaseSlider.EVENTS.CLICK]: BaseSlider.prototype._handleClick,
+    [BaseSlider.EVENTS.TRANSITIONEND]:
+        BaseSlider.prototype._handleTransitionEnd,
 };

@@ -5,8 +5,8 @@ export default function EventManager() {}
 EventManager.prototype = {
     constructor: EventManager,
 
-    createEventTable(instance, baseMap = {}) {
-        const eventTable = Object.assign({}, baseMap);
+    createEventTable(instance) {
+        const eventTable = {};
         let proto = Object.getPrototypeOf(instance);
 
         while (proto && proto.constructor !== Object) {
