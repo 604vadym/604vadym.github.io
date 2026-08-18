@@ -15,9 +15,13 @@ DOMValidator.prototype = {
         }
 
         const className = instance.constructor.name;
-        if (className !== this._baseClass && childElements === null) {
+        const isPayloadEmpty =
+            !childElements || Object.keys(childElements).length === 0;
+
+        if (className !== this._baseClass && isPayloadEmpty) {
             throw new Error(
-                `DOMValidator: subclass "${className}" must provide validation elements`,
+                `DOMValidator: validation payload is missing or empty\n` +
+                    `subclass initiated the DOM verification process, but failed to provide any elements\n`,
             );
         }
 

@@ -18,7 +18,7 @@ PaginationSlider.prototype.init = function () {
     this._initPagination();
 };
 
-PaginationSlider.prototype._initDOMElements = function (childElements = null) {
+PaginationSlider.prototype._initDOMElements = function (childElements) {
     const pagination = document.querySelector(
         this._options.singleSelectors.pagination,
     );

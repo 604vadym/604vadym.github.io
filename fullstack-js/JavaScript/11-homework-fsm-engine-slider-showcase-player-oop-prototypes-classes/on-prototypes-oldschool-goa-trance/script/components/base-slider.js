@@ -33,7 +33,7 @@ BaseSlider.prototype = {
         this._initEventListeners();
     },
 
-    _initDOMElements(childElements = null) {
+    _initDOMElements(childElements) {
         const slider = document.querySelector(
             this._options.singleSelectors.slider,
         );
