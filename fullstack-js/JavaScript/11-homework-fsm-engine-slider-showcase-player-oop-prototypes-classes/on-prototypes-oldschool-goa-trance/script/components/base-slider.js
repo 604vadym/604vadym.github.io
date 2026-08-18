@@ -102,24 +102,6 @@ BaseSlider.prototype = {
         this._eventTable = this._EventManager.createEventTable(this);
     },
 
-    handleEvent(e) {
-        const handle = this._eventTable[e.type];
-        if (handle) handle(e);
-    },
-
-    _handleClick(e) {
-        const button = e.target.closest(`.${this._options.classes.button}`);
-        if (!button || this._state === BaseSlider.STATES.MOVING) return;
-
-        const clickAction = this._getClickAction(button);
-
-        clickAction?.action(button);
-    },
-
-    _handleTransitionEnd() {
-        this._state = BaseSlider.STATES.IDLE;
-    },
-
     _updateSlider() {
         this._state = BaseSlider.STATES.MOVING;
 
@@ -184,6 +166,24 @@ BaseSlider.prototype = {
                 action: () => this._prevSlide(),
             },
         ];
+    },
+
+    handleEvent(e) {
+        const handle = this._eventTable[e.type];
+        if (handle) handle(e);
+    },
+
+    _handleClick(e) {
+        const button = e.target.closest(`.${this._options.classes.button}`);
+        if (!button || this._state === BaseSlider.STATES.MOVING) return;
+
+        const clickAction = this._getClickAction(button);
+
+        clickAction?.action(button);
+    },
+
+    _handleTransitionEnd() {
+        this._state = BaseSlider.STATES.IDLE;
     },
 };
 
