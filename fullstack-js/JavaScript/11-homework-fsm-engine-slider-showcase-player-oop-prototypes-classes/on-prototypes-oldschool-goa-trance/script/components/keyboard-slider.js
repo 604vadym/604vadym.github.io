@@ -12,6 +12,12 @@ KeyboardSlider.prototype.constructor = KeyboardSlider;
 
 KeyboardSlider.STATES = PaginationSlider.STATES;
 
+KeyboardSlider.prototype._initDOMElements = function (childElements = null) {
+    PaginationSlider.prototype._initDOMElements.call(this, {
+        ...childElements,
+    });
+};
+
 KeyboardSlider.prototype._initEventListeners = function () {
     PaginationSlider.prototype._initEventListeners.call(this);
     document.addEventListener("keydown", this);

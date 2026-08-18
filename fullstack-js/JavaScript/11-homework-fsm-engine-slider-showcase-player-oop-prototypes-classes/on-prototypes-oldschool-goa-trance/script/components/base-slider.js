@@ -12,7 +12,7 @@ export default function BaseSlider(options) {
     this._options = options;
 
     Object.defineProperty(this, "_DOMValidator", {
-        value: new DOMValidator(BaseSlider),
+        value: new DOMValidator(BaseSlider, "_initDOMElements"),
         writable: false,
         configurable: false,
     });

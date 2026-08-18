@@ -1,7 +1,8 @@
 "use strict";
 
-export default function DOMValidator(baseClass) {
+export default function DOMValidator(baseClass, protectedMethodName) {
     this._baseClass = baseClass.name;
+    this._protectedMethodName = protectedMethodName;
 }
 
 DOMValidator.prototype = {
@@ -19,6 +20,35 @@ DOMValidator.prototype = {
             throw new Error(
                 `DOMValidator: subclass "${className}" must provide validation elements`,
             );
+        }
+
+        if (
+            !Object.prototype.hasOwnProperty.call(
+                instance.constructor.prototype,
+                this._protectedMethodName,
+            )
+        ) {
+            throw Error(
+                `ERROR in last child, name of child ` +
+                    `${instance.constructor.name}`,
+            );
+        }
+
+        let proto = Object.getPrototypeOf(instance.constructor.prototype);
+
+        while (proto && proto.constructor.name !== this._baseClass) {
+            if (
+                !Object.prototype.hasOwnProperty.call(
+                    proto,
+                    this._protectedMethodName,
+                )
+            ) {
+                throw Error(
+                    `ERROR in intermediate child, name of child ` +
+                        `${proto.constructor.name}`,
+                );
+            }
+            proto = Object.getPrototypeOf(proto);
         }
 
         const DOMElements = {
