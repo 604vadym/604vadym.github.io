@@ -24,7 +24,7 @@ export default function BaseSlider(options) {
     });
 
     Object.defineProperty(this, "_EventManager", {
-        value: new EventManager(),
+        value: new EventManager("EVENT_MAP"),
         writable: false,
         configurable: false,
     });
@@ -113,16 +113,6 @@ BaseSlider.prototype = {
         return (sourceIndex + this._slidesCount) % this._slidesCount;
     },
 
-    _getClickAction(button) {
-        const classList = button.classList;
-
-        const actionIndex = this._clickActionTable.findIndex((entry) =>
-            classList.contains(entry.className),
-        );
-
-        return actionIndex !== -1 ? this._clickActionTable[actionIndex] : null;
-    },
-
     _nextSlide() {
         this._goToSlide(this._currentIndex + 1);
     },
@@ -137,6 +127,16 @@ BaseSlider.prototype = {
         if (this._currentIndex !== oldIndex) {
             this._updateSlider();
         }
+    },
+
+    _getClickAction(button) {
+        const classList = button.classList;
+
+        const actionIndex = this._clickActionTable.findIndex((entry) =>
+            classList.contains(entry.className),
+        );
+
+        return actionIndex !== -1 ? this._clickActionTable[actionIndex] : null;
     },
 
     _initClickActionTable() {
