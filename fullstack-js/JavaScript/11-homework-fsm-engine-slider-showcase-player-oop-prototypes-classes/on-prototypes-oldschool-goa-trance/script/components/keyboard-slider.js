@@ -48,23 +48,16 @@ KeyboardSlider.prototype._handleKeyDown = function (e) {
         if (isButton) return;
     }
 
-    {
-        const oldIndex = this._currentIndex;
-
-        if (e.code === "ArrowRight" || e.code === "KeyD") {
-            e.preventDefault();
-            if (this._state === this.constructor.STATES.MOVING) return;
-            this._nextSlide();
-        } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
-            e.preventDefault();
-            if (this._state === this.constructor.STATES.MOVING) return;
-            this._prevSlide();
-        }
-
-        if (this._currentIndex !== oldIndex) {
-            this._updateSlider();
-            return;
-        }
+    if (e.code === "ArrowRight" || e.code === "KeyD") {
+        e.preventDefault();
+        if (this._state === this.constructor.STATES.MOVING) return;
+        this._nextSlide();
+        return;
+    } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
+        e.preventDefault();
+        if (this._state === this.constructor.STATES.MOVING) return;
+        this._prevSlide();
+        return;
     }
 
     if (e.code === "Escape") {

@@ -102,7 +102,7 @@ BaseSlider.prototype = {
 
         const clickAction = this._getClickAction(button);
 
-        clickAction?.action(button) && this._updateSlider();
+        clickAction?.action(button);
     },
 
     _handleTransitionEnd() {
@@ -141,20 +141,19 @@ BaseSlider.prototype = {
     },
 
     _nextSlide() {
-        this._currentIndex = (this._currentIndex + 1) % this._slidesCount;
-        return true;
+        this._goToSlide(this._currentIndex + 1);
     },
 
     _prevSlide() {
-        this._currentIndex =
-            (this._currentIndex - 1 + this._slidesCount) % this._slidesCount;
-        return true;
+        this._goToSlide(this._currentIndex - 1);
     },
 
     _goToSlide(index) {
         const oldIndex = this._currentIndex;
         this._currentIndex = this._normaliseIndex(index);
-        return this._currentIndex !== oldIndex;
+        if (this._currentIndex !== oldIndex) {
+            this._updateSlider();
+        }
     },
 
     _initClickActionTable() {
