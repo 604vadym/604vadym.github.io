@@ -59,21 +59,21 @@ KeyboardSlider.prototype._ignore = function (e) {
 };
 
 KeyboardSlider.prototype._initKeyActionTable = function () {
-    const keysConfig = this._options.keys;
+    const keyConfig = this._options.keys;
     this._keyActionTable = [];
 
-    Object.entries(keysConfig).forEach(([keysAction, keys]) => {
-        const action = this[`_${keysAction}`];
+    Object.entries(keyConfig).forEach(([keyAction, keys]) => {
+        const action = this[`_${keyAction}`];
         if (keys && typeof action === "function") {
             this._keyActionTable.push({
-                match: this._matchKey(keys),
+                match: this._matchKeys(keys),
                 action: (e) => action.call(this, e),
             });
         }
     });
 };
 
-KeyboardSlider.prototype._matchKey = function (keys) {
+KeyboardSlider.prototype._matchKeys = function (keys) {
     const [firstKey] = keys;
     const param = KeyboardManager.getKeyParam(firstKey);
     return (e) => keys.includes(e[param]);
