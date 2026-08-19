@@ -64,28 +64,33 @@ KeyboardSlider.prototype._ignore = function (e) {
 };
 
 KeyboardSlider.prototype._initKeyActionTable = function () {
+    const keys = this._options.keys;
     this._keyActionTable = [
         {
-            match: (e) => this._options.keys.execute.includes(e.key),
+            match: this._matchKey(keys.execute, "key"),
             action: (e) => this._execute(e),
         },
         {
-            match: (e) => this._options.keys.reset.includes(e.key),
+            match: this._matchKey(keys.reset, "key"),
             action: (e) => this._reset(e),
         },
         {
-            match: (e) => this._options.keys.next.includes(e.code),
+            match: this._matchKey(keys.next, "code"),
             action: (e) => this._next(e),
         },
         {
-            match: (e) => this._options.keys.prev.includes(e.code),
+            match: this._matchKey(keys.prev, "code"),
             action: (e) => this._prev(e),
         },
         {
-            match: (e) => this._options.keys.ignore.includes(e.code),
+            match: this._matchKey(keys.ignore, "code"),
             action: (e) => this._ignore(e),
         },
     ];
+};
+
+KeyboardSlider.prototype._matchKey = function (keys, param) {
+    return (e) => keys.includes(e[param]);
 };
 
 KeyboardSlider.prototype._getKeyAction = function (e) {
@@ -94,7 +99,6 @@ KeyboardSlider.prototype._getKeyAction = function (e) {
 
 KeyboardSlider.prototype._handleKeyDown = function (e) {
     const keyAction = this._getKeyAction(e);
-
     keyAction?.action(e);
 };
 
