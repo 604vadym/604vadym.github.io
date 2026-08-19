@@ -8,15 +8,14 @@ KeyboardSlider.EVENTS = {
     KEYUP: "keyup",
 };
 
+KeyboardSlider.STATES = PaginationSlider.STATES;
+
 export default function KeyboardSlider(options) {
     PaginationSlider.call(this, options);
 }
 
 KeyboardSlider.prototype = Object.create(PaginationSlider.prototype);
-
 KeyboardSlider.prototype.constructor = KeyboardSlider;
-
-KeyboardSlider.STATES = PaginationSlider.STATES;
 
 KeyboardSlider.prototype._initActionTables = function () {
     PaginationSlider.prototype._initActionTables.call(this);

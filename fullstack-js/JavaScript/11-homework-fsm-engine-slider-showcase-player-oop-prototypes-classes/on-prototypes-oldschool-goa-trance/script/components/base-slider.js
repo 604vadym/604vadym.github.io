@@ -4,14 +4,14 @@ import * as helper from "../utils/helpers.js";
 import DOMValidator from "../services/dom-validator.js";
 import EventManager from "../services/event-manager.js";
 
-BaseSlider.STATES = {
-    IDLE: "IDLE",
-    MOVING: "MOVING",
-};
-
 BaseSlider.EVENTS = {
     CLICK: "click",
     TRANSITIONEND: "transitionend",
+};
+
+BaseSlider.STATES = {
+    IDLE: "IDLE",
+    MOVING: "MOVING",
 };
 
 export default function BaseSlider(options) {

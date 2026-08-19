@@ -3,15 +3,14 @@
 import * as helper from "../utils/helpers.js";
 import BaseSlider from "./base-slider.js";
 
+PaginationSlider.STATES = BaseSlider.STATES;
+
 export default function PaginationSlider(options) {
     BaseSlider.call(this, options);
 }
 
 PaginationSlider.prototype = Object.create(BaseSlider.prototype);
-
 PaginationSlider.prototype.constructor = PaginationSlider;
-
-PaginationSlider.STATES = BaseSlider.STATES;
 
 PaginationSlider.prototype.init = function () {
     BaseSlider.prototype.init.call(this);
