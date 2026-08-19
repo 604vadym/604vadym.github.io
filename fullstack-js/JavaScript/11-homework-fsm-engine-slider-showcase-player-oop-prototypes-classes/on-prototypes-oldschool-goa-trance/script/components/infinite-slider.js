@@ -51,7 +51,9 @@ InfiniteSlider.prototype._initInfiniteLoop = function () {
     const cloneOfLast = this._slides[this._slidesCount - 1].cloneNode(true);
     this._track.append(cloneOfFirst);
     this._track.prepend(cloneOfLast);
-    this._slides = this._slider.querySelectorAll(".slider__slide");
+    this._slides = this._slider.querySelectorAll(
+        this._options.groupSelectors.slides,
+    );
 };
 
 InfiniteSlider.prototype._teleportSlides = function () {
