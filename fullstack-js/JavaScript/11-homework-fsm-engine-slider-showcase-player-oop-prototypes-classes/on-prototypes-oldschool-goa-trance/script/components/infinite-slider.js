@@ -10,6 +10,7 @@ export default function InfiniteSlider(options) {
 
 InfiniteSlider.prototype = Object.create(KeyboardSlider.prototype);
 InfiniteSlider.prototype.constructor = InfiniteSlider;
+Object.setPrototypeOf(InfiniteSlider, KeyboardSlider);
 
 InfiniteSlider.prototype.init = function () {
     KeyboardSlider.prototype.init.call(this);
@@ -79,7 +80,7 @@ InfiniteSlider.prototype._handleTransitionEnd = function () {
     }
 };
 
-InfiniteSlider.EVENT_MAP = {
+InfiniteSlider[InfiniteSlider.EVENT_MAP_KEY] = {
     transitionend: {
         target: (instance) => instance._track,
         handler: InfiniteSlider.prototype._handleTransitionEnd,

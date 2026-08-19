@@ -3,14 +3,13 @@
 import KeyboardManager from "../services/keyboard-manager.js";
 import PaginationSlider from "./pagination-slider.js";
 
-KeyboardSlider.STATES = PaginationSlider.STATES;
-
 export default function KeyboardSlider(options) {
     PaginationSlider.call(this, options);
 }
 
 KeyboardSlider.prototype = Object.create(PaginationSlider.prototype);
 KeyboardSlider.prototype.constructor = KeyboardSlider;
+Object.setPrototypeOf(KeyboardSlider, PaginationSlider);
 
 KeyboardSlider.prototype._initActionTables = function () {
     PaginationSlider.prototype._initActionTables.call(this);
@@ -98,7 +97,7 @@ KeyboardSlider.prototype._handleKeyUp = function () {
     }
 };
 
-KeyboardSlider.EVENT_MAP = {
+KeyboardSlider[KeyboardSlider.EVENT_MAP_KEY] = {
     keydown: {
         target: () => document,
         handler: KeyboardSlider.prototype._handleKeyDown,

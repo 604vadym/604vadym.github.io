@@ -4,6 +4,8 @@ import * as helper from "../utils/helpers.js";
 import DOMValidator from "../services/dom-validator.js";
 import EventManager from "../services/event-manager.js";
 
+BaseSlider.EVENT_MAP_KEY = "EVENT_MAP";
+
 BaseSlider.STATES = {
     IDLE: "IDLE",
     MOVING: "MOVING",
@@ -19,7 +21,7 @@ export default function BaseSlider(options) {
     });
 
     Object.defineProperty(this, "_EventManager", {
-        value: new EventManager("EVENT_MAP"),
+        value: new EventManager(BaseSlider.EVENT_MAP_KEY),
         writable: false,
         configurable: false,
     });
@@ -171,7 +173,7 @@ BaseSlider.prototype = {
     },
 };
 
-BaseSlider.EVENT_MAP = {
+BaseSlider[BaseSlider.EVENT_MAP_KEY] = {
     click: {
         target: (instance) => instance._slider,
         handler: BaseSlider.prototype._handleClick,
