@@ -15,6 +15,6 @@ KeyboardManager.KEY_MAP = {
     "End": "code"
 };
 
-KeyboardManager.getParam = function ([firstKey]) {
-    return KeyboardManager.KEY_MAP[firstKey] || "code";
+KeyboardManager.getKeyParam = function (key) {
+    return KeyboardManager.KEY_MAP[key] || "code";
 };

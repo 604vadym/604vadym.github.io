@@ -1,6 +1,6 @@
 "use strict";
 
-import KeyMngr from "../services/keyboard-manager.js";
+import KeyboardManager from "../services/keyboard-manager.js";
 import PaginationSlider from "./pagination-slider.js";
 
 KeyboardSlider.EVENTS = {
@@ -68,29 +68,31 @@ KeyboardSlider.prototype._initKeyActionTable = function () {
     const keys = this._options.keys;
     this._keyActionTable = [
         {
-            match: this._matchKey(keys.execute, KeyMngr.getParam(keys.execute)),
+            match: this._matchKey(keys.execute),
             action: (e) => this._execute(e),
         },
         {
-            match: this._matchKey(keys.reset, KeyMngr.getParam(keys.reset)),
+            match: this._matchKey(keys.reset),
             action: (e) => this._reset(e),
         },
         {
-            match: this._matchKey(keys.next, KeyMngr.getParam(keys.next)),
+            match: this._matchKey(keys.next),
             action: (e) => this._next(e),
         },
         {
-            match: this._matchKey(keys.prev, KeyMngr.getParam(keys.prev)),
+            match: this._matchKey(keys.prev),
             action: (e) => this._prev(e),
         },
         {
-            match: this._matchKey(keys.ignore, KeyMngr.getParam(keys.ignore)),
+            match: this._matchKey(keys.ignore),
             action: (e) => this._ignore(e),
         },
     ];
 };
 
-KeyboardSlider.prototype._matchKey = function (keys, param) {
+KeyboardSlider.prototype._matchKey = function (keys) {
+    const [firstKey] = keys;
+    const param = KeyboardManager.getKeyParam(firstKey);
     return (e) => keys.includes(e[param]);
 };
 
@@ -100,6 +102,7 @@ KeyboardSlider.prototype._getKeyAction = function (e) {
 
 KeyboardSlider.prototype._handleKeyDown = function (e) {
     const keyAction = this._getKeyAction(e);
+
     keyAction?.action(e);
 };
 
