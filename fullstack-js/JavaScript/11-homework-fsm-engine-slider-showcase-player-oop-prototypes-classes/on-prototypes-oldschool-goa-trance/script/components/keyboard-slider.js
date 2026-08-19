@@ -1,5 +1,6 @@
 "use strict";
 
+import KeyMngr from "../services/keyboard-manager.js";
 import PaginationSlider from "./pagination-slider.js";
 
 KeyboardSlider.EVENTS = {
@@ -67,23 +68,23 @@ KeyboardSlider.prototype._initKeyActionTable = function () {
     const keys = this._options.keys;
     this._keyActionTable = [
         {
-            match: this._matchKey(keys.execute, "key"),
+            match: this._matchKey(keys.execute, KeyMngr.getParam(keys.execute)),
             action: (e) => this._execute(e),
         },
         {
-            match: this._matchKey(keys.reset, "key"),
+            match: this._matchKey(keys.reset, KeyMngr.getParam(keys.reset)),
             action: (e) => this._reset(e),
         },
         {
-            match: this._matchKey(keys.next, "code"),
+            match: this._matchKey(keys.next, KeyMngr.getParam(keys.next)),
             action: (e) => this._next(e),
         },
         {
-            match: this._matchKey(keys.prev, "code"),
+            match: this._matchKey(keys.prev, KeyMngr.getParam(keys.prev)),
             action: (e) => this._prev(e),
         },
         {
-            match: this._matchKey(keys.ignore, "code"),
+            match: this._matchKey(keys.ignore, KeyMngr.getParam(keys.ignore)),
             action: (e) => this._ignore(e),
         },
     ];
