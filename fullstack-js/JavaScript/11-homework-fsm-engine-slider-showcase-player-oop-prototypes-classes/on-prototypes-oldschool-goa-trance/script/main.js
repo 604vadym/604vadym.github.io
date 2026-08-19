@@ -61,6 +61,14 @@ const slider = new Slider({
     states: {
         keyboardBtnPressed: "is-pressed",
     },
+
+    keys: {
+        execute: ["Enter"],
+        reset: ["Escape"],
+        next: ["ArrowRight", "KeyD"],
+        prev: ["ArrowLeft", "KeyA"],
+        ignore: ["PageDown", "PageUp", "End"],
+    },
 });
 
 slider.init();

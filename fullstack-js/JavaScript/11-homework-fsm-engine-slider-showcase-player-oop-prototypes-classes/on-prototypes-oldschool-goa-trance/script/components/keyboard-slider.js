@@ -22,7 +22,7 @@ KeyboardSlider.prototype._initActionTables = function () {
     this._initKeyActionTable();
 };
 
-KeyboardSlider.prototype._enter = function (e) {
+KeyboardSlider.prototype._execute = function (e) {
     const activeElement = document.activeElement;
     const isButton = activeElement?.closest(`.${this._options.classes.button}`);
 
@@ -39,7 +39,7 @@ KeyboardSlider.prototype._enter = function (e) {
     }
 };
 
-KeyboardSlider.prototype._escape = function (e) {
+KeyboardSlider.prototype._reset = function (e) {
     if (e.ctrlKey || e.altKey || e.metaKey) return;
     e.preventDefault();
     if (e.shiftKey) {
@@ -47,43 +47,43 @@ KeyboardSlider.prototype._escape = function (e) {
     }
 };
 
-KeyboardSlider.prototype._right = function (e) {
+KeyboardSlider.prototype._next = function (e) {
     e.preventDefault();
     if (this._state === this.constructor.STATES.MOVING) return;
     this._nextSlide();
 };
 
-KeyboardSlider.prototype._left = function (e) {
+KeyboardSlider.prototype._prev = function (e) {
     e.preventDefault();
     if (this._state === this.constructor.STATES.MOVING) return;
     this._prevSlide();
 };
 
-KeyboardSlider.prototype._void = function (e) {
+KeyboardSlider.prototype._ignore = function (e) {
     e.preventDefault();
 };
 
 KeyboardSlider.prototype._initKeyActionTable = function () {
     this._keyActionTable = [
         {
-            match: (e) => e.key === "Enter",
-            action: (e) => this._enter(e),
+            match: (e) => this._options.keys.execute.includes(e.key),
+            action: (e) => this._execute(e),
         },
         {
-            match: (e) => e.key === "Escape",
-            action: (e) => this._escape(e),
+            match: (e) => this._options.keys.reset.includes(e.key),
+            action: (e) => this._reset(e),
         },
         {
-            match: (e) => ["ArrowRight", "KeyD"].includes(e.code),
-            action: (e) => this._right(e),
+            match: (e) => this._options.keys.next.includes(e.code),
+            action: (e) => this._next(e),
         },
         {
-            match: (e) => ["ArrowLeft", "KeyA"].includes(e.code),
-            action: (e) => this._left(e),
+            match: (e) => this._options.keys.prev.includes(e.code),
+            action: (e) => this._prev(e),
         },
         {
-            match: (e) => ["PageDown", "PageUp", "End"].includes(e.code),
-            action: (e) => this._void(e),
+            match: (e) => this._options.keys.ignore.includes(e.code),
+            action: (e) => this._ignore(e),
         },
     ];
 };
