@@ -22,7 +22,7 @@ EventManager.prototype = {
             const className = constructor.name;
 
             if (eventMap) {
-                this._assertEventMapContract(eventMap, className);
+                this._assertEventMapContract(eventMap, className, instance);
 
                 Object.entries(eventMap).forEach(
                     ([event, { target, handler }]) => {
@@ -47,8 +47,20 @@ EventManager.prototype = {
         }
     },
 
-    _assertEventMapContract(eventMap, className) {
+    _assertEventMapContract(eventMap, className, instance) {
         Object.entries(eventMap).forEach(([event, { target, handler }]) => {
+            const targetElement =
+                typeof target === "function" ? target(instance) : null;
+            if (targetElement) {
+                const isEventSupported = `on${event}` in targetElement;
+                if (!isEventSupported) {
+                    throw new TypeError(
+                        `EventManager: invalid or unsupported event "${event}" in "${className}"\n` +
+                            `target element does not support this event`,
+                    );
+                }
+            }
+
             if (typeof target !== "function" || typeof handler !== "function") {
                 throw new TypeError(
                     `EventManager: broken contract in "${className}"\n` +

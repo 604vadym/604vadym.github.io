@@ -4,11 +4,6 @@ import * as helper from "../utils/helpers.js";
 import DOMValidator from "../services/dom-validator.js";
 import EventManager from "../services/event-manager.js";
 
-BaseSlider.EVENTS = {
-    CLICK: "click",
-    TRANSITIONEND: "transitionend",
-};
-
 BaseSlider.STATES = {
     IDLE: "IDLE",
     MOVING: "MOVING",
@@ -177,11 +172,11 @@ BaseSlider.prototype = {
 };
 
 BaseSlider.EVENT_MAP = {
-    [BaseSlider.EVENTS.CLICK]: {
+    click: {
         target: (instance) => instance._slider,
         handler: BaseSlider.prototype._handleClick,
     },
-    [BaseSlider.EVENTS.TRANSITIONEND]: {
+    transitionend: {
         target: (instance) => instance._track,
         handler: BaseSlider.prototype._handleTransitionEnd,
     },

@@ -2,10 +2,6 @@
 
 import KeyboardSlider from "./keyboard-slider.js";
 
-InfiniteSlider.EVENTS = {
-    TRANSITIONEND: "transitionend",
-};
-
 InfiniteSlider.STATES = KeyboardSlider.STATES;
 
 export default function InfiniteSlider(options) {
@@ -84,7 +80,7 @@ InfiniteSlider.prototype._handleTransitionEnd = function () {
 };
 
 InfiniteSlider.EVENT_MAP = {
-    [InfiniteSlider.EVENTS.TRANSITIONEND]: {
+    transitionend: {
         target: (instance) => instance._track,
         handler: InfiniteSlider.prototype._handleTransitionEnd,
     },

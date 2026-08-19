@@ -3,11 +3,6 @@
 import KeyboardManager from "../services/keyboard-manager.js";
 import PaginationSlider from "./pagination-slider.js";
 
-KeyboardSlider.EVENTS = {
-    KEYDOWN: "keydown",
-    KEYUP: "keyup",
-};
-
 KeyboardSlider.STATES = PaginationSlider.STATES;
 
 export default function KeyboardSlider(options) {
@@ -115,11 +110,11 @@ KeyboardSlider.prototype._handleKeyUp = function () {
 };
 
 KeyboardSlider.EVENT_MAP = {
-    [KeyboardSlider.EVENTS.KEYDOWN]: {
+    keydown: {
         target: () => document,
         handler: KeyboardSlider.prototype._handleKeyDown,
     },
-    [KeyboardSlider.EVENTS.KEYUP]: {
+    keyup: {
         target: () => document,
         handler: KeyboardSlider.prototype._handleKeyUp,
     },
