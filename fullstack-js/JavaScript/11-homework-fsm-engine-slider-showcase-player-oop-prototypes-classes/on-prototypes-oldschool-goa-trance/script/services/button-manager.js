@@ -14,15 +14,15 @@ ButtonManager.prototype = {
     _initClickActionTable() {
         this._clickActionTable = [
             {
-                className: this._instance._options.buttons.btnNext,
+                className: this._instance._options.buttons.next,
                 action: () => this._instance._nextSlide(),
             },
             {
-                className: this._instance._options.buttons.btnPrev,
+                className: this._instance._options.buttons.prev,
                 action: () => this._instance._prevSlide(),
             },
             {
-                className: this._instance._options.buttons.paginationDot,
+                className: this._instance._options.buttons.goto,
                 action: (button) =>
                     this._instance._goToSlide(
                         this._instance._paginationDots.indexOf(button),

@@ -49,9 +49,9 @@ const slider = new Slider({
     groupSelectors: { slides: ".slider__slide", images: ".slider__image" },
 
     buttons: {
-        btnNext: "slider__btn--next",
-        btnPrev: "slider__btn--prev",
-        paginationDot: "pagination__dot",
+        next: "slider__btn--next",
+        prev: "slider__btn--prev",
+        goto: "pagination__dot",
     },
 
     classes: {
