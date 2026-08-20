@@ -6,23 +6,23 @@ ButtonManager.prototype = {
     constructor: ButtonManager,
 
     init(instance, configName) {
-        this._initClickActionTable(instance, configName);
+        this._initButtonActionTable(instance, configName);
     },
 
     manage(button) {
-        const request = this._clickActionTable.find((entry) =>
+        const request = this._buttonActionTable.find((entry) =>
             button.classList.contains(entry.buttonName),
         );
 
         request?.action(button);
     },
 
-    _initClickActionTable(instance, configName) {
+    _initButtonActionTable(instance, configName) {
         const config = instance._options[configName];
 
         this._assertConfig(config, configName, instance.constructor.name);
 
-        this._clickActionTable = [];
+        this._buttonActionTable = [];
         Object.entries(config).forEach(([clickAction, buttonName]) => {
             const methodName = `_${configName}${clickAction.charAt(0).toUpperCase()}${clickAction.slice(1)}`;
             const action = instance[methodName];
@@ -35,7 +35,7 @@ ButtonManager.prototype = {
                     instance.constructor.name,
                 );
 
-                this._clickActionTable.push({
+                this._buttonActionTable.push({
                     buttonName: buttonName,
                     action: (button) => action.call(instance, button),
                 });

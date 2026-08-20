@@ -47,7 +47,12 @@ BaseSlider.prototype = {
         this._initProps();
         this._updateSlideWidth();
         this._buttonManager.init(this, "click");
-        this._eventManager.init(this, BaseSlider.EVENT_MAP_KEY);
+        this._eventManager.init(
+            this,
+            BaseSlider.EVENT_MAP_KEY,
+            "target",
+            "handler",
+        );
     },
 
     _initDOMElements(childElements) {

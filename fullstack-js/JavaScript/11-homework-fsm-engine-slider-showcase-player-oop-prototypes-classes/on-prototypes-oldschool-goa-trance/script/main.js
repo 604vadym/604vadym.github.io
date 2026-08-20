@@ -48,12 +48,6 @@ const slider = new Slider({
 
     groupSelectors: { slides: ".slider__slide", images: ".slider__image" },
 
-    click: {
-        next: "slider__btn--next",
-        prev: "slider__btn--prev",
-        goto: "pagination__dot",
-    },
-
     classes: {
         button: "button",
         paginationDot: "pagination__dot",
@@ -69,6 +63,12 @@ const slider = new Slider({
 
     states: {
         keyboardBtnPressed: "is-pressed",
+    },
+
+    click: {
+        next: "slider__btn--next",
+        prev: "slider__btn--prev",
+        goto: "pagination__dot",
     },
 
     press: {
