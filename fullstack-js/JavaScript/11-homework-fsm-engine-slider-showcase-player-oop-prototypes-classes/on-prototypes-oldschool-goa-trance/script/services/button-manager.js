@@ -39,7 +39,7 @@ ButtonManager.prototype = {
         ];
     },
 
-    _getClickAction(button) {
+    getClickAction(button) {
         const classList = button.classList;
 
         const actionIndex = this._clickActionTable.findIndex((entry) =>

@@ -15,19 +15,19 @@ BaseSlider.STATES = {
 export default function BaseSlider(options) {
     this._options = options;
 
-    Object.defineProperty(this, "_DOMValidator", {
+    Object.defineProperty(this, "_domValidator", {
         value: new DOMValidator(BaseSlider),
         writable: false,
         configurable: false,
     });
 
-    Object.defineProperty(this, "_ButtonManager", {
+    Object.defineProperty(this, "_buttonManager", {
         value: new ButtonManager(this),
         writable: false,
         configurable: false,
     });
 
-    Object.defineProperty(this, "_EventManager", {
+    Object.defineProperty(this, "_eventManager", {
         value: new EventManager(BaseSlider.EVENT_MAP_KEY),
         writable: false,
         configurable: false,
@@ -46,8 +46,8 @@ BaseSlider.prototype = {
         this._initProps();
         this._updateSlideWidth();
         this._initActionTables();
-        this._ButtonManager.init(this);
-        this._EventManager.init(this);
+        this._buttonManager.init(this);
+        this._eventManager.init(this);
     },
 
     _initDOMElements(childElements) {
@@ -73,7 +73,7 @@ BaseSlider.prototype = {
             this._options.groupSelectors.images,
         );
 
-        this._DOMValidator.validate(this, childElements, {
+        this._domValidator.validate(this, childElements, {
             slider,
             track,
             viewport,
@@ -139,7 +139,7 @@ BaseSlider.prototype = {
         const button = e.target.closest(`.${this._options.classes.button}`);
         if (!button || this._state === BaseSlider.STATES.MOVING) return;
 
-        const clickAction = this._ButtonManager._getClickAction(button);
+        const clickAction = this._buttonManager.getClickAction(button);
 
         clickAction?.action(button);
     },
