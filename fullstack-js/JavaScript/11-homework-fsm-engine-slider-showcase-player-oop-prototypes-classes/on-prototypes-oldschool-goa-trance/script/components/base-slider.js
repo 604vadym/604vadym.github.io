@@ -135,23 +135,11 @@ BaseSlider.prototype = {
         }
     },
 
-    _getClickAction(button) {
-        const classList = button.classList;
-
-        const actionIndex = this._ButtonManager._clickActionTable.findIndex(
-            (entry) => classList.contains(entry.className),
-        );
-
-        return actionIndex !== -1
-            ? this._ButtonManager._clickActionTable[actionIndex]
-            : null;
-    },
-
     _handleClick(e) {
         const button = e.target.closest(`.${this._options.classes.button}`);
         if (!button || this._state === BaseSlider.STATES.MOVING) return;
 
-        const clickAction = this._getClickAction(button);
+        const clickAction = this._ButtonManager._getClickAction(button);
 
         clickAction?.action(button);
     },

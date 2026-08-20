@@ -38,4 +38,14 @@ ButtonManager.prototype = {
             },
         ];
     },
+
+    _getClickAction(button) {
+        const classList = button.classList;
+
+        const actionIndex = this._clickActionTable.findIndex((entry) =>
+            classList.contains(entry.className),
+        );
+
+        return actionIndex !== -1 ? this._clickActionTable[actionIndex] : null;
+    },
 };
