@@ -135,11 +135,11 @@ BaseSlider.prototype = {
         }
     },
 
-    _next() {
+    _clickNext() {
         this._nextSlide();
     },
 
-    _prev() {
+    _clickPrev() {
         this._prevSlide();
     },
 
