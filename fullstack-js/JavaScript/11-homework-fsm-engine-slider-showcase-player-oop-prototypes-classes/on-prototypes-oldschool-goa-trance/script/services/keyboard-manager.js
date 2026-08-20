@@ -41,7 +41,14 @@ KeyboardManager.prototype = {
             const methodName = `_${configName}${keyAction.charAt(0).toUpperCase()}${keyAction.slice(1)}`;
             const action = instance[methodName];
 
-            if (keys && typeof action === "function") {
+            if (keys) {
+                this._assertMethodContract(
+                    action,
+                    methodName,
+                    configName,
+                    instance.constructor.name,
+                );
+
                 this._keyActionTable.push({
                     match: this._matchKeys(keys),
                     action: (e) => action.call(instance, e),
@@ -59,7 +66,16 @@ KeyboardManager.prototype = {
     _assertConfig(config, configName, className) {
         if (!config) {
             throw new Error(
-                `[KeyboardManager]: configuration section "${configName}" is missing in options for component "${className}".`,
+                `[KeyboardManager]: configuration section "${configName}" is missing in options for "${className}"`,
+            );
+        }
+    },
+
+    _assertMethodContract(method, methodName, configName, className) {
+        if (typeof method !== "function") {
+            throw new TypeError(
+                `[KeyboardManager]: broken contract in "${className}"\n` +
+                    `method "${methodName}" declared in "${configName}" options must be a valid function`,
             );
         }
     },

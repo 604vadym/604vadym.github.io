@@ -27,7 +27,14 @@ ButtonManager.prototype = {
             const methodName = `_${configName}${clickAction.charAt(0).toUpperCase()}${clickAction.slice(1)}`;
             const action = instance[methodName];
 
-            if (buttonName && typeof action === "function") {
+            if (buttonName) {
+                this._assertMethodContract(
+                    action,
+                    methodName,
+                    configName,
+                    instance.constructor.name,
+                );
+
                 this._clickActionTable.push({
                     buttonName: buttonName,
                     action: (button) => action.call(instance, button),
@@ -39,7 +46,16 @@ ButtonManager.prototype = {
     _assertConfig(config, configName, className) {
         if (!config) {
             throw new Error(
-                `[ButtonManager]: configuration section "${configName}" is missing in options for component "${className}".`,
+                `[ButtonManager]: configuration section "${configName}" is missing in options for "${className}"`,
+            );
+        }
+    },
+
+    _assertMethodContract(method, methodName, configName, className) {
+        if (typeof method !== "function") {
+            throw new TypeError(
+                `[ButtonManager]: broken contract in "${className}"\n` +
+                    `method "${methodName}" declared in "${configName}" options must be a valid function`,
             );
         }
     },

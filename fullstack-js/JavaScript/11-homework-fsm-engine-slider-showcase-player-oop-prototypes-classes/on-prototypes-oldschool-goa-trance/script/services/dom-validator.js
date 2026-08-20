@@ -10,7 +10,7 @@ DOMValidator.prototype = {
     validate(instance, childElements, ...elements) {
         if (elements.length === 0) {
             throw new Error(
-                `DOMValidator: base class [${this._baseClass}] must provide validation elements`,
+                `[DOMValidator]: base class [${this._baseClass}] must provide validation elements`,
             );
         }
 
@@ -20,7 +20,7 @@ DOMValidator.prototype = {
 
         if (className !== this._baseClass && isPayloadEmpty) {
             throw new Error(
-                `DOMValidator: validation payload is missing or empty\n` +
+                `[DOMValidator]: validation payload is missing or empty\n` +
                     `subclass initiated the DOM verification process, but failed to provide any elements\n`,
             );
         }
@@ -41,7 +41,7 @@ DOMValidator.prototype = {
         });
 
         if (!DOMValidator.isDOMElementsFound(DOMElements)) {
-            throw new Error(`DOMValidator: [${className}] validation failed`);
+            throw new Error(`[DOMValidator]: [${className}] validation failed`);
         }
     },
 };
@@ -52,14 +52,17 @@ DOMValidator.isDOMElementsFound = function ({
 } = {}) {
     if (!elements && !collections) {
         console.warn(
-            `DOMValidator.isDOMElementsFound(): invalid function call`,
+            `[DOMValidator.isDOMElementsFound()]: invalid function call`,
         );
+        return false;
     }
 
     if (elements) {
         for (const [name, element] of Object.entries(elements)) {
             if (!element) {
-                console.error(`DOM Error: element ${name} not found`);
+                console.error(
+                    `[DOMValidator.isDOMElementsFound()] DOM error: element ${name} not found`,
+                );
                 return false;
             }
         }
@@ -68,7 +71,9 @@ DOMValidator.isDOMElementsFound = function ({
     if (collections) {
         for (const [name, element] of Object.entries(collections)) {
             if (element.length === 0) {
-                console.error(`DOM Error: elements ${name} not found`);
+                console.error(
+                    `[DOMValidator.isDOMElementsFound()] DOM error: elements ${name} not found`,
+                );
                 return false;
             }
         }

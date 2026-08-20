@@ -57,7 +57,7 @@ EventManager.prototype = {
                 const isEventSupported = `on${event}` in targetElement;
                 if (!isEventSupported) {
                     throw new TypeError(
-                        `EventManager: invalid or unsupported event "${event}" in "${className}"\n` +
+                        `[EventManager]: invalid or unsupported event "${event}" in "${className}"\n` +
                             `target element does not support this event`,
                     );
                 }
@@ -65,7 +65,7 @@ EventManager.prototype = {
 
             if (typeof target !== "function" || typeof handler !== "function") {
                 throw new TypeError(
-                    `EventManager: broken contract in "${className}"\n` +
+                    `[EventManager]: broken contract in "${className}"\n` +
                         `event "${event}" must provide valid "target" and "handler" functions`,
                 );
             }
@@ -75,7 +75,7 @@ EventManager.prototype = {
     _assertTargetElement(targetElement, event, className) {
         if (!targetElement) {
             throw new Error(
-                `EventManager: target element missing\n` +
+                `[EventManager]: target element missing\n` +
                     `class "${className}" failed to resolve target element for event "${event}"`,
             );
         }
