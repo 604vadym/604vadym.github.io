@@ -10,23 +10,21 @@ ButtonManager.prototype = {
     },
 
     _initClickActionTable(instance, configName) {
-        this._clickActionTable = [
-            {
-                className: instance._options[configName].next,
-                action: () => instance._clickNext(),
-            },
-            {
-                className: instance._options[configName].prev,
-                action: () => instance._clickPrev(),
-            },
-            {
-                className: instance._options[configName].goto,
-                action: (button) =>
-                    instance._clickGoto(
-                        instance._paginationDots.indexOf(button),
-                    ),
-            },
-        ];
+        const config = instance._options[configName];
+        if (!config) return;
+        this._clickActionTable = [];
+
+        Object.entries(config).forEach(([actionName, className]) => {
+            const methodName = `_${configName}${actionName.charAt(0).toUpperCase()}${actionName.slice(1)}`;
+            const action = instance[methodName];
+
+            if (className && typeof action === "function") {
+                this._clickActionTable.push({
+                    className: className,
+                    action: (button) => action.call(instance, button),
+                });
+            }
+        });
     },
 
     getClickAction(button) {

@@ -60,6 +60,6 @@ PaginationSlider.prototype._initPagination = function () {
     );
 };
 
-PaginationSlider.prototype._clickGoto = function (index) {
-    this._goToSlide(index);
+PaginationSlider.prototype._clickGoto = function (button) {
+    this._goToSlide(this._paginationDots.indexOf(button));
 };
