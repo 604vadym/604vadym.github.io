@@ -135,6 +135,14 @@ BaseSlider.prototype = {
         }
     },
 
+    _next() {
+        this._nextSlide();
+    },
+
+    _prev() {
+        this._prevSlide();
+    },
+
     _handleClick(e) {
         const button = e.target.closest(`.${this._options.classes.button}`);
         if (!button || this._state === BaseSlider.STATES.MOVING) return;

@@ -16,7 +16,7 @@ KeyboardSlider.prototype._initActionTables = function () {
     this._initKeyActionTable();
 };
 
-KeyboardSlider.prototype._execute = function (e) {
+KeyboardSlider.prototype._pressExecute = function (e) {
     const activeElement = document.activeElement;
     const isButton = activeElement?.closest(`.${this._options.classes.button}`);
 
@@ -33,7 +33,7 @@ KeyboardSlider.prototype._execute = function (e) {
     }
 };
 
-KeyboardSlider.prototype._reset = function (e) {
+KeyboardSlider.prototype._pressReset = function (e) {
     if (e.ctrlKey || e.altKey || e.metaKey) return;
     e.preventDefault();
     if (e.shiftKey) {
@@ -41,19 +41,19 @@ KeyboardSlider.prototype._reset = function (e) {
     }
 };
 
-KeyboardSlider.prototype._next = function (e) {
+KeyboardSlider.prototype._pressNext = function (e) {
     e.preventDefault();
     if (this._state === this.constructor.STATES.MOVING) return;
     this._nextSlide();
 };
 
-KeyboardSlider.prototype._prev = function (e) {
+KeyboardSlider.prototype._pressPrev = function (e) {
     e.preventDefault();
     if (this._state === this.constructor.STATES.MOVING) return;
     this._prevSlide();
 };
 
-KeyboardSlider.prototype._ignore = function (e) {
+KeyboardSlider.prototype._pressIgnore = function (e) {
     e.preventDefault();
 };
 
@@ -62,7 +62,10 @@ KeyboardSlider.prototype._initKeyActionTable = function () {
     this._keyActionTable = [];
 
     Object.entries(keyConfig).forEach(([keyAction, keys]) => {
-        const action = this[`_${keyAction}`];
+        const action =
+            this[
+                `_press${keyAction.charAt(0).toUpperCase()}${keyAction.slice(1)}`
+            ];
         if (keys && typeof action === "function") {
             this._keyActionTable.push({
                 match: this._matchKeys(keys),

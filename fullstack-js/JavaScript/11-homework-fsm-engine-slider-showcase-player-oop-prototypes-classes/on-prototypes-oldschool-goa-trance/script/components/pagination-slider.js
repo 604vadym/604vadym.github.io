@@ -59,3 +59,7 @@ PaginationSlider.prototype._initPagination = function () {
         this._options.classesActive.paginationDot,
     );
 };
+
+PaginationSlider.prototype._goto = function (index) {
+    this._goToSlide(index);
+};

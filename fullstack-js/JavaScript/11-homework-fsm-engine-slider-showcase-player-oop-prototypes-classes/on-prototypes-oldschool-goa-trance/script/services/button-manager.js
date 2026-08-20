@@ -15,16 +15,16 @@ ButtonManager.prototype = {
         this._clickActionTable = [
             {
                 className: this._instance._options.buttons.next,
-                action: () => this._instance._nextSlide(),
+                action: () => this._instance._next(),
             },
             {
                 className: this._instance._options.buttons.prev,
-                action: () => this._instance._prevSlide(),
+                action: () => this._instance._prev(),
             },
             {
                 className: this._instance._options.buttons.goto,
                 action: (button) =>
-                    this._instance._goToSlide(
+                    this._instance._goto(
                         this._instance._paginationDots.indexOf(button),
                     ),
             },
