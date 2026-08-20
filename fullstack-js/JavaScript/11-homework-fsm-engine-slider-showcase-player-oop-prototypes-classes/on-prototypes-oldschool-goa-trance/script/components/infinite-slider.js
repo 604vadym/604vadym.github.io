@@ -30,14 +30,6 @@ InfiniteSlider.prototype._normaliseIndex = function (index = null) {
         : (this._currentIndex - 1 + this._slidesCount) % this._slidesCount;
 };
 
-InfiniteSlider.prototype._nextSlide = function () {
-    this._goToSlide(this._normaliseIndex() + 1);
-};
-
-InfiniteSlider.prototype._prevSlide = function () {
-    this._goToSlide(this._normaliseIndex() - 1);
-};
-
 InfiniteSlider.prototype._initInfiniteLoop = function () {
     const cloneOfFirst = this._slides[0].cloneNode(true);
     const cloneOfLast = this._slides[this._slidesCount - 1].cloneNode(true);

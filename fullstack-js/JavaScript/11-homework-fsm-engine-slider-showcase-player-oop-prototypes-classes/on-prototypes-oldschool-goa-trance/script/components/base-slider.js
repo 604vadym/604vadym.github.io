@@ -114,11 +114,11 @@ BaseSlider.prototype = {
     },
 
     _nextSlide() {
-        this._goToSlide(this._currentIndex + 1);
+        this._goToSlide(this._normaliseIndex() + 1);
     },
 
     _prevSlide() {
-        this._goToSlide(this._currentIndex - 1);
+        this._goToSlide(this._normaliseIndex() - 1);
     },
 
     _goToSlide(index) {
