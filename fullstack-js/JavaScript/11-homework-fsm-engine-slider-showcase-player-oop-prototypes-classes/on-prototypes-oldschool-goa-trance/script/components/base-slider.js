@@ -84,8 +84,7 @@ BaseSlider.prototype = {
         this._state = BaseSlider.STATES.IDLE;
         this._slidesCount = this._slides.length;
         this._trackTransition = this._track.style.transition;
-        this._startIndex = 0;
-        this._currentIndex = this._startIndex;
+        this._currentIndex = 0;
         this._slideWidth = 0;
     },
 

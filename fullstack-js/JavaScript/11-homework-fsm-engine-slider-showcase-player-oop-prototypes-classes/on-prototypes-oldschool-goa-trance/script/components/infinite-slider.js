@@ -25,22 +25,17 @@ InfiniteSlider.prototype._initProps = function () {
 };
 
 InfiniteSlider.prototype._normaliseIndex = function (index = null) {
-    const sourceIndex =
-        index !== null
-            ? index + 1
-            : (this._currentIndex - 1 + this._slidesCount) % this._slidesCount;
-
-    return sourceIndex;
+    return index !== null
+        ? index + 1
+        : (this._currentIndex - 1 + this._slidesCount) % this._slidesCount;
 };
 
 InfiniteSlider.prototype._nextSlide = function () {
-    ++this._currentIndex;
-    this._updateSlider();
+    this._goToSlide(this._normaliseIndex() + 1);
 };
 
 InfiniteSlider.prototype._prevSlide = function () {
-    --this._currentIndex;
-    this._updateSlider();
+    this._goToSlide(this._normaliseIndex() - 1);
 };
 
 InfiniteSlider.prototype._initInfiniteLoop = function () {
