@@ -48,10 +48,19 @@ const slider = new Slider({
 
     groupSelectors: { slides: ".slider__slide", images: ".slider__image" },
 
+    buttons: {
+        btnNext: "slider__btn--next",
+        btnPrev: "slider__btn--prev",
+        paginationDot: "pagination__dot",
+    },
+
     classes: {
         button: "button",
         paginationDot: "pagination__dot",
-        paginationDotActive: "pagination__dot--active",
+    },
+
+    classesActive: {
+        paginationDot: "pagination__dot--active",
     },
 
     jsClasses: {

@@ -36,13 +36,13 @@ PaginationSlider.prototype._updateSlider = function () {
 
 PaginationSlider.prototype._updatePagination = function () {
     const activeDot = this._pagination.querySelector(
-        `.${this._options.classes.paginationDotActive}`,
+        `.${this._options.classesActive.paginationDot}`,
     );
     if (activeDot) {
-        activeDot.classList.remove(this._options.classes.paginationDotActive);
+        activeDot.classList.remove(this._options.classesActive.paginationDot);
     }
     this._paginationDots[this._normaliseIndex()].classList.add(
-        this._options.classes.paginationDotActive,
+        this._options.classesActive.paginationDot,
     );
 };
 
@@ -56,6 +56,6 @@ PaginationSlider.prototype._initPagination = function () {
         this._paginationDots.push(this._pagination.appendChild(dot));
     }
     this._paginationDots[0].classList.add(
-        this._options.classes.paginationDotActive,
+        this._options.classesActive.paginationDot,
     );
 };
