@@ -29,15 +29,6 @@ PaginationSlider.prototype._initDOMElements = function (childElements) {
     this._pagination = pagination;
 };
 
-PaginationSlider.prototype._initClickActionTable = function () {
-    BaseSlider.prototype._initClickActionTable.call(this);
-    this._clickActionTable.push({
-        className: this._options.classes.paginationDot,
-        action: (button) =>
-            this._goToSlide(this._paginationDots.indexOf(button)),
-    });
-};
-
 PaginationSlider.prototype._updateSlider = function () {
     BaseSlider.prototype._updateSlider.call(this);
     this._updatePagination();

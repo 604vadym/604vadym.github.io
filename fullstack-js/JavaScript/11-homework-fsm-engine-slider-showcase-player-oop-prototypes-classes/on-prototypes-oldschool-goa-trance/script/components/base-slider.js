@@ -2,6 +2,7 @@
 
 import * as helper from "../utils/helpers.js";
 import DOMValidator from "../services/dom-validator.js";
+import ButtonManager from "../services/button-manager.js";
 import EventManager from "../services/event-manager.js";
 
 BaseSlider.EVENT_MAP_KEY = "EVENT_MAP";
@@ -16,6 +17,12 @@ export default function BaseSlider(options) {
 
     Object.defineProperty(this, "_DOMValidator", {
         value: new DOMValidator(BaseSlider),
+        writable: false,
+        configurable: false,
+    });
+
+    Object.defineProperty(this, "_ButtonManager", {
+        value: new ButtonManager(this),
         writable: false,
         configurable: false,
     });
@@ -39,6 +46,7 @@ BaseSlider.prototype = {
         this._initProps();
         this._updateSlideWidth();
         this._initActionTables();
+        this._ButtonManager.init(this);
         this._EventManager.init(this);
     },
 
@@ -88,9 +96,7 @@ BaseSlider.prototype = {
         this._slideWidth = 0;
     },
 
-    _initActionTables() {
-        this._initClickActionTable();
-    },
+    _initActionTables() {},
 
     _updateSlider() {
         this._state = BaseSlider.STATES.MOVING;
@@ -132,30 +138,13 @@ BaseSlider.prototype = {
     _getClickAction(button) {
         const classList = button.classList;
 
-        const actionIndex = this._clickActionTable.findIndex((entry) =>
-            classList.contains(entry.className),
+        const actionIndex = this._ButtonManager._clickActionTable.findIndex(
+            (entry) => classList.contains(entry.className),
         );
 
-        return actionIndex !== -1 ? this._clickActionTable[actionIndex] : null;
-    },
-
-    _initClickActionTable() {
-        this._clickActionTable = [
-            {
-                className: this._options.singleSelectors.btnNext.replace(
-                    /^\./,
-                    "",
-                ),
-                action: () => this._nextSlide(),
-            },
-            {
-                className: this._options.singleSelectors.btnPrev.replace(
-                    /^\./,
-                    "",
-                ),
-                action: () => this._prevSlide(),
-            },
-        ];
+        return actionIndex !== -1
+            ? this._ButtonManager._clickActionTable[actionIndex]
+            : null;
     },
 
     _handleClick(e) {
