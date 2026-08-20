@@ -9,29 +9,38 @@ ButtonManager.prototype = {
         this._initClickActionTable(instance, configName);
     },
 
+    manage(button) {
+        const request = this._clickActionTable.find((entry) =>
+            button.classList.contains(entry.buttonName),
+        );
+
+        request?.action(button);
+    },
+
     _initClickActionTable(instance, configName) {
         const config = instance._options[configName];
-        if (!config) return;
-        this._clickActionTable = [];
 
-        Object.entries(config).forEach(([clickAction, className]) => {
+        this._assertConfig(config, configName, instance.constructor.name);
+
+        this._clickActionTable = [];
+        Object.entries(config).forEach(([clickAction, buttonName]) => {
             const methodName = `_${configName}${clickAction.charAt(0).toUpperCase()}${clickAction.slice(1)}`;
             const action = instance[methodName];
 
-            if (className && typeof action === "function") {
+            if (buttonName && typeof action === "function") {
                 this._clickActionTable.push({
-                    className: className,
+                    buttonName: buttonName,
                     action: (button) => action.call(instance, button),
                 });
             }
         });
     },
 
-    manage(button) {
-        const request = this._clickActionTable.find((entry) =>
-            button.classList.contains(entry.className),
-        );
-
-        request?.action(button);
+    _assertConfig(config, configName, className) {
+        if (!config) {
+            throw new Error(
+                `[ButtonManager]: configuration section "${configName}" is missing in options for component "${className}".`,
+            );
+        }
     },
 };

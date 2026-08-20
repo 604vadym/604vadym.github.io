@@ -25,11 +25,18 @@ KeyboardManager.prototype = {
         this._initKeyActionTable(instance, configName);
     },
 
+    manage(e) {
+        const request = this._keyActionTable.find((entry) => entry.match(e));
+
+        request?.action(e);
+    },
+
     _initKeyActionTable(instance, configName) {
         const config = instance._options[configName];
-        if (!config) return;
-        this._keyActionTable = [];
 
+        this._assertConfig(config, configName, instance.constructor.name);
+
+        this._keyActionTable = [];
         Object.entries(config).forEach(([keyAction, keys]) => {
             const methodName = `_${configName}${keyAction.charAt(0).toUpperCase()}${keyAction.slice(1)}`;
             const action = instance[methodName];
@@ -49,9 +56,11 @@ KeyboardManager.prototype = {
         return (e) => keys.includes(e[param]);
     },
 
-    manage(e) {
-        const request = this._keyActionTable.find((entry) => entry.match(e));
-
-        request?.action(e);
+    _assertConfig(config, configName, className) {
+        if (!config) {
+            throw new Error(
+                `[KeyboardManager]: configuration section "${configName}" is missing in options for component "${className}".`,
+            );
+        }
     },
 };
