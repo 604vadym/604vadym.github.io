@@ -3,6 +3,7 @@
 import * as helper from "../utils/helpers.js";
 import DOMValidator from "../services/dom-validator.js";
 import ButtonManager from "../services/button-manager.js";
+import KeyboardManager from "../services/keyboard-manager.js";
 import EventManager from "../services/event-manager.js";
 
 BaseSlider.EVENT_MAP_KEY = "EVENT_MAP";
@@ -27,6 +28,12 @@ export default function BaseSlider(options) {
         configurable: false,
     });
 
+    Object.defineProperty(this, "_keyboardManager", {
+        value: new KeyboardManager(),
+        writable: false,
+        configurable: false,
+    });
+
     Object.defineProperty(this, "_eventManager", {
         value: new EventManager(BaseSlider.EVENT_MAP_KEY),
         writable: false,
@@ -45,8 +52,8 @@ BaseSlider.prototype = {
         this._initDOMElements();
         this._initProps();
         this._updateSlideWidth();
-        this._initActionTables();
         this._buttonManager.init(this, "click");
+        this._keyboardManager.init(this, "press");
         this._eventManager.init(this);
     },
 
@@ -95,8 +102,6 @@ BaseSlider.prototype = {
         this._currentIndex = 0;
         this._slideWidth = 0;
     },
-
-    _initActionTables() {},
 
     _updateSlider() {
         this._state = BaseSlider.STATES.MOVING;

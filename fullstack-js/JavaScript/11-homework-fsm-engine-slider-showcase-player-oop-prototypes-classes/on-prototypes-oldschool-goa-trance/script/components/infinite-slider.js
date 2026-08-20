@@ -2,8 +2,6 @@
 
 import KeyboardSlider from "./keyboard-slider.js";
 
-InfiniteSlider.STATES = KeyboardSlider.STATES;
-
 export default function InfiniteSlider(options) {
     KeyboardSlider.call(this, options);
 }
