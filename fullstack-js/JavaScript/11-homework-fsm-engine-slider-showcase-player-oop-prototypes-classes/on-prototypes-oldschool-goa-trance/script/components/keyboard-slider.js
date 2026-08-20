@@ -64,9 +64,7 @@ KeyboardSlider.prototype._pressIgnore = function (e) {
 };
 
 KeyboardSlider.prototype._handleKeyDown = function (e) {
-    const keyAction = this._keyboardManager.getKeyAction(e);
-
-    keyAction?.action(e);
+    this._keyboardManager.manage(e);
 };
 
 KeyboardSlider.prototype._handleKeyUp = function () {

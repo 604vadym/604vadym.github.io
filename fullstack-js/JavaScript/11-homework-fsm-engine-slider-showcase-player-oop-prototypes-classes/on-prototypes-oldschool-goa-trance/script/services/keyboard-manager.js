@@ -49,7 +49,9 @@ KeyboardManager.prototype = {
         return (e) => keys.includes(e[param]);
     },
 
-    getKeyAction(e) {
-        return this._keyActionTable.find((entry) => entry.match(e));
+    manage(e) {
+        const request = this._keyActionTable.find((entry) => entry.match(e));
+
+        request?.action(e);
     },
 };

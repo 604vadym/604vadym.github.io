@@ -145,9 +145,7 @@ BaseSlider.prototype = {
         const button = e.target.closest(`.${this._options.classes.button}`);
         if (!button || this._state === BaseSlider.STATES.MOVING) return;
 
-        const clickAction = this._buttonManager.getClickAction(button);
-
-        clickAction?.action(button);
+        this._buttonManager.manage(button);
     },
 
     _handleTransitionEnd() {

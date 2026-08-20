@@ -14,8 +14,8 @@ ButtonManager.prototype = {
         if (!config) return;
         this._clickActionTable = [];
 
-        Object.entries(config).forEach(([actionName, className]) => {
-            const methodName = `_${configName}${actionName.charAt(0).toUpperCase()}${actionName.slice(1)}`;
+        Object.entries(config).forEach(([clickAction, className]) => {
+            const methodName = `_${configName}${clickAction.charAt(0).toUpperCase()}${clickAction.slice(1)}`;
             const action = instance[methodName];
 
             if (className && typeof action === "function") {
@@ -27,13 +27,15 @@ ButtonManager.prototype = {
         });
     },
 
-    getClickAction(button) {
+    manage(button) {
         const classList = button.classList;
-
         const actionIndex = this._clickActionTable.findIndex((entry) =>
             classList.contains(entry.className),
         );
 
-        return actionIndex !== -1 ? this._clickActionTable[actionIndex] : null;
+        const request =
+            actionIndex !== -1 ? this._clickActionTable[actionIndex] : null;
+
+        request?.action(button);
     },
 };
