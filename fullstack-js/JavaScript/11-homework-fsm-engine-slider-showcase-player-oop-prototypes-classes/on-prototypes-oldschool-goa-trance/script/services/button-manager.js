@@ -28,13 +28,9 @@ ButtonManager.prototype = {
     },
 
     manage(button) {
-        const classList = button.classList;
-        const actionIndex = this._clickActionTable.findIndex((entry) =>
-            classList.contains(entry.className),
+        const request = this._clickActionTable.find((entry) =>
+            button.classList.contains(entry.className),
         );
-
-        const request =
-            actionIndex !== -1 ? this._clickActionTable[actionIndex] : null;
 
         request?.action(button);
     },
