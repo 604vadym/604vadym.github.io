@@ -1,31 +1,29 @@
 "use strict";
 
-export default function ButtonManager(instance) {
-    this._instance = instance;
-}
+export default function ButtonManager() {}
 
 ButtonManager.prototype = {
     constructor: ButtonManager,
 
-    init() {
-        this._initClickActionTable();
+    init(instance, configName) {
+        this._initClickActionTable(instance, configName);
     },
 
-    _initClickActionTable() {
+    _initClickActionTable(instance, configName) {
         this._clickActionTable = [
             {
-                className: this._instance._options.buttons.next,
-                action: () => this._instance._clickNext(),
+                className: instance._options[configName].next,
+                action: () => instance._clickNext(),
             },
             {
-                className: this._instance._options.buttons.prev,
-                action: () => this._instance._clickPrev(),
+                className: instance._options[configName].prev,
+                action: () => instance._clickPrev(),
             },
             {
-                className: this._instance._options.buttons.goto,
+                className: instance._options[configName].goto,
                 action: (button) =>
-                    this._instance._clickGoto(
-                        this._instance._paginationDots.indexOf(button),
+                    instance._clickGoto(
+                        instance._paginationDots.indexOf(button),
                     ),
             },
         ];

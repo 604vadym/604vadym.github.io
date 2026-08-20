@@ -22,7 +22,7 @@ export default function BaseSlider(options) {
     });
 
     Object.defineProperty(this, "_buttonManager", {
-        value: new ButtonManager(this),
+        value: new ButtonManager(),
         writable: false,
         configurable: false,
     });
@@ -46,7 +46,7 @@ BaseSlider.prototype = {
         this._initProps();
         this._updateSlideWidth();
         this._initActionTables();
-        this._buttonManager.init(this);
+        this._buttonManager.init(this, "click");
         this._eventManager.init(this);
     },
 

@@ -48,7 +48,7 @@ const slider = new Slider({
 
     groupSelectors: { slides: ".slider__slide", images: ".slider__image" },
 
-    buttons: {
+    click: {
         next: "slider__btn--next",
         prev: "slider__btn--prev",
         goto: "pagination__dot",
@@ -71,7 +71,7 @@ const slider = new Slider({
         keyboardBtnPressed: "is-pressed",
     },
 
-    keys: {
+    press: {
         execute: ["Enter"],
         reset: ["Escape"],
         next: ["ArrowRight", "KeyD"],

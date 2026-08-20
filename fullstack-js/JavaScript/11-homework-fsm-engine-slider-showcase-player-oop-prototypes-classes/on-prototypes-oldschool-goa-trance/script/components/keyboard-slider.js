@@ -13,7 +13,7 @@ Object.setPrototypeOf(KeyboardSlider, PaginationSlider);
 
 KeyboardSlider.prototype._initActionTables = function () {
     PaginationSlider.prototype._initActionTables.call(this);
-    this._initKeyActionTable();
+    this._initKeyActionTable("press");
 };
 
 KeyboardSlider.prototype._pressExecute = function (e) {
@@ -57,15 +57,15 @@ KeyboardSlider.prototype._pressIgnore = function (e) {
     e.preventDefault();
 };
 
-KeyboardSlider.prototype._initKeyActionTable = function () {
-    const keyConfig = this._options.keys;
+KeyboardSlider.prototype._initKeyActionTable = function (configName) {
+    const config = this._options[configName];
+    if (!config) return;
     this._keyActionTable = [];
 
-    Object.entries(keyConfig).forEach(([keyAction, keys]) => {
-        const action =
-            this[
-                `_press${keyAction.charAt(0).toUpperCase()}${keyAction.slice(1)}`
-            ];
+    Object.entries(config).forEach(([keyAction, keys]) => {
+        const methodName = `_${configName}${keyAction.charAt(0).toUpperCase()}${keyAction.slice(1)}`;
+        const action = this[methodName];
+
         if (keys && typeof action === "function") {
             this._keyActionTable.push({
                 match: this._matchKeys(keys),
