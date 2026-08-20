@@ -28,12 +28,6 @@ export default function BaseSlider(options) {
         configurable: false,
     });
 
-    Object.defineProperty(this, "_keyboardManager", {
-        value: new KeyboardManager(),
-        writable: false,
-        configurable: false,
-    });
-
     Object.defineProperty(this, "_eventManager", {
         value: new EventManager(BaseSlider.EVENT_MAP_KEY),
         writable: false,
@@ -53,7 +47,6 @@ BaseSlider.prototype = {
         this._initProps();
         this._updateSlideWidth();
         this._buttonManager.init(this, "click");
-        this._keyboardManager.init(this, "press");
         this._eventManager.init(this);
     },
 

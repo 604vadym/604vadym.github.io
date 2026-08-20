@@ -5,11 +5,22 @@ import PaginationSlider from "./pagination-slider.js";
 
 export default function KeyboardSlider(options) {
     PaginationSlider.call(this, options);
+
+    Object.defineProperty(this, "_keyboardManager", {
+        value: new KeyboardManager(),
+        writable: false,
+        configurable: false,
+    });
 }
 
 KeyboardSlider.prototype = Object.create(PaginationSlider.prototype);
 KeyboardSlider.prototype.constructor = KeyboardSlider;
 Object.setPrototypeOf(KeyboardSlider, PaginationSlider);
+
+KeyboardSlider.prototype.init = function () {
+    PaginationSlider.prototype.init.call(this);
+    this._keyboardManager.init(this, "press");
+};
 
 KeyboardSlider.prototype._pressExecute = function (e) {
     const activeElement = document.activeElement;
