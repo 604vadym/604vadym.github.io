@@ -1,9 +1,6 @@
 "use strict";
 
-export default function EventManager(eventMapKey) {
-    this._eventTable = {};
-    this._eventMapKey = eventMapKey;
-}
+export default function EventManager() {}
 
 EventManager.prototype = {
     constructor: EventManager,
@@ -13,12 +10,17 @@ EventManager.prototype = {
         if (handle) handle(e);
     },
 
-    init(instance) {
+    init(instance, eventMapKey) {
+        this._initEventTable(instance, eventMapKey);
+    },
+
+    _initEventTable(instance, eventMapKey) {
+        this._eventTable = {};
         let proto = Object.getPrototypeOf(instance);
 
         while (proto && proto.constructor !== Object) {
             const constructor = proto.constructor;
-            const eventMap = constructor[this._eventMapKey];
+            const eventMap = constructor[eventMapKey];
             const className = constructor.name;
 
             if (eventMap) {

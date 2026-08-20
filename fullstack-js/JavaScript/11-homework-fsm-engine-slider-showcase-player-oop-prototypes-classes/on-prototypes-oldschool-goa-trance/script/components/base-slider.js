@@ -29,7 +29,7 @@ export default function BaseSlider(options) {
     });
 
     Object.defineProperty(this, "_eventManager", {
-        value: new EventManager(BaseSlider.EVENT_MAP_KEY),
+        value: new EventManager(),
         writable: false,
         configurable: false,
     });
@@ -47,7 +47,7 @@ BaseSlider.prototype = {
         this._initProps();
         this._updateSlideWidth();
         this._buttonManager.init(this, "click");
-        this._eventManager.init(this);
+        this._eventManager.init(this, BaseSlider.EVENT_MAP_KEY);
     },
 
     _initDOMElements(childElements) {
