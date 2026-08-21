@@ -136,30 +136,30 @@ DraggableSlider[DraggableSlider.EVENT_MAP_KEY] = {
         target: (instance) => instance._slider,
         handler: DraggableSlider.prototype._handleMouseDownTouchStart,
     },
-    // touchstart: {
-    //     target: (instance) => instance._slider,
-    //     handler: DraggableSlider.prototype._handleMouseDownTouchStart,
-    // },
+    touchstart: {
+        target: (instance) => instance._slider,
+        handler: DraggableSlider.prototype._handleMouseDownTouchStart,
+    },
     mousemove: {
         target: (instance) => document,
         handler: DraggableSlider.prototype._handleMouseMoveTouchMove,
     },
-    // touchmove: {
-    //     target: (instance) => document,
-    //     handler: DraggableSlider.prototype._handleMouseMoveTouchMove,
-    // },
+    touchmove: {
+        target: (instance) => document,
+        handler: DraggableSlider.prototype._handleMouseMoveTouchMove,
+    },
     mouseup: {
         target: (instance) => document,
         handler: DraggableSlider.prototype._handleMouseUpTouchEnd,
     },
-    // touchend: {
-    //     target: (instance) => document,
-    //     handler: DraggableSlider.prototype._handleMouseUpTouchEnd,
-    // },
-    // touchcancel: {
-    //     target: (instance) => instance._slider,
-    //     handler: () => this._stopDragging(),
-    // },
+    touchend: {
+        target: (instance) => document,
+        handler: DraggableSlider.prototype._handleMouseUpTouchEnd,
+    },
+    touchcancel: {
+        target: (instance) => instance._slider,
+        handler: () => this._stopDragging(),
+    },
     dragstart: {
         target: (instance) => instance._slider,
         handler: (e) => e.preventDefault(),

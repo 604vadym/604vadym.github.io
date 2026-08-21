@@ -57,18 +57,6 @@ EventManager.prototype = {
             const [targetKey, handlerKey] = Object.keys(eventConfig);
             const target = eventConfig[targetKey];
             const handler = eventConfig[handlerKey];
-            const targetElement =
-                typeof target === "function" ? target(instance) : null;
-
-            if (targetElement) {
-                const isEventSupported = `on${event}` in targetElement;
-                if (!isEventSupported) {
-                    throw new TypeError(
-                        `[EventManager]: invalid or unsupported event "${event}" in "${className}"\n` +
-                            `target element does not support this event`,
-                    );
-                }
-            }
 
             if (typeof target !== "function" || typeof handler !== "function") {
                 throw new TypeError(
