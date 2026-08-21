@@ -6,13 +6,6 @@ import ButtonManager from "../services/button-manager.js";
 import KeyboardManager from "../services/keyboard-manager.js";
 import EventManager from "../services/event-manager.js";
 
-BaseSlider.EVENT_MAP_KEY = "EVENT_MAP";
-
-BaseSlider.STATES = {
-    IDLE: "IDLE",
-    MOVING: "MOVING",
-};
-
 export default function BaseSlider(options) {
     this._options = options;
 
@@ -34,6 +27,13 @@ export default function BaseSlider(options) {
         configurable: false,
     });
 }
+
+BaseSlider.EVENT_MAP_KEY = "EVENT_MAP";
+
+BaseSlider.STATES = {
+    IDLE: "IDLE",
+    MOVING: "MOVING",
+};
 
 BaseSlider.prototype = {
     constructor: BaseSlider,
@@ -91,13 +91,24 @@ BaseSlider.prototype = {
     _initProps() {
         this._state = this.constructor.STATES.IDLE;
         this._slidesCount = this._slides.length;
-        this._trackTransition = this._track.style.transition;
         this._currentIndex = 0;
         this._slideWidth = 0;
     },
 
-    _isInputBlocked() {
-        return this._state === this.constructor.STATES.MOVING;
+    _nextSlide() {
+        this._goToSlide(this._normaliseIndex() + 1);
+    },
+
+    _prevSlide() {
+        this._goToSlide(this._normaliseIndex() - 1);
+    },
+
+    _goToSlide(index) {
+        const oldIndex = this._currentIndex;
+        this._currentIndex = this._normaliseIndex(index);
+        if (this._currentIndex !== oldIndex) {
+            this._updateSlider();
+        }
     },
 
     _updateSlider() {
@@ -121,20 +132,8 @@ BaseSlider.prototype = {
         return (sourceIndex + this._slidesCount) % this._slidesCount;
     },
 
-    _nextSlide() {
-        this._goToSlide(this._normaliseIndex() + 1);
-    },
-
-    _prevSlide() {
-        this._goToSlide(this._normaliseIndex() - 1);
-    },
-
-    _goToSlide(index) {
-        const oldIndex = this._currentIndex;
-        this._currentIndex = this._normaliseIndex(index);
-        if (this._currentIndex !== oldIndex) {
-            this._updateSlider();
-        }
+    _isInputBlocked() {
+        return this._state === this.constructor.STATES.MOVING;
     },
 
     _clickNext() {

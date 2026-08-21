@@ -16,6 +16,20 @@ PaginationSlider.prototype.init = function () {
     this._initPagination();
 };
 
+PaginationSlider.prototype._initPagination = function () {
+    this._paginationDots = [];
+
+    for (let i = 0; i < this._slidesCount; i++) {
+        const dot = document.createElement("button");
+        dot.classList.add(this._options.classes.button);
+        dot.classList.add(this._options.classes.paginationDot);
+        this._paginationDots.push(this._pagination.appendChild(dot));
+    }
+    this._paginationDots[0].classList.add(
+        this._options.classesActive.paginationDot,
+    );
+};
+
 PaginationSlider.prototype._initDOMElements = function (childElements) {
     const pagination = document.querySelector(
         this._options.singleSelectors.pagination,
@@ -42,20 +56,6 @@ PaginationSlider.prototype._updatePagination = function () {
         activeDot.classList.remove(this._options.classesActive.paginationDot);
     }
     this._paginationDots[this._normaliseIndex()].classList.add(
-        this._options.classesActive.paginationDot,
-    );
-};
-
-PaginationSlider.prototype._initPagination = function () {
-    this._paginationDots = [];
-
-    for (let i = 0; i < this._slidesCount; i++) {
-        const dot = document.createElement("button");
-        dot.classList.add(this._options.classes.button);
-        dot.classList.add(this._options.classes.paginationDot);
-        this._paginationDots.push(this._pagination.appendChild(dot));
-    }
-    this._paginationDots[0].classList.add(
         this._options.classesActive.paginationDot,
     );
 };

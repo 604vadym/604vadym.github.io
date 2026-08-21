@@ -22,6 +22,18 @@ KeyboardSlider.prototype.init = function () {
     this._keyboardManager.init(this, "press");
 };
 
+KeyboardSlider.prototype._pressNext = function (e) {
+    e.preventDefault();
+    if (this._isInputBlocked()) return;
+    this._nextSlide();
+};
+
+KeyboardSlider.prototype._pressPrev = function (e) {
+    e.preventDefault();
+    if (this._isInputBlocked()) return;
+    this._prevSlide();
+};
+
 KeyboardSlider.prototype._pressExecute = function (e) {
     const activeElement = document.activeElement;
     const isButton = activeElement?.closest(`.${this._options.classes.button}`);
@@ -45,18 +57,6 @@ KeyboardSlider.prototype._pressReset = function (e) {
     if (e.shiftKey) {
         // hardResetSlider();
     }
-};
-
-KeyboardSlider.prototype._pressNext = function (e) {
-    e.preventDefault();
-    if (this._isInputBlocked()) return;
-    this._nextSlide();
-};
-
-KeyboardSlider.prototype._pressPrev = function (e) {
-    e.preventDefault();
-    if (this._isInputBlocked()) return;
-    this._prevSlide();
 };
 
 KeyboardSlider.prototype._pressIgnore = function (e) {

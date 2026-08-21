@@ -16,18 +16,6 @@ InfiniteSlider.prototype.init = function () {
     this._teleportSlides();
 };
 
-InfiniteSlider.prototype._initProps = function () {
-    KeyboardSlider.prototype._initProps.call(this);
-    this._currentIndex = 1;
-    this._teleportMap = { 0: this._slidesCount, [this._slidesCount + 1]: 1 };
-};
-
-InfiniteSlider.prototype._normaliseIndex = function (index = null) {
-    return index !== null
-        ? index + 1
-        : (this._currentIndex - 1 + this._slidesCount) % this._slidesCount;
-};
-
 InfiniteSlider.prototype._initInfiniteLoop = function () {
     const cloneOfFirst = this._slides[0].cloneNode(true);
     const cloneOfLast = this._slides[this._slidesCount - 1].cloneNode(true);
@@ -38,12 +26,25 @@ InfiniteSlider.prototype._initInfiniteLoop = function () {
     );
 };
 
+InfiniteSlider.prototype._initProps = function () {
+    KeyboardSlider.prototype._initProps.call(this);
+    this._currentIndex = 1;
+    this._trackTransition = this._track.style.transition;
+    this._teleportMap = { 0: this._slidesCount, [this._slidesCount + 1]: 1 };
+};
+
+InfiniteSlider.prototype._normaliseIndex = function (index = null) {
+    return index !== null
+        ? index + 1
+        : (this._currentIndex - 1 + this._slidesCount) % this._slidesCount;
+};
+
 InfiniteSlider.prototype._teleportSlides = function () {
-    this._track.style.transition = "none";
+    this._disableAnimation();
     this._updateSlider();
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-            this._track.style.transition = this._trackTransition;
+            this._enableAnimation();
             this._state = this.constructor.STATES.IDLE;
         });
     });
@@ -55,6 +56,14 @@ InfiniteSlider.prototype._resetLoop = function () {
         return true;
     }
     return false;
+};
+
+InfiniteSlider.prototype._enableAnimation = function () {
+    this._track.style.transition = this._trackTransition;
+};
+
+InfiniteSlider.prototype._disableAnimation = function () {
+    this._track.style.transition = "none";
 };
 
 InfiniteSlider.prototype._handleTransitionEnd = function () {

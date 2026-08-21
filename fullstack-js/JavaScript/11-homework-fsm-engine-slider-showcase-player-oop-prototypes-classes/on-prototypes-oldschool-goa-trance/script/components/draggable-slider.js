@@ -32,7 +32,7 @@ DraggableSlider.prototype._startDragging = function (e) {
     this._isDragging = true;
     this._pointerStartX = this._getClientX(e);
     this._updateSlideWidth();
-    this._track.style.transition = "none";
+    this._disableAnimation();
 };
 
 DraggableSlider.prototype._moveConveyor = function (currentPointerX) {
@@ -44,7 +44,7 @@ DraggableSlider.prototype._moveConveyor = function (currentPointerX) {
     } else {
         this._isDragging = false;
         this._isDraggingInterrupted = true;
-        this._track.style.transition = this._trackTransition;
+        this._enableAnimation();
 
         if (pointerOffset < 0) {
             this._nextSlide();
@@ -59,7 +59,7 @@ DraggableSlider.prototype._stopDragging = function (
     e = null,
 ) {
     this._isDragging = false;
-    this._track.style.transition = this._trackTransition;
+    this._enableAnimation();
 
     if (pointerOffset === null) {
         this._updateSlider();

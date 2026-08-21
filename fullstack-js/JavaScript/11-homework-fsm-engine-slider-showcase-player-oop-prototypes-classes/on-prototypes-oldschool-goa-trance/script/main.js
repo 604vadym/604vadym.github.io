@@ -73,10 +73,10 @@ const slider = new Slider({
     },
 
     press: {
-        execute: ["Enter"],
-        reset: ["Escape"],
         next: ["ArrowRight", "KeyD"],
         prev: ["ArrowLeft", "KeyA"],
+        execute: ["Enter"],
+        reset: ["Escape"],
         ignore: ["PageDown", "PageUp", "End"],
     },
 });
