@@ -29,7 +29,6 @@ InfiniteSlider.prototype._initInfiniteLoop = function () {
 InfiniteSlider.prototype._initProps = function () {
     KeyboardSlider.prototype._initProps.call(this);
     this._currentIndex = 1;
-    this._trackTransition = this._track.style.transition;
     this._teleportMap = { 0: this._slidesCount, [this._slidesCount + 1]: 1 };
 };
 
@@ -56,14 +55,6 @@ InfiniteSlider.prototype._resetLoop = function () {
         return true;
     }
     return false;
-};
-
-InfiniteSlider.prototype._enableAnimation = function () {
-    this._track.style.transition = this._trackTransition;
-};
-
-InfiniteSlider.prototype._disableAnimation = function () {
-    this._track.style.transition = "none";
 };
 
 InfiniteSlider.prototype._handleTransitionEnd = function () {

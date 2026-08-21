@@ -64,6 +64,7 @@ const slider = new Slider({
 
     states: {
         keyboardBtnPressed: "is-pressed",
+        resizing: "slider--resizing",
     },
 
     click: {

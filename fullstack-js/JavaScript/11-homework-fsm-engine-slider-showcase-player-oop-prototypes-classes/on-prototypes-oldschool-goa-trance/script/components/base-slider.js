@@ -89,10 +89,13 @@ BaseSlider.prototype = {
     },
 
     _initProps() {
-        this._state = this.constructor.STATES.IDLE;
+        this._trackTransition = this._track.style.transition;
         this._slidesCount = this._slides.length;
+        this._state = this.constructor.STATES.IDLE;
         this._currentIndex = 0;
         this._slideWidth = 0;
+        this._isResizing = false;
+        this._resizeTimeoutId = null;
     },
 
     _nextSlide() {
@@ -114,12 +117,20 @@ BaseSlider.prototype = {
     _updateSlider() {
         this._state = this.constructor.STATES.MOVING;
 
-        if (helper.hasFinePointer()) {
+        if (helper.hasFinePointer() || this._isResizing) {
             this._track.style.transform = `translateX(-${this._currentIndex * 100}%)`;
         } else {
             const offset = this._currentIndex * this._slideWidth;
             this._track.style.transform = `translateX(-${offset}px)`;
         }
+    },
+
+    _updateSliderInstantly() {
+        this._disableAnimation();
+        this._updateSlider();
+        this._track.offsetHeight;
+        this._enableAnimation();
+        this._state = this.constructor.STATES.IDLE;
     },
 
     _updateSlideWidth() {
@@ -130,6 +141,14 @@ BaseSlider.prototype = {
         const sourceIndex = index !== null ? index : this._currentIndex;
 
         return (sourceIndex + this._slidesCount) % this._slidesCount;
+    },
+
+    _enableAnimation() {
+        this._track.style.transition = this._trackTransition;
+    },
+
+    _disableAnimation() {
+        this._track.style.transition = "none";
     },
 
     _isInputBlocked() {
@@ -145,8 +164,16 @@ BaseSlider.prototype = {
     },
 
     _handleClick(e) {
+        if (e.button === 2) {
+            e.preventDefault();
+            return;
+        }
         const button = e.target.closest(`.${this._options.classes.button}`);
         if (!button || this._isInputBlocked()) return;
+
+        if (e.pointerType === "mouse" || e.pointerType === "touch") {
+            button.blur();
+        }
 
         this._buttonManager.manage(button);
     },
@@ -154,10 +181,28 @@ BaseSlider.prototype = {
     _handleTransitionEnd() {
         this._state = this.constructor.STATES.IDLE;
     },
+
+    _handleResize() {
+        clearTimeout(this._resizeTimeoutId);
+        this._isResizing = true;
+        this._slider.classList.add(this._options.states.resizing);
+        this._updateSliderInstantly();
+
+        this._resizeTimeoutId = setTimeout(() => {
+            this._isResizing = false;
+            this._slider.classList.remove(this._options.states.resizing);
+            this._updateSlideWidth();
+            this._updateSliderInstantly();
+        }, 8);
+    },
 };
 
 BaseSlider[BaseSlider.EVENT_MAP_KEY] = {
     click: {
+        target: (instance) => instance._slider,
+        handler: BaseSlider.prototype._handleClick,
+    },
+    auxclick: {
         target: (instance) => instance._slider,
         handler: BaseSlider.prototype._handleClick,
     },
@@ -168,5 +213,9 @@ BaseSlider[BaseSlider.EVENT_MAP_KEY] = {
     dragstart: {
         target: (instance) => instance._slider,
         handler: (e) => e.preventDefault(),
+    },
+    resize: {
+        target: (instance) => window,
+        handler: BaseSlider.prototype._handleResize,
     },
 };
