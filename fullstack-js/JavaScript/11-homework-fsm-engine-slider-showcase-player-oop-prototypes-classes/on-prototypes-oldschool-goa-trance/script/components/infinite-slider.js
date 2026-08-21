@@ -33,8 +33,8 @@ InfiniteSlider.prototype._initProps = function () {
     this._teleportMap = { 0: this._slidesCount, [this._slidesCount + 1]: 1 };
 };
 
-InfiniteSlider.prototype._hardResetSlider = function () {
-    KeyboardSlider.prototype._hardResetSlider.call(this);
+InfiniteSlider.prototype._hardReset = function () {
+    KeyboardSlider.prototype._hardReset.call(this);
     this._currentIndex = this._startIndex;
 };
 

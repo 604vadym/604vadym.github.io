@@ -1,6 +1,5 @@
 "use strict";
 
-import * as helper from "../utils/helpers.js";
 import BaseSlider from "./base-slider.js";
 
 export default function PaginationSlider(options) {

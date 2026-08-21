@@ -1,7 +1,7 @@
 "use strict";
 
-import KeyboardManager from "../services/keyboard-manager.js";
 import PaginationSlider from "./pagination-slider.js";
+import KeyboardManager from "../services/keyboard-manager.js";
 
 export default function KeyboardSlider(options) {
     PaginationSlider.call(this, options);
@@ -22,7 +22,7 @@ KeyboardSlider.prototype.init = function () {
     this._keyboardManager.init(this, "press");
 };
 
-KeyboardSlider.prototype._hardResetSlider = function () {
+KeyboardSlider.prototype._hardReset = function () {
     this._currentIndex = this._startIndex;
     this._isResizing = false;
     clearTimeout(this._resizeTimeoutId);
@@ -63,7 +63,7 @@ KeyboardSlider.prototype._pressReset = function (e) {
     if (e.ctrlKey || e.altKey || e.metaKey) return;
     e.preventDefault();
     if (e.shiftKey) {
-        this._hardResetSlider();
+        this._hardReset();
     }
 };
 

@@ -3,7 +3,6 @@
 import * as helper from "../utils/helpers.js";
 import DOMValidator from "../services/dom-validator.js";
 import ButtonManager from "../services/button-manager.js";
-import KeyboardManager from "../services/keyboard-manager.js";
 import EventManager from "../services/event-manager.js";
 
 export default function BaseSlider(options) {
@@ -196,8 +195,8 @@ BaseSlider.prototype = {
     },
 
     _handleResize() {
-        clearTimeout(this._resizeTimeoutId);
         this._isResizing = true;
+        clearTimeout(this._resizeTimeoutId);
         this._slider.classList.add(this._options.states.resizing);
         this._updateSliderInstantly();
 
@@ -228,7 +227,7 @@ BaseSlider[BaseSlider.EVENT_MAP_KEY] = {
         handler: (e) => e.preventDefault(),
     },
     resize: {
-        target: (instance) => window,
+        target: () => window,
         handler: BaseSlider.prototype._handleResize,
     },
 };

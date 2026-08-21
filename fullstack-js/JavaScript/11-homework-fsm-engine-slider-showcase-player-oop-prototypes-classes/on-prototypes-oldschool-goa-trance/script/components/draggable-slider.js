@@ -22,8 +22,8 @@ DraggableSlider.prototype._initProps = function () {
     this._isDraggingInterrupted = false;
 };
 
-DraggableSlider.prototype._hardResetSlider = function () {
-    InfiniteSlider.prototype._hardResetSlider.call(this);
+DraggableSlider.prototype._hardReset = function () {
+    InfiniteSlider.prototype._hardReset.call(this);
     this._pointerStartX = 0;
     this._isDragging = false;
     this._isDraggingInterrupted = false;
@@ -90,10 +90,6 @@ DraggableSlider.prototype._stopDragging = function (
             }
         } else {
             this._updateSlider();
-        }
-    } else {
-        if (e && helper.hasFinePointer() && e.button === 1) {
-            e.preventDefault();
         }
     }
 };

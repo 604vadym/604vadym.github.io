@@ -1,5 +1,7 @@
 "use strict";
 
+export default function KeyboardManager() {}
+
 KeyboardManager.KEY_MAP = {
     Enter: "key",
     Escape: "key",
@@ -15,8 +17,6 @@ KeyboardManager.KEY_MAP = {
 KeyboardManager.getKeyParam = function (key) {
     return KeyboardManager.KEY_MAP[key] || "code";
 };
-
-export default function KeyboardManager() {}
 
 KeyboardManager.prototype = {
     constructor: KeyboardManager,
