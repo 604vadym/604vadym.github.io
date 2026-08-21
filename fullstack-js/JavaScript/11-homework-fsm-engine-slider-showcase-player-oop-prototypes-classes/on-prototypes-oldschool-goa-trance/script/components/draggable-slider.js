@@ -22,6 +22,13 @@ DraggableSlider.prototype._initProps = function () {
     this._isDraggingInterrupted = false;
 };
 
+DraggableSlider.prototype._hardResetSlider = function () {
+    InfiniteSlider.prototype._hardResetSlider.call(this);
+    this._pointerStartX = 0;
+    this._isDragging = false;
+    this._isDraggingInterrupted = false;
+};
+
 DraggableSlider.prototype._isInputBlocked = function () {
     return (
         InfiniteSlider.prototype._isInputBlocked.call(this) || this._isDragging
@@ -85,7 +92,6 @@ DraggableSlider.prototype._stopDragging = function (
     } else {
         if (e && helper.hasFinePointer() && e.button === 1) {
             e.preventDefault();
-            return;
         }
     }
 };

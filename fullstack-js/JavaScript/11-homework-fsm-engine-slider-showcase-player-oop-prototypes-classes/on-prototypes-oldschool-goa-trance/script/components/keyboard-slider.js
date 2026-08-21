@@ -22,6 +22,14 @@ KeyboardSlider.prototype.init = function () {
     this._keyboardManager.init(this, "press");
 };
 
+KeyboardSlider.prototype._hardResetSlider = function () {
+    this._currentIndex = this._startIndex;
+    this._isResizing = false;
+    clearTimeout(this._resizeTimeoutId);
+    this._slider.classList.remove(this._options.states.resizing);
+    this._updateSliderInstantly();
+};
+
 KeyboardSlider.prototype._pressNext = function (e) {
     e.preventDefault();
     if (this._isInputBlocked()) return;
@@ -55,7 +63,7 @@ KeyboardSlider.prototype._pressReset = function (e) {
     if (e.ctrlKey || e.altKey || e.metaKey) return;
     e.preventDefault();
     if (e.shiftKey) {
-        // hardResetSlider();
+        this._hardResetSlider();
     }
 };
 

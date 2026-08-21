@@ -28,8 +28,14 @@ InfiniteSlider.prototype._initInfiniteLoop = function () {
 
 InfiniteSlider.prototype._initProps = function () {
     KeyboardSlider.prototype._initProps.call(this);
-    this._currentIndex = 1;
+    this._startIndex = 1;
+    this._currentIndex = this._startIndex;
     this._teleportMap = { 0: this._slidesCount, [this._slidesCount + 1]: 1 };
+};
+
+InfiniteSlider.prototype._hardResetSlider = function () {
+    KeyboardSlider.prototype._hardResetSlider.call(this);
+    this._currentIndex = this._startIndex;
 };
 
 InfiniteSlider.prototype._normaliseIndex = function (index = null) {
