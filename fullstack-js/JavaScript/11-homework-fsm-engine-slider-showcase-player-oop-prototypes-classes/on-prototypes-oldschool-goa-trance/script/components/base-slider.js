@@ -96,6 +96,10 @@ BaseSlider.prototype = {
         this._slideWidth = 0;
     },
 
+    _isInputBlocked() {
+        return this._state === this.constructor.STATES.MOVING;
+    },
+
     _updateSlider() {
         this._state = this.constructor.STATES.MOVING;
 
@@ -143,7 +147,7 @@ BaseSlider.prototype = {
 
     _handleClick(e) {
         const button = e.target.closest(`.${this._options.classes.button}`);
-        if (!button || this._state === this.constructor.STATES.MOVING) return;
+        if (!button || this._isInputBlocked()) return;
 
         this._buttonManager.manage(button);
     },

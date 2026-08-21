@@ -26,7 +26,7 @@ KeyboardSlider.prototype._pressExecute = function (e) {
     const activeElement = document.activeElement;
     const isButton = activeElement?.closest(`.${this._options.classes.button}`);
 
-    if (isButton && this._state === this.constructor.STATES.MOVING) {
+    if (isButton && this._isInputBlocked()) {
         e.preventDefault();
         return;
     }
@@ -49,13 +49,13 @@ KeyboardSlider.prototype._pressReset = function (e) {
 
 KeyboardSlider.prototype._pressNext = function (e) {
     e.preventDefault();
-    if (this._state === this.constructor.STATES.MOVING) return;
+    if (this._isInputBlocked()) return;
     this._nextSlide();
 };
 
 KeyboardSlider.prototype._pressPrev = function (e) {
     e.preventDefault();
-    if (this._state === this.constructor.STATES.MOVING) return;
+    if (this._isInputBlocked()) return;
     this._prevSlide();
 };
 

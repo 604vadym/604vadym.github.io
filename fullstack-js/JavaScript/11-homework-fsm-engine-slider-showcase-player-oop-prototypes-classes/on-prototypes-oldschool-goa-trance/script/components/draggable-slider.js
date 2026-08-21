@@ -22,6 +22,12 @@ DraggableSlider.prototype._initProps = function () {
     this._isDraggingInterrupted = false;
 };
 
+DraggableSlider.prototype._isInputBlocked = function () {
+    return (
+        InfiniteSlider.prototype._isInputBlocked.call(this) || this._isDragging
+    );
+};
+
 DraggableSlider.prototype._startDragging = function (e) {
     this._isDragging = true;
     this._pointerStartX = this._getClientX(e);
@@ -41,11 +47,10 @@ DraggableSlider.prototype._moveConveyor = function (currentPointerX) {
         this._track.style.transition = this._trackTransition;
 
         if (pointerOffset < 0) {
-            ++this._currentIndex;
+            this._nextSlide();
         } else {
-            --this._currentIndex;
+            this._prevSlide();
         }
-        this._updateSlider();
     }
 };
 
@@ -70,12 +75,13 @@ DraggableSlider.prototype._stopDragging = function (
     if (pointerOffset) {
         if (Math.abs(pointerOffset) > triggerThreshold) {
             if (pointerOffset < 0) {
-                ++this._currentIndex;
+                this._nextSlide();
             } else {
-                --this._currentIndex;
+                this._prevSlide();
             }
+        } else {
+            this._updateSlider();
         }
-        this._updateSlider();
     } else {
         if (e && helper.hasFinePointer() && e.button === 1) {
             e.preventDefault();
