@@ -51,6 +51,7 @@ const slider = new Slider({
     classes: {
         button: "button",
         paginationDot: "pagination__dot",
+        track: "slider__track",
     },
 
     classesActive: {

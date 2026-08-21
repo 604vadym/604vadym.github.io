@@ -89,7 +89,7 @@ DraggableSlider.prototype._getClientX = function (e) {
 };
 
 DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
-    if (this._state === DraggableSlider.STATES.MOVING) return;
+    if (this._state === this.constructor.STATES.MOVING) return;
 
     if (e.type === "mousedown" && !helper.hasFinePointer()) {
         return;
@@ -100,7 +100,7 @@ DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
         return;
     }
 
-    if (e.target.closest(".slider__track")) {
+    if (e.target.closest(`.${this._options.classes.track}`)) {
         if (e.touches && e.touches.length > 1) {
             this._stopDragging();
             return;
@@ -159,9 +159,5 @@ DraggableSlider[DraggableSlider.EVENT_MAP_KEY] = {
     touchcancel: {
         target: (instance) => instance._slider,
         handler: () => this._stopDragging(),
-    },
-    dragstart: {
-        target: (instance) => instance._slider,
-        handler: (e) => e.preventDefault(),
     },
 };

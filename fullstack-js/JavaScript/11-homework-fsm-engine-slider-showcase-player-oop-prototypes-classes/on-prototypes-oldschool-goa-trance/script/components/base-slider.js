@@ -89,7 +89,7 @@ BaseSlider.prototype = {
     },
 
     _initProps() {
-        this._state = BaseSlider.STATES.IDLE;
+        this._state = this.constructor.STATES.IDLE;
         this._slidesCount = this._slides.length;
         this._trackTransition = this._track.style.transition;
         this._currentIndex = 0;
@@ -97,7 +97,7 @@ BaseSlider.prototype = {
     },
 
     _updateSlider() {
-        this._state = BaseSlider.STATES.MOVING;
+        this._state = this.constructor.STATES.MOVING;
 
         if (helper.hasFinePointer()) {
             this._track.style.transform = `translateX(-${this._currentIndex * 100}%)`;
@@ -143,13 +143,13 @@ BaseSlider.prototype = {
 
     _handleClick(e) {
         const button = e.target.closest(`.${this._options.classes.button}`);
-        if (!button || this._state === BaseSlider.STATES.MOVING) return;
+        if (!button || this._state === this.constructor.STATES.MOVING) return;
 
         this._buttonManager.manage(button);
     },
 
     _handleTransitionEnd() {
-        this._state = BaseSlider.STATES.IDLE;
+        this._state = this.constructor.STATES.IDLE;
     },
 };
 
@@ -161,5 +161,9 @@ BaseSlider[BaseSlider.EVENT_MAP_KEY] = {
     transitionend: {
         target: (instance) => instance._track,
         handler: BaseSlider.prototype._handleTransitionEnd,
+    },
+    dragstart: {
+        target: (instance) => instance._slider,
+        handler: (e) => e.preventDefault(),
     },
 };
