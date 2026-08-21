@@ -41,19 +41,17 @@ KeyboardManager.prototype = {
             const methodName = `_${configName}${keyAction.charAt(0).toUpperCase()}${keyAction.slice(1)}`;
             const action = instance[methodName];
 
-            if (keys) {
-                this._assertMethodContract(
-                    action,
-                    methodName,
-                    configName,
-                    instance.constructor.name,
-                );
+            this._assertMethodContract(
+                action,
+                methodName,
+                configName,
+                instance.constructor.name,
+            );
 
-                this._keyActionTable.push({
-                    match: this._matchKeys(keys),
-                    action: (e) => action.call(instance, e),
-                });
-            }
+            this._keyActionTable.push({
+                match: this._matchKeys(keys),
+                action: (e) => action.call(instance, e),
+            });
         });
     },
 

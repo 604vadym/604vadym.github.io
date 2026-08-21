@@ -5,37 +5,34 @@ export default function EventManager() {}
 EventManager.prototype = {
     constructor: EventManager,
 
-    init(instance, eventMapKey, targetKey, handlerKey) {
-        this._initEventTable(instance, eventMapKey, targetKey, handlerKey);
+    init(instance, eventMapKey) {
+        this._initEventHandlerTable(instance, eventMapKey);
     },
 
     handleEvent(e) {
-        const handle = this._eventTable[e.type];
+        const handle = this._eventHandlerTable[e.type];
+
         if (handle) handle(e);
     },
 
-    _initEventTable(instance, eventMapKey, targetKey, handlerKey) {
+    _initEventHandlerTable(instance, eventMapKey) {
         let proto = Object.getPrototypeOf(instance);
 
-        this._eventTable = {};
+        this._eventHandlerTable = {};
         while (proto && proto.constructor !== Object) {
             const constructor = proto.constructor;
             const eventMap = constructor[eventMapKey];
             const className = constructor.name;
 
             if (eventMap) {
-                this._assertEventMapContract(
-                    eventMap,
-                    targetKey,
-                    handlerKey,
-                    className,
-                    instance,
-                );
+                this._assertEventMapContract(eventMap, className, instance);
 
                 Object.entries(eventMap).forEach(([event, eventConfig]) => {
+                    const [targetKey, handlerKey] = Object.keys(eventConfig);
                     const target = eventConfig[targetKey];
                     const handler = eventConfig[handlerKey];
-                    if (!this._eventTable[event]) {
+
+                    if (!this._eventHandlerTable[event]) {
                         const targetElement = target(instance);
 
                         this._assertTargetElement(
@@ -44,7 +41,7 @@ EventManager.prototype = {
                             className,
                         );
 
-                        this._eventTable[event] = (e) =>
+                        this._eventHandlerTable[event] = (e) =>
                             handler.call(instance, e);
 
                         targetElement.addEventListener(event, this);
@@ -55,14 +52,9 @@ EventManager.prototype = {
         }
     },
 
-    _assertEventMapContract(
-        eventMap,
-        targetKey,
-        handlerKey,
-        className,
-        instance,
-    ) {
+    _assertEventMapContract(eventMap, className, instance) {
         Object.entries(eventMap).forEach(([event, eventConfig]) => {
+            const [targetKey, handlerKey] = Object.keys(eventConfig);
             const target = eventConfig[targetKey];
             const handler = eventConfig[handlerKey];
             const targetElement =
@@ -81,7 +73,7 @@ EventManager.prototype = {
             if (typeof target !== "function" || typeof handler !== "function") {
                 throw new TypeError(
                     `[EventManager]: broken contract in "${className}"\n` +
-                        `event "${event}" must provide valid "${targetKey}" and "${handlerKey}" functions`,
+                        `event "${event}" must provide valid functions`,
                 );
             }
         });

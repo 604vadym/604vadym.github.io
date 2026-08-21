@@ -23,23 +23,21 @@ ButtonManager.prototype = {
         this._assertConfig(config, configName, instance.constructor.name);
 
         this._buttonActionTable = [];
-        Object.entries(config).forEach(([clickAction, buttonName]) => {
-            const methodName = `_${configName}${clickAction.charAt(0).toUpperCase()}${clickAction.slice(1)}`;
+        Object.entries(config).forEach(([buttonAction, buttonName]) => {
+            const methodName = `_${configName}${buttonAction.charAt(0).toUpperCase()}${buttonAction.slice(1)}`;
             const action = instance[methodName];
 
-            if (buttonName) {
-                this._assertMethodContract(
-                    action,
-                    methodName,
-                    configName,
-                    instance.constructor.name,
-                );
+            this._assertMethodContract(
+                action,
+                methodName,
+                configName,
+                instance.constructor.name,
+            );
 
-                this._buttonActionTable.push({
-                    buttonName: buttonName,
-                    action: (button) => action.call(instance, button),
-                });
-            }
+            this._buttonActionTable.push({
+                buttonName: buttonName,
+                action: (button) => action.call(instance, button),
+            });
         });
     },
 
