@@ -16,26 +16,53 @@ EventManager.prototype = {
     },
 
     subscribe(instance, eventMap) {
+        if (!eventMap) return;
+
+        const className = instance.constructor.name;
+
+        try {
+            this._assertEventMapContract(eventMap, className, instance);
+        } catch (error) {
+            console.warn(error);
+        }
+
         Object.entries(eventMap).forEach(([event, eventConfig]) => {
             const [targetKey, handlerKey] = Object.keys(eventConfig);
             const target = eventConfig[targetKey];
             const handler = eventConfig[handlerKey];
+
             const targetElement = target(instance);
 
-            this._eventHandlerTable[event] = (e) => handler.call(instance, e);
+            try {
+                this._assertTargetElement(targetElement, event, className);
+            } catch (error) {
+                console.warn(error);
+                return;
+            }
 
+            this._eventHandlerTable[event] = (e) => handler?.call(instance, e);
             targetElement.addEventListener(event, this);
         });
     },
 
     unsubscribe(instance, eventMap) {
+        if (!eventMap) return;
+
+        const className = instance.constructor.name;
+
         Object.entries(eventMap).forEach(([event, eventConfig]) => {
             const [targetKey] = Object.keys(eventConfig);
             const target = eventConfig[targetKey];
             const targetElement = target(instance);
 
-            targetElement.removeEventListener(event, this);
+            try {
+                this._assertTargetElement(targetElement, event, className);
+            } catch (error) {
+                console.warn(error);
+                return;
+            }
 
+            targetElement.removeEventListener(event, this);
             delete this._eventHandlerTable[event];
         });
     },
