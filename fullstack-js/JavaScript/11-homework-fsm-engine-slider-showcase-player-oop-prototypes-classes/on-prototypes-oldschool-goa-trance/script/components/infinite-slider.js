@@ -50,7 +50,7 @@ InfiniteSlider.prototype._teleportSlides = function () {
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
             this._enableAnimation();
-            this._state = this.constructor.STATES.IDLE;
+            this._state = "IDLE";
         });
     });
 };
@@ -67,7 +67,7 @@ InfiniteSlider.prototype._handleTransitionEnd = function () {
     if (this._resetLoop()) {
         this._teleportSlides();
     } else {
-        this._state = this.constructor.STATES.IDLE;
+        this._state = "IDLE";
     }
 };
 

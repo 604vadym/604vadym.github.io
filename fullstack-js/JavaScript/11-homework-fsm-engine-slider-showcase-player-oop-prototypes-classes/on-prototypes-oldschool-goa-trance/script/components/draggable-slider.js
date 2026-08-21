@@ -103,7 +103,7 @@ DraggableSlider.prototype._getClientX = function (e) {
 };
 
 DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
-    if (this._state === this.constructor.STATES.MOVING) return;
+    if (this.state === "MOVING") return;
 
     if (e.type === "mousedown" && !helper.hasFinePointer()) {
         return;

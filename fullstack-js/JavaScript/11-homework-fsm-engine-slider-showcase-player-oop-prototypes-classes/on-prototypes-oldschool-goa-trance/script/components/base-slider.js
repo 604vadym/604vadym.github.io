@@ -39,7 +39,19 @@ BaseSlider.prototype = {
     constructor: BaseSlider,
 
     get state() {
-        return this._state;
+        return this.__state;
+    },
+
+    set _state(stateKey) {
+        const state = this.constructor.STATES[stateKey];
+
+        if (!state) {
+            throw new TypeError(
+                `[FSM]: Invalid state transition token "${stateKey}"`,
+            );
+        }
+
+        this.__state = state;
     },
 
     init() {
@@ -91,7 +103,7 @@ BaseSlider.prototype = {
     _initProps() {
         this._trackTransition = this._track.style.transition;
         this._slidesCount = this._slides.length;
-        this._state = this.constructor.STATES.IDLE;
+        this._state = "IDLE";
         this._startIndex = 0;
         this._currentIndex = this._startIndex;
         this._slideWidth = 0;
@@ -116,7 +128,7 @@ BaseSlider.prototype = {
     },
 
     _updateSlider() {
-        this._state = this.constructor.STATES.MOVING;
+        this._state = "MOVING";
 
         if (helper.hasFinePointer() || this._isResizing) {
             this._track.style.transform = `translateX(-${this._currentIndex * 100}%)`;
@@ -131,7 +143,7 @@ BaseSlider.prototype = {
         this._updateSlider();
         this._track.offsetHeight;
         this._enableAnimation();
-        this._state = this.constructor.STATES.IDLE;
+        this._state = "IDLE";
     },
 
     _updateSlideWidth() {
@@ -153,7 +165,7 @@ BaseSlider.prototype = {
     },
 
     _isInputBlocked() {
-        return this._state === this.constructor.STATES.MOVING;
+        return this.state === "MOVING";
     },
 
     _clickNext() {
@@ -180,7 +192,7 @@ BaseSlider.prototype = {
     },
 
     _handleTransitionEnd() {
-        this._state = this.constructor.STATES.IDLE;
+        this._state = "IDLE";
     },
 
     _handleResize() {
