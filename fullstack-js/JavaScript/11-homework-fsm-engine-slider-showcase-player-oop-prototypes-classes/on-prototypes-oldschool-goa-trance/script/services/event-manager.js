@@ -15,6 +15,31 @@ EventManager.prototype = {
         if (handle) handle(e);
     },
 
+    subscribe(instance, eventMap) {
+        Object.entries(eventMap).forEach(([event, eventConfig]) => {
+            const [targetKey, handlerKey] = Object.keys(eventConfig);
+            const target = eventConfig[targetKey];
+            const handler = eventConfig[handlerKey];
+            const targetElement = target(instance);
+
+            this._eventHandlerTable[event] = (e) => handler.call(instance, e);
+
+            targetElement.addEventListener(event, this);
+        });
+    },
+
+    unsubscribe(instance, eventMap) {
+        Object.entries(eventMap).forEach(([event, eventConfig]) => {
+            const [targetKey] = Object.keys(eventConfig);
+            const target = eventConfig[targetKey];
+            const targetElement = target(instance);
+
+            targetElement.removeEventListener(event, this);
+
+            delete this._eventHandlerTable[event];
+        });
+    },
+
     _initEventHandlerTable(instance, eventMapKey) {
         let proto = Object.getPrototypeOf(instance);
 

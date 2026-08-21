@@ -40,6 +40,7 @@ DraggableSlider.prototype._startDragging = function (e) {
     this._pointerStartX = this._getClientX(e);
     this._updateSlideWidth();
     this._disableAnimation();
+    this._eventManager.subscribe(this, DraggableSlider.DYNAMIC_EVENT_MAP);
 };
 
 DraggableSlider.prototype._moveConveyor = function (currentPointerX) {
@@ -67,6 +68,7 @@ DraggableSlider.prototype._stopDragging = function (
 ) {
     this._isDragging = false;
     this._enableAnimation();
+    this._eventManager.unsubscribe(this, DraggableSlider.DYNAMIC_EVENT_MAP);
 
     if (pointerOffset === null) {
         this._updateSlider();
@@ -143,6 +145,29 @@ DraggableSlider.prototype._handleMouseUpTouchEnd = function (e) {
     this._stopDragging(pointerOffset, e);
 };
 
+DraggableSlider.DYNAMIC_EVENT_MAP = {
+    mousemove: {
+        target: () => document,
+        handler: DraggableSlider.prototype._handleMouseMoveTouchMove,
+    },
+    touchmove: {
+        target: () => document,
+        handler: DraggableSlider.prototype._handleMouseMoveTouchMove,
+    },
+    mouseup: {
+        target: () => document,
+        handler: DraggableSlider.prototype._handleMouseUpTouchEnd,
+    },
+    touchend: {
+        target: () => document,
+        handler: DraggableSlider.prototype._handleMouseUpTouchEnd,
+    },
+    touchcancel: {
+        target: (instance) => instance._slider,
+        handler: () => DraggableSlider.prototype._stopDragging(),
+    },
+};
+
 DraggableSlider[DraggableSlider.EVENT_MAP_KEY] = {
     mousedown: {
         target: (instance) => instance._slider,
@@ -151,25 +176,5 @@ DraggableSlider[DraggableSlider.EVENT_MAP_KEY] = {
     touchstart: {
         target: (instance) => instance._slider,
         handler: DraggableSlider.prototype._handleMouseDownTouchStart,
-    },
-    mousemove: {
-        target: (instance) => document,
-        handler: DraggableSlider.prototype._handleMouseMoveTouchMove,
-    },
-    touchmove: {
-        target: (instance) => document,
-        handler: DraggableSlider.prototype._handleMouseMoveTouchMove,
-    },
-    mouseup: {
-        target: (instance) => document,
-        handler: DraggableSlider.prototype._handleMouseUpTouchEnd,
-    },
-    touchend: {
-        target: (instance) => document,
-        handler: DraggableSlider.prototype._handleMouseUpTouchEnd,
-    },
-    touchcancel: {
-        target: (instance) => instance._slider,
-        handler: () => this._stopDragging(),
     },
 };
