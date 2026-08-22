@@ -86,18 +86,18 @@ AutoscrollSlider.prototype._nextSlideAuto = function () {
     ++this._currentIndex;
     this._updateSlider();
 
-    // const isMouseStillOver =
-    //     helper.hasFinePointer() &&
-    //     document.querySelector(
-    //         ".js-autoscroll-pause:not(.slider__btn--autoscroll-off):hover",
-    //     );
+    const isMouseStillOver =
+        helper.hasFinePointer() &&
+        document.querySelector(
+            `.${this._options.jsClasses.autoscrollPauseHover}:not(.${this._options.classes.btnAutoscrollOff}):hover`,
+        );
 
-    // if (isMouseStillOver) {
-    //     this._isMouseOver = true;
-    //     this._tryKillAutoscroll("hover");
-    // } else {
-    //     this._isMouseOver = false;
-    // }
+    if (isMouseStillOver) {
+        this._isMouseOver = true;
+        this._tryKillAutoscroll("hover");
+    } else {
+        this._isMouseOver = false;
+    }
 };
 
 AutoscrollSlider.prototype._tryResurrectAutoscroll = function (context = null) {
@@ -107,25 +107,24 @@ AutoscrollSlider.prototype._tryResurrectAutoscroll = function (context = null) {
         !this._isTabActive ||
         (context !== "visibility" && this._isDragging) ||
         this._isKeyboardFocused ||
-        // isAudioModeActive() ||
         (this._isMouseOver && !isDriftingAfterClick)
     )
         return;
 
-    // if (
-    //     context === "hover" &&
-    //     isAutoscrollFirstCycle() &&
-    //     !isDriftingAfterClick
-    // )
-    //     return;
+    if (
+        context === "hover" &&
+        this._isAutoscrollFirstCycle() &&
+        !isDriftingAfterClick
+    )
+        return;
 
-    // if (context === "hover" && hasFinePointer()) {
-    //     if (isDriftingAfterClick) {
-    //         context = null;
-    //     }
-    // } else if (context !== "visibility") {
-    //     context = null;
-    // }
+    if (context === "hover" && helper.hasFinePointer()) {
+        if (isDriftingAfterClick) {
+            context = null;
+        }
+    } else if (context !== "visibility") {
+        context = null;
+    }
 
     if (context === "hover") {
         this._startAutoscroll(this._getAdaptiveWakeUpDelay());
@@ -137,9 +136,9 @@ AutoscrollSlider.prototype._tryResurrectAutoscroll = function (context = null) {
 AutoscrollSlider.prototype._tryKillAutoscroll = function (context = null) {
     if (!this._isAutoscrollOn) return;
 
-    // if (isTabActive && !isAudioModeActive() && !isKeyboardFocused) {
-    //     if (context === "hover" && isAutoscrollFirstCycle()) return;
-    // }
+    if (this._isTabActive && !this._isKeyboardFocused) {
+        if (context === "hover" && this._isAutoscrollFirstCycle()) return;
+    }
 
     this._timer.stop();
 };

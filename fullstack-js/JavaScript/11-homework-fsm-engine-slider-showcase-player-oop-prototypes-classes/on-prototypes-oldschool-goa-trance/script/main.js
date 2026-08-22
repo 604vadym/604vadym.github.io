@@ -49,9 +49,10 @@ const slider = new Slider({
     groupSelectors: { slides: ".slider__slide", images: ".slider__image" },
 
     classes: {
+        track: "slider__track",
         button: "button",
         paginationDot: "pagination__dot",
-        track: "slider__track",
+        btnAutoscrollOff: "slider__btn--autoscroll-off",
     },
 
     classesActive: {
