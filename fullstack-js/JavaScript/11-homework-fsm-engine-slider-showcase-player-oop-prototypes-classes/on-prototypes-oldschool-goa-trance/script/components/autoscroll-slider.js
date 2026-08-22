@@ -249,62 +249,45 @@ function handleBlur(e) {
     }
 }
 
-function handleMouseDown(e) {
-    if (e.button === 1) {
-        if (isMoving) {
-            e.preventDefault();
-            return;
-        }
-        const isInteractiveTarget =
-            e.target.closest(".slider__link-shop") ||
-            e.target.closest(".button") ||
-            e.target.closest("a");
-        if (isInteractiveTarget) return;
-
-        e.preventDefault();
-        if (isAutoscrollOn) {
-            toggleAutoscrollMode();
-        }
-        if (audioPlayer.paused) {
-            startAudio("album");
-        } else {
-            stopAudio();
-        }
-    }
-}
-
-function handleMouseOver(e) {
-    if (!hasFinePointer()) return;
-    const isPauseTarget = e.target.closest(".js-autoscroll-pause");
+AutoscrollSlider.prototype._handleMouseOver = function (e) {
+    if (!helper.hasFinePointer()) return;
+    const isPauseTarget = e.target.closest(
+        `.${this._options.jsClasses.autoscrollPauseHover}`,
+    );
 
     if (isPauseTarget) {
-        const msSinceStart = Date.now() - autoscrollManualStartTimestamp;
+        const msSinceStart = Date.now() - this._autoscrollManualStartTimestamp;
         if (msSinceStart < 100) {
-            isMouseOver = true;
+            this._isMouseOver = true;
             return;
         }
-        if (isMouseOver) return;
+        if (this._isMouseOver) return;
 
-        isMouseOver = true;
-        tryKillAutoscroll("hover");
+        this._isMouseOver = true;
+        this._tryKillAutoscroll("hover");
     } else {
-        if (!isMouseOver) return;
-        isMouseOver = false;
-        tryResurrectAutoscroll("hover");
+        if (!this._isMouseOver) return;
+        this._isMouseOver = false;
+        this._tryResurrectAutoscroll("hover");
     }
-}
+};
 
-function handleMouseOut(e) {
-    if (!hasFinePointer()) return;
-    if (e.relatedTarget && e.relatedTarget.closest(".js-autoscroll-pause")) {
+AutoscrollSlider.prototype._handleMouseOut = function (e) {
+    if (!helper.hasFinePointer()) return;
+    if (
+        e.relatedTarget &&
+        e.relatedTarget.closest(
+            `.${this._options.jsClasses.autoscrollPauseHover}`,
+        )
+    ) {
         return;
     }
 
-    if (!slider.contains(e.relatedTarget)) {
-        isMouseOver = false;
-        tryResurrectAutoscroll("hover");
+    if (!this._slider.contains(e.relatedTarget)) {
+        this._isMouseOver = false;
+        this._tryResurrectAutoscroll("hover");
     }
-}
+};
 
 AutoscrollSlider.prototype._handleTransitionEnd = function () {
     DraggableSlider.prototype._handleTransitionEnd.call(this);
@@ -342,14 +325,14 @@ AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
         target: (instance) => instance._slider,
         handler: AutoscrollSlider.prototype._handleClick,
     },
-    // mouseover: {
-    //     target: (instance) => instance._slider,
-    //     handler: AutoscrollSlider.prototype._handleMouseOver,
-    // },
-    // mouseout: {
-    //     target: (instance) => instance._slider,
-    //     handler: AutoscrollSlider.prototype._handleMouseOut,
-    // },
+    mouseover: {
+        target: (instance) => instance._slider,
+        handler: AutoscrollSlider.prototype._handleMouseOver,
+    },
+    mouseout: {
+        target: (instance) => instance._slider,
+        handler: AutoscrollSlider.prototype._handleMouseOut,
+    },
     // focus: {
     //     target: (instance) => instance._slider,
     //     handler: AutoscrollSlider.prototype._handleClick,
@@ -362,10 +345,6 @@ AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
         target: (instance) => instance._track,
         handler: AutoscrollSlider.prototype._handleTransitionEnd,
     },
-    // mousedown: {
-    //     target: () => document,
-    //     handler: AutoscrollSlider.prototype._handleMouseDown,
-    // },
     // keydown: {
     //     target: () => document,
     //     handler: AutoscrollSlider.prototype._handleKeyDown,
