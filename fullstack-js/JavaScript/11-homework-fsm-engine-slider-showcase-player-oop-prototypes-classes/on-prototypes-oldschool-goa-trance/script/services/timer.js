@@ -1,9 +1,8 @@
 "use strict";
 
 export default function Timer(instance, action) {
-    this._client = instance;
-    this._onTick = action;
     this._id = null;
+    this._onTick = () => action.call(instance);
 }
 
 Timer.prototype = {
@@ -11,7 +10,7 @@ Timer.prototype = {
 
     start(delay) {
         this._kill();
-        this._id = setInterval(this._tick.bind(this), delay);
+        this._id = setInterval(() => this._tick(), delay);
     },
 
     stop() {
@@ -19,7 +18,7 @@ Timer.prototype = {
     },
 
     _tick() {
-        this._onTick.call(this._client);
+        this._onTick();
     },
 
     _kill() {
