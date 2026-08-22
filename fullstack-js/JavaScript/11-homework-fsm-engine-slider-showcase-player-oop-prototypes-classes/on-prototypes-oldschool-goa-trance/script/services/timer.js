@@ -2,6 +2,8 @@
 
 export default function Timer(instance, action) {
     this._id = null;
+    this._delay = null;
+    this._bootstrap = null;
     this._onTick = () => action.call(instance);
 }
 
@@ -10,15 +12,26 @@ Timer.prototype = {
 
     start(delay) {
         this._kill();
-        this._id = setInterval(() => this._tick(), delay);
+        this._id = setInterval(() => this._tick(delay), delay);
     },
 
     stop() {
         this._kill();
     },
 
-    _tick() {
+    initBootstrap(instance, bootstrapMethod, delay) {
+        this._delay = delay;
+        if (instance && bootstrapMethod) {
+            this._bootstrap = (currentDelay) =>
+                bootstrapMethod.call(instance, currentDelay);
+        }
+    },
+
+    _tick(delay) {
         this._onTick();
+        if (this._bootstrap && delay !== this._delay) {
+            this._bootstrap(this._delay);
+        }
     },
 
     _kill() {

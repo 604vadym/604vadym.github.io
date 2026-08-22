@@ -58,6 +58,11 @@ AutoscrollSlider.prototype._initProps = function () {
             ? autoscrollWakeUpDelay
             : this.constructor.AUTOSCROLL_WAKE_UP_DELAY;
 
+    this._timer.initBootstrap(
+        this,
+        this._startAutoscroll,
+        this._autoscrollDelay,
+    );
     this._isAutoscrollOn = Boolean(this._options.autoplay);
 
     this._autoscrollPauseTimestamp = 0;
@@ -156,10 +161,6 @@ AutoscrollSlider.prototype._startAutoscroll = function (
     const currentDelay = delay || this._autoscrollDelay;
 
     this._timer.start(currentDelay);
-
-    if (currentDelay !== this._autoscrollDelay) {
-        this._startAutoscroll();
-    }
 };
 
 AutoscrollSlider.prototype._stopAutoscroll = function () {
