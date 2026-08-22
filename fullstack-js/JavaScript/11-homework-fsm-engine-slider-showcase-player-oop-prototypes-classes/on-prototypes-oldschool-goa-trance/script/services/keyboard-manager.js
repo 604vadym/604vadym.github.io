@@ -32,26 +32,26 @@ KeyboardManager.prototype = {
         request?.action(e);
     },
 
-    _initKeyActionTable(instance, configName) {
-        const config = instance._options[configName];
+    _initKeyActionTable(client, configName) {
+        const config = client._options[configName];
 
-        this._assertConfig(config, configName, instance.constructor.name);
+        this._assertConfig(config, configName, client.constructor.name);
 
         this._keyActionTable = [];
         Object.entries(config).forEach(([keyAction, keys]) => {
             const methodName = `_${configName}${keyAction.charAt(0).toUpperCase()}${keyAction.slice(1)}`;
-            const action = instance[methodName];
+            const action = client[methodName];
 
             this._assertMethodContract(
                 action,
                 methodName,
                 configName,
-                instance.constructor.name,
+                client.constructor.name,
             );
 
             this._keyActionTable.push({
                 match: this._matchKeys(keys),
-                action: (e) => action.call(instance, e),
+                action: (e) => action.call(client, e),
             });
         });
     },

@@ -67,8 +67,8 @@ EventManager.prototype = {
         });
     },
 
-    _initEventHandlerTable(instance, eventMapKey) {
-        let proto = Object.getPrototypeOf(instance);
+    _initEventHandlerTable(client, eventMapKey) {
+        let proto = Object.getPrototypeOf(client);
 
         this._eventHandlerTable = {};
         while (proto && proto.constructor !== Object) {
@@ -77,7 +77,7 @@ EventManager.prototype = {
             const className = constructor.name;
 
             if (eventMap) {
-                this._assertEventMapContract(eventMap, className, instance);
+                this._assertEventMapContract(eventMap, className);
 
                 Object.entries(eventMap).forEach(([event, eventConfig]) => {
                     const [targetKey, handlerKey] = Object.keys(eventConfig);
@@ -85,7 +85,7 @@ EventManager.prototype = {
                     const handler = eventConfig[handlerKey];
 
                     if (!this._eventHandlerTable[event]) {
-                        const targetElement = target(instance);
+                        const targetElement = target(client);
 
                         this._assertTargetElement(
                             targetElement,
@@ -94,7 +94,7 @@ EventManager.prototype = {
                         );
 
                         this._eventHandlerTable[event] = (e) =>
-                            handler.call(instance, e);
+                            handler.call(client, e);
 
                         targetElement.addEventListener(event, this);
                     }
@@ -104,7 +104,7 @@ EventManager.prototype = {
         }
     },
 
-    _assertEventMapContract(eventMap, className, instance) {
+    _assertEventMapContract(eventMap, className) {
         Object.entries(eventMap).forEach(([event, eventConfig]) => {
             const [targetKey, handlerKey] = Object.keys(eventConfig);
             const target = eventConfig[targetKey];

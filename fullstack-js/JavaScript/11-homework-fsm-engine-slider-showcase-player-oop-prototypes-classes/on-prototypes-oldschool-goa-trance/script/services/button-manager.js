@@ -17,26 +17,26 @@ ButtonManager.prototype = {
         request?.action(button);
     },
 
-    _initButtonActionTable(instance, configName) {
-        const config = instance._options[configName];
+    _initButtonActionTable(client, configName) {
+        const config = client._options[configName];
 
-        this._assertConfig(config, configName, instance.constructor.name);
+        this._assertConfig(config, configName, client.constructor.name);
 
         this._buttonActionTable = [];
         Object.entries(config).forEach(([buttonAction, buttonName]) => {
             const methodName = `_${configName}${buttonAction.charAt(0).toUpperCase()}${buttonAction.slice(1)}`;
-            const action = instance[methodName];
+            const action = client[methodName];
 
             this._assertMethodContract(
                 action,
                 methodName,
                 configName,
-                instance.constructor.name,
+                client.constructor.name,
             );
 
             this._buttonActionTable.push({
                 buttonName: buttonName,
-                action: (button) => action.call(instance, button),
+                action: (button) => action.call(client, button),
             });
         });
     },
