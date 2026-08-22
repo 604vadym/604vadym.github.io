@@ -8,7 +8,7 @@ export default function AutoscrollSlider(options) {
     DraggableSlider.call(this, options);
 
     Object.defineProperty(this, "_timer", {
-        value: new Timer(),
+        value: new Timer(this, this._nextSlideAuto),
         writable: false,
         configurable: false,
     });
@@ -146,7 +146,6 @@ AutoscrollSlider.prototype._startAutoscroll = function (
     this._isAutoscrollOn = true;
     this._slider.classList.add(this._options.states.autoscrollon);
     this._btnAutoscrollOff.tabIndex = 0;
-    this._timer.kill();
 
     if (context === "visibility") {
         this._state = "IDLE";
@@ -156,7 +155,7 @@ AutoscrollSlider.prototype._startAutoscroll = function (
 
     const currentDelay = delay || this._autoscrollDelay;
 
-    this._timer.tick(this._nextSlideAuto, currentDelay, this);
+    this._timer.start(currentDelay);
 
     if (currentDelay !== this._autoscrollDelay) {
         this._startAutoscroll();
@@ -168,7 +167,7 @@ AutoscrollSlider.prototype._stopAutoscroll = function () {
     this._slider.classList.remove(this._options.states.autoscrollon);
     this._btnAutoscrollOff.tabIndex = -1;
     this._autoscrollPauseTimestamp = Date.now();
-    this._timer.kill();
+    this._timer.stop();
 };
 
 AutoscrollSlider.prototype._toggleAutoscrollMode = function () {
