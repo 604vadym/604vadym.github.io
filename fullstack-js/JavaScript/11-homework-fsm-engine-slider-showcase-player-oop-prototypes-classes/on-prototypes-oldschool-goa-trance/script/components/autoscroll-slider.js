@@ -59,8 +59,8 @@ AutoscrollSlider.prototype._initProps = function () {
             : this.constructor.AUTOSCROLL_WAKE_UP_DELAY;
 
     this._timer.initBootstrap(
-        this,
-        this._startAutoscroll,
+        this._timer,
+        this._timer.start,
         this._autoscrollDelay,
     );
     this._isAutoscrollOn = Boolean(this._options.autoplay);
