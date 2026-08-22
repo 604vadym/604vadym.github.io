@@ -2,9 +2,16 @@
 
 import * as helper from "../utils/helpers.js";
 import DraggableSlider from "./draggable-slider.js";
+import Timer from "../services/timer.js";
 
 export default function AutoscrollSlider(options) {
     DraggableSlider.call(this, options);
+
+    Object.defineProperty(this, "_timer", {
+        value: new Timer(),
+        writable: false,
+        configurable: false,
+    });
 }
 
 AutoscrollSlider.AUTOSCROLL_DELAY = 4500;
@@ -61,7 +68,31 @@ AutoscrollSlider.prototype._initProps = function () {
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
     this._isKeyboardDynamicFocused = false;
-    this._autoscrollId = null;
+};
+
+AutoscrollSlider.prototype._nextSlideAuto = function () {
+    if (this.state === "MOVING" || !this._isAutoscrollOn) return;
+
+    if (this._currentIndex === this._slidesCount) {
+        this._currentIndex = 0;
+        this._updateSliderInstantly();
+    }
+
+    ++this._currentIndex;
+    this._updateSlider();
+
+    // const isMouseStillOver =
+    //     helper.hasFinePointer() &&
+    //     document.querySelector(
+    //         ".js-autoscroll-pause:not(.slider__btn--autoscroll-off):hover",
+    //     );
+
+    // if (isMouseStillOver) {
+    //     this._isMouseOver = true;
+    //     this._tryKillAutoscroll("hover");
+    // } else {
+    //     this._isMouseOver = false;
+    // }
 };
 
 AutoscrollSlider.prototype._tryResurrectAutoscroll = function (context = null) {
@@ -108,13 +139,6 @@ AutoscrollSlider.prototype._tryKillAutoscroll = function (context = null) {
     this._killAutoscroll();
 };
 
-AutoscrollSlider.prototype._killAutoscroll = function () {
-    if (this._autoscrollId) {
-        clearInterval(this._autoscrollId);
-        this._autoscrollId = null;
-    }
-};
-
 AutoscrollSlider.prototype._startAutoscroll = function (
     delay = null,
     context = null,
@@ -122,7 +146,7 @@ AutoscrollSlider.prototype._startAutoscroll = function (
     this._isAutoscrollOn = true;
     this._slider.classList.add(this._options.states.autoscrollon);
     this._btnAutoscrollOff.tabIndex = 0;
-    this._killAutoscroll();
+    this._timer.kill();
 
     if (context === "visibility") {
         this._state = "IDLE";
@@ -132,34 +156,11 @@ AutoscrollSlider.prototype._startAutoscroll = function (
 
     const currentDelay = delay || this._autoscrollDelay;
 
-    this._autoscrollId = setInterval(() => {
-        if (this.state === "MOVING" || !this._isAutoscrollOn) return;
+    this._timer.tick(this._nextSlideAuto, currentDelay, this);
 
-        if (this._currentIndex === this._slidesCount) {
-            this._currentIndex = 0;
-            this._updateSliderInstantly();
-        }
-
-        ++this._currentIndex;
-        this._updateSlider();
-
-        // const isMouseStillOver =
-        //     helper.hasFinePointer() &&
-        //     document.querySelector(
-        //         ".js-autoscroll-pause:not(.slider__btn--autoscroll-off):hover",
-        //     );
-
-        // if (isMouseStillOver) {
-        //     this._isMouseOver = true;
-        //     this._tryKillAutoscroll("hover");
-        // } else {
-        //     this._isMouseOver = false;
-        // }
-
-        if (currentDelay !== this._autoscrollDelay) {
-            this._startAutoscroll();
-        }
-    }, currentDelay);
+    if (currentDelay !== this._autoscrollDelay) {
+        this._startAutoscroll();
+    }
 };
 
 AutoscrollSlider.prototype._stopAutoscroll = function () {
@@ -167,7 +168,7 @@ AutoscrollSlider.prototype._stopAutoscroll = function () {
     this._slider.classList.remove(this._options.states.autoscrollon);
     this._btnAutoscrollOff.tabIndex = -1;
     this._autoscrollPauseTimestamp = Date.now();
-    this._killAutoscroll();
+    this._timer.kill();
 };
 
 AutoscrollSlider.prototype._toggleAutoscrollMode = function () {
