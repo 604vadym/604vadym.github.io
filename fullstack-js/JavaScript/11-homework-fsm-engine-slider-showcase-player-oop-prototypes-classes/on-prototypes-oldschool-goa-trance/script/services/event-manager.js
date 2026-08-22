@@ -27,9 +27,11 @@ EventManager.prototype = {
         }
 
         Object.entries(eventMap).forEach(([event, eventConfig]) => {
-            const [targetKey, handlerKey] = Object.keys(eventConfig);
+            const [targetKey, handlerKey, optionsKey] =
+                Object.keys(eventConfig);
             const target = eventConfig[targetKey];
             const handler = eventConfig[handlerKey];
+            const options = eventConfig[optionsKey];
 
             const targetElement = target(instance);
 
@@ -41,7 +43,7 @@ EventManager.prototype = {
             }
 
             this._eventHandlerTable[event] = (e) => handler?.call(instance, e);
-            targetElement.addEventListener(event, this);
+            targetElement.addEventListener(event, this, options);
         });
     },
 
@@ -51,8 +53,10 @@ EventManager.prototype = {
         const className = instance.constructor.name;
 
         Object.entries(eventMap).forEach(([event, eventConfig]) => {
-            const [targetKey] = Object.keys(eventConfig);
+            const [targetKey, handlerKey, optionsKey] =
+                Object.keys(eventConfig);
             const target = eventConfig[targetKey];
+            const options = eventConfig[optionsKey];
             const targetElement = target(instance);
 
             try {
@@ -62,7 +66,7 @@ EventManager.prototype = {
                 return;
             }
 
-            targetElement.removeEventListener(event, this);
+            targetElement.removeEventListener(event, this, options);
             delete this._eventHandlerTable[event];
         });
     },
@@ -80,9 +84,11 @@ EventManager.prototype = {
                 this._assertEventMapContract(eventMap, className);
 
                 Object.entries(eventMap).forEach(([event, eventConfig]) => {
-                    const [targetKey, handlerKey] = Object.keys(eventConfig);
+                    const [targetKey, handlerKey, optionsKey] =
+                        Object.keys(eventConfig);
                     const target = eventConfig[targetKey];
                     const handler = eventConfig[handlerKey];
+                    const options = eventConfig[optionsKey];
 
                     if (!this._eventHandlerTable[event]) {
                         const targetElement = target(client);
@@ -96,7 +102,7 @@ EventManager.prototype = {
                         this._eventHandlerTable[event] = (e) =>
                             handler.call(client, e);
 
-                        targetElement.addEventListener(event, this);
+                        targetElement.addEventListener(event, this, options);
                     }
                 });
             }

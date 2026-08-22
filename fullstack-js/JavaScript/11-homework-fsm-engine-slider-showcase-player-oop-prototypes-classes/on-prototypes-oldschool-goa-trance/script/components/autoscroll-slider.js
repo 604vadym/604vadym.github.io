@@ -75,6 +75,18 @@ AutoscrollSlider.prototype._initProps = function () {
     this._isKeyboardDynamicFocused = false;
 };
 
+AutoscrollSlider.prototype._initPagination = function () {
+    DraggableSlider.prototype._initPagination.call(this);
+    for (let i = 0; i < this._slidesCount; i++) {
+        this._paginationDots[i].classList.add(
+            this._options.jsClasses.autoscrollPauseHover,
+        );
+        this._paginationDots[i].classList.add(
+            this._options.jsClasses.dynamicFocus,
+        );
+    }
+};
+
 AutoscrollSlider.prototype._nextSlideAuto = function () {
     if (this.state === "MOVING" || !this._isAutoscrollOn) return;
 
@@ -207,6 +219,19 @@ AutoscrollSlider.prototype._clickAutoscrolloff = function () {
     this._toggleAutoscrollMode();
 };
 
+AutoscrollSlider.prototype._pressExecute = function (e) {
+    DraggableSlider.prototype._pressExecute.call(this, e);
+
+    const activeElement = document.activeElement;
+    const isButton = activeElement?.closest(`.${this._options.classes.button}`);
+
+    if (isButton && this._isInputBlocked()) return;
+
+    this._isKeyboardDynamicFocused = !!activeElement?.closest(
+        `.${this._options.jsClasses.dynamicFocus}`,
+    );
+};
+
 AutoscrollSlider.prototype._pressAutoscrollon = function (e) {
     e.preventDefault();
     this._toggleAutoscrollMode();
@@ -228,25 +253,25 @@ AutoscrollSlider.prototype._handleClick = function (e) {
     DraggableSlider.prototype._handleClick.call(this, e);
 };
 
-function handleFocus(e) {
+AutoscrollSlider.prototype._handleFocus = function (e) {
     if (
-        e.target.closest(".js-autoscroll-pause") &&
-        !e.target.closest(".js-dynamic-focus")
+        e.target.closest(`.${this._options.jsClasses.autoscrollPauseHover}`) &&
+        !e.target.closest(`.${this._options.jsClasses.dynamicFocus}`)
     ) {
-        isKeyboardFocused = true;
-        tryKillAutoscroll();
+        this._isKeyboardFocused = true;
+        this._tryKillAutoscroll();
     }
-}
+};
 
-function handleBlur(e) {
+AutoscrollSlider.prototype._handleBlur = function (e) {
     if (
-        e.target.closest(".js-autoscroll-pause") &&
-        !e.target.closest(".js-dynamic-focus")
+        e.target.closest(`.${this._options.jsClasses.autoscrollPauseHover}`) &&
+        !e.target.closest(`.${this._options.jsClasses.dynamicFocus}`)
     ) {
-        isKeyboardFocused = false;
-        tryResurrectAutoscroll();
+        this._isKeyboardFocused = false;
+        this._tryResurrectAutoscroll();
     }
-}
+};
 
 AutoscrollSlider.prototype._handleMouseOver = function (e) {
     if (!helper.hasFinePointer()) return;
@@ -332,14 +357,16 @@ AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
         target: (instance) => instance._slider,
         handler: AutoscrollSlider.prototype._handleMouseOut,
     },
-    // focus: {
-    //     target: (instance) => instance._slider,
-    //     handler: AutoscrollSlider.prototype._handleClick,
-    // },
-    // blur: {
-    //     target: (instance) => instance._slider,
-    //     handler: AutoscrollSlider.prototype._handleClick,
-    // },
+    focus: {
+        target: (instance) => instance._slider,
+        handler: AutoscrollSlider.prototype._handleFocus,
+        options: { capture: true },
+    },
+    blur: {
+        target: (instance) => instance._slider,
+        handler: AutoscrollSlider.prototype._handleBlur,
+        options: { capture: true },
+    },
     transitionend: {
         target: (instance) => instance._track,
         handler: AutoscrollSlider.prototype._handleTransitionEnd,
@@ -353,6 +380,3 @@ AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
         handler: AutoscrollSlider.prototype._handleVisibilityChange,
     },
 };
-
-// slider.addEventListener("focus", handleFocus, { capture: true });
-// slider.addEventListener("blur", handleBlur, { capture: true });
