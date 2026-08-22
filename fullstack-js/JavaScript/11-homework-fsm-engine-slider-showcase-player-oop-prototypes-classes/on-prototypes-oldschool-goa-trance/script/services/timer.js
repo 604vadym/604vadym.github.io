@@ -20,11 +20,17 @@ Timer.prototype = {
     },
 
     initBootstrap(instance, bootstrapMethod, delay) {
-        this._delay = delay;
-        if (instance && bootstrapMethod) {
-            this._bootstrap = (currentDelay) =>
-                bootstrapMethod.call(instance, currentDelay);
-        }
+        this._delay = Number(delay);
+
+        this._assertBootstrapContract(
+            bootstrapMethod,
+            this._delay,
+            delay,
+            instance.constructor.name,
+        );
+
+        this._bootstrap = (currentDelay) =>
+            bootstrapMethod.call(instance, currentDelay);
     },
 
     _tick(delay) {
@@ -38,6 +44,22 @@ Timer.prototype = {
         if (this._id) {
             clearInterval(this._id);
             this._id = null;
+        }
+    },
+
+    _assertBootstrapContract(bootstrapMethod, delay, paramDelay, className) {
+        if (typeof bootstrapMethod !== "function") {
+            throw new TypeError(
+                `[Timer]: broken initBootstrap contract in "${className}"\n` +
+                    `expected a function for bootstrapMethod, received "${typeof bootstrapMethod}"`,
+            );
+        }
+
+        if (isNaN(delay) || delay <= 0) {
+            throw new TypeError(
+                `[Timer]: broken initBootstrap contract in "${className}"\n` +
+                    `valid positive number required for delay, received "${paramDelay}"`,
+            );
         }
     },
 };
