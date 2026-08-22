@@ -323,15 +323,15 @@ AutoscrollSlider.prototype._handleTransitionEnd = function () {
     }
 };
 
-function handleVisibilityChange() {
+AutoscrollSlider.prototype._handleVisibilityChange = function () {
     if (document.hidden === true) {
-        isTabActive = false;
-        tryKillAutoscroll();
+        this._isTabActive = false;
+        this._tryKillAutoscroll();
     } else {
-        isTabActive = true;
-        tryResurrectAutoscroll("visibility");
+        this._isTabActive = true;
+        this._tryResurrectAutoscroll("visibility");
     }
-}
+};
 
 AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
     click: {
@@ -370,10 +370,10 @@ AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
     //     target: () => document,
     //     handler: AutoscrollSlider.prototype._handleKeyDown,
     // },
-    // visibilitychange: {
-    //     target: () => document,
-    //     handler: AutoscrollSlider.prototype._handleVisibilityChange,
-    // },
+    visibilitychange: {
+        target: () => document,
+        handler: AutoscrollSlider.prototype._handleVisibilityChange,
+    },
 };
 
 // slider.addEventListener("focus", handleFocus, { capture: true });
