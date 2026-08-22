@@ -141,7 +141,7 @@ AutoscrollSlider.prototype._tryKillAutoscroll = function (context = null) {
     //     if (context === "hover" && isAutoscrollFirstCycle()) return;
     // }
 
-    this._killAutoscroll();
+    this._timer.stop();
 };
 
 AutoscrollSlider.prototype._startAutoscroll = function (
@@ -182,23 +182,23 @@ AutoscrollSlider.prototype._toggleAutoscrollMode = function () {
     }
 };
 
-function isAutoscrollFirstCycle() {
-    const msSinceStart = Date.now() - autoscrollManualStartTimestamp;
-    return msSinceStart < AUTOSCROLL_DELAY;
-}
+AutoscrollSlider.prototype._isAutoscrollFirstCycle = function () {
+    const msSinceStart = Date.now() - this._autoscrollManualStartTimestamp;
+    return msSinceStart < this._autoscrollDelay;
+};
 
-function isPostClickDriftActive() {
-    const msSinceLastClick = Date.now() - lastClickTimestamp;
-    return msSinceLastClick < AUTOSCROLL_WAKE_UP_DELAY;
-}
+AutoscrollSlider.prototype._isPostClickDriftActive = function () {
+    const msSinceLastClick = Date.now() - this._lastClickTimestamp;
+    return msSinceLastClick < this._autoscrollWakeUpDelay;
+};
 
-function getAdaptiveWakeUpDelay() {
-    const msSlideStand = Date.now() - slideStandTimestamp;
-    if (msSlideStand < AUTOSCROLL_DELAY - AUTOSCROLL_WAKE_UP_DELAY) {
-        return AUTOSCROLL_DELAY - msSlideStand;
+AutoscrollSlider.prototype._getAdaptiveWakeUpDelay = function () {
+    const msSlideStand = Date.now() - this._slideStandTimestamp;
+    if (msSlideStand < this._autoscrollDelay - this._autoscrollWakeUpDelay) {
+        return this._autoscrollDelay - msSlideStand;
     }
-    return AUTOSCROLL_WAKE_UP_DELAY;
-}
+    return this._autoscrollWakeUpDelay;
+};
 
 AutoscrollSlider.prototype._clickAutoscrollon = function () {
     this._toggleAutoscrollMode();
@@ -208,14 +208,25 @@ AutoscrollSlider.prototype._clickAutoscrolloff = function () {
     this._toggleAutoscrollMode();
 };
 
-AutoscrollSlider.prototype._pressAutoscrollon = function () {
-    // e.preventDefault();
+AutoscrollSlider.prototype._pressAutoscrollon = function (e) {
+    e.preventDefault();
     this._toggleAutoscrollMode();
 };
 
-AutoscrollSlider.prototype._pressAutoscrolloff = function () {
-    // e.preventDefault();
+AutoscrollSlider.prototype._pressAutoscrolloff = function (e) {
+    e.preventDefault();
     this._toggleAutoscrollMode();
+};
+
+AutoscrollSlider.prototype._handleClick = function (e) {
+    const button = e.target.closest(`.${this._options.classes.button}`);
+
+    if (button && !this._isInputBlocked() && e.button !== 2) {
+        this._lastClickTimestamp = Date.now();
+        this._tryKillAutoscroll();
+    }
+
+    DraggableSlider.prototype._handleClick.call(this, e);
 };
 
 function handleFocus(e) {
@@ -295,26 +306,22 @@ function handleMouseOut(e) {
     }
 }
 
-function handleTransitionEnd() {
-    if (resetLoop()) {
-        teleportSlides();
-    } else {
-        isMoving = false;
-    }
+AutoscrollSlider.prototype._handleTransitionEnd = function () {
+    DraggableSlider.prototype._handleTransitionEnd.call(this);
 
-    slideStandTimestamp = Date.now();
+    this._slideStandTimestamp = Date.now();
 
-    const albumIndex = getAlbumIndex();
-    if (activeAlbumIndex !== albumIndex) {
-        onAlbumChanged(albumIndex);
-    }
+    // const albumIndex = getAlbumIndex();
+    // if (activeAlbumIndex !== albumIndex) {
+    //     onAlbumChanged(albumIndex);
+    // }
 
-    if (isKeyboardDynamicFocused) {
-        isKeyboardDynamicFocused = false;
-        tryKillAutoscroll();
-        tryResurrectAutoscroll();
+    if (this._isKeyboardDynamicFocused) {
+        this._isKeyboardDynamicFocused = false;
+        this._tryKillAutoscroll();
+        this._tryResurrectAutoscroll();
     }
-}
+};
 
 function handleVisibilityChange() {
     if (document.hidden === true) {
@@ -327,14 +334,14 @@ function handleVisibilityChange() {
 }
 
 AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
-    // click: {
-    //     target: (instance) => instance._slider,
-    //     handler: AutoscrollSlider.prototype._handleClick,
-    // },
-    // auxclick: {
-    //     target: (instance) => instance._slider,
-    //     handler: AutoscrollSlider.prototype._handleClick,
-    // },
+    click: {
+        target: (instance) => instance._slider,
+        handler: AutoscrollSlider.prototype._handleClick,
+    },
+    auxclick: {
+        target: (instance) => instance._slider,
+        handler: AutoscrollSlider.prototype._handleClick,
+    },
     // mouseover: {
     //     target: (instance) => instance._slider,
     //     handler: AutoscrollSlider.prototype._handleMouseOver,
@@ -351,10 +358,10 @@ AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
     //     target: (instance) => instance._slider,
     //     handler: AutoscrollSlider.prototype._handleClick,
     // },
-    // transitionend: {
-    //     target: (instance) => instance._track,
-    //     handler: AutoscrollSlider.prototype._handleTransitionEnd,
-    // },
+    transitionend: {
+        target: (instance) => instance._track,
+        handler: AutoscrollSlider.prototype._handleTransitionEnd,
+    },
     // mousedown: {
     //     target: () => document,
     //     handler: AutoscrollSlider.prototype._handleMouseDown,
