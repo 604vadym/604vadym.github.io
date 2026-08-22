@@ -5,6 +5,7 @@ export default function KeyboardManager() {}
 KeyboardManager.KEY_MAP = {
     Enter: "key",
     Escape: "key",
+    " ": "key",
     ArrowRight: "code",
     ArrowLeft: "code",
     KeyD: "code",

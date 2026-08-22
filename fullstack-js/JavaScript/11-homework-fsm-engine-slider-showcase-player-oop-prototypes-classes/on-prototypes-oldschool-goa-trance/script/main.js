@@ -1,6 +1,6 @@
 "use strict";
 
-import Slider from "./components/draggable-slider.js";
+import Slider from "./components/autoscroll-slider.js";
 
 /*
  * JS #11. Розробка повнофункціонального слайдера на чистому JavaScript з використанням прототипів, класів та наслідування
@@ -30,17 +30,17 @@ const slider = new Slider({
     singleSelectors: {
         slider: ".slider",
         track: ".slider__track",
-        // btnAutoscrollOn: ".slider__btn--autoscroll-on",
-        // btnAutoscrollOff: ".slider__btn--autoscroll-off",
-        pagination: ".slider__pagination",
+        viewport: ".slider__viewport",
         // btnAudioNext: ".slider__btn-audio--next",
         // btnAudioPrev: ".slider__btn-audio--prev",
         // audioTrackTitle: ".slider__audio-track-title",
         // audioTrackCurrentTime: ".slider__audio-track-current-time",
         // linkShop: ".slider__link-shop",
-        viewport: ".slider__viewport",
         btnNext: ".slider__btn--next",
         btnPrev: ".slider__btn--prev",
+        pagination: ".slider__pagination",
+        btnAutoscrollOn: ".slider__btn--autoscroll-on",
+        btnAutoscrollOff: ".slider__btn--autoscroll-off",
         // btnAudioPlay: ".slider__btn-audio--play",
         // btnAudioPause: ".slider__btn-audio--pause",
         // audioTrackFullTime: ".slider__audio-track-full-time",
@@ -65,18 +65,23 @@ const slider = new Slider({
     states: {
         keyboardBtnPressed: "is-pressed",
         resizing: "slider--resizing",
+        autoscrollon: "slider--autoscroll-on",
     },
 
     click: {
         next: "slider__btn--next",
         prev: "slider__btn--prev",
         goto: "pagination__dot",
+        autoscrollon: "slider__btn--autoscroll-on",
+        autoscrolloff: "slider__btn--autoscroll-off",
     },
 
     press: {
         next: ["ArrowRight", "KeyD"],
         prev: ["ArrowLeft", "KeyA"],
         execute: ["Enter"],
+        autoscrollon: [" "],
+        autoscrolloff: [" "],
         reset: ["Escape"],
         ignore: ["PageDown", "PageUp", "End"],
     },
