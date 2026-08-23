@@ -129,7 +129,7 @@ AutoscrollSlider.prototype._nextSlideAuto = function () {
 };
 
 AutoscrollSlider.prototype._nextSlideAutoLazy = function () {
-    this._currentIndex = 0;
+    this._currentIndex = this._startIndex - 1;
     this._updateSliderInstantly();
     this._goToSlide(this._currentIndex);
 };
