@@ -1,5 +1,6 @@
 "use strict";
 
+import * as helper from "../utils/helpers.js";
 import PaginationSlider from "./pagination-slider.js";
 import KeyboardManager from "../services/keyboard-manager.js";
 
@@ -28,6 +29,7 @@ KeyboardSlider.prototype._hardReset = function () {
     clearTimeout(this._resizeTimeoutId);
     this._slider.classList.remove(this._options.states.resizing);
     this._updateSliderInstantly();
+    helper.tryClearFocus();
 };
 
 KeyboardSlider.prototype._pressNext = function (e) {
@@ -60,11 +62,12 @@ KeyboardSlider.prototype._pressExecute = function (e) {
 };
 
 KeyboardSlider.prototype._pressReset = function (e) {
-    if (e.ctrlKey || e.altKey || e.metaKey) return;
+    if (helper.hasPlatformModifiers(e)) return false;
     e.preventDefault();
     if (e.shiftKey) {
         this._hardReset();
     }
+    return true;
 };
 
 KeyboardSlider.prototype._pressIgnore = function (e) {

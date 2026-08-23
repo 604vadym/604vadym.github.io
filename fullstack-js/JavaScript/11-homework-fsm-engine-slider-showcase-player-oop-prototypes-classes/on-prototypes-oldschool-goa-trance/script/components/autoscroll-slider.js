@@ -111,6 +111,17 @@ AutoscrollSlider.prototype._initPagination = function () {
     }
 };
 
+AutoscrollSlider.prototype._hardReset = function () {
+    DraggableSlider.prototype._hardReset.call(this);
+    this._autoscrollPauseTimestamp = 0;
+    this._autoscrollManualStartTimestamp = 0;
+    this._slideStandTimestamp = 0;
+    this._lastClickTimestamp = 0;
+    this._isMouseOver = false;
+    this._isKeyboardFocused = false;
+    this._isKeyboardDynamicFocused = false;
+};
+
 AutoscrollSlider.prototype._nextSlideAuto = function () {
     if (this.state === STATES.MOVING || !this._isAutoscrollOn) return;
 
@@ -264,6 +275,18 @@ AutoscrollSlider.prototype._pressExecute = function (e) {
     );
 };
 
+AutoscrollSlider.prototype._pressReset = function (e) {
+    const isResetExecuted = DraggableSlider.prototype._pressReset.call(this, e);
+
+    if (isResetExecuted) {
+        if (this._isAutoscrollOn) {
+            this._toggleAutoscrollMode();
+        }
+    }
+
+    return isResetExecuted;
+};
+
 AutoscrollSlider.prototype._pressAutoscrollon = function (e) {
     e.preventDefault();
     this._toggleAutoscrollMode();
@@ -285,7 +308,10 @@ AutoscrollSlider.prototype._afterResize = function () {
 };
 
 AutoscrollSlider.prototype._handleClick = function (e) {
-    const validButton = DraggableSlider.prototype._validateInput.call(this, e);
+    const validButton = DraggableSlider.prototype._validateButtonInput.call(
+        this,
+        e,
+    );
     if (validButton) {
         this._lastClickTimestamp = Date.now();
         this._tryPauseAutoscroll();

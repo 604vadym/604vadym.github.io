@@ -178,7 +178,7 @@ BaseSlider.prototype = {
     },
 
     _handleClick(e) {
-        const button = this._validateInput(e);
+        const button = this._validateButtonInput(e);
         if (!button) return;
 
         if (e.pointerType === "mouse" || e.pointerType === "touch") {
@@ -188,7 +188,7 @@ BaseSlider.prototype = {
         this._buttonManager.manage(button);
     },
 
-    _validateInput(e) {
+    _validateButtonInput(e) {
         if (e._validButton !== undefined) {
             return e._validButton;
         }

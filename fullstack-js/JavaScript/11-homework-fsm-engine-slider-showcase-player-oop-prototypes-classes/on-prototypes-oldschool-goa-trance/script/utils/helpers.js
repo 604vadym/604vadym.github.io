@@ -9,3 +9,7 @@ export function tryClearFocus() {
         document.activeElement.blur();
     }
 }
+
+export function hasPlatformModifiers(e) {
+    return !!(e.ctrlKey || e.altKey || e.metaKey);
+}
