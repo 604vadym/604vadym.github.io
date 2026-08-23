@@ -89,6 +89,7 @@ const slider = new Slider({
         ignore: ["PageDown", "PageUp", "End"],
     },
 
+    autoplay: false,
     autoscrollDelay: null,
     autoscrollWakeUpDelay: null,
 });

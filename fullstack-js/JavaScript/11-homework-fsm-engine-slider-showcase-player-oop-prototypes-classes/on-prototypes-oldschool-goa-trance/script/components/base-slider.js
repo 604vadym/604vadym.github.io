@@ -29,10 +29,10 @@ export default function BaseSlider(options) {
 
 BaseSlider.EVENT_MAP_KEY = "EVENT_MAP";
 
-BaseSlider.STATES = {
+BaseSlider.STATES = Object.freeze({
     IDLE: "IDLE",
     MOVING: "MOVING",
-};
+});
 
 BaseSlider.prototype = {
     constructor: BaseSlider,
@@ -164,7 +164,7 @@ BaseSlider.prototype = {
     },
 
     _isInputBlocked() {
-        return this.state === "MOVING";
+        return this.state === this.constructor.STATES.MOVING;
     },
 
     _clickNext() {
