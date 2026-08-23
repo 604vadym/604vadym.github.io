@@ -307,16 +307,14 @@ AutoscrollSlider.prototype._afterResize = function () {
 };
 
 AutoscrollSlider.prototype._handleClick = function (e) {
-    const validButton = DraggableSlider.prototype._validateButtonInput.call(
-        this,
-        e,
-    );
-    if (validButton) {
+    const isExecuted = DraggableSlider.prototype._handleClick.call(this, e);
+
+    if (isExecuted) {
         this._lastClickTimestamp = Date.now();
         this._tryPauseAutoscroll();
     }
 
-    DraggableSlider.prototype._handleClick.call(this, e);
+    return isExecuted;
 };
 
 AutoscrollSlider.prototype._handleFocus = function (e) {

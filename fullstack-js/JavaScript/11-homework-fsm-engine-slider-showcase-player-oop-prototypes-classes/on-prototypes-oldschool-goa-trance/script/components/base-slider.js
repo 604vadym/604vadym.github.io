@@ -181,29 +181,27 @@ BaseSlider.prototype = {
 
     _handleClick(e) {
         const button = this._validateButtonInput(e);
-        if (!button) return;
+        if (!button) return false;
 
         if (e.pointerType === "mouse" || e.pointerType === "touch") {
             button.blur();
         }
 
         this._buttonManager.manage(button);
+
+        return true;
     },
 
     _validateButtonInput(e) {
-        if (e._validButton !== undefined) {
-            return e._validButton;
-        }
-
         if (e.button === 2) {
             e.preventDefault();
-            return (e._validButton = null);
+            return null;
         }
 
         const button = e.target.closest(`.${this._options.classes.button}`);
-        if (!button || this._isInputBlocked()) return (e._validButton = null);
+        if (!button || this._isInputBlocked()) return null;
 
-        return (e._validButton = button);
+        return button;
     },
 
     _handleTransitionEnd() {
