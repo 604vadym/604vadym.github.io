@@ -34,6 +34,8 @@ BaseSlider.STATES = Object.freeze({
     MOVING: "MOVING",
 });
 
+const STATES = BaseSlider.STATES;
+
 BaseSlider.prototype = {
     constructor: BaseSlider,
 
@@ -102,7 +104,7 @@ BaseSlider.prototype = {
     _initProps() {
         this._trackTransition = this._track.style.transition;
         this._slidesCount = this._slides.length;
-        this._state = "IDLE";
+        this._state = STATES.IDLE;
         this._startIndex = 0;
         this._currentIndex = this._startIndex;
         this._slideWidth = 0;
@@ -127,7 +129,7 @@ BaseSlider.prototype = {
     },
 
     _updateSlider() {
-        this._state = "MOVING";
+        this._state = STATES.MOVING;
 
         if (helper.hasFinePointer() || this._isResizing) {
             this._track.style.transform = `translateX(-${this._currentIndex * 100}%)`;
@@ -142,7 +144,7 @@ BaseSlider.prototype = {
         this._updateSlider();
         this._track.offsetHeight;
         this._enableAnimation();
-        this._state = "IDLE";
+        this._state = STATES.IDLE;
     },
 
     _updateSlideWidth() {
@@ -164,7 +166,7 @@ BaseSlider.prototype = {
     },
 
     _isInputBlocked() {
-        return this.state === this.constructor.STATES.MOVING;
+        return this.state === STATES.MOVING;
     },
 
     _clickNext() {
@@ -191,7 +193,7 @@ BaseSlider.prototype = {
     },
 
     _handleTransitionEnd() {
-        this._state = "IDLE";
+        this._state = STATES.IDLE;
     },
 
     _handleResize() {

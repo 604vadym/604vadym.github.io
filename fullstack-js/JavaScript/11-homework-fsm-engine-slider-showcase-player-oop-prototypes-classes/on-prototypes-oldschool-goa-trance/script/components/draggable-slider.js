@@ -11,6 +11,8 @@ DraggableSlider.prototype = Object.create(InfiniteSlider.prototype);
 DraggableSlider.prototype.constructor = DraggableSlider;
 Object.setPrototypeOf(DraggableSlider, InfiniteSlider);
 
+const STATES = DraggableSlider.STATES;
+
 DraggableSlider.prototype.init = function () {
     InfiniteSlider.prototype.init.call(this);
 };
@@ -99,7 +101,7 @@ DraggableSlider.prototype._getClientX = function (e) {
 };
 
 DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
-    if (this.state === this.constructor.STATES.MOVING) return;
+    if (this.state === STATES.MOVING) return;
 
     if (e.type === "mousedown" && !helper.hasFinePointer()) {
         return;
