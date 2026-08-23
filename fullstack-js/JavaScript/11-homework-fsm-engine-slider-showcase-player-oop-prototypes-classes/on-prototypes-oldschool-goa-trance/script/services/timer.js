@@ -55,7 +55,7 @@ Timer.prototype = {
             );
         }
 
-        if (isNaN(delay) || delay <= 0) {
+        if (!Number.isFinite(delay) || delay <= 0) {
             throw new TypeError(
                 `[Timer]: broken initBootstrap contract in "${className}"\n` +
                     `valid positive number required for delay, received "${paramDelay}"`,

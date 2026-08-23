@@ -91,12 +91,10 @@ AutoscrollSlider.prototype._nextSlideAuto = function () {
     if (this.state === "MOVING" || !this._isAutoscrollOn) return;
 
     if (this._currentIndex === this._slidesCount) {
-        this._currentIndex = 0;
-        this._updateSliderInstantly();
+        this._nextSlideAutoLazy();
+    } else {
+        this._nextSlide();
     }
-
-    ++this._currentIndex;
-    this._updateSlider();
 
     const isMouseStillOver =
         helper.hasFinePointer() &&
@@ -110,6 +108,12 @@ AutoscrollSlider.prototype._nextSlideAuto = function () {
     } else {
         this._isMouseOver = false;
     }
+};
+
+AutoscrollSlider.prototype._nextSlideAutoLazy = function () {
+    this._currentIndex = 0;
+    this._updateSliderInstantly();
+    this._goToSlide(this._currentIndex);
 };
 
 AutoscrollSlider.prototype._tryResurrectAutoscroll = function (context = null) {

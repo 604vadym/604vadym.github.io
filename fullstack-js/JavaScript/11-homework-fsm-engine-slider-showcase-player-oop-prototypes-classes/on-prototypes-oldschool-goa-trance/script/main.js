@@ -88,6 +88,9 @@ const slider = new Slider({
         reset: ["Escape"],
         ignore: ["PageDown", "PageUp", "End"],
     },
+
+    autoscrollDelay: null,
+    autoscrollWakeUpDelay: null,
 });
 
 slider.init();
