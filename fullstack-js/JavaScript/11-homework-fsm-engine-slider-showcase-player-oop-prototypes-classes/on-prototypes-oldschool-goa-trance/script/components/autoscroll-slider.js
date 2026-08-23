@@ -275,9 +275,8 @@ AutoscrollSlider.prototype._pressAutoscrolloff = function (e) {
 };
 
 AutoscrollSlider.prototype._handleClick = function (e) {
-    const button = e.target.closest(`.${this._options.classes.button}`);
-
-    if (button && !this._isInputBlocked() && e.button !== 2) {
+    const validButton = DraggableSlider.prototype._validateInput.call(this, e);
+    if (validButton) {
         this._lastClickTimestamp = Date.now();
         this._tryPauseAutoscroll();
     }
