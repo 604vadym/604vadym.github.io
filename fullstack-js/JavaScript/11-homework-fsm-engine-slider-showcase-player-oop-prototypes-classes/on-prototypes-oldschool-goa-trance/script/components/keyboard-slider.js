@@ -50,7 +50,7 @@ KeyboardSlider.prototype._pressExecute = function (e) {
 
     if (isButton && this._isInputBlocked()) {
         e.preventDefault();
-        return;
+        return false;
     }
 
     const isPressTarget = activeElement?.closest(
@@ -59,14 +59,18 @@ KeyboardSlider.prototype._pressExecute = function (e) {
     if (isPressTarget) {
         activeElement.classList.add(this._options.states.keyboardBtnPressed);
     }
+
+    return true;
 };
 
 KeyboardSlider.prototype._pressReset = function (e) {
     if (helper.hasPlatformModifiers(e)) return false;
+
     e.preventDefault();
     if (e.shiftKey) {
         this._hardReset();
     }
+
     return true;
 };
 

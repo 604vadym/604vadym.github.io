@@ -263,28 +263,27 @@ AutoscrollSlider.prototype._clickAutoscrolloff = function () {
 };
 
 AutoscrollSlider.prototype._pressExecute = function (e) {
-    DraggableSlider.prototype._pressExecute.call(this, e);
+    const isExecuted = DraggableSlider.prototype._pressExecute.call(this, e);
 
-    const activeElement = document.activeElement;
-    const isButton = activeElement?.closest(`.${this._options.classes.button}`);
+    if (isExecuted) {
+        this._isKeyboardDynamicFocused = !!document.activeElement?.closest(
+            `.${this._options.jsClasses.dynamicFocus}`,
+        );
+    }
 
-    if (isButton && this._isInputBlocked()) return;
-
-    this._isKeyboardDynamicFocused = !!activeElement?.closest(
-        `.${this._options.jsClasses.dynamicFocus}`,
-    );
+    return isExecuted;
 };
 
 AutoscrollSlider.prototype._pressReset = function (e) {
-    const isResetExecuted = DraggableSlider.prototype._pressReset.call(this, e);
+    const isExecuted = DraggableSlider.prototype._pressReset.call(this, e);
 
-    if (isResetExecuted) {
+    if (isExecuted) {
         if (this._isAutoscrollOn) {
             this._toggleAutoscrollMode();
         }
     }
 
-    return isResetExecuted;
+    return isExecuted;
 };
 
 AutoscrollSlider.prototype._pressAutoscrollon = function (e) {
