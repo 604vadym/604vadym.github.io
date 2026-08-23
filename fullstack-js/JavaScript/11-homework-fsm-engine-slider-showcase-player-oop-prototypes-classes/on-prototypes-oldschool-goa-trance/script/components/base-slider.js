@@ -179,8 +179,11 @@ BaseSlider.prototype = {
 
     _handleClick(e) {
         const button = this._validateInput(e);
-
         if (!button) return;
+
+        if (e.pointerType === "mouse" || e.pointerType === "touch") {
+            button.blur();
+        }
 
         this._buttonManager.manage(button);
     },
@@ -197,10 +200,6 @@ BaseSlider.prototype = {
 
         const button = e.target.closest(`.${this._options.classes.button}`);
         if (!button || this._isInputBlocked()) return (e._validButton = null);
-
-        if (e.pointerType === "mouse" || e.pointerType === "touch") {
-            button.blur();
-        }
 
         return (e._validButton = button);
     },
