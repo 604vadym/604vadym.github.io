@@ -129,7 +129,9 @@ BaseSlider.prototype = {
     },
 
     _updateSlider() {
-        this._state = STATES.MOVING;
+        if (this._track.style.transition !== "none") {
+            this._state = STATES.MOVING;
+        }
 
         if (helper.hasFinePointer() || this._isResizing) {
             this._track.style.transform = `translateX(-${this._currentIndex * 100}%)`;
