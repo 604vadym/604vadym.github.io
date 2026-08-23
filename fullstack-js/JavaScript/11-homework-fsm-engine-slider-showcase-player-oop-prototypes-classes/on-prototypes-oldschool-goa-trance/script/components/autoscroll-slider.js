@@ -96,15 +96,9 @@ AutoscrollSlider.prototype._nextSlideAuto = function () {
         this._nextSlide();
     }
 
-    const isMouseStillOver =
-        helper.hasFinePointer() &&
-        document.querySelector(
-            `.${this._options.jsClasses.autoscrollPauseHover}:not(.${this._options.classes.btnAutoscrollOff}):hover`,
-        );
-
-    if (isMouseStillOver) {
+    if (this._isMouseStillOver()) {
         this._isMouseOver = true;
-        this._tryKillAutoscroll("hover");
+        this._tryPauseAutoscroll("hover");
     } else {
         this._isMouseOver = false;
     }
@@ -116,7 +110,16 @@ AutoscrollSlider.prototype._nextSlideAutoLazy = function () {
     this._goToSlide(this._currentIndex);
 };
 
-AutoscrollSlider.prototype._tryResurrectAutoscroll = function (context = null) {
+AutoscrollSlider.prototype._isMouseStillOver = function () {
+    return (
+        helper.hasFinePointer() &&
+        !!document.querySelector(
+            `.${this._options.jsClasses.autoscrollPauseHover}:not(.${this._options.classes.btnAutoscrollOff}):hover`,
+        )
+    );
+};
+
+AutoscrollSlider.prototype._tryResumeAutoscroll = function (context = null) {
     const isDriftingAfterClick = this._isPostClickDriftActive();
     if (
         !this._isAutoscrollOn ||
@@ -149,7 +152,20 @@ AutoscrollSlider.prototype._tryResurrectAutoscroll = function (context = null) {
     }
 };
 
-AutoscrollSlider.prototype._tryKillAutoscroll = function (context = null) {
+AutoscrollSlider.prototype._isPostClickDriftActive = function () {
+    const msSinceLastClick = Date.now() - this._lastClickTimestamp;
+    return msSinceLastClick < this._autoscrollWakeUpDelay;
+};
+
+AutoscrollSlider.prototype._getAdaptiveWakeUpDelay = function () {
+    const msSlideStand = Date.now() - this._slideStandTimestamp;
+    if (msSlideStand < this._autoscrollDelay - this._autoscrollWakeUpDelay) {
+        return this._autoscrollDelay - msSlideStand;
+    }
+    return this._autoscrollWakeUpDelay;
+};
+
+AutoscrollSlider.prototype._tryPauseAutoscroll = function (context = null) {
     if (!this._isAutoscrollOn) return;
 
     if (this._isTabActive && !this._isKeyboardFocused) {
@@ -202,19 +218,6 @@ AutoscrollSlider.prototype._isAutoscrollFirstCycle = function () {
     return msSinceStart < this._autoscrollDelay;
 };
 
-AutoscrollSlider.prototype._isPostClickDriftActive = function () {
-    const msSinceLastClick = Date.now() - this._lastClickTimestamp;
-    return msSinceLastClick < this._autoscrollWakeUpDelay;
-};
-
-AutoscrollSlider.prototype._getAdaptiveWakeUpDelay = function () {
-    const msSlideStand = Date.now() - this._slideStandTimestamp;
-    if (msSlideStand < this._autoscrollDelay - this._autoscrollWakeUpDelay) {
-        return this._autoscrollDelay - msSlideStand;
-    }
-    return this._autoscrollWakeUpDelay;
-};
-
 AutoscrollSlider.prototype._clickAutoscrollon = function () {
     this._toggleAutoscrollMode();
 };
@@ -251,7 +254,7 @@ AutoscrollSlider.prototype._handleClick = function (e) {
 
     if (button && !this._isInputBlocked() && e.button !== 2) {
         this._lastClickTimestamp = Date.now();
-        this._tryKillAutoscroll();
+        this._tryPauseAutoscroll();
     }
 
     DraggableSlider.prototype._handleClick.call(this, e);
@@ -263,7 +266,7 @@ AutoscrollSlider.prototype._handleFocus = function (e) {
         !e.target.closest(`.${this._options.jsClasses.dynamicFocus}`)
     ) {
         this._isKeyboardFocused = true;
-        this._tryKillAutoscroll();
+        this._tryPauseAutoscroll();
     }
 };
 
@@ -273,7 +276,7 @@ AutoscrollSlider.prototype._handleBlur = function (e) {
         !e.target.closest(`.${this._options.jsClasses.dynamicFocus}`)
     ) {
         this._isKeyboardFocused = false;
-        this._tryResurrectAutoscroll();
+        this._tryResumeAutoscroll();
     }
 };
 
@@ -292,11 +295,11 @@ AutoscrollSlider.prototype._handleMouseOver = function (e) {
         if (this._isMouseOver) return;
 
         this._isMouseOver = true;
-        this._tryKillAutoscroll("hover");
+        this._tryPauseAutoscroll("hover");
     } else {
         if (!this._isMouseOver) return;
         this._isMouseOver = false;
-        this._tryResurrectAutoscroll("hover");
+        this._tryResumeAutoscroll("hover");
     }
 };
 
@@ -313,7 +316,7 @@ AutoscrollSlider.prototype._handleMouseOut = function (e) {
 
     if (!this._slider.contains(e.relatedTarget)) {
         this._isMouseOver = false;
-        this._tryResurrectAutoscroll("hover");
+        this._tryResumeAutoscroll("hover");
     }
 };
 
@@ -329,18 +332,18 @@ AutoscrollSlider.prototype._handleTransitionEnd = function () {
 
     if (this._isKeyboardDynamicFocused) {
         this._isKeyboardDynamicFocused = false;
-        this._tryKillAutoscroll();
-        this._tryResurrectAutoscroll();
+        this._tryPauseAutoscroll();
+        this._tryResumeAutoscroll();
     }
 };
 
 AutoscrollSlider.prototype._handleVisibilityChange = function () {
     if (document.hidden === true) {
         this._isTabActive = false;
-        this._tryKillAutoscroll();
+        this._tryPauseAutoscroll();
     } else {
         this._isTabActive = true;
-        this._tryResurrectAutoscroll("visibility");
+        this._tryResumeAutoscroll("visibility");
     }
 };
 
