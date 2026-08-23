@@ -209,17 +209,24 @@ BaseSlider.prototype = {
     },
 
     _handleResize() {
+        this._beforeResize();
+        this._resizeTimeoutId = setTimeout(() => {
+            this._afterResize();
+        }, 8);
+    },
+
+    _beforeResize(e) {
         this._isResizing = true;
         clearTimeout(this._resizeTimeoutId);
         this._slider.classList.add(this._options.states.resizing);
         this._updateSliderInstantly();
+    },
 
-        this._resizeTimeoutId = setTimeout(() => {
-            this._isResizing = false;
-            this._slider.classList.remove(this._options.states.resizing);
-            this._updateSlideWidth();
-            this._updateSliderInstantly();
-        }, 8);
+    _afterResize(e) {
+        this._isResizing = false;
+        this._slider.classList.remove(this._options.states.resizing);
+        this._updateSlideWidth();
+        this._updateSliderInstantly();
     },
 };
 

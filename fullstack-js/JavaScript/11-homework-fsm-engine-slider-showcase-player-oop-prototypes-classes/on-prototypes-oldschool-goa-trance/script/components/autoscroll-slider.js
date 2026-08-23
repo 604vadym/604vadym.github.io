@@ -274,6 +274,16 @@ AutoscrollSlider.prototype._pressAutoscrolloff = function (e) {
     this._toggleAutoscrollMode();
 };
 
+AutoscrollSlider.prototype._beforeResize = function () {
+    DraggableSlider.prototype._beforeResize.call(this);
+    this._tryPauseAutoscroll();
+};
+
+AutoscrollSlider.prototype._afterResize = function () {
+    DraggableSlider.prototype._afterResize.call(this);
+    this._tryResumeAutoscroll();
+};
+
 AutoscrollSlider.prototype._handleClick = function (e) {
     const validButton = DraggableSlider.prototype._validateInput.call(this, e);
     if (validButton) {
