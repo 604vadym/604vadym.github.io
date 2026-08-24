@@ -256,6 +256,26 @@ AutoscrollSlider.prototype._isAutoscrollFirstCycle = function () {
     return msSinceStart < this._autoscrollDelay;
 };
 
+AutoscrollSlider.prototype._clickNext = function () {
+    DraggableSlider.prototype._clickNext.call(this);
+    this._tryPauseAutoscroll();
+};
+
+AutoscrollSlider.prototype._clickPrev = function () {
+    DraggableSlider.prototype._clickPrev.call(this);
+    this._tryPauseAutoscroll();
+};
+
+AutoscrollSlider.prototype._clickGoto = function (button) {
+    const isExecuted = DraggableSlider.prototype._clickGoto.call(this, button);
+
+    if (isExecuted) {
+        this._tryPauseAutoscroll();
+    }
+
+    return isExecuted;
+};
+
 AutoscrollSlider.prototype._clickAutoscrollon = function () {
     this._toggleAutoscrollMode();
 };
@@ -315,30 +335,9 @@ AutoscrollSlider.prototype._handleClick = function (e) {
 
     if (isExecuted) {
         this._lastClickTimestamp = Date.now();
-        this._tryPauseAutoscroll();
     }
 
     return isExecuted;
-};
-
-AutoscrollSlider.prototype._handleFocus = function (e) {
-    if (
-        e.target.closest(`.${this._options.jsClasses.autoscrollPauseHover}`) &&
-        !e.target.closest(`.${this._options.jsClasses.dynamicFocus}`)
-    ) {
-        this._isKeyboardFocused = true;
-        this._tryPauseAutoscroll();
-    }
-};
-
-AutoscrollSlider.prototype._handleBlur = function (e) {
-    if (
-        e.target.closest(`.${this._options.jsClasses.autoscrollPauseHover}`) &&
-        !e.target.closest(`.${this._options.jsClasses.dynamicFocus}`)
-    ) {
-        this._isKeyboardFocused = false;
-        this._tryResumeAutoscroll();
-    }
 };
 
 AutoscrollSlider.prototype._handleMouseOver = function (e) {
@@ -379,6 +378,26 @@ AutoscrollSlider.prototype._handleMouseOut = function (e) {
     if (!this._slider.contains(e.relatedTarget)) {
         this._isMouseOver = false;
         this._tryResumeAutoscroll(CONTEXTS.HOVER);
+    }
+};
+
+AutoscrollSlider.prototype._handleFocus = function (e) {
+    if (
+        e.target.closest(`.${this._options.jsClasses.autoscrollPauseHover}`) &&
+        !e.target.closest(`.${this._options.jsClasses.dynamicFocus}`)
+    ) {
+        this._isKeyboardFocused = true;
+        this._tryPauseAutoscroll();
+    }
+};
+
+AutoscrollSlider.prototype._handleBlur = function (e) {
+    if (
+        e.target.closest(`.${this._options.jsClasses.autoscrollPauseHover}`) &&
+        !e.target.closest(`.${this._options.jsClasses.dynamicFocus}`)
+    ) {
+        this._isKeyboardFocused = false;
+        this._tryResumeAutoscroll();
     }
 };
 

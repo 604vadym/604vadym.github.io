@@ -127,7 +127,9 @@ BaseSlider.prototype = {
         this._currentIndex = this._normaliseIndex(index);
         if (this._currentIndex !== oldIndex) {
             this._updateSlider();
+            return true;
         }
+        return false;
     },
 
     _updateSlider() {
