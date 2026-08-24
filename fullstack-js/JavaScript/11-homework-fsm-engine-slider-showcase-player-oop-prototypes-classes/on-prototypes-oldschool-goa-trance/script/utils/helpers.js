@@ -11,5 +11,27 @@ export function tryClearFocus() {
 }
 
 export function hasPlatformModifiers(e) {
-    return !!(e.ctrlKey || e.altKey || e.metaKey);
+    return Boolean(e?.ctrlKey || e?.altKey || e?.metaKey);
+}
+
+export function prevent(e) {
+    if (e && typeof e.preventDefault === "function") {
+        e.preventDefault();
+    }
+}
+
+export function hasShift(e) {
+    return Boolean(e?.shiftKey);
+}
+
+export function isOverrideKey(e) {
+    return hasShift(e);
+}
+
+export function isPassthroughKey(e) {
+    return hasShift(e);
+}
+
+export function isMultiTouch(e) {
+    return Boolean(e?.touches && e.touches.length > 1);
 }

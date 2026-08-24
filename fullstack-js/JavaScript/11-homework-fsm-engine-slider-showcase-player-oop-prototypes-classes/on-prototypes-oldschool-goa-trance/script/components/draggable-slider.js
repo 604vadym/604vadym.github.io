@@ -11,6 +11,9 @@ DraggableSlider.prototype = Object.create(InfiniteSlider.prototype);
 DraggableSlider.prototype.constructor = DraggableSlider;
 Object.setPrototypeOf(DraggableSlider, InfiniteSlider);
 
+const MOUSE_BUTTON_RIGHT = 2;
+const MOUSE_BUTTON_MIDDLE = 1;
+
 const STATES = DraggableSlider.STATES;
 
 DraggableSlider.prototype.init = function () {
@@ -45,8 +48,8 @@ DraggableSlider.prototype._startDragging = function (e) {
     this._eventManager.subscribe(this, DraggableSlider.DYNAMIC_EVENT_MAP);
 };
 
-DraggableSlider.prototype._moveConveyor = function (currentPointerX) {
-    const pointerOffset = currentPointerX - this._pointerStartX;
+DraggableSlider.prototype._moveConveyor = function (pointerCurrentX) {
+    const pointerOffset = pointerCurrentX - this._pointerStartX;
     const trackOffset = this._currentIndex * this._slideWidth - pointerOffset;
 
     if (Math.abs(pointerOffset) < this._slideWidth) {
@@ -107,16 +110,17 @@ DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
         return;
     }
 
-    if (e.button === 1 || e.button === 2) {
-        e.preventDefault();
+    if (e.button === MOUSE_BUTTON_MIDDLE || e.button === MOUSE_BUTTON_RIGHT) {
+        helper.prevent(e);
         return;
     }
 
     if (e.target.closest(`.${this._options.classes.track}`)) {
-        if (e.touches && e.touches.length > 1) {
+        if (helper.isMultiTouch(e)) {
             this._stopDragging();
             return;
         }
+
         this._startDragging(e);
     }
 };
@@ -124,7 +128,7 @@ DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
 DraggableSlider.prototype._handleMouseMoveTouchMove = function (e) {
     if (!this._isDragging) return;
 
-    if (e.touches && e.touches.length > 1) {
+    if (helper.isMultiTouch(e)) {
         this._stopDragging();
         return;
     }
@@ -162,7 +166,7 @@ DraggableSlider.DYNAMIC_EVENT_MAP = {
     },
     touchcancel: {
         target: (instance) => instance._slider,
-        handler: () => DraggableSlider.prototype._stopDragging(),
+        handler: DraggableSlider.prototype._stopDragging,
     },
 };
 

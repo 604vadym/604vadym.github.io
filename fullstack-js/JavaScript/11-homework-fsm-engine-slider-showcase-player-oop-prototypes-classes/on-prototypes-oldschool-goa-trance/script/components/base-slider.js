@@ -34,6 +34,8 @@ BaseSlider.STATES = Object.freeze({
     MOVING: "MOVING",
 });
 
+const MOUSE_BUTTON_RIGHT = 2;
+
 const STATES = BaseSlider.STATES;
 
 BaseSlider.prototype = {
@@ -180,8 +182,13 @@ BaseSlider.prototype = {
     },
 
     _handleClick(e) {
-        const button = this._validateButtonInput(e);
-        if (!button) return false;
+        if (e.button === MOUSE_BUTTON_RIGHT) {
+            helper.prevent(e);
+            return false;
+        }
+
+        const button = e.target.closest(`.${this._options.classes.button}`);
+        if (!button || this._isInputBlocked()) return false;
 
         if (e.pointerType === "mouse" || e.pointerType === "touch") {
             button.blur();
@@ -190,18 +197,6 @@ BaseSlider.prototype = {
         this._buttonManager.manage(button);
 
         return true;
-    },
-
-    _validateButtonInput(e) {
-        if (e.button === 2) {
-            e.preventDefault();
-            return null;
-        }
-
-        const button = e.target.closest(`.${this._options.classes.button}`);
-        if (!button || this._isInputBlocked()) return null;
-
-        return button;
     },
 
     _handleTransitionEnd() {
@@ -245,7 +240,7 @@ BaseSlider[BaseSlider.EVENT_MAP_KEY] = {
     },
     dragstart: {
         target: (instance) => instance._slider,
-        handler: (e) => e.preventDefault(),
+        handler: helper.prevent,
     },
     resize: {
         target: () => window,

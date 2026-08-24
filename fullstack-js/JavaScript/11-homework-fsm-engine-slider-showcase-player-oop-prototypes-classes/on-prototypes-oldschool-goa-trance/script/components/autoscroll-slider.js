@@ -148,8 +148,10 @@ AutoscrollSlider.prototype._nextSlideAutoLazy = function () {
 AutoscrollSlider.prototype._isMouseStillOver = function () {
     return (
         helper.hasFinePointer() &&
-        !!document.querySelector(
-            `.${this._options.jsClasses.autoscrollPauseHover}:not(.${this._options.classes.btnAutoscrollOff}):hover`,
+        Boolean(
+            document.querySelector(
+                `.${this._options.jsClasses.autoscrollPauseHover}:not(.${this._options.classes.btnAutoscrollOff}):hover`,
+            ),
         )
     );
 };
@@ -159,9 +161,9 @@ AutoscrollSlider.prototype._tryResumeAutoscroll = function (context = null) {
     if (
         !this._isAutoscrollOn ||
         !this._isTabActive ||
-        (context !== CONTEXTS.VISIBILITY && this._isDragging) ||
         this._isKeyboardFocused ||
-        (this._isMouseOver && !isDriftingAfterClick)
+        (this._isMouseOver && !isDriftingAfterClick) ||
+        (this._isDragging && context !== CONTEXTS.VISIBILITY)
     )
         return;
 
@@ -266,8 +268,10 @@ AutoscrollSlider.prototype._pressExecute = function (e) {
     const isExecuted = DraggableSlider.prototype._pressExecute.call(this, e);
 
     if (isExecuted) {
-        this._isKeyboardDynamicFocused = !!document.activeElement?.closest(
-            `.${this._options.jsClasses.dynamicFocus}`,
+        this._isKeyboardDynamicFocused = Boolean(
+            document.activeElement?.closest(
+                `.${this._options.jsClasses.dynamicFocus}`,
+            ),
         );
     }
 
@@ -287,12 +291,12 @@ AutoscrollSlider.prototype._pressReset = function (e) {
 };
 
 AutoscrollSlider.prototype._pressAutoscrollon = function (e) {
-    e.preventDefault();
+    helper.prevent(e);
     this._toggleAutoscrollMode();
 };
 
 AutoscrollSlider.prototype._pressAutoscrolloff = function (e) {
-    e.preventDefault();
+    helper.prevent(e);
     this._toggleAutoscrollMode();
 };
 
@@ -339,6 +343,7 @@ AutoscrollSlider.prototype._handleBlur = function (e) {
 
 AutoscrollSlider.prototype._handleMouseOver = function (e) {
     if (!helper.hasFinePointer()) return;
+
     const isPauseTarget = e.target.closest(
         `.${this._options.jsClasses.autoscrollPauseHover}`,
     );
@@ -350,7 +355,6 @@ AutoscrollSlider.prototype._handleMouseOver = function (e) {
             return;
         }
         if (this._isMouseOver) return;
-
         this._isMouseOver = true;
         this._tryPauseAutoscroll(CONTEXTS.HOVER);
     } else {
@@ -362,6 +366,7 @@ AutoscrollSlider.prototype._handleMouseOver = function (e) {
 
 AutoscrollSlider.prototype._handleMouseOut = function (e) {
     if (!helper.hasFinePointer()) return;
+
     if (
         e.relatedTarget &&
         e.relatedTarget.closest(

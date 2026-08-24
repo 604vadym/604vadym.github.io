@@ -33,13 +33,13 @@ KeyboardSlider.prototype._hardReset = function () {
 };
 
 KeyboardSlider.prototype._pressNext = function (e) {
-    e.preventDefault();
+    helper.prevent(e);
     if (this._isInputBlocked()) return;
     this._nextSlide();
 };
 
 KeyboardSlider.prototype._pressPrev = function (e) {
-    e.preventDefault();
+    helper.prevent(e);
     if (this._isInputBlocked()) return;
     this._prevSlide();
 };
@@ -49,7 +49,7 @@ KeyboardSlider.prototype._pressExecute = function (e) {
     const isButton = activeElement?.closest(`.${this._options.classes.button}`);
 
     if (isButton && this._isInputBlocked()) {
-        e.preventDefault();
+        helper.prevent(e);
         return false;
     }
 
@@ -66,8 +66,8 @@ KeyboardSlider.prototype._pressExecute = function (e) {
 KeyboardSlider.prototype._pressReset = function (e) {
     if (helper.hasPlatformModifiers(e)) return false;
 
-    e.preventDefault();
-    if (e.shiftKey) {
+    helper.prevent(e);
+    if (helper.isOverrideKey(e)) {
         this._hardReset();
     }
 
@@ -75,7 +75,7 @@ KeyboardSlider.prototype._pressReset = function (e) {
 };
 
 KeyboardSlider.prototype._pressIgnore = function (e) {
-    e.preventDefault();
+    helper.prevent(e);
 };
 
 KeyboardSlider.prototype._handleKeyDown = function (e) {
