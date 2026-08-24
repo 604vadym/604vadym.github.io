@@ -60,5 +60,5 @@ PaginationSlider.prototype._updatePagination = function () {
 };
 
 PaginationSlider.prototype._clickGoto = function (button) {
-    return this._goToSlide(this._paginationDots.indexOf(button));
+    this._goToSlide(this._paginationDots.indexOf(button));
 };

@@ -126,10 +126,12 @@ BaseSlider.prototype = {
         const oldIndex = this._currentIndex;
         this._currentIndex = this._normaliseIndex(index);
         if (this._currentIndex !== oldIndex) {
-            this._updateSlider();
-            return true;
+            this._onSlideChanged();
         }
-        return false;
+    },
+
+    _onSlideChanged() {
+        this._updateSlider();
     },
 
     _updateSlider() {

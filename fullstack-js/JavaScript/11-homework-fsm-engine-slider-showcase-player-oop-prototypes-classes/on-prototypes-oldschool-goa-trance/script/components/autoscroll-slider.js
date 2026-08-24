@@ -95,6 +95,7 @@ AutoscrollSlider.prototype._initProps = function () {
     this._isTabActive = true;
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
+    this._isAutoscrollAction = false;
     this._isKeyboardDynamicFocused = false;
     this._isAutoscrollOn = Boolean(this._options.autoplay);
 };
@@ -119,17 +120,31 @@ AutoscrollSlider.prototype._hardReset = function () {
     this._lastClickTimestamp = 0;
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
+    this._isAutoscrollAction = false;
     this._isKeyboardDynamicFocused = false;
+};
+
+AutoscrollSlider.prototype._onSlideChanged = function () {
+    DraggableSlider.prototype._onSlideChanged.call(this);
+
+    if (!this._isAutoscrollAction) {
+        this._tryPauseAutoscroll();
+        this._tryResumeAutoscroll();
+    }
 };
 
 AutoscrollSlider.prototype._nextSlideAuto = function () {
     if (this.state === STATES.MOVING || !this._isAutoscrollOn) return;
+
+    this._isAutoscrollAction = true;
 
     if (this._currentIndex === this._slidesCount) {
         this._nextSlideAutoLazy();
     } else {
         this._nextSlide();
     }
+
+    this._isAutoscrollAction = false;
 
     if (this._isMouseStillOver()) {
         this._isMouseOver = true;
@@ -254,26 +269,6 @@ AutoscrollSlider.prototype._toggleAutoscrollMode = function () {
 AutoscrollSlider.prototype._isAutoscrollFirstCycle = function () {
     const msSinceStart = Date.now() - this._autoscrollManualStartTimestamp;
     return msSinceStart < this._autoscrollDelay;
-};
-
-AutoscrollSlider.prototype._clickNext = function () {
-    DraggableSlider.prototype._clickNext.call(this);
-    this._tryPauseAutoscroll();
-};
-
-AutoscrollSlider.prototype._clickPrev = function () {
-    DraggableSlider.prototype._clickPrev.call(this);
-    this._tryPauseAutoscroll();
-};
-
-AutoscrollSlider.prototype._clickGoto = function (button) {
-    const isExecuted = DraggableSlider.prototype._clickGoto.call(this, button);
-
-    if (isExecuted) {
-        this._tryPauseAutoscroll();
-    }
-
-    return isExecuted;
 };
 
 AutoscrollSlider.prototype._clickAutoscrollon = function () {
