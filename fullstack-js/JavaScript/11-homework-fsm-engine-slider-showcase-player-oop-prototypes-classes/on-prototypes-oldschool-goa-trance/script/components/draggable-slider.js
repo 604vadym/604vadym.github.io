@@ -11,8 +11,8 @@ DraggableSlider.prototype = Object.create(InfiniteSlider.prototype);
 DraggableSlider.prototype.constructor = DraggableSlider;
 Object.setPrototypeOf(DraggableSlider, InfiniteSlider);
 
-const MOUSE_BUTTON_RIGHT = 2;
 const MOUSE_BUTTON_MIDDLE = 1;
+const MOUSE_BUTTON_RIGHT = 2;
 
 const STATES = DraggableSlider.STATES;
 
@@ -45,7 +45,7 @@ DraggableSlider.prototype._startDragging = function (e) {
     this._pointerStartX = this._getClientX(e);
     this._updateSlideWidth();
     this._disableAnimation();
-    this._eventManager.subscribe(this, DraggableSlider.DYNAMIC_EVENT_MAP);
+    this._eventManager.subscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
 };
 
 DraggableSlider.prototype._moveConveyor = function (pointerCurrentX) {
@@ -73,7 +73,7 @@ DraggableSlider.prototype._stopDragging = function (
 ) {
     this._isDragging = false;
     this._enableAnimation();
-    this._eventManager.unsubscribe(this, DraggableSlider.DYNAMIC_EVENT_MAP);
+    this._eventManager.unsubscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
 
     if (pointerOffset === null) {
         this._updateSlider();

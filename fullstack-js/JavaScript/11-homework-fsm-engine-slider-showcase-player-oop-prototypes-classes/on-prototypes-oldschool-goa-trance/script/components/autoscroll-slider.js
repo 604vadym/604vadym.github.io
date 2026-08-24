@@ -133,6 +133,19 @@ AutoscrollSlider.prototype._onSlideChanged = function () {
     }
 };
 
+AutoscrollSlider.prototype._startDragging = function (e) {
+    this._tryPauseAutoscroll();
+    DraggableSlider.prototype._startDragging.call(this, e);
+};
+
+AutoscrollSlider.prototype._stopDragging = function (
+    pointerOffset = null,
+    e = null,
+) {
+    DraggableSlider.prototype._stopDragging.call(this, pointerOffset, e);
+    this._tryResumeAutoscroll();
+};
+
 AutoscrollSlider.prototype._nextSlideAuto = function () {
     if (this.state === STATES.MOVING || !this._isAutoscrollOn) return;
 
@@ -335,6 +348,14 @@ AutoscrollSlider.prototype._handleClick = function (e) {
     return isExecuted;
 };
 
+AutoscrollSlider.prototype._handleMouseUpTouchEnd = function (e) {
+    const isDraggingInterrupted = this._isDraggingInterrupted;
+    DraggableSlider.prototype._handleMouseUpTouchEnd.call(this, e);
+    if (isDraggingInterrupted) {
+        this._tryResumeAutoscroll();
+    }
+};
+
 AutoscrollSlider.prototype._handleMouseOver = function (e) {
     if (!helper.hasFinePointer()) return;
 
@@ -421,6 +442,21 @@ AutoscrollSlider.prototype._handleVisibilityChange = function () {
         this._isTabActive = true;
         this._tryResumeAutoscroll(CONTEXTS.VISIBILITY);
     }
+};
+
+AutoscrollSlider.DYNAMIC_EVENT_MAP = Object.assign(
+    {},
+    DraggableSlider.DYNAMIC_EVENT_MAP,
+);
+
+AutoscrollSlider.DYNAMIC_EVENT_MAP.mouseup = {
+    target: () => document,
+    handler: AutoscrollSlider.prototype._handleMouseUpTouchEnd,
+};
+
+AutoscrollSlider.DYNAMIC_EVENT_MAP.touchend = {
+    target: () => document,
+    handler: AutoscrollSlider.prototype._handleMouseUpTouchEnd,
 };
 
 AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
