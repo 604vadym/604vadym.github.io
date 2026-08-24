@@ -203,25 +203,29 @@ BaseSlider.prototype = {
         return true;
     },
 
-    _handleTransitionEnd() {
+    _handleTransitionEnd(e) {
         this._state = STATES.IDLE;
     },
 
-    _handleResize() {
+    _handleDragStart(e) {
+        helper.prevent(e);
+    },
+
+    _handleResize(e) {
         this._beforeResize();
         this._resizeTimeoutId = setTimeout(() => {
             this._afterResize();
         }, 8);
     },
 
-    _beforeResize(e) {
+    _beforeResize() {
         this._isResizing = true;
         clearTimeout(this._resizeTimeoutId);
         this._slider.classList.add(this._options.states.resizing);
         this._updateSliderInstantly();
     },
 
-    _afterResize(e) {
+    _afterResize() {
         this._isResizing = false;
         this._slider.classList.remove(this._options.states.resizing);
         this._updateSlideWidth();
@@ -244,7 +248,7 @@ BaseSlider[BaseSlider.EVENT_MAP_KEY] = {
     },
     dragstart: {
         target: (instance) => instance._slider,
-        handler: helper.prevent,
+        handler: BaseSlider.prototype._handleDragStart,
     },
     resize: {
         target: () => window,

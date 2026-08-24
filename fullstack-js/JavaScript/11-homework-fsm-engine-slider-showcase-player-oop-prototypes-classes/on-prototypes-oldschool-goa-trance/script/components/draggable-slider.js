@@ -147,6 +147,10 @@ DraggableSlider.prototype._handleMouseUpTouchEnd = function (e) {
     this._stopDragging(pointerOffset, e);
 };
 
+DraggableSlider.prototype._handleTouchCancel = function (e) {
+    this._stopDragging();
+};
+
 DraggableSlider.DYNAMIC_EVENT_MAP = {
     mousemove: {
         target: () => document,
@@ -166,7 +170,7 @@ DraggableSlider.DYNAMIC_EVENT_MAP = {
     },
     touchcancel: {
         target: (instance) => instance._slider,
-        handler: DraggableSlider.prototype._stopDragging,
+        handler: DraggableSlider.prototype._handleTouchCancel,
     },
 };
 

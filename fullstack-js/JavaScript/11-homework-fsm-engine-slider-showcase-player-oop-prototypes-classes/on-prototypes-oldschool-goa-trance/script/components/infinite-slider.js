@@ -68,7 +68,7 @@ InfiniteSlider.prototype._resetLoop = function () {
     return false;
 };
 
-InfiniteSlider.prototype._handleTransitionEnd = function () {
+InfiniteSlider.prototype._handleTransitionEnd = function (e) {
     if (this._resetLoop()) {
         this._teleportSlides();
     } else {

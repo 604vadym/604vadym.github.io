@@ -82,7 +82,7 @@ KeyboardSlider.prototype._handleKeyDown = function (e) {
     this._keyboardManager.manage(e);
 };
 
-KeyboardSlider.prototype._handleKeyUp = function () {
+KeyboardSlider.prototype._handleKeyUp = function (e) {
     const pressedBtn = document.querySelector(
         `.${this._options.states.keyboardBtnPressed}`,
     );

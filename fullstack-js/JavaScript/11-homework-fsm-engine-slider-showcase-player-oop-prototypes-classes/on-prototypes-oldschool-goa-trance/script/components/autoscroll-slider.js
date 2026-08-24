@@ -417,7 +417,7 @@ AutoscrollSlider.prototype._handleBlur = function (e) {
     }
 };
 
-AutoscrollSlider.prototype._handleTransitionEnd = function () {
+AutoscrollSlider.prototype._handleTransitionEnd = function (e) {
     DraggableSlider.prototype._handleTransitionEnd.call(this);
 
     this._slideStandTimestamp = Date.now();
@@ -434,7 +434,7 @@ AutoscrollSlider.prototype._handleTransitionEnd = function () {
     }
 };
 
-AutoscrollSlider.prototype._handleVisibilityChange = function () {
+AutoscrollSlider.prototype._handleVisibilityChange = function (e) {
     if (document.hidden === true) {
         this._isTabActive = false;
         this._tryPauseAutoscroll();
@@ -490,10 +490,6 @@ AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
         target: (instance) => instance._track,
         handler: AutoscrollSlider.prototype._handleTransitionEnd,
     },
-    // keydown: {
-    //     target: () => document,
-    //     handler: AutoscrollSlider.prototype._handleKeyDown,
-    // },
     visibilitychange: {
         target: () => document,
         handler: AutoscrollSlider.prototype._handleVisibilityChange,
