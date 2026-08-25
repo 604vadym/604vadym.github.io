@@ -30,7 +30,7 @@ Object.defineProperty(AutoscrollSlider, "AUTOSCROLL_DELAY", {
 });
 
 Object.defineProperty(AutoscrollSlider, "AUTOSCROLL_WAKE_UP_DELAY", {
-    value: 1500,
+    value: 2000,
     writable: false,
     configurable: false,
 });
@@ -88,7 +88,7 @@ AutoscrollSlider.prototype._initProps = function () {
     );
 
     this._autoscrollManualStartTimestamp = 0;
-    this._slideStandTimestamp = 0;
+    this._slideChangeTimestamp = 0;
     this._lastClickTimestamp = 0;
 
     this._isTabActive = true;
@@ -113,7 +113,7 @@ AutoscrollSlider.prototype._initPagination = function () {
 AutoscrollSlider.prototype._hardReset = function () {
     DraggableSlider.prototype._hardReset.call(this);
     this._autoscrollManualStartTimestamp = 0;
-    this._slideStandTimestamp = 0;
+    this._slideChangeTimestamp = 0;
     this._lastClickTimestamp = 0;
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
@@ -122,7 +122,7 @@ AutoscrollSlider.prototype._hardReset = function () {
 
 AutoscrollSlider.prototype._onSlideChanged = function () {
     DraggableSlider.prototype._onSlideChanged.call(this);
-
+    this._slideChangeTimestamp = Date.now();
     if (!this._isAutoscrollAction) {
         this._tryPauseAutoscroll();
         this._tryResumeAutoscroll();
@@ -217,7 +217,7 @@ AutoscrollSlider.prototype._isPostClickDriftActive = function () {
 };
 
 AutoscrollSlider.prototype._getAdaptiveWakeUpDelay = function () {
-    const msSlideStand = Date.now() - this._slideStandTimestamp;
+    const msSlideStand = Date.now() - this._slideChangeTimestamp;
     if (msSlideStand < this._autoscrollDelay - this._autoscrollWakeUpDelay) {
         return this._autoscrollDelay - msSlideStand;
     }
@@ -395,11 +395,6 @@ AutoscrollSlider.prototype._handleBlur = function (e) {
     }
 };
 
-AutoscrollSlider.prototype._handleTransitionEnd = function (e) {
-    DraggableSlider.prototype._handleTransitionEnd.call(this);
-    this._slideStandTimestamp = Date.now();
-};
-
 AutoscrollSlider.prototype._handleVisibilityChange = function (e) {
     if (document.hidden === true) {
         this._isTabActive = false;
@@ -451,10 +446,6 @@ AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
         target: (instance) => instance._slider,
         handler: AutoscrollSlider.prototype._handleBlur,
         options: { capture: true },
-    },
-    transitionend: {
-        target: (instance) => instance._track,
-        handler: AutoscrollSlider.prototype._handleTransitionEnd,
     },
     visibilitychange: {
         target: () => document,
