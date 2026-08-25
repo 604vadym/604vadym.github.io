@@ -45,6 +45,7 @@ DraggableSlider.prototype._startDragging = function (e) {
     this._pointerStartX = this._getClientX(e);
     this._updateSlideWidth();
     this._disableAnimation();
+    this._onDragStarted();
     this._eventManager.subscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
 };
 
@@ -77,6 +78,7 @@ DraggableSlider.prototype._stopDragging = function (
 
     if (pointerOffset === null) {
         this._updateSlider();
+        this._onDragEnded();
         return;
     }
 
@@ -97,7 +99,11 @@ DraggableSlider.prototype._stopDragging = function (
             this._updateSlider();
         }
     }
+    this._onDragEnded();
 };
+
+DraggableSlider.prototype._onDragStarted = function () {};
+DraggableSlider.prototype._onDragEnded = function () {};
 
 DraggableSlider.prototype._getClientX = function (e) {
     return e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
@@ -140,6 +146,7 @@ DraggableSlider.prototype._handleMouseMoveTouchMove = function (e) {
 DraggableSlider.prototype._handleMouseUpTouchEnd = function (e) {
     if (this._isDraggingInterrupted) {
         this._isDraggingInterrupted = false;
+        this._onDragEnded();
         return;
     }
     if (!this._isDragging) return;
