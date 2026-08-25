@@ -69,7 +69,7 @@ const slider = new Slider({
     states: {
         keyboardBtnPressed: "is-pressed",
         resizing: "slider--resizing",
-        autoscrollon: "slider--autoscroll-on",
+        autoscrollOn: "slider--autoscroll-on",
     },
 
     click: {

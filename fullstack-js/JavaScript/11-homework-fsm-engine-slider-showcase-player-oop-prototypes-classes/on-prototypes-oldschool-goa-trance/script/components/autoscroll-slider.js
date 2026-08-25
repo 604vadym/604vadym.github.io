@@ -245,38 +245,38 @@ AutoscrollSlider.prototype._startAutoscroll = function (
     delay = null,
     context = null,
 ) {
-    this._isAutoscrollOn = true;
-    this._slider.classList.add(this._options.states.autoscrollon);
-    this._btnAutoscrollOff.tabIndex = 0;
-
     if (context === CONTEXTS.VISIBILITY) {
         this._state = STATES.IDLE;
         this._isDragging = false;
         this._isKeyboardDynamicFocused = false;
     }
 
-    const currentDelay = delay || this._autoscrollDelay;
-
-    this._timer.start(currentDelay);
+    this._toggleAutoscrollState(true);
+    this._timer.start(delay || this._autoscrollDelay);
 };
 
 AutoscrollSlider.prototype._stopAutoscroll = function () {
-    this._isAutoscrollOn = false;
-    this._slider.classList.remove(this._options.states.autoscrollon);
-    this._btnAutoscrollOff.tabIndex = -1;
     this._autoscrollPauseTimestamp = Date.now();
+    this._toggleAutoscrollState(false);
     this._timer.stop();
+};
+
+AutoscrollSlider.prototype._toggleAutoscrollState = function (isActive) {
+    this._isAutoscrollOn = isActive;
+    this._slider.classList.toggle(this._options.states.autoscrollOn, isActive);
+    this._btnAutoscrollOff.tabIndex = isActive ? 0 : -1;
+    this._btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
 };
 
 AutoscrollSlider.prototype._toggleAutoscrollMode = function () {
     if (this._isAutoscrollOn) {
-        helper.tryClearFocus();
         this._stopAutoscroll();
     } else {
         this._nextSlide();
         this._startAutoscroll();
         this._autoscrollManualStartTimestamp = Date.now();
     }
+    helper.tryClearFocus();
 };
 
 AutoscrollSlider.prototype._isAutoscrollFirstCycle = function () {
