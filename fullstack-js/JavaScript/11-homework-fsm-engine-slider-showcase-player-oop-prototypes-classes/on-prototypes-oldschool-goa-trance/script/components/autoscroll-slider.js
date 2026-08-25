@@ -13,7 +13,7 @@ export default function AutoscrollSlider(options) {
     DraggableSlider.call(this, options);
 
     Object.defineProperty(this, "_timer", {
-        value: new Timer(this, this._nextSlideAuto),
+        value: new Timer(this, this._nextAuto),
         writable: false,
         configurable: false,
     });
@@ -88,7 +88,7 @@ AutoscrollSlider.prototype._initProps = function () {
     );
 
     this._autoscrollManualStartTimestamp = 0;
-    this._slideChangeTimestamp = 0;
+    this._indexChangeTimestamp = 0;
     this._lastClickTimestamp = 0;
 
     this._isTabActive = true;
@@ -113,16 +113,16 @@ AutoscrollSlider.prototype._initPagination = function () {
 AutoscrollSlider.prototype._hardReset = function () {
     DraggableSlider.prototype._hardReset.call(this);
     this._autoscrollManualStartTimestamp = 0;
-    this._slideChangeTimestamp = 0;
+    this._indexChangeTimestamp = 0;
     this._lastClickTimestamp = 0;
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
     this._isAutoscrollAction = false;
 };
 
-AutoscrollSlider.prototype._onSlideChanged = function () {
-    DraggableSlider.prototype._onSlideChanged.call(this);
-    this._slideChangeTimestamp = Date.now();
+AutoscrollSlider.prototype._onIndexChanged = function () {
+    DraggableSlider.prototype._onIndexChanged.call(this);
+    this._indexChangeTimestamp = Date.now();
     if (!this._isAutoscrollAction) {
         this._tryPauseAutoscroll();
         this._tryResumeAutoscroll();
@@ -137,15 +137,15 @@ AutoscrollSlider.prototype._onDragEnded = function () {
     this._tryResumeAutoscroll();
 };
 
-AutoscrollSlider.prototype._nextSlideAuto = function () {
+AutoscrollSlider.prototype._nextAuto = function () {
     if (this.state === STATES.MOVING || !this._isAutoscrollOn) return;
 
     this._isAutoscrollAction = true;
 
     if (this._currentIndex === this._slidesCount) {
-        this._nextSlideAutoLazy();
+        this._nextAutoLazy();
     } else {
-        this._nextSlide();
+        this._nextIndex();
     }
 
     this._isAutoscrollAction = false;
@@ -156,10 +156,10 @@ AutoscrollSlider.prototype._nextSlideAuto = function () {
     }
 };
 
-AutoscrollSlider.prototype._nextSlideAutoLazy = function () {
+AutoscrollSlider.prototype._nextAutoLazy = function () {
     this._currentIndex = this._startIndex - 1;
     this._updateSliderInstantly();
-    this._goToSlide(this._currentIndex);
+    this._goToIndex(this._currentIndex);
 };
 
 AutoscrollSlider.prototype._isMouseStillOver = function () {
@@ -212,7 +212,7 @@ AutoscrollSlider.prototype._isPostClickDriftActive = function () {
 };
 
 AutoscrollSlider.prototype._getAdaptiveWakeUpDelay = function () {
-    const msSlideStand = Date.now() - this._slideChangeTimestamp;
+    const msSlideStand = Date.now() - this._indexChangeTimestamp;
     if (msSlideStand < this._autoscrollDelay - this._autoscrollWakeUpDelay) {
         return this._autoscrollDelay - msSlideStand;
     }
@@ -259,7 +259,7 @@ AutoscrollSlider.prototype._toggleAutoscrollMode = function () {
     if (this._isAutoscrollOn) {
         this._stopAutoscroll();
     } else {
-        this._nextSlide();
+        this.next();
         this._startAutoscroll();
         this._autoscrollManualStartTimestamp = Date.now();
     }
@@ -382,6 +382,13 @@ AutoscrollSlider.prototype._handleBlur = function (e) {
     }
 };
 
+AutoscrollSlider.prototype._handleTransitionEnd = function (e) {
+    DraggableSlider.prototype._handleTransitionEnd.call(this, e);
+    this._onSlideChanged(this._normaliseIndex());
+};
+
+AutoscrollSlider.prototype._onSlideChanged = function (index) {};
+
 AutoscrollSlider.prototype._handleVisibilityChange = function (e) {
     if (document.hidden === true) {
         this._isTabActive = false;
@@ -418,6 +425,10 @@ AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
         target: (instance) => instance._slider,
         handler: AutoscrollSlider.prototype._handleBlur,
         options: { capture: true },
+    },
+    transitionend: {
+        target: (instance) => instance._track,
+        handler: AutoscrollSlider.prototype._handleTransitionEnd,
     },
     visibilitychange: {
         target: () => document,

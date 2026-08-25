@@ -67,6 +67,18 @@ BaseSlider.prototype = {
         this._eventManager.init(this, BaseSlider.EVENT_MAP_KEY);
     },
 
+    next() {
+        this._nextIndex();
+    },
+
+    prev() {
+        this._prevIndex();
+    },
+
+    goto(index) {
+        this._goToIndex(index);
+    },
+
     _initDOMElements(childElements) {
         const slider = document.querySelector(
             this._options.singleSelectors.slider,
@@ -116,23 +128,23 @@ BaseSlider.prototype = {
         this._resizeTimeoutId = null;
     },
 
-    _nextSlide() {
-        this._goToSlide(this._normaliseIndex() + 1);
+    _nextIndex() {
+        this._goToIndex(this._normaliseIndex() + 1);
     },
 
-    _prevSlide() {
-        this._goToSlide(this._normaliseIndex() - 1);
+    _prevIndex() {
+        this._goToIndex(this._normaliseIndex() - 1);
     },
 
-    _goToSlide(index) {
+    _goToIndex(index) {
         const oldIndex = this._currentIndex;
         this._currentIndex = this._normaliseIndex(index);
         if (this._currentIndex !== oldIndex) {
-            this._onSlideChanged();
+            this._onIndexChanged();
         }
     },
 
-    _onSlideChanged() {
+    _onIndexChanged() {
         this._updateSlider();
     },
 
@@ -190,11 +202,11 @@ BaseSlider.prototype = {
     },
 
     _clickNext() {
-        this._nextSlide();
+        this._nextIndex();
     },
 
     _clickPrev() {
-        this._prevSlide();
+        this._prevIndex();
     },
 
     _handleClick(e) {

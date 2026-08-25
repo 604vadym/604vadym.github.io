@@ -35,13 +35,13 @@ KeyboardSlider.prototype._hardReset = function () {
 KeyboardSlider.prototype._pressNext = function (e) {
     helper.prevent(e);
     if (this._isInputBlocked()) return;
-    this._nextSlide();
+    this._nextIndex();
 };
 
 KeyboardSlider.prototype._pressPrev = function (e) {
     helper.prevent(e);
     if (this._isInputBlocked()) return;
-    this._prevSlide();
+    this._prevIndex();
 };
 
 KeyboardSlider.prototype._pressExecute = function (e) {

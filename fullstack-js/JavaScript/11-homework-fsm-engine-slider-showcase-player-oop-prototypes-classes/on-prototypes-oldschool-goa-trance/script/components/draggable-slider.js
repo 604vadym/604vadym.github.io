@@ -61,9 +61,9 @@ DraggableSlider.prototype._moveConveyor = function (pointerCurrentX) {
         this._enableAnimation();
 
         if (pointerOffset < 0) {
-            this._nextSlide();
+            this._nextIndex();
         } else {
-            this._prevSlide();
+            this._prevIndex();
         }
     }
 };
@@ -91,9 +91,9 @@ DraggableSlider.prototype._stopDragging = function (
     if (pointerOffset) {
         if (Math.abs(pointerOffset) > triggerThreshold) {
             if (pointerOffset < 0) {
-                this._nextSlide();
+                this._nextIndex();
             } else {
-                this._prevSlide();
+                this._prevIndex();
             }
         } else {
             this._updateSlider();
