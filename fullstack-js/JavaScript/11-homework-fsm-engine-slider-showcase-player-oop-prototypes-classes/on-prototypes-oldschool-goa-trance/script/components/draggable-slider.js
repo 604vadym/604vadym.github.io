@@ -104,6 +104,7 @@ DraggableSlider.prototype._getClientX = function (e) {
 };
 
 DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
+    InfiniteSlider.prototype._handleMouseDown.call(this, e);
     if (this.state === STATES.MOVING) return;
 
     if (e.type === "mousedown" && !helper.hasFinePointer()) {
@@ -151,6 +152,17 @@ DraggableSlider.prototype._handleTouchCancel = function (e) {
     this._stopDragging();
 };
 
+DraggableSlider[DraggableSlider.EVENT_MAP_KEY] = {
+    mousedown: {
+        target: (instance) => instance._slider,
+        handler: DraggableSlider.prototype._handleMouseDownTouchStart,
+    },
+    touchstart: {
+        target: (instance) => instance._slider,
+        handler: DraggableSlider.prototype._handleMouseDownTouchStart,
+    },
+};
+
 DraggableSlider.DYNAMIC_EVENT_MAP = {
     mousemove: {
         target: () => document,
@@ -171,16 +183,5 @@ DraggableSlider.DYNAMIC_EVENT_MAP = {
     touchcancel: {
         target: (instance) => instance._slider,
         handler: DraggableSlider.prototype._handleTouchCancel,
-    },
-};
-
-DraggableSlider[DraggableSlider.EVENT_MAP_KEY] = {
-    mousedown: {
-        target: (instance) => instance._slider,
-        handler: DraggableSlider.prototype._handleMouseDownTouchStart,
-    },
-    touchstart: {
-        target: (instance) => instance._slider,
-        handler: DraggableSlider.prototype._handleMouseDownTouchStart,
     },
 };

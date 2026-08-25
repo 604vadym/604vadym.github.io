@@ -34,6 +34,8 @@ BaseSlider.STATES = Object.freeze({
     MOVING: "MOVING",
 });
 
+const MOUSE_BUTTON_LEFT = 0;
+const MOUSE_BUTTON_MIDDLE = 1;
 const MOUSE_BUTTON_RIGHT = 2;
 
 const STATES = BaseSlider.STATES;
@@ -177,6 +179,16 @@ BaseSlider.prototype = {
         return this.state === STATES.MOVING;
     },
 
+    _tryResetBtnNoActive() {
+        if (this._btnNoActive) {
+            this._btnNoActive.classList.remove(
+                this._options.jsClasses.btnNoActive,
+            );
+            this._eventManager.unsubscribe(this, BaseSlider.DYNAMIC_EVENT_MAP);
+            delete this._btnNoActive;
+        }
+    },
+
     _clickNext() {
         this._nextSlide();
     },
@@ -203,12 +215,31 @@ BaseSlider.prototype = {
         return true;
     },
 
-    _handleTransitionEnd(e) {
-        this._state = STATES.IDLE;
+    _handleMouseDown(e) {
+        if (e.button === MOUSE_BUTTON_RIGHT) {
+            const button = e.target.closest(`.${this._options.classes.button}`);
+            if (button && !this._btnNoActive) {
+                button.classList.add(this._options.jsClasses.btnNoActive);
+                this._btnNoActive = button;
+                this._eventManager.subscribe(
+                    this,
+                    BaseSlider.DYNAMIC_EVENT_MAP,
+                );
+            }
+        } else if (
+            e.button === MOUSE_BUTTON_LEFT ||
+            e.button === MOUSE_BUTTON_MIDDLE
+        ) {
+            this._tryResetBtnNoActive();
+        }
     },
 
     _handleDragStart(e) {
         helper.prevent(e);
+    },
+
+    _handleTransitionEnd(e) {
+        this._state = STATES.IDLE;
     },
 
     _handleResize(e) {
@@ -231,6 +262,10 @@ BaseSlider.prototype = {
         this._updateSlideWidth();
         this._updateSliderInstantly();
     },
+
+    _handleMouseLeave(e) {
+        this._tryResetBtnNoActive();
+    },
 };
 
 BaseSlider[BaseSlider.EVENT_MAP_KEY] = {
@@ -242,16 +277,27 @@ BaseSlider[BaseSlider.EVENT_MAP_KEY] = {
         target: (instance) => instance._slider,
         handler: BaseSlider.prototype._handleClick,
     },
-    transitionend: {
-        target: (instance) => instance._track,
-        handler: BaseSlider.prototype._handleTransitionEnd,
+    mousedown: {
+        target: (instance) => instance._slider,
+        handler: BaseSlider.prototype._handleMouseDown,
     },
     dragstart: {
         target: (instance) => instance._slider,
         handler: BaseSlider.prototype._handleDragStart,
     },
+    transitionend: {
+        target: (instance) => instance._track,
+        handler: BaseSlider.prototype._handleTransitionEnd,
+    },
     resize: {
         target: () => window,
         handler: BaseSlider.prototype._handleResize,
+    },
+};
+
+BaseSlider.DYNAMIC_EVENT_MAP = {
+    mouseleave: {
+        target: (instance) => instance._btnNoActive,
+        handler: BaseSlider.prototype._handleMouseLeave,
     },
 };
