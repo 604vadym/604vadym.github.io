@@ -24,7 +24,7 @@ AutoscrollSlider.prototype.constructor = AutoscrollSlider;
 Object.setPrototypeOf(AutoscrollSlider, DraggableSlider);
 
 Object.defineProperty(AutoscrollSlider, "AUTOSCROLL_DELAY", {
-    value: 4500,
+    value: 5000,
     writable: false,
     configurable: false,
 });
@@ -87,7 +87,6 @@ AutoscrollSlider.prototype._initProps = function () {
         this._autoscrollDelay,
     );
 
-    this._autoscrollPauseTimestamp = 0;
     this._autoscrollManualStartTimestamp = 0;
     this._slideStandTimestamp = 0;
     this._lastClickTimestamp = 0;
@@ -96,7 +95,6 @@ AutoscrollSlider.prototype._initProps = function () {
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
     this._isAutoscrollAction = false;
-    this._isKeyboardDynamicFocused = false;
     this._isAutoscrollOn = Boolean(this._options.autoplay);
 };
 
@@ -114,14 +112,12 @@ AutoscrollSlider.prototype._initPagination = function () {
 
 AutoscrollSlider.prototype._hardReset = function () {
     DraggableSlider.prototype._hardReset.call(this);
-    this._autoscrollPauseTimestamp = 0;
     this._autoscrollManualStartTimestamp = 0;
     this._slideStandTimestamp = 0;
     this._lastClickTimestamp = 0;
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
     this._isAutoscrollAction = false;
-    this._isKeyboardDynamicFocused = false;
 };
 
 AutoscrollSlider.prototype._onSlideChanged = function () {
@@ -159,11 +155,9 @@ AutoscrollSlider.prototype._nextSlideAuto = function () {
 
     this._isAutoscrollAction = false;
 
-    if (this._isMouseStillOver()) {
-        this._isMouseOver = true;
+    this._isMouseOver = this._isMouseStillOver();
+    if (this._isMouseOver) {
         this._tryPauseAutoscroll(CONTEXTS.HOVER);
-    } else {
-        this._isMouseOver = false;
     }
 };
 
@@ -248,7 +242,6 @@ AutoscrollSlider.prototype._startAutoscroll = function (
     if (context === CONTEXTS.VISIBILITY) {
         this._state = STATES.IDLE;
         this._isDragging = false;
-        this._isKeyboardDynamicFocused = false;
     }
 
     this._toggleAutoscrollState(true);
@@ -256,7 +249,6 @@ AutoscrollSlider.prototype._startAutoscroll = function (
 };
 
 AutoscrollSlider.prototype._stopAutoscroll = function () {
-    this._autoscrollPauseTimestamp = Date.now();
     this._toggleAutoscrollState(false);
     this._timer.stop();
 };
@@ -290,20 +282,6 @@ AutoscrollSlider.prototype._clickAutoscrollon = function () {
 
 AutoscrollSlider.prototype._clickAutoscrolloff = function () {
     this._toggleAutoscrollMode();
-};
-
-AutoscrollSlider.prototype._pressExecute = function (e) {
-    const isExecuted = DraggableSlider.prototype._pressExecute.call(this, e);
-
-    if (isExecuted) {
-        this._isKeyboardDynamicFocused = Boolean(
-            document.activeElement?.closest(
-                `.${this._options.jsClasses.dynamicFocus}`,
-            ),
-        );
-    }
-
-    return isExecuted;
 };
 
 AutoscrollSlider.prototype._pressReset = function (e) {
@@ -419,19 +397,7 @@ AutoscrollSlider.prototype._handleBlur = function (e) {
 
 AutoscrollSlider.prototype._handleTransitionEnd = function (e) {
     DraggableSlider.prototype._handleTransitionEnd.call(this);
-
     this._slideStandTimestamp = Date.now();
-
-    // const albumIndex = getAlbumIndex();
-    // if (activeAlbumIndex !== albumIndex) {
-    //     onAlbumChanged(albumIndex);
-    // }
-
-    if (this._isKeyboardDynamicFocused) {
-        this._isKeyboardDynamicFocused = false;
-        this._tryPauseAutoscroll();
-        this._tryResumeAutoscroll();
-    }
 };
 
 AutoscrollSlider.prototype._handleVisibilityChange = function (e) {
