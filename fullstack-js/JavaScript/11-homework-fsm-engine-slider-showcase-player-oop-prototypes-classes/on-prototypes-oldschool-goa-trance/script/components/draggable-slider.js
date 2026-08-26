@@ -31,7 +31,9 @@ DraggableSlider.prototype._initProps = function () {
         this._options.slideTriggerThresholdCoef,
     );
     this._triggerThresholdCoef =
-        triggerThresholdCoef >= 0 && triggerThresholdCoef <= 0.33
+        Number.isFinite(this._options.slideTriggerThresholdCoef) &&
+        triggerThresholdCoef >= 0 &&
+        triggerThresholdCoef <= 0.33
             ? triggerThresholdCoef
             : this.constructor.TRIGGER_THRESHOLD_COEF;
 
@@ -69,13 +71,10 @@ DraggableSlider.prototype._moveConveyor = function (pointerCurrentX) {
 };
 
 DraggableSlider.prototype._stopDragging = function (pointerOffset = null) {
-    if (pointerOffset === null) {
-        this._updateSlider();
-        this._onDragEnded();
-        return;
-    }
-
-    if (!helper.hasFinePointer() && Math.abs(pointerOffset) < 6) {
+    if (
+        pointerOffset === null ||
+        (!helper.hasFinePointer() && Math.abs(pointerOffset) < 6)
+    ) {
         pointerOffset = 0;
     }
 
@@ -90,6 +89,8 @@ DraggableSlider.prototype._stopDragging = function (pointerOffset = null) {
         } else {
             this._updateTrack();
         }
+    } else {
+        this._updateSlider();
     }
     this._onDragEnded();
 };
