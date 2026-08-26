@@ -25,6 +25,10 @@ KeyboardSlider.prototype.init = function () {
     this._keyboardManager.init(this, "press");
 };
 
+KeyboardSlider.prototype.handleKeyDown = function (e) {
+    return this._keyboardManager.manage(e);
+};
+
 KeyboardSlider.prototype._hardReset = function () {
     this._currentIndex = this._startIndex;
     this._isResizing = false;
@@ -51,6 +55,8 @@ KeyboardSlider.prototype._pressPrev = function (e) {
 KeyboardSlider.prototype._pressExecute = function (e) {
     const activeElement = document.activeElement;
     const isButton = activeElement?.closest(`.${this._options.classes.button}`);
+
+    if (!isButton) return e;
 
     if (isButton && this._isInputBlocked()) {
         helper.prevent(e);
@@ -82,10 +88,6 @@ KeyboardSlider.prototype._pressIgnore = function (e) {
     helper.prevent(e);
 };
 
-KeyboardSlider.prototype._handleKeyDown = function (e) {
-    this._keyboardManager.manage(e);
-};
-
 KeyboardSlider.prototype._handleKeyUp = function (e) {
     const pressedBtn = document.querySelector(
         `.${this._options.states.keyboardBtnPressed}`,
@@ -96,10 +98,6 @@ KeyboardSlider.prototype._handleKeyUp = function (e) {
 };
 
 KeyboardSlider[KeyboardSlider.EVENT_MAP_KEY] = {
-    keydown: {
-        target: () => document,
-        handler: KeyboardSlider.prototype._handleKeyDown,
-    },
     keyup: {
         target: () => document,
         handler: KeyboardSlider.prototype._handleKeyUp,

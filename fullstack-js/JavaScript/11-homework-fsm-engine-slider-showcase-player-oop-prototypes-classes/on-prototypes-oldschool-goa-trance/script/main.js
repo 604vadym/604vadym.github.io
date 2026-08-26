@@ -99,16 +99,16 @@ const slider = new Slider({
     slideTriggerThresholdCoef: null,
 });
 
-const shop = new Shop();
-
-const app = new ShowcaseApp(
-    {
-        press: {
-            execute: ["Enter"],
-        },
+const shop = new Shop({
+    singleSelectors: {
+        linkShop: ".slider__link-shop",
     },
-    slider,
-    shop,
-);
+
+    press: {
+        execute: ["Enter"],
+    },
+});
+
+const app = new ShowcaseApp(slider, shop);
 
 app.init();

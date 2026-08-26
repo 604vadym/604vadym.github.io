@@ -29,7 +29,7 @@ KeyboardManager.prototype = {
     manage(e) {
         const request = this._keyActionTable.find((entry) => entry.match(e));
 
-        request?.action(e);
+        return request?.action(e);
     },
 
     _initKeyActionTable(client, configName) {
