@@ -2,6 +2,7 @@
 
 import ShowcaseApp from "./showcase-app.js";
 import Slider from "./components/autoscroll-slider.js";
+import Shop from "./components/shop.js";
 
 /*
  * JS #11. Розробка повнофункціонального слайдера на чистому JavaScript з використанням прототипів, класів та наслідування
@@ -98,5 +99,7 @@ const slider = new Slider({
     slideTriggerThresholdCoef: null,
 });
 
-const app = new ShowcaseApp(slider);
+const shop = new Shop();
+
+const app = new ShowcaseApp(slider, shop);
 app.init();

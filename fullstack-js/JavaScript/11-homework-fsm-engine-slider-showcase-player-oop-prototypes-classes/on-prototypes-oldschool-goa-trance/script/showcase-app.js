@@ -2,8 +2,9 @@
 
 import EventManager from "./services/event-manager.js";
 
-export default function ShowcaseApp(slider) {
+export default function ShowcaseApp(slider, shop) {
     this._slider = slider;
+    this._shop = shop;
 }
 
 ShowcaseApp.prototype = {
@@ -11,5 +12,6 @@ ShowcaseApp.prototype = {
 
     init() {
         this._slider.init();
+        this._shop.init();
     },
 };
