@@ -41,11 +41,11 @@ DraggableSlider.prototype._isInputBlocked = function () {
 };
 
 DraggableSlider.prototype._startDragging = function (e) {
+    this._onDragStarted();
     this._isDragging = true;
     this._pointerStartX = this._getClientX(e);
     this._updateSlideWidth();
     this._disableAnimation();
-    this._onDragStarted();
     this._eventManager.subscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
 };
 
