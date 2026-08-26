@@ -146,10 +146,6 @@ BaseSlider.prototype = {
 
     _onIndexChanged() {
         this._state = STATES.MOVING;
-        this._updateSlider();
-    },
-
-    _updateSlider() {
         this._updateTrack();
     },
 

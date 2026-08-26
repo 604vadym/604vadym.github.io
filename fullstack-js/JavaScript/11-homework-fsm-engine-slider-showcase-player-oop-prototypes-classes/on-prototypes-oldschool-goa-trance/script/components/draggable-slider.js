@@ -62,7 +62,6 @@ DraggableSlider.prototype._startDragging = function (e) {
 DraggableSlider.prototype._moveConveyor = function (pointerCurrentX) {
     const pointerOffset = pointerCurrentX - this._pointerStartX;
     const trackOffset = this._currentIndex * this._slideWidth - pointerOffset;
-
     if (Math.abs(pointerOffset) < this._slideWidth) {
         this._track.style.transform = `translateX(-${trackOffset}px)`;
     } else {
@@ -78,6 +77,7 @@ DraggableSlider.prototype._stopDragging = function (pointerOffset = null) {
         pointerOffset = 0;
     }
 
+    this._onDragEnded();
     if (pointerOffset) {
         const triggerThreshold = this._slideWidth * this._triggerThresholdCoef;
         if (Math.abs(pointerOffset) > triggerThreshold) {
@@ -90,9 +90,8 @@ DraggableSlider.prototype._stopDragging = function (pointerOffset = null) {
             this._updateTrack();
         }
     } else {
-        this._updateSlider();
+        this._updateTrack();
     }
-    this._onDragEnded();
 };
 
 DraggableSlider.prototype._onDragStarted = function () {
@@ -100,6 +99,7 @@ DraggableSlider.prototype._onDragStarted = function () {
     this._disableAnimation();
     this._eventManager.subscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
 };
+
 DraggableSlider.prototype._onDragEnded = function () {
     this._isDragging = false;
     this._enableAnimation();
