@@ -72,7 +72,7 @@ InfiniteSlider.prototype._handleTransitionEnd = function (e) {
     if (this._resetLoop()) {
         this._teleportSlides();
     } else {
-        this._state = STATES.IDLE;
+        KeyboardSlider.prototype._handleTransitionEnd.call(this, e);
     }
 };
 

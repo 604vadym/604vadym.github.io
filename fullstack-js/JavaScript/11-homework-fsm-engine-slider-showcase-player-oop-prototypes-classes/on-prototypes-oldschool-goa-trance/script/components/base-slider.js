@@ -252,7 +252,10 @@ BaseSlider.prototype = {
 
     _handleTransitionEnd(e) {
         this._state = STATES.IDLE;
+        this._onSlideChanged(this._normaliseIndex());
     },
+
+    _onSlideChanged(index) {},
 
     _handleResize(e) {
         this._beforeResize();

@@ -382,13 +382,6 @@ AutoscrollSlider.prototype._handleBlur = function (e) {
     }
 };
 
-AutoscrollSlider.prototype._handleTransitionEnd = function (e) {
-    DraggableSlider.prototype._handleTransitionEnd.call(this, e);
-    this._onSlideChanged(this._normaliseIndex());
-};
-
-AutoscrollSlider.prototype._onSlideChanged = function (index) {};
-
 AutoscrollSlider.prototype._handleVisibilityChange = function (e) {
     if (document.hidden === true) {
         this._isTabActive = false;
@@ -425,10 +418,6 @@ AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
         target: (instance) => instance._slider,
         handler: AutoscrollSlider.prototype._handleBlur,
         options: { capture: true },
-    },
-    transitionend: {
-        target: (instance) => instance._track,
-        handler: AutoscrollSlider.prototype._handleTransitionEnd,
     },
     visibilitychange: {
         target: () => document,
