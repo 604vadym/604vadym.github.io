@@ -1,5 +1,6 @@
 "use strict";
 
+import ShowcaseApp from "./showcase-app.js";
 import Slider from "./components/autoscroll-slider.js";
 
 /*
@@ -97,4 +98,5 @@ const slider = new Slider({
     slideTriggerThresholdCoef: null,
 });
 
-slider.init();
+const app = new ShowcaseApp(slider);
+app.init();
