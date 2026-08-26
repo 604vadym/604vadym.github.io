@@ -93,6 +93,8 @@ const slider = new Slider({
     autoplay: false,
     autoscrollDelay: null,
     autoscrollWakeUpDelay: null,
+
+    slideTriggerThresholdCoef: null,
 });
 
 slider.init();

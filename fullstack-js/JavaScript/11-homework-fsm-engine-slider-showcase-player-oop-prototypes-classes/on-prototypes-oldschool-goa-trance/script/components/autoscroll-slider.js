@@ -130,8 +130,8 @@ AutoscrollSlider.prototype._onIndexChanged = function () {
 };
 
 AutoscrollSlider.prototype._onDragStarted = function () {
-    DraggableSlider.prototype._onDragStarted.call(this);
     this._tryPauseAutoscroll();
+    DraggableSlider.prototype._onDragStarted.call(this);
 };
 
 AutoscrollSlider.prototype._onDragEnded = function () {

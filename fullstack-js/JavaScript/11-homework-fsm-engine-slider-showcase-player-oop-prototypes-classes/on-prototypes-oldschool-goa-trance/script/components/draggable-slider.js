@@ -11,6 +11,12 @@ DraggableSlider.prototype = Object.create(InfiniteSlider.prototype);
 DraggableSlider.prototype.constructor = DraggableSlider;
 Object.setPrototypeOf(DraggableSlider, InfiniteSlider);
 
+Object.defineProperty(DraggableSlider, "TRIGGER_THRESHOLD_COEF", {
+    value: 0.2,
+    writable: false,
+    configurable: false,
+});
+
 const MOUSE_BUTTON_MIDDLE = 1;
 const MOUSE_BUTTON_RIGHT = 2;
 
@@ -20,16 +26,23 @@ DraggableSlider.prototype.init = function () {
 
 DraggableSlider.prototype._initProps = function () {
     InfiniteSlider.prototype._initProps.call(this);
+
+    const triggerThresholdCoef = Number(
+        this._options.slideTriggerThresholdCoef,
+    );
+    this._triggerThresholdCoef =
+        triggerThresholdCoef >= 0 && triggerThresholdCoef <= 0.33
+            ? triggerThresholdCoef
+            : this.constructor.TRIGGER_THRESHOLD_COEF;
+
     this._pointerStartX = 0;
     this._isDragging = false;
-    this._isDraggingInterrupted = false;
 };
 
 DraggableSlider.prototype._hardReset = function () {
     InfiniteSlider.prototype._hardReset.call(this);
     this._pointerStartX = 0;
     this._isDragging = false;
-    this._isDraggingInterrupted = false;
 };
 
 DraggableSlider.prototype._isInputBlocked = function () {
@@ -40,11 +53,8 @@ DraggableSlider.prototype._isInputBlocked = function () {
 
 DraggableSlider.prototype._startDragging = function (e) {
     this._onDragStarted();
-    this._isDragging = true;
     this._pointerStartX = this._getClientX(e);
     this._updateSlideWidth();
-    this._disableAnimation();
-    this._eventManager.subscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
 };
 
 DraggableSlider.prototype._moveConveyor = function (pointerCurrentX) {
@@ -54,39 +64,23 @@ DraggableSlider.prototype._moveConveyor = function (pointerCurrentX) {
     if (Math.abs(pointerOffset) < this._slideWidth) {
         this._track.style.transform = `translateX(-${trackOffset}px)`;
     } else {
-        this._isDragging = false;
-        this._isDraggingInterrupted = true;
-        this._enableAnimation();
-
-        if (pointerOffset < 0) {
-            this._nextIndex();
-        } else {
-            this._prevIndex();
-        }
+        this._stopDragging(pointerOffset);
     }
 };
 
-DraggableSlider.prototype._stopDragging = function (
-    pointerOffset = null,
-    e = null,
-) {
-    this._isDragging = false;
-    this._enableAnimation();
-    this._eventManager.unsubscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
-
+DraggableSlider.prototype._stopDragging = function (pointerOffset = null) {
     if (pointerOffset === null) {
         this._updateSlider();
         this._onDragEnded();
         return;
     }
 
-    const triggerThreshold = this._slideWidth * 0.2;
-
     if (!helper.hasFinePointer() && Math.abs(pointerOffset) < 6) {
         pointerOffset = 0;
     }
 
     if (pointerOffset) {
+        const triggerThreshold = this._slideWidth * this._triggerThresholdCoef;
         if (Math.abs(pointerOffset) > triggerThreshold) {
             if (pointerOffset < 0) {
                 this._nextIndex();
@@ -100,8 +94,16 @@ DraggableSlider.prototype._stopDragging = function (
     this._onDragEnded();
 };
 
-DraggableSlider.prototype._onDragStarted = function () {};
-DraggableSlider.prototype._onDragEnded = function () {};
+DraggableSlider.prototype._onDragStarted = function () {
+    this._isDragging = true;
+    this._disableAnimation();
+    this._eventManager.subscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
+};
+DraggableSlider.prototype._onDragEnded = function () {
+    this._isDragging = false;
+    this._enableAnimation();
+    this._eventManager.unsubscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
+};
 
 DraggableSlider.prototype._getClientX = function (e) {
     return e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
@@ -142,16 +144,10 @@ DraggableSlider.prototype._handleMouseMoveTouchMove = function (e) {
 };
 
 DraggableSlider.prototype._handleMouseUpTouchEnd = function (e) {
-    if (this._isDraggingInterrupted) {
-        this._isDraggingInterrupted = false;
-        this._onIndexChanged();
-        this._onDragEnded();
-        return;
-    }
     if (!this._isDragging) return;
 
     const pointerOffset = this._getClientX(e) - this._pointerStartX;
-    this._stopDragging(pointerOffset, e);
+    this._stopDragging(pointerOffset);
 };
 
 DraggableSlider.prototype._handleTouchCancel = function (e) {
