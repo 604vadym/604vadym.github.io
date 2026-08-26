@@ -42,8 +42,8 @@ PaginationSlider.prototype._initDOMElements = function (childElements) {
     this._pagination = pagination;
 };
 
-PaginationSlider.prototype._updateSlider = function () {
-    BaseSlider.prototype._updateSlider.call(this);
+PaginationSlider.prototype._onIndexChanged = function () {
+    BaseSlider.prototype._onIndexChanged.call(this);
     this._updatePagination();
 };
 
