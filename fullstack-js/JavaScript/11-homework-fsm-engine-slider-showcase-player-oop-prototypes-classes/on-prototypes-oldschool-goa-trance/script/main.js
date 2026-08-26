@@ -101,5 +101,14 @@ const slider = new Slider({
 
 const shop = new Shop();
 
-const app = new ShowcaseApp(slider, shop);
+const app = new ShowcaseApp(
+    {
+        press: {
+            execute: ["Enter"],
+        },
+    },
+    slider,
+    shop,
+);
+
 app.init();
