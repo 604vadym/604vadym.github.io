@@ -14,8 +14,6 @@ Object.setPrototypeOf(DraggableSlider, InfiniteSlider);
 const MOUSE_BUTTON_MIDDLE = 1;
 const MOUSE_BUTTON_RIGHT = 2;
 
-const STATES = DraggableSlider.STATES;
-
 DraggableSlider.prototype.init = function () {
     InfiniteSlider.prototype.init.call(this);
 };
@@ -96,7 +94,7 @@ DraggableSlider.prototype._stopDragging = function (
                 this._prevIndex();
             }
         } else {
-            this._updateSlider();
+            this._updateTrack();
         }
     }
     this._onDragEnded();
@@ -111,7 +109,7 @@ DraggableSlider.prototype._getClientX = function (e) {
 
 DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
     InfiniteSlider.prototype._handleMouseDown.call(this, e);
-    if (this.state === STATES.MOVING) return;
+    if (InfiniteSlider.prototype._isInputBlocked.call(this)) return;
 
     if (e.type === "mousedown" && !helper.hasFinePointer()) {
         return;
@@ -146,6 +144,7 @@ DraggableSlider.prototype._handleMouseMoveTouchMove = function (e) {
 DraggableSlider.prototype._handleMouseUpTouchEnd = function (e) {
     if (this._isDraggingInterrupted) {
         this._isDraggingInterrupted = false;
+        this._onIndexChanged();
         this._onDragEnded();
         return;
     }

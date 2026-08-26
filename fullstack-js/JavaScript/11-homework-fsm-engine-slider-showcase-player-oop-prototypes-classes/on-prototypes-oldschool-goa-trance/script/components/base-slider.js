@@ -145,14 +145,15 @@ BaseSlider.prototype = {
     },
 
     _onIndexChanged() {
+        this._state = STATES.MOVING;
         this._updateSlider();
     },
 
     _updateSlider() {
-        if (this._track.style.transition !== "none") {
-            this._state = STATES.MOVING;
-        }
+        this._updateTrack();
+    },
 
+    _updateTrack() {
         if (helper.hasFinePointer() || this._isResizing) {
             this._track.style.transform = `translateX(-${this._currentIndex * 100}%)`;
         } else {
@@ -161,12 +162,11 @@ BaseSlider.prototype = {
         }
     },
 
-    _updateSliderInstantly() {
+    _updateTrackInstantly() {
         this._disableAnimation();
-        this._updateSlider();
+        this._updateTrack();
         this._track.offsetHeight;
         this._enableAnimation();
-        this._state = STATES.IDLE;
     },
 
     _updateSlideWidth() {
@@ -251,11 +251,12 @@ BaseSlider.prototype = {
     },
 
     _handleTransitionEnd(e) {
-        this._state = STATES.IDLE;
-        this._onSlideChanged(this._normaliseIndex());
+        this._onSlideChanged();
     },
 
-    _onSlideChanged(index) {},
+    _onSlideChanged() {
+        this._state = STATES.IDLE;
+    },
 
     _handleResize(e) {
         this._beforeResize();
@@ -268,14 +269,15 @@ BaseSlider.prototype = {
         this._isResizing = true;
         clearTimeout(this._resizeTimeoutId);
         this._slider.classList.add(this._options.states.resizing);
-        this._updateSliderInstantly();
+        this._updateTrackInstantly();
     },
 
     _afterResize() {
         this._isResizing = false;
         this._slider.classList.remove(this._options.states.resizing);
         this._updateSlideWidth();
-        this._updateSliderInstantly();
+        this._updateTrackInstantly();
+        this._state = STATES.IDLE;
     },
 
     _handleMouseLeave(e) {

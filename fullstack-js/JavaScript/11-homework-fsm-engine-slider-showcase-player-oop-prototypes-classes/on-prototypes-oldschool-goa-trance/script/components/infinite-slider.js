@@ -10,8 +10,6 @@ InfiniteSlider.prototype = Object.create(KeyboardSlider.prototype);
 InfiniteSlider.prototype.constructor = InfiniteSlider;
 Object.setPrototypeOf(InfiniteSlider, KeyboardSlider);
 
-const STATES = KeyboardSlider.STATES;
-
 InfiniteSlider.prototype.init = function () {
     KeyboardSlider.prototype.init.call(this);
     this._initInfiniteLoop();
@@ -51,11 +49,11 @@ InfiniteSlider.prototype._normaliseIndex = function (index = null) {
 
 InfiniteSlider.prototype._teleportSlides = function () {
     this._disableAnimation();
-    this._updateSlider();
+    this._updateTrack();
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
             this._enableAnimation();
-            this._state = STATES.IDLE;
+            this._onSlideChanged();
         });
     });
 };

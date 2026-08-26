@@ -140,7 +140,7 @@ AutoscrollSlider.prototype._onDragEnded = function () {
 };
 
 AutoscrollSlider.prototype._nextAuto = function () {
-    if (this.state === STATES.MOVING || !this._isAutoscrollOn) return;
+    if (this._isInputBlocked() || !this._isAutoscrollOn) return;
 
     this._isAutoscrollAction = true;
 
@@ -160,7 +160,7 @@ AutoscrollSlider.prototype._nextAuto = function () {
 
 AutoscrollSlider.prototype._nextAutoLazy = function () {
     this._currentIndex = this._startIndex - 1;
-    this._updateSliderInstantly();
+    this._updateTrackInstantly();
     this._goToIndex(this._currentIndex);
 };
 
