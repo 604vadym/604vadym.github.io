@@ -103,6 +103,8 @@ const shop = new Shop({
         link: ".slider__link-shop",
     },
 
+    data: null,
+
     defaultUrl: null,
 
     press: {

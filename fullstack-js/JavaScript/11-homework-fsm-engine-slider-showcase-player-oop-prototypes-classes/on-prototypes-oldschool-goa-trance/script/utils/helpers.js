@@ -1,5 +1,13 @@
 "use strict";
 
+export const URL_REGEXP =
+    /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+
+export function isValidUrl(url) {
+    if (typeof url !== "string") return false;
+    return URL_REGEXP.test(url);
+}
+
 export function hasFinePointer() {
     return window.matchMedia("(pointer: fine)").matches;
 }

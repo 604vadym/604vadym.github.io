@@ -26,9 +26,6 @@ Object.defineProperty(Shop, "DEFAULT_URL", {
     configurable: false,
 });
 
-const URL_REGEXP =
-    /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
-
 Shop.prototype = {
     constructor: Shop,
 
@@ -49,7 +46,7 @@ Shop.prototype = {
         } else {
             console.warn(
                 `[Shop]: index ${index} is out of bounds [0..${this._data.length - 1}]. ` +
-                    `Falling back to store default link`,
+                    `Falling back to shop default link`,
             );
             this._link.setAttribute("href", this._defaultUrl);
         }
@@ -88,40 +85,59 @@ Shop.prototype = {
 
     _pressExecute(e) {
         helper.prevent(e);
-        const currentUrl = this._getUrl();
-        window.open(currentUrl, "_blank");
+        window.open(this._getUrl(), "_blank");
         return true;
     },
 
     _initDefaultUrl() {
         const defaultUrl = this._options.defaultUrl;
-        if (URL_REGEXP.test(defaultUrl)) {
+        if (helper.isValidUrl(defaultUrl)) {
             this._defaultUrl = defaultUrl;
-        } else if (URL_REGEXP.test(this.constructor.DEFAULT_URL)) {
+        } else if (helper.isValidUrl(this.constructor.DEFAULT_URL)) {
             this._defaultUrl = this.constructor.DEFAULT_URL;
         } else {
             throw new Error(
-                `[Shop]: Master initialisation aborted. Both custom options.defaultUrl ("${defaultUrl}") ` +
-                    `and fallback constructor.DEFAULT_URL ("${this.constructor.DEFAULT_URL}") failed to validate ` +
-                    `against the required URL specification protocol`,
+                `[Shop]: Master initialisation aborted\n` +
+                    `Both custom options.defaultUrl ("${defaultUrl}") ` +
+                    `and fallback DEFAULT_URL ("${this.constructor.DEFAULT_URL}")\n` +
+                    `failed to validate against the required URL specification protocol`,
             );
         }
     },
 
     _initData() {
-        this._data = [
-            {
-                url: "https://ultimae.bandcamp.com/album/code-eternity",
-            },
-            {
-                url: "https://www.discogs.com/sell/release/419254",
-            },
-            {
-                url: "https://ultimae.bandcamp.com/album/life",
-            },
-            {
-                url: "https://ultimae.bandcamp.com/album/360",
-            },
-        ];
+        this._data =
+            Array.isArray(this._options.data) && this._options.data.length > 0
+                ? this._options.data
+                : [
+                      {
+                          url: "https://ultimae.bandcamp.com/album/code-eternity",
+                      },
+                      {
+                          url: "https://www.discogs.com/sell/release/419254",
+                      },
+                      {
+                          url: "https://ultimae.bandcamp.com/album/life",
+                      },
+                      {
+                          url: "https://ultimae.bandcamp.com/album/360",
+                      },
+                  ];
+        this._validateData();
+    },
+
+    _validateData() {
+        this._data.forEach((item, index) => {
+            if (!helper.isValidUrl(item.url)) {
+                throw new Error(
+                    `[Shop]: Dataset verification failed during master initialisation\n` +
+                        `The URL provided at index ${index} ("${item.url}") is invalid or broken\n` +
+                        `Ensure all links conform to the standard URL specification protocol\n` +
+                        `Expected format: "http://example.com/path" or "https://example.com/path" ` +
+                        `(must include valid transfer protocol, domain name and clean path string)\n` +
+                        `Check your array source in main.js or local shop fallback definitions`,
+                );
+            }
+        });
     },
 };
