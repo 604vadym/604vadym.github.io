@@ -29,6 +29,11 @@ Shop.prototype = {
         this._keyboardManager.init(this, "press");
     },
 
+    setActiveIndex(index) {
+        this._currentIndex = index;
+        this._updateUrl();
+    },
+
     handleKeyDown(e) {
         return this._keyboardManager.manage(e);
     },
@@ -48,6 +53,24 @@ Shop.prototype = {
         this._initData();
     },
 
+    _updateUrl() {
+        const currentUrl = _getCurrentUrl();
+        if (this._link.getAttribute("href") !== currentUrl) {
+            this._link.setAttribute("href", currentUrl);
+        }
+    },
+
+    _getCurrentUrl() {
+        return this._data[this._currentIndex].url;
+    },
+
+    _pressExecute(e) {
+        helper.prevent(e);
+        const currentUrl = this._getCurrentUrl();
+        window.open(currentUrl, "_blank");
+        return true;
+    },
+
     _initData() {
         this._data = [
             {
@@ -63,16 +86,5 @@ Shop.prototype = {
                 url: "https://ultimae.bandcamp.com/album/360",
             },
         ];
-    },
-
-    _getCurrentUrl() {
-        return this._data[this._currentIndex].url;
-    },
-
-    _pressExecute(e) {
-        helper.prevent(e);
-        const currentUrl = this._getCurrentUrl();
-        window.open(currentUrl, "_blank");
-        return true;
     },
 };
