@@ -74,6 +74,8 @@ EventManager.prototype = {
     _initEventHandlerTable(client, eventMapKey) {
         let proto = Object.getPrototypeOf(client);
 
+        this._assertEventMapKey(client, eventMapKey);
+
         this._eventHandlerTable = {};
         while (proto && proto.constructor !== Object) {
             const constructor = proto.constructor;
@@ -110,6 +112,19 @@ EventManager.prototype = {
         }
     },
 
+    _assertEventMapKey(client, eventMapKey) {
+        if (
+            !eventMapKey ||
+            (typeof eventMapKey !== "string" && typeof eventMapKey !== "symbol")
+        ) {
+            throw new TypeError(
+                `[EventManager]: Cannot initialise event handlers for class "${client.constructor.name}"\n` +
+                    `The provided eventMapKey is invalid ("${eventMapKey}")\n` +
+                    `Expecting a valid String or Symbol identifier`,
+            );
+        }
+    },
+
     _assertEventMapContract(eventMap, className) {
         Object.entries(eventMap).forEach(([event, eventConfig]) => {
             const [targetKey, handlerKey] = Object.keys(eventConfig);
@@ -118,8 +133,8 @@ EventManager.prototype = {
 
             if (typeof target !== "function" || typeof handler !== "function") {
                 throw new TypeError(
-                    `[EventManager]: broken contract in "${className}"\n` +
-                        `event "${event}" must provide valid functions`,
+                    `[EventManager]: Broken contract in "${className}"\n` +
+                        `Event "${event}" must provide valid functions`,
                 );
             }
         });
@@ -128,8 +143,8 @@ EventManager.prototype = {
     _assertTargetElement(targetElement, event, className) {
         if (!targetElement) {
             throw new Error(
-                `[EventManager]: target element missing\n` +
-                    `class "${className}" failed to resolve target element for event "${event}"`,
+                `[EventManager]: Target element missing\n` +
+                    `Class "${className}" failed to resolve target element for event "${event}"`,
             );
         }
     },

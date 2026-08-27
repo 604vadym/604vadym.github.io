@@ -50,15 +50,15 @@ Timer.prototype = {
     _assertBootstrapContract(bootstrapMethod, delay, paramDelay, className) {
         if (typeof bootstrapMethod !== "function") {
             throw new TypeError(
-                `[Timer]: broken initBootstrap contract in "${className}"\n` +
-                    `expected a function for bootstrapMethod, received "${typeof bootstrapMethod}"`,
+                `[Timer]: Broken initBootstrap contract in "${className}"\n` +
+                    `Expected a function for bootstrapMethod, received "${typeof bootstrapMethod}"`,
             );
         }
 
         if (!Number.isFinite(delay) || delay <= 0) {
             throw new TypeError(
-                `[Timer]: broken initBootstrap contract in "${className}"\n` +
-                    `valid positive number required for delay, received "${paramDelay}"`,
+                `[Timer]: Broken initBootstrap contract in "${className}"\n` +
+                    `Valid positive number required for delay, received "${paramDelay}"`,
             );
         }
     },

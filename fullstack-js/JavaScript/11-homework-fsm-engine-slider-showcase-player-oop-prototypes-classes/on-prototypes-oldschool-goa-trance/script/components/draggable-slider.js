@@ -133,6 +133,10 @@ DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
     }
 };
 
+DraggableSlider.prototype._handleTouchCancel = function (e) {
+    this._stopDragging();
+};
+
 DraggableSlider.prototype._handleMouseMoveTouchMove = function (e) {
     if (!this._isDragging) return;
 
@@ -151,10 +155,6 @@ DraggableSlider.prototype._handleMouseUpTouchEnd = function (e) {
     this._stopDragging(pointerOffset);
 };
 
-DraggableSlider.prototype._handleTouchCancel = function (e) {
-    this._stopDragging();
-};
-
 DraggableSlider[DraggableSlider.EVENT_MAP_KEY] = {
     mousedown: {
         target: (instance) => instance._slider,
@@ -167,6 +167,10 @@ DraggableSlider[DraggableSlider.EVENT_MAP_KEY] = {
 };
 
 DraggableSlider.DYNAMIC_EVENT_MAP = {
+    touchcancel: {
+        target: (instance) => instance._slider,
+        handler: DraggableSlider.prototype._handleTouchCancel,
+    },
     mousemove: {
         target: () => document,
         handler: DraggableSlider.prototype._handleMouseMoveTouchMove,
@@ -182,9 +186,5 @@ DraggableSlider.DYNAMIC_EVENT_MAP = {
     touchend: {
         target: () => document,
         handler: DraggableSlider.prototype._handleMouseUpTouchEnd,
-    },
-    touchcancel: {
-        target: (instance) => instance._slider,
-        handler: DraggableSlider.prototype._handleTouchCancel,
     },
 };

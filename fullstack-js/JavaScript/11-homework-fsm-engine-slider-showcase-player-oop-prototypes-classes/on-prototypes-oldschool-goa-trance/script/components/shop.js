@@ -45,7 +45,7 @@ Shop.prototype = {
             this._updateUrl();
         } else {
             console.warn(
-                `[Shop]: index ${index} is out of bounds [0..${this._data.length - 1}]. ` +
+                `[Shop]: Index ${index} is out of bounds [0..${this._data.length - 1}]. ` +
                     `Falling back to shop default link`,
             );
             this._link.setAttribute("href", this._defaultUrl);
@@ -100,7 +100,9 @@ Shop.prototype = {
                 `[Shop]: Master initialisation aborted\n` +
                     `Both custom options.defaultUrl ("${defaultUrl}") ` +
                     `and fallback DEFAULT_URL ("${this.constructor.DEFAULT_URL}")\n` +
-                    `failed to validate against the required URL specification protocol`,
+                    `Failed to validate against the required URL specification protocol\n` +
+                    `Expected format: "http://example.com" or "https://example.com" ` +
+                    `(must include valid transfer protocol and domain name)`,
             );
         }
     },
@@ -133,8 +135,8 @@ Shop.prototype = {
                     `[Shop]: Dataset verification failed during master initialisation\n` +
                         `The URL provided at index ${index} ("${item.url}") is invalid or broken\n` +
                         `Ensure all links conform to the standard URL specification protocol\n` +
-                        `Expected format: "http://example.com/path" or "https://example.com/path" ` +
-                        `(must include valid transfer protocol, domain name and clean path string)\n` +
+                        `Expected format: "http://example.com" or "https://example.com" ` +
+                        `(must include valid transfer protocol and domain name)\n` +
                         `Check your array source in main.js or local shop fallback definitions`,
                 );
             }

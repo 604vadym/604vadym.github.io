@@ -65,7 +65,7 @@ KeyboardManager.prototype = {
     _assertConfig(config, configName, className) {
         if (!config) {
             throw new Error(
-                `[KeyboardManager]: configuration section "${configName}" is missing in options for "${className}"`,
+                `[KeyboardManager]: Configuration section "${configName}" is missing in options for "${className}"`,
             );
         }
     },
@@ -73,8 +73,8 @@ KeyboardManager.prototype = {
     _assertMethodContract(method, methodName, configName, className) {
         if (typeof method !== "function") {
             throw new TypeError(
-                `[KeyboardManager]: broken contract in "${className}"\n` +
-                    `method "${methodName}" declared in "${configName}" options must be a valid function`,
+                `[KeyboardManager]: Broken contract in "${className}"\n` +
+                    `Method "${methodName}" declared in "${configName}" options must be a valid function`,
             );
         }
     },

@@ -44,7 +44,7 @@ ButtonManager.prototype = {
     _assertConfig(config, configName, className) {
         if (!config) {
             throw new Error(
-                `[ButtonManager]: configuration section "${configName}" is missing in options for "${className}"`,
+                `[ButtonManager]: Configuration section "${configName}" is missing in options for "${className}"`,
             );
         }
     },
@@ -52,8 +52,8 @@ ButtonManager.prototype = {
     _assertMethodContract(method, methodName, configName, className) {
         if (typeof method !== "function") {
             throw new TypeError(
-                `[ButtonManager]: broken contract in "${className}"\n` +
-                    `method "${methodName}" declared in "${configName}" options must be a valid function`,
+                `[ButtonManager]: Broken contract in "${className}"\n` +
+                    `Method "${methodName}" declared in "${configName}" options must be a valid function`,
             );
         }
     },

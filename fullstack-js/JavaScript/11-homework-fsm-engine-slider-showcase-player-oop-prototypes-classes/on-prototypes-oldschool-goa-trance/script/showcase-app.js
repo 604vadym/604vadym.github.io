@@ -14,6 +14,8 @@ export default function ShowcaseApp(slider, shop) {
     });
 }
 
+ShowcaseApp.EVENT_MAP_KEY = "EVENT_MAP";
+
 ShowcaseApp.prototype = {
     constructor: ShowcaseApp,
 
