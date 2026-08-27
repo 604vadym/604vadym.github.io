@@ -101,7 +101,7 @@ const slider = new Slider({
 
 const shop = new Shop({
     singleSelectors: {
-        linkShop: ".slider__link-shop",
+        link: ".slider__link-shop",
     },
 
     press: {
