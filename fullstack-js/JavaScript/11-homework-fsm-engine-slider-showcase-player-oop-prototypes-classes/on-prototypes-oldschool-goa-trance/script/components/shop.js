@@ -20,18 +20,39 @@ export default function Shop(options) {
     });
 }
 
+Object.defineProperty(Shop, "DEFAULT_URL", {
+    value: "https://bandcamp.com",
+    writable: false,
+    configurable: false,
+});
+
+const URL_REGEXP =
+    /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+
 Shop.prototype = {
     constructor: Shop,
 
     init() {
         this._initDOMElements();
         this._initProps();
+        this._updateUrl();
         this._keyboardManager.init(this, "press");
     },
 
     setActiveIndex(index) {
-        this._currentIndex = index;
-        this._updateUrl();
+        const isValidIndex =
+            Number.isFinite(index) && index >= 0 && index < this._data.length;
+
+        if (isValidIndex) {
+            this._currentIndex = index;
+            this._updateUrl();
+        } else {
+            console.warn(
+                `[Shop]: index ${index} is out of bounds [0..${this._data.length - 1}]. ` +
+                    `Falling back to store default link`,
+            );
+            this._link.setAttribute("href", this._defaultUrl);
+        }
     },
 
     handleKeyDown(e) {
@@ -50,25 +71,41 @@ Shop.prototype = {
 
     _initProps() {
         this._currentIndex = 0;
+        this._initDefaultUrl();
         this._initData();
     },
 
     _updateUrl() {
-        const currentUrl = _getCurrentUrl();
+        const currentUrl = this._getUrl();
         if (this._link.getAttribute("href") !== currentUrl) {
             this._link.setAttribute("href", currentUrl);
         }
     },
 
-    _getCurrentUrl() {
+    _getUrl() {
         return this._data[this._currentIndex].url;
     },
 
     _pressExecute(e) {
         helper.prevent(e);
-        const currentUrl = this._getCurrentUrl();
+        const currentUrl = this._getUrl();
         window.open(currentUrl, "_blank");
         return true;
+    },
+
+    _initDefaultUrl() {
+        const defaultUrl = this._options.defaultUrl;
+        if (URL_REGEXP.test(defaultUrl)) {
+            this._defaultUrl = defaultUrl;
+        } else if (URL_REGEXP.test(this.constructor.DEFAULT_URL)) {
+            this._defaultUrl = this.constructor.DEFAULT_URL;
+        } else {
+            throw new Error(
+                `[Shop]: Master initialisation aborted. Both custom options.defaultUrl ("${defaultUrl}") ` +
+                    `and fallback constructor.DEFAULT_URL ("${this.constructor.DEFAULT_URL}") failed to validate ` +
+                    `against the required URL specification protocol`,
+            );
+        }
     },
 
     _initData() {

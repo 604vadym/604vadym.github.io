@@ -37,7 +37,6 @@ const slider = new Slider({
         // btnAudioPrev: ".slider__btn-audio--prev",
         // audioTrackTitle: ".slider__audio-track-title",
         // audioTrackCurrentTime: ".slider__audio-track-current-time",
-        // linkShop: ".slider__link-shop",
         btnNext: ".slider__btn--next",
         btnPrev: ".slider__btn--prev",
         pagination: ".slider__pagination",
@@ -103,6 +102,8 @@ const shop = new Shop({
     singleSelectors: {
         link: ".slider__link-shop",
     },
+
+    defaultUrl: null,
 
     press: {
         execute: ["Enter"],
