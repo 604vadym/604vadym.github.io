@@ -28,12 +28,22 @@ ShowcaseApp.prototype = {
         this._eventManager.init(this, ShowcaseApp.EVENT_MAP_KEY);
     },
 
-    _handleKeyDown(e) {
+    _pipe(e, handlerName) {
         const pipeline = [this._slider, this._shop];
         for (const component of pipeline) {
             if (!(e instanceof KeyboardEvent)) break;
-            e = component.handleKeyDown(e);
+            if (typeof component[handlerName] === "function") {
+                e = component[handlerName](e);
+            }
         }
+    },
+
+    _handleKeyDown(e) {
+        this._pipe(e, "handleKeyDown");
+    },
+
+    _handleKeyUp(e) {
+        this._pipe(e, "handleKeyUp");
     },
 
     _handleMouseDown(e) {
@@ -47,6 +57,10 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     keydown: {
         target: () => document,
         handler: ShowcaseApp.prototype._handleKeyDown,
+    },
+    keyup: {
+        target: () => document,
+        handler: ShowcaseApp.prototype._handleKeyUp,
     },
     mousedown: {
         target: () => document,

@@ -29,6 +29,16 @@ KeyboardSlider.prototype.handleKeyDown = function (e) {
     return this._keyboardManager.manage(e);
 };
 
+KeyboardSlider.prototype.handleKeyUp = function (e) {
+    const pressedBtn = document.querySelector(
+        `.${this._options.states.keyboardBtnPressed}`,
+    );
+    if (pressedBtn) {
+        pressedBtn.classList.remove(this._options.states.keyboardBtnPressed);
+    }
+    return e;
+};
+
 KeyboardSlider.prototype._hardReset = function () {
     this._currentIndex = this._startIndex;
     this._isResizing = false;
@@ -86,20 +96,4 @@ KeyboardSlider.prototype._pressReset = function (e) {
 
 KeyboardSlider.prototype._pressIgnore = function (e) {
     helper.prevent(e);
-};
-
-KeyboardSlider.prototype._handleKeyUp = function (e) {
-    const pressedBtn = document.querySelector(
-        `.${this._options.states.keyboardBtnPressed}`,
-    );
-    if (pressedBtn) {
-        pressedBtn.classList.remove(this._options.states.keyboardBtnPressed);
-    }
-};
-
-KeyboardSlider[KeyboardSlider.EVENT_MAP_KEY] = {
-    keyup: {
-        target: () => document,
-        handler: KeyboardSlider.prototype._handleKeyUp,
-    },
 };
