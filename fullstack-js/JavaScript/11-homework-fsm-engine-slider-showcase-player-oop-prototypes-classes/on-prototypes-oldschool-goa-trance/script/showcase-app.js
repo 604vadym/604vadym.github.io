@@ -1,5 +1,6 @@
 "use strict";
 
+import * as helper from "./utils/helpers.js";
 import KeyboardManager from "./services/keyboard-manager.js";
 import EventManager from "./services/event-manager.js";
 
@@ -15,6 +16,8 @@ export default function ShowcaseApp(slider, shop) {
 }
 
 ShowcaseApp.EVENT_MAP_KEY = "EVENT_MAP";
+
+const MOUSE_BUTTON_MIDDLE = 1;
 
 ShowcaseApp.prototype = {
     constructor: ShowcaseApp,
@@ -32,11 +35,21 @@ ShowcaseApp.prototype = {
             e = component.handleKeyDown(e);
         }
     },
+
+    _handleMouseDown(e) {
+        if (e.button === MOUSE_BUTTON_MIDDLE) {
+            helper.prevent(e);
+        }
+    },
 };
 
 ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     keydown: {
         target: () => document,
         handler: ShowcaseApp.prototype._handleKeyDown,
+    },
+    mousedown: {
+        target: () => document,
+        handler: ShowcaseApp.prototype._handleMouseDown,
     },
 };
