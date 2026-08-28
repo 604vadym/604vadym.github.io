@@ -3,6 +3,7 @@
 import * as helper from "./utils/helpers.js";
 import DOMValidator from "./services/dom-validator.js";
 import EventManager from "./services/event-manager.js";
+import KeyboardManager from "./services/keyboard-manager.js";
 
 export default function ShowcaseApp(slider, audioPlayer, shop, options) {
     this._slider = slider;
@@ -12,6 +13,12 @@ export default function ShowcaseApp(slider, audioPlayer, shop, options) {
 
     Object.defineProperty(this, "_domValidator", {
         value: new DOMValidator(ShowcaseApp),
+        writable: false,
+        configurable: false,
+    });
+
+    Object.defineProperty(this, "_keyboardManager", {
+        value: new KeyboardManager(),
         writable: false,
         configurable: false,
     });
@@ -37,6 +44,7 @@ ShowcaseApp.prototype = {
         this._slider.init();
         this._audioPlayer.init();
         this._shop.init();
+        this._keyboardManager.init(this, "press");
         this._eventManager.init(this, ShowcaseApp.EVENT_MAP_KEY);
     },
 
@@ -60,6 +68,10 @@ ShowcaseApp.prototype = {
             this._eventManager.unsubscribe(this, ShowcaseApp.DYNAMIC_EVENT_MAP);
             delete this._btnNoActive;
         }
+    },
+
+    _pressIgnore(e) {
+        helper.prevent(e);
     },
 
     _pipe(e, handlerName, EventClass) {
@@ -95,6 +107,7 @@ ShowcaseApp.prototype = {
                 );
             }
         }
+        this._keyboardManager.manage(e);
     },
 
     _handleKeyUp(e) {

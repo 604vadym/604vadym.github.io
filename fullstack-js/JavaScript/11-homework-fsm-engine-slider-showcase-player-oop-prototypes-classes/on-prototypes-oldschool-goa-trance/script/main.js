@@ -80,10 +80,8 @@ const slider = new Slider({
         next: ["ArrowRight", "KeyD"],
         prev: ["ArrowLeft", "KeyA"],
         execute: ["Enter"],
-        autoscrollon: [" "],
-        autoscrolloff: [" "],
+        toggleautoscroll: [" "],
         reset: ["Escape"],
-        ignore: ["PageDown", "PageUp", "End"],
     },
 
     autoplay: false,
@@ -143,6 +141,10 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
 
     states: {
         keyboardBtnPressed: "is-pressed",
+    },
+
+    press: {
+        ignore: ["PageDown", "PageUp", "End"],
     },
 });
 

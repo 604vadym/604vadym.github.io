@@ -80,7 +80,3 @@ KeyboardSlider.prototype._pressReset = function (e) {
 
     return true;
 };
-
-KeyboardSlider.prototype._pressIgnore = function (e) {
-    helper.prevent(e);
-};

@@ -303,13 +303,9 @@ AutoscrollSlider.prototype._pressReset = function (e) {
     return isExecuted;
 };
 
-AutoscrollSlider.prototype._pressAutoscrollon = function (e) {
+AutoscrollSlider.prototype._pressToggleautoscroll = function (e) {
     helper.prevent(e);
-    this._toggleAutoscrollMode();
-};
-
-AutoscrollSlider.prototype._pressAutoscrolloff = function (e) {
-    helper.prevent(e);
+    if (this._isInputBlocked()) return;
     this._toggleAutoscrollMode();
 };
 
