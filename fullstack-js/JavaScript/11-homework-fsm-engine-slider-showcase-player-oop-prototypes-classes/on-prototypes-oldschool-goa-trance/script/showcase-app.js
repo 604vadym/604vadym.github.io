@@ -86,7 +86,14 @@ ShowcaseApp.prototype = {
     },
 
     _handleKeyUp(e) {
-        this._pipe(e, "handleKeyUp", KeyboardEvent);
+        const pressedBtn = document.querySelector(
+            `.${this._options.states.keyboardBtnPressed}`,
+        );
+        if (pressedBtn) {
+            pressedBtn.classList.remove(
+                this._options.states.keyboardBtnPressed,
+            );
+        }
     },
 
     _handleMouseDown(e) {

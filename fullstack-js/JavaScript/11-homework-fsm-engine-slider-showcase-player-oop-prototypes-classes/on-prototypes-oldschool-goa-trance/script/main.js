@@ -141,6 +141,10 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
     jsClasses: {
         btnNoActive: "js-no-active",
     },
+
+    states: {
+        keyboardBtnPressed: "is-pressed",
+    },
 });
 
 app.init();
