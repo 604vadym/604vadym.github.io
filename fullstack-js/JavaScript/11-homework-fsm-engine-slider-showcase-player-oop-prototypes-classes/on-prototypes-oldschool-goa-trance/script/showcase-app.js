@@ -25,6 +25,7 @@ export default function ShowcaseApp(slider, audioPlayer, shop, options) {
 
 ShowcaseApp.EVENT_MAP_KEY = "EVENT_MAP";
 
+const MOUSE_BUTTON_LEFT = 0;
 const MOUSE_BUTTON_MIDDLE = 1;
 const MOUSE_BUTTON_RIGHT = 2;
 
@@ -71,6 +72,16 @@ ShowcaseApp.prototype = {
         }
     },
 
+    _tryResetBtnNoActive() {
+        if (this._btnNoActive) {
+            this._btnNoActive.classList.remove(
+                this._options.jsClasses.btnNoActive,
+            );
+            this._eventManager.unsubscribe(this, ShowcaseApp.DYNAMIC_EVENT_MAP);
+            delete this._btnNoActive;
+        }
+    },
+
     _handleClick(e) {
         if (e.button === MOUSE_BUTTON_RIGHT) {
             helper.prevent(e);
@@ -92,10 +103,32 @@ ShowcaseApp.prototype = {
         if (e.button === MOUSE_BUTTON_MIDDLE) {
             helper.prevent(e);
         }
+        if (!this._showcase.contains(e.target)) return;
+
+        if (e.button === MOUSE_BUTTON_RIGHT) {
+            const button = e.target.closest(`.${this._options.classes.button}`);
+            if (button && !this._btnNoActive) {
+                button.classList.add(this._options.jsClasses.btnNoActive);
+                this._btnNoActive = button;
+                this._eventManager.subscribe(
+                    this,
+                    ShowcaseApp.DYNAMIC_EVENT_MAP,
+                );
+            }
+        } else if (
+            e.button === MOUSE_BUTTON_LEFT ||
+            e.button === MOUSE_BUTTON_MIDDLE
+        ) {
+            this._tryResetBtnNoActive();
+        }
     },
 
     _handleSlideChange(e) {
         this._shop.setActiveIndex(e.detail.index);
+    },
+
+    _handleMouseLeave(e) {
+        this._tryResetBtnNoActive();
     },
 };
 
@@ -123,5 +156,12 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     slidechange: {
         target: (instance) => instance._slider.element,
         handler: ShowcaseApp.prototype._handleSlideChange,
+    },
+};
+
+ShowcaseApp.DYNAMIC_EVENT_MAP = {
+    mouseleave: {
+        target: (instance) => instance._btnNoActive,
+        handler: ShowcaseApp.prototype._handleMouseLeave,
     },
 };

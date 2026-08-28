@@ -111,7 +111,6 @@ DraggableSlider.prototype._getClientX = function (e) {
 };
 
 DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
-    InfiniteSlider.prototype._handleMouseDown.call(this, e);
     if (InfiniteSlider.prototype._isInputBlocked.call(this)) return;
 
     if (e.type === "mousedown" && !helper.hasFinePointer()) {
