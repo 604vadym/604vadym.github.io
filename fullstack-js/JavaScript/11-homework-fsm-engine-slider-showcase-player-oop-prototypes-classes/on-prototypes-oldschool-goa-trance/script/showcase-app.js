@@ -3,8 +3,9 @@
 import * as helper from "./utils/helpers.js";
 import EventManager from "./services/event-manager.js";
 
-export default function ShowcaseApp(slider, shop) {
+export default function ShowcaseApp(slider, audioPlayer, shop) {
     this._slider = slider;
+    this._audioPlayer = audioPlayer;
     this._shop = shop;
 
     Object.defineProperty(this, "_eventManager", {
@@ -23,6 +24,7 @@ ShowcaseApp.prototype = {
 
     init() {
         this._slider.init();
+        this._audioPlayer.init();
         this._shop.init();
         this._eventManager.init(this, ShowcaseApp.EVENT_MAP_KEY);
     },

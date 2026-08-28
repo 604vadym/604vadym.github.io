@@ -2,6 +2,7 @@
 
 import ShowcaseApp from "./showcase-app.js";
 import Slider from "./components/autoscroll-slider.js";
+import AudioPlayer from "./components/audio-player.js";
 import Shop from "./components/shop.js";
 
 /*
@@ -33,8 +34,6 @@ const slider = new Slider({
         slider: ".slider",
         track: ".slider__track",
         viewport: ".slider__viewport",
-        // btnAudioNext: ".slider__btn-audio--next",
-        // btnAudioPrev: ".slider__btn-audio--prev",
         // audioTrackTitle: ".slider__audio-track-title",
         // audioTrackCurrentTime: ".slider__audio-track-current-time",
         btnNext: ".slider__btn--next",
@@ -42,8 +41,6 @@ const slider = new Slider({
         pagination: ".slider__pagination",
         btnAutoscrollOn: ".slider__btn--autoscroll-on",
         btnAutoscrollOff: ".slider__btn--autoscroll-off",
-        // btnAudioPlay: ".slider__btn-audio--play",
-        // btnAudioPause: ".slider__btn-audio--pause",
         // audioTrackFullTime: ".slider__audio-track-full-time",
     },
 
@@ -98,6 +95,15 @@ const slider = new Slider({
     slideTriggerThresholdCoef: null,
 });
 
+const audioPlayer = new AudioPlayer({
+    singleSelectors: {
+        btnNext: ".slider__btn-audio--next",
+        btnPrev: ".slider__btn-audio--prev",
+        btnPlay: ".slider__btn-audio--play",
+        btnPause: ".slider__btn-audio--pause",
+    },
+});
+
 const shop = new Shop({
     singleSelectors: {
         link: ".slider__link-shop",
@@ -112,6 +118,6 @@ const shop = new Shop({
     },
 });
 
-const app = new ShowcaseApp(slider, shop);
+const app = new ShowcaseApp(slider, audioPlayer, shop);
 
 app.init();
