@@ -54,20 +54,17 @@ KeyboardSlider.prototype._pressPrev = function (e) {
 
 KeyboardSlider.prototype._pressExecute = function (e) {
     const activeElement = document.activeElement;
-    const isButton = activeElement?.closest(`.${this._options.classes.button}`);
+    const isButton = activeElement?.closest(
+        `.${this._options.classes.sliderBtn}`,
+    );
+    const isPaginationDot = activeElement?.closest(
+        `.${this._options.classes.paginationDot}`,
+    );
+    if (!isButton && !isPaginationDot) return e;
 
-    if (!isButton) return e;
-
-    if (isButton && this._isInputBlocked()) {
+    if ((isButton || isPaginationDot) && this._isInputBlocked()) {
         helper.prevent(e);
         return false;
-    }
-
-    const isPressTarget = activeElement?.closest(
-        `.${this._options.jsClasses.keyboardPressBtn}`,
-    );
-    if (isPressTarget) {
-        activeElement.classList.add(this._options.states.keyboardBtnPressed);
     }
 
     return true;

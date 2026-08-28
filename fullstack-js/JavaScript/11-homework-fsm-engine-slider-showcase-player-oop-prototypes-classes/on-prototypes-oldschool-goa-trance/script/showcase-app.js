@@ -63,9 +63,9 @@ ShowcaseApp.prototype = {
     },
 
     _pipe(e, handlerName, EventClass) {
-        const pipeline = [this._slider, this._shop];
+        const pipeline = [this._slider, this._audioPlayer, this._shop];
         for (const component of pipeline) {
-            if (!(e instanceof EventClass)) break;
+            if (!(e instanceof EventClass)) return e;
             if (typeof component[handlerName] === "function") {
                 e = component[handlerName](e);
             }
@@ -82,7 +82,19 @@ ShowcaseApp.prototype = {
     },
 
     _handleKeyDown(e) {
-        this._pipe(e, "handleKeyDown", KeyboardEvent);
+        const result = this._pipe(e, "handleKeyDown", KeyboardEvent);
+
+        if (result === true) {
+            const activeElement = document.activeElement;
+            const isPressTarget = activeElement?.closest(
+                `.${this._options.jsClasses.keyboardPressBtn}`,
+            );
+            if (isPressTarget) {
+                activeElement.classList.add(
+                    this._options.states.keyboardBtnPressed,
+                );
+            }
+        }
     },
 
     _handleKeyUp(e) {

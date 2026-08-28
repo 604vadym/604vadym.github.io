@@ -59,13 +59,11 @@ const slider = new Slider({
     },
 
     jsClasses: {
-        keyboardPressBtn: "js-pressed-target",
         autoscrollPause: "js-autoscroll-pause",
         dynamicFocus: "js-dynamic-focus",
     },
 
     states: {
-        keyboardBtnPressed: "is-pressed",
         resizing: "slider--resizing",
         autoscrollOn: "slider--autoscroll-on",
     },
@@ -139,6 +137,7 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
     },
 
     jsClasses: {
+        keyboardPressBtn: "js-pressed-target",
         btnNoActive: "js-no-active",
     },
 
