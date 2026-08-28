@@ -83,6 +83,18 @@ BaseSlider.prototype = {
         this._goToIndex(index);
     },
 
+    handleClick(e) {
+        if (this._isInputBlocked()) return false;
+
+        const button = e.target.closest(`.${this._options.classes.sliderBtn}`);
+        if (!button) return e;
+        helper.tryBlurPointerTarget(e, button);
+
+        this._buttonManager.manage(button);
+
+        return true;
+    },
+
     _initDOMElements(childElements) {
         const slider = document.querySelector(
             this._options.singleSelectors.slider,
@@ -209,24 +221,6 @@ BaseSlider.prototype = {
         this._prevIndex();
     },
 
-    _handleClick(e) {
-        if (e.button === MOUSE_BUTTON_RIGHT) {
-            helper.prevent(e);
-            return false;
-        }
-
-        const button = e.target.closest(`.${this._options.classes.button}`);
-        if (!button || this._isInputBlocked()) return false;
-
-        if (e.pointerType === "mouse" || e.pointerType === "touch") {
-            button.blur();
-        }
-
-        this._buttonManager.manage(button);
-
-        return true;
-    },
-
     _handleMouseDown(e) {
         if (e.button === MOUSE_BUTTON_RIGHT) {
             const button = e.target.closest(`.${this._options.classes.button}`);
@@ -291,14 +285,6 @@ BaseSlider.prototype = {
 };
 
 BaseSlider[BaseSlider.EVENT_MAP_KEY] = {
-    click: {
-        target: (instance) => instance._slider,
-        handler: BaseSlider.prototype._handleClick,
-    },
-    auxclick: {
-        target: (instance) => instance._slider,
-        handler: BaseSlider.prototype._handleClick,
-    },
     mousedown: {
         target: (instance) => instance._slider,
         handler: BaseSlider.prototype._handleMouseDown,

@@ -1,5 +1,6 @@
 "use strict";
 
+import * as helper from "../utils/helpers.js";
 import BaseSlider from "./base-slider.js";
 
 export default function PaginationSlider(options) {
@@ -13,6 +14,20 @@ Object.setPrototypeOf(PaginationSlider, BaseSlider);
 PaginationSlider.prototype.init = function () {
     BaseSlider.prototype.init.call(this);
     this._initPagination();
+};
+
+PaginationSlider.prototype.handleClick = function (e) {
+    const what = BaseSlider.prototype.handleClick.call(this, e);
+
+    if (!(what instanceof MouseEvent)) return what;
+
+    const button = e.target.closest(`.${this._options.classes.paginationDot}`);
+    if (!button) return e;
+    helper.tryBlurPointerTarget(e, button);
+
+    this._buttonManager.manage(button);
+
+    return true;
 };
 
 PaginationSlider.prototype._initPagination = function () {

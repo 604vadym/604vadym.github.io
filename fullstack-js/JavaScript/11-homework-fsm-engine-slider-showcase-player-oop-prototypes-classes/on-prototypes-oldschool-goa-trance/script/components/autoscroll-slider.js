@@ -42,6 +42,18 @@ AutoscrollSlider.prototype.init = function () {
     this._initAutoscroll();
 };
 
+AutoscrollSlider.prototype.handleClick = function (e) {
+    const what = DraggableSlider.prototype.handleClick.call(this, e);
+
+    if (what instanceof MouseEvent) return what;
+
+    if (what === true) {
+        this._lastClickTimestamp = Date.now();
+    }
+
+    return what;
+};
+
 AutoscrollSlider.prototype._initAutoscroll = function () {
     if (this._isAutoscrollOn) {
         this._startAutoscroll();
@@ -313,16 +325,6 @@ AutoscrollSlider.prototype._afterResize = function () {
     this._tryResumeAutoscroll();
 };
 
-AutoscrollSlider.prototype._handleClick = function (e) {
-    const isExecuted = DraggableSlider.prototype._handleClick.call(this, e);
-
-    if (isExecuted) {
-        this._lastClickTimestamp = Date.now();
-    }
-
-    return isExecuted;
-};
-
 AutoscrollSlider.prototype._handleMouseOver = function (e) {
     if (!helper.hasFinePointer()) return;
 
@@ -393,14 +395,6 @@ AutoscrollSlider.prototype._handleVisibilityChange = function (e) {
 };
 
 AutoscrollSlider[AutoscrollSlider.EVENT_MAP_KEY] = {
-    click: {
-        target: (instance) => instance._slider,
-        handler: AutoscrollSlider.prototype._handleClick,
-    },
-    auxclick: {
-        target: (instance) => instance._slider,
-        handler: AutoscrollSlider.prototype._handleClick,
-    },
     mouseover: {
         target: (instance) => instance._slider,
         handler: AutoscrollSlider.prototype._handleMouseOver,

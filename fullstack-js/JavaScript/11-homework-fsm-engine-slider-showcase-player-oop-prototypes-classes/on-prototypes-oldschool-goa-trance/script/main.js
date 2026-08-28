@@ -49,6 +49,7 @@ const slider = new Slider({
     classes: {
         track: "slider__track",
         button: "button",
+        sliderBtn: "slider__btn",
         paginationDot: "pagination__dot",
         btnAutoscrollOff: "slider__btn--autoscroll-off",
     },
@@ -97,10 +98,22 @@ const slider = new Slider({
 
 const audioPlayer = new AudioPlayer({
     singleSelectors: {
-        btnNext: ".slider__btn-audio--next",
-        btnPrev: ".slider__btn-audio--prev",
+        deck: ".slider__audio-btns",
         btnPlay: ".slider__btn-audio--play",
         btnPause: ".slider__btn-audio--pause",
+        btnNext: ".slider__btn-audio--next",
+        btnPrev: ".slider__btn-audio--prev",
+    },
+
+    classes: {
+        playerBtn: "slider__btn-audio",
+    },
+
+    click: {
+        play: "slider__btn-audio--play",
+        pause: "slider__btn-audio--pause",
+        next: "slider__btn-audio--next",
+        prev: "slider__btn-audio--prev",
     },
 });
 
@@ -118,6 +131,10 @@ const shop = new Shop({
     },
 });
 
-const app = new ShowcaseApp(slider, audioPlayer, shop);
+const app = new ShowcaseApp(slider, audioPlayer, shop, {
+    singleSelectors: {
+        app: ".showcase",
+    },
+});
 
 app.init();

@@ -18,6 +18,14 @@ export function tryClearFocus() {
     }
 }
 
+export function tryBlurPointerTarget(e, element) {
+    if (e && (e.pointerType === "mouse" || e.pointerType === "touch")) {
+        if (element && typeof element.blur === "function") {
+            element.blur();
+        }
+    }
+}
+
 export function hasPlatformModifiers(e) {
     return Boolean(e?.ctrlKey || e?.altKey || e?.metaKey);
 }
