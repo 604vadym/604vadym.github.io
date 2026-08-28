@@ -52,26 +52,6 @@ ShowcaseApp.prototype = {
         this._showcase = showcase;
     },
 
-    _pipe(e, handlerName) {
-        const pipeline = [this._slider, this._shop];
-        for (const component of pipeline) {
-            if (!(e instanceof KeyboardEvent)) break;
-            if (typeof component[handlerName] === "function") {
-                e = component[handlerName](e);
-            }
-        }
-    },
-
-    _pipeClicks(e) {
-        const pipeline = [this._slider, this._audioPlayer, this._shop];
-        for (const component of pipeline) {
-            if (!(e instanceof MouseEvent)) break;
-            if (typeof component.handleClick === "function") {
-                e = component.handleClick(e);
-            }
-        }
-    },
-
     _tryResetBtnNoActive() {
         if (this._btnNoActive) {
             this._btnNoActive.classList.remove(
@@ -82,21 +62,31 @@ ShowcaseApp.prototype = {
         }
     },
 
+    _pipe(e, handlerName, EventClass) {
+        const pipeline = [this._slider, this._shop];
+        for (const component of pipeline) {
+            if (!(e instanceof EventClass)) break;
+            if (typeof component[handlerName] === "function") {
+                e = component[handlerName](e);
+            }
+        }
+    },
+
     _handleClick(e) {
         if (e.button === MOUSE_BUTTON_RIGHT) {
             helper.prevent(e);
             return;
         }
 
-        this._pipeClicks(e);
+        this._pipe(e, "handleClick", MouseEvent);
     },
 
     _handleKeyDown(e) {
-        this._pipe(e, "handleKeyDown");
+        this._pipe(e, "handleKeyDown", KeyboardEvent);
     },
 
     _handleKeyUp(e) {
-        this._pipe(e, "handleKeyUp");
+        this._pipe(e, "handleKeyUp", KeyboardEvent);
     },
 
     _handleMouseDown(e) {
