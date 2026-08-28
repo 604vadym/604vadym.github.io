@@ -43,16 +43,3 @@ export function isPassthroughKey(e) {
 export function isMultiTouch(e) {
     return Boolean(e?.touches && e.touches.length > 1);
 }
-
-export function filterButton(e, className) {
-    if (!e || !className) return null;
-
-    const button = e.target.closest(`.${className}`);
-    if (!button) return null;
-
-    if (e.pointerType === "mouse" || e.pointerType === "touch") {
-        button.blur();
-    }
-
-    return button;
-}

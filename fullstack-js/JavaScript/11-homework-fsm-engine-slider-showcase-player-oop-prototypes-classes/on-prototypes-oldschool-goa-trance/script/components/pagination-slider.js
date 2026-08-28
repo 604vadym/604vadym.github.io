@@ -17,18 +17,10 @@ PaginationSlider.prototype.init = function () {
 };
 
 PaginationSlider.prototype.handleClick = function (e) {
-    const what = BaseSlider.prototype.handleClick.call(this, e);
-
-    if (!(what instanceof MouseEvent)) return what;
-
-    const button = helper.filterButton(
-        what,
+    return this._processClick(
+        BaseSlider.prototype.handleClick.call(this, e),
         this._options.classes.paginationDot,
     );
-    if (!button) return what;
-
-    this._buttonManager.manage(button);
-    return true;
 };
 
 PaginationSlider.prototype._initPagination = function () {

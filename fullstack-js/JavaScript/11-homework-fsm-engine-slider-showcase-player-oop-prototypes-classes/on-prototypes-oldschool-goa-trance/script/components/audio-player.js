@@ -1,6 +1,5 @@
 "use strict";
 
-import * as helper from "../utils/helpers.js";
 import DOMValidator from "../services/dom-validator.js";
 import ButtonManager from "../services/button-manager.js";
 import EventManager from "../services/event-manager.js";
@@ -46,7 +45,7 @@ AudioPlayer.prototype = {
     },
 
     handleClick(e) {
-        const button = helper.filterButton(e, this._options.classes.playerBtn);
+        const button = e.target.closest(`.${this._options.classes.playerBtn}`);
         if (!button) return e;
 
         this._buttonManager.manage(button);

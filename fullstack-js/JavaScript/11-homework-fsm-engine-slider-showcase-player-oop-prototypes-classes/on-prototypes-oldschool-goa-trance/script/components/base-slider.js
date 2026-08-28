@@ -85,9 +85,18 @@ BaseSlider.prototype = {
 
     handleClick(e) {
         if (this._isInputBlocked()) return false;
+        return this._processClick(e, this._options.classes.sliderBtn);
+    },
 
-        const button = helper.filterButton(e, this._options.classes.sliderBtn);
+    _processClick(e, btnClassName) {
+        if (!(e instanceof MouseEvent)) return e;
+
+        const button = e.target.closest(`.${btnClassName}`);
         if (!button) return e;
+
+        if (e.pointerType === "mouse" || e.pointerType === "touch") {
+            button.blur();
+        }
 
         this._buttonManager.manage(button);
         return true;

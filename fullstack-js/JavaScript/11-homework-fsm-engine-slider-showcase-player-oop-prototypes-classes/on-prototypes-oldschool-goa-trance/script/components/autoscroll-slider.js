@@ -43,13 +43,13 @@ AutoscrollSlider.prototype.init = function () {
 };
 
 AutoscrollSlider.prototype.handleClick = function (e) {
-    const what = DraggableSlider.prototype.handleClick.call(this, e);
+    const result = DraggableSlider.prototype.handleClick.call(this, e);
 
-    if (what === true) {
+    if (result === true) {
         this._lastClickTimestamp = Date.now();
     }
 
-    return what;
+    return result;
 };
 
 AutoscrollSlider.prototype._initAutoscroll = function () {
