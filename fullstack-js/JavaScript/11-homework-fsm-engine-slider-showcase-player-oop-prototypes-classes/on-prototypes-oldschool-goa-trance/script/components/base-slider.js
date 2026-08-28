@@ -59,6 +59,10 @@ BaseSlider.prototype = {
         this.__state = state;
     },
 
+    get element() {
+        return this._slider;
+    },
+
     init() {
         this._initDOMElements();
         this._initProps();
@@ -252,6 +256,11 @@ BaseSlider.prototype = {
 
     _onSlideChanged() {
         this._state = STATES.IDLE;
+        const e = new CustomEvent("slidechange", {
+            detail: { index: this._normaliseIndex() },
+            bubbles: true,
+        });
+        this._slider.dispatchEvent(e);
     },
 
     _handleResize(e) {

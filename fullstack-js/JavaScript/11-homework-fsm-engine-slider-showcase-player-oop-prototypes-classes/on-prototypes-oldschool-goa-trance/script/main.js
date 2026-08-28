@@ -62,7 +62,7 @@ const slider = new Slider({
 
     jsClasses: {
         keyboardPressBtn: "js-pressed-target",
-        autoscrollPauseHover: "js-autoscroll-pause",
+        autoscrollPause: "js-autoscroll-pause",
         dynamicFocus: "js-dynamic-focus",
         btnNoActive: "js-no-active",
     },

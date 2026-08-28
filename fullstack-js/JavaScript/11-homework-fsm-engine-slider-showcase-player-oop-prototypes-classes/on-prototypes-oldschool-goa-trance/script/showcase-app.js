@@ -1,7 +1,6 @@
 "use strict";
 
 import * as helper from "./utils/helpers.js";
-import KeyboardManager from "./services/keyboard-manager.js";
 import EventManager from "./services/event-manager.js";
 
 export default function ShowcaseApp(slider, shop) {
@@ -51,6 +50,10 @@ ShowcaseApp.prototype = {
             helper.prevent(e);
         }
     },
+
+    _handleSlideChange(e) {
+        this._shop.setActiveIndex(e.detail.index);
+    },
 };
 
 ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
@@ -65,5 +68,9 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     mousedown: {
         target: () => document,
         handler: ShowcaseApp.prototype._handleMouseDown,
+    },
+    slidechange: {
+        target: (instance) => instance._slider.element,
+        handler: ShowcaseApp.prototype._handleSlideChange,
     },
 };

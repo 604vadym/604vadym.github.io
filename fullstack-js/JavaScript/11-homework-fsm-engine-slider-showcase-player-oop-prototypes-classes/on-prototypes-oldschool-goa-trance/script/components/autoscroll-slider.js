@@ -102,7 +102,7 @@ AutoscrollSlider.prototype._initPagination = function () {
     DraggableSlider.prototype._initPagination.call(this);
     for (let i = 0; i < this._slidesCount; i++) {
         this._paginationDots[i].classList.add(
-            this._options.jsClasses.autoscrollPauseHover,
+            this._options.jsClasses.autoscrollPause,
         );
         this._paginationDots[i].classList.add(
             this._options.jsClasses.dynamicFocus,
@@ -169,7 +169,7 @@ AutoscrollSlider.prototype._isMouseStillOver = function () {
         helper.hasFinePointer() &&
         Boolean(
             document.querySelector(
-                `.${this._options.jsClasses.autoscrollPauseHover}:not(.${this._options.classes.btnAutoscrollOff}):hover`,
+                `.${this._options.jsClasses.autoscrollPause}:not(.${this._options.classes.btnAutoscrollOff}):hover`,
             ),
         )
     );
@@ -327,7 +327,7 @@ AutoscrollSlider.prototype._handleMouseOver = function (e) {
     if (!helper.hasFinePointer()) return;
 
     const isPauseTarget = e.target.closest(
-        `.${this._options.jsClasses.autoscrollPauseHover}`,
+        `.${this._options.jsClasses.autoscrollPause}`,
     );
 
     if (isPauseTarget) {
@@ -351,9 +351,7 @@ AutoscrollSlider.prototype._handleMouseOut = function (e) {
 
     if (
         e.relatedTarget &&
-        e.relatedTarget.closest(
-            `.${this._options.jsClasses.autoscrollPauseHover}`,
-        )
+        e.relatedTarget.closest(`.${this._options.jsClasses.autoscrollPause}`)
     ) {
         return;
     }
@@ -366,7 +364,7 @@ AutoscrollSlider.prototype._handleMouseOut = function (e) {
 
 AutoscrollSlider.prototype._handleFocus = function (e) {
     if (
-        e.target.closest(`.${this._options.jsClasses.autoscrollPauseHover}`) &&
+        e.target.closest(`.${this._options.jsClasses.autoscrollPause}`) &&
         !e.target.closest(`.${this._options.jsClasses.dynamicFocus}`)
     ) {
         this._isKeyboardFocused = true;
@@ -376,7 +374,7 @@ AutoscrollSlider.prototype._handleFocus = function (e) {
 
 AutoscrollSlider.prototype._handleBlur = function (e) {
     if (
-        e.target.closest(`.${this._options.jsClasses.autoscrollPauseHover}`) &&
+        e.target.closest(`.${this._options.jsClasses.autoscrollPause}`) &&
         !e.target.closest(`.${this._options.jsClasses.dynamicFocus}`)
     ) {
         this._isKeyboardFocused = false;
