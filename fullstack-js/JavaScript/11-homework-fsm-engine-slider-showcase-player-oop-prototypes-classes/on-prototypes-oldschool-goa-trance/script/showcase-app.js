@@ -104,6 +104,10 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
         target: (instance) => instance._showcase,
         handler: ShowcaseApp.prototype._handleClick,
     },
+    auxclick: {
+        target: (instance) => instance._showcase,
+        handler: ShowcaseApp.prototype._handleClick,
+    },
     keydown: {
         target: () => document,
         handler: ShowcaseApp.prototype._handleKeyDown,

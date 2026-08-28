@@ -45,8 +45,6 @@ AutoscrollSlider.prototype.init = function () {
 AutoscrollSlider.prototype.handleClick = function (e) {
     const what = DraggableSlider.prototype.handleClick.call(this, e);
 
-    if (what instanceof MouseEvent) return what;
-
     if (what === true) {
         this._lastClickTimestamp = Date.now();
     }

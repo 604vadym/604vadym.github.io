@@ -86,12 +86,10 @@ BaseSlider.prototype = {
     handleClick(e) {
         if (this._isInputBlocked()) return false;
 
-        const button = e.target.closest(`.${this._options.classes.sliderBtn}`);
+        const button = helper.filterButton(e, this._options.classes.sliderBtn);
         if (!button) return e;
-        helper.tryBlurPointerTarget(e, button);
 
         this._buttonManager.manage(button);
-
         return true;
     },
 

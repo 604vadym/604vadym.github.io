@@ -46,17 +46,14 @@ AudioPlayer.prototype = {
     },
 
     handleClick(e) {
-        const button = e.target.closest(`.${this._options.classes.playerBtn}`);
+        const button = helper.filterButton(e, this._options.classes.playerBtn);
         if (!button) return e;
-        helper.tryBlurPointerTarget(e, button);
 
         this._buttonManager.manage(button);
-
         return true;
     },
 
     _initDOMElements(childElements) {
-        const deck = document.querySelector(this._options.singleSelectors.deck);
         const btnNext = document.querySelector(
             this._options.singleSelectors.btnNext,
         );
@@ -71,14 +68,12 @@ AudioPlayer.prototype = {
         );
 
         this._domValidator.validate(this, childElements, {
-            deck,
             btnNext,
             btnPrev,
             btnPlay,
             btnPause,
         });
 
-        this._deck = deck;
         this._btnNext = btnNext;
         this._btnPrev = btnPrev;
     },

@@ -98,7 +98,6 @@ const slider = new Slider({
 
 const audioPlayer = new AudioPlayer({
     singleSelectors: {
-        deck: ".slider__audio-btns",
         btnPlay: ".slider__btn-audio--play",
         btnPause: ".slider__btn-audio--pause",
         btnNext: ".slider__btn-audio--next",

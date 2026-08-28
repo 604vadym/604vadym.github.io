@@ -21,12 +21,13 @@ PaginationSlider.prototype.handleClick = function (e) {
 
     if (!(what instanceof MouseEvent)) return what;
 
-    const button = e.target.closest(`.${this._options.classes.paginationDot}`);
-    if (!button) return e;
-    helper.tryBlurPointerTarget(e, button);
+    const button = helper.filterButton(
+        what,
+        this._options.classes.paginationDot,
+    );
+    if (!button) return what;
 
     this._buttonManager.manage(button);
-
     return true;
 };
 

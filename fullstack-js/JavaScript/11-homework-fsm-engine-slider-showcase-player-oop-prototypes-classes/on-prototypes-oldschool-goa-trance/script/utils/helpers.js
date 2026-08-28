@@ -18,14 +18,6 @@ export function tryClearFocus() {
     }
 }
 
-export function tryBlurPointerTarget(e, element) {
-    if (e && (e.pointerType === "mouse" || e.pointerType === "touch")) {
-        if (element && typeof element.blur === "function") {
-            element.blur();
-        }
-    }
-}
-
 export function hasPlatformModifiers(e) {
     return Boolean(e?.ctrlKey || e?.altKey || e?.metaKey);
 }
@@ -50,4 +42,17 @@ export function isPassthroughKey(e) {
 
 export function isMultiTouch(e) {
     return Boolean(e?.touches && e.touches.length > 1);
+}
+
+export function filterButton(e, className) {
+    if (!e || !className) return null;
+
+    const button = e.target.closest(`.${className}`);
+    if (!button) return null;
+
+    if (e.pointerType === "mouse" || e.pointerType === "touch") {
+        button.blur();
+    }
+
+    return button;
 }
