@@ -38,6 +38,16 @@ AudioPlayer.EVENT_MAP_KEY = "EVENT_MAP";
 AudioPlayer.prototype = {
     constructor: AudioPlayer,
 
+    get _currentAudioTrackIndex() {
+        return this.__currentAudioTrackIndex;
+    },
+
+    set _currentAudioTrackIndex(index) {
+        const totalAudioTracks = this._getTotalAudioTracks();
+        this.__currentAudioTrackIndex =
+            (index + totalAudioTracks) % totalAudioTracks;
+    },
+
     init() {
         this._initDOMElements();
         this._initProps();
@@ -96,11 +106,11 @@ AudioPlayer.prototype = {
     },
 
     _initProps() {
-        this._currentAlbumIndex = 0;
-        this._currentAudioTrackIndex = 0;
         this._player = new Audio();
         this._initMode();
         this._initData();
+        this._currentAlbumIndex = 0;
+        this._currentAudioTrackIndex = 0;
     },
 
     _initMode() {
@@ -159,14 +169,11 @@ AudioPlayer.prototype = {
     },
 
     _nextAudioTrack() {
-        this._currentAudioTrackIndex =
-            (this._currentAudioTrackIndex + 1) % this._getTotalAudioTracks();
+        this._currentAudioTrackIndex++;
     },
 
     _prevAudioTrack() {
-        this._currentAudioTrackIndex =
-            (this._currentAudioTrackIndex - 1 + this._getTotalAudioTracks()) %
-            this._getTotalAudioTracks();
+        this._currentAudioTrackIndex--;
     },
 
     _getTotalAudioTracks() {
