@@ -93,14 +93,21 @@ const slider = new Slider({
 
 const audioPlayer = new AudioPlayer({
     singleSelectors: {
+        deck: ".showcase",
         btnPlay: ".slider__btn-audio--play",
         btnPause: ".slider__btn-audio--pause",
         btnNext: ".slider__btn-audio--next",
         btnPrev: ".slider__btn-audio--prev",
+        btnPlayTheme: ".slider__btn--autoscroll-on",
+        btnPauseTheme: ".slider__btn--autoscroll-off",
     },
 
     classes: {
         playerBtn: "slider__btn-audio",
+    },
+
+    states: {
+        active: "slider--audio-play",
     },
 
     click: {
@@ -108,7 +115,11 @@ const audioPlayer = new AudioPlayer({
         pause: "slider__btn-audio--pause",
         next: "slider__btn-audio--next",
         prev: "slider__btn-audio--prev",
+        playtheme: "slider__btn--autoscroll-on",
+        pausetheme: "slider__btn--autoscroll-off",
     },
+
+    mainThemeMode: true,
 });
 
 const shop = new Shop({

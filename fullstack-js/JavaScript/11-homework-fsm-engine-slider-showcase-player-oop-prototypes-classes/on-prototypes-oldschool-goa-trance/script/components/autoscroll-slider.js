@@ -305,8 +305,9 @@ AutoscrollSlider.prototype._pressReset = function (e) {
 
 AutoscrollSlider.prototype._pressToggleautoscroll = function (e) {
     helper.prevent(e);
-    if (this._isInputBlocked()) return;
+    if (this._isInputBlocked()) return false;
     this._toggleAutoscrollMode();
+    return true;
 };
 
 AutoscrollSlider.prototype._beforeResize = function () {

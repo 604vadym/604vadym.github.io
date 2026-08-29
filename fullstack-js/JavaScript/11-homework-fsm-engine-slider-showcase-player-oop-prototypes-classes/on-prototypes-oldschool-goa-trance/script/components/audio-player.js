@@ -51,6 +51,7 @@ AudioPlayer.prototype = {
     },
 
     _initDOMElements(childElements) {
+        const deck = document.querySelector(this._options.singleSelectors.deck);
         const btnNext = document.querySelector(
             this._options.singleSelectors.btnNext,
         );
@@ -65,25 +66,52 @@ AudioPlayer.prototype = {
         );
 
         this._domValidator.validate(this, childElements, {
+            deck,
             btnNext,
             btnPrev,
             btnPlay,
             btnPause,
         });
 
+        this._deck = deck;
         this._btnNext = btnNext;
         this._btnPrev = btnPrev;
+
+        if (this._options.defaultMode === true) {
+            const btnPlayTheme = document.querySelector(
+                this._options.singleSelectors.btnPlayTheme,
+            );
+            const btnPauseTheme = document.querySelector(
+                this._options.singleSelectors.btnPauseTheme,
+            );
+
+            this._domValidator.validate(this, childElements, {
+                btnPlayTheme,
+                btnPauseTheme,
+            });
+
+            this._btnPlayTheme = btnPlayTheme;
+            this._btnPauseTheme = btnPauseTheme;
+        }
     },
 
     _initProps() {
         this._currentAlbumIndex = 0;
         this._currentAudioTrackIndex = 0;
         this._player = new Audio();
-        this._player.src = this.constructor.MAIN_THEME_SRC;
-        setTimeout(() => {
-            this._player.preload = "none";
-        }, 300);
+        this._initMode();
         this._initData();
+    },
+
+    _initMode() {
+        if (this._options.defaultMode === true) {
+            this._player.src = this.constructor.MAIN_THEME_SRC;
+            setTimeout(() => {
+                this._player.preload = "none";
+            }, 300);
+        } else {
+            this._player.preload = "none";
+        }
     },
 
     _initButton() {
@@ -94,6 +122,69 @@ AudioPlayer.prototype = {
         );
     },
 
+    _startAudio(context) {
+        if (context === "theme" && this._options.defaultMode === true) {
+            if (!this._isMainThemeLoaded()) {
+                this._player.src = MAIN_THEME_SRC;
+            }
+            // tryResetMainThemeTime();
+            this._player.play().catch(() => {});
+            return;
+        }
+
+        if (context === "album") {
+            if (!this._isAudioModeActive()) {
+                this._toggleAudioMode(true);
+                // tryKillAutoscroll();
+            }
+
+            if (this._isNewAudioTrack(audioPlayer.src)) {
+                // updateAudioTrackTitle();
+                // audioTrackCurrentTime.style.width = "0";
+                const currentAlbum =
+                    this._goaMasterpieces[this._currentAlbumIndex];
+                this._player.src =
+                    currentAlbum.tracks[this._currentAudioTrackIndex].src;
+            }
+
+            this._player.play().catch(() => {});
+        }
+    },
+
+    _stopAudio() {
+        if (isAudioModeActive()) {
+            toggleAudioMode(false);
+        }
+        audioPlayer.pause();
+    },
+
+    _isAudioModeActive() {
+        return this._deck.classList.contains(this._options.states.active);
+    },
+
+    _isMainThemeLoaded() {
+        return this._player.src.includes(
+            this.constructor.MAIN_THEME_SRC.substring(2),
+        );
+    },
+
+    _isNewAudioTrack(currentSrc) {
+        return !currentSrc.includes(
+            this._goaMasterpieces[this._currentAlbumIndex].tracks[
+                this._currentAudioTrackIndex
+            ].src.substring(2),
+        );
+    },
+
+    _toggleAudioMode(isActive) {
+        this._deck.classList.toggle(this._options.states.active, isActive);
+        this._btnNext.tabIndex = isActive ? 0 : -1;
+        this._btnPrev.tabIndex = isActive ? 0 : -1;
+        if (this._options.defaultMode === true) {
+            this._btnPlayTheme.tabIndex = isActive ? -1 : 0;
+        }
+    },
+
     _clickPlay() {},
 
     _clickPause() {},
@@ -101,6 +192,10 @@ AudioPlayer.prototype = {
     _clickNext() {},
 
     _clickPrev() {},
+
+    _clickPlaytheme() {},
+
+    _clickPausetheme() {},
 
     _initData() {
         this._goaMasterpieces = [
