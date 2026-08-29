@@ -245,7 +245,7 @@ AudioPlayer.prototype = {
             !Array.isArray(this._goaMasterpieces) ||
             this._goaMasterpieces.length === 0
         ) {
-            throw new Error(
+            throw new TypeError(
                 `[AudioPlayer]: Dataset verification failed during core bootstrap\n` +
                     `The required "playlist" configuration array is missing, empty or malformed\n` +
                     `Ensure that a valid array containing album matrices is explicitly ` +

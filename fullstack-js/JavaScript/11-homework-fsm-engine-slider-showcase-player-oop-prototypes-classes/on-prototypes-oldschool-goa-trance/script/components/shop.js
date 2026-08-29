@@ -90,15 +90,18 @@ Shop.prototype = {
     },
 
     _initDefaultUrl() {
-        const defaultUrl = this._options.defaultUrl;
-        if (helper.isValidUrl(defaultUrl)) {
-            this._defaultUrl = defaultUrl;
-        } else if (helper.isValidUrl(this.constructor.DEFAULT_URL)) {
-            this._defaultUrl = this.constructor.DEFAULT_URL;
-        } else {
+        const configUrl = this._options.defaultUrl;
+        const markupUrl = this._link.getAttribute("href");
+        this._defaultUrl =
+            configUrl || markupUrl || this.constructor.DEFAULT_URL;
+        this._validateDefaultUrl(configUrl);
+    },
+
+    _validateDefaultUrl(configUrl, markupUrl) {
+        if (!helper.isValidUrl(this._defaultUrl)) {
             throw new Error(
                 `[Shop]: Master initialisation aborted\n` +
-                    `Both custom options.defaultUrl ("${defaultUrl}") ` +
+                    `Both custom options.defaultUrl("${configUrl})", markup ("${markupUrl}") ` +
                     `and fallback DEFAULT_URL ("${this.constructor.DEFAULT_URL}")\n` +
                     `Failed to validate against the required URL specification protocol\n` +
                     `Expected format: "http://example.com" or "https://example.com" ` +
@@ -108,27 +111,33 @@ Shop.prototype = {
     },
 
     _initData() {
-        this._data =
-            Array.isArray(this._options.data) && this._options.data.length > 0
-                ? this._options.data
-                : [
-                      {
-                          url: "https://ultimae.bandcamp.com/album/code-eternity",
-                      },
-                      {
-                          url: "https://www.discogs.com/sell/release/419254",
-                      },
-                      {
-                          url: "https://ultimae.bandcamp.com/album/life",
-                      },
-                      {
-                          url: "https://ultimae.bandcamp.com/album/360",
-                      },
-                  ];
+        this._data = this._options.data;
         this._validateData();
     },
 
     _validateData() {
+        if (
+            !Array.isArray(this._options.data) ||
+            this._options.data.length === 0
+        ) {
+            if (!Array.isArray(this._data) || this._data.length === 0) {
+                throw new TypeError(
+                    `[Shop]: Dataset verification failed during core bootstrap\n` +
+                        `The required "data" configuration array is missing, empty or malformed\n` +
+                        `Ensure that a valid array containing e-commerce URL targets is explicitly ` +
+                        `passed into the Shop constructor\n` +
+                        `Expected Configuration Format:\n` +
+                        `  new Shop({\n` +
+                        `      data: [\n` +
+                        `          { url: "https://example.com" },\n` +
+                        `          { url: "https://otherexample.com" },\n` +
+                        `          { url: "https://anotherexample.com" }\n` +
+                        `      ]\n` +
+                        `  });\n`,
+                );
+            }
+        }
+
         this._data.forEach((item, index) => {
             if (!helper.isValidUrl(item.url)) {
                 throw new Error(

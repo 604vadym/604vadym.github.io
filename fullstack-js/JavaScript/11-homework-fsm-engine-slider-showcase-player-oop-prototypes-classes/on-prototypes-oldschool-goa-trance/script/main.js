@@ -166,13 +166,26 @@ const shop = new Shop({
         link: ".slider__link-shop",
     },
 
-    data: null,
-
-    defaultUrl: null,
-
     press: {
         execute: ["Enter"],
     },
+
+    defaultUrl: null,
+
+    data: [
+        {
+            url: "https://ultimae.bandcamp.com/album/code-eternity",
+        },
+        {
+            url: "https://www.discogs.com/sell/release/419254",
+        },
+        {
+            url: "https://ultimae.bandcamp.com/album/life",
+        },
+        {
+            url: "https://ultimae.bandcamp.com/album/360",
+        },
+    ],
 });
 
 const app = new ShowcaseApp(slider, audioPlayer, shop, {
