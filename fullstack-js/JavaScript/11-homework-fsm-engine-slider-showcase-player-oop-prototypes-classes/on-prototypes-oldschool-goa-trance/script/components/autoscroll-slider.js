@@ -263,8 +263,8 @@ AutoscrollSlider.prototype._stopAutoscroll = function () {
 AutoscrollSlider.prototype._toggleAutoscrollState = function (isActive) {
     this._isAutoscrollOn = isActive;
     this._slider.classList.toggle(this._options.states.autoscrollOn, isActive);
-    this._btnAutoscrollOff.tabIndex = isActive ? 0 : -1;
     this._btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
+    this._btnAutoscrollOff.tabIndex = isActive ? 0 : -1;
 };
 
 AutoscrollSlider.prototype._toggleAutoscrollMode = function () {

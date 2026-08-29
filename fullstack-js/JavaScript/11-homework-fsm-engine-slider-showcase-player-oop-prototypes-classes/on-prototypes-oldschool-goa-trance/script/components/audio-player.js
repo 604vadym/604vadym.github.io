@@ -56,28 +56,30 @@ AudioPlayer.prototype = {
 
     _initDOMElements(childElements) {
         const deck = document.querySelector(this._options.singleSelectors.deck);
-        const btnNext = document.querySelector(
-            this._options.singleSelectors.btnNext,
-        );
-        const btnPrev = document.querySelector(
-            this._options.singleSelectors.btnPrev,
-        );
         const btnPlay = document.querySelector(
             this._options.singleSelectors.btnPlay,
         );
         const btnPause = document.querySelector(
             this._options.singleSelectors.btnPause,
         );
+        const btnNext = document.querySelector(
+            this._options.singleSelectors.btnNext,
+        );
+        const btnPrev = document.querySelector(
+            this._options.singleSelectors.btnPrev,
+        );
 
         this._domValidator.validate(this, childElements, {
             deck,
-            btnNext,
-            btnPrev,
             btnPlay,
             btnPause,
+            btnNext,
+            btnPrev,
         });
 
         this._deck = deck;
+        this._btnPlay = btnPlay;
+        this._btnPause = btnPause;
         this._btnNext = btnNext;
         this._btnPrev = btnPrev;
     },
@@ -184,6 +186,8 @@ AudioPlayer.prototype = {
 
     _toggleAudioMode(isActive) {
         this._deck.classList.toggle(this._options.states.active, isActive);
+        this._btnPlay.tabIndex = isActive ? -1 : 0;
+        this._btnPause.tabIndex = isActive ? 0 : -1;
         this._btnNext.tabIndex = isActive ? 0 : -1;
         this._btnPrev.tabIndex = isActive ? 0 : -1;
     },
