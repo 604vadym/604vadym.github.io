@@ -72,6 +72,7 @@ PaginationSlider.prototype._initButton = function () {
     this._paginationDot = new Button(
         this._options.classes.paginationDot,
         this._buttonManager,
+        this._buttonManager.manage,
     );
 };
 

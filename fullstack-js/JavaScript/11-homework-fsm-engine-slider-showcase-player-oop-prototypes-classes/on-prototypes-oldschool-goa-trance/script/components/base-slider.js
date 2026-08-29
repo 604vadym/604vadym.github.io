@@ -139,6 +139,7 @@ BaseSlider.prototype = {
         this._button = new Button(
             this._options.classes.sliderBtn,
             this._buttonManager,
+            this._buttonManager.manage,
         );
     },
 

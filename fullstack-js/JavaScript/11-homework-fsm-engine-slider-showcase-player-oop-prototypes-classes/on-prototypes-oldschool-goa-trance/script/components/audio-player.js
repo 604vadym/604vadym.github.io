@@ -90,6 +90,7 @@ AudioPlayer.prototype = {
         this._button = new Button(
             this._options.classes.playerBtn,
             this._buttonManager,
+            this._buttonManager.manage,
         );
     },
 

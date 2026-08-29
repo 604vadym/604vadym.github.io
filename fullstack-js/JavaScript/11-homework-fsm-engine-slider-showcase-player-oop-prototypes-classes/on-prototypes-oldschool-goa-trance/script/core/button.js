@@ -1,9 +1,9 @@
 "use strict";
 
-export default function Button(className, manager) {
+export default function Button(className, instance, command) {
     this._className = className;
-    this._assertManager(manager);
-    this._manager = manager;
+    this._assertCommand(command);
+    this._onCommand = (element) => command.call(instance, element);
 }
 
 Button.prototype = {
@@ -19,14 +19,15 @@ Button.prototype = {
             button.blur();
         }
 
-        this._manager.manage(button);
+        this._onCommand(button);
         return true;
     },
 
-    _assertManager(manager) {
-        if (!manager || typeof manager.manage !== "function") {
+    _assertCommand(command) {
+        if (typeof command !== "function") {
             throw new TypeError(
-                `[Button]: Invalid ButtonManager instance passed`,
+                `[Button]: Failed to instantiate "${this.constructor.name}"\n` +
+                    `A valid executable callback function is required`,
             );
         }
     },
