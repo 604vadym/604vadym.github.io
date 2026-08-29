@@ -98,8 +98,6 @@ const audioPlayer = new AudioPlayer({
         btnPause: ".slider__btn-audio--pause",
         btnNext: ".slider__btn-audio--next",
         btnPrev: ".slider__btn-audio--prev",
-        btnPlayTheme: ".slider__btn--autoscroll-on",
-        btnPauseTheme: ".slider__btn--autoscroll-off",
     },
 
     classes: {
@@ -115,11 +113,9 @@ const audioPlayer = new AudioPlayer({
         pause: "slider__btn-audio--pause",
         next: "slider__btn-audio--next",
         prev: "slider__btn-audio--prev",
-        playtheme: "slider__btn--autoscroll-on",
-        pausetheme: "slider__btn--autoscroll-off",
     },
 
-    mainThemeMode: true,
+    mainThemeSrc: "./assets/audio/asura/main-theme-rare-mix-preview.mp3",
 });
 
 const shop = new Shop({

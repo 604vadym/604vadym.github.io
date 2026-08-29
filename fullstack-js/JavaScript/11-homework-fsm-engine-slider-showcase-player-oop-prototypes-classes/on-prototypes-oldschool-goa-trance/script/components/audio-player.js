@@ -27,12 +27,6 @@ export default function AudioPlayer(options) {
     });
 }
 
-Object.defineProperty(AudioPlayer, "MAIN_THEME_SRC", {
-    value: "./assets/audio/asura/main-theme-rare-mix-preview.mp3",
-    writable: false,
-    configurable: false,
-});
-
 AudioPlayer.EVENT_MAP_KEY = "EVENT_MAP";
 
 AudioPlayer.prototype = {
@@ -86,36 +80,27 @@ AudioPlayer.prototype = {
         this._deck = deck;
         this._btnNext = btnNext;
         this._btnPrev = btnPrev;
-
-        if (this._options.defaultMode === true) {
-            const btnPlayTheme = document.querySelector(
-                this._options.singleSelectors.btnPlayTheme,
-            );
-            const btnPauseTheme = document.querySelector(
-                this._options.singleSelectors.btnPauseTheme,
-            );
-
-            this._domValidator.validate(this, childElements, {
-                btnPlayTheme,
-                btnPauseTheme,
-            });
-
-            this._btnPlayTheme = btnPlayTheme;
-            this._btnPauseTheme = btnPauseTheme;
-        }
     },
 
     _initProps() {
         this._player = new Audio();
-        this._initMode();
+        this._mainThemeSrc = this._options.mainThemeSrc || null;
+        this._hasMainTheme = Boolean(this._mainThemeSrc);
+        this._initMainTheme();
+        this._initPreload();
         this._initData();
         this._currentAlbumIndex = 0;
         this._currentAudioTrackIndex = 0;
     },
 
-    _initMode() {
-        if (this._options.defaultMode === true) {
-            this._player.src = this.constructor.MAIN_THEME_SRC;
+    _initMainTheme() {
+        if (this._hasMainTheme) {
+            this._player.src = this._mainThemeSrc;
+        }
+    },
+
+    _initPreload() {
+        if (this._hasMainTheme) {
             setTimeout(() => {
                 this._player.preload = "none";
             }, 300);
@@ -133,9 +118,9 @@ AudioPlayer.prototype = {
     },
 
     _startAudio(context) {
-        if (context === "theme" && this._options.defaultMode === true) {
+        if (context === "theme" && this._hasMainTheme) {
             if (!this._isMainThemeLoaded()) {
-                this._player.src = MAIN_THEME_SRC;
+                this._player.src = this._mainThemeSrc;
             }
             // tryResetMainThemeTime();
             this._player.play().catch(() => {});
@@ -185,9 +170,8 @@ AudioPlayer.prototype = {
     },
 
     _isMainThemeLoaded() {
-        return this._player.src.includes(
-            this.constructor.MAIN_THEME_SRC.substring(2),
-        );
+        if (!this._hasMainTheme) return false;
+        return this._player.src.includes(this._mainThemeSrc.substring(2));
     },
 
     _isNewAudioTrack(currentSrc) {
@@ -202,9 +186,6 @@ AudioPlayer.prototype = {
         this._deck.classList.toggle(this._options.states.active, isActive);
         this._btnNext.tabIndex = isActive ? 0 : -1;
         this._btnPrev.tabIndex = isActive ? 0 : -1;
-        if (this._options.defaultMode === true) {
-            this._btnPlayTheme.tabIndex = isActive ? -1 : 0;
-        }
     },
 
     _clickPlay(e) {
@@ -225,10 +206,6 @@ AudioPlayer.prototype = {
         this._prevAudioTrack();
         this._startAudio("album");
     },
-
-    _clickPlaytheme() {},
-
-    _clickPausetheme() {},
 
     _initData() {
         this._goaMasterpieces = [
