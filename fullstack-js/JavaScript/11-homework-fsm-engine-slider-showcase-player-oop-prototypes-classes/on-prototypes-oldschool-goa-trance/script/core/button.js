@@ -3,7 +3,7 @@
 export default function Button(className, instance, command) {
     this._className = className;
     this._assertCommand(command);
-    this._onCommand = (element) => command.call(instance, element);
+    this._command = (element) => command.call(instance, element);
 }
 
 Button.prototype = {
@@ -19,7 +19,7 @@ Button.prototype = {
             button.blur();
         }
 
-        this._onCommand(button);
+        this._command(button);
         return true;
     },
 
@@ -27,7 +27,7 @@ Button.prototype = {
         if (typeof command !== "function") {
             throw new TypeError(
                 `[Button]: Failed to instantiate "${this.constructor.name}"\n` +
-                    `A valid executable callback function is required`,
+                    `The command parameter must be a valid function`,
             );
         }
     },

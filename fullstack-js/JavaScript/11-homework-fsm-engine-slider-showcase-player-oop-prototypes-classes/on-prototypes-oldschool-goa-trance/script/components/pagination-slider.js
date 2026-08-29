@@ -18,7 +18,7 @@ PaginationSlider.prototype.init = function () {
 };
 
 PaginationSlider.prototype.handleClick = function (e) {
-    return this._paginationDot.execute(
+    return this._buttonPagination.execute(
         BaseSlider.prototype.handleClick.call(this, e),
     );
 };
@@ -69,7 +69,7 @@ PaginationSlider.prototype._updatePagination = function () {
 
 PaginationSlider.prototype._initButton = function () {
     BaseSlider.prototype._initButton.call(this);
-    this._paginationDot = new Button(
+    this._buttonPagination = new Button(
         this._options.classes.paginationDot,
         this._buttonManager,
         this._buttonManager.manage,
