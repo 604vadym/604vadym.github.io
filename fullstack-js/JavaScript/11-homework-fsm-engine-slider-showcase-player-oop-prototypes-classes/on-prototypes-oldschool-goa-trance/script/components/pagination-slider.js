@@ -77,5 +77,5 @@ PaginationSlider.prototype._initButtons = function () {
 };
 
 PaginationSlider.prototype._clickGoto = function (button) {
-    this._goToIndex(this._paginationDots.indexOf(button));
+    this.goto(this._paginationDots.indexOf(button));
 };

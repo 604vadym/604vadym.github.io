@@ -50,6 +50,32 @@ AudioPlayer.prototype = {
         this._eventManager.init(this, AudioPlayer.EVENT_MAP_KEY);
     },
 
+    playAlbum() {
+        this._startAudio("album");
+    },
+
+    pauseAlbum() {
+        this._stopAudio();
+    },
+
+    playTheme() {
+        this._startAudio("theme");
+    },
+
+    pauseTheme() {
+        this._stopAudio();
+    },
+
+    next() {
+        this._nextAudioTrack();
+        this._startAudio("album");
+    },
+
+    prev() {
+        this._prevAudioTrack();
+        this._startAudio("album");
+    },
+
     handleClick(e) {
         return this._button.execute(e);
     },
@@ -194,21 +220,19 @@ AudioPlayer.prototype = {
 
     _clickPlay(e) {
         // if (e.shiftKey && isAutoscrollOn) toggleAutoscrollMode();
-        this._startAudio("album");
+        this.playAlbum();
     },
 
     _clickPause() {
-        this._stopAudio();
+        this.pauseAlbum();
     },
 
     _clickNext() {
-        this._nextAudioTrack();
-        this._startAudio("album");
+        this.next();
     },
 
     _clickPrev() {
-        this._prevAudioTrack();
-        this._startAudio("album");
+        this.prev();
     },
 
     _initData() {

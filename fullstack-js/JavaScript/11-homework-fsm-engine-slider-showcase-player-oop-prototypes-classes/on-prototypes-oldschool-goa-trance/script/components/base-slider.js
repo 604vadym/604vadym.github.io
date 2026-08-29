@@ -70,15 +70,21 @@ BaseSlider.prototype = {
     },
 
     next() {
-        this._nextIndex();
+        this.goto(this._normaliseIndex() + 1);
     },
 
     prev() {
-        this._prevIndex();
+        this.goto(this._normaliseIndex() - 1);
     },
 
     goto(index) {
-        this._goToIndex(index);
+        const oldIndex = this._currentIndex;
+        this._currentIndex = this._normaliseIndex(index);
+        if (this._currentIndex !== oldIndex) {
+            this._onIndexChanged();
+            return true;
+        }
+        return false;
     },
 
     handleClick(e) {
@@ -143,27 +149,6 @@ BaseSlider.prototype = {
         );
     },
 
-    _nextIndex() {
-        this._goToIndex(this._normaliseIndex() + 1);
-    },
-
-    _prevIndex() {
-        this._goToIndex(this._normaliseIndex() - 1);
-    },
-
-    _goToIndex(index) {
-        const oldIndex = this._currentIndex;
-        this._currentIndex = this._normaliseIndex(index);
-        if (this._currentIndex !== oldIndex) {
-            this._onIndexChanged();
-        }
-    },
-
-    _onIndexChanged() {
-        this._state = STATES.MOVING;
-        this._updateTrack();
-    },
-
     _updateTrack() {
         if (helper.hasFinePointer() || this._isResizing) {
             this._track.style.transform = `translateX(-${this._currentIndex * 100}%)`;
@@ -190,6 +175,11 @@ BaseSlider.prototype = {
         return (sourceIndex + this._slidesCount) % this._slidesCount;
     },
 
+    _onIndexChanged() {
+        this._state = STATES.MOVING;
+        this._updateTrack();
+    },
+
     _enableAnimation() {
         this._track.style.transition = this._trackTransition;
     },
@@ -203,11 +193,11 @@ BaseSlider.prototype = {
     },
 
     _clickNext() {
-        this._nextIndex();
+        this.next();
     },
 
     _clickPrev() {
-        this._prevIndex();
+        this.prev();
     },
 
     _handleDragStart(e) {

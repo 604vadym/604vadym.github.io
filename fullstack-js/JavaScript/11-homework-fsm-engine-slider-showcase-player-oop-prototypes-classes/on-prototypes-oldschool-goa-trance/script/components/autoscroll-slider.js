@@ -157,7 +157,7 @@ AutoscrollSlider.prototype._nextAuto = function () {
     if (this._currentIndex === this._slidesCount) {
         this._nextAutoLazy();
     } else {
-        this._nextIndex();
+        this.next();
     }
 
     this._isAutoscrollAction = false;
@@ -171,7 +171,7 @@ AutoscrollSlider.prototype._nextAuto = function () {
 AutoscrollSlider.prototype._nextAutoLazy = function () {
     this._currentIndex = this._startIndex - 1;
     this._updateTrackInstantly();
-    this._goToIndex(this._currentIndex);
+    this.goto(this._currentIndex);
 };
 
 AutoscrollSlider.prototype._isMouseStillOver = function () {
