@@ -1,6 +1,7 @@
 "use strict";
 
 import * as helper from "../utils/helpers.js";
+import Button from "../core/button.js";
 import BaseSlider from "./base-slider.js";
 
 export default function PaginationSlider(options) {
@@ -17,9 +18,8 @@ PaginationSlider.prototype.init = function () {
 };
 
 PaginationSlider.prototype.handleClick = function (e) {
-    return this._processClick(
+    return this._paginationDot.execute(
         BaseSlider.prototype.handleClick.call(this, e),
-        this._options.classes.paginationDot,
     );
 };
 
@@ -64,6 +64,14 @@ PaginationSlider.prototype._updatePagination = function () {
     }
     this._paginationDots[this._normaliseIndex()].classList.add(
         this._options.classesActive.paginationDot,
+    );
+};
+
+PaginationSlider.prototype._initButton = function () {
+    BaseSlider.prototype._initButton.call(this);
+    this._paginationDot = new Button(
+        this._options.classes.paginationDot,
+        this._buttonManager,
     );
 };
 

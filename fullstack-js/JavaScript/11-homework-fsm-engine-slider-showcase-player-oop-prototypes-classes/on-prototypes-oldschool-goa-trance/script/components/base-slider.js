@@ -1,6 +1,7 @@
 "use strict";
 
 import * as helper from "../utils/helpers.js";
+import Button from "../core/button.js";
 import DOMValidator from "../services/dom-validator.js";
 import ButtonManager from "../services/button-manager.js";
 import EventManager from "../services/event-manager.js";
@@ -64,6 +65,7 @@ BaseSlider.prototype = {
         this._initProps();
         this._updateSlideWidth();
         this._buttonManager.init(this, "click");
+        this._initButton();
         this._eventManager.init(this, BaseSlider.EVENT_MAP_KEY);
     },
 
@@ -81,21 +83,7 @@ BaseSlider.prototype = {
 
     handleClick(e) {
         if (this._isInputBlocked()) return false;
-        return this._processClick(e, this._options.classes.sliderBtn);
-    },
-
-    _processClick(e, btnClassName) {
-        if (!(e instanceof MouseEvent)) return e;
-
-        const button = e.target.closest(`.${btnClassName}`);
-        if (!button) return e;
-
-        if (e.pointerType === "mouse" || e.pointerType === "touch") {
-            button.blur();
-        }
-
-        this._buttonManager.manage(button);
-        return true;
+        return this._button.execute(e);
     },
 
     _initDOMElements(childElements) {
@@ -145,6 +133,13 @@ BaseSlider.prototype = {
         this._slideWidth = 0;
         this._isResizing = false;
         this._resizeTimeoutId = null;
+    },
+
+    _initButton() {
+        this._button = new Button(
+            this._options.classes.sliderBtn,
+            this._buttonManager,
+        );
     },
 
     _nextIndex() {

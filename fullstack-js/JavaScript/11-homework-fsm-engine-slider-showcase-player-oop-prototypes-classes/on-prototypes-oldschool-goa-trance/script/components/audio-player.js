@@ -1,5 +1,6 @@
 "use strict";
 
+import Button from "../core/button.js";
 import DOMValidator from "../services/dom-validator.js";
 import ButtonManager from "../services/button-manager.js";
 import EventManager from "../services/event-manager.js";
@@ -41,15 +42,12 @@ AudioPlayer.prototype = {
         this._initDOMElements();
         this._initProps();
         this._buttonManager.init(this, "click");
+        this._initButton();
         this._eventManager.init(this, AudioPlayer.EVENT_MAP_KEY);
     },
 
     handleClick(e) {
-        const button = e.target.closest(`.${this._options.classes.playerBtn}`);
-        if (!button) return e;
-
-        this._buttonManager.manage(button);
-        return true;
+        return this._button.execute(e);
     },
 
     _initDOMElements(childElements) {
@@ -86,6 +84,13 @@ AudioPlayer.prototype = {
             this._player.preload = "none";
         }, 300);
         this._initData();
+    },
+
+    _initButton() {
+        this._button = new Button(
+            this._options.classes.playerBtn,
+            this._buttonManager,
+        );
     },
 
     _clickPlay() {},
