@@ -251,12 +251,10 @@ AutoscrollSlider.prototype._startAutoscroll = function (
         this._isDragging = false;
     }
 
-    this._toggleAutoscrollState(true);
     this._timer.start(delay || this._autoscrollDelay);
 };
 
 AutoscrollSlider.prototype._stopAutoscroll = function () {
-    this._toggleAutoscrollState(false);
     this._timer.stop();
 };
 
@@ -270,9 +268,11 @@ AutoscrollSlider.prototype._toggleAutoscrollState = function (isActive) {
 AutoscrollSlider.prototype._toggleAutoscrollMode = function () {
     if (this._isAutoscrollOn) {
         this._stopAutoscroll();
+        this._toggleAutoscrollState(false);
     } else {
         this.next();
         this._startAutoscroll();
+        this._toggleAutoscrollState(true);
         this._autoscrollManualStartTimestamp = Date.now();
     }
     helper.tryClearFocus();
