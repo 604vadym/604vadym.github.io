@@ -52,7 +52,7 @@ AudioPlayer.prototype = {
         this._initDOMElements();
         this._initProps();
         this._buttonManager.init(this, "click");
-        this._initButton();
+        this._initButtons();
         this._eventManager.init(this, AudioPlayer.EVENT_MAP_KEY);
     },
 
@@ -124,7 +124,7 @@ AudioPlayer.prototype = {
         }
     },
 
-    _initButton() {
+    _initButtons() {
         this._button = new Button(
             this._options.classes.playerBtn,
             this._buttonManager,

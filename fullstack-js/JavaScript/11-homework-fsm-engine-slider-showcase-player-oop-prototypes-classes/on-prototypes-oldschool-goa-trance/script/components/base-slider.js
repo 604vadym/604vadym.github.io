@@ -65,7 +65,7 @@ BaseSlider.prototype = {
         this._initProps();
         this._updateSlideWidth();
         this._buttonManager.init(this, "click");
-        this._initButton();
+        this._initButtons();
         this._eventManager.init(this, BaseSlider.EVENT_MAP_KEY);
     },
 
@@ -135,7 +135,7 @@ BaseSlider.prototype = {
         this._resizeTimeoutId = null;
     },
 
-    _initButton() {
+    _initButtons() {
         this._button = new Button(
             this._options.classes.sliderBtn,
             this._buttonManager,
