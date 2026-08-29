@@ -137,6 +137,11 @@ AudioPlayer.prototype = {
         }
     },
 
+    _initData() {
+        this._goaMasterpieces = this._options.playlist;
+        this._validateData();
+    },
+
     _initButtons() {
         this._button = new Button(
             this._options.classes.playerBtn,
@@ -235,48 +240,25 @@ AudioPlayer.prototype = {
         this.prev();
     },
 
-    _initData() {
-        this._goaMasterpieces = [
-            {
-                tracks: [
-                    {
-                        src: "./assets/audio/asura/2000-code-eternity/01-like-a-summer-day-preview.mp3",
-                    },
-                    {
-                        src: "./assets/audio/asura/2000-code-eternity/02-trinity-preview.mp3",
-                    },
-                ],
-            },
-            {
-                tracks: [
-                    {
-                        src: "./assets/audio/asura/2003-lost-eden/01-lost-eden-preview.mp3",
-                    },
-                    {
-                        src: "./assets/audio/asura/2003-lost-eden/02-from-the-abyss-preview.mp3",
-                    },
-                ],
-            },
-            {
-                tracks: [
-                    {
-                        src: "./assets/audio/asura/2007-life-squared/01-golgotha-preview.mp3",
-                    },
-                    {
-                        src: "./assets/audio/asura/2007-life-squared/02-back-to-light-preview.mp3",
-                    },
-                ],
-            },
-            {
-                tracks: [
-                    {
-                        src: "./assets/audio/asura/2010-360/01-el-hai-preview.mp3",
-                    },
-                    {
-                        src: "./assets/audio/asura/2010-360/02-regenesis-preview.mp3",
-                    },
-                ],
-            },
-        ];
+    _validateData() {
+        if (
+            !Array.isArray(this._goaMasterpieces) ||
+            this._goaMasterpieces.length === 0
+        ) {
+            throw new Error(
+                `[AudioPlayer]: Dataset verification failed during core bootstrap\n` +
+                    `The required "playlist" configuration array is missing, empty or malformed\n` +
+                    `Ensure that a valid array containing album matrices is explicitly ` +
+                    `passed into the AudioPlayer constructor\n` +
+                    `Expected Configuration Format:\n` +
+                    `  new AudioPlayer({\n` +
+                    `      playlist: [\n` +
+                    `          { tracks: [{ src: "./path/to/track1.mp3" }, { src: "./path/to/track2.mp3" }, { src: "./path/to/track3.mp3" }] },\n` +
+                    `          { tracks: [{ src: "./other/path/to/track1.mp3" }, { src: "./other/path/to/track2.mp3" }, { src: "./other/path/to/track3.mp3" }] },\n` +
+                    `          { tracks: [{ src: "./another/path/to/track1.mp3" }, { src: "./another/path/to/track2.mp3" }, { src: "./another/path/to/track3.mp3" }] }\n` +
+                    `      ]\n` +
+                    `  });\n`,
+            );
+        }
     },
 };

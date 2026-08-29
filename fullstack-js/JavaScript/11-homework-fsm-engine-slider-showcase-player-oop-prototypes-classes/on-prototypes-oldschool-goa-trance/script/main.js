@@ -116,6 +116,49 @@ const audioPlayer = new AudioPlayer({
     },
 
     mainThemeSrc: "./assets/audio/asura/main-theme-rare-mix-preview.mp3",
+
+    playlist: [
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/asura/2000-code-eternity/01-like-a-summer-day-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/asura/2000-code-eternity/02-trinity-preview.mp3",
+                },
+            ],
+        },
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/asura/2003-lost-eden/01-lost-eden-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/asura/2003-lost-eden/02-from-the-abyss-preview.mp3",
+                },
+            ],
+        },
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/asura/2007-life-squared/01-golgotha-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/asura/2007-life-squared/02-back-to-light-preview.mp3",
+                },
+            ],
+        },
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/asura/2010-360/01-el-hai-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/asura/2010-360/02-regenesis-preview.mp3",
+                },
+            ],
+        },
+    ],
 });
 
 const shop = new Shop({
