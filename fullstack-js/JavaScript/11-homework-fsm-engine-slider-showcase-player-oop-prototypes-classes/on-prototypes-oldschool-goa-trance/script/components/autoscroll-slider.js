@@ -263,10 +263,10 @@ AutoscrollSlider.prototype._toggleAutoscrollState = function (isActive) {
     this._slider.classList.toggle(this._options.states.autoscrollOn, isActive);
     this._btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
     this._btnAutoscrollOff.tabIndex = isActive ? 0 : -1;
-    this._onAutoscrollStateChange(isActive);
+    this._onAutoscrollStateChanged(isActive);
 };
 
-AutoscrollSlider.prototype._onAutoscrollStateChange = function (isActive) {
+AutoscrollSlider.prototype._onAutoscrollStateChanged = function (isActive) {
     const e = new CustomEvent("autoscrollchange", {
         detail: { isActive },
         bubbles: true,

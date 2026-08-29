@@ -149,6 +149,14 @@ ShowcaseApp.prototype = {
         this._shop.setActiveIndex(e.detail.index);
     },
 
+    _handleAutoscrollChange(e) {
+        if (e.detail.isActive === true) {
+            this._audioPlayer.playTheme();
+        } else if (e.detail.isActive === false) {
+            this._audioPlayer.pauseTheme();
+        }
+    },
+
     _handleMouseLeave(e) {
         this._tryResetBtnNoActive();
     },
@@ -178,6 +186,10 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     slidechange: {
         target: (instance) => instance._slider.element,
         handler: ShowcaseApp.prototype._handleSlideChange,
+    },
+    autoscrollchange: {
+        target: (instance) => instance._slider.element,
+        handler: ShowcaseApp.prototype._handleAutoscrollChange,
     },
 };
 
