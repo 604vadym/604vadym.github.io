@@ -70,6 +70,11 @@ ShowcaseApp.prototype = {
         }
     },
 
+    _pressReset(e) {
+        if (helper.hasPlatformModifiers(e)) return;
+        helper.prevent(e);
+    },
+
     _pressIgnore(e) {
         helper.prevent(e);
     },

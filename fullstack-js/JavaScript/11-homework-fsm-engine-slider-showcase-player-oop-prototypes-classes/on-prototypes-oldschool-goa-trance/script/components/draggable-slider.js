@@ -82,9 +82,9 @@ DraggableSlider.prototype._stopDragging = function (pointerOffset = null) {
         const triggerThreshold = this._slideWidth * this._triggerThresholdCoef;
         if (Math.abs(pointerOffset) > triggerThreshold) {
             if (pointerOffset < 0) {
-                this._nextIndex();
+                this.next();
             } else {
-                this._prevIndex();
+                this.prev();
             }
         } else {
             this._updateTrack();

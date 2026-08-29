@@ -43,13 +43,13 @@ KeyboardSlider.prototype._hardReset = function () {
 KeyboardSlider.prototype._pressNext = function (e) {
     helper.prevent(e);
     if (this._isInputBlocked()) return;
-    this._nextIndex();
+    this.next();
 };
 
 KeyboardSlider.prototype._pressPrev = function (e) {
     helper.prevent(e);
     if (this._isInputBlocked()) return;
-    this._prevIndex();
+    this.prev();
 };
 
 KeyboardSlider.prototype._pressExecute = function (e) {
@@ -71,12 +71,8 @@ KeyboardSlider.prototype._pressExecute = function (e) {
 };
 
 KeyboardSlider.prototype._pressReset = function (e) {
-    if (helper.hasPlatformModifiers(e)) return false;
-
-    helper.prevent(e);
     if (helper.isOverrideKey(e)) {
         this._hardReset();
     }
-
-    return true;
+    return e;
 };

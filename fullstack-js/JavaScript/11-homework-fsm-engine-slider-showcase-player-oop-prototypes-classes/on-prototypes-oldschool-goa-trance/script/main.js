@@ -115,6 +115,10 @@ const audioPlayer = new AudioPlayer({
         prev: "slider__btn-audio--prev",
     },
 
+    press: {
+        reset: ["Escape"],
+    },
+
     mainThemeSrc: "./assets/audio/asura/main-theme-rare-mix-preview.mp3",
 
     playlist: [
@@ -207,6 +211,7 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
     },
 
     press: {
+        reset: ["Escape"],
         ignore: ["PageDown", "PageUp", "End"],
     },
 });

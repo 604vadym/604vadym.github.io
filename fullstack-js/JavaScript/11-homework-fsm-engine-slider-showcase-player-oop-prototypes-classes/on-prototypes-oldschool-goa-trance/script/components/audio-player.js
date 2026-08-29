@@ -1,8 +1,10 @@
 "use strict";
 
+import * as helper from "../utils/helpers.js";
 import Button from "../core/button.js";
 import DOMValidator from "../services/dom-validator.js";
 import ButtonManager from "../services/button-manager.js";
+import KeyboardManager from "../services/keyboard-manager.js";
 import EventManager from "../services/event-manager.js";
 
 export default function AudioPlayer(options) {
@@ -16,6 +18,12 @@ export default function AudioPlayer(options) {
 
     Object.defineProperty(this, "_buttonManager", {
         value: new ButtonManager(),
+        writable: false,
+        configurable: false,
+    });
+
+    Object.defineProperty(this, "_keyboardManager", {
+        value: new KeyboardManager(),
         writable: false,
         configurable: false,
     });
@@ -47,6 +55,7 @@ AudioPlayer.prototype = {
         this._initProps();
         this._buttonManager.init(this, "click");
         this._initButtons();
+        this._keyboardManager.init(this, "press");
         this._eventManager.init(this, AudioPlayer.EVENT_MAP_KEY);
     },
 
@@ -78,6 +87,10 @@ AudioPlayer.prototype = {
 
     handleClick(e) {
         return this._button.execute(e);
+    },
+
+    handleKeyDown(e) {
+        return this._keyboardManager.manage(e);
     },
 
     _initDOMElements(childElements) {
@@ -223,6 +236,16 @@ AudioPlayer.prototype = {
         this._btnPrev.tabIndex = isActive ? 0 : -1;
     },
 
+    _hardReset() {
+        if (this._hasMainTheme) {
+            this._player.src = this._mainThemeSrc;
+        } else {
+            this._player.currentTime = 0;
+        }
+        this._currentAlbumIndex = 0;
+        this._currentAudioTrackIndex = 0;
+    },
+
     _clickPlay(e) {
         // if (e.shiftKey && isAutoscrollOn) toggleAutoscrollMode();
         this.playAlbum();
@@ -238,6 +261,14 @@ AudioPlayer.prototype = {
 
     _clickPrev() {
         this.prev();
+    },
+
+    _pressReset(e) {
+        this._stopAudio();
+        if (helper.isOverrideKey(e)) {
+            this._hardReset();
+        }
+        return e;
     },
 
     _validateData() {
