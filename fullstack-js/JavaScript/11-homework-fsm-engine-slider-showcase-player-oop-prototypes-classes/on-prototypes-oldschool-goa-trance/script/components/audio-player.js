@@ -77,29 +77,55 @@ AudioPlayer.prototype = {
         this._eventManager.init(this, AudioPlayer.EVENT_MAP_KEY);
     },
 
+    play() {
+        this.playAlbum();
+    },
+
     playAlbum() {
-        this._startAudio("album");
+        if (!this._isAudioModeActive()) {
+            this._toggleAudioMode(true);
+            // tryKillAutoscroll();
+        }
+
+        if (this._isNewAudioTrack(this._player.src)) {
+            // updateAudioTrackTitle();
+            // audioTrackCurrentTime.style.width = "0";
+            const currentAlbum = this._goaMasterpieces[this._currentAlbumIndex];
+            this._player.src =
+                currentAlbum.tracks[this._currentAudioTrackIndex].src;
+        }
+
+        this._player.play().catch(() => {});
     },
 
     playTheme() {
-        this._startAudio("theme");
+        if (this._hasMainTheme) {
+            if (!this._isMainThemeLoaded()) {
+                this._player.src = this._mainThemeSrc;
+            }
+            this._tryResetMainThemeTime();
+            this._player.play().catch(() => {});
+        }
     },
 
     pause() {
         if (this._isMainThemeLoaded()) {
             this._mainThemePauseTimestamp = Date.now();
         }
-        this._stopAudio();
+        if (this._isAudioModeActive()) {
+            this._toggleAudioMode(false);
+        }
+        this._player.pause();
     },
 
     next() {
         this._nextAudioTrack();
-        this._startAudio("album");
+        this.playAlbum();
     },
 
     prev() {
         this._prevAudioTrack();
-        this._startAudio("album");
+        this.playAlbum();
     },
 
     switchAlbum(index) {
@@ -107,7 +133,7 @@ AudioPlayer.prototype = {
         this._currentAudioTrackIndex = 0;
 
         if (this._isAudioModeActive()) {
-            this._startAudio("album");
+            this.playAlbum();
         }
     },
 
@@ -198,42 +224,6 @@ AudioPlayer.prototype = {
         );
     },
 
-    _startAudio(context) {
-        if (context === "theme" && this._hasMainTheme) {
-            if (!this._isMainThemeLoaded()) {
-                this._player.src = this._mainThemeSrc;
-            }
-            this._tryResetMainThemeTime();
-            this._player.play().catch(() => {});
-            return;
-        }
-
-        if (context === "album") {
-            if (!this._isAudioModeActive()) {
-                this._toggleAudioMode(true);
-                // tryKillAutoscroll();
-            }
-
-            if (this._isNewAudioTrack(this._player.src)) {
-                // updateAudioTrackTitle();
-                // audioTrackCurrentTime.style.width = "0";
-                const currentAlbum =
-                    this._goaMasterpieces[this._currentAlbumIndex];
-                this._player.src =
-                    currentAlbum.tracks[this._currentAudioTrackIndex].src;
-            }
-
-            this._player.play().catch(() => {});
-        }
-    },
-
-    _stopAudio() {
-        if (this._isAudioModeActive()) {
-            this._toggleAudioMode(false);
-        }
-        this._player.pause();
-    },
-
     _nextAudioTrack() {
         this._currentAudioTrackIndex++;
     },
@@ -298,11 +288,11 @@ AudioPlayer.prototype = {
 
     _clickPlay(e) {
         // if (e.shiftKey && isAutoscrollOn) toggleAutoscrollMode();
-        this.playAlbum();
+        this.play();
     },
 
     _clickPause() {
-        this.pauseAlbum();
+        this.pause();
     },
 
     _clickNext() {
@@ -314,7 +304,7 @@ AudioPlayer.prototype = {
     },
 
     _pressReset(e) {
-        this._stopAudio();
+        this.pause();
         if (helper.isOverrideKey(e)) {
             this._hardReset();
         }
