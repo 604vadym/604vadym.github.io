@@ -46,6 +46,7 @@ AudioPlayer.EVENT_MAP_KEY = "EVENT_MAP";
 AudioPlayer.STATES = Object.freeze({
     ALBUM: "ALBUM",
     THEME: "THEME",
+    ALBUMTHEME: "ALBUMTHEME",
     IDLE: "IDLE",
 });
 
@@ -65,6 +66,16 @@ AudioPlayer.prototype = {
             throw new TypeError(
                 `[FSM]: Invalid state transition token "${stateKey}"`,
             );
+        }
+
+        if (state === STATES.ALBUM && this.__state === STATES.THEME) {
+            this.__state = STATES.ALBUMTHEME;
+            return;
+        }
+
+        if (state === STATES.IDLE && this.__state === STATES.ALBUMTHEME) {
+            this.__state = STATES.THEME;
+            return;
         }
 
         this.__state = state;
@@ -294,8 +305,14 @@ AudioPlayer.prototype = {
     },
 
     _tryPlayAudio() {
-        if (this.state === STATES.ALBUM) {
+        if (this.state === STATES.ALBUM || this.state === STATES.ALBUMTHEME) {
             this._playAudio("album");
+        }
+    },
+
+    _tryPlayTheme() {
+        if (this.state === STATES.THEME) {
+            this._playAudio("theme");
         }
     },
 
@@ -429,6 +446,7 @@ AudioPlayer.prototype = {
     _clickPause() {
         this._toggleAudioMode(false);
         this.pause();
+        this._tryPlayTheme();
     },
 
     _clickNext() {
