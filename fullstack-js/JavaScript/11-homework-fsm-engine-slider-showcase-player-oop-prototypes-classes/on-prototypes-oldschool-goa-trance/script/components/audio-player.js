@@ -119,17 +119,21 @@ AudioPlayer.prototype = {
     },
 
     nextAudioTrack() {
-        this._nextAudioTrack();
-        this.playAlbum();
+        this._currentAudioTrackIndex++;
+        if (this._isAudioModeActive()) {
+            this.playAlbum();
+        }
     },
 
     prevAudioTrack() {
-        this._prevAudioTrack();
-        this.playAlbum();
+        this._currentAudioTrackIndex--;
+        if (this._isAudioModeActive()) {
+            this.playAlbum();
+        }
     },
 
     switchAudioTrack(index) {
-        const isTrackChanged = this._givenAudioTrack(index);
+        const isTrackChanged = this._setAudioTrack(index);
 
         if (isTrackChanged && this._isAudioModeActive()) {
             this.playAlbum();
@@ -139,21 +143,19 @@ AudioPlayer.prototype = {
     },
 
     nextAlbum() {
-        this.switchAlbum(
-            this._normaliseIndex(
-                this._currentAlbumIndex + 1,
-                this._getTotalAlbums(),
-            ),
-        );
+        this._currentAlbumIndex++;
+        this._setAlbum(this._currentAlbumIndex);
+        if (this._isAudioModeActive()) {
+            this.playAlbum();
+        }
     },
 
     prevAlbum() {
-        this.switchAlbum(
-            this._normaliseIndex(
-                this._currentAlbumIndex - 1,
-                this._getTotalAlbums(),
-            ),
-        );
+        this._currentAlbumIndex--;
+        this._setAlbum(this._currentAlbumIndex);
+        if (this._isAudioModeActive()) {
+            this.playAlbum();
+        }
     },
 
     switchAlbum(index) {
@@ -253,15 +255,7 @@ AudioPlayer.prototype = {
         );
     },
 
-    _nextAudioTrack() {
-        this._currentAudioTrackIndex++;
-    },
-
-    _prevAudioTrack() {
-        this._currentAudioTrackIndex--;
-    },
-
-    _givenAudioTrack(index) {
+    _setAudioTrack(index) {
         if (index < 0 || index >= this._getTotalAudioTracks()) {
             return false;
         }
