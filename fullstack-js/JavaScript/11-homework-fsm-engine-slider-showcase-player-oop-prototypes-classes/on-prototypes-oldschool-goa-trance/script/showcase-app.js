@@ -152,13 +152,14 @@ ShowcaseApp.prototype = {
 
     _handleSlideChange(e) {
         this._shop.setActiveIndex(e.detail.index);
+        this._audioPlayer.switchAlbum(e.detail.index);
     },
 
     _handleAutoscrollChange(e) {
         if (e.detail.isActive === true) {
             this._audioPlayer.playTheme();
         } else if (e.detail.isActive === false) {
-            this._audioPlayer.pauseTheme();
+            this._audioPlayer.pause();
         }
     },
 
