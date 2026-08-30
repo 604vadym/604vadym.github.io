@@ -43,8 +43,32 @@ Object.defineProperty(AudioPlayer, "MAIN_THEME_RESET_PAUSE_THRESHOLD", {
 
 AudioPlayer.EVENT_MAP_KEY = "EVENT_MAP";
 
+AudioPlayer.STATES = Object.freeze({
+    ALBUM: "ALBUM",
+    THEME: "THEME",
+    IDLE: "IDLE",
+});
+
+const STATES = AudioPlayer.STATES;
+
 AudioPlayer.prototype = {
     constructor: AudioPlayer,
+
+    get state() {
+        return this.__state;
+    },
+
+    set _state(stateKey) {
+        const state = this.constructor.STATES[stateKey];
+
+        if (!state) {
+            throw new TypeError(
+                `[FSM]: Invalid state transition token "${stateKey}"`,
+            );
+        }
+
+        this.__state = state;
+    },
 
     get _currentAudioTrackIndex() {
         return this.__currentAudioTrackIndex;
@@ -82,17 +106,17 @@ AudioPlayer.prototype = {
     },
 
     playAlbum() {
-        this._toggleAudioMode(true);
-        // tryKillAutoscroll();
+        this._state = STATES.ALBUM;
         this._playAudio("album");
     },
 
     playTheme() {
+        this._state = STATES.THEME;
         this._playAudio("theme");
     },
 
     pause() {
-        this._toggleAudioMode(false);
+        this._state = STATES.IDLE;
         this._pauseAudio();
     },
 
@@ -179,6 +203,7 @@ AudioPlayer.prototype = {
         this._initMainTheme();
         this._initPreload();
         this._initData();
+        this._state = STATES.IDLE;
         this._currentAlbumIndex = 0;
         this._currentAudioTrackIndex = 0;
         this._mainThemePauseTimestamp = 0;
@@ -298,7 +323,7 @@ AudioPlayer.prototype = {
     },
 
     _isAudioModeActive() {
-        return this._deck.classList.contains(this._options.states.active);
+        return this.state === STATES.ALBUM;
     },
 
     _isMainThemeLoaded() {
@@ -345,14 +370,18 @@ AudioPlayer.prototype = {
         this._currentAlbumIndex = 0;
         this._currentAudioTrackIndex = 0;
         this._player.currentTime = 0;
+        this._state = STATES.IDLE;
     },
 
     _clickPlay(e) {
         // if (e.shiftKey && isAutoscrollOn) toggleAutoscrollMode();
+        this._toggleAudioMode(true);
+        // tryKillAutoscroll();
         this.play();
     },
 
     _clickPause() {
+        this._toggleAudioMode(false);
         this.pause();
     },
 
