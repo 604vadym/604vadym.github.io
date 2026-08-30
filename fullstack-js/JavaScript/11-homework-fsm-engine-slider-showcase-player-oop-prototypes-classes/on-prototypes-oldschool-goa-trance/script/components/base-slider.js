@@ -40,6 +40,10 @@ const STATES = BaseSlider.STATES;
 BaseSlider.prototype = {
     constructor: BaseSlider,
 
+    get element() {
+        return this._slider;
+    },
+
     get state() {
         return this.__state;
     },
@@ -54,10 +58,6 @@ BaseSlider.prototype = {
         }
 
         this.__state = state;
-    },
-
-    get element() {
-        return this._slider;
     },
 
     init() {

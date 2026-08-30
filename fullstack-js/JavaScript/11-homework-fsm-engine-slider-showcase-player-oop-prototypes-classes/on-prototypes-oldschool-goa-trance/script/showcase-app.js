@@ -156,11 +156,22 @@ ShowcaseApp.prototype = {
     },
 
     _handleAutoscrollChange(e) {
-        if (e.detail.isActive === true) {
+        if (e.detail.isActive === true && this._audioPlayer.state === "IDLE") {
             this._audioPlayer.playTheme();
-        } else if (e.detail.isActive === false) {
+        } else if (
+            e.detail.isActive === false &&
+            this._audioPlayer.state === "THEME"
+        ) {
             this._audioPlayer.pause();
         }
+    },
+
+    _handleAlbumPlay(e) {
+        this._slider.pauseAutoscroll();
+    },
+
+    _handleAlbumPause(e) {
+        this._slider.resumeAutoscroll();
     },
 
     _handleMouseLeave(e) {
@@ -196,6 +207,14 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     autoscrollchange: {
         target: (instance) => instance._slider.element,
         handler: ShowcaseApp.prototype._handleAutoscrollChange,
+    },
+    albumplay: {
+        target: (instance) => instance._audioPlayer.element,
+        handler: ShowcaseApp.prototype._handleAlbumPlay,
+    },
+    albumpause: {
+        target: (instance) => instance._audioPlayer.element,
+        handler: ShowcaseApp.prototype._handleAlbumPause,
     },
 };
 

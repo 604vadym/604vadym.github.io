@@ -55,6 +55,10 @@ const STATES = AudioPlayer.STATES;
 AudioPlayer.prototype = {
     constructor: AudioPlayer,
 
+    get element() {
+        return this._deck;
+    },
+
     get state() {
         return this.__state;
     },
@@ -117,6 +121,7 @@ AudioPlayer.prototype = {
     },
 
     playAlbum() {
+        this._onPlayAlbum();
         this._state = STATES.ALBUM;
         this._playAudio("album");
     },
@@ -127,6 +132,9 @@ AudioPlayer.prototype = {
     },
 
     pause() {
+        if (this.state === STATES.ALBUM || this.state === STATES.ALBUMTHEME) {
+            this._onPauseAlbum();
+        }
         this._state = STATES.IDLE;
         this._pauseAudio();
     },
@@ -302,6 +310,16 @@ AudioPlayer.prototype = {
             this._buttonManager,
             this._buttonManager.manage,
         );
+    },
+
+    _onPlayAlbum() {
+        const e = new Event("albumplay", { bubbles: true });
+        this._deck.dispatchEvent(e);
+    },
+
+    _onPauseAlbum() {
+        const e = new Event("albumpause", { bubbles: true });
+        this._deck.dispatchEvent(e);
     },
 
     _tryPlayAudio() {

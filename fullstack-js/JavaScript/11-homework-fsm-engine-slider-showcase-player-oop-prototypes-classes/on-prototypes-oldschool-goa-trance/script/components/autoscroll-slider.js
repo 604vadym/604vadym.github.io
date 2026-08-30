@@ -58,6 +58,16 @@ AutoscrollSlider.prototype._initAutoscroll = function () {
     }
 };
 
+AutoscrollSlider.prototype.resumeAutoscroll = function () {
+    this._isAutoscrollLocked = false;
+    this._tryResumeAutoscroll();
+};
+
+AutoscrollSlider.prototype.pauseAutoscroll = function () {
+    this._tryPauseAutoscroll();
+    this._isAutoscrollLocked = true;
+};
+
 AutoscrollSlider.prototype._initDOMElements = function (childElements) {
     const btnAutoscrollOn = document.querySelector(
         this._options.singleSelectors.btnAutoscrollOn,
@@ -105,6 +115,7 @@ AutoscrollSlider.prototype._initProps = function () {
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
     this._isAutoscrollAction = false;
+    this._isAutoscrollLocked = false;
     this._isAutoscrollOn = Boolean(this._options.autoplay);
 };
 
@@ -128,6 +139,7 @@ AutoscrollSlider.prototype._hardReset = function () {
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
     this._isAutoscrollAction = false;
+    this._isAutoscrollLocked = false;
 };
 
 AutoscrollSlider.prototype._onIndexChanged = function () {
@@ -186,6 +198,7 @@ AutoscrollSlider.prototype._isMouseStillOver = function () {
 };
 
 AutoscrollSlider.prototype._tryResumeAutoscroll = function (context = null) {
+    if (this._isAutoscrollLocked) return;
     const isDriftingAfterClick = this._isPostClickDriftActive();
     if (
         !this._isAutoscrollOn ||
