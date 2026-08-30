@@ -138,6 +138,11 @@ AudioPlayer.prototype = {
         return isTrackChanged;
     },
 
+    stopAudioTrack() {
+        this.pause();
+        this._player.currentTime = 0;
+    },
+
     nextAlbum() {
         this._currentAlbumIndex++;
         this._setAlbum(this._currentAlbumIndex);
@@ -156,6 +161,11 @@ AudioPlayer.prototype = {
             this._tryPlayAudio();
         }
         return isAlbumChanged;
+    },
+
+    stopAlbum() {
+        this.stopAudioTrack();
+        this._currentAudioTrackIndex = 0;
     },
 
     handleClick(e) {
@@ -247,7 +257,7 @@ AudioPlayer.prototype = {
     },
 
     _tryPlayAudio() {
-        if (this._isAudioModeActive()) {
+        if (this.state === STATES.ALBUM) {
             this._playAudio("album");
         }
     },
@@ -323,7 +333,7 @@ AudioPlayer.prototype = {
     },
 
     _isAudioModeActive() {
-        return this.state === STATES.ALBUM;
+        return this._deck.classList.contains(this._options.states.active);
     },
 
     _isMainThemeLoaded() {
@@ -368,9 +378,8 @@ AudioPlayer.prototype = {
             this._mainThemePauseTimestamp = 0;
         }
         this._currentAlbumIndex = 0;
-        this._currentAudioTrackIndex = 0;
-        this._player.currentTime = 0;
-        this._state = STATES.IDLE;
+        this._toggleAudioMode(false);
+        this.stopAlbum();
     },
 
     _clickPlay(e) {
