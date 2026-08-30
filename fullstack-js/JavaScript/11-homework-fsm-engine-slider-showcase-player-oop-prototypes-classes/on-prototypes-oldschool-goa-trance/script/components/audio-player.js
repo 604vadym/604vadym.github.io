@@ -129,12 +129,13 @@ AudioPlayer.prototype = {
     },
 
     switchAlbum(index) {
-        this._currentAlbumIndex = index;
-        this._currentAudioTrackIndex = 0;
+        const isAlbumChanged = this._setAlbum(index);
 
-        if (this._isAudioModeActive()) {
+        if (isAlbumChanged && this._isAudioModeActive()) {
             this.playAlbum();
         }
+
+        return isAlbumChanged;
     },
 
     handleClick(e) {
@@ -230,6 +231,25 @@ AudioPlayer.prototype = {
 
     _prevAudioTrack() {
         this._currentAudioTrackIndex--;
+    },
+
+    _givenAudioTrack(index) {
+        const totalTracks = this._getTotalAudioTracks();
+        if (index < 0 || index >= totalTracks) {
+            return false;
+        }
+
+        const oldIndex = this._currentAudioTrackIndex;
+        this._currentAudioTrackIndex = index;
+        return this._currentAudioTrackIndex !== oldIndex;
+    },
+
+    _setAlbum(index) {
+        const oldIndex = this._currentAlbumIndex;
+        this._currentAlbumIndex = index;
+        this._currentAudioTrackIndex = 0;
+        this._player.currentTime = 0;
+        return this._currentAlbumIndex !== oldIndex;
     },
 
     _getTotalAudioTracks() {
