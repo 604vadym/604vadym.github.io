@@ -119,6 +119,8 @@ const audioPlayer = new AudioPlayer({
         reset: ["Escape"],
     },
 
+    mainThemeResetPauseThreshold: null,
+
     mainThemeSrc: "./assets/audio/asura/main-theme-rare-mix-preview.mp3",
 
     playlist: [

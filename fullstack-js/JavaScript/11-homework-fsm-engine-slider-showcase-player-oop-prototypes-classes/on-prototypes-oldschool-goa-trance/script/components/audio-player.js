@@ -35,6 +35,12 @@ export default function AudioPlayer(options) {
     });
 }
 
+Object.defineProperty(AudioPlayer, "MAIN_THEME_RESET_PAUSE_THRESHOLD", {
+    value: 300000,
+    writable: false,
+    configurable: false,
+});
+
 AudioPlayer.EVENT_MAP_KEY = "EVENT_MAP";
 
 AudioPlayer.prototype = {
@@ -80,6 +86,9 @@ AudioPlayer.prototype = {
     },
 
     pause() {
+        if (this._isMainThemeLoaded()) {
+            this._mainThemePauseTimestamp = Date.now();
+        }
         this._stopAudio();
     },
 
@@ -149,6 +158,15 @@ AudioPlayer.prototype = {
         this._initData();
         this._currentAlbumIndex = 0;
         this._currentAudioTrackIndex = 0;
+        this._mainThemePauseTimestamp = 0;
+
+        const mainThemeResetPauseThreshold = Number(
+            this._options.mainThemeResetPauseThreshold,
+        );
+        this._mainThemeResetPauseThreshold =
+            mainThemeResetPauseThreshold > 0
+                ? mainThemeResetPauseThreshold
+                : this.constructor.MAIN_THEME_RESET_PAUSE_THRESHOLD;
     },
 
     _initMainTheme() {
@@ -185,7 +203,7 @@ AudioPlayer.prototype = {
             if (!this._isMainThemeLoaded()) {
                 this._player.src = this._mainThemeSrc;
             }
-            // tryResetMainThemeTime();
+            this._tryResetMainThemeTime();
             this._player.play().catch(() => {});
             return;
         }
@@ -249,6 +267,16 @@ AudioPlayer.prototype = {
         return (index + totalCount) % totalCount;
     },
 
+    _tryResetMainThemeTime() {
+        if (
+            this._mainThemePauseTimestamp > 0 &&
+            Date.now() - this._mainThemePauseTimestamp >
+                this._mainThemeResetPauseThreshold
+        ) {
+            this._player.currentTime = 0;
+        }
+    },
+
     _toggleAudioMode(isActive) {
         this._deck.classList.toggle(this._options.states.active, isActive);
         this._btnPlay.tabIndex = isActive ? -1 : 0;
@@ -260,6 +288,7 @@ AudioPlayer.prototype = {
     _hardReset() {
         if (this._hasMainTheme) {
             this._player.src = this._mainThemeSrc;
+            this._mainThemePauseTimestamp = 0;
         } else {
             this._player.currentTime = 0;
         }
