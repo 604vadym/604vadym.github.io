@@ -138,9 +138,20 @@ AudioPlayer.prototype = {
         return isTrackChanged;
     },
 
+    restartAudioTrack() {
+        this.rewindAudioTrack();
+        if (this.state === STATES.IDLE) {
+            this.play();
+        }
+    },
+
+    rewindAudioTrack() {
+        this._player.currentTime = 0;
+    },
+
     stopAudioTrack() {
         this.pause();
-        this._player.currentTime = 0;
+        this.rewindAudioTrack();
     },
 
     nextAlbum() {
@@ -163,14 +174,35 @@ AudioPlayer.prototype = {
         return isAlbumChanged;
     },
 
-    stopAlbum() {
-        this.stopAudioTrack();
-        this._currentAudioTrackIndex = 0;
+    restartAlbum() {
+        this.rewindAlbum();
+        this.restartAudioTrack();
     },
 
-    reset() {
-        this.stopAlbum();
+    rewindAlbum() {
+        this._currentAudioTrackIndex = 0;
+        this.rewindAudioTrack();
+        this._tryPlayAudio();
+    },
+
+    stopAlbum() {
+        this._currentAudioTrackIndex = 0;
+        this.stopAudioTrack();
+    },
+
+    restartPlaylist() {
         this._currentAlbumIndex = 0;
+        this.restartAlbum();
+    },
+
+    rewindPlaylist() {
+        this._currentAudioTrackIndex = 0;
+        this.rewindAlbum();
+    },
+
+    stopPlaylist() {
+        this._currentAlbumIndex = 0;
+        this.stopAlbum();
     },
 
     handleClick(e) {
@@ -317,7 +349,7 @@ AudioPlayer.prototype = {
         }
 
         if (!this._isAudioPlaying()) {
-            this._player.currentTime = 0;
+            this.rewindAudioTrack();
         }
         this._currentAudioTrackIndex = 0;
         const oldIndex = this._currentAlbumIndex;
@@ -364,7 +396,7 @@ AudioPlayer.prototype = {
             Date.now() - this._mainThemePauseTimestamp >
                 this._mainThemeResetPauseThreshold
         ) {
-            this._player.currentTime = 0;
+            this.rewindAudioTrack();
         }
     },
 
@@ -384,7 +416,7 @@ AudioPlayer.prototype = {
         } else {
             this._player.src = "";
         }
-        this.reset();
+        this.stopPlaylist();
     },
 
     _clickPlay(e) {
@@ -405,6 +437,16 @@ AudioPlayer.prototype = {
 
     _clickPrev() {
         this.prevAudioTrack();
+    },
+
+    _pressRestartaudiotrack(e) {
+        this.restartAudioTrack();
+        return e;
+    },
+
+    _pressRestartalbum(e) {
+        this.restartAlbum();
+        return e;
     },
 
     _pressReset(e) {

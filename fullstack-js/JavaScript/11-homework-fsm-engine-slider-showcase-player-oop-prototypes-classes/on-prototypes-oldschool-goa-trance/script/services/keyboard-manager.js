@@ -6,6 +6,7 @@ KeyboardManager.KEY_MAP = {
     Enter: "key",
     Escape: "key",
     " ": "key",
+    0: "key",
     ArrowRight: "code",
     ArrowLeft: "code",
     KeyD: "code",
@@ -13,6 +14,7 @@ KeyboardManager.KEY_MAP = {
     PageDown: "code",
     PageUp: "code",
     End: "code",
+    Backspace: "code",
 };
 
 KeyboardManager.getKeyParam = function (key) {
@@ -29,7 +31,7 @@ KeyboardManager.prototype = {
     manage(e) {
         const request = this._keyActionTable.find((entry) => entry.match(e));
 
-        return request?.action(e);
+        return request?.action(e) ?? e;
     },
 
     _initKeyActionTable(client, configName) {

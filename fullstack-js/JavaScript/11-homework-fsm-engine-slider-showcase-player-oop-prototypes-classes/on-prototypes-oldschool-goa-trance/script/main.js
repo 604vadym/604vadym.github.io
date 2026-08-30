@@ -117,6 +117,8 @@ const audioPlayer = new AudioPlayer({
 
     press: {
         reset: ["Escape"],
+        restartaudiotrack: ["0"],
+        restartalbum: ["Backspace"],
     },
 
     mainThemeResetPauseThreshold: null,
