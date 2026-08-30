@@ -64,7 +64,7 @@ AudioPlayer.prototype = {
     set _currentAlbumIndex(index) {
         this.__currentAlbumIndex = this._normaliseIndex(
             index,
-            this._goaMasterpieces.length,
+            this._getTotalAlbums(),
         );
     },
 
@@ -118,14 +118,42 @@ AudioPlayer.prototype = {
         this._player.pause();
     },
 
-    next() {
+    nextAudioTrack() {
         this._nextAudioTrack();
         this.playAlbum();
     },
 
-    prev() {
+    prevAudioTrack() {
         this._prevAudioTrack();
         this.playAlbum();
+    },
+
+    switchAudioTrack(index) {
+        const isTrackChanged = this._givenAudioTrack(index);
+
+        if (isTrackChanged && this._isAudioModeActive()) {
+            this.playAlbum();
+        }
+
+        return isTrackChanged;
+    },
+
+    nextAlbum() {
+        this.switchAlbum(
+            this._normaliseIndex(
+                this._currentAlbumIndex + 1,
+                this._getTotalAlbums(),
+            ),
+        );
+    },
+
+    prevAlbum() {
+        this.switchAlbum(
+            this._normaliseIndex(
+                this._currentAlbumIndex - 1,
+                this._getTotalAlbums(),
+            ),
+        );
     },
 
     switchAlbum(index) {
@@ -234,8 +262,7 @@ AudioPlayer.prototype = {
     },
 
     _givenAudioTrack(index) {
-        const totalTracks = this._getTotalAudioTracks();
-        if (index < 0 || index >= totalTracks) {
+        if (index < 0 || index >= this._getTotalAudioTracks()) {
             return false;
         }
 
@@ -245,6 +272,10 @@ AudioPlayer.prototype = {
     },
 
     _setAlbum(index) {
+        if (index < 0 || index >= this._getTotalAlbums()) {
+            return false;
+        }
+
         const oldIndex = this._currentAlbumIndex;
         this._currentAlbumIndex = index;
         this._currentAudioTrackIndex = 0;
@@ -254,6 +285,10 @@ AudioPlayer.prototype = {
 
     _getTotalAudioTracks() {
         return this._goaMasterpieces[this._currentAlbumIndex].tracks.length;
+    },
+
+    _getTotalAlbums() {
+        return this._goaMasterpieces.length;
     },
 
     _isAudioModeActive() {
@@ -299,11 +334,10 @@ AudioPlayer.prototype = {
         if (this._hasMainTheme) {
             this._player.src = this._mainThemeSrc;
             this._mainThemePauseTimestamp = 0;
-        } else {
-            this._player.currentTime = 0;
         }
         this._currentAlbumIndex = 0;
         this._currentAudioTrackIndex = 0;
+        this._player.currentTime = 0;
     },
 
     _clickPlay(e) {
@@ -316,11 +350,11 @@ AudioPlayer.prototype = {
     },
 
     _clickNext() {
-        this.next();
+        this.nextAudioTrack();
     },
 
     _clickPrev() {
-        this.prev();
+        this.prevAudioTrack();
     },
 
     _pressReset(e) {
