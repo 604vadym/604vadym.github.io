@@ -70,7 +70,8 @@ ShowcaseApp.prototype = {
         }
     },
 
-    _pressToggle() {
+    _pressToggle(e) {
+        helper.prevent(e);
         return "reverse";
     },
 
@@ -84,25 +85,6 @@ ShowcaseApp.prototype = {
     _pressIgnore(e) {
         helper.prevent(e);
         return false;
-    },
-
-    _stream(e, handlerName, EventClass, pump) {
-        let pipeline;
-        if (pump === "reverse") {
-            pipeline = [this._audioPlayer, this._slider, this._shop];
-        } else {
-            pipeline = [this._slider, this._audioPlayer, this._shop];
-        }
-        return this._pipe(e, handlerName, EventClass, pipeline);
-    },
-
-    _pipe(e, handlerName, EventClass, pipeline) {
-        for (const component of pipeline) {
-            if (!(e instanceof EventClass)) return e;
-            if (typeof component[handlerName] === "function") {
-                e = component[handlerName](e);
-            }
-        }
     },
 
     _handleClick(e) {
@@ -128,6 +110,25 @@ ShowcaseApp.prototype = {
                 activeElement.classList.add(
                     this._options.states.keyboardBtnPressed,
                 );
+            }
+        }
+    },
+
+    _stream(e, handlerName, EventClass, pump) {
+        let pipeline;
+        if (pump === "reverse") {
+            pipeline = [this._audioPlayer, this._slider, this._shop];
+        } else {
+            pipeline = [this._slider, this._audioPlayer, this._shop];
+        }
+        return this._pipe(e, handlerName, EventClass, pipeline);
+    },
+
+    _pipe(e, handlerName, EventClass, pipeline) {
+        for (const component of pipeline) {
+            if (!(e instanceof EventClass)) return e;
+            if (typeof component[handlerName] === "function") {
+                e = component[handlerName](e);
             }
         }
     },

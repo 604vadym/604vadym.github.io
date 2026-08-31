@@ -503,6 +503,14 @@ AudioPlayer.prototype = {
     },
 
     _pressToggleaudiomode(e) {
+        if (helper.isPassthroughKey(e)) {
+            if (this.state !== STATES.ALBUM) {
+                this.play();
+            } else {
+                this.pause();
+            }
+            return e;
+        }
         if (this.state === STATES.ALBUM) {
             return false;
         }

@@ -382,10 +382,18 @@ AutoscrollSlider.prototype._pressReset = function (e) {
 };
 
 AutoscrollSlider.prototype._pressToggleautoscroll = function (e) {
-    helper.prevent(e);
     if (this._isInputBlocked()) return false;
+    if (helper.isOverrideKey(e)) {
+        if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) {
+            this._toggleAutoscrollMode();
+        }
+        return e;
+    }
     this._toggleAutoscrollMode();
-    return true;
+    if (this.stateAutoscroll === STATES_AUTOSCROLL.ON) {
+        return true;
+    }
+    return e;
 };
 
 AutoscrollSlider.prototype._beforeResize = function () {
