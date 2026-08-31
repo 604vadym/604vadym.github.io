@@ -197,6 +197,7 @@ ShowcaseApp.prototype = {
     },
 
     _handleAlbumChange(e) {
+        helper.prevent(e);
         this._slider.next();
     },
 

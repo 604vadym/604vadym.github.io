@@ -353,8 +353,10 @@ AudioPlayer.prototype = {
         const e = new CustomEvent("albumchange", {
             detail: { index: this._currentAlbumIndex },
             bubbles: true,
+            cancelable: true,
         });
         this._deck.dispatchEvent(e);
+        return e.defaultPrevented;
     },
 
     _tryPlayAudio() {
@@ -529,7 +531,9 @@ AudioPlayer.prototype = {
         }
 
         if (this._currentAudioTrackIndex === this._getTotalAudioTracks() - 1) {
-            this._onAlbumChanged();
+            if (!this._onAlbumChanged()) {
+                this.nextAlbum();
+            }
             // if (!isTabActive) {
             //     resetLoop();
             //     updateSliderInstantly();
