@@ -43,3 +43,7 @@ export function isPassthroughKey(e) {
 export function isMultiTouch(e) {
     return Boolean(e?.touches && e.touches.length > 1);
 }
+
+export function isTabHidden() {
+    return document.hidden === true;
+}

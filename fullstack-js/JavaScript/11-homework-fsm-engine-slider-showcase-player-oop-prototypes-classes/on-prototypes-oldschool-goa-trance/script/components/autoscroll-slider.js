@@ -458,7 +458,7 @@ AutoscrollSlider.prototype._handleBlur = function (e) {
 };
 
 AutoscrollSlider.prototype._handleVisibilityChange = function (e) {
-    if (document.hidden === true) {
+    if (helper.isTabHidden()) {
         this._isTabActive = false;
         this._tryPauseAutoscroll();
     } else {
