@@ -55,6 +55,11 @@ PaginationSlider.prototype._onIndexChanged = function () {
     this._updatePagination();
 };
 
+PaginationSlider.prototype._onIndexChangedInstantly = function () {
+    BaseSlider.prototype._onIndexChangedInstantly.call(this);
+    this._updatePagination();
+};
+
 PaginationSlider.prototype._updatePagination = function () {
     const activeDot = this._pagination.querySelector(
         `.${this._options.classesActive.paginationDot}`,

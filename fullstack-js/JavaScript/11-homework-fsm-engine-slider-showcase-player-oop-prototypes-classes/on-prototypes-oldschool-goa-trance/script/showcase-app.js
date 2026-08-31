@@ -198,10 +198,11 @@ ShowcaseApp.prototype = {
 
     _handleAlbumChange(e) {
         if (helper.isTabHidden()) {
+            this._slider.nextInstantly();
         } else {
             helper.prevent(e);
+            this._slider.next();
         }
-        this._slider.next();
     },
 
     _toggleAudioPlayerLayout(isActive) {

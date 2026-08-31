@@ -87,6 +87,24 @@ BaseSlider.prototype = {
         return false;
     },
 
+    nextInstantly() {
+        this.gotoInstantly(this._normaliseIndex() + 1);
+    },
+
+    prevInstantly() {
+        this.gotoInstantly(this._normaliseIndex() - 1);
+    },
+
+    gotoInstantly(index) {
+        const oldIndex = this._currentIndex;
+        this._currentIndex = this._normaliseIndex(index);
+        if (this._currentIndex !== oldIndex) {
+            this._onIndexChangedInstantly();
+            return true;
+        }
+        return false;
+    },
+
     handleClick(e) {
         if (this._isInputBlocked()) return false;
         return this._button.execute(e);
@@ -178,6 +196,10 @@ BaseSlider.prototype = {
     _onIndexChanged() {
         this._state = STATES.MOVING;
         this._updateTrack();
+    },
+
+    _onIndexChangedInstantly() {
+        this._updateTrackInstantly();
     },
 
     _enableAnimation() {

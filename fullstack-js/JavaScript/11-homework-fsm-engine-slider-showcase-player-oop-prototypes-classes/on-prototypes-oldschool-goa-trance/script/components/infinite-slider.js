@@ -47,6 +47,11 @@ InfiniteSlider.prototype._normaliseIndex = function (index = null) {
         : (this._currentIndex - 1 + this._slidesCount) % this._slidesCount;
 };
 
+InfiniteSlider.prototype._onIndexChangedInstantly = function () {
+    this._resetLoop();
+    KeyboardSlider.prototype._onIndexChangedInstantly.call(this);
+};
+
 InfiniteSlider.prototype._teleportSlides = function () {
     this._disableAnimation();
     this._updateTrack();
