@@ -65,7 +65,6 @@ const slider = new Slider({
 
     states: {
         resizing: "slider--resizing",
-        autoscrollOn: "slider--autoscroll-on",
     },
 
     click: {
@@ -102,10 +101,6 @@ const audioPlayer = new AudioPlayer({
 
     classes: {
         playerBtn: "slider__btn-audio",
-    },
-
-    states: {
-        active: "slider--audio-play",
     },
 
     click: {
@@ -211,6 +206,8 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
     },
 
     states: {
+        autoscrollActive: "slider--autoscroll-on",
+        audioActive: "slider--audio-play",
         keyboardBtnPressed: "is-pressed",
     },
 

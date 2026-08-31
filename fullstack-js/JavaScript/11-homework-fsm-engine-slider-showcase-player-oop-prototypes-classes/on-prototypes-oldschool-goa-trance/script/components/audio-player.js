@@ -59,6 +59,22 @@ AudioPlayer.prototype = {
         return this._deck;
     },
 
+    get btnPlay() {
+        return this._btnPlay;
+    },
+
+    get btnPause() {
+        return this._btnPause;
+    },
+
+    get btnNext() {
+        return this._btnNext;
+    },
+
+    get btnPrev() {
+        return this._btnPrev;
+    },
+
     get state() {
         return this.__state;
     },
@@ -68,7 +84,7 @@ AudioPlayer.prototype = {
 
         if (!state) {
             throw new TypeError(
-                `[FSM]: Invalid state transition token "${stateKey}"`,
+                `[FSM AudioPlayer]: Invalid state transition token "${stateKey}"`,
             );
         }
 
@@ -134,10 +150,10 @@ AudioPlayer.prototype = {
     },
 
     pause() {
+        if (this.state === STATES.IDLE) return;
         if (this.state === STATES.ALBUM || this.state === STATES.ALBUMTHEME) {
             this._onPauseAlbum();
         }
-        if (this.state === STATES.IDLE) return;
         this._state = STATES.IDLE;
         this._pauseAudio();
     },
@@ -415,10 +431,6 @@ AudioPlayer.prototype = {
         return Boolean(this._player.src) && !this._player.paused;
     },
 
-    _isAudioModeActive() {
-        return this._deck.classList.contains(this._options.states.active);
-    },
-
     _isMainThemeLoaded() {
         if (!this._hasMainTheme) return false;
         return this._player.src.includes(this._mainThemeSrc.substring(2));
@@ -446,15 +458,6 @@ AudioPlayer.prototype = {
         }
     },
 
-    _toggleAudioMode(isActive) {
-        if (this._isAudioModeActive() === isActive) return;
-        this._deck.classList.toggle(this._options.states.active, isActive);
-        this._btnPlay.tabIndex = isActive ? -1 : 0;
-        this._btnPause.tabIndex = isActive ? 0 : -1;
-        this._btnNext.tabIndex = isActive ? 0 : -1;
-        this._btnPrev.tabIndex = isActive ? 0 : -1;
-    },
-
     _hardReset() {
         if (this._hasMainTheme) {
             this._player.src = this._mainThemeSrc;
@@ -467,13 +470,11 @@ AudioPlayer.prototype = {
 
     _clickPlay(e) {
         // if (e.shiftKey && isAutoscrollOn) toggleAutoscrollMode();
-        this._toggleAudioMode(true);
         // tryKillAutoscroll();
         this.play();
     },
 
     _clickPause() {
-        this._toggleAudioMode(false);
         this.pause();
         this._tryPlayTheme();
     },
@@ -502,7 +503,6 @@ AudioPlayer.prototype = {
         } else {
             this.pause();
         }
-        this._toggleAudioMode(false);
         return e;
     },
 

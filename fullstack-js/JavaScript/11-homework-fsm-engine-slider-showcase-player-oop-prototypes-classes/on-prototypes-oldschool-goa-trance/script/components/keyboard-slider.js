@@ -36,7 +36,6 @@ KeyboardSlider.prototype._hardReset = function () {
     this._slider.classList.remove(this._options.states.resizing);
     this._updateTrackInstantly();
     this._updatePagination();
-    helper.tryClearFocus();
     this._state = STATES.IDLE;
 };
 

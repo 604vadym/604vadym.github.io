@@ -53,7 +53,7 @@ BaseSlider.prototype = {
 
         if (!state) {
             throw new TypeError(
-                `[FSM]: Invalid state transition token "${stateKey}"`,
+                `[FSM Slider]: Invalid state transition token "${stateKey}"`,
             );
         }
 

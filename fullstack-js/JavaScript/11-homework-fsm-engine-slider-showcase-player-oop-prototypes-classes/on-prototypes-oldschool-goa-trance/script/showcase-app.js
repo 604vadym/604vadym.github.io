@@ -73,6 +73,7 @@ ShowcaseApp.prototype = {
     _pressReset(e) {
         if (helper.hasPlatformModifiers(e)) return;
         helper.prevent(e);
+        helper.tryClearFocus();
     },
 
     _pressIgnore(e) {
@@ -156,19 +157,62 @@ ShowcaseApp.prototype = {
     },
 
     _handleAutoscrollChange(e) {
-        if (e.detail.isActive === true) {
+        this._toggleAudioPlayerTheme(e.detail.isActive);
+        this._toggleAutoscrollLayout(e.detail.isActive);
+    },
+
+    _toggleAudioPlayerTheme(isActive) {
+        if (isActive) {
             this._audioPlayer.playTheme();
-        } else if (e.detail.isActive === false) {
+        } else {
             this._audioPlayer.resetTheme();
         }
     },
 
+    _toggleAutoscrollLayout(isActive) {
+        if (this._isAutoscrollActive() === isActive) return;
+        this._showcase.classList.toggle(
+            this._options.states.autoscrollActive,
+            isActive,
+        );
+        this._slider.btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
+        this._slider.btnAutoscrollOff.tabIndex = isActive ? 0 : -1;
+        helper.tryClearFocus();
+    },
+
+    _isAutoscrollActive() {
+        return this._showcase.classList.contains(
+            this._options.states.autoscrollActive,
+        );
+    },
+
     _handleAlbumPlay(e) {
         this._slider.lockAutoscroll();
+        this._toggleAudioPlayerLayout(true);
     },
 
     _handleAlbumPause(e) {
         this._slider.unlockAutoscroll();
+        this._toggleAudioPlayerLayout(false);
+    },
+
+    _toggleAudioPlayerLayout(isActive) {
+        if (this._isAudioActive() === isActive) return;
+        this._showcase.classList.toggle(
+            this._options.states.audioActive,
+            isActive,
+        );
+        this._audioPlayer.btnPlay.tabIndex = isActive ? -1 : 0;
+        this._audioPlayer.btnPause.tabIndex = isActive ? 0 : -1;
+        this._audioPlayer.btnNext.tabIndex = isActive ? 0 : -1;
+        this._audioPlayer.btnPrev.tabIndex = isActive ? 0 : -1;
+        // helper.tryClearFocus();
+    },
+
+    _isAudioActive() {
+        return this._showcase.classList.contains(
+            this._options.states.audioActive,
+        );
     },
 
     _handleMouseLeave(e) {

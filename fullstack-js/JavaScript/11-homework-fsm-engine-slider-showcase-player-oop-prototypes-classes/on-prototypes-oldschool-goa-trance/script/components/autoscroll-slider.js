@@ -44,6 +44,24 @@ AutoscrollSlider.STATES_AUTOSCROLL = Object.freeze({
 const STATES = AutoscrollSlider.STATES;
 const STATES_AUTOSCROLL = AutoscrollSlider.STATES_AUTOSCROLL;
 
+Object.defineProperty(AutoscrollSlider.prototype, "btnAutoscrollOn", {
+    get: function () {
+        return this._btnAutoscrollOn;
+    },
+
+    configurable: false,
+    enumerable: true,
+});
+
+Object.defineProperty(AutoscrollSlider.prototype, "btnAutoscrollOff", {
+    get: function () {
+        return this._btnAutoscrollOff;
+    },
+
+    configurable: false,
+    enumerable: true,
+});
+
 Object.defineProperty(AutoscrollSlider.prototype, "stateAutoscroll", {
     get: function () {
         return this.__stateAutoscroll;
@@ -59,7 +77,7 @@ Object.defineProperty(AutoscrollSlider.prototype, "_stateAutoscroll", {
 
         if (!state) {
             throw new TypeError(
-                `[FSM Slider]: Invalid state transition token "${stateKey}"`,
+                `[FSM Autoscroll]: Invalid state transition token "${stateKey}"`,
             );
         }
 
@@ -315,18 +333,6 @@ AutoscrollSlider.prototype._stopAutoscroll = function () {
     this._timer.stop();
 };
 
-AutoscrollSlider.prototype._toggleAutoscrollState = function (isActive) {
-    this._onAutoscrollStateChanged(isActive);
-    if (this._isAutoscrollModeActive() === isActive) return;
-    this._slider.classList.toggle(this._options.states.autoscrollOn, isActive);
-    this._btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
-    this._btnAutoscrollOff.tabIndex = isActive ? 0 : -1;
-};
-
-AutoscrollSlider.prototype._isAutoscrollModeActive = function () {
-    return this._slider.classList.contains(this._options.states.autoscrollOn);
-};
-
 AutoscrollSlider.prototype._onAutoscrollStateChanged = function (isActive) {
     this._stateAutoscroll = isActive
         ? STATES_AUTOSCROLL.ON
@@ -341,14 +347,13 @@ AutoscrollSlider.prototype._onAutoscrollStateChanged = function (isActive) {
 AutoscrollSlider.prototype._toggleAutoscrollMode = function () {
     if (this.stateAutoscroll === STATES_AUTOSCROLL.OFF) {
         this.next();
-        this._toggleAutoscrollState(true);
+        this._onAutoscrollStateChanged(true);
         this._startAutoscroll();
         this._autoscrollManualStartTimestamp = Date.now();
     } else {
-        this._toggleAutoscrollState(false);
+        this._onAutoscrollStateChanged(false);
         this._stopAutoscroll();
     }
-    helper.tryClearFocus();
 };
 
 AutoscrollSlider.prototype._isAutoscrollFirstCycle = function () {
