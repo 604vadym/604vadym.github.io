@@ -529,9 +529,7 @@ AudioPlayer.prototype = {
         }
 
         if (this._currentAudioTrackIndex === this._getTotalAudioTracks() - 1) {
-            // this._currentAlbumIndex++;
             this._onAlbumChanged();
-            this.nextAlbum();
             // if (!isTabActive) {
             //     resetLoop();
             //     updateSliderInstantly();
@@ -540,8 +538,7 @@ AudioPlayer.prototype = {
             //     updateSlider();
             // }
         } else {
-            this._currentAudioTrackIndex++;
-            this._playAudio("album");
+            this.nextAudioTrack();
         }
     },
 
