@@ -502,6 +502,13 @@ AudioPlayer.prototype = {
         this.prevAudioTrack();
     },
 
+    _pressToggleaudiomode(e) {
+        if (this.state === STATES.ALBUM) {
+            return false;
+        }
+        return e;
+    },
+
     _pressRestartaudiotrack(e) {
         this.restartAudioTrack();
         return e;
