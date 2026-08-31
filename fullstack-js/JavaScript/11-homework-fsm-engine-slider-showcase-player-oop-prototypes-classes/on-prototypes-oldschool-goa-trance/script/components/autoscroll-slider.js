@@ -316,16 +316,21 @@ AutoscrollSlider.prototype._stopAutoscroll = function () {
 };
 
 AutoscrollSlider.prototype._toggleAutoscrollState = function (isActive) {
-    this._stateAutoscroll = isActive
-        ? STATES_AUTOSCROLL.ON
-        : STATES_AUTOSCROLL.OFF;
     this._onAutoscrollStateChanged(isActive);
+    if (this._isAutoscrollModeActive() === isActive) return;
     this._slider.classList.toggle(this._options.states.autoscrollOn, isActive);
     this._btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
     this._btnAutoscrollOff.tabIndex = isActive ? 0 : -1;
 };
 
+AutoscrollSlider.prototype._isAutoscrollModeActive = function () {
+    return this._slider.classList.contains(this._options.states.autoscrollOn);
+};
+
 AutoscrollSlider.prototype._onAutoscrollStateChanged = function (isActive) {
+    this._stateAutoscroll = isActive
+        ? STATES_AUTOSCROLL.ON
+        : STATES_AUTOSCROLL.OFF;
     const e = new CustomEvent("autoscrollchange", {
         detail: { isActive },
         bubbles: true,
