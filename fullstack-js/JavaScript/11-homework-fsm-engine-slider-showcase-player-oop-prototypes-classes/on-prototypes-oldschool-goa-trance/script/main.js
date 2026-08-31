@@ -212,6 +212,7 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
     },
 
     press: {
+        toggle: [" "],
         reset: ["Escape"],
         ignore: ["PageDown", "PageUp", "End"],
     },

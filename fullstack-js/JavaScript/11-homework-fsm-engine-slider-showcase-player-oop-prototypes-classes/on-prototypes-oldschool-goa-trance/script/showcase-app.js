@@ -70,18 +70,33 @@ ShowcaseApp.prototype = {
         }
     },
 
+    _pressToggle() {
+        return "reverse";
+    },
+
     _pressReset(e) {
-        if (helper.hasPlatformModifiers(e)) return;
+        if (helper.hasPlatformModifiers(e)) return false;
         helper.prevent(e);
         helper.tryClearFocus();
+        return e;
     },
 
     _pressIgnore(e) {
         helper.prevent(e);
+        return false;
     },
 
-    _pipe(e, handlerName, EventClass) {
-        const pipeline = [this._slider, this._audioPlayer, this._shop];
+    _stream(e, handlerName, EventClass, pump) {
+        let pipeline;
+        if (pump === "reverse") {
+            pipeline = [this._audioPlayer, this._slider, this._shop];
+        } else {
+            pipeline = [this._slider, this._audioPlayer, this._shop];
+        }
+        return this._pipe(e, handlerName, EventClass, pipeline);
+    },
+
+    _pipe(e, handlerName, EventClass, pipeline) {
         for (const component of pipeline) {
             if (!(e instanceof EventClass)) return e;
             if (typeof component[handlerName] === "function") {
@@ -96,12 +111,14 @@ ShowcaseApp.prototype = {
             return;
         }
 
-        this._pipe(e, "handleClick", MouseEvent);
+        this._stream(e, "handleClick", MouseEvent);
     },
 
     _handleKeyDown(e) {
-        const result = this._pipe(e, "handleKeyDown", KeyboardEvent);
+        let pump;
+        if (!(pump = this._keyboardManager.manage(e))) return;
 
+        const result = this._stream(e, "handleKeyDown", KeyboardEvent, pump);
         if (result === true) {
             const activeElement = document.activeElement;
             const isPressTarget = activeElement?.closest(
@@ -113,7 +130,6 @@ ShowcaseApp.prototype = {
                 );
             }
         }
-        this._keyboardManager.manage(e);
     },
 
     _handleKeyUp(e) {
