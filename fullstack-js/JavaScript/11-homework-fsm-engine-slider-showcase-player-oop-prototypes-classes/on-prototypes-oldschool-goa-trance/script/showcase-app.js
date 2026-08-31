@@ -196,12 +196,12 @@ ShowcaseApp.prototype = {
         this._toggleAudioPlayerLayout(false);
     },
 
-    _handleAlbumChange(e) {
-        if (helper.isTabHidden()) {
-            this._slider.nextInstantly();
-        } else {
+    _handleAlbumEnd(e) {
+        if (helper.isTabActive()) {
             helper.prevent(e);
             this._slider.next();
+        } else {
+            this._slider.nextInstantly();
         }
     },
 
@@ -266,9 +266,9 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
         target: (instance) => instance._audioPlayer.element,
         handler: ShowcaseApp.prototype._handleAlbumPause,
     },
-    albumchange: {
+    albumend: {
         target: (instance) => instance._audioPlayer.element,
-        handler: ShowcaseApp.prototype._handleAlbumChange,
+        handler: ShowcaseApp.prototype._handleAlbumEnd,
     },
 };
 

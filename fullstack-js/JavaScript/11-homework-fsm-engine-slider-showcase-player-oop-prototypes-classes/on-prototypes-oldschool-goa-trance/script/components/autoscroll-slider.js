@@ -458,12 +458,12 @@ AutoscrollSlider.prototype._handleBlur = function (e) {
 };
 
 AutoscrollSlider.prototype._handleVisibilityChange = function (e) {
-    if (helper.isTabHidden()) {
-        this._isTabActive = false;
-        this._tryPauseAutoscroll();
-    } else {
+    if (helper.isTabActive()) {
         this._isTabActive = true;
         this._tryResumeAutoscroll(CONTEXTS.VISIBILITY);
+    } else {
+        this._isTabActive = false;
+        this._tryPauseAutoscroll();
     }
 };
 

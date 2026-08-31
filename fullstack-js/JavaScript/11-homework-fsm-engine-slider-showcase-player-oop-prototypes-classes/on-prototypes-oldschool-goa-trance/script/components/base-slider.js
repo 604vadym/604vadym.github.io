@@ -200,6 +200,7 @@ BaseSlider.prototype = {
 
     _onIndexChangedInstantly() {
         this._updateTrackInstantly();
+        this._onSlideChanged();
     },
 
     _enableAnimation() {

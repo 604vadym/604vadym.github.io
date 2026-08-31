@@ -349,9 +349,14 @@ AudioPlayer.prototype = {
         this._deck.dispatchEvent(e);
     },
 
-    _onAlbumChanged() {
-        const e = new CustomEvent("albumchange", {
-            detail: { index: this._currentAlbumIndex },
+    _onAlbumEnded() {
+        const e = new CustomEvent("albumend", {
+            detail: {
+                index: this._normaliseIndex(
+                    this._currentAlbumIndex + 1,
+                    this._getTotalAlbums(),
+                ),
+            },
             bubbles: true,
             cancelable: true,
         });
@@ -531,16 +536,9 @@ AudioPlayer.prototype = {
         }
 
         if (this._currentAudioTrackIndex === this._getTotalAudioTracks() - 1) {
-            if (!this._onAlbumChanged()) {
+            if (!this._onAlbumEnded()) {
                 this.nextAlbum();
             }
-            // if (!isTabActive) {
-            //     resetLoop();
-            //     updateSliderInstantly();
-            //     onAlbumChanged(getAlbumIndex());
-            // } else {
-            //     updateSlider();
-            // }
         } else {
             this.nextAudioTrack();
         }
