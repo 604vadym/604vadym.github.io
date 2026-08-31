@@ -349,6 +349,14 @@ AudioPlayer.prototype = {
         this._deck.dispatchEvent(e);
     },
 
+    _onAlbumChanged() {
+        const e = new CustomEvent("albumchange", {
+            detail: { index: this._currentAlbumIndex },
+            bubbles: true,
+        });
+        this._deck.dispatchEvent(e);
+    },
+
     _tryPlayAudio() {
         if (this.state === STATES.ALBUM || this.state === STATES.ALBUMTHEME) {
             this._playAudio("album");
@@ -506,6 +514,37 @@ AudioPlayer.prototype = {
         return e;
     },
 
+    _handlePause() {
+        if (this.state === STATES.ALBUM) return;
+        if (this.state === STATES.THEME) {
+            this._playAudio("theme");
+        }
+        // tryResurrectAutoscroll();
+    },
+
+    _handleEnded() {
+        if (this.state === STATES.THEME) {
+            this._playAudio("theme");
+            return;
+        }
+
+        if (this._currentAudioTrackIndex === this._getTotalAudioTracks() - 1) {
+            // this._currentAlbumIndex++;
+            this._onAlbumChanged();
+            this.nextAlbum();
+            // if (!isTabActive) {
+            //     resetLoop();
+            //     updateSliderInstantly();
+            //     onAlbumChanged(getAlbumIndex());
+            // } else {
+            //     updateSlider();
+            // }
+        } else {
+            this._currentAudioTrackIndex++;
+            this._playAudio("album");
+        }
+    },
+
     _validateData() {
         if (
             !Array.isArray(this._goaMasterpieces) ||
@@ -526,5 +565,16 @@ AudioPlayer.prototype = {
                     `  });\n`,
             );
         }
+    },
+};
+
+AudioPlayer[AudioPlayer.EVENT_MAP_KEY] = {
+    pause: {
+        target: (instance) => instance._player,
+        handler: AudioPlayer.prototype._handlePause,
+    },
+    ended: {
+        target: (instance) => instance._player,
+        handler: AudioPlayer.prototype._handleEnded,
     },
 };
