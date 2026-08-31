@@ -156,22 +156,19 @@ ShowcaseApp.prototype = {
     },
 
     _handleAutoscrollChange(e) {
-        if (e.detail.isActive === true && this._audioPlayer.state === "IDLE") {
+        if (e.detail.isActive === true) {
             this._audioPlayer.playTheme();
-        } else if (
-            e.detail.isActive === false &&
-            this._audioPlayer.state === "THEME"
-        ) {
-            this._audioPlayer.pause();
+        } else if (e.detail.isActive === false) {
+            this._audioPlayer.resetTheme();
         }
     },
 
     _handleAlbumPlay(e) {
-        this._slider.pauseAutoscroll();
+        this._slider.lockAutoscroll();
     },
 
     _handleAlbumPause(e) {
-        this._slider.resumeAutoscroll();
+        this._slider.unlockAutoscroll();
     },
 
     _handleMouseLeave(e) {

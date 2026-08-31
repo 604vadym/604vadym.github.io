@@ -35,7 +35,50 @@ Object.defineProperty(AutoscrollSlider, "AUTOSCROLL_WAKE_UP_DELAY", {
     configurable: false,
 });
 
+AutoscrollSlider.STATES_AUTOSCROLL = Object.freeze({
+    ON: "ON",
+    OFF: "OFF",
+    LOCKED: "LOCKED",
+});
+
 const STATES = AutoscrollSlider.STATES;
+const STATES_AUTOSCROLL = AutoscrollSlider.STATES_AUTOSCROLL;
+
+Object.defineProperty(AutoscrollSlider.prototype, "stateAutoscroll", {
+    get: function () {
+        return this.__stateAutoscroll;
+    },
+
+    configurable: false,
+    enumerable: true,
+});
+
+Object.defineProperty(AutoscrollSlider.prototype, "_stateAutoscroll", {
+    set: function (stateKey) {
+        const state = this.constructor.STATES_AUTOSCROLL[stateKey];
+
+        if (!state) {
+            throw new TypeError(
+                `[FSM Slider]: Invalid state transition token "${stateKey}"`,
+            );
+        }
+
+        if (state === STATES.ALBUM && this.__state === STATES.THEME) {
+            this.__state = STATES.ALBUMTHEME;
+            return;
+        }
+
+        if (state === STATES.IDLE && this.__state === STATES.ALBUMTHEME) {
+            this.__state = STATES.THEME;
+            return;
+        }
+
+        this.__stateAutoscroll = state;
+    },
+
+    configurable: false,
+    enumerable: false,
+});
 
 AutoscrollSlider.prototype.init = function () {
     DraggableSlider.prototype.init.call(this);
@@ -53,19 +96,21 @@ AutoscrollSlider.prototype.handleClick = function (e) {
 };
 
 AutoscrollSlider.prototype._initAutoscroll = function () {
-    if (this._isAutoscrollOn) {
-        this._startAutoscroll();
+    if (this._options.autoplay === true) {
+        this._toggleAutoscrollMode();
     }
 };
 
-AutoscrollSlider.prototype.resumeAutoscroll = function () {
-    this._isAutoscrollLocked = false;
-    this._tryResumeAutoscroll();
+AutoscrollSlider.prototype.lockAutoscroll = function () {
+    if (this.stateAutoscroll !== STATES_AUTOSCROLL.ON) return;
+    this._stateAutoscroll = STATES_AUTOSCROLL.LOCKED;
+    this._tryPauseAutoscroll();
 };
 
-AutoscrollSlider.prototype.pauseAutoscroll = function () {
-    this._tryPauseAutoscroll();
-    this._isAutoscrollLocked = true;
+AutoscrollSlider.prototype.unlockAutoscroll = function () {
+    if (this.stateAutoscroll === STATES_AUTOSCROLL.OFF) return;
+    this._stateAutoscroll = STATES_AUTOSCROLL.ON;
+    this._tryResumeAutoscroll();
 };
 
 AutoscrollSlider.prototype._initDOMElements = function (childElements) {
@@ -115,8 +160,7 @@ AutoscrollSlider.prototype._initProps = function () {
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
     this._isAutoscrollAction = false;
-    this._isAutoscrollLocked = false;
-    this._isAutoscrollOn = Boolean(this._options.autoplay);
+    this._stateAutoscroll = STATES_AUTOSCROLL.OFF;
 };
 
 AutoscrollSlider.prototype._initPagination = function () {
@@ -139,7 +183,6 @@ AutoscrollSlider.prototype._hardReset = function () {
     this._isMouseOver = false;
     this._isKeyboardFocused = false;
     this._isAutoscrollAction = false;
-    this._isAutoscrollLocked = false;
 };
 
 AutoscrollSlider.prototype._onIndexChanged = function () {
@@ -162,7 +205,8 @@ AutoscrollSlider.prototype._onDragEnded = function () {
 };
 
 AutoscrollSlider.prototype._nextAuto = function () {
-    if (this._isInputBlocked() || !this._isAutoscrollOn) return;
+    if (this._isInputBlocked() || this.stateAutoscroll !== STATES_AUTOSCROLL.ON)
+        return;
 
     this._isAutoscrollAction = true;
 
@@ -198,10 +242,10 @@ AutoscrollSlider.prototype._isMouseStillOver = function () {
 };
 
 AutoscrollSlider.prototype._tryResumeAutoscroll = function (context = null) {
-    if (this._isAutoscrollLocked) return;
+    if (this.stateAutoscroll === STATES_AUTOSCROLL.LOCKED) return;
     const isDriftingAfterClick = this._isPostClickDriftActive();
     if (
-        !this._isAutoscrollOn ||
+        this.stateAutoscroll !== STATES_AUTOSCROLL.ON ||
         !this._isTabActive ||
         this._isKeyboardFocused ||
         (this._isMouseOver && !isDriftingAfterClick) ||
@@ -245,7 +289,7 @@ AutoscrollSlider.prototype._getAdaptiveWakeUpDelay = function () {
 };
 
 AutoscrollSlider.prototype._tryPauseAutoscroll = function (context = null) {
-    if (!this._isAutoscrollOn) return;
+    if (this.stateAutoscroll === STATES_AUTOSCROLL.OFF) return;
 
     if (this._isTabActive && !this._isKeyboardFocused) {
         if (context === CONTEXTS.HOVER && this._isAutoscrollFirstCycle())
@@ -272,11 +316,13 @@ AutoscrollSlider.prototype._stopAutoscroll = function () {
 };
 
 AutoscrollSlider.prototype._toggleAutoscrollState = function (isActive) {
-    this._isAutoscrollOn = isActive;
+    this._stateAutoscroll = isActive
+        ? STATES_AUTOSCROLL.ON
+        : STATES_AUTOSCROLL.OFF;
+    this._onAutoscrollStateChanged(isActive);
     this._slider.classList.toggle(this._options.states.autoscrollOn, isActive);
     this._btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
     this._btnAutoscrollOff.tabIndex = isActive ? 0 : -1;
-    this._onAutoscrollStateChanged(isActive);
 };
 
 AutoscrollSlider.prototype._onAutoscrollStateChanged = function (isActive) {
@@ -288,14 +334,14 @@ AutoscrollSlider.prototype._onAutoscrollStateChanged = function (isActive) {
 };
 
 AutoscrollSlider.prototype._toggleAutoscrollMode = function () {
-    if (this._isAutoscrollOn) {
-        this._stopAutoscroll();
-        this._toggleAutoscrollState(false);
-    } else {
+    if (this.stateAutoscroll === STATES_AUTOSCROLL.OFF) {
         this.next();
-        this._startAutoscroll();
         this._toggleAutoscrollState(true);
+        this._startAutoscroll();
         this._autoscrollManualStartTimestamp = Date.now();
+    } else {
+        this._toggleAutoscrollState(false);
+        this._stopAutoscroll();
     }
     helper.tryClearFocus();
 };
@@ -317,7 +363,7 @@ AutoscrollSlider.prototype._pressReset = function (e) {
     const isExecuted = DraggableSlider.prototype._pressReset.call(this, e);
 
     if (isExecuted) {
-        if (this._isAutoscrollOn) {
+        if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) {
             this._toggleAutoscrollMode();
         }
     }

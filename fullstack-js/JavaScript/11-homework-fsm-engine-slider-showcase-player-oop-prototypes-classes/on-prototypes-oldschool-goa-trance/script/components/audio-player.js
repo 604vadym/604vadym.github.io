@@ -121,12 +121,14 @@ AudioPlayer.prototype = {
     },
 
     playAlbum() {
+        if (this.state === STATES.ALBUM) return;
         this._onPlayAlbum();
         this._state = STATES.ALBUM;
         this._playAudio("album");
     },
 
     playTheme() {
+        if (this.state !== STATES.IDLE) return;
         this._state = STATES.THEME;
         this._playAudio("theme");
     },
@@ -135,6 +137,7 @@ AudioPlayer.prototype = {
         if (this.state === STATES.ALBUM || this.state === STATES.ALBUMTHEME) {
             this._onPauseAlbum();
         }
+        if (this.state === STATES.IDLE) return;
         this._state = STATES.IDLE;
         this._pauseAudio();
     },
@@ -222,6 +225,14 @@ AudioPlayer.prototype = {
     stopPlaylist() {
         this._currentAlbumIndex = 0;
         this.stopAlbum();
+    },
+
+    resetTheme() {
+        if (this.state === STATES.ALBUMTHEME) {
+            this._state = "ALBUM";
+        } else if (this.state === STATES.THEME) {
+            this.pause();
+        }
     },
 
     handleClick(e) {
