@@ -78,8 +78,8 @@ ShowcaseApp.prototype = {
         }
     },
 
-    _isRepeatOnActiveAudio(e) {
-        if (e.repeat && this._isPassthrougOnActiveAudio(e)) {
+    _isRepeatAllowed(e) {
+        if (e.repeat && !this._isPassthrougOnActiveAudio(e)) {
             return true;
         }
         return false;
@@ -96,16 +96,16 @@ ShowcaseApp.prototype = {
 
     _pressNext(e) {
         helper.prevent(e);
-        if (this._isRepeatOnActiveAudio(e)) return MODES.REPEAT_FILTERED;
-        if (this._isPassthrougOnActiveAudio(e)) return MODES.REVERSE;
-        return MODES.REPEAT_ALLOWED;
+        if (this._isRepeatAllowed(e)) return MODES.REPEAT_ALLOWED;
+        if (e.repeat) return MODES.REPEAT_FILTERED;
+        return MODES.REVERSE;
     },
 
     _pressPrev(e) {
         helper.prevent(e);
-        if (this._isRepeatOnActiveAudio(e)) return MODES.REPEAT_FILTERED;
-        if (this._isPassthrougOnActiveAudio(e)) return MODES.REVERSE;
-        return MODES.REPEAT_ALLOWED;
+        if (this._isRepeatAllowed(e)) return MODES.REPEAT_ALLOWED;
+        if (e.repeat) return MODES.REPEAT_FILTERED;
+        return MODES.REVERSE;
     },
 
     _pressExecute(e) {
