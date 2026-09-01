@@ -158,6 +158,17 @@ AudioPlayer.prototype = {
         this._pauseAudio();
     },
 
+    toggle() {
+        if (this.state === STATES.IDLE) {
+            this.play();
+        } else if (
+            this.state === STATES.ALBUM ||
+            this.state === STATES.ALBUMTHEME
+        ) {
+            this.pause();
+        }
+    },
+
     nextAudioTrack() {
         this._currentAudioTrackIndex++;
         this._tryPlayAudio();

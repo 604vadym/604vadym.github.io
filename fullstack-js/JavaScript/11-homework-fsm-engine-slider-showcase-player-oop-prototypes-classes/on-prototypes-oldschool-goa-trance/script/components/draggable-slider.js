@@ -70,11 +70,10 @@ DraggableSlider.prototype._moveConveyor = function (pointerCurrentX) {
 };
 
 DraggableSlider.prototype._stopDragging = function (pointerOffset = null) {
-    if (
-        pointerOffset === null ||
-        (!helper.hasFinePointer() && Math.abs(pointerOffset) < 6)
-    ) {
+    let isClick = pointerOffset ? false : pointerOffset === null ? false : true;
+    if (!helper.hasFinePointer() && Math.abs(pointerOffset) < 6) {
         pointerOffset = 0;
+        isClick = true;
     }
 
     this._onDragEnded();
@@ -90,6 +89,9 @@ DraggableSlider.prototype._stopDragging = function (pointerOffset = null) {
             this._updateTrack();
         }
     } else {
+        if (isClick) {
+            this._onViewportClicked();
+        }
         this._updateTrack();
     }
 };
@@ -104,6 +106,11 @@ DraggableSlider.prototype._onDragEnded = function () {
     this._isDragging = false;
     this._enableAnimation();
     this._eventManager.unsubscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
+};
+
+DraggableSlider.prototype._onViewportClicked = function () {
+    const e = new Event("viewportclick", { bubbles: true });
+    this._slider.dispatchEvent(e);
 };
 
 DraggableSlider.prototype._getClientX = function (e) {

@@ -75,9 +75,18 @@ ShowcaseApp.prototype = {
         return "reverse";
     },
 
+    _pressNext(e) {
+        helper.prevent(e);
+        return e;
+    },
+
+    _pressPrev(e) {
+        helper.prevent(e);
+        return e;
+    },
+
     _pressReset(e) {
         if (helper.hasPlatformModifiers(e)) return false;
-        helper.prevent(e);
         helper.tryClearFocus();
         return e;
     },
@@ -166,6 +175,10 @@ ShowcaseApp.prototype = {
         ) {
             this._tryResetBtnNoActive();
         }
+    },
+
+    _handleViewportClick(e) {
+        this._audioPlayer.toggle();
     },
 
     _handleSlideChange(e) {
@@ -266,6 +279,10 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     mousedown: {
         target: () => document,
         handler: ShowcaseApp.prototype._handleMouseDown,
+    },
+    viewportclick: {
+        target: (instance) => instance._slider.element,
+        handler: ShowcaseApp.prototype._handleViewportClick,
     },
     slidechange: {
         target: (instance) => instance._slider.element,

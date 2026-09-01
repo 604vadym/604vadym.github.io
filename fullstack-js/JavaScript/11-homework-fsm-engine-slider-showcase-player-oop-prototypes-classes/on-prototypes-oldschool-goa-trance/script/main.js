@@ -214,6 +214,8 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
 
     press: {
         toggle: [" "],
+        next: ["ArrowRight"],
+        prev: ["ArrowLeft"],
         reset: ["Escape"],
         ignore: ["PageDown", "PageUp", "End"],
     },

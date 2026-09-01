@@ -40,15 +40,13 @@ KeyboardSlider.prototype._hardReset = function () {
 };
 
 KeyboardSlider.prototype._pressNext = function (e) {
-    helper.prevent(e);
-    if (this._isInputBlocked()) return;
-    this.next();
+    if (this._isInputBlocked()) return; // TODO: false?
+    this.next(); // TODO: return e?
 };
 
 KeyboardSlider.prototype._pressPrev = function (e) {
-    helper.prevent(e);
-    if (this._isInputBlocked()) return;
-    this.prev();
+    if (this._isInputBlocked()) return; // TODO: false?
+    this.prev(); // TODO: return e?
 };
 
 KeyboardSlider.prototype._pressExecute = function (e) {
@@ -62,7 +60,7 @@ KeyboardSlider.prototype._pressExecute = function (e) {
     if (!isButton && !isPaginationDot) return e;
 
     if ((isButton || isPaginationDot) && this._isInputBlocked()) {
-        helper.prevent(e);
+        helper.prevent(e); // TODO: move to app
         return false;
     }
 
