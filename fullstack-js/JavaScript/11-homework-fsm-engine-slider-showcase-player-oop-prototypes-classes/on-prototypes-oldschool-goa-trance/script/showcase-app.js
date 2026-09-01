@@ -113,6 +113,11 @@ ShowcaseApp.prototype = {
         return MODES.REVERSE;
     },
 
+    _pressUp(e) {
+        helper.prevent(e);
+        return e;
+    },
+
     _pressExecute(e) {
         return MODES.REPEAT_ALLOWED;
     },

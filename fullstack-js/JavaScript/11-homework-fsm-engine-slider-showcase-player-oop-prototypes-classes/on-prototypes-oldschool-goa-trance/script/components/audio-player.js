@@ -536,6 +536,13 @@ AudioPlayer.prototype = {
         return e;
     },
 
+    _pressUp(e) {
+        if (!this.isAlbumPlaying()) {
+            this.play();
+        }
+        return false;
+    },
+
     _pressRestartaudiotrack(e) {
         this.restartAudioTrack();
         return e;

@@ -78,6 +78,7 @@ const slider = new Slider({
     press: {
         next: ["ArrowRight", "KeyD"],
         prev: ["ArrowLeft", "KeyA"],
+        up: ["ArrowUp", "KeyW"],
         execute: ["Enter"],
         toggleautoscroll: [" "],
         reset: ["Escape"],
@@ -113,6 +114,7 @@ const audioPlayer = new AudioPlayer({
     press: {
         next: ["ArrowRight", "KeyD"],
         prev: ["ArrowLeft", "KeyA"],
+        up: ["ArrowUp", "KeyW"],
         restartaudiotrack: ["0"],
         restartalbum: ["Backspace"],
         toggleaudiomode: [" "],
@@ -219,6 +221,7 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
     press: {
         next: ["ArrowRight", "KeyD"],
         prev: ["ArrowLeft", "KeyA"],
+        up: ["ArrowUp", "KeyW"],
         execute: ["Enter"],
         toggle: [" "],
         reset: ["Escape"],
