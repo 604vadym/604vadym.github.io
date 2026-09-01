@@ -195,6 +195,8 @@ BaseSlider.prototype = {
 
     _onIndexChanged() {
         this._state = STATES.MOVING;
+        const e = new Event("slidemove", { bubbles: true });
+        this._slider.dispatchEvent(e);
         this._updateTrack();
     },
 

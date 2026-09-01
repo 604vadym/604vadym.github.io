@@ -49,6 +49,7 @@ ShowcaseApp.prototype = {
 
     init() {
         this._initDOMElements();
+        this._initProps();
         this._slider.init();
         this._audioPlayer.init();
         this._shop.init();
@@ -66,6 +67,10 @@ ShowcaseApp.prototype = {
         });
 
         this._showcase = showcase;
+    },
+
+    _initProps() {
+        this._isSliderMoving = false;
     },
 
     _tryResetBtnNoActive() {
@@ -182,6 +187,7 @@ ShowcaseApp.prototype = {
             helper.prevent(e);
             return;
         }
+        if (pump === MODES.REVERSE && this._isSliderMoving) return;
 
         const result = this._stream(e, "handleKeyDown", KeyboardEvent, pump);
         if (result === true) {
@@ -236,7 +242,12 @@ ShowcaseApp.prototype = {
         this._audioPlayer.toggle();
     },
 
+    _handleSlideMove(e) {
+        this._isSliderMoving = true;
+    },
+
     _handleSlideChange(e) {
+        this._isSliderMoving = false;
         this._shop.setActiveIndex(e.detail.index);
         this._audioPlayer.switchAlbum(e.detail.index);
     },
@@ -338,6 +349,10 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     viewportclick: {
         target: (instance) => instance._slider.element,
         handler: ShowcaseApp.prototype._handleViewportClick,
+    },
+    slidemove: {
+        target: (instance) => instance._slider.element,
+        handler: ShowcaseApp.prototype._handleSlideMove,
     },
     slidechange: {
         target: (instance) => instance._slider.element,
