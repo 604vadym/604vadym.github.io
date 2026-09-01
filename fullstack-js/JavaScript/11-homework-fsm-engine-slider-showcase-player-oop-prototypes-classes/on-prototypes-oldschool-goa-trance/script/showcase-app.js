@@ -97,12 +97,29 @@ ShowcaseApp.prototype = {
     },
 
     _handleClick(e) {
+        this._stream(e, "handleClick", MouseEvent);
+    },
+
+    _handleAuxClick(e) {
         if (e.button === MOUSE_BUTTON_RIGHT) {
-            helper.prevent(e);
             return;
         }
 
-        this._stream(e, "handleClick", MouseEvent);
+        if (e.target.closest(".showcase")) {
+            if (e.button === MOUSE_BUTTON_MIDDLE) {
+                const isInteractiveTarget =
+                    e.target.closest(`.${this._options.classes.linkShop}`) ||
+                    e.target.closest(`.${this._options.classes.button}`) ||
+                    e.target.closest("a");
+
+                if (isInteractiveTarget) {
+                    this._stream(e, "handleClick", MouseEvent);
+                    return;
+                }
+            }
+        }
+
+        this._stream(e, "handleAuxClick", MouseEvent);
     },
 
     _handleKeyDown(e) {
@@ -265,8 +282,8 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
         handler: ShowcaseApp.prototype._handleClick,
     },
     auxclick: {
-        target: (instance) => instance._showcase,
-        handler: ShowcaseApp.prototype._handleClick,
+        target: () => document,
+        handler: ShowcaseApp.prototype._handleAuxClick,
     },
     keydown: {
         target: () => document,

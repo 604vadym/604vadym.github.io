@@ -199,6 +199,7 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
 
     classes: {
         button: "button",
+        linkShop: "slider__link-shop",
     },
 
     jsClasses: {

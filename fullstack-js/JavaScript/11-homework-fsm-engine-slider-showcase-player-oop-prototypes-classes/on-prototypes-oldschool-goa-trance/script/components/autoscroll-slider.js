@@ -113,6 +113,13 @@ AutoscrollSlider.prototype.handleClick = function (e) {
     return result;
 };
 
+AutoscrollSlider.prototype.handleAuxClick = function (e) {
+    if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) {
+        this._toggleAutoscrollMode();
+    }
+    return e;
+};
+
 AutoscrollSlider.prototype._initAutoscroll = function () {
     if (this._options.autoplay === true) {
         this._toggleAutoscrollMode();

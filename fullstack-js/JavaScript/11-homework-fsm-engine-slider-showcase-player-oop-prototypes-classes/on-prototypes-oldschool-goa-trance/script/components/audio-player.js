@@ -132,6 +132,10 @@ AudioPlayer.prototype = {
         this._eventManager.init(this, AudioPlayer.EVENT_MAP_KEY);
     },
 
+    handleAuxClick(e) {
+        return this.toggle() ? false : e;
+    },
+
     play() {
         this.playAlbum();
     },
@@ -161,11 +165,13 @@ AudioPlayer.prototype = {
     toggle() {
         if (this.state === STATES.IDLE) {
             this.play();
+            return true;
         } else if (
             this.state === STATES.ALBUM ||
             this.state === STATES.ALBUMTHEME
         ) {
             this.pause();
+            return false;
         }
     },
 
