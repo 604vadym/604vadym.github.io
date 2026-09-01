@@ -400,6 +400,7 @@ AutoscrollSlider.prototype._pressReset = function (e) {
 AutoscrollSlider.prototype._pressToggleautoscroll = function (e) {
     if (this._isInputBlocked()) return false;
     if (helper.isOverrideKey(e)) {
+        // isOverrideKey - move to app???
         if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) {
             this._toggleAutoscrollMode();
         }

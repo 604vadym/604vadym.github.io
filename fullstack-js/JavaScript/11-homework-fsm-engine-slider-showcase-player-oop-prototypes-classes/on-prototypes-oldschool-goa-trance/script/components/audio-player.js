@@ -155,7 +155,7 @@ AudioPlayer.prototype = {
 
     pause() {
         if (this.state === STATES.IDLE) return;
-        if (this.state === STATES.ALBUM || this.state === STATES.ALBUMTHEME) {
+        if (this.isAlbumPlaying()) {
             this._onPauseAlbum();
         }
         this._state = STATES.IDLE;
@@ -166,10 +166,7 @@ AudioPlayer.prototype = {
         if (this.state === STATES.IDLE) {
             this.play();
             return true;
-        } else if (
-            this.state === STATES.ALBUM ||
-            this.state === STATES.ALBUMTHEME
-        ) {
+        } else if (this.isAlbumPlaying()) {
             this.pause();
             return false;
         }
@@ -266,6 +263,10 @@ AudioPlayer.prototype = {
         } else if (this.state === STATES.THEME) {
             this.pause();
         }
+    },
+
+    isAlbumPlaying() {
+        return this.state === STATES.ALBUM || this.state === STATES.ALBUMTHEME;
     },
 
     handleClick(e) {
@@ -382,7 +383,7 @@ AudioPlayer.prototype = {
     },
 
     _tryPlayAudio() {
-        if (this.state === STATES.ALBUM || this.state === STATES.ALBUMTHEME) {
+        if (this.isAlbumPlaying()) {
             this._playAudio("album");
         }
     },
@@ -519,16 +520,17 @@ AudioPlayer.prototype = {
         this.prevAudioTrack();
     },
 
-    _pressToggleaudiomode(e) {
-        if (helper.isPassthroughKey(e)) {
-            if (this.state !== STATES.ALBUM) {
-                this.play();
-            } else {
-                this.pause();
-            }
-            return e;
+    _pressNext(e) {
+        if (this.isAlbumPlaying()) {
+            this.nextAudioTrack();
+            return false;
         }
-        if (this.state === STATES.ALBUM) {
+        return e;
+    },
+
+    _pressPrev(e) {
+        if (this.isAlbumPlaying()) {
+            this.prevAudioTrack();
             return false;
         }
         return e;
@@ -544,8 +546,25 @@ AudioPlayer.prototype = {
         return e;
     },
 
+    _pressToggleaudiomode(e) {
+        if (helper.isPassthroughKey(e)) {
+            // isPassthroughKey - move to app???
+            if (this.state !== STATES.ALBUM) {
+                this.play();
+            } else {
+                this.pause();
+            }
+            return e;
+        }
+        if (this.state === STATES.ALBUM) {
+            return false;
+        }
+        return e;
+    },
+
     _pressReset(e) {
         if (helper.isOverrideKey(e)) {
+            // isOverrideKey - move to app???
             this._hardReset();
         } else {
             this.pause();

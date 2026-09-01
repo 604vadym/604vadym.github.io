@@ -70,19 +70,32 @@ ShowcaseApp.prototype = {
         }
     },
 
-    _pressToggle(e) {
-        helper.prevent(e);
-        return "reverse";
-    },
-
     _pressNext(e) {
         helper.prevent(e);
+        if (this._isRepeatOnActiveAudio(e)) return false;
+        if (helper.isPassthroughKey(e)) return "reverse";
         return e;
     },
 
     _pressPrev(e) {
         helper.prevent(e);
+        if (this._isRepeatOnActiveAudio(e)) return false;
+        if (helper.isPassthroughKey(e)) return "reverse";
         return e;
+    },
+
+    _isRepeatOnActiveAudio(e) {
+        if (e.repeat && helper.isPassthroughKey(e)) {
+            if (this._audioPlayer.isAlbumPlaying()) {
+                return true;
+            }
+        }
+        return false;
+    },
+
+    _pressToggle(e) {
+        helper.prevent(e);
+        return "reverse";
     },
 
     _pressReset(e) {
@@ -94,6 +107,25 @@ ShowcaseApp.prototype = {
     _pressIgnore(e) {
         helper.prevent(e);
         return false;
+    },
+
+    _stream(e, handlerName, EventClass, pump) {
+        let pipeline;
+        if (pump === "reverse") {
+            pipeline = [this._audioPlayer, this._slider, this._shop];
+        } else {
+            pipeline = [this._slider, this._audioPlayer, this._shop];
+        }
+        return this._pipe(e, handlerName, EventClass, pipeline);
+    },
+
+    _pipe(e, handlerName, EventClass, pipeline) {
+        for (const component of pipeline) {
+            if (!(e instanceof EventClass)) return e;
+            if (typeof component[handlerName] === "function") {
+                e = component[handlerName](e);
+            }
+        }
     },
 
     _handleClick(e) {
@@ -136,25 +168,6 @@ ShowcaseApp.prototype = {
                 activeElement.classList.add(
                     this._options.states.keyboardBtnPressed,
                 );
-            }
-        }
-    },
-
-    _stream(e, handlerName, EventClass, pump) {
-        let pipeline;
-        if (pump === "reverse") {
-            pipeline = [this._audioPlayer, this._slider, this._shop];
-        } else {
-            pipeline = [this._slider, this._audioPlayer, this._shop];
-        }
-        return this._pipe(e, handlerName, EventClass, pipeline);
-    },
-
-    _pipe(e, handlerName, EventClass, pipeline) {
-        for (const component of pipeline) {
-            if (!(e instanceof EventClass)) return e;
-            if (typeof component[handlerName] === "function") {
-                e = component[handlerName](e);
             }
         }
     },

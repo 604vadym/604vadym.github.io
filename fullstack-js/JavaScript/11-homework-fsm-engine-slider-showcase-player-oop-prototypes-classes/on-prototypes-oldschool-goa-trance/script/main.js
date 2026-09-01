@@ -111,9 +111,11 @@ const audioPlayer = new AudioPlayer({
     },
 
     press: {
-        toggleaudiomode: [" "],
+        next: ["ArrowRight", "KeyD"],
+        prev: ["ArrowLeft", "KeyA"],
         restartaudiotrack: ["0"],
         restartalbum: ["Backspace"],
+        toggleaudiomode: [" "],
         reset: ["Escape"],
     },
 
@@ -214,9 +216,9 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
     },
 
     press: {
+        next: ["ArrowRight", "KeyD"],
+        prev: ["ArrowLeft", "KeyA"],
         toggle: [" "],
-        next: ["ArrowRight"],
-        prev: ["ArrowLeft"],
         reset: ["Escape"],
         ignore: ["PageDown", "PageUp", "End"],
     },
