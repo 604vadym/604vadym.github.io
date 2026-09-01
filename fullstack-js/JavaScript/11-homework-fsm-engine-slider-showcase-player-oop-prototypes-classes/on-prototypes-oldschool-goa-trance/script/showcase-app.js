@@ -70,27 +70,38 @@ ShowcaseApp.prototype = {
         }
     },
 
-    _pressNext(e) {
-        helper.prevent(e);
-        if (this._isRepeatOnActiveAudio(e)) return false;
-        if (helper.isPassthroughKey(e)) return "reverse";
-        return e;
-    },
-
-    _pressPrev(e) {
-        helper.prevent(e);
-        if (this._isRepeatOnActiveAudio(e)) return false;
-        if (helper.isPassthroughKey(e)) return "reverse";
-        return e;
-    },
-
     _isRepeatOnActiveAudio(e) {
-        if (e.repeat && helper.isPassthroughKey(e)) {
+        if (e.repeat && this._isPassthrougOnActiveAudio(e)) {
+            return true;
+        }
+        return false;
+    },
+
+    _isPassthrougOnActiveAudio(e) {
+        if (helper.isPassthroughKey(e)) {
             if (this._audioPlayer.isAlbumPlaying()) {
                 return true;
             }
         }
         return false;
+    },
+
+    _pressNext(e) {
+        helper.prevent(e);
+        if (this._isRepeatOnActiveAudio(e)) return "repeatFiltered";
+        if (this._isPassthrougOnActiveAudio(e)) return "reverse";
+        return "repeatAllowed";
+    },
+
+    _pressPrev(e) {
+        helper.prevent(e);
+        if (this._isRepeatOnActiveAudio(e)) return "repeatFiltered";
+        if (this._isPassthrougOnActiveAudio(e)) return "reverse";
+        return "repeatAllowed";
+    },
+
+    _pressExecute(e) {
+        return "repeatAllowed";
     },
 
     _pressToggle(e) {
@@ -157,6 +168,12 @@ ShowcaseApp.prototype = {
     _handleKeyDown(e) {
         let pump;
         if (!(pump = this._keyboardManager.manage(e))) return;
+
+        if (pump === "repeatFiltered") return;
+        if (pump !== "repeatAllowed" && e.repeat) {
+            helper.prevent(e);
+            return;
+        }
 
         const result = this._stream(e, "handleKeyDown", KeyboardEvent, pump);
         if (result === true) {

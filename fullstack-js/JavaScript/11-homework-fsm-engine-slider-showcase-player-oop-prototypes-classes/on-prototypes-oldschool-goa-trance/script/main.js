@@ -218,6 +218,7 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
     press: {
         next: ["ArrowRight", "KeyD"],
         prev: ["ArrowLeft", "KeyA"],
+        execute: ["Enter"],
         toggle: [" "],
         reset: ["Escape"],
         ignore: ["PageDown", "PageUp", "End"],
