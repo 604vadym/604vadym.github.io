@@ -536,11 +536,28 @@ AudioPlayer.prototype = {
         return e;
     },
 
-    _pressUp(e) {
+    _pressPlay(e) {
         if (!this.isAlbumPlaying()) {
             this.play();
         }
         return false;
+    },
+
+    _pressPause(e) {
+        if (this.isAlbumPlaying()) {
+            this.pause();
+        }
+        return e;
+    },
+
+    _pressPlaypause(e) {
+        if (this.isAlbumPlaying()) {
+            this.pause();
+            return e;
+        } else {
+            this.play();
+            return false;
+        }
     },
 
     _pressRestartaudiotrack(e) {

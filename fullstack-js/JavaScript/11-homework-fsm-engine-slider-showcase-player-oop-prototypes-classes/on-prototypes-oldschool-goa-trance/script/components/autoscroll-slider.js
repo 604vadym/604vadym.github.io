@@ -397,7 +397,7 @@ AutoscrollSlider.prototype._pressReset = function (e) {
     return isExecuted;
 };
 
-AutoscrollSlider.prototype._pressUp = function (e) {
+AutoscrollSlider.prototype._pressAutoscrolloff = function (e) {
     if (this._isInputBlocked()) return false;
     if (helper.isOverrideKey(e)) {
         // isOverrideKey - move to app???
@@ -424,6 +424,14 @@ AutoscrollSlider.prototype._pressToggleautoscroll = function (e) {
     this._toggleAutoscrollMode();
     if (this.stateAutoscroll === STATES_AUTOSCROLL.ON) {
         return true;
+    }
+    return e;
+};
+
+AutoscrollSlider.prototype._pressIgnore = function (e) {
+    if (this._isInputBlocked()) return false;
+    if (this.stateAutoscroll === STATES_AUTOSCROLL.ON) {
+        return false;
     }
     return e;
 };

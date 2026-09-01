@@ -8,15 +8,20 @@ KeyboardManager.KEY_MAP = {
     " ": "key",
     0: "key",
     ArrowUp: "code",
+    ArrowDown: "code",
     ArrowRight: "code",
     ArrowLeft: "code",
     KeyW: "code",
+    KeyS: "code",
     KeyD: "code",
     KeyA: "code",
     PageDown: "code",
     PageUp: "code",
     End: "code",
     Backspace: "code",
+    Pause: "key",
+    Pause: "code",
+    MediaPlayPause: "key",
 };
 
 KeyboardManager.getKeyParam = function (key) {

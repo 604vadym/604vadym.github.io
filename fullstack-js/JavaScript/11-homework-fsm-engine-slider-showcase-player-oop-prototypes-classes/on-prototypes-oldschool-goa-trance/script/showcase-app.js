@@ -113,7 +113,17 @@ ShowcaseApp.prototype = {
         return MODES.REVERSE;
     },
 
-    _pressUp(e) {
+    _pressPlay(e) {
+        helper.prevent(e);
+        return e;
+    },
+
+    _pressPause(e) {
+        helper.prevent(e);
+        return e;
+    },
+
+    _pressPlaypause(e) {
         helper.prevent(e);
         return e;
     },
@@ -316,7 +326,7 @@ ShowcaseApp.prototype = {
         this._audioPlayer.btnPause.tabIndex = isActive ? 0 : -1;
         this._audioPlayer.btnNext.tabIndex = isActive ? 0 : -1;
         this._audioPlayer.btnPrev.tabIndex = isActive ? 0 : -1;
-        // helper.tryClearFocus();
+        helper.tryClearFocus();
     },
 
     _isAudioActive() {
