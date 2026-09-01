@@ -200,6 +200,7 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
     },
 
     classes: {
+        app: "showcase",
         button: "button",
         linkShop: "slider__link-shop",
     },

@@ -36,6 +36,14 @@ const MOUSE_BUTTON_LEFT = 0;
 const MOUSE_BUTTON_MIDDLE = 1;
 const MOUSE_BUTTON_RIGHT = 2;
 
+ShowcaseApp.PIPELINE_MODES = Object.freeze({
+    REVERSE: "reverse",
+    REPEAT_FILTERED: "repeatFiltered",
+    REPEAT_ALLOWED: "repeatAllowed",
+});
+
+const MODES = ShowcaseApp.PIPELINE_MODES;
+
 ShowcaseApp.prototype = {
     constructor: ShowcaseApp,
 
@@ -88,25 +96,25 @@ ShowcaseApp.prototype = {
 
     _pressNext(e) {
         helper.prevent(e);
-        if (this._isRepeatOnActiveAudio(e)) return "repeatFiltered";
-        if (this._isPassthrougOnActiveAudio(e)) return "reverse";
-        return "repeatAllowed";
+        if (this._isRepeatOnActiveAudio(e)) return MODES.REPEAT_FILTERED;
+        if (this._isPassthrougOnActiveAudio(e)) return MODES.REVERSE;
+        return MODES.REPEAT_ALLOWED;
     },
 
     _pressPrev(e) {
         helper.prevent(e);
-        if (this._isRepeatOnActiveAudio(e)) return "repeatFiltered";
-        if (this._isPassthrougOnActiveAudio(e)) return "reverse";
-        return "repeatAllowed";
+        if (this._isRepeatOnActiveAudio(e)) return MODES.REPEAT_FILTERED;
+        if (this._isPassthrougOnActiveAudio(e)) return MODES.REVERSE;
+        return MODES.REPEAT_ALLOWED;
     },
 
     _pressExecute(e) {
-        return "repeatAllowed";
+        return MODES.REPEAT_ALLOWED;
     },
 
     _pressToggle(e) {
         helper.prevent(e);
-        return "reverse";
+        return MODES.REVERSE;
     },
 
     _pressReset(e) {
@@ -122,7 +130,7 @@ ShowcaseApp.prototype = {
 
     _stream(e, handlerName, EventClass, pump) {
         let pipeline;
-        if (pump === "reverse") {
+        if (pump === MODES.REVERSE) {
             pipeline = [this._audioPlayer, this._slider, this._shop];
         } else {
             pipeline = [this._slider, this._audioPlayer, this._shop];
@@ -148,7 +156,7 @@ ShowcaseApp.prototype = {
             return;
         }
 
-        if (e.target.closest(".showcase")) {
+        if (e.target.closest(`.${this._options.classes.app}`)) {
             if (e.button === MOUSE_BUTTON_MIDDLE) {
                 const isInteractiveTarget =
                     e.target.closest(`.${this._options.classes.linkShop}`) ||
@@ -169,8 +177,8 @@ ShowcaseApp.prototype = {
         let pump;
         if (!(pump = this._keyboardManager.manage(e))) return;
 
-        if (pump === "repeatFiltered") return;
-        if (pump !== "repeatAllowed" && e.repeat) {
+        if (pump === MODES.REPEAT_FILTERED) return;
+        if (pump !== MODES.REPEAT_ALLOWED && e.repeat) {
             helper.prevent(e);
             return;
         }
