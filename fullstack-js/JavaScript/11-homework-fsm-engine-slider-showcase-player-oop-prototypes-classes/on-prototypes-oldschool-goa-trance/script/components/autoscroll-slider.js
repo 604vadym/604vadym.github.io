@@ -222,6 +222,15 @@ AutoscrollSlider.prototype._onDragEnded = function () {
     this._tryResumeAutoscroll();
 };
 
+AutoscrollSlider.prototype._onViewportClicked = function (e) {
+    if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) {
+        if (e && helper.isPassthroughKey(e)) {
+            this._toggleAutoscrollMode();
+        }
+    }
+    DraggableSlider.prototype._onViewportClicked.call(this, e);
+};
+
 AutoscrollSlider.prototype._nextAuto = function () {
     if (this._isInputBlocked() || this.stateAutoscroll !== STATES_AUTOSCROLL.ON)
         return;

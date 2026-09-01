@@ -69,7 +69,10 @@ DraggableSlider.prototype._moveConveyor = function (pointerCurrentX) {
     }
 };
 
-DraggableSlider.prototype._stopDragging = function (pointerOffset = null) {
+DraggableSlider.prototype._stopDragging = function (
+    pointerOffset = null,
+    e = null,
+) {
     let isClick = pointerOffset ? false : pointerOffset === null ? false : true;
     if (!helper.hasFinePointer() && Math.abs(pointerOffset) < 6) {
         pointerOffset = 0;
@@ -90,7 +93,7 @@ DraggableSlider.prototype._stopDragging = function (pointerOffset = null) {
         }
     } else {
         if (isClick) {
-            this._onViewportClicked();
+            this._onViewportClicked(e);
         }
         this._updateTrack();
     }
@@ -108,9 +111,9 @@ DraggableSlider.prototype._onDragEnded = function () {
     this._eventManager.unsubscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
 };
 
-DraggableSlider.prototype._onViewportClicked = function () {
-    const e = new Event("viewportclick", { bubbles: true });
-    this._slider.dispatchEvent(e);
+DraggableSlider.prototype._onViewportClicked = function (e) {
+    const event = new Event("viewportclick", { bubbles: true });
+    this._slider.dispatchEvent(event);
 };
 
 DraggableSlider.prototype._getClientX = function (e) {
@@ -124,7 +127,6 @@ DraggableSlider.prototype._handleMouseDownTouchStart = function (e) {
     }
 
     if (e.button === MOUSE_BUTTON_MIDDLE || e.button === MOUSE_BUTTON_RIGHT) {
-        helper.prevent(e);
         return;
     }
 
@@ -153,7 +155,7 @@ DraggableSlider.prototype._handleMouseUpTouchEnd = function (e) {
     if (!this._isDragging) return;
 
     const pointerOffset = this._getClientX(e) - this._pointerStartX;
-    this._stopDragging(pointerOffset);
+    this._stopDragging(pointerOffset, e);
 };
 
 DraggableSlider.prototype._handleTouchCancel = function (e) {
