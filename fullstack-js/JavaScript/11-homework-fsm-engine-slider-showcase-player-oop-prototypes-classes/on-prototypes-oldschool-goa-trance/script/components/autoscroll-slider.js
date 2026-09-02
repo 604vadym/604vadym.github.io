@@ -126,6 +126,11 @@ AutoscrollSlider.prototype._initAutoscroll = function () {
     }
 };
 
+AutoscrollSlider.prototype.enableAutoscroll = function () {
+    if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) return;
+    this._toggleAutoscrollMode();
+};
+
 AutoscrollSlider.prototype.disableAutoscroll = function () {
     if (this.stateAutoscroll === STATES_AUTOSCROLL.OFF) return;
     this._toggleAutoscrollMode();

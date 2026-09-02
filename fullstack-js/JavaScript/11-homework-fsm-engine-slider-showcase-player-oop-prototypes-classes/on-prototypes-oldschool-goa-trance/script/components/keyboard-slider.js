@@ -62,7 +62,6 @@ KeyboardSlider.prototype._pressExecute = function (e) {
     if (!isButton && !isPaginationDot) return e;
 
     if ((isButton || isPaginationDot) && this._isInputBlocked()) {
-        helper.prevent(e); // TODO: move to app
         return false;
     }
 

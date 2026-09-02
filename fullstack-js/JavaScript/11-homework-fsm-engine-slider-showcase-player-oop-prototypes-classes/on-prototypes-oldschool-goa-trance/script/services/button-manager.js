@@ -14,7 +14,7 @@ ButtonManager.prototype = {
             button.classList.contains(entry.buttonName),
         );
 
-        request?.action(e);
+        request?.action(button, e);
     },
 
     _initButtonActionTable(client, configName) {
@@ -36,7 +36,7 @@ ButtonManager.prototype = {
 
             this._buttonActionTable.push({
                 buttonName: buttonName,
-                action: (button) => action.call(client, button),
+                action: (button, e) => action.call(client, button, e),
             });
         });
     },

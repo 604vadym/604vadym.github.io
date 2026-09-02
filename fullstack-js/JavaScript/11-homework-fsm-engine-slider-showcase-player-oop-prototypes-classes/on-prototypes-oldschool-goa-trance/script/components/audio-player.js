@@ -556,7 +556,7 @@ AudioPlayer.prototype = {
         this.stopPlaylist();
     },
 
-    _clickPlay(e) {
+    _clickPlay(button, e) {
         this.play();
         if (helper.isPassthroughKey(e)) {
             this._onPlayAlbumPassthrough();

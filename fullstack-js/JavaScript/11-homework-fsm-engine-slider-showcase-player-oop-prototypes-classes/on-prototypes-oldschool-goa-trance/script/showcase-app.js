@@ -409,7 +409,7 @@ ShowcaseApp.prototype = {
         this._audioDeckView.renderTimeline(0, null);
     },
 
-    _handleTimechange(e) {
+    _handleTimeChange(e) {
         const { currentTime, duration } = e.detail;
         this._audioDeckView.renderTimeline(currentTime, duration);
     },
@@ -478,7 +478,7 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     },
     timechange: {
         target: (instance) => instance._audioPlayer.element,
-        handler: ShowcaseApp.prototype._handleTimechange,
+        handler: ShowcaseApp.prototype._handleTimeChange,
     },
 };
 
