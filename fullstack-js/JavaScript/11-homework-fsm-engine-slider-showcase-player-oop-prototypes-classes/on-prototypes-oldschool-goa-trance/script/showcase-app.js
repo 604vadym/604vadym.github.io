@@ -106,11 +106,21 @@ ShowcaseApp.prototype = {
         return MODES.REVERSE;
     },
 
+    _pressNextaudio(e) {
+        helper.prevent(e);
+        return e;
+    },
+
     _pressPrev(e) {
         helper.prevent(e);
         if (this._isRepeatAllowed(e)) return MODES.REPEAT_ALLOWED;
         if (e.repeat) return MODES.REPEAT_FILTERED;
         return MODES.REVERSE;
+    },
+
+    _pressPrevaudio(e) {
+        helper.prevent(e);
+        return e;
     },
 
     _pressPlay(e) {
@@ -124,6 +134,18 @@ ShowcaseApp.prototype = {
     },
 
     _pressPlaypause(e) {
+        helper.prevent(e);
+        return e;
+    },
+
+    _pressRestartaudiotrack(e) {
+        if (helper.hasPlatformModifiers(e)) return false;
+        helper.prevent(e);
+        return e;
+    },
+
+    _pressRestartalbum(e) {
+        if (helper.hasPlatformModifiers(e)) return false;
         helper.prevent(e);
         return e;
     },

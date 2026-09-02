@@ -561,12 +561,18 @@ AudioPlayer.prototype = {
     },
 
     _pressRestartaudiotrack(e) {
-        this.restartAudioTrack();
+        if (this.isAlbumPlaying()) {
+            this.restartAudioTrack();
+            return false;
+        }
         return e;
     },
 
     _pressRestartalbum(e) {
-        this.restartAlbum();
+        if (this.isAlbumPlaying()) {
+            this.restartAlbum();
+            return false;
+        }
         return e;
     },
 
