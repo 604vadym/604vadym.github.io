@@ -320,7 +320,9 @@ ShowcaseApp.prototype = {
     _handleSlideChange(e) {
         this._isSliderMoving = false;
         this._shop.setActiveIndex(e.detail.index);
-        this._audioPlayer.switchAlbum(e.detail.index);
+        if (helper.isTabActive()) {
+            this._audioPlayer.switchAlbum(e.detail.index);
+        }
     },
 
     _handleAutoscrollChange(e) {

@@ -212,6 +212,15 @@ AutoscrollSlider.prototype._hardReset = function () {
 
 AutoscrollSlider.prototype._onIndexChanged = function () {
     DraggableSlider.prototype._onIndexChanged.call(this);
+    this._onAutoscrollIndexChanged();
+};
+
+AutoscrollSlider.prototype._onIndexChangedInstantly = function () {
+    DraggableSlider.prototype._onIndexChangedInstantly.call(this);
+    this._onAutoscrollIndexChanged();
+};
+
+AutoscrollSlider.prototype._onAutoscrollIndexChanged = function () {
     this._indexChangeTimestamp = Date.now();
     if (!this._isAutoscrollAction) {
         this._tryPauseAutoscroll();
