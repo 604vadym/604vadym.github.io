@@ -3,6 +3,7 @@
 import ShowcaseApp from "./showcase-app.js";
 import Slider from "./components/autoscroll-slider.js";
 import AudioPlayer from "./components/audio-player.js";
+import AudioDeckView from "./components/audio-deck-view.js";
 import Shop from "./components/shop.js";
 
 /*
@@ -211,6 +212,14 @@ const audioPlayer = new AudioPlayer({
     ],
 });
 
+const audioDeckView = new AudioDeckView({
+    singleSelectors: {
+        audioTrackTitle: ".slider__audio-track-title",
+        progressBarCurrentTime: ".slider__audio-track-current-time",
+        progressBarFullTime: ".slider__audio-track-full-time",
+    },
+});
+
 const shop = new Shop({
     singleSelectors: {
         link: ".slider__link-shop",
@@ -238,7 +247,7 @@ const shop = new Shop({
     ],
 });
 
-const app = new ShowcaseApp(slider, audioPlayer, shop, {
+const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
     singleSelectors: {
         app: ".showcase",
     },
@@ -310,6 +319,57 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
         reset: ["Escape"],
         ignore: ["PageDown", "PageUp", "End"],
     },
+
+    albums: [
+        {
+            title: "Code Eternity",
+            year: 2000,
+            tracks: [
+                {
+                    name: "Like a Summer Day",
+                },
+                {
+                    name: "Trinity",
+                },
+            ],
+        },
+        {
+            title: "Lost Eden",
+            year: 2003,
+            tracks: [
+                {
+                    name: "Lost Eden",
+                },
+                {
+                    name: "From the Abyss",
+                },
+            ],
+        },
+        {
+            title: "Life²",
+            year: 2007,
+            tracks: [
+                {
+                    name: "Golgotha",
+                },
+                {
+                    name: "Back to Light",
+                },
+            ],
+        },
+        {
+            title: "360",
+            year: 2010,
+            tracks: [
+                {
+                    name: "El Hai",
+                },
+                {
+                    name: "Regenesis",
+                },
+            ],
+        },
+    ],
 });
 
 app.init();

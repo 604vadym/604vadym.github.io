@@ -5,9 +5,16 @@ import DOMValidator from "./services/dom-validator.js";
 import EventManager from "./services/event-manager.js";
 import KeyboardManager from "./services/keyboard-manager.js";
 
-export default function ShowcaseApp(slider, audioPlayer, shop, options) {
+export default function ShowcaseApp(
+    slider,
+    audioPlayer,
+    audioDeckView,
+    shop,
+    options,
+) {
     this._slider = slider;
     this._audioPlayer = audioPlayer;
+    this._audioDeckView = audioDeckView;
     this._shop = shop;
     this._options = options;
 
@@ -65,6 +72,7 @@ ShowcaseApp.prototype = {
         this._initProps();
         this._slider.init();
         this._audioPlayer.init();
+        this._audioDeckView.init();
         this._shop.init();
         this._keyboardManager.init(this, "press");
         this._eventManager.init(this, ShowcaseApp.EVENT_MAP_KEY);
@@ -355,15 +363,6 @@ ShowcaseApp.prototype = {
         this._toggleAudioPlayerLayout(false);
     },
 
-    _handleAlbumEnd(e) {
-        if (helper.isTabActive()) {
-            helper.prevent(e);
-            this._slider.next();
-        } else {
-            this._slider.nextInstantly();
-        }
-    },
-
     _toggleAudioPlayerLayout(isActive) {
         if (this._isAudioActive() === isActive) return;
         this._showcase.classList.toggle(
@@ -381,6 +380,31 @@ ShowcaseApp.prototype = {
         return this._showcase.classList.contains(
             this._options.states.audioActive,
         );
+    },
+
+    _handleAlbumEnd(e) {
+        if (helper.isTabActive()) {
+            helper.prevent(e);
+            this._slider.next();
+        } else {
+            this._slider.nextInstantly();
+        }
+    },
+
+    _handleAudioTrackChange(e) {
+        const { trackIndex, albumIndex, totalTracks } = e.detail;
+        const trackName =
+            this._options.albums[albumIndex].tracks[trackIndex].name;
+        this._audioDeckView.renderAudioTrackTitle(
+            trackIndex + 1,
+            totalTracks,
+            trackName,
+        );
+    },
+
+    _handleTimechange(e) {
+        const { currentTime, duration } = e.detail;
+        this._audioDeckView.renderTimeline(currentTime, duration);
     },
 
     _handleMouseLeave(e) {
@@ -436,6 +460,14 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     albumend: {
         target: (instance) => instance._audioPlayer.element,
         handler: ShowcaseApp.prototype._handleAlbumEnd,
+    },
+    audiotrackchange: {
+        target: (instance) => instance._audioPlayer.element,
+        handler: ShowcaseApp.prototype._handleAudioTrackChange,
+    },
+    timechange: {
+        target: (instance) => instance._audioPlayer.element,
+        handler: ShowcaseApp.prototype._handleTimechange,
     },
 };
 

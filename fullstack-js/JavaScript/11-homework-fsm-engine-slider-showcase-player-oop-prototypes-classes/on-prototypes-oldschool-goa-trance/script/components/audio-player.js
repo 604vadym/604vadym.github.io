@@ -405,6 +405,34 @@ AudioPlayer.prototype = {
         return e.defaultPrevented;
     },
 
+    _onAudioTrackChanged() {
+        const trackIndex = this._currentAudioTrackIndex;
+        const albumIndex = this._currentAlbumIndex;
+        const totalTracks =
+            this._goaMasterpieces[this._currentAlbumIndex].tracks.length;
+
+        const e = new CustomEvent("audiotrackchange", {
+            detail: {
+                trackIndex,
+                albumIndex,
+                totalTracks,
+            },
+            bubbles: true,
+        });
+        this._deck.dispatchEvent(e);
+    },
+
+    _onTimeChanged() {
+        const e = new CustomEvent("timechange", {
+            detail: {
+                currentTime: this._player.currentTime,
+                duration: this._player.duration,
+            },
+            bubbles: true,
+        });
+        this._deck.dispatchEvent(e);
+    },
+
     _tryPlayAudio() {
         if (this.isAlbumPlaying()) {
             this._playAudio("album");
@@ -433,6 +461,7 @@ AudioPlayer.prototype = {
             if (this._isNewAudioTrack(this._player.src)) {
                 // updateAudioTrackTitle();
                 // audioTrackCurrentTime.style.width = "0";
+                this._onAudioTrackChanged();
                 const currentAlbum =
                     this._goaMasterpieces[this._currentAlbumIndex];
                 this._player.src =
@@ -657,6 +686,11 @@ AudioPlayer.prototype = {
         }
     },
 
+    _handleTimeUpdate() {
+        if (!this._player.duration || isNaN(this._player.duration)) return;
+        this._onTimeChanged();
+    },
+
     _validateData() {
         if (
             !Array.isArray(this._goaMasterpieces) ||
@@ -688,5 +722,9 @@ AudioPlayer[AudioPlayer.EVENT_MAP_KEY] = {
     ended: {
         target: (instance) => instance._player,
         handler: AudioPlayer.prototype._handleEnded,
+    },
+    timeupdate: {
+        target: (instance) => instance._player,
+        handler: AudioPlayer.prototype._handleTimeUpdate,
     },
 };
