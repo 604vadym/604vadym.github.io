@@ -78,13 +78,16 @@ BaseSlider.prototype = {
     },
 
     goto(index) {
-        const oldIndex = this._currentIndex;
-        this._currentIndex = this._normaliseIndex(index);
-        if (this._currentIndex !== oldIndex) {
-            this._onIndexChanged();
-            return true;
+        if (!Number.isFinite(index)) {
+            return false;
         }
-        return false;
+
+        if (!this._changeIndex(index)) {
+            return false;
+        }
+
+        this._onIndexChanged();
+        return true;
     },
 
     nextInstantly() {
@@ -96,13 +99,16 @@ BaseSlider.prototype = {
     },
 
     gotoInstantly(index) {
-        const oldIndex = this._currentIndex;
-        this._currentIndex = this._normaliseIndex(index);
-        if (this._currentIndex !== oldIndex) {
-            this._onIndexChangedInstantly();
-            return true;
+        if (!Number.isFinite(index)) {
+            return false;
         }
-        return false;
+
+        if (!this._changeIndex(index)) {
+            return false;
+        }
+
+        this._onIndexChangedInstantly();
+        return true;
     },
 
     handleClick(e) {
@@ -191,6 +197,12 @@ BaseSlider.prototype = {
         const sourceIndex = index !== null ? index : this._currentIndex;
 
         return (sourceIndex + this._slidesCount) % this._slidesCount;
+    },
+
+    _changeIndex(index) {
+        const oldIndex = this._currentIndex;
+        this._currentIndex = this._normaliseIndex(index);
+        return this._currentIndex !== oldIndex;
     },
 
     _onIndexChanged() {

@@ -193,6 +193,10 @@ AudioPlayer.prototype = {
     },
 
     switchAudioTrack(index) {
+        if (!Number.isFinite(index)) {
+            return false;
+        }
+
         const isTrackChanged = this._setAudioTrack(index);
         if (isTrackChanged) {
             this._tryPlayAudio();
@@ -229,6 +233,10 @@ AudioPlayer.prototype = {
     },
 
     switchAlbum(index) {
+        if (!Number.isFinite(index)) {
+            return false;
+        }
+
         const isAlbumChanged = this._setAlbum(index);
         if (isAlbumChanged) {
             this._tryPlayAudio();
