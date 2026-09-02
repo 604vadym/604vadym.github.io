@@ -365,6 +365,10 @@ ShowcaseApp.prototype = {
         this._toggleAudioPlayerLayout(false);
     },
 
+    _handleAlbumPlayPassthrough(e) {
+        this._slider.disableAutoscroll();
+    },
+
     _toggleAudioPlayerLayout(isActive) {
         if (this._isAudioActive() === isActive) return;
         this._showcase.classList.toggle(
@@ -459,6 +463,10 @@ ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
     albumpause: {
         target: (instance) => instance._audioPlayer.element,
         handler: ShowcaseApp.prototype._handleAlbumPause,
+    },
+    albumplaypassthrough: {
+        target: (instance) => instance._audioPlayer.element,
+        handler: ShowcaseApp.prototype._handleAlbumPlayPassthrough,
     },
     albumend: {
         target: (instance) => instance._audioPlayer.element,

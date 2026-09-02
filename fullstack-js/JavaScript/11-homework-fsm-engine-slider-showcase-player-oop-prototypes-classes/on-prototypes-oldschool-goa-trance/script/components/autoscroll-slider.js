@@ -126,6 +126,11 @@ AutoscrollSlider.prototype._initAutoscroll = function () {
     }
 };
 
+AutoscrollSlider.prototype.disableAutoscroll = function () {
+    if (this.stateAutoscroll === STATES_AUTOSCROLL.OFF) return;
+    this._toggleAutoscrollMode();
+};
+
 AutoscrollSlider.prototype.lockAutoscroll = function () {
     if (this.stateAutoscroll !== STATES_AUTOSCROLL.ON) return;
     this._stateAutoscroll = STATES_AUTOSCROLL.LOCKED;
@@ -285,7 +290,6 @@ AutoscrollSlider.prototype._isMouseStillOver = function () {
 };
 
 AutoscrollSlider.prototype._tryResumeAutoscroll = function (context = null) {
-    if (this.stateAutoscroll === STATES_AUTOSCROLL.LOCKED) return;
     const isDriftingAfterClick = this._isPostClickDriftActive();
     if (
         this.stateAutoscroll !== STATES_AUTOSCROLL.ON ||
@@ -409,7 +413,6 @@ AutoscrollSlider.prototype._pressReset = function (e) {
 AutoscrollSlider.prototype._pressAutoscrolloff = function (e) {
     if (this._isInputBlocked()) return false;
     if (helper.isOverrideKey(e)) {
-        // isOverrideKey - move to app???
         if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) {
             this._toggleAutoscrollMode();
         }
@@ -424,7 +427,6 @@ AutoscrollSlider.prototype._pressAutoscrolloff = function (e) {
 AutoscrollSlider.prototype._pressToggleautoscroll = function (e) {
     if (this._isInputBlocked()) return false;
     if (helper.isOverrideKey(e)) {
-        // isOverrideKey - move to app???
         if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) {
             this._toggleAutoscrollMode();
         }

@@ -390,6 +390,11 @@ AudioPlayer.prototype = {
         this._deck.dispatchEvent(e);
     },
 
+    _onPlayAlbumPassthrough() {
+        const e = new Event("albumplaypassthrough", { bubbles: true });
+        this._deck.dispatchEvent(e);
+    },
+
     _onAlbumEnded() {
         const e = new CustomEvent("albumend", {
             detail: {
@@ -552,9 +557,10 @@ AudioPlayer.prototype = {
     },
 
     _clickPlay(e) {
-        // if (e.shiftKey && isAutoscrollOn) toggleAutoscrollMode();
-        // tryKillAutoscroll();
         this.play();
+        if (helper.isPassthroughKey(e)) {
+            this._onPlayAlbumPassthrough();
+        }
     },
 
     _clickPause() {
@@ -637,7 +643,6 @@ AudioPlayer.prototype = {
 
     _pressToggleaudiomode(e) {
         if (helper.isPassthroughKey(e)) {
-            // isPassthroughKey - move to app???
             if (this.state !== STATES.ALBUM) {
                 this.play();
             } else {
@@ -653,20 +658,11 @@ AudioPlayer.prototype = {
 
     _pressReset(e) {
         if (helper.isOverrideKey(e)) {
-            // isOverrideKey - move to app???
             this._hardReset();
         } else {
             this.pause();
         }
         return e;
-    },
-
-    _handlePause() {
-        if (this.state === STATES.ALBUM) return;
-        if (this.state === STATES.THEME) {
-            this._playAudio("theme");
-        }
-        // tryResurrectAutoscroll();
     },
 
     _handleEnded() {
@@ -713,10 +709,6 @@ AudioPlayer.prototype = {
 };
 
 AudioPlayer[AudioPlayer.EVENT_MAP_KEY] = {
-    pause: {
-        target: (instance) => instance._player,
-        handler: AudioPlayer.prototype._handlePause,
-    },
     ended: {
         target: (instance) => instance._player,
         handler: AudioPlayer.prototype._handleEnded,

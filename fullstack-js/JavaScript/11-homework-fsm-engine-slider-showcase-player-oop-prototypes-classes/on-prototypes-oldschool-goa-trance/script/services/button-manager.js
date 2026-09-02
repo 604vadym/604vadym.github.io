@@ -9,12 +9,12 @@ ButtonManager.prototype = {
         this._initButtonActionTable(instance, configName);
     },
 
-    manage(button) {
+    manage(button, e) {
         const request = this._buttonActionTable.find((entry) =>
             button.classList.contains(entry.buttonName),
         );
 
-        request?.action(button);
+        request?.action(e);
     },
 
     _initButtonActionTable(client, configName) {

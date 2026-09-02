@@ -3,7 +3,7 @@
 export default function Button(className, instance, command) {
     this._className = className;
     this._assertCommand(command);
-    this._command = (element) => command.call(instance, element);
+    this._command = (element, input) => command.call(instance, element, input);
 }
 
 Button.prototype = {
@@ -19,7 +19,7 @@ Button.prototype = {
             button.blur();
         }
 
-        this._command(button);
+        this._command(button, input);
         return true;
     },
 
