@@ -32,6 +32,19 @@ export default function ShowcaseApp(slider, audioPlayer, shop, options) {
 
 ShowcaseApp.EVENT_MAP_KEY = "EVENT_MAP";
 
+const shiftAudioTrackMap = {
+    ")": 10,
+    "!": 11,
+    "@": 12,
+    "#": 13,
+    $: 14,
+    "%": 15,
+    "^": 16,
+    "&": 17,
+    "*": 18,
+    "(": 19,
+};
+
 const MOUSE_BUTTON_LEFT = 0;
 const MOUSE_BUTTON_MIDDLE = 1;
 const MOUSE_BUTTON_RIGHT = 2;
@@ -125,7 +138,14 @@ ShowcaseApp.prototype = {
     },
 
     _pressSwitchaudiotrack(e) {
-        this._audioPlayer.audioTrackInQueue = parseInt(e.key, 10) - 1;
+        let audioTrackIndex;
+        if (helper.isOverrideKey(e) && e.key in shiftAudioTrackMap) {
+            audioTrackIndex = shiftAudioTrackMap[e.key] - 1;
+        } else {
+            audioTrackIndex = parseInt(e.key, 10) - 1;
+        }
+
+        this._audioPlayer.audioTrackInQueue = audioTrackIndex;
         return e;
     },
 

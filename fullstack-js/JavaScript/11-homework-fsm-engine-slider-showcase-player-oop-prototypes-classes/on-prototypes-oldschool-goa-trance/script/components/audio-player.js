@@ -75,6 +75,20 @@ AudioPlayer.prototype = {
         return this._btnPrev;
     },
 
+    get audioTrackInQueue() {
+        return this._audioTrackInQueue;
+    },
+
+    set audioTrackInQueue(index) {
+        if (
+            !Number.isFinite(index) ||
+            index < 0 ||
+            index >= this._getTotalAudioTracks()
+        )
+            return;
+        this._audioTrackInQueue = index;
+    },
+
     get state() {
         return this.__state;
     },
@@ -121,16 +135,6 @@ AudioPlayer.prototype = {
             index,
             this._getTotalAlbums(),
         );
-    },
-
-    set audioTrackInQueue(index) {
-        if (
-            !Number.isFinite(index) ||
-            index < 0 ||
-            index >= this._getTotalAudioTracks()
-        )
-            return;
-        this._audioTrackInQueue = index;
     },
 
     init() {
@@ -328,7 +332,7 @@ AudioPlayer.prototype = {
         this._currentAlbumIndex = 0;
         this._currentAudioTrackIndex = 0;
         this._mainThemePauseTimestamp = 0;
-        this._trackInQueue = null;
+        this._audioTrackInQueue = null;
 
         const mainThemeResetPauseThreshold = Number(
             this._options.mainThemeResetPauseThreshold,
@@ -548,8 +552,8 @@ AudioPlayer.prototype = {
     },
 
     _pressSwitchaudiotrack(e) {
-        if (this._audioTrackInQueue !== null) {
-            const isSwitched = this.switchAudioTrack(this._audioTrackInQueue);
+        if (this.audioTrackInQueue !== null) {
+            const isSwitched = this.switchAudioTrack(this.audioTrackInQueue);
             this._audioTrackInQueue = null;
             if (isSwitched) return false;
         }
