@@ -46,7 +46,7 @@ AudioDeckView.prototype = {
 
     renderTimeline(currentTime, duration) {
         if (!duration) {
-            this._progressBar.style.width = "0%";
+            this._progressBar.style.width = "0";
             return;
         }
 

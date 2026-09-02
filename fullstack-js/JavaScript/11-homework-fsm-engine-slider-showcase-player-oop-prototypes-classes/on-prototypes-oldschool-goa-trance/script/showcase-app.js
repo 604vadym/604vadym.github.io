@@ -400,6 +400,7 @@ ShowcaseApp.prototype = {
             totalTracks,
             trackName,
         );
+        this._audioDeckView.renderTimeline(0, null);
     },
 
     _handleTimechange(e) {

@@ -459,8 +459,6 @@ AudioPlayer.prototype = {
 
         if (context === "album") {
             if (this._isNewAudioTrack(this._player.src)) {
-                // updateAudioTrackTitle();
-                // audioTrackCurrentTime.style.width = "0";
                 this._onAudioTrackChanged();
                 const currentAlbum =
                     this._goaMasterpieces[this._currentAlbumIndex];
