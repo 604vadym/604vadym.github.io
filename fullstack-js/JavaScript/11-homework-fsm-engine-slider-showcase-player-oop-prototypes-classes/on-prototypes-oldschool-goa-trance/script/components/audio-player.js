@@ -123,6 +123,16 @@ AudioPlayer.prototype = {
         );
     },
 
+    set audioTrackInQueue(index) {
+        if (
+            !Number.isFinite(index) ||
+            index < 0 ||
+            index >= this._getTotalAudioTracks()
+        )
+            return;
+        this._audioTrackInQueue = index;
+    },
+
     init() {
         this._initDOMElements();
         this._initProps();
@@ -130,10 +140,6 @@ AudioPlayer.prototype = {
         this._initButtons();
         this._keyboardManager.init(this, "press");
         this._eventManager.init(this, AudioPlayer.EVENT_MAP_KEY);
-    },
-
-    handleAuxClick(e) {
-        return this.toggle() ? false : e;
     },
 
     play() {
@@ -273,6 +279,10 @@ AudioPlayer.prototype = {
         return this._button.execute(e);
     },
 
+    handleAuxClick(e) {
+        return this.toggle() ? false : e;
+    },
+
     handleKeyDown(e) {
         return this._keyboardManager.manage(e);
     },
@@ -318,6 +328,7 @@ AudioPlayer.prototype = {
         this._currentAlbumIndex = 0;
         this._currentAudioTrackIndex = 0;
         this._mainThemePauseTimestamp = 0;
+        this._trackInQueue = null;
 
         const mainThemeResetPauseThreshold = Number(
             this._options.mainThemeResetPauseThreshold,
@@ -532,6 +543,15 @@ AudioPlayer.prototype = {
         if (this.isAlbumPlaying()) {
             this.prevAudioTrack();
             return false;
+        }
+        return e;
+    },
+
+    _pressSwitchaudiotrack(e) {
+        if (this._audioTrackInQueue !== null) {
+            const isSwitched = this.switchAudioTrack(this._audioTrackInQueue);
+            this._audioTrackInQueue = null;
+            if (isSwitched) return false;
         }
         return e;
     },

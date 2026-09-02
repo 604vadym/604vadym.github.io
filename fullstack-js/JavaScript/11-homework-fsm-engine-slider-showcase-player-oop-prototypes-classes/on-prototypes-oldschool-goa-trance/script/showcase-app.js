@@ -71,6 +71,7 @@ ShowcaseApp.prototype = {
 
     _initProps() {
         this._isSliderMoving = false;
+        this._btnNoActive = null;
     },
 
     _tryResetBtnNoActive() {
@@ -79,7 +80,7 @@ ShowcaseApp.prototype = {
                 this._options.jsClasses.btnNoActive,
             );
             this._eventManager.unsubscribe(this, ShowcaseApp.DYNAMIC_EVENT_MAP);
-            delete this._btnNoActive;
+            this._btnNoActive = null;
         }
     },
 
@@ -106,7 +107,7 @@ ShowcaseApp.prototype = {
         return MODES.REVERSE;
     },
 
-    _pressNextaudio(e) {
+    _pressNextaudiotrack(e) {
         helper.prevent(e);
         return e;
     },
@@ -118,8 +119,13 @@ ShowcaseApp.prototype = {
         return MODES.REVERSE;
     },
 
-    _pressPrevaudio(e) {
+    _pressPrevaudiotrack(e) {
         helper.prevent(e);
+        return e;
+    },
+
+    _pressSwitchaudiotrack(e) {
+        this._audioPlayer.audioTrackInQueue = parseInt(e.key, 10) - 1;
         return e;
     },
 

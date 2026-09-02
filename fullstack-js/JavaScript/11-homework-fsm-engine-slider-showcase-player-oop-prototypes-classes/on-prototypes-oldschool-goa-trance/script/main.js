@@ -133,6 +133,7 @@ const audioPlayer = new AudioPlayer({
             "BracketLeft",
             "KeyP",
         ],
+        switchaudiotrack: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
         play: ["ArrowUp", "KeyW"],
         pause: ["ArrowDown", "KeyS", "Pause"],
         playpause: ["MediaPlayPause"],
@@ -241,7 +242,7 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
 
     press: {
         next: ["ArrowRight", "KeyD"],
-        nextaudio: [
+        nextaudiotrack: [
             "MediaTrackNext",
             "=",
             "+",
@@ -250,7 +251,7 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
             "KeyN",
         ],
         prev: ["ArrowLeft", "KeyA"],
-        prevaudio: [
+        prevaudiotrack: [
             "MediaTrackPrevious",
             "_",
             "-",
@@ -258,6 +259,7 @@ const app = new ShowcaseApp(slider, audioPlayer, shop, {
             "BracketLeft",
             "KeyP",
         ],
+        switchaudiotrack: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
         play: ["ArrowUp", "KeyW"],
         pause: ["ArrowDown", "KeyS", "Pause"],
         playpause: ["MediaPlayPause"],
