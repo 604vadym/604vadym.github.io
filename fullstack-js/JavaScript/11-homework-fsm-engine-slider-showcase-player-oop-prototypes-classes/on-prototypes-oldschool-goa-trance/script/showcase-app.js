@@ -344,8 +344,7 @@ ShowcaseApp.prototype = {
             this._options.states.autoscrollActive,
             isActive,
         );
-        this._slider.btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
-        this._slider.btnAutoscrollOff.tabIndex = isActive ? 0 : -1;
+        this._slider.toggleTabIndex(isActive);
         helper.tryClearFocus();
     },
 
@@ -375,10 +374,7 @@ ShowcaseApp.prototype = {
             this._options.states.audioActive,
             isActive,
         );
-        this._audioPlayer.btnPlay.tabIndex = isActive ? -1 : 0;
-        this._audioPlayer.btnPause.tabIndex = isActive ? 0 : -1;
-        this._audioPlayer.btnNext.tabIndex = isActive ? 0 : -1;
-        this._audioPlayer.btnPrev.tabIndex = isActive ? 0 : -1;
+        this._audioPlayer.toggleTabIndex(isActive);
         helper.tryClearFocus();
     },
 

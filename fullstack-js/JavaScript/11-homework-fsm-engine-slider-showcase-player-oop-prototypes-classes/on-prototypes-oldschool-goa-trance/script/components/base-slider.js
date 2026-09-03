@@ -111,6 +111,11 @@ BaseSlider.prototype = {
         return true;
     },
 
+    toggleTabIndex(isActive) {
+        this._btnAutoscrollOn.tabIndex = isActive ? -1 : 0;
+        this._btnAutoscrollOff.tabIndex = isActive ? 0 : -1;
+    },
+
     handleClick(e) {
         if (this._isInputBlocked()) return false;
         return this._button.execute(e);

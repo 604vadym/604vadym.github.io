@@ -59,22 +59,6 @@ AudioPlayer.prototype = {
         return this._deck;
     },
 
-    get btnPlay() {
-        return this._btnPlay;
-    },
-
-    get btnPause() {
-        return this._btnPause;
-    },
-
-    get btnNext() {
-        return this._btnNext;
-    },
-
-    get btnPrev() {
-        return this._btnPrev;
-    },
-
     get audioTrackInQueue() {
         return this._audioTrackInQueue;
     },
@@ -281,6 +265,13 @@ AudioPlayer.prototype = {
         } else if (this.state === STATES.THEME) {
             this.pause();
         }
+    },
+
+    toggleTabIndex(isActive) {
+        this._btnPlay.tabIndex = isActive ? -1 : 0;
+        this._btnPause.tabIndex = isActive ? 0 : -1;
+        this._btnNext.tabIndex = isActive ? 0 : -1;
+        this._btnPrev.tabIndex = isActive ? 0 : -1;
     },
 
     isAlbumPlaying() {

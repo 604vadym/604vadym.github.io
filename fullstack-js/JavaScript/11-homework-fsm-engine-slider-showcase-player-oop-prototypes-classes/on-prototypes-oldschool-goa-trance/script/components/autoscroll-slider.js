@@ -44,24 +44,6 @@ AutoscrollSlider.STATES_AUTOSCROLL = Object.freeze({
 const STATES = AutoscrollSlider.STATES;
 const STATES_AUTOSCROLL = AutoscrollSlider.STATES_AUTOSCROLL;
 
-Object.defineProperty(AutoscrollSlider.prototype, "btnAutoscrollOn", {
-    get: function () {
-        return this._btnAutoscrollOn;
-    },
-
-    configurable: false,
-    enumerable: true,
-});
-
-Object.defineProperty(AutoscrollSlider.prototype, "btnAutoscrollOff", {
-    get: function () {
-        return this._btnAutoscrollOff;
-    },
-
-    configurable: false,
-    enumerable: true,
-});
-
 Object.defineProperty(AutoscrollSlider.prototype, "stateAutoscroll", {
     get: function () {
         return this.__stateAutoscroll;
