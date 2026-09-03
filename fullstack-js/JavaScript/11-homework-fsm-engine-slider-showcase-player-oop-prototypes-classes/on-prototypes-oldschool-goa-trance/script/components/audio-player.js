@@ -653,8 +653,8 @@ AudioPlayer.prototype = {
     },
 
     _pressExecute(e) {
-        if (!this._button.isActive()) return e;
-        return true;
+        if (this._button.isActive()) return true;
+        return e;
     },
 
     _pressToggleaudiomode(e) {

@@ -42,13 +42,13 @@ KeyboardSlider.prototype._hardReset = function () {
 KeyboardSlider.prototype._pressNext = function (e) {
     if (this._isInputBlocked()) return false;
     this.next();
-    return false;
+    return true;
 };
 
 KeyboardSlider.prototype._pressPrev = function (e) {
     if (this._isInputBlocked()) return false;
     this.prev();
-    return false;
+    return true;
 };
 
 KeyboardSlider.prototype._pressExecute = function (e) {

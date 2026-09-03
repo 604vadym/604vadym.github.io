@@ -75,6 +75,12 @@ AutoscrollSlider.prototype.init = function () {
     this._initAutoscroll();
 };
 
+AutoscrollSlider.prototype._initAutoscroll = function () {
+    if (this._options.autoplay === true) {
+        this._toggleAutoscrollMode();
+    }
+};
+
 AutoscrollSlider.prototype.handleClick = function (e) {
     const result = DraggableSlider.prototype.handleClick.call(this, e);
 
@@ -90,12 +96,6 @@ AutoscrollSlider.prototype.handleAuxClick = function (e) {
         this._toggleAutoscrollMode();
     }
     return e;
-};
-
-AutoscrollSlider.prototype._initAutoscroll = function () {
-    if (this._options.autoplay === true) {
-        this._toggleAutoscrollMode();
-    }
 };
 
 AutoscrollSlider.prototype.enableAutoscroll = function () {
@@ -376,20 +376,20 @@ AutoscrollSlider.prototype._clickAutoscrolloff = function () {
 };
 
 AutoscrollSlider.prototype._pressReset = function (e) {
-    const isExecuted = DraggableSlider.prototype._pressReset.call(this, e);
+    const result = DraggableSlider.prototype._pressReset.call(this, e);
 
-    if (isExecuted) {
+    if (result) {
         if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) {
             this._toggleAutoscrollMode();
         }
     }
 
-    return isExecuted;
+    return result;
 };
 
 AutoscrollSlider.prototype._pressAutoscrolloff = function (e) {
     if (this._isInputBlocked()) return false;
-    if (helper.isOverrideKey(e)) {
+    if (helper.isPassthroughKey(e)) {
         if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) {
             this._toggleAutoscrollMode();
         }
@@ -403,7 +403,7 @@ AutoscrollSlider.prototype._pressAutoscrolloff = function (e) {
 
 AutoscrollSlider.prototype._pressToggleautoscroll = function (e) {
     if (this._isInputBlocked()) return false;
-    if (helper.isOverrideKey(e)) {
+    if (helper.isPassthroughKey(e)) {
         if (this.stateAutoscroll !== STATES_AUTOSCROLL.OFF) {
             this._toggleAutoscrollMode();
         }
