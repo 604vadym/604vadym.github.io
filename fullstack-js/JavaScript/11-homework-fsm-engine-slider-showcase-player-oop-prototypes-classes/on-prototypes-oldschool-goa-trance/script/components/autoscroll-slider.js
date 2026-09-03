@@ -63,16 +63,6 @@ Object.defineProperty(AutoscrollSlider.prototype, "_stateAutoscroll", {
             );
         }
 
-        if (state === STATES.ALBUM && this.__state === STATES.THEME) {
-            this.__state = STATES.ALBUMTHEME;
-            return;
-        }
-
-        if (state === STATES.IDLE && this.__state === STATES.ALBUMTHEME) {
-            this.__state = STATES.THEME;
-            return;
-        }
-
         this.__stateAutoscroll = state;
     },
 

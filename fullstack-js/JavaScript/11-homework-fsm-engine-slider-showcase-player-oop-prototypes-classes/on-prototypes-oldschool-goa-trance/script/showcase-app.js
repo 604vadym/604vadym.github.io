@@ -190,6 +190,7 @@ ShowcaseApp.prototype = {
                 e = component[handlerName](e);
             }
         }
+        return e;
     },
 
     _handleClick(e) {

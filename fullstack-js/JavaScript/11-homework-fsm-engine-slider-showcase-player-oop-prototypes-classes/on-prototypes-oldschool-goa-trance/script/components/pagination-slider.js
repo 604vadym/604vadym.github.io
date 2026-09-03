@@ -30,11 +30,13 @@ PaginationSlider.prototype._initPagination = function () {
         const dot = document.createElement("button");
         dot.classList.add(this._options.classes.button);
         dot.classList.add(this._options.classes.paginationDot);
+        dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
         this._paginationDots.push(this._pagination.appendChild(dot));
     }
     this._paginationDots[0].classList.add(
         this._options.classesActive.paginationDot,
     );
+    this._paginationDots[0].setAttribute("aria-current", "true");
 };
 
 PaginationSlider.prototype._initDOMElements = function (childElements) {
@@ -66,10 +68,14 @@ PaginationSlider.prototype._updatePagination = function () {
     );
     if (activeDot) {
         activeDot.classList.remove(this._options.classesActive.paginationDot);
+        activeDot.removeAttribute("aria-current");
     }
-    this._paginationDots[this._normaliseIndex()].classList.add(
+
+    const currentIndex = this._normaliseIndex();
+    this._paginationDots[currentIndex].classList.add(
         this._options.classesActive.paginationDot,
     );
+    this._paginationDots[currentIndex].setAttribute("aria-current", "true");
 };
 
 PaginationSlider.prototype._initButtons = function () {
