@@ -2,64 +2,6 @@
 
 export default function KeyboardManager() {}
 
-KeyboardManager.KEY_MAP = {
-    Enter: "key",
-    Escape: "key",
-    " ": "key",
-    0: "key",
-    1: "key",
-    2: "key",
-    3: "key",
-    4: "key",
-    5: "key",
-    6: "key",
-    7: "key",
-    8: "key",
-    9: "key",
-    ")": "key",
-    "!": "key",
-    "@": "key",
-    "#": "key",
-    $: "key",
-    "%": "key",
-    "^": "key",
-    "&": "key",
-    "*": "key",
-    "(": "key",
-    "-": "key",
-    _: "key",
-    "+": "key",
-    "=": "key",
-    ArrowUp: "code",
-    ArrowDown: "code",
-    ArrowRight: "code",
-    ArrowLeft: "code",
-    KeyW: "code",
-    KeyS: "code",
-    KeyD: "code",
-    KeyA: "code",
-    KeyN: "code",
-    KeyP: "code",
-    PageDown: "code",
-    PageUp: "code",
-    Home: "code",
-    End: "code",
-    Backspace: "code",
-    Pause: "key",
-    Pause: "code",
-    MediaPlayPause: "key",
-    MediaTrackNext: "key",
-    MediaTrackPrevious: "key",
-    NumpadAdd: "code",
-    NumpadSubtract: "code",
-    BracketRight: "code",
-    BracketLeft: "code",
-};
-
-KeyboardManager.getKeyParam = function (key) {
-    return KeyboardManager.KEY_MAP[key] || "code";
-};
-
 KeyboardManager.prototype = {
     constructor: KeyboardManager,
 
@@ -98,12 +40,7 @@ KeyboardManager.prototype = {
     },
 
     _matchKeys(keys) {
-        return (e) => {
-            return keys.some((key) => {
-                const param = KeyboardManager.getKeyParam(key);
-                return e[param] === key;
-            });
-        };
+        return (e) => keys.includes(e.code) || keys.includes(e.key);
     },
 
     _assertConfig(config, configName, className) {
