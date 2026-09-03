@@ -125,7 +125,8 @@ ShowcaseApp.prototype = {
         helper.prevent(e);
         if (this._isRepeatAllowed(e)) return MODES.REPEAT_ALLOWED;
         if (e.repeat) return MODES.REPEAT_FILTERED;
-        return MODES.REVERSE;
+        if (this._isPassthrougOnActiveAudio(e)) return MODES.REVERSE;
+        return e;
     },
 
     _pressSwitchaudiotrack(e) {
