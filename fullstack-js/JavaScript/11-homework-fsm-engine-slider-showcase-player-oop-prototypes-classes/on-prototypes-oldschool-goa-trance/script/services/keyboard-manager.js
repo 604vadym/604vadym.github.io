@@ -98,9 +98,12 @@ KeyboardManager.prototype = {
     },
 
     _matchKeys(keys) {
-        const [firstKey] = keys;
-        const param = KeyboardManager.getKeyParam(firstKey);
-        return (e) => keys.includes(e[param]);
+        return (e) => {
+            return keys.some((key) => {
+                const param = KeyboardManager.getKeyParam(key);
+                return e[param] === key;
+            });
+        };
     },
 
     _assertConfig(config, configName, className) {
