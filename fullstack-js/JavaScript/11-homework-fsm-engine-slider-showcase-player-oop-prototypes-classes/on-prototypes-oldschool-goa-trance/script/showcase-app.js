@@ -121,28 +121,11 @@ ShowcaseApp.prototype = {
         return false;
     },
 
-    _pressNext(e) {
+    _pressStep(e) {
         helper.prevent(e);
         if (this._isRepeatAllowed(e)) return MODES.REPEAT_ALLOWED;
         if (e.repeat) return MODES.REPEAT_FILTERED;
         return MODES.REVERSE;
-    },
-
-    _pressNextaudiotrack(e) {
-        helper.prevent(e);
-        return e;
-    },
-
-    _pressPrev(e) {
-        helper.prevent(e);
-        if (this._isRepeatAllowed(e)) return MODES.REPEAT_ALLOWED;
-        if (e.repeat) return MODES.REPEAT_FILTERED;
-        return MODES.REVERSE;
-    },
-
-    _pressPrevaudiotrack(e) {
-        helper.prevent(e);
-        return e;
     },
 
     _pressSwitchaudiotrack(e) {
@@ -157,33 +140,6 @@ ShowcaseApp.prototype = {
         return e;
     },
 
-    _pressPlay(e) {
-        helper.prevent(e);
-        return e;
-    },
-
-    _pressPause(e) {
-        helper.prevent(e);
-        return e;
-    },
-
-    _pressPlaypause(e) {
-        helper.prevent(e);
-        return e;
-    },
-
-    _pressRestartaudiotrack(e) {
-        if (helper.hasPlatformModifiers(e)) return false;
-        helper.prevent(e);
-        return e;
-    },
-
-    _pressRestartalbum(e) {
-        if (helper.hasPlatformModifiers(e)) return false;
-        helper.prevent(e);
-        return e;
-    },
-
     _pressExecute(e) {
         return MODES.REPEAT_ALLOWED;
     },
@@ -193,15 +149,26 @@ ShowcaseApp.prototype = {
         return MODES.REVERSE;
     },
 
-    _pressReset(e) {
+    _pressEscape(e) {
         if (helper.hasPlatformModifiers(e)) return false;
         helper.tryClearFocus();
+        return e;
+    },
+
+    _pressCheckplatformmodifiers(e) {
+        if (helper.hasPlatformModifiers(e)) return false;
+        helper.prevent(e);
         return e;
     },
 
     _pressIgnore(e) {
         helper.prevent(e);
         return false;
+    },
+
+    _pressPrevent(e) {
+        helper.prevent(e);
+        return e;
     },
 
     _stream(e, handlerName, EventClass, pump) {

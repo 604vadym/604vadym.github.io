@@ -268,24 +268,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
     },
 
     press: {
-        next: ["ArrowRight", "KeyD"],
-        nextaudiotrack: [
-            "MediaTrackNext",
-            "=",
-            "+",
-            "NumpadAdd",
-            "BracketRight",
-            "KeyN",
-        ],
-        prev: ["ArrowLeft", "KeyA"],
-        prevaudiotrack: [
-            "MediaTrackPrevious",
-            "_",
-            "-",
-            "NumpadSubtract",
-            "BracketLeft",
-            "KeyP",
-        ],
+        step: ["ArrowRight", "ArrowLeft", "KeyD", "KeyA"],
         switchaudiotrack: [
             "1",
             "2",
@@ -307,15 +290,24 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
             "*",
             "(",
         ],
-        play: ["ArrowUp", "KeyW"],
-        pause: ["ArrowDown", "KeyS", "Pause"],
-        playpause: ["MediaPlayPause"],
-        restartaudiotrack: ["0", "Home"],
-        restartalbum: ["Backspace"],
         execute: ["Enter"],
         toggle: [" "],
-        reset: ["Escape"],
+
+        escape: ["Escape"],
+        checkplatformmodifiers: ["0", "Home", "Backspace"],
         ignore: ["PageDown", "PageUp", "End"],
+        prevent: [
+            "=",
+            "+",
+            "_",
+            "-",
+            "ArrowUp",
+            "ArrowDown",
+            "BracketRight",
+            "BracketLeft",
+            "NumpadAdd",
+            "NumpadSubtract",
+        ],
     },
 
     albums: [
