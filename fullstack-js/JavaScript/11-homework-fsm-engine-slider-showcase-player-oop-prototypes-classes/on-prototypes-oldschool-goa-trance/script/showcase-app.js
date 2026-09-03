@@ -152,6 +152,7 @@ ShowcaseApp.prototype = {
 
     _pressEscape(e) {
         if (helper.hasPlatformModifiers(e)) return false;
+        helper.prevent(e);
         helper.tryClearFocus();
         return e;
     },
