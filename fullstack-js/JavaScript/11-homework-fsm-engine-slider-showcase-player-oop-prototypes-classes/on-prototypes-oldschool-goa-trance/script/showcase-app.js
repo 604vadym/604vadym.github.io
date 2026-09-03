@@ -56,13 +56,13 @@ const MOUSE_BUTTON_LEFT = 0;
 const MOUSE_BUTTON_MIDDLE = 1;
 const MOUSE_BUTTON_RIGHT = 2;
 
-ShowcaseApp.PIPELINE_MODES = Object.freeze({
+ShowcaseApp.KEYBOARD_MODES = Object.freeze({
     REVERSE: "reverse",
     REPEAT_FILTERED: "repeatFiltered",
     REPEAT_ALLOWED: "repeatAllowed",
 });
 
-const MODES = ShowcaseApp.PIPELINE_MODES;
+const MODES = ShowcaseApp.KEYBOARD_MODES;
 
 ShowcaseApp.prototype = {
     constructor: ShowcaseApp,

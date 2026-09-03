@@ -594,10 +594,14 @@ AudioPlayer.prototype = {
     },
 
     _pressSwitchaudiotrack(e) {
-        if (this.audioTrackInQueue !== null) {
-            const isSwitched = this.switchAudioTrack(this.audioTrackInQueue);
-            this._audioTrackInQueue = null;
-            if (isSwitched) return false;
+        if (this.isAlbumPlaying()) {
+            if (this.audioTrackInQueue !== null) {
+                const isSwitched = this.switchAudioTrack(
+                    this.audioTrackInQueue,
+                );
+                this._audioTrackInQueue = null;
+                if (isSwitched) return false;
+            }
         }
         return e;
     },
