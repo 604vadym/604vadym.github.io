@@ -327,6 +327,7 @@ AudioPlayer.prototype = {
         this._initMainTheme();
         this._initPreload();
         this._initData();
+        this._initMediaSession();
         this._state = STATES.IDLE;
         this._currentAlbumIndex = 0;
         this._currentAudioTrackIndex = 0;
@@ -361,6 +362,13 @@ AudioPlayer.prototype = {
     _initData() {
         this._goaMasterpieces = this._options.playlist;
         this._validateData();
+    },
+
+    _initMediaSession() {
+        if ("mediaSession" in navigator) {
+            navigator.mediaSession.setActionHandler("play", () => {});
+            navigator.mediaSession.setActionHandler("pause", () => {});
+        }
     },
 
     _initButtons() {
@@ -438,7 +446,9 @@ AudioPlayer.prototype = {
     _tryPlayTheme() {
         if (this.state === STATES.THEME) {
             this._playAudio("theme");
+            return true;
         }
+        return false;
     },
 
     _playAudio(context) {
@@ -602,6 +612,9 @@ AudioPlayer.prototype = {
     _pressPause(e) {
         if (this.isAlbumPlaying()) {
             this.pause();
+            if (this._tryPlayTheme()) {
+                return false;
+            }
         }
         return e;
     },
@@ -609,11 +622,14 @@ AudioPlayer.prototype = {
     _pressPlaypause(e) {
         if (this.isAlbumPlaying()) {
             this.pause();
-            return e;
+            if (this._tryPlayTheme()) {
+                return false;
+            }
         } else {
             this.play();
             return false;
         }
+        return e;
     },
 
     _pressRestartaudiotrack(e) {
