@@ -157,6 +157,7 @@ const audioPlayer = new AudioPlayer({
         playpause: ["MediaPlayPause"],
         restartaudiotrack: ["0", "Home"],
         restartalbum: ["Backspace"],
+        execute: ["Enter"],
         toggleaudiomode: [" "],
         reset: ["Escape"],
     },

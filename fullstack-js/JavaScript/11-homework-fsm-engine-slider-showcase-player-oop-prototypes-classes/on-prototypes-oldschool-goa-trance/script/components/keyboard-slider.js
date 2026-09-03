@@ -52,13 +52,9 @@ KeyboardSlider.prototype._pressPrev = function (e) {
 };
 
 KeyboardSlider.prototype._pressExecute = function (e) {
-    const activeElement = document.activeElement;
-    const isButton = activeElement?.closest(
-        `.${this._options.classes.sliderBtn}`,
-    );
-    const isPaginationDot = activeElement?.closest(
-        `.${this._options.classes.paginationDot}`,
-    );
+    const isButton = this._button.isActive();
+    const isPaginationDot = this._buttonPagination.isActive();
+
     if (!isButton && !isPaginationDot) return e;
 
     if ((isButton || isPaginationDot) && this._isInputBlocked()) {

@@ -23,6 +23,10 @@ Button.prototype = {
         return true;
     },
 
+    isActive() {
+        return document.activeElement?.closest(`.${this._className}`);
+    },
+
     _assertCommand(command) {
         if (typeof command !== "function") {
             throw new TypeError(

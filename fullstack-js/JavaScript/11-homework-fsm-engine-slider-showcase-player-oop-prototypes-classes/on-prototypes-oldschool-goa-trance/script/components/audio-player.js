@@ -632,6 +632,11 @@ AudioPlayer.prototype = {
         return e;
     },
 
+    _pressExecute(e) {
+        if (!this._button.isActive()) return e;
+        return true;
+    },
+
     _pressToggleaudiomode(e) {
         if (helper.isPassthroughKey(e)) {
             if (this.state !== STATES.ALBUM) {
