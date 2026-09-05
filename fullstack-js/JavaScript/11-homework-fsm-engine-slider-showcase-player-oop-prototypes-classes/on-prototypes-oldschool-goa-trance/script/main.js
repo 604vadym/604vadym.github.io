@@ -231,16 +231,19 @@ const shop = new Shop({
 
     data: [
         {
-            url: "https://ultimae.bandcamp.com/album/code-eternity",
+            url: "https://mfgmemo604.bandcamp.com/album/emuna",
         },
         {
-            url: "https://www.discogs.com/sell/release/419254",
+            url: "https://mwnn.bandcamp.com/album/moment-of-truth",
         },
         {
-            url: "https://ultimae.bandcamp.com/album/life",
+            url: "https://mwnn.bandcamp.com/album/earth-moving-the-sun",
         },
         {
-            url: "https://ultimae.bandcamp.com/album/360",
+            url: "https://themusesrapt.bandcamp.com/album/spiritual-healing",
+        },
+        {
+            url: "https://laugebabagnohm.bandcamp.com/album/langbortistan",
         },
     ],
 });
