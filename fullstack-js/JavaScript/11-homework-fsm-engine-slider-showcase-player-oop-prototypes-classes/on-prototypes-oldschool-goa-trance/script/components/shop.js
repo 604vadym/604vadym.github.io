@@ -48,6 +48,7 @@ Shop.prototype = {
                 `[Shop]: Index ${index} is out of bounds [0..${this._data.length - 1}]. ` +
                     `Falling back to shop default link`,
             );
+            this._currentIndex = null;
             this._link.setAttribute("href", this._defaultUrl);
         }
     },
@@ -80,7 +81,9 @@ Shop.prototype = {
     },
 
     _getUrl() {
-        return this._data[this._currentIndex].url;
+        return this._currentIndex !== null
+            ? this._data[this._currentIndex].url
+            : this._defaultUrl;
     },
 
     _pressExecute(e) {
@@ -94,7 +97,7 @@ Shop.prototype = {
         const markupUrl = this._link.getAttribute("href");
         this._defaultUrl =
             configUrl || markupUrl || this.constructor.DEFAULT_URL;
-        this._validateDefaultUrl(configUrl);
+        this._validateDefaultUrl(configUrl, markupUrl);
     },
 
     _validateDefaultUrl(configUrl, markupUrl) {
