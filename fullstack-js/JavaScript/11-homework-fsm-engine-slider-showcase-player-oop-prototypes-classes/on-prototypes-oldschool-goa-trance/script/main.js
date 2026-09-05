@@ -164,46 +164,165 @@ const audioPlayer = new AudioPlayer({
 
     mainThemeResetPauseThreshold: null,
 
-    mainThemeSrc: null,
+    mainThemeSrc:
+        "./assets/audio/main-theme-the-mystery-of-the-yeti-preview.mp3",
 
     playlist: [
         {
             tracks: [
                 {
-                    src: "./assets/audio/asura/2000-code-eternity/01-like-a-summer-day-preview.mp3",
+                    src: "./assets/audio/emuna/2000-emuna/01-adon-haslichot-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/asura/2000-code-eternity/02-trinity-preview.mp3",
+                    src: "./assets/audio/emuna/2000-emuna/02-crystal-clear-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/03-the-3rd-world-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/04-heart-of-trance-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/05-missing-bush-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/06-angel-kaya-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/07-one-in-a-million-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/08-i-believe-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/09-gods-image-preview.mp3",
                 },
             ],
         },
         {
             tracks: [
                 {
-                    src: "./assets/audio/asura/2003-lost-eden/01-lost-eden-preview.mp3",
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/01-moment-of-truth-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/asura/2003-lost-eden/02-from-the-abyss-preview.mp3",
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/02-floor-essence-dayglo-mix-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/03-subterfuge-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/04-evolution-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/05-azymuth-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/06-low-commotion-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/07-skydiving-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/08-dawn-chorus-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/09-cairo-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/10-sugar-rush-refined-mix-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/11-cosmic-echoes-preview.mp3",
                 },
             ],
         },
         {
             tracks: [
                 {
-                    src: "./assets/audio/asura/2007-life-squared/01-golgotha-preview.mp3",
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/01-vavoom-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/asura/2007-life-squared/02-back-to-light-preview.mp3",
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/02-seratonin-sunrise-mvo-mix-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/03-camouflage-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/04-own-the-world-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/05-the-first-day-horizon-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/06-treacle-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/07-possessed-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/08-parallel-universe-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/09-spaghettification-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/10-tarantula-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/11-the-breech-preview.mp3",
                 },
             ],
         },
         {
             tracks: [
                 {
-                    src: "./assets/audio/asura/2010-360/01-el-hai-preview.mp3",
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/01-spiritual-healing-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/asura/2010-360/02-regenesis-preview.mp3",
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/02-the-ancient-sounds-of-the-god-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/03-the-angel-and-the-snake-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/04-enchanted-forest-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/05-the-return-of-the-travellers-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/06-and-the-sensitives-will-be-kings-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/07-the-warriors-of-temperance-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/08-corazon-de-fuego-preview.mp3",
+                },
+            ],
+        },
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/01-langbortistan-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/02-dybet-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/03-h2o-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/04-refleksioner-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/05-nordlys-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/06-hypnose-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/07-rejsen-preview.mp3",
                 },
             ],
         },
