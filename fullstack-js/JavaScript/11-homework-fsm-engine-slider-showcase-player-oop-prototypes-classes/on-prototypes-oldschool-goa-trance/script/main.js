@@ -164,7 +164,7 @@ const audioPlayer = new AudioPlayer({
 
     mainThemeResetPauseThreshold: null,
 
-    mainThemeSrc: "./assets/audio/asura/main-theme-rare-mix-preview.mp3",
+    mainThemeSrc: null,
 
     playlist: [
         {
@@ -315,50 +315,170 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
 
     albums: [
         {
-            title: "Code Eternity",
+            title: "Emuna",
             year: 2000,
             tracks: [
                 {
-                    name: "Like a Summer Day",
+                    name: "אדון הסליחות (Adon Haslichot)",
                 },
                 {
-                    name: "Trinity",
-                },
-            ],
-        },
-        {
-            title: "Lost Eden",
-            year: 2003,
-            tracks: [
-                {
-                    name: "Lost Eden",
+                    name: "Crystal Clear",
                 },
                 {
-                    name: "From the Abyss",
-                },
-            ],
-        },
-        {
-            title: "Life²",
-            year: 2007,
-            tracks: [
-                {
-                    name: "Golgotha",
+                    name: "The 3rd World",
                 },
                 {
-                    name: "Back to Light",
+                    name: "Heart of Trance",
+                },
+                {
+                    name: "Missing Bush",
+                },
+                {
+                    name: "Angel Kaya",
+                },
+                {
+                    name: "One in a Million",
+                },
+                {
+                    name: "I Believe",
+                },
+                {
+                    name: "God's Image",
                 },
             ],
         },
         {
-            title: "360",
-            year: 2010,
+            title: "Moment of Truth",
+            year: 1996,
             tracks: [
                 {
-                    name: "El Hai",
+                    name: "Moment of Truth",
                 },
                 {
-                    name: "Regenesis",
+                    name: "Floor-Essence (Dayglo Mix)",
+                },
+                {
+                    name: "Subterfuge",
+                },
+                {
+                    name: "Evolution",
+                },
+                {
+                    name: "Azymuth",
+                },
+                {
+                    name: "Low Commotion",
+                },
+                {
+                    name: "Skydiving",
+                },
+                {
+                    name: "Dawn Chorus",
+                },
+                {
+                    name: "Cairo",
+                },
+                {
+                    name: "Sugar Rush (Refined Mix)",
+                },
+                {
+                    name: "Cosmic Echoes",
+                },
+            ],
+        },
+        {
+            title: "Earth Moving the Sun",
+            year: 1998,
+            tracks: [
+                {
+                    name: "Vavoom!",
+                },
+                {
+                    name: "Seratonin Sunrise (MVO Mix)",
+                },
+                {
+                    name: "Camouflage",
+                },
+                {
+                    name: "Own the World",
+                },
+                {
+                    name: "The First Day (Horizon)",
+                },
+                {
+                    name: "Treacle",
+                },
+                {
+                    name: "Possessed",
+                },
+                {
+                    name: "Parallel Universe",
+                },
+                {
+                    name: "Spaghettification",
+                },
+                {
+                    name: "Tarantula",
+                },
+                {
+                    name: "The Breech",
+                },
+            ],
+        },
+        {
+            title: "Spiritual Healing",
+            year: 1998,
+            tracks: [
+                {
+                    name: "Spiritual Healing",
+                },
+                {
+                    name: "The Ancient Sounds of the God",
+                },
+                {
+                    name: "The Angel and the Snake",
+                },
+                {
+                    name: "Enchanted Forest",
+                },
+                {
+                    name: "The Return of the Travellers",
+                },
+                {
+                    name: "...And the Sensitives will be Kings",
+                },
+                {
+                    name: "The Warriors of Temperance",
+                },
+                {
+                    name: "Corazón De Fuego",
+                },
+            ],
+        },
+        {
+            title: "Langbortistan",
+            year: 2011,
+            tracks: [
+                {
+                    name: "Langbortistan",
+                },
+                {
+                    name: "Dybet",
+                },
+                {
+                    name: "H₂O",
+                },
+                {
+                    name: "Refleksioner",
+                },
+                {
+                    name: "Nordlys",
+                },
+                {
+                    name: "Hypnose",
+                },
+                {
+                    name: "Rejsen",
                 },
             ],
         },
