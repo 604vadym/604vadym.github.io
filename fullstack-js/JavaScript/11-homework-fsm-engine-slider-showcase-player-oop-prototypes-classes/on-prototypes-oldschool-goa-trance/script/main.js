@@ -1,5 +1,16 @@
 "use strict";
 
+/* 
+  ============================================================================
+  ⚠️ COPYRIGHT NOTICE & DISCLAIMER (Non-Commercial Educational Fan Project)
+  All media assets (short audio previews, album covers) are property of their
+  respective artists and copyright holders. This project was created strictly
+  for educational and portfolio presentation purposes and is not intended for
+  commercial use. If requested by the respective artists or copyright holders,
+  any materials will be removed immediately.
+  ============================================================================
+*/
+
 import ShowcaseApp from "./showcase-app.js";
 import Slider from "./components/autoscroll-slider.js";
 import AudioPlayer from "./components/audio-player.js";
