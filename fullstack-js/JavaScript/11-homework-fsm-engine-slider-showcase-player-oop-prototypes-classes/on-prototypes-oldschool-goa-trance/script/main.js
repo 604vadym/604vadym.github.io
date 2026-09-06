@@ -242,7 +242,7 @@ const audioPlayer = new AudioPlayer({
                     src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/01-vavoom-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/02-seratonin-sunrise-mvo-mix-preview.mp3",
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/02-seratonin-sunrise-mvo-mix.mp3",
                 },
                 {
                     src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/03-camouflage-preview.mp3",
@@ -251,7 +251,7 @@ const audioPlayer = new AudioPlayer({
                     src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/04-own-the-world-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/05-the-first-day-horizon-preview.mp3",
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/05-the-first-day-horizon.mp3",
                 },
                 {
                     src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/06-treacle-preview.mp3",
@@ -279,7 +279,7 @@ const audioPlayer = new AudioPlayer({
                     src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/01-spiritual-healing-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/02-the-ancient-sounds-of-the-god-preview.mp3",
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/02-the-ancient-sounds-of-the-god.mp3",
                 },
                 {
                     src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/03-the-angel-and-the-snake-preview.mp3",
@@ -288,13 +288,13 @@ const audioPlayer = new AudioPlayer({
                     src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/04-enchanted-forest-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/05-the-return-of-the-travellers-preview.mp3",
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/05-the-return-of-the-travellers.mp3",
                 },
                 {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/06-and-the-sensitives-will-be-kings-preview.mp3",
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/06-and-the-sensitives-will-be-kings.mp3",
                 },
                 {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/07-the-warriors-of-temperance-preview.mp3",
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/07-the-warriors-of-temperance.mp3",
                 },
                 {
                     src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/08-corazon-de-fuego-preview.mp3",
