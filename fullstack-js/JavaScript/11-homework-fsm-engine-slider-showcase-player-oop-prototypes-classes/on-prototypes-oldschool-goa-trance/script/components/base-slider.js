@@ -165,6 +165,7 @@ BaseSlider.prototype = {
         this._state = STATES.IDLE;
         this._startIndex = 0;
         this._currentIndex = this._startIndex;
+        this._activeIndex = this._currentIndex;
         this._slideWidth = 0;
         this._isResizing = false;
         this._resizeTimeoutId = null;
@@ -176,6 +177,11 @@ BaseSlider.prototype = {
             this._buttonManager,
             this._buttonManager.manage,
         );
+    },
+
+    _moveTrack() {
+        this._state = STATES.MOVING;
+        this._updateTrack();
     },
 
     _updateTrack() {
@@ -211,10 +217,9 @@ BaseSlider.prototype = {
     },
 
     _onIndexChanged() {
-        this._state = STATES.MOVING;
+        this._moveTrack();
         const e = new Event("slidemove", { bubbles: true });
         this._slider.dispatchEvent(e);
-        this._updateTrack();
     },
 
     _onIndexChangedInstantly() {
@@ -252,11 +257,14 @@ BaseSlider.prototype = {
 
     _onSlideChanged() {
         this._state = STATES.IDLE;
-        const e = new CustomEvent("slidechange", {
-            detail: { index: this._normaliseIndex() },
-            bubbles: true,
-        });
-        this._slider.dispatchEvent(e);
+        if (this._activeIndex !== this._currentIndex) {
+            this._activeIndex = this._currentIndex;
+            const e = new CustomEvent("slidechange", {
+                detail: { index: this._normaliseIndex() },
+                bubbles: true,
+            });
+            this._slider.dispatchEvent(e);
+        }
     },
 
     _handleResize(e) {
