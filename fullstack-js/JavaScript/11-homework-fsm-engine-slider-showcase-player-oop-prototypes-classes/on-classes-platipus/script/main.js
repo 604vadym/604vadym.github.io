@@ -184,7 +184,7 @@ const audioPlayer = new AudioPlayer({
         {
             tracks: [
                 {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/01-moment-of-truth-preview.mp3",
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/01-azymuth-preview.mp3",
                 },
                 {
                     src: "./assets/audio/man-with-no-name/1996-moment-of-truth/02-floor-essence-dayglo-mix-preview.mp3",
@@ -197,13 +197,13 @@ const audioPlayer = new AudioPlayer({
         {
             tracks: [
                 {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/01-vavoom-preview.mp3",
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/04-own-the-world-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/02-seratonin-sunrise-mvo-mix.mp3",
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/06-treacle-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/03-camouflage-preview.mp3",
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/08-parallel-universe-preview.mp3",
                 },
             ],
         },
@@ -216,7 +216,7 @@ const audioPlayer = new AudioPlayer({
                     src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/02-the-ancient-sounds-of-the-god.mp3",
                 },
                 {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/03-the-angel-and-the-snake-preview.mp3",
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/07-the-warriors-of-temperance.mp3",
                 },
             ],
         },
@@ -344,7 +344,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
             year: 1996,
             tracks: [
                 {
-                    name: "Moment of Truth",
+                    name: "Azymuth",
                 },
                 {
                     name: "Floor-Essence (Dayglo Mix)",
@@ -359,13 +359,13 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
             year: 1998,
             tracks: [
                 {
-                    name: "Vavoom!",
+                    name: "Own the World",
                 },
                 {
-                    name: "Seratonin Sunrise (MVO Mix)",
+                    name: "Treacle",
                 },
                 {
-                    name: "Camouflage",
+                    name: "Parallel Universe",
                 },
             ],
         },
@@ -380,7 +380,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
                     name: "The Ancient Sounds of the God",
                 },
                 {
-                    name: "The Angel and the Snake",
+                    name: "The Warriors of Temperance",
                 },
             ],
         },
