@@ -31,6 +31,7 @@ KeyboardSlider.prototype.handleKeyDown = function (e) {
 
 KeyboardSlider.prototype._hardReset = function () {
     this._currentIndex = this._startIndex;
+    this._activeIndex = this._currentIndex;
     this._isResizing = false;
     clearTimeout(this._resizeTimeoutId);
     this._slider.classList.remove(this._options.states.resizing);
