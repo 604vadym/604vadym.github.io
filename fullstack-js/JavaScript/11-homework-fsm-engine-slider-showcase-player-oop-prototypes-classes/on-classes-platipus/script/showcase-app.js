@@ -28,10 +28,12 @@ const KEYBOARD_MODES = Object.freeze({
     REPEAT_ALLOWED: "repeatAllowed",
 });
 
-const MODES = KEYBOARD_MODES;
-
 export default class ShowcaseApp {
     static EVENT_MAP_KEY = "EVENT_MAP";
+
+    static get MODES() {
+        return KEYBOARD_MODES;
+    }
 
     constructor(slider, audioPlayer, audioDeckView, shop, options) {
         this._slider = slider;
@@ -52,7 +54,7 @@ export default class ShowcaseApp {
         this._audioDeckView.init();
         this._shop.init();
         this._keyboardManager.init(this, "press");
-        this._eventManager.init(this, ShowcaseApp.EVENT_MAP_KEY);
+        this._eventManager.init(this, this.constructor.EVENT_MAP_KEY);
     }
 
     _initDOMElements(childElements) {
@@ -100,9 +102,10 @@ export default class ShowcaseApp {
 
     _pressStep(e) {
         helper.prevent(e);
-        if (this._isRepeatAllowed(e)) return MODES.REPEAT_ALLOWED;
-        if (e.repeat) return MODES.REPEAT_FILTERED;
-        if (this._isPassthrougOnActiveAudio(e)) return MODES.REVERSE;
+        if (this._isRepeatAllowed(e)) return ShowcaseApp.MODES.REPEAT_ALLOWED;
+        if (e.repeat) return ShowcaseApp.MODES.REPEAT_FILTERED;
+        if (this._isPassthrougOnActiveAudio(e))
+            return ShowcaseApp.MODES.REVERSE;
         return e;
     }
 
@@ -119,12 +122,12 @@ export default class ShowcaseApp {
     }
 
     _pressExecute(e) {
-        return MODES.REPEAT_ALLOWED;
+        return ShowcaseApp.MODES.REPEAT_ALLOWED;
     }
 
     _pressToggle(e) {
         helper.prevent(e);
-        return MODES.REVERSE;
+        return ShowcaseApp.MODES.REVERSE;
     }
 
     _pressEscape(e) {
@@ -152,7 +155,7 @@ export default class ShowcaseApp {
 
     _stream(e, handlerName, EventClass, pump) {
         let pipeline;
-        if (pump === MODES.REVERSE) {
+        if (pump === ShowcaseApp.MODES.REVERSE) {
             pipeline = [this._audioPlayer, this._slider, this._shop];
         } else {
             pipeline = [this._slider, this._audioPlayer, this._shop];
@@ -200,12 +203,12 @@ export default class ShowcaseApp {
         let pump;
         if (!(pump = this._keyboardManager.manage(e))) return;
 
-        if (pump === MODES.REPEAT_FILTERED) return;
-        if (pump !== MODES.REPEAT_ALLOWED && e.repeat) {
+        if (pump === ShowcaseApp.MODES.REPEAT_FILTERED) return;
+        if (pump !== ShowcaseApp.MODES.REPEAT_ALLOWED && e.repeat) {
             helper.prevent(e);
             return;
         }
-        if (pump === MODES.REVERSE && this._isSliderMoving) return;
+        if (pump === ShowcaseApp.MODES.REVERSE && this._isSliderMoving) return;
 
         const result = this._stream(e, "handleKeyDown", KeyboardEvent, pump);
         if (result === true) {

@@ -7,6 +7,10 @@ import KeyboardManager from "../services/keyboard-manager.js";
 const DEFAULT_URL = "https://bandcamp.com";
 
 export default class Shop {
+    static get DEFAULT_URL() {
+        return DEFAULT_URL;
+    }
+
     constructor(options) {
         this._options = options;
         this._domValidator = new DOMValidator(Shop);

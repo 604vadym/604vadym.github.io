@@ -7,61 +7,41 @@ import ButtonManager from "../services/button-manager.js";
 import KeyboardManager from "../services/keyboard-manager.js";
 import EventManager from "../services/event-manager.js";
 
-export default function AudioPlayer(options) {
-    this._options = options;
-
-    Object.defineProperty(this, "_domValidator", {
-        value: new DOMValidator(AudioPlayer),
-        writable: false,
-        configurable: false,
-    });
-
-    Object.defineProperty(this, "_buttonManager", {
-        value: new ButtonManager(),
-        writable: false,
-        configurable: false,
-    });
-
-    Object.defineProperty(this, "_keyboardManager", {
-        value: new KeyboardManager(),
-        writable: false,
-        configurable: false,
-    });
-
-    Object.defineProperty(this, "_eventManager", {
-        value: new EventManager(),
-        writable: false,
-        configurable: false,
-    });
-}
-
-Object.defineProperty(AudioPlayer, "MAIN_THEME_RESET_PAUSE_THRESHOLD", {
-    value: 300000,
-    writable: false,
-    configurable: false,
-});
-
-AudioPlayer.EVENT_MAP_KEY = "EVENT_MAP";
-
-AudioPlayer.STATES = Object.freeze({
+const STATES = Object.freeze({
     ALBUM: "ALBUM",
     THEME: "THEME",
     ALBUMTHEME: "ALBUMTHEME",
     IDLE: "IDLE",
 });
 
-const STATES = AudioPlayer.STATES;
+const MAIN_THEME_RESET_PAUSE_THRESHOLD = 300000;
 
-AudioPlayer.prototype = {
-    constructor: AudioPlayer,
+export default class AudioPlayer {
+    static EVENT_MAP_KEY = "EVENT_MAP";
+
+    static get STATES() {
+        return STATES;
+    }
+
+    static get MAIN_THEME_RESET_PAUSE_THRESHOLD() {
+        return MAIN_THEME_RESET_PAUSE_THRESHOLD;
+    }
+
+    constructor(options) {
+        this._options = options;
+        this._domValidator = new DOMValidator(AudioPlayer);
+        this._buttonManager = new ButtonManager();
+        this._keyboardManager = new KeyboardManager();
+        this._eventManager = new EventManager();
+    }
 
     get element() {
         return this._deck;
-    },
+    }
 
     get audioTrackInQueue() {
         return this._audioTrackInQueue;
-    },
+    }
 
     set audioTrackInQueue(index) {
         if (
@@ -71,14 +51,14 @@ AudioPlayer.prototype = {
         )
             return;
         this._audioTrackInQueue = index;
-    },
+    }
 
     get state() {
         return this.__state;
-    },
+    }
 
     set _state(stateKey) {
-        const state = this.constructor.STATES[stateKey];
+        const state = STATES[stateKey];
 
         if (!state) {
             throw new TypeError(
@@ -97,29 +77,29 @@ AudioPlayer.prototype = {
         }
 
         this.__state = state;
-    },
+    }
 
     get _currentAudioTrackIndex() {
         return this.__currentAudioTrackIndex;
-    },
+    }
 
     set _currentAudioTrackIndex(index) {
         this.__currentAudioTrackIndex = this._normaliseIndex(
             index,
             this._getTotalAudioTracks(),
         );
-    },
+    }
 
     get _currentAlbumIndex() {
         return this.__currentAlbumIndex;
-    },
+    }
 
     set _currentAlbumIndex(index) {
         this.__currentAlbumIndex = this._normaliseIndex(
             index,
             this._getTotalAlbums(),
         );
-    },
+    }
 
     init() {
         this._initDOMElements();
@@ -127,25 +107,25 @@ AudioPlayer.prototype = {
         this._buttonManager.init(this, "click");
         this._initButtons();
         this._keyboardManager.init(this, "press");
-        this._eventManager.init(this, AudioPlayer.EVENT_MAP_KEY);
-    },
+        this._eventManager.init(this, this.constructor.EVENT_MAP_KEY);
+    }
 
     play() {
         this.playAlbum();
-    },
+    }
 
     playAlbum() {
         if (this.state === STATES.ALBUM) return;
         this._onPlayAlbum();
         this._state = STATES.ALBUM;
         this._playAudio("album");
-    },
+    }
 
     playTheme() {
         if (this.state !== STATES.IDLE) return;
         this._state = STATES.THEME;
         this._playAudio("theme");
-    },
+    }
 
     pause() {
         if (this.state === STATES.IDLE) return;
@@ -154,7 +134,7 @@ AudioPlayer.prototype = {
         }
         this._state = STATES.IDLE;
         this._pauseAudio();
-    },
+    }
 
     toggle() {
         if (this.state === STATES.IDLE) {
@@ -164,17 +144,17 @@ AudioPlayer.prototype = {
             this.pause();
             return false;
         }
-    },
+    }
 
     nextAudioTrack() {
         this._currentAudioTrackIndex++;
         this._tryPlayAudio();
-    },
+    }
 
     prevAudioTrack() {
         this._currentAudioTrackIndex--;
         this._tryPlayAudio();
-    },
+    }
 
     switchAudioTrack(index) {
         if (!Number.isFinite(index)) {
@@ -186,35 +166,35 @@ AudioPlayer.prototype = {
             this._tryPlayAudio();
         }
         return isTrackChanged;
-    },
+    }
 
     restartAudioTrack() {
         this.rewindAudioTrack();
         if (this.state === STATES.IDLE) {
             this.play();
         }
-    },
+    }
 
     rewindAudioTrack() {
         this._player.currentTime = 0;
-    },
+    }
 
     stopAudioTrack() {
         this.pause();
         this.rewindAudioTrack();
-    },
+    }
 
     nextAlbum() {
         this._currentAlbumIndex++;
         this._setAlbum(this._currentAlbumIndex);
         this._tryPlayAudio();
-    },
+    }
 
     prevAlbum() {
         this._currentAlbumIndex--;
         this._setAlbum(this._currentAlbumIndex);
         this._tryPlayAudio();
-    },
+    }
 
     switchAlbum(index) {
         if (!Number.isFinite(index)) {
@@ -226,38 +206,38 @@ AudioPlayer.prototype = {
             this._tryPlayAudio();
         }
         return isAlbumChanged;
-    },
+    }
 
     restartAlbum() {
         this.rewindAlbum();
         this.restartAudioTrack();
-    },
+    }
 
     rewindAlbum() {
         this._currentAudioTrackIndex = 0;
         this.rewindAudioTrack();
         this._tryPlayAudio();
-    },
+    }
 
     stopAlbum() {
         this._currentAudioTrackIndex = 0;
         this.stopAudioTrack();
-    },
+    }
 
     restartPlaylist() {
         this._currentAlbumIndex = 0;
         this.restartAlbum();
-    },
+    }
 
     rewindPlaylist() {
         this._currentAudioTrackIndex = 0;
         this.rewindAlbum();
-    },
+    }
 
     stopPlaylist() {
         this._currentAlbumIndex = 0;
         this.stopAlbum();
-    },
+    }
 
     resetTheme() {
         if (this.state === STATES.ALBUMTHEME) {
@@ -265,30 +245,30 @@ AudioPlayer.prototype = {
         } else if (this.state === STATES.THEME) {
             this.pause();
         }
-    },
+    }
 
     toggleTabIndex(isActive) {
         this._btnPlay.tabIndex = isActive ? -1 : 0;
         this._btnPause.tabIndex = isActive ? 0 : -1;
         this._btnNext.tabIndex = isActive ? 0 : -1;
         this._btnPrev.tabIndex = isActive ? 0 : -1;
-    },
+    }
 
     isAlbumPlaying() {
         return this.state === STATES.ALBUM || this.state === STATES.ALBUMTHEME;
-    },
+    }
 
     handleClick(e) {
         return this._button.execute(e);
-    },
+    }
 
     handleAuxClick(e) {
         return this.toggle() ? false : e;
-    },
+    }
 
     handleKeyDown(e) {
         return this._keyboardManager.manage(e);
-    },
+    }
 
     _initDOMElements(childElements) {
         const deck = document.querySelector(this._options.singleSelectors.deck);
@@ -318,7 +298,7 @@ AudioPlayer.prototype = {
         this._btnPause = btnPause;
         this._btnNext = btnNext;
         this._btnPrev = btnPrev;
-    },
+    }
 
     _initProps() {
         this._player = new Audio();
@@ -341,13 +321,13 @@ AudioPlayer.prototype = {
             mainThemeResetPauseThreshold > 0
                 ? mainThemeResetPauseThreshold
                 : this.constructor.MAIN_THEME_RESET_PAUSE_THRESHOLD;
-    },
+    }
 
     _initMainTheme() {
         if (this._hasMainTheme) {
             this._player.src = this._mainThemeSrc;
         }
-    },
+    }
 
     _initPreload() {
         if (this._hasMainTheme) {
@@ -357,19 +337,19 @@ AudioPlayer.prototype = {
         } else {
             this._player.preload = "none";
         }
-    },
+    }
 
     _initData() {
         this._goaMasterpieces = this._options.playlist;
         this._validateData();
-    },
+    }
 
     _initMediaSession() {
         if ("mediaSession" in navigator) {
             navigator.mediaSession.setActionHandler("play", () => {});
             navigator.mediaSession.setActionHandler("pause", () => {});
         }
-    },
+    }
 
     _initButtons() {
         this._button = new Button(
@@ -377,22 +357,22 @@ AudioPlayer.prototype = {
             this._buttonManager,
             this._buttonManager.manage,
         );
-    },
+    }
 
     _onPlayAlbum() {
         const e = new Event("albumplay", { bubbles: true });
         this._deck.dispatchEvent(e);
-    },
+    }
 
     _onPauseAlbum() {
         const e = new Event("albumpause", { bubbles: true });
         this._deck.dispatchEvent(e);
-    },
+    }
 
     _onPlayAlbumPassthrough() {
         const e = new Event("albumplaypassthrough", { bubbles: true });
         this._deck.dispatchEvent(e);
-    },
+    }
 
     _onAlbumEnded() {
         const e = new CustomEvent("albumend", {
@@ -407,7 +387,7 @@ AudioPlayer.prototype = {
         });
         this._deck.dispatchEvent(e);
         return e.defaultPrevented;
-    },
+    }
 
     _onAudioTrackChanged() {
         const trackIndex = this._currentAudioTrackIndex;
@@ -424,7 +404,7 @@ AudioPlayer.prototype = {
             bubbles: true,
         });
         this._deck.dispatchEvent(e);
-    },
+    }
 
     _onTimeChanged() {
         const e = new CustomEvent("timechange", {
@@ -435,13 +415,13 @@ AudioPlayer.prototype = {
             bubbles: true,
         });
         this._deck.dispatchEvent(e);
-    },
+    }
 
     _tryPlayAudio() {
         if (this.isAlbumPlaying()) {
             this._playAudio("album");
         }
-    },
+    }
 
     _tryPlayTheme() {
         if (this.state === STATES.THEME) {
@@ -449,7 +429,7 @@ AudioPlayer.prototype = {
             return true;
         }
         return false;
-    },
+    }
 
     _playAudio(context) {
         if (context === "theme") {
@@ -473,7 +453,7 @@ AudioPlayer.prototype = {
             }
             this._player.play().catch(() => {});
         }
-    },
+    }
 
     _pauseAudio() {
         if (this._isAudioPlaying()) {
@@ -482,7 +462,7 @@ AudioPlayer.prototype = {
             }
             this._player.pause();
         }
-    },
+    }
 
     _setAudioTrack(index) {
         if (index < 0 || index >= this._getTotalAudioTracks()) {
@@ -492,7 +472,7 @@ AudioPlayer.prototype = {
         const oldIndex = this._currentAudioTrackIndex;
         this._currentAudioTrackIndex = index;
         return this._currentAudioTrackIndex !== oldIndex;
-    },
+    }
 
     _setAlbum(index) {
         if (index < 0 || index >= this._getTotalAlbums()) {
@@ -506,24 +486,24 @@ AudioPlayer.prototype = {
         const oldIndex = this._currentAlbumIndex;
         this._currentAlbumIndex = index;
         return this._currentAlbumIndex !== oldIndex;
-    },
+    }
 
     _getTotalAudioTracks() {
         return this._goaMasterpieces[this._currentAlbumIndex].tracks.length;
-    },
+    }
 
     _getTotalAlbums() {
         return this._goaMasterpieces.length;
-    },
+    }
 
     _isAudioPlaying() {
         return Boolean(this._player.src) && !this._player.paused;
-    },
+    }
 
     _isMainThemeLoaded() {
         if (!this._hasMainTheme) return false;
         return this._player.src.includes(this._mainThemeSrc.substring(2));
-    },
+    }
 
     _isNewAudioTrack(currentSrc) {
         return !currentSrc.includes(
@@ -531,11 +511,11 @@ AudioPlayer.prototype = {
                 this._currentAudioTrackIndex
             ].src.substring(2),
         );
-    },
+    }
 
     _normaliseIndex(index, totalCount) {
         return (index + totalCount) % totalCount;
-    },
+    }
 
     _tryResetMainThemeTime() {
         if (
@@ -545,7 +525,7 @@ AudioPlayer.prototype = {
         ) {
             this.rewindAudioTrack();
         }
-    },
+    }
 
     _hardReset() {
         if (this._hasMainTheme) {
@@ -555,27 +535,27 @@ AudioPlayer.prototype = {
             this._player.src = "";
         }
         this.stopPlaylist();
-    },
+    }
 
     _clickPlay(button, e) {
         this.play();
         if (helper.isPassthroughKey(e)) {
             this._onPlayAlbumPassthrough();
         }
-    },
+    }
 
     _clickPause() {
         this.pause();
         this._tryPlayTheme();
-    },
+    }
 
     _clickNext() {
         this.nextAudioTrack();
-    },
+    }
 
     _clickPrev() {
         this.prevAudioTrack();
-    },
+    }
 
     _pressNext(e) {
         if (this.isAlbumPlaying()) {
@@ -583,7 +563,7 @@ AudioPlayer.prototype = {
             return false;
         }
         return e;
-    },
+    }
 
     _pressPrev(e) {
         if (this.isAlbumPlaying()) {
@@ -591,7 +571,7 @@ AudioPlayer.prototype = {
             return false;
         }
         return e;
-    },
+    }
 
     _pressSwitchaudiotrack(e) {
         if (this.isAlbumPlaying()) {
@@ -604,14 +584,14 @@ AudioPlayer.prototype = {
             }
         }
         return e;
-    },
+    }
 
     _pressPlay(e) {
         if (!this.isAlbumPlaying()) {
             this.play();
         }
         return false;
-    },
+    }
 
     _pressPause(e) {
         if (this.isAlbumPlaying()) {
@@ -621,7 +601,7 @@ AudioPlayer.prototype = {
             }
         }
         return e;
-    },
+    }
 
     _pressPlaypause(e) {
         if (this.isAlbumPlaying()) {
@@ -634,7 +614,7 @@ AudioPlayer.prototype = {
             return false;
         }
         return e;
-    },
+    }
 
     _pressRestartaudiotrack(e) {
         if (this.isAlbumPlaying()) {
@@ -642,7 +622,7 @@ AudioPlayer.prototype = {
             return false;
         }
         return e;
-    },
+    }
 
     _pressRestartalbum(e) {
         if (this.isAlbumPlaying()) {
@@ -650,12 +630,12 @@ AudioPlayer.prototype = {
             return false;
         }
         return e;
-    },
+    }
 
     _pressExecute(e) {
         if (this._button.isActive()) return true;
         return e;
-    },
+    }
 
     _pressToggleaudiomode(e) {
         if (helper.isPassthroughKey(e)) {
@@ -670,7 +650,7 @@ AudioPlayer.prototype = {
             return false;
         }
         return e;
-    },
+    }
 
     _pressReset(e) {
         if (helper.isOverrideKey(e)) {
@@ -679,7 +659,7 @@ AudioPlayer.prototype = {
             this.pause();
         }
         return e;
-    },
+    }
 
     _handleEnded() {
         if (this.state === STATES.THEME) {
@@ -694,12 +674,12 @@ AudioPlayer.prototype = {
         } else {
             this.nextAudioTrack();
         }
-    },
+    }
 
     _handleTimeUpdate() {
         if (!this._player.duration || isNaN(this._player.duration)) return;
         this._onTimeChanged();
-    },
+    }
 
     _validateData() {
         if (
@@ -721,16 +701,18 @@ AudioPlayer.prototype = {
                     `  });\n`,
             );
         }
-    },
-};
+    }
 
-AudioPlayer[AudioPlayer.EVENT_MAP_KEY] = {
-    ended: {
-        target: (instance) => instance._player,
-        handler: AudioPlayer.prototype._handleEnded,
-    },
-    timeupdate: {
-        target: (instance) => instance._player,
-        handler: AudioPlayer.prototype._handleTimeUpdate,
-    },
-};
+    static {
+        AudioPlayer[AudioPlayer.EVENT_MAP_KEY] = {
+            ended: {
+                target: (instance) => instance._player,
+                handler: AudioPlayer.prototype._handleEnded,
+            },
+            timeupdate: {
+                target: (instance) => instance._player,
+                handler: AudioPlayer.prototype._handleTimeUpdate,
+            },
+        };
+    }
+}
