@@ -1,13 +1,12 @@
 "use strict";
 
-export default function Button(className, instance, command) {
-    this._className = className;
-    this._assertCommand(command);
-    this._command = (element, input) => command.call(instance, element, input);
-}
-
-Button.prototype = {
-    constructor: Button,
+export default class Button {
+    constructor(className, instance, command) {
+        this._className = className;
+        this._assertCommand(command);
+        this._command = (element, input) =>
+            command.call(instance, element, input);
+    }
 
     execute(input) {
         if (!(input instanceof MouseEvent)) return input;
@@ -21,11 +20,11 @@ Button.prototype = {
 
         this._command(button, input);
         return true;
-    },
+    }
 
     isActive() {
         return document.activeElement?.closest(`.${this._className}`);
-    },
+    }
 
     _assertCommand(command) {
         if (typeof command !== "function") {
@@ -34,5 +33,5 @@ Button.prototype = {
                     `The command parameter must be a valid function`,
             );
         }
-    },
-};
+    }
+}
