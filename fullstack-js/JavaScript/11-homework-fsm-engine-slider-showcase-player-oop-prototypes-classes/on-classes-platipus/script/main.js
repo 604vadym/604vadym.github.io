@@ -1,0 +1,618 @@
+"use strict";
+
+/* 
+  ============================================================================
+  ⚠️ COPYRIGHT NOTICE & DISCLAIMER (Non-Commercial Educational Fan Project)
+  All media assets (short audio previews, album covers) are property of their
+  respective artists and copyright holders. This project was created strictly
+  for educational and portfolio presentation purposes and is not intended for
+  commercial use. If requested by the respective artists or copyright holders,
+  any materials will be removed immediately.
+  ============================================================================
+*/
+
+import ShowcaseApp from "./showcase-app.js";
+import Slider from "./components/autoscroll-slider.js";
+import AudioPlayer from "./components/audio-player.js";
+import AudioDeckView from "./components/audio-deck-view.js";
+import Shop from "./components/shop.js";
+
+/*
+ * JS #11. Розробка повнофункціонального слайдера на чистому JavaScript з використанням прототипів, класів та наслідування
+ *
+ * Опис завдання
+ *
+ * На цьому етапі курсу ви продовжите розробку слайдера, розпочату на попередньому занятті, із застосуванням більш складних концепцій програмування:
+ *
+ * Переписування коду з використанням прототипу та наслідування:Використовуйте вже розроблений код слайдера як основу.
+ * Реорганізуйте код, застосовуючи прототипи для основних функцій слайдера та наслідування для розширення функціональності (наприклад, тач та перетягування мишею).
+ * Динамічна генерація елементів управління через JavaScript:Відмовтеся від статичної верстки елементів управління в HTML.
+ * Реалізуйте створення кнопок навігації та індикаторів слайдів динамічно через JavaScript.
+ * Додавання налаштувань конфігурації слайдера:Розширте можливості вашого слайдера, додавши об'єкт конфігурації, який дозволить налаштовувати його поведінку (наприклад, інтервал автопрогортання, відображення індикаторів).
+ * Розробка нової версії слайдера з використанням класів:Створіть альтернативну версію слайдера, яка використовує класи для організації коду.
+ * Додайте у цій версії додаткові функції, такі як автоматична пауза при наведенні миші на слайдер.
+ *
+ * Вимоги до виконання:
+ *
+ * Ваше домашнє завдання має містити дві версії слайдера: на основі прототипів та класів.
+ * Обидві версії повинні бути доступні в окремих гілках у вашому репозиторії на GitHub.
+ * Подбайте про чітку документацію вашого коду та налаштувань конфігурації слайдера.
+ * Переконайтеся, що ваш слайдер адаптований для роботи в різних браузерах та на різних пристроях.
+ *
+ */
+
+const slider = new Slider({
+    singleSelectors: {
+        slider: ".slider",
+        track: ".slider__track",
+        viewport: ".slider__viewport",
+        btnNext: ".slider__btn--next",
+        btnPrev: ".slider__btn--prev",
+        pagination: ".slider__pagination",
+        btnAutoscrollOn: ".slider__btn--autoscroll-on",
+        btnAutoscrollOff: ".slider__btn--autoscroll-off",
+    },
+
+    groupSelectors: { slides: ".slider__slide", images: ".slider__image" },
+
+    classes: {
+        track: "slider__track",
+        button: "button",
+        sliderBtn: "slider__btn",
+        paginationDot: "pagination__dot",
+        btnAutoscrollOff: "slider__btn--autoscroll-off",
+    },
+
+    classesActive: {
+        paginationDot: "pagination__dot--active",
+    },
+
+    jsClasses: {
+        autoscrollPause: "js-autoscroll-pause",
+        dynamicFocus: "js-dynamic-focus",
+    },
+
+    states: {
+        resizing: "slider--resizing",
+    },
+
+    click: {
+        next: "slider__btn--next",
+        prev: "slider__btn--prev",
+        goto: "pagination__dot",
+        autoscrollon: "slider__btn--autoscroll-on",
+        autoscrolloff: "slider__btn--autoscroll-off",
+    },
+
+    press: {
+        next: ["ArrowRight", "KeyD"],
+        prev: ["ArrowLeft", "KeyA"],
+        autoscrolloff: ["ArrowUp", "KeyW"],
+        execute: ["Enter"],
+        toggleautoscroll: [" "],
+        reset: ["Escape"],
+        ignore: ["MediaPlayPause"],
+    },
+
+    autoplay: false,
+    autoscrollDelay: null,
+    autoscrollWakeUpDelay: null,
+
+    slideTriggerThresholdCoef: null,
+});
+
+const audioPlayer = new AudioPlayer({
+    singleSelectors: {
+        deck: ".showcase",
+        btnPlay: ".slider__btn-audio--play",
+        btnPause: ".slider__btn-audio--pause",
+        btnNext: ".slider__btn-audio--next",
+        btnPrev: ".slider__btn-audio--prev",
+    },
+
+    classes: {
+        playerBtn: "slider__btn-audio",
+    },
+
+    click: {
+        play: "slider__btn-audio--play",
+        pause: "slider__btn-audio--pause",
+        next: "slider__btn-audio--next",
+        prev: "slider__btn-audio--prev",
+    },
+
+    press: {
+        next: [
+            "ArrowRight",
+            "KeyD",
+            "MediaTrackNext",
+            "=",
+            "+",
+            "NumpadAdd",
+            "BracketRight",
+            "KeyN",
+        ],
+        prev: [
+            "ArrowLeft",
+            "KeyA",
+            "MediaTrackPrevious",
+            "_",
+            "-",
+            "NumpadSubtract",
+            "BracketLeft",
+            "KeyP",
+        ],
+        switchaudiotrack: [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            ")",
+            "!",
+            "@",
+            "#",
+            "$",
+            "%",
+            "^",
+            "&",
+            "*",
+            "(",
+        ],
+        play: ["ArrowUp", "KeyW"],
+        pause: ["ArrowDown", "KeyS", "Pause"],
+        playpause: ["MediaPlayPause"],
+        restartaudiotrack: ["0", "Home"],
+        restartalbum: ["Backspace"],
+        execute: ["Enter"],
+        toggleaudiomode: [" "],
+        reset: ["Escape"],
+    },
+
+    mainThemeResetPauseThreshold: null,
+
+    mainThemeSrc:
+        "./assets/audio/main-theme-the-mystery-of-the-yeti-preview.mp3",
+
+    playlist: [
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/emuna/2000-emuna/01-adon-haslichot-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/02-crystal-clear-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/03-the-3rd-world-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/04-heart-of-trance-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/05-missing-bush-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/06-angel-kaya-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/07-one-in-a-million-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/08-i-believe-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/emuna/2000-emuna/09-gods-image-preview.mp3",
+                },
+            ],
+        },
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/01-moment-of-truth-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/02-floor-essence-dayglo-mix-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/03-subterfuge-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/04-evolution-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/05-azymuth-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/06-low-commotion-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/07-skydiving-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/08-dawn-chorus-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/09-cairo-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/10-sugar-rush-refined-mix-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/11-cosmic-echoes-preview.mp3",
+                },
+            ],
+        },
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/01-vavoom-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/02-seratonin-sunrise-mvo-mix.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/03-camouflage-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/04-own-the-world-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/05-the-first-day-horizon.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/06-treacle-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/07-possessed-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/08-parallel-universe-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/09-spaghettification-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/10-tarantula-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/11-the-breech-preview.mp3",
+                },
+            ],
+        },
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/01-spiritual-healing-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/02-the-ancient-sounds-of-the-god.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/03-the-angel-and-the-snake-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/04-enchanted-forest-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/05-the-return-of-the-travellers.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/06-and-the-sensitives-will-be-kings.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/07-the-warriors-of-temperance.mp3",
+                },
+                {
+                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/08-corazon-de-fuego-preview.mp3",
+                },
+            ],
+        },
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/01-langbortistan-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/02-dybet-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/03-h2o-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/04-refleksioner-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/05-nordlys-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/06-hypnose-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/07-rejsen-preview.mp3",
+                },
+            ],
+        },
+    ],
+});
+
+const audioDeckView = new AudioDeckView({
+    singleSelectors: {
+        audioTrackTitle: ".slider__audio-track-title",
+        progressBarCurrentTime: ".slider__audio-track-current-time",
+        progressBarFullTime: ".slider__audio-track-full-time",
+    },
+});
+
+const shop = new Shop({
+    singleSelectors: {
+        link: ".slider__link-shop",
+    },
+
+    press: {
+        execute: ["Enter"],
+    },
+
+    defaultUrl: null,
+
+    data: [
+        {
+            url: "https://mfgmemo604.bandcamp.com/album/emuna",
+        },
+        {
+            url: "https://mwnn.bandcamp.com/album/moment-of-truth",
+        },
+        {
+            url: "https://mwnn.bandcamp.com/album/earth-moving-the-sun",
+        },
+        {
+            url: "https://themusesrapt.bandcamp.com/album/spiritual-healing",
+        },
+        {
+            url: "https://laugebabagnohm.bandcamp.com/album/langbortistan",
+        },
+    ],
+});
+
+const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
+    singleSelectors: {
+        app: ".showcase",
+    },
+
+    classes: {
+        app: "showcase",
+        button: "button",
+        linkShop: "slider__link-shop",
+    },
+
+    jsClasses: {
+        keyboardPressBtn: "js-pressed-target",
+        btnNoActive: "js-no-active",
+    },
+
+    states: {
+        autoscrollActive: "slider--autoscroll-on",
+        audioActive: "slider--audio-play",
+        keyboardBtnPressed: "is-pressed",
+    },
+
+    press: {
+        step: ["ArrowRight", "ArrowLeft", "KeyD", "KeyA"],
+        switchaudiotrack: [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            ")",
+            "!",
+            "@",
+            "#",
+            "$",
+            "%",
+            "^",
+            "&",
+            "*",
+            "(",
+        ],
+        execute: ["Enter"],
+        toggle: [" "],
+
+        escape: ["Escape"],
+        checkplatformmodifiers: ["0", "Home", "Backspace"],
+        ignore: ["PageDown", "PageUp", "End"],
+        prevent: [
+            "=",
+            "+",
+            "_",
+            "-",
+            "ArrowUp",
+            "ArrowDown",
+            "BracketRight",
+            "BracketLeft",
+            "NumpadAdd",
+            "NumpadSubtract",
+        ],
+    },
+
+    albums: [
+        {
+            title: "Emuna",
+            year: 2000,
+            tracks: [
+                {
+                    name: "אדון הסליחות (Adon Haslichot)",
+                },
+                {
+                    name: "Crystal Clear",
+                },
+                {
+                    name: "The 3rd World",
+                },
+                {
+                    name: "Heart of Trance",
+                },
+                {
+                    name: "Missing Bush",
+                },
+                {
+                    name: "Angel Kaya",
+                },
+                {
+                    name: "One in a Million",
+                },
+                {
+                    name: "I Believe",
+                },
+                {
+                    name: "God's Image",
+                },
+            ],
+        },
+        {
+            title: "Moment of Truth",
+            year: 1996,
+            tracks: [
+                {
+                    name: "Moment of Truth",
+                },
+                {
+                    name: "Floor-Essence (Dayglo Mix)",
+                },
+                {
+                    name: "Subterfuge",
+                },
+                {
+                    name: "Evolution",
+                },
+                {
+                    name: "Azymuth",
+                },
+                {
+                    name: "Low Commotion",
+                },
+                {
+                    name: "Skydiving",
+                },
+                {
+                    name: "Dawn Chorus",
+                },
+                {
+                    name: "Cairo",
+                },
+                {
+                    name: "Sugar Rush (Refined Mix)",
+                },
+                {
+                    name: "Cosmic Echoes",
+                },
+            ],
+        },
+        {
+            title: "Earth Moving the Sun",
+            year: 1998,
+            tracks: [
+                {
+                    name: "Vavoom!",
+                },
+                {
+                    name: "Seratonin Sunrise (MVO Mix)",
+                },
+                {
+                    name: "Camouflage",
+                },
+                {
+                    name: "Own the World",
+                },
+                {
+                    name: "The First Day (Horizon)",
+                },
+                {
+                    name: "Treacle",
+                },
+                {
+                    name: "Possessed",
+                },
+                {
+                    name: "Parallel Universe",
+                },
+                {
+                    name: "Spaghettification",
+                },
+                {
+                    name: "Tarantula",
+                },
+                {
+                    name: "The Breech",
+                },
+            ],
+        },
+        {
+            title: "Spiritual Healing",
+            year: 1998,
+            tracks: [
+                {
+                    name: "Spiritual Healing",
+                },
+                {
+                    name: "The Ancient Sounds of the God",
+                },
+                {
+                    name: "The Angel and the Snake",
+                },
+                {
+                    name: "Enchanted Forest",
+                },
+                {
+                    name: "The Return of the Travellers",
+                },
+                {
+                    name: "...And the Sensitives will be Kings",
+                },
+                {
+                    name: "The Warriors of Temperance",
+                },
+                {
+                    name: "Corazón De Fuego",
+                },
+            ],
+        },
+        {
+            title: "Langbortistan",
+            year: 2011,
+            tracks: [
+                {
+                    name: "Langbortistan",
+                },
+                {
+                    name: "Dybet",
+                },
+                {
+                    name: "H₂O",
+                },
+                {
+                    name: "Refleksioner",
+                },
+                {
+                    name: "Nordlys",
+                },
+                {
+                    name: "Hypnose",
+                },
+                {
+                    name: "Rejsen",
+                },
+            ],
+        },
+    ],
+});
+
+app.init();
