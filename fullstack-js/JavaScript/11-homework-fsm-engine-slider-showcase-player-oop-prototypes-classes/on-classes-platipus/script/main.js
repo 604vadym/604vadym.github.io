@@ -190,24 +190,6 @@ const audioPlayer = new AudioPlayer({
                 {
                     src: "./assets/audio/emuna/2000-emuna/03-the-3rd-world-preview.mp3",
                 },
-                {
-                    src: "./assets/audio/emuna/2000-emuna/04-heart-of-trance-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/emuna/2000-emuna/05-missing-bush-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/emuna/2000-emuna/06-angel-kaya-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/emuna/2000-emuna/07-one-in-a-million-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/emuna/2000-emuna/08-i-believe-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/emuna/2000-emuna/09-gods-image-preview.mp3",
-                },
             ],
         },
         {
@@ -220,30 +202,6 @@ const audioPlayer = new AudioPlayer({
                 },
                 {
                     src: "./assets/audio/man-with-no-name/1996-moment-of-truth/03-subterfuge-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/04-evolution-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/05-azymuth-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/06-low-commotion-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/07-skydiving-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/08-dawn-chorus-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/09-cairo-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/10-sugar-rush-refined-mix-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/11-cosmic-echoes-preview.mp3",
                 },
             ],
         },
@@ -258,30 +216,6 @@ const audioPlayer = new AudioPlayer({
                 {
                     src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/03-camouflage-preview.mp3",
                 },
-                {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/04-own-the-world-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/05-the-first-day-horizon.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/06-treacle-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/07-possessed-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/08-parallel-universe-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/09-spaghettification-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/10-tarantula-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/11-the-breech-preview.mp3",
-                },
             ],
         },
         {
@@ -294,46 +228,6 @@ const audioPlayer = new AudioPlayer({
                 },
                 {
                     src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/03-the-angel-and-the-snake-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/04-enchanted-forest-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/05-the-return-of-the-travellers.mp3",
-                },
-                {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/06-and-the-sensitives-will-be-kings.mp3",
-                },
-                {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/07-the-warriors-of-temperance.mp3",
-                },
-                {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/08-corazon-de-fuego-preview.mp3",
-                },
-            ],
-        },
-        {
-            tracks: [
-                {
-                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/01-langbortistan-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/02-dybet-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/03-h2o-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/04-refleksioner-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/05-nordlys-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/06-hypnose-preview.mp3",
-                },
-                {
-                    src: "./assets/audio/lauge-and-baba-gnohm/2011-langbortistan/07-rejsen-preview.mp3",
                 },
             ],
         },
@@ -371,9 +265,6 @@ const shop = new Shop({
         },
         {
             url: "https://themusesrapt.bandcamp.com/album/spiritual-healing",
-        },
-        {
-            url: "https://laugebabagnohm.bandcamp.com/album/langbortistan",
         },
     ],
 });
@@ -457,24 +348,6 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
                 {
                     name: "The 3rd World",
                 },
-                {
-                    name: "Heart of Trance",
-                },
-                {
-                    name: "Missing Bush",
-                },
-                {
-                    name: "Angel Kaya",
-                },
-                {
-                    name: "One in a Million",
-                },
-                {
-                    name: "I Believe",
-                },
-                {
-                    name: "God's Image",
-                },
             ],
         },
         {
@@ -489,30 +362,6 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
                 },
                 {
                     name: "Subterfuge",
-                },
-                {
-                    name: "Evolution",
-                },
-                {
-                    name: "Azymuth",
-                },
-                {
-                    name: "Low Commotion",
-                },
-                {
-                    name: "Skydiving",
-                },
-                {
-                    name: "Dawn Chorus",
-                },
-                {
-                    name: "Cairo",
-                },
-                {
-                    name: "Sugar Rush (Refined Mix)",
-                },
-                {
-                    name: "Cosmic Echoes",
                 },
             ],
         },
@@ -529,30 +378,6 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
                 {
                     name: "Camouflage",
                 },
-                {
-                    name: "Own the World",
-                },
-                {
-                    name: "The First Day (Horizon)",
-                },
-                {
-                    name: "Treacle",
-                },
-                {
-                    name: "Possessed",
-                },
-                {
-                    name: "Parallel Universe",
-                },
-                {
-                    name: "Spaghettification",
-                },
-                {
-                    name: "Tarantula",
-                },
-                {
-                    name: "The Breech",
-                },
             ],
         },
         {
@@ -567,48 +392,6 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
                 },
                 {
                     name: "The Angel and the Snake",
-                },
-                {
-                    name: "Enchanted Forest",
-                },
-                {
-                    name: "The Return of the Travellers",
-                },
-                {
-                    name: "...And the Sensitives will be Kings",
-                },
-                {
-                    name: "The Warriors of Temperance",
-                },
-                {
-                    name: "Corazón De Fuego",
-                },
-            ],
-        },
-        {
-            title: "Langbortistan",
-            year: 2011,
-            tracks: [
-                {
-                    name: "Langbortistan",
-                },
-                {
-                    name: "Dybet",
-                },
-                {
-                    name: "H₂O",
-                },
-                {
-                    name: "Refleksioner",
-                },
-                {
-                    name: "Nordlys",
-                },
-                {
-                    name: "Hypnose",
-                },
-                {
-                    name: "Rejsen",
                 },
             ],
         },
