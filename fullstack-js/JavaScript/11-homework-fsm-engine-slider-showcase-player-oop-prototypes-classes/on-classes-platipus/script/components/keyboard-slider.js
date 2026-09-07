@@ -27,7 +27,7 @@ export default class KeyboardSlider extends PaginationSlider {
         this._slider.classList.remove(this._options.states.resizing);
         this._updateTrackInstantly();
         this._updatePagination();
-        this._state = STATES.IDLE;
+        this._state = this.constructor.STATES.IDLE;
     }
 
     _pressNext(e) {
