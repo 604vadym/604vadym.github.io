@@ -30,6 +30,7 @@ InfiniteSlider.prototype._initProps = function () {
     KeyboardSlider.prototype._initProps.call(this);
     this._startIndex = 1;
     this._currentIndex = this._startIndex;
+    this._activeIndex = this._currentIndex;
     this._teleportMap = {
         [this._startIndex - 1]: this._slidesCount,
         [this._slidesCount + 1]: this._startIndex,

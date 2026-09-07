@@ -89,7 +89,7 @@ DraggableSlider.prototype._stopDragging = function (
                 this.prev();
             }
         } else {
-            this._updateTrack();
+            this._moveTrack();
         }
     } else {
         if (isClick) {
