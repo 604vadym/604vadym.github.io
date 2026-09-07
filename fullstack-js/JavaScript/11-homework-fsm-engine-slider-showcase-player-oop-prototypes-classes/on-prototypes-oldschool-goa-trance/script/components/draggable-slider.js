@@ -20,10 +20,6 @@ Object.defineProperty(DraggableSlider, "TRIGGER_THRESHOLD_COEF", {
 const MOUSE_BUTTON_MIDDLE = 1;
 const MOUSE_BUTTON_RIGHT = 2;
 
-DraggableSlider.prototype.init = function () {
-    InfiniteSlider.prototype.init.call(this);
-};
-
 DraggableSlider.prototype._initProps = function () {
     InfiniteSlider.prototype._initProps.call(this);
 
