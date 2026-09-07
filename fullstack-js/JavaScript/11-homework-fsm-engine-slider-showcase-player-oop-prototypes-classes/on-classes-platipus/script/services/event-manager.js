@@ -1,19 +1,15 @@
 "use strict";
 
-export default function EventManager() {}
-
-EventManager.prototype = {
-    constructor: EventManager,
-
+export default class EventManager {
     init(instance, eventMapKey) {
         this._initEventHandlerTable(instance, eventMapKey);
-    },
+    }
 
     handleEvent(e) {
         const handle = this._eventHandlerTable[e.type];
 
         if (handle) handle(e);
-    },
+    }
 
     subscribe(instance, eventMap) {
         if (!eventMap) return;
@@ -45,7 +41,7 @@ EventManager.prototype = {
             this._eventHandlerTable[event] = (e) => handler?.call(instance, e);
             targetElement.addEventListener(event, this, options);
         });
-    },
+    }
 
     unsubscribe(instance, eventMap) {
         if (!eventMap) return;
@@ -69,7 +65,7 @@ EventManager.prototype = {
             targetElement.removeEventListener(event, this, options);
             delete this._eventHandlerTable[event];
         });
-    },
+    }
 
     _initEventHandlerTable(client, eventMapKey) {
         let proto = Object.getPrototypeOf(client);
@@ -110,7 +106,7 @@ EventManager.prototype = {
             }
             proto = Object.getPrototypeOf(proto);
         }
-    },
+    }
 
     _assertEventMapKey(client, eventMapKey) {
         if (
@@ -123,7 +119,7 @@ EventManager.prototype = {
                     `Expecting a valid String or Symbol identifier`,
             );
         }
-    },
+    }
 
     _assertEventMapContract(eventMap, className) {
         Object.entries(eventMap).forEach(([event, eventConfig]) => {
@@ -138,7 +134,7 @@ EventManager.prototype = {
                 );
             }
         });
-    },
+    }
 
     _assertTargetElement(targetElement, event, className) {
         if (!targetElement) {
@@ -147,5 +143,5 @@ EventManager.prototype = {
                     `Class "${className}" failed to resolve target element for event "${event}"`,
             );
         }
-    },
-};
+    }
+}

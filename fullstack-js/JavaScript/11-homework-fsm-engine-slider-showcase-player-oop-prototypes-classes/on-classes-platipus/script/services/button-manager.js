@@ -1,13 +1,9 @@
 "use strict";
 
-export default function ButtonManager() {}
-
-ButtonManager.prototype = {
-    constructor: ButtonManager,
-
+export default class ButtonManager {
     init(instance, configName) {
         this._initButtonActionTable(instance, configName);
-    },
+    }
 
     manage(button, e) {
         const request = this._buttonActionTable.find((entry) =>
@@ -15,7 +11,7 @@ ButtonManager.prototype = {
         );
 
         return request?.action(button, e);
-    },
+    }
 
     _initButtonActionTable(client, configName) {
         const config = client._options[configName];
@@ -39,7 +35,7 @@ ButtonManager.prototype = {
                 action: (button, e) => action.call(client, button, e),
             });
         });
-    },
+    }
 
     _assertConfig(config, configName, className) {
         if (!config) {
@@ -47,7 +43,7 @@ ButtonManager.prototype = {
                 `[ButtonManager]: Configuration section "${configName}" is missing in options for "${className}"`,
             );
         }
-    },
+    }
 
     _assertMethodContract(method, methodName, configName, className) {
         if (typeof method !== "function") {
@@ -56,5 +52,5 @@ ButtonManager.prototype = {
                     `Method "${methodName}" declared in "${configName}" options must be a valid function`,
             );
         }
-    },
-};
+    }
+}

@@ -1,19 +1,15 @@
 "use strict";
 
-export default function KeyboardManager() {}
-
-KeyboardManager.prototype = {
-    constructor: KeyboardManager,
-
+export default class KeyboardManager {
     init(instance, configName) {
         this._initKeyActionTable(instance, configName);
-    },
+    }
 
     manage(e) {
         const request = this._keyActionTable.find((entry) => entry.match(e));
 
         return request?.action(e) ?? e;
-    },
+    }
 
     _initKeyActionTable(client, configName) {
         const config = client._options[configName];
@@ -37,11 +33,11 @@ KeyboardManager.prototype = {
                 action: (e) => action.call(client, e),
             });
         });
-    },
+    }
 
     _matchKeys(keys) {
         return (e) => keys.includes(e.code) || keys.includes(e.key);
-    },
+    }
 
     _assertConfig(config, configName, className) {
         if (!config) {
@@ -49,7 +45,7 @@ KeyboardManager.prototype = {
                 `[KeyboardManager]: Configuration section "${configName}" is missing in options for "${className}"`,
             );
         }
-    },
+    }
 
     _assertMethodContract(method, methodName, configName, className) {
         if (typeof method !== "function") {
@@ -58,5 +54,5 @@ KeyboardManager.prototype = {
                     `Method "${methodName}" declared in "${configName}" options must be a valid function`,
             );
         }
-    },
-};
+    }
+}
