@@ -5,40 +5,6 @@ import DOMValidator from "./services/dom-validator.js";
 import EventManager from "./services/event-manager.js";
 import KeyboardManager from "./services/keyboard-manager.js";
 
-export default function ShowcaseApp(
-    slider,
-    audioPlayer,
-    audioDeckView,
-    shop,
-    options,
-) {
-    this._slider = slider;
-    this._audioPlayer = audioPlayer;
-    this._audioDeckView = audioDeckView;
-    this._shop = shop;
-    this._options = options;
-
-    Object.defineProperty(this, "_domValidator", {
-        value: new DOMValidator(ShowcaseApp),
-        writable: false,
-        configurable: false,
-    });
-
-    Object.defineProperty(this, "_keyboardManager", {
-        value: new KeyboardManager(),
-        writable: false,
-        configurable: false,
-    });
-
-    Object.defineProperty(this, "_eventManager", {
-        value: new EventManager(),
-        writable: false,
-        configurable: false,
-    });
-}
-
-ShowcaseApp.EVENT_MAP_KEY = "EVENT_MAP";
-
 const shiftAudioTrackMap = {
     ")": 10,
     "!": 11,
@@ -56,16 +22,27 @@ const MOUSE_BUTTON_LEFT = 0;
 const MOUSE_BUTTON_MIDDLE = 1;
 const MOUSE_BUTTON_RIGHT = 2;
 
-ShowcaseApp.KEYBOARD_MODES = Object.freeze({
+const KEYBOARD_MODES = Object.freeze({
     REVERSE: "reverse",
     REPEAT_FILTERED: "repeatFiltered",
     REPEAT_ALLOWED: "repeatAllowed",
 });
 
-const MODES = ShowcaseApp.KEYBOARD_MODES;
+const MODES = KEYBOARD_MODES;
 
-ShowcaseApp.prototype = {
-    constructor: ShowcaseApp,
+export default class ShowcaseApp {
+    static EVENT_MAP_KEY = "EVENT_MAP";
+
+    constructor(slider, audioPlayer, audioDeckView, shop, options) {
+        this._slider = slider;
+        this._audioPlayer = audioPlayer;
+        this._audioDeckView = audioDeckView;
+        this._shop = shop;
+        this._options = options;
+        this._domValidator = new DOMValidator(ShowcaseApp);
+        this._keyboardManager = new KeyboardManager();
+        this._eventManager = new EventManager();
+    }
 
     init() {
         this._initDOMElements();
@@ -76,7 +53,7 @@ ShowcaseApp.prototype = {
         this._shop.init();
         this._keyboardManager.init(this, "press");
         this._eventManager.init(this, ShowcaseApp.EVENT_MAP_KEY);
-    },
+    }
 
     _initDOMElements(childElements) {
         const showcase = document.querySelector(
@@ -88,12 +65,12 @@ ShowcaseApp.prototype = {
         });
 
         this._showcase = showcase;
-    },
+    }
 
     _initProps() {
         this._isSliderMoving = false;
         this._btnNoActive = null;
-    },
+    }
 
     _tryResetBtnNoActive() {
         if (this._btnNoActive) {
@@ -103,14 +80,14 @@ ShowcaseApp.prototype = {
             this._eventManager.unsubscribe(this, ShowcaseApp.DYNAMIC_EVENT_MAP);
             this._btnNoActive = null;
         }
-    },
+    }
 
     _isRepeatAllowed(e) {
         if (e.repeat && !this._isPassthrougOnActiveAudio(e)) {
             return true;
         }
         return false;
-    },
+    }
 
     _isPassthrougOnActiveAudio(e) {
         if (helper.isPassthroughKey(e)) {
@@ -119,7 +96,7 @@ ShowcaseApp.prototype = {
             }
         }
         return false;
-    },
+    }
 
     _pressStep(e) {
         helper.prevent(e);
@@ -127,7 +104,7 @@ ShowcaseApp.prototype = {
         if (e.repeat) return MODES.REPEAT_FILTERED;
         if (this._isPassthrougOnActiveAudio(e)) return MODES.REVERSE;
         return e;
-    },
+    }
 
     _pressSwitchaudiotrack(e) {
         let audioTrackIndex;
@@ -139,39 +116,39 @@ ShowcaseApp.prototype = {
 
         this._audioPlayer.audioTrackInQueue = audioTrackIndex;
         return e;
-    },
+    }
 
     _pressExecute(e) {
         return MODES.REPEAT_ALLOWED;
-    },
+    }
 
     _pressToggle(e) {
         helper.prevent(e);
         return MODES.REVERSE;
-    },
+    }
 
     _pressEscape(e) {
         if (helper.hasPlatformModifiers(e)) return false;
         helper.prevent(e);
         helper.tryClearFocus();
         return e;
-    },
+    }
 
     _pressCheckplatformmodifiers(e) {
         if (helper.hasPlatformModifiers(e)) return false;
         helper.prevent(e);
         return e;
-    },
+    }
 
     _pressIgnore(e) {
         helper.prevent(e);
         return false;
-    },
+    }
 
     _pressPrevent(e) {
         helper.prevent(e);
         return e;
-    },
+    }
 
     _stream(e, handlerName, EventClass, pump) {
         let pipeline;
@@ -181,7 +158,7 @@ ShowcaseApp.prototype = {
             pipeline = [this._slider, this._audioPlayer, this._shop];
         }
         return this._pipe(e, handlerName, EventClass, pipeline);
-    },
+    }
 
     _pipe(e, handlerName, EventClass, pipeline) {
         for (const component of pipeline) {
@@ -191,11 +168,11 @@ ShowcaseApp.prototype = {
             }
         }
         return e;
-    },
+    }
 
     _handleClick(e) {
         this._stream(e, "handleClick", MouseEvent);
-    },
+    }
 
     _handleAuxClick(e) {
         if (e.button === MOUSE_BUTTON_RIGHT) {
@@ -217,7 +194,7 @@ ShowcaseApp.prototype = {
         }
 
         this._stream(e, "handleAuxClick", MouseEvent);
-    },
+    }
 
     _handleKeyDown(e) {
         let pump;
@@ -242,7 +219,7 @@ ShowcaseApp.prototype = {
                 );
             }
         }
-    },
+    }
 
     _handleKeyUp(e) {
         const pressedBtn = document.querySelector(
@@ -253,7 +230,7 @@ ShowcaseApp.prototype = {
                 this._options.states.keyboardBtnPressed,
             );
         }
-    },
+    }
 
     _handleMouseDown(e) {
         if (e.button === MOUSE_BUTTON_MIDDLE) {
@@ -277,15 +254,15 @@ ShowcaseApp.prototype = {
         ) {
             this._tryResetBtnNoActive();
         }
-    },
+    }
 
     _handleViewportClick(e) {
         this._audioPlayer.toggle();
-    },
+    }
 
     _handleSlideMove(e) {
         this._isSliderMoving = true;
-    },
+    }
 
     _handleSlideChange(e) {
         this._isSliderMoving = false;
@@ -293,12 +270,12 @@ ShowcaseApp.prototype = {
         if (helper.isTabActive()) {
             this._audioPlayer.switchAlbum(e.detail.index);
         }
-    },
+    }
 
     _handleAutoscrollChange(e) {
         this._toggleAudioPlayerTheme(e.detail.isActive);
         this._toggleAutoscrollLayout(e.detail.isActive);
-    },
+    }
 
     _toggleAudioPlayerTheme(isActive) {
         if (isActive) {
@@ -306,7 +283,7 @@ ShowcaseApp.prototype = {
         } else {
             this._audioPlayer.resetTheme();
         }
-    },
+    }
 
     _toggleAutoscrollLayout(isActive) {
         if (this._isAutoscrollActive() === isActive) return;
@@ -316,27 +293,27 @@ ShowcaseApp.prototype = {
         );
         this._slider.toggleTabIndex(isActive);
         helper.tryClearFocus();
-    },
+    }
 
     _isAutoscrollActive() {
         return this._showcase.classList.contains(
             this._options.states.autoscrollActive,
         );
-    },
+    }
 
     _handleAlbumPlay(e) {
         this._slider.lockAutoscroll();
         this._toggleAudioPlayerLayout(true);
-    },
+    }
 
     _handleAlbumPause(e) {
         this._slider.unlockAutoscroll();
         this._toggleAudioPlayerLayout(false);
-    },
+    }
 
     _handleAlbumPlayPassthrough(e) {
         this._slider.disableAutoscroll();
-    },
+    }
 
     _toggleAudioPlayerLayout(isActive) {
         if (this._isAudioActive() === isActive) return;
@@ -346,13 +323,13 @@ ShowcaseApp.prototype = {
         );
         this._audioPlayer.toggleTabIndex(isActive);
         helper.tryClearFocus();
-    },
+    }
 
     _isAudioActive() {
         return this._showcase.classList.contains(
             this._options.states.audioActive,
         );
-    },
+    }
 
     _handleAlbumEnd(e) {
         if (helper.isTabActive()) {
@@ -361,7 +338,7 @@ ShowcaseApp.prototype = {
         } else {
             this._slider.nextInstantly();
         }
-    },
+    }
 
     _handleAudioTrackChange(e) {
         const { trackIndex, albumIndex, totalTracks } = e.detail;
@@ -373,84 +350,86 @@ ShowcaseApp.prototype = {
             trackName,
         );
         this._audioDeckView.renderTimeline(0, null);
-    },
+    }
 
     _handleTimeChange(e) {
         const { currentTime, duration } = e.detail;
         this._audioDeckView.renderTimeline(currentTime, duration);
-    },
+    }
 
     _handleMouseLeave(e) {
         this._tryResetBtnNoActive();
-    },
-};
+    }
 
-ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
-    click: {
-        target: (instance) => instance._showcase,
-        handler: ShowcaseApp.prototype._handleClick,
-    },
-    auxclick: {
-        target: () => document,
-        handler: ShowcaseApp.prototype._handleAuxClick,
-    },
-    keydown: {
-        target: () => document,
-        handler: ShowcaseApp.prototype._handleKeyDown,
-    },
-    keyup: {
-        target: () => document,
-        handler: ShowcaseApp.prototype._handleKeyUp,
-    },
-    mousedown: {
-        target: () => document,
-        handler: ShowcaseApp.prototype._handleMouseDown,
-    },
-    viewportclick: {
-        target: (instance) => instance._slider.element,
-        handler: ShowcaseApp.prototype._handleViewportClick,
-    },
-    slidemove: {
-        target: (instance) => instance._slider.element,
-        handler: ShowcaseApp.prototype._handleSlideMove,
-    },
-    slidechange: {
-        target: (instance) => instance._slider.element,
-        handler: ShowcaseApp.prototype._handleSlideChange,
-    },
-    autoscrollchange: {
-        target: (instance) => instance._slider.element,
-        handler: ShowcaseApp.prototype._handleAutoscrollChange,
-    },
-    albumplay: {
-        target: (instance) => instance._audioPlayer.element,
-        handler: ShowcaseApp.prototype._handleAlbumPlay,
-    },
-    albumpause: {
-        target: (instance) => instance._audioPlayer.element,
-        handler: ShowcaseApp.prototype._handleAlbumPause,
-    },
-    albumplaypassthrough: {
-        target: (instance) => instance._audioPlayer.element,
-        handler: ShowcaseApp.prototype._handleAlbumPlayPassthrough,
-    },
-    albumend: {
-        target: (instance) => instance._audioPlayer.element,
-        handler: ShowcaseApp.prototype._handleAlbumEnd,
-    },
-    audiotrackchange: {
-        target: (instance) => instance._audioPlayer.element,
-        handler: ShowcaseApp.prototype._handleAudioTrackChange,
-    },
-    timechange: {
-        target: (instance) => instance._audioPlayer.element,
-        handler: ShowcaseApp.prototype._handleTimeChange,
-    },
-};
+    static {
+        ShowcaseApp[ShowcaseApp.EVENT_MAP_KEY] = {
+            click: {
+                target: (instance) => instance._showcase,
+                handler: ShowcaseApp.prototype._handleClick,
+            },
+            auxclick: {
+                target: () => document,
+                handler: ShowcaseApp.prototype._handleAuxClick,
+            },
+            keydown: {
+                target: () => document,
+                handler: ShowcaseApp.prototype._handleKeyDown,
+            },
+            keyup: {
+                target: () => document,
+                handler: ShowcaseApp.prototype._handleKeyUp,
+            },
+            mousedown: {
+                target: () => document,
+                handler: ShowcaseApp.prototype._handleMouseDown,
+            },
+            viewportclick: {
+                target: (instance) => instance._slider.element,
+                handler: ShowcaseApp.prototype._handleViewportClick,
+            },
+            slidemove: {
+                target: (instance) => instance._slider.element,
+                handler: ShowcaseApp.prototype._handleSlideMove,
+            },
+            slidechange: {
+                target: (instance) => instance._slider.element,
+                handler: ShowcaseApp.prototype._handleSlideChange,
+            },
+            autoscrollchange: {
+                target: (instance) => instance._slider.element,
+                handler: ShowcaseApp.prototype._handleAutoscrollChange,
+            },
+            albumplay: {
+                target: (instance) => instance._audioPlayer.element,
+                handler: ShowcaseApp.prototype._handleAlbumPlay,
+            },
+            albumpause: {
+                target: (instance) => instance._audioPlayer.element,
+                handler: ShowcaseApp.prototype._handleAlbumPause,
+            },
+            albumplaypassthrough: {
+                target: (instance) => instance._audioPlayer.element,
+                handler: ShowcaseApp.prototype._handleAlbumPlayPassthrough,
+            },
+            albumend: {
+                target: (instance) => instance._audioPlayer.element,
+                handler: ShowcaseApp.prototype._handleAlbumEnd,
+            },
+            audiotrackchange: {
+                target: (instance) => instance._audioPlayer.element,
+                handler: ShowcaseApp.prototype._handleAudioTrackChange,
+            },
+            timechange: {
+                target: (instance) => instance._audioPlayer.element,
+                handler: ShowcaseApp.prototype._handleTimeChange,
+            },
+        };
+    }
 
-ShowcaseApp.DYNAMIC_EVENT_MAP = {
-    mouseleave: {
-        target: (instance) => instance._btnNoActive,
-        handler: ShowcaseApp.prototype._handleMouseLeave,
-    },
-};
+    static DYNAMIC_EVENT_MAP = {
+        mouseleave: {
+            target: (instance) => instance._btnNoActive,
+            handler: ShowcaseApp.prototype._handleMouseLeave,
+        },
+    };
+}
