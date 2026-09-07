@@ -1,11 +1,9 @@
 "use strict";
 
-export default function DOMValidator(baseClass) {
-    this._baseClass = baseClass.name;
-}
-
-DOMValidator.prototype = {
-    constructor: DOMValidator,
+export default class DOMValidator {
+    constructor(baseClass) {
+        this._baseClass = baseClass.name;
+    }
 
     validate(instance, childElements, ...elements) {
         if (elements.length === 0) {
@@ -43,41 +41,38 @@ DOMValidator.prototype = {
         if (!DOMValidator.isDOMElementsFound(DOMElements)) {
             throw new Error(`[DOMValidator]: [${className}] Validation failed`);
         }
-    },
-};
-
-DOMValidator.isDOMElementsFound = function ({
-    elements = null,
-    collections = null,
-} = {}) {
-    if (!elements && !collections) {
-        console.warn(
-            `[DOMValidator.isDOMElementsFound()]: Invalid function call`,
-        );
-        return false;
     }
 
-    if (elements) {
-        for (const [name, element] of Object.entries(elements)) {
-            if (!element) {
-                console.error(
-                    `[DOMValidator.isDOMElementsFound()] DOM error: Element ${name} not found`,
-                );
-                return false;
+    static isDOMElementsFound({ elements = null, collections = null } = {}) {
+        if (!elements && !collections) {
+            console.warn(
+                `[DOMValidator.isDOMElementsFound()]: Invalid function call`,
+            );
+            return false;
+        }
+
+        if (elements) {
+            for (const [name, element] of Object.entries(elements)) {
+                if (!element) {
+                    console.error(
+                        `[DOMValidator.isDOMElementsFound()] DOM error: Element ${name} not found`,
+                    );
+                    return false;
+                }
             }
         }
-    }
 
-    if (collections) {
-        for (const [name, element] of Object.entries(collections)) {
-            if (element.length === 0) {
-                console.error(
-                    `[DOMValidator.isDOMElementsFound()] DOM error: Elements ${name} not found`,
-                );
-                return false;
+        if (collections) {
+            for (const [name, element] of Object.entries(collections)) {
+                if (element.length === 0) {
+                    console.error(
+                        `[DOMValidator.isDOMElementsFound()] DOM error: Elements ${name} not found`,
+                    );
+                    return false;
+                }
             }
         }
-    }
 
-    return true;
-};
+        return true;
+    }
+}
