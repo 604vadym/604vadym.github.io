@@ -3,10 +3,6 @@
 import KeyboardSlider from "./keyboard-slider.js";
 
 export default class InfiniteSlider extends KeyboardSlider {
-    constructor(options) {
-        super(options);
-    }
-
     init() {
         super.init();
         this._initInfiniteLoop();

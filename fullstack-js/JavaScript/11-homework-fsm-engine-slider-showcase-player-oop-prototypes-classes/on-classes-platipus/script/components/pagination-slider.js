@@ -5,10 +5,6 @@ import Button from "../core/button.js";
 import BaseSlider from "./base-slider.js";
 
 export default class PaginationSlider extends BaseSlider {
-    constructor(options) {
-        super(options);
-    }
-
     init() {
         super.init();
         this._initPagination();

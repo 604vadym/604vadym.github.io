@@ -13,14 +13,6 @@ export default class DraggableSlider extends InfiniteSlider {
         return TRIGGER_THRESHOLD_COEF;
     }
 
-    constructor(options) {
-        super(options);
-    }
-
-    init() {
-        super.init();
-    }
-
     _initProps() {
         super._initProps();
 
