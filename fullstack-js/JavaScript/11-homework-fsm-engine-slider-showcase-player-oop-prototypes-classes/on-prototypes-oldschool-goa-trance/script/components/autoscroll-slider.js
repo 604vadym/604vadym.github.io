@@ -41,7 +41,6 @@ AutoscrollSlider.STATES_AUTOSCROLL = Object.freeze({
     LOCKED: "LOCKED",
 });
 
-const STATES = AutoscrollSlider.STATES;
 const STATES_AUTOSCROLL = AutoscrollSlider.STATES_AUTOSCROLL;
 
 Object.defineProperty(AutoscrollSlider.prototype, "stateAutoscroll", {
@@ -328,7 +327,7 @@ AutoscrollSlider.prototype._startAutoscroll = function (
     context = null,
 ) {
     if (context === CONTEXTS.VISIBILITY) {
-        this._state = STATES.IDLE;
+        this._state = this.constructor.STATES.IDLE;
         this._isDragging = false;
     }
 
