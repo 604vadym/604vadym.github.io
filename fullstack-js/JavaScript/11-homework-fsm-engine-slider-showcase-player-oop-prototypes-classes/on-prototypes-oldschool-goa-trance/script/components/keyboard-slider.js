@@ -18,8 +18,6 @@ KeyboardSlider.prototype = Object.create(PaginationSlider.prototype);
 KeyboardSlider.prototype.constructor = KeyboardSlider;
 Object.setPrototypeOf(KeyboardSlider, PaginationSlider);
 
-const STATES = PaginationSlider.STATES;
-
 KeyboardSlider.prototype.init = function () {
     PaginationSlider.prototype.init.call(this);
     this._keyboardManager.init(this, "press");
@@ -37,7 +35,7 @@ KeyboardSlider.prototype._hardReset = function () {
     this._slider.classList.remove(this._options.states.resizing);
     this._updateTrackInstantly();
     this._updatePagination();
-    this._state = STATES.IDLE;
+    this._state = this.constructor.STATES.IDLE;
 };
 
 KeyboardSlider.prototype._pressNext = function (e) {
