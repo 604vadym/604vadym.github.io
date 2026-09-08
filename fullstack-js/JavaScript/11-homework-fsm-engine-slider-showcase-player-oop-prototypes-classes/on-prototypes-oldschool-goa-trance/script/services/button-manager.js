@@ -14,7 +14,7 @@ ButtonManager.prototype = {
             button.classList.contains(entry.buttonName),
         );
 
-        return request?.action(button, e);
+        return request?.action(button, e) ?? e;
     },
 
     _initButtonActionTable(client, configName) {
