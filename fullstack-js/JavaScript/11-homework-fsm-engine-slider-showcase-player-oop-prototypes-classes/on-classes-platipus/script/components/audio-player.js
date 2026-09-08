@@ -17,7 +17,9 @@ const STATES = Object.freeze({
 const MAIN_THEME_RESET_PAUSE_THRESHOLD = 300000;
 
 export default class AudioPlayer {
-    static EVENT_MAP_KEY = "EVENT_MAP";
+    static get EVENT_MAP_KEY() {
+        return "EVENT_MAP";
+    }
 
     static get STATES() {
         return STATES;
@@ -107,7 +109,7 @@ export default class AudioPlayer {
         this._buttonManager.init(this, "click");
         this._initButtons();
         this._keyboardManager.init(this, "press");
-        this._eventManager.init(this, this.constructor.EVENT_MAP_KEY);
+        this._eventManager.init(this, AudioPlayer.EVENT_MAP_KEY);
     }
 
     play() {

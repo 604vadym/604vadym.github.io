@@ -83,7 +83,8 @@ export default class Shop {
     _initDefaultUrl() {
         const configUrl = this._options.defaultUrl;
         const markupUrl = this._link.getAttribute("href");
-        this._defaultUrl = configUrl || markupUrl || DEFAULT_URL;
+        this._defaultUrl =
+            configUrl || markupUrl || this.constructor.DEFAULT_URL;
         this._validateDefaultUrl(configUrl, markupUrl);
     }
 
@@ -92,7 +93,7 @@ export default class Shop {
             throw new Error(
                 `[Shop]: Master initialisation aborted\n` +
                     `Both custom options.defaultUrl("${configUrl})", markup ("${markupUrl}") ` +
-                    `and fallback DEFAULT_URL ("${DEFAULT_URL}")\n` +
+                    `and fallback DEFAULT_URL ("${this.constructor.DEFAULT_URL}")\n` +
                     `Failed to validate against the required URL specification protocol\n` +
                     `Expected format: "http://example.com" or "https://example.com" ` +
                     `(must include valid transfer protocol and domain name)`,

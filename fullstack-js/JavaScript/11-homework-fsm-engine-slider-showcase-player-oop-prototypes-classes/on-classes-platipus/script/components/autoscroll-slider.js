@@ -19,10 +19,6 @@ const AUTOSCROLL_DELAY = 5000;
 const AUTOSCROLL_WAKE_UP_DELAY = 2000;
 
 export default class AutoscrollSlider extends DraggableSlider {
-    static get CONTEXTS() {
-        return CONTEXTS;
-    }
-
     static get STATES_AUTOSCROLL() {
         return STATES_AUTOSCROLL;
     }
@@ -45,7 +41,7 @@ export default class AutoscrollSlider extends DraggableSlider {
     }
 
     set _stateAutoscroll(stateKey) {
-        const state = this.constructor.STATES_AUTOSCROLL[stateKey];
+        const state = STATES_AUTOSCROLL[stateKey];
 
         if (!state) {
             throw new TypeError(

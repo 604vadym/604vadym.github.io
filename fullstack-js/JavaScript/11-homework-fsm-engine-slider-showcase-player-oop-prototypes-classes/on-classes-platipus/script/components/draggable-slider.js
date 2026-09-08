@@ -92,16 +92,13 @@ export default class DraggableSlider extends InfiniteSlider {
     _onDragStarted() {
         this._isDragging = true;
         this._disableAnimation();
-        this._eventManager.subscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
+        this._eventManager.subscribe(this, DraggableSlider.DYNAMIC_EVENT_MAP);
     }
 
     _onDragEnded() {
         this._isDragging = false;
         this._enableAnimation();
-        this._eventManager.unsubscribe(
-            this,
-            this.constructor.DYNAMIC_EVENT_MAP,
-        );
+        this._eventManager.unsubscribe(this, DraggableSlider.DYNAMIC_EVENT_MAP);
     }
 
     _onViewportClicked(e) {

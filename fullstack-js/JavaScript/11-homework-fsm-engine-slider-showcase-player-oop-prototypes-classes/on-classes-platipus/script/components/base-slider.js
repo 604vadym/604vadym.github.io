@@ -12,7 +12,9 @@ const STATES = Object.freeze({
 });
 
 export default class BaseSlider {
-    static EVENT_MAP_KEY = "EVENT_MAP";
+    static get EVENT_MAP_KEY() {
+        return "EVENT_MAP";
+    }
 
     static get STATES() {
         return STATES;
@@ -34,7 +36,7 @@ export default class BaseSlider {
     }
 
     set _state(stateKey) {
-        const state = this.constructor.STATES[stateKey];
+        const state = STATES[stateKey];
 
         if (!state) {
             throw new TypeError(
