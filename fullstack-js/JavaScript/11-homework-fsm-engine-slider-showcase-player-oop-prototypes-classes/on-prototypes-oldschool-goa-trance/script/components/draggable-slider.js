@@ -98,13 +98,13 @@ DraggableSlider.prototype._stopDragging = function (
 DraggableSlider.prototype._onDragStarted = function () {
     this._isDragging = true;
     this._disableAnimation();
-    this._eventManager.subscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
+    this._eventManager.subscribe(this, DraggableSlider.DYNAMIC_EVENT_MAP);
 };
 
 DraggableSlider.prototype._onDragEnded = function () {
     this._isDragging = false;
     this._enableAnimation();
-    this._eventManager.unsubscribe(this, this.constructor.DYNAMIC_EVENT_MAP);
+    this._eventManager.unsubscribe(this, DraggableSlider.DYNAMIC_EVENT_MAP);
 };
 
 DraggableSlider.prototype._onViewportClicked = function (e) {
