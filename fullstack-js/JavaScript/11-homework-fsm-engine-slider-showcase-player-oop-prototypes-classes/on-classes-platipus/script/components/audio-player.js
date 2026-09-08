@@ -60,7 +60,7 @@ export default class AudioPlayer {
     }
 
     set _state(stateKey) {
-        const state = STATES[stateKey];
+        const state = this.constructor.STATES[stateKey];
 
         if (!state) {
             throw new TypeError(

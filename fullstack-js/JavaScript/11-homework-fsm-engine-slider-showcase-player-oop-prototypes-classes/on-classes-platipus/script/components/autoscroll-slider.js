@@ -41,7 +41,7 @@ export default class AutoscrollSlider extends DraggableSlider {
     }
 
     set _stateAutoscroll(stateKey) {
-        const state = STATES_AUTOSCROLL[stateKey];
+        const state = this.constructor.STATES_AUTOSCROLL[stateKey];
 
         if (!state) {
             throw new TypeError(

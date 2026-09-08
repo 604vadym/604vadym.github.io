@@ -36,7 +36,7 @@ export default class BaseSlider {
     }
 
     set _state(stateKey) {
-        const state = STATES[stateKey];
+        const state = this.constructor.STATES[stateKey];
 
         if (!state) {
             throw new TypeError(
