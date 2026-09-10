@@ -445,6 +445,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
 
     albums: [
         {
+            artist: "Emuna",
             title: "Emuna",
             year: 2000,
             tracks: [
@@ -478,6 +479,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
             ],
         },
         {
+            artist: "Man With No Name",
             title: "Moment of Truth",
             year: 1996,
             tracks: [
@@ -517,6 +519,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
             ],
         },
         {
+            artist: "Man With No Name",
             title: "Earth Moving the Sun",
             year: 1998,
             tracks: [
@@ -556,6 +559,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
             ],
         },
         {
+            artist: "The Muses Rapt",
             title: "Spiritual Healing",
             year: 1998,
             tracks: [
@@ -586,6 +590,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
             ],
         },
         {
+            artist: "Lauge & Baba Gnohm",
             title: "Langbortistan",
             year: 2011,
             tracks: [
