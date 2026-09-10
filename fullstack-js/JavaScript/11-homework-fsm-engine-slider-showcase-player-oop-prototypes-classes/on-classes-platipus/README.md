@@ -1,4 +1,4 @@
-# Copyright Disclaimer (Non-Commercial Educational Fan Project)
+# Copyright Disclaimer (Non-Commercial Educational Project)
 
 This project was created strictly for educational and portfolio presentation purposes and as a non-commercial tribute to the music and artists featured in the project.
 
