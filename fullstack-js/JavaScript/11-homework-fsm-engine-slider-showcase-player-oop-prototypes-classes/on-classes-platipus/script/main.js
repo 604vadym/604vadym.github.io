@@ -244,16 +244,16 @@ const shop = new Shop({
 
     data: [
         {
-            url: "https://mfgmemo604.bandcamp.com/album/emuna",
+            url: "https://platipusmusic.bandcamp.com/album/turtle-crossing-2",
         },
         {
-            url: "https://mwnn.bandcamp.com/album/moment-of-truth",
+            url: "https://platipusmusic.bandcamp.com/album/shhhh",
         },
         {
-            url: "https://mwnn.bandcamp.com/album/earth-moving-the-sun",
+            url: "https://artoftrance.bandcamp.com/album/wildlife-on-one",
         },
         {
-            url: "https://themusesrapt.bandcamp.com/album/spiritual-healing",
+            url: "https://artoftrance.bandcamp.com/album/voice-of-earth",
         },
     ],
 });
