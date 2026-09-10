@@ -171,52 +171,127 @@ const audioPlayer = new AudioPlayer({
         {
             tracks: [
                 {
-                    src: "./assets/audio/emuna/2000-emuna/01-adon-haslichot-preview.mp3",
+                    src: "./assets/audio/terra-ferma/1997-turtle-crossing/01-lunar-sunrise-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/emuna/2000-emuna/02-crystal-clear-preview.mp3",
+                    src: "./assets/audio/terra-ferma/1997-turtle-crossing/02-fire-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/emuna/2000-emuna/03-the-3rd-world-preview.mp3",
-                },
-            ],
-        },
-        {
-            tracks: [
-                {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/01-azymuth-preview.mp3",
+                    src: "./assets/audio/terra-ferma/1997-turtle-crossing/03-the-scream-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/02-floor-essence-dayglo-mix-preview.mp3",
+                    src: "./assets/audio/terra-ferma/1997-turtle-crossing/04-visions-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/man-with-no-name/1996-moment-of-truth/03-subterfuge-preview.mp3",
-                },
-            ],
-        },
-        {
-            tracks: [
-                {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/04-own-the-world-preview.mp3",
+                    src: "./assets/audio/terra-ferma/1997-turtle-crossing/05-the-poet-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/06-treacle-preview.mp3",
+                    src: "./assets/audio/terra-ferma/1997-turtle-crossing/06-floating-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/man-with-no-name/1998-earth-moving-the-sun/08-parallel-universe-preview.mp3",
+                    src: "./assets/audio/terra-ferma/1997-turtle-crossing/07-the-snakecharmer-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/terra-ferma/1997-turtle-crossing/08-planet-ogo-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/terra-ferma/1997-turtle-crossing/09-crazy-people-preview.mp3",
                 },
             ],
         },
         {
             tracks: [
                 {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/01-spiritual-healing-preview.mp3",
+                    src: "./assets/audio/quietman/1998-shhhh/01-now-and-zen-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/02-the-ancient-sounds-of-the-god.mp3",
+                    src: "./assets/audio/quietman/1998-shhhh/02-theme-from-terminus-preview.mp3",
                 },
                 {
-                    src: "./assets/audio/the-muses-rapt/1998-spiritual-healing/07-the-warriors-of-temperance.mp3",
+                    src: "./assets/audio/quietman/1998-shhhh/03-propeller-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/quietman/1998-shhhh/04-the-sleeper-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/quietman/1998-shhhh/05-approach-and-identify-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/quietman/1998-shhhh/06-kalahari-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/quietman/1998-shhhh/07-plastic-gourd-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/quietman/1998-shhhh/08-evolution-preview.mp3",
+                },
+            ],
+        },
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/art-of-trance/1996-wildlife-on-one/01-kaleidoscope-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1996-wildlife-on-one/02-mosquito-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1996-wildlife-on-one/03-gloria-transparent-mix-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1996-wildlife-on-one/04-haagen-daaz-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1996-wildlife-on-one/05-octopus-original-mix-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1996-wildlife-on-one/06-golden-rain-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1996-wildlife-on-one/07-deeper-than-deep-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1996-wildlife-on-one/08-blue-owl-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1996-wildlife-on-one/09-emerald-eyes-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1996-wildlife-on-one/10-cambodia-tunnel-vision-mix-preview.mp3",
+                },
+            ],
+        },
+        {
+            tracks: [
+                {
+                    src: "./assets/audio/art-of-trance/1999-voice-of-earth/01-breathe-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1999-voice-of-earth/02-monsoon-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1999-voice-of-earth/03-the-hummer-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1999-voice-of-earth/04-madagascar-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1999-voice-of-earth/05-requiem-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1999-voice-of-earth/06-dud-uk-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1999-voice-of-earth/07-easter-island-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1999-voice-of-earth/08-stealth-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1999-voice-of-earth/09-panorama-preview.mp3",
+                },
+                {
+                    src: "./assets/audio/art-of-trance/1999-voice-of-earth/10-voice-of-earth-preview.mp3",
                 },
             ],
         },
@@ -325,62 +400,141 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
 
     albums: [
         {
-            title: "Emuna",
-            year: 2000,
+            artist: "Terra Ferma",
+            title: "Turtle Crossing",
+            year: 1997,
             tracks: [
                 {
-                    name: "אדון הסליחות (Adon Haslichot)",
+                    name: "Lunar Sunrise",
                 },
                 {
-                    name: "Crystal Clear",
+                    name: "Fire",
                 },
                 {
-                    name: "The 3rd World",
+                    name: "The Scream",
+                },
+                {
+                    name: "Visions",
+                },
+                {
+                    name: "The Poet",
+                },
+                {
+                    name: "Floating",
+                },
+                {
+                    name: "The Snakecharmer",
+                },
+                {
+                    name: "Planet Ogo",
+                },
+                {
+                    name: "Crazy People",
                 },
             ],
         },
         {
-            title: "Moment of Truth",
+            artist: "Quietman",
+            title: "Shhhh",
+            year: 1998,
+            tracks: [
+                {
+                    name: "Now & Zen",
+                },
+                {
+                    name: "Theme from Terminus",
+                },
+                {
+                    name: "Propeller",
+                },
+                {
+                    name: "The Sleeper",
+                },
+                {
+                    name: "Approach & Identify",
+                },
+                {
+                    name: "Kalahari",
+                },
+                {
+                    name: "Plastic Gourd",
+                },
+                {
+                    name: "Evolution",
+                },
+            ],
+        },
+        {
+            artist: "Art Of Trance",
+            title: "Wildlife On One",
             year: 1996,
             tracks: [
                 {
-                    name: "Azymuth",
+                    name: "Kaleidoscope",
                 },
                 {
-                    name: "Floor-Essence (Dayglo Mix)",
+                    name: "Mosquito",
                 },
                 {
-                    name: "Subterfuge",
+                    name: "Gloria (Transparent Mix)",
+                },
+                {
+                    name: "Haagen Daaz",
+                },
+                {
+                    name: "Octopus (Original Mix)",
+                },
+                {
+                    name: "Golden Rain",
+                },
+                {
+                    name: "Deeper than Deep",
+                },
+                {
+                    name: "Blue Owl",
+                },
+                {
+                    name: "Emerald Eyes",
+                },
+                {
+                    name: "Cambodia (Tunnel Vision Mix)",
                 },
             ],
         },
         {
-            title: "Earth Moving the Sun",
-            year: 1998,
+            artist: "Art Of Trance",
+            title: "Voice Of Earth",
+            year: 1999,
             tracks: [
                 {
-                    name: "Own the World",
+                    name: "Breathe",
                 },
                 {
-                    name: "Treacle",
+                    name: "Monsoon",
                 },
                 {
-                    name: "Parallel Universe",
-                },
-            ],
-        },
-        {
-            title: "Spiritual Healing",
-            year: 1998,
-            tracks: [
-                {
-                    name: "Spiritual Healing",
+                    name: "The Hummer",
                 },
                 {
-                    name: "The Ancient Sounds of the God",
+                    name: "Madagascar",
                 },
                 {
-                    name: "The Warriors of Temperance",
+                    name: "Requiem",
+                },
+                {
+                    name: "Dud UK",
+                },
+                {
+                    name: "Easter Island",
+                },
+                {
+                    name: "Stealth",
+                },
+                {
+                    name: "Panorama",
+                },
+                {
+                    name: "Voice of Earth",
                 },
             ],
         },
