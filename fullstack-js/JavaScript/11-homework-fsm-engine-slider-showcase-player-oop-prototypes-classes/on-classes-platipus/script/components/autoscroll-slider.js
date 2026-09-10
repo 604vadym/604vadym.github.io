@@ -315,7 +315,7 @@ export default class AutoscrollSlider extends DraggableSlider {
 
     _startAutoscroll(delay = null, context = null) {
         if (context === CONTEXTS.VISIBILITY) {
-            this._state = this.constructor.IDLE;
+            this._state = this.constructor.STATES.IDLE;
             this._isDragging = false;
         }
 
