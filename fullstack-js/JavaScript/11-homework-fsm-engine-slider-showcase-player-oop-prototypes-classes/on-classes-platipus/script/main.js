@@ -165,7 +165,7 @@ const audioPlayer = new AudioPlayer({
     mainThemeResetPauseThreshold: null,
 
     mainThemeSrc:
-        "./assets/audio/main-theme-the-mystery-of-the-yeti-preview.mp3",
+        "./assets/audio/main-theme-the-adventures-of-there-will-be-no-armageddon.mp3",
 
     playlist: [
         {
