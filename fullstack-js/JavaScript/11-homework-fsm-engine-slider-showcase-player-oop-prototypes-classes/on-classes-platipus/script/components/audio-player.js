@@ -144,6 +144,7 @@ export default class AudioPlayer {
             return true;
         } else if (this.isAlbumPlaying()) {
             this.pause();
+            this._tryPlayTheme();
             return false;
         }
     }
@@ -641,10 +642,10 @@ export default class AudioPlayer {
 
     _pressToggleaudiomode(e) {
         if (helper.isPassthroughKey(e)) {
-            if (this.state !== STATES.ALBUM) {
-                this.play();
-            } else {
+            if (this.isAlbumPlaying()) {
                 this.pause();
+            } else {
+                this.play();
             }
             return e;
         }
