@@ -5,7 +5,7 @@
 An educational JavaScript architecture project exploring a music showcase, interactive
 slider, audio player and shop built around finite state machines and object-oriented design.
 
-The project includes two implementations based on related architectural concepts, using prototype-based OOP and ES6 classes.
+The project includes two implementations of the same architectural concepts, using prototype-based OOP and ES6 classes.
 
 ## Implementations
 
