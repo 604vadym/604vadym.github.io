@@ -1,4 +1,13 @@
-# Copyright Disclaimer (Non-Commercial Educational Project)
+# ES6 Classes — Platipus Tribute
+
+A non-commercial educational JavaScript project exploring ES6 class-based object-oriented architecture, finite state machines, event-driven component interaction and reusable slider/audio-player components.
+
+## Documentation
+
+- [English documentation](../docs/en/)
+- [Russian documentation](../docs/ru/)
+
+## Copyright Disclaimer (Non-Commercial Educational Project)
 
 This project was created strictly for educational and portfolio presentation purposes and as a non-commercial tribute to the music and artists featured in the project.
 
