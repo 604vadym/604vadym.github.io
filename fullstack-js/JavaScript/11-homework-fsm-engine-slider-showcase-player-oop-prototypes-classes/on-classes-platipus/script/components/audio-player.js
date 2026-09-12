@@ -343,7 +343,7 @@ export default class AudioPlayer {
     }
 
     _initData() {
-        this._goaMasterpieces = this._options.playlist;
+        this._platipusMasterpieces = this._options.playlist;
         this._validateData();
     }
 
@@ -396,7 +396,7 @@ export default class AudioPlayer {
         const trackIndex = this._currentAudioTrackIndex;
         const albumIndex = this._currentAlbumIndex;
         const totalTracks =
-            this._goaMasterpieces[this._currentAlbumIndex].tracks.length;
+            this._platipusMasterpieces[this._currentAlbumIndex].tracks.length;
 
         const e = new CustomEvent("audiotrackchange", {
             detail: {
@@ -450,7 +450,7 @@ export default class AudioPlayer {
             if (this._isNewAudioTrack(this._player.src)) {
                 this._onAudioTrackChanged();
                 const currentAlbum =
-                    this._goaMasterpieces[this._currentAlbumIndex];
+                    this._platipusMasterpieces[this._currentAlbumIndex];
                 this._player.src =
                     currentAlbum.tracks[this._currentAudioTrackIndex].src;
             }
@@ -492,11 +492,12 @@ export default class AudioPlayer {
     }
 
     _getTotalAudioTracks() {
-        return this._goaMasterpieces[this._currentAlbumIndex].tracks.length;
+        return this._platipusMasterpieces[this._currentAlbumIndex].tracks
+            .length;
     }
 
     _getTotalAlbums() {
-        return this._goaMasterpieces.length;
+        return this._platipusMasterpieces.length;
     }
 
     _isAudioPlaying() {
@@ -510,7 +511,7 @@ export default class AudioPlayer {
 
     _isNewAudioTrack(currentSrc) {
         return !currentSrc.includes(
-            this._goaMasterpieces[this._currentAlbumIndex].tracks[
+            this._platipusMasterpieces[this._currentAlbumIndex].tracks[
                 this._currentAudioTrackIndex
             ].src.substring(2),
         );
@@ -686,8 +687,8 @@ export default class AudioPlayer {
 
     _validateData() {
         if (
-            !Array.isArray(this._goaMasterpieces) ||
-            this._goaMasterpieces.length === 0
+            !Array.isArray(this._platipusMasterpieces) ||
+            this._platipusMasterpieces.length === 0
         ) {
             throw new TypeError(
                 `[AudioPlayer]: Dataset verification failed during core bootstrap\n` +
