@@ -1,6 +1,10 @@
 # ES6 Classes — Platipus Tribute
 
-A non-commercial educational JavaScript project exploring ES6 class-based object-oriented architecture, finite state machines, event-driven component interaction and reusable slider/audio-player components.
+An educational JavaScript project exploring ES6 class-based object-oriented architecture, finite state machines, event-driven component interaction and reusable slider/audio-player components.
+
+## Demo
+
+[Open the project on GitHub Pages](https://604vadym.github.io/fullstack-js/JavaScript/11-homework-fsm-engine-slider-showcase-player-oop-prototypes-classes/on-classes-platipus/index.html)
 
 ## Documentation
 

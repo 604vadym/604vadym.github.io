@@ -1,4 +1,14 @@
-# Copyright Disclaimer (Non-Commercial Educational Project)
+# Procedural JavaScript — Asura Tribute
+
+An educational JavaScript project exploring the implementation of a complex interactive music showcase using a procedural programming approach.
+
+The project focuses on implementing the required functionality, coordinating the slider, audio player and user interactions, ensuring reliable and predictable application behaviour within a procedural architecture.
+
+## Demo
+
+[Open the project on GitHub Pages](https://604vadym.github.io/fullstack-js/JavaScript/10-homework-slider-pure-js-on-fuctions/index.html)
+
+## Copyright Disclaimer (Non-Commercial Educational Project)
 
 This project is created strictly for educational purposes, portfolio demonstration and as a non-commercial tribute to the music of Asura.
 

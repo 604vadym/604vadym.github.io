@@ -1,6 +1,10 @@
 # Prototype-based OOP — Goa Trance Tribute
 
-A non-commercial educational JavaScript project exploring prototype-based object-oriented architecture, finite state machines, event-driven component interaction and reusable slider/audio-player components.
+An educational JavaScript project exploring prototype-based object-oriented architecture, finite state machines, event-driven component interaction and reusable slider/audio-player components.
+
+## Demo
+
+[Open the project on GitHub Pages](https://604vadym.github.io/fullstack-js/JavaScript/11-homework-fsm-engine-slider-showcase-player-oop-prototypes-classes/on-prototypes-oldschool-goa-trance/index.html)
 
 ## Documentation
 

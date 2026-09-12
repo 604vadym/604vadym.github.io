@@ -11,11 +11,15 @@ The project includes two implementations of the same architectural concepts, usi
 
 ### [on-prototypes-oldschool-goa-trance](./on-prototypes-oldschool-goa-trance/)
 
-A prototype-based OOP implementation focused on inheritance, composition, component interaction, finite state machines, custom events and manager-based architecture.
+A prototype-based OOP implementation focused on inheritance, polymorphism, composition, component interaction, finite state machines, custom events and manager-based architecture.
+
+[**Open demo on GitHub Pages**](https://604vadym.github.io/fullstack-js/JavaScript/11-homework-fsm-engine-slider-showcase-player-oop-prototypes-classes/on-prototypes-oldschool-goa-trance/index.html)
 
 ### [on-classes-platipus](./on-classes-platipus/)
 
 An ES6 class-based implementation developed as a further evolution of the project, reworking the same architectural concepts using JavaScript classes, static contracts, inheritance and polymorphism.
+
+[**Open demo on GitHub Pages**](https://604vadym.github.io/fullstack-js/JavaScript/11-homework-fsm-engine-slider-showcase-player-oop-prototypes-classes/on-classes-platipus/index.html)
 
 ## Documentation
 
