@@ -117,7 +117,7 @@ flowchart LR
     VIEW --> APP
     SHOP --> APP
 
-    APP --> INIT[app.init()]
+    APP --> INIT["app.init()"]
 ```
 
 The composition root therefore contains application wiring/data rather than slider implementation details.
@@ -215,7 +215,7 @@ The common operation is `goto()`:
 
 ```mermaid
 flowchart TD
-    G[goto(index)] --> VALID{finite index?}
+    G["goto(index)"] --> VALID{finite index?}
     VALID -->|no| FAIL[return false]
     VALID -->|yes| CHANGE[_changeIndex]
     CHANGE --> SAME{index changed?}
@@ -269,7 +269,7 @@ Pagination is data-dependent, so the dots are generated dynamically from the sli
 
 ```mermaid
 flowchart TD
-    INIT[init()] --> BASE[BaseSlider.init()]
+    INIT["init()"] --> BASE["BaseSlider.init()"]
     BASE --> COUNT[slidesCount]
     COUNT --> LOOP[for each slide]
     LOOP --> CREATE[create button]
@@ -376,7 +376,7 @@ The map converts a clone position to the corresponding real position.
 
 ```mermaid
 flowchart TD
-    END[transitionend] --> TELE[_resetLoop()]
+    END[transitionend] --> TELE["\_resetLoop()"]
     TELE --> CLONE{clone position?}
     CLONE -->|yes| INST[disable animation]
     INST --> RESET[move to real position]
@@ -437,10 +437,10 @@ The current default in the implementation is `0.2`.
 ```mermaid
 flowchart TD
     UP[pointer up] --> OFFSET[offset]
-    OFFSET --> BIG{abs(offset) > threshold?}
-    BIG -->|yes + offset < 0| NEXT[next()]
-    BIG -->|yes + offset > 0| PREV[prev()]
-    BIG -->|no| RESTORE[_moveTrack()]
+    OFFSET --> BIG{"abs(offset) > threshold?"}
+    BIG -->|yes + offset < 0| NEXT["next()"]
+    BIG -->|yes + offset > 0| PREV["prev()"]
+    BIG -->|no| RESTORE["_moveTrack()"]
     UP --> CLICK{click-like movement?}
     CLICK -->|yes| VIEWPORT[viewportclick]
 ```
@@ -585,7 +585,7 @@ Changing album resets the track index to `0`.
 
 ```mermaid
 flowchart TD
-    ALBUM[switchAlbum(index)] --> VALID{valid album?}
+    ALBUM["switchAlbum(index)"] --> VALID{valid album?}
     VALID -->|no| FAIL[false]
     VALID -->|yes| SET[set album index]
     SET --> RESET[track index = 0]
@@ -613,10 +613,10 @@ flowchart TD
     END[audio ended] --> THEME{theme state?}
     THEME -->|yes| REPLAY[replay / continue theme]
     THEME -->|no| LAST{last track?}
-    LAST -->|no| NEXTTRACK[nextAudioTrack()]
+    LAST -->|no| NEXTTRACK["nextAudioTrack()"]
     LAST -->|yes| EVENT[albumend event]
     EVENT --> CANCEL{default prevented?}
-    CANCEL -->|no| NEXTALBUM[nextAlbum()]
+    CANCEL -->|no| NEXTALBUM["nextAlbum()"]
     CANCEL -->|yes| APP[application handles progression]
 ```
 
@@ -741,8 +741,8 @@ sequenceDiagram
 flowchart LR
     AP[AudioPlayer] -->|cancelable albumend| APP[ShowcaseApp]
     APP --> ACTIVE{tab active?}
-    ACTIVE -->|yes| PREVENT[prevent default] --> NEXT[slider.next()]
-    ACTIVE -->|no| INSTANT[slider.nextInstantly()]
+    ACTIVE -->|yes| PREVENT[prevent default] --> NEXT["slider.next()"]
+    ACTIVE -->|no| INSTANT["slider.nextInstantly()"]
 ```
 
 The cancelable event gives the application layer control over progression without embedding slider knowledge into the audio component.
@@ -886,7 +886,7 @@ The components first query their required DOM elements and then validate the res
 ```mermaid
 flowchart TD
     INIT[component init] --> QUERY[query DOM]
-    QUERY --> VALIDATE[DOMValidator.validate()]
+    QUERY --> VALIDATE["DOMValidator.validate()"]
     VALIDATE --> FOUND{all required?}
     FOUND -->|yes| READY[continue initialization]
     FOUND -->|no| STOP[throw initialization error]
@@ -911,11 +911,11 @@ The most interesting feature is its bootstrap/restart behaviour:
 
 ```mermaid
 flowchart TD
-    START[start(delay)] --> INTERVAL[setInterval]
+    START["start(delay)"] --> INTERVAL[setInterval]
     INTERVAL --> TICK[tick]
     TICK --> ACTION[onTick]
     ACTION --> BOOT{delay differs from canonical?}
-    BOOT -->|yes| RESET[bootstrap(normal delay)]
+    BOOT -->|yes| RESET["bootstrap(normal delay)"]
     BOOT -->|no| WAIT[next interval]
 ```
 
