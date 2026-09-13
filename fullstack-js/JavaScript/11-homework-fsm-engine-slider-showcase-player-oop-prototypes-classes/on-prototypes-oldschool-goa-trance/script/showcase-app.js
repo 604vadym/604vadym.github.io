@@ -105,6 +105,16 @@ ShowcaseApp.prototype = {
         }
     },
 
+    _tryClearShopLinkFocus() {
+        const link = document.activeElement?.closest(
+            `.${this._options.classes.linkShop}`,
+        );
+
+        if (link) {
+            link.blur();
+        }
+    },
+
     _isRepeatAllowed(e) {
         if (e.repeat && !this._isPassthrougOnActiveAudio(e)) {
             return true;
@@ -194,11 +204,13 @@ ShowcaseApp.prototype = {
     },
 
     _handleClick(e) {
+        this._tryClearShopLinkFocus();
         this._stream(e, "handleClick", MouseEvent);
     },
 
     _handleAuxClick(e) {
         if (e.button === MOUSE_BUTTON_RIGHT) {
+            this._tryClearShopLinkFocus();
             return;
         }
 

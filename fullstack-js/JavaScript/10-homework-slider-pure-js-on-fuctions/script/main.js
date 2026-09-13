@@ -187,6 +187,12 @@ function initSlider() {
             e.preventDefault();
             return;
         }
+
+        const link = document.activeElement?.closest(".slider__link-shop");
+        if (link && (e.pointerType === "mouse" || e.pointerType === "touch")) {
+            link.blur();
+        }
+
         const button = e.target.closest(".button");
         if (!button || isMoving) return;
 
