@@ -84,12 +84,12 @@ export default class ShowcaseApp {
         }
     }
 
-    _tryClearShopLinkFocus() {
+    _tryClearShopLinkFocus(e) {
         const link = document.activeElement?.closest(
             `.${this._options.classes.linkShop}`,
         );
 
-        if (link) {
+        if (link && helper.isPointerInteraction(e)) {
             link.blur();
         }
     }
@@ -183,13 +183,13 @@ export default class ShowcaseApp {
     }
 
     _handleClick(e) {
-        this._tryClearShopLinkFocus();
+        this._tryClearShopLinkFocus(e);
         this._stream(e, "handleClick", MouseEvent);
     }
 
     _handleAuxClick(e) {
         if (e.button === MOUSE_BUTTON_RIGHT) {
-            this._tryClearShopLinkFocus();
+            this._tryClearShopLinkFocus(e);
             return;
         }
 

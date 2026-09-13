@@ -1,5 +1,7 @@
 "use strict";
 
+import * as helper from "../utils/helpers.js";
+
 export default class Button {
     constructor(className, instance, command) {
         this._className = className;
@@ -14,7 +16,7 @@ export default class Button {
         const button = input.target.closest(`.${this._className}`);
         if (!button) return input;
 
-        if (input.pointerType === "mouse" || input.pointerType === "touch") {
+        if (helper.isPointerInteraction(input)) {
             button.blur();
         }
 

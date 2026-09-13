@@ -12,6 +12,10 @@ export function isMultiTouch(e) {
     return Boolean(e?.touches && e.touches.length > 1);
 }
 
+export function isPointerInteraction(e) {
+    return e?.pointerType === "mouse" || e?.pointerType === "touch";
+}
+
 export function isTabActive() {
     return document.hidden === false;
 }
