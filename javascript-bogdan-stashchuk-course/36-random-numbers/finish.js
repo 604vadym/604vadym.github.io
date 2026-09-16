@@ -13,8 +13,26 @@
  *  - для генерации случайного числа в заданном диапазоне
  *  - для добавления случайного числа в массив с возвратом измененного массива
  */
+"use strict";
 
-const MIN = 1000
-const MAX = 9999
+const MIN = 1000;
+const MAX = 9999;
 
-const myNumbers = [2355, 7235, 8135, 1762, 2361, 8351]
+const myNumbers = [2355, 7235, 8135, 1762, 2361, 8351];
+
+function generateNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function addRandNumberToArr(min, max, arr) {
+    let num;
+    do {
+        num = generateNumber(min, max);
+    } while (arr.includes(num));
+    const arrCopy = arr.slice();
+    arrCopy.push(num);
+    return arrCopy;
+}
+
+console.log("Before:", myNumbers);
+console.log("After:", addRandNumberToArr(MIN, MAX, myNumbers));
