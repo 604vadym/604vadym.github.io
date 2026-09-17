@@ -91,6 +91,10 @@ function logToTerminal(...args) {
                 return `${arg}n`;
             }
 
+            if (typeof arg === "undefined") {
+                return "undefined";
+            }
+
             const typeStr = Object.prototype.toString.call(arg);
 
             if (typeStr === "[object Set]") {
