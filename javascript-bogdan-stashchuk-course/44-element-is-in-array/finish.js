@@ -6,9 +6,26 @@
  *
  * 3. В противном случае вернуть "false"
  */
+"use strict";
 
-const transports = ['Bus', 'Car', 'Bicycle', 'Airplane']
+const transports = ["Bus", "Car", "Bicycle", "Airplane"];
 
-console.log(isElementInArray(transports, 'Bus')) // true
-console.log(isElementInArray(transports, 'Phone')) // false
-console.log(isElementInArray(transports, 'Airplane')) // true
+function isElementInArray(inputArray, searchElement) {
+    return inputArray.findIndex((value) => value === searchElement) === -1
+        ? false
+        : true;
+}
+
+console.log(isElementInArray(transports, "Bus")); // true
+console.log(isElementInArray(transports, "Phone")); // false
+console.log(isElementInArray(transports, "Airplane")); // true
+
+console.log("******************************");
+
+function isElementInArrayViaIncludes(inputArray, searchElement) {
+    return inputArray.includes(searchElement);
+}
+
+console.log(isElementInArrayViaIncludes(transports, "Bus")); // true
+console.log(isElementInArrayViaIncludes(transports, "Phone")); // false
+console.log(isElementInArrayViaIncludes(transports, "Airplane")); // true
