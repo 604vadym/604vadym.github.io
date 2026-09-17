@@ -8,5 +8,12 @@
  * для каждого элемента вызовите функцию "cityInfo"
  * и выведите в консоль результат вызова функции
  */
+"use strict";
 
-const myCities = ['London', 'New York', 'Singapore']
+const myCities = ["London", "New York", "Singapore"];
+
+function cityInfo(cityName, index) {
+    return `${cityName} is at the index ${index} in the myCities array`;
+}
+
+myCities.forEach((city, i) => console.log(cityInfo(city, i)));
