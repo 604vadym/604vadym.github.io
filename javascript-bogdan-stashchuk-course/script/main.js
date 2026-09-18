@@ -87,13 +87,9 @@ const homeworkMap = {
 function logToTerminal(...args) {
     const msg = args
         .map((arg) => {
-            if (typeof arg === "bigint") {
-                return `${arg}n`;
-            }
-
-            if (typeof arg === "undefined") {
-                return "undefined";
-            }
+            if (typeof arg === "bigint") return `${arg}n`;
+            if (typeof arg === "undefined") return "undefined";
+            if (arg === null) return "null";
 
             const typeStr = Object.prototype.toString.call(arg);
 
@@ -103,7 +99,7 @@ function logToTerminal(...args) {
                 arg = Object.fromEntries(arg);
             }
 
-            if (typeof arg === "object" && arg !== null) {
+            if (typeof arg === "object") {
                 return JSON.stringify(
                     arg,
                     (key, value) => {
