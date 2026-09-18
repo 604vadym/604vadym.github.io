@@ -9,17 +9,27 @@
  *
  * ПРИМЕЧАНИЕ: Мы предполагаем, что "inputArray" содержит элементы только примитивных типов
  */
+"use strict";
 
-const myNumbers = [123, 50, 27]
+const myNumbers = [123, 50, 27];
 
-pushIfUnique(myNumbers, 50) // "50 уже в массиве"
-console.log(myNumbers) // [123, 50, 27]
+function pushIfUnique(inputArray, newElement) {
+    if (inputArray.includes(newElement)) {
+        console.log(`${newElement} уже находится в массиве`);
+        return;
+    }
 
-pushIfUnique(myNumbers, 80)
-console.log(myNumbers) // [123, 50, 27, 80]
+    inputArray.push(newElement);
+}
 
-pushIfUnique(myNumbers, 80) // "80 уже в массиве"
-console.log(myNumbers) // [123, 50, 27, 80]
+pushIfUnique(myNumbers, 50); // "50 уже в массиве"
+console.log(myNumbers); // [123, 50, 27]
 
-pushIfUnique(myNumbers, 77)
-console.log(myNumbers) // [123, 50, 27, 80, 77]
+pushIfUnique(myNumbers, 80);
+console.log(myNumbers); // [123, 50, 27, 80]
+
+pushIfUnique(myNumbers, 80); // "80 уже в массиве"
+console.log(myNumbers); // [123, 50, 27, 80]
+
+pushIfUnique(myNumbers, 77);
+console.log(myNumbers); // [123, 50, 27, 80, 77]
