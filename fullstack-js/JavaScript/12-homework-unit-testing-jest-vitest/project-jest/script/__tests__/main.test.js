@@ -178,18 +178,18 @@ describe("Module: main", () => {
     describe("Function addToArr()", () => {
         describe("when the string is not present in the array", () => {
             test("ensure the array contains the newly added string", () => {
-                const strAssert = "hello";
+                const expectedString = "hello";
                 expect(
-                    main.addToArr(strAssert, ["hi", "hallo", "bonjour"]),
-                ).toContain(strAssert);
+                    main.addToArr(expectedString, ["hi", "hallo", "bonjour"]),
+                ).toContain(expectedString);
             });
         });
 
         describe("when the string already exists in the array", () => {
             test("return the original array without adding duplicates", () => {
-                const strAssert = "hi";
-                const initialArray = [strAssert, "hallo", "bonjour"];
-                expect(main.addToArr(strAssert, initialArray)).toEqual(
+                const expectedString = "hi";
+                const initialArray = [expectedString, "hallo", "bonjour"];
+                expect(main.addToArr(expectedString, initialArray)).toEqual(
                     initialArray,
                 );
             });

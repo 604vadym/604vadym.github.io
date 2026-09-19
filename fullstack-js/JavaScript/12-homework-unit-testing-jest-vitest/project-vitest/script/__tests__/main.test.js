@@ -4,7 +4,7 @@ import * as main from "../main.js";
 describe("Module: main", () => {
     describe("Function: handleButtonClick()", () => {
         const buttonId = "testButton";
-        const msgAssert = "Hello from Vitest";
+        const expectedMessage = "Hello from Vitest";
 
         beforeEach(() => {
             document.body.innerHTML = `<button id='${buttonId}'>Click me</button>`;
@@ -16,17 +16,17 @@ describe("Module: main", () => {
 
         test("logs the message to the console on button click", () => {
             const logSpy = vi.spyOn(console, "log");
-            main.handleButtonClick("testButton", msgAssert);
+            main.handleButtonClick("testButton", expectedMessage);
             document.getElementById(buttonId).click();
-            expect(logSpy).toHaveBeenCalledWith(msgAssert);
+            expect(logSpy).toHaveBeenCalledWith(expectedMessage);
         });
 
         test("log an error to the console when the button is not found", () => {
             const errorSpy = vi.spyOn(console, "error");
-            const nonexistentBtnId = "nonexistent";
-            main.handleButtonClick(nonexistentBtnId, msgAssert);
+            const invalidButtonId = "unknown-id";
+            main.handleButtonClick(invalidButtonId, expectedMessage);
             expect(errorSpy).toHaveBeenCalledWith(
-                expect.stringContaining(nonexistentBtnId),
+                expect.stringContaining(invalidButtonId),
             );
         });
     });
