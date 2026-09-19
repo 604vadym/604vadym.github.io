@@ -90,3 +90,14 @@ export function generateArray(key) {
     }
     return [];
 }
+
+export function generateObject(key) {
+    if (typeof key === "undefined") return null;
+    if (key === "123") {
+        return { a: 1, b: 2, c: 3 };
+    }
+    if (key === "888") {
+        return { a: 8, b: 8, c: 8 };
+    }
+    return {};
+}

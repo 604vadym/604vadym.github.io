@@ -160,4 +160,62 @@ describe("Module: main", () => {
             });
         });
     });
+
+    describe("Function generateObject()", () => {
+        describe("with valid keys", () => {
+            test("", () => {
+                expect(main.generateObject("123")).toEqual({
+                    a: 1,
+                    b: 2,
+                    c: 3,
+                });
+            });
+
+            test("", () => {
+                expect(main.generateObject("888")).toEqual({
+                    a: 8,
+                    b: 8,
+                    c: 8,
+                });
+            });
+        });
+
+        describe("with invalid keys", () => {
+            test("", () => {
+                expect(main.generateObject("")).toEqual({});
+            });
+
+            test("", () => {
+                expect(main.generateObject("8")).toEqual({});
+            });
+
+            test("", () => {
+                expect(main.generateObject("321")).toEqual({});
+            });
+
+            test("", () => {
+                expect(main.generateObject("777")).toEqual({});
+            });
+
+            test("", () => {
+                expect(main.generateObject("hello")).toEqual({});
+            });
+        });
+
+        describe("with invalid keys containing spaces", () => {
+            test("", () => {
+                expect(main.generateObject("12 3")).toEqual({});
+            });
+
+            test("", () => {
+                expect(main.generateObject("888 ")).toEqual({});
+            });
+        });
+
+        describe("with missing inputs", () => {
+            test("", () => {
+                expect(main.generateObject()).toBeNull();
+            });
+        });
+    });
 });
