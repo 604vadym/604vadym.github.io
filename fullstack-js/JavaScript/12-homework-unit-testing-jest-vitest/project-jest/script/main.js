@@ -106,3 +106,21 @@ export function addToArr(str, arr) {
     if (arr.includes(str)) return arr;
     return arr.concat([str]);
 }
+
+export const shoppingCart = {
+    items: [],
+
+    addItem(item) {
+        if (!item || !item.name || !item.price) return false;
+        this.items.push(item);
+        return true;
+    },
+
+    getTotalPrice() {
+        return this.items.reduce((total, item) => total + item.price, 0);
+    },
+
+    clear() {
+        this.items = [];
+    },
+};
