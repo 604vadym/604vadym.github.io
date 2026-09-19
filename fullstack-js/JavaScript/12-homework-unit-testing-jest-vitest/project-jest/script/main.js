@@ -80,3 +80,13 @@ console.log(weekFn(7)); // 'Неділя'
 console.log(weekFn(9)); // null
 console.log(weekFn(1.5)); // null
 console.log(weekFn("2")); // null
+
+export function generateArray(key) {
+    if (key === "123") {
+        return [1, 2, 3];
+    }
+    if (key === "888") {
+        return [8, 8, 8];
+    }
+    return [];
+}

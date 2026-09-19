@@ -116,4 +116,48 @@ describe("Module: main", () => {
             });
         });
     });
+
+    describe("Function: generateArray()", () => {
+        describe("with valid keys", () => {
+            test("", () => {
+                expect(main.generateArray("123")).toEqual([1, 2, 3]);
+            });
+
+            test("", () => {
+                expect(main.generateArray("888")).toEqual([8, 8, 8]);
+            });
+        });
+
+        describe("with invalid keys", () => {
+            test("", () => {
+                expect(main.generateArray("")).toEqual([]);
+            });
+
+            test("", () => {
+                expect(main.generateArray("8")).toEqual([]);
+            });
+
+            test("", () => {
+                expect(main.generateArray("321")).toEqual([]);
+            });
+
+            test("", () => {
+                expect(main.generateArray("777")).toEqual([]);
+            });
+
+            test("", () => {
+                expect(main.generateArray("hello")).toEqual([]);
+            });
+        });
+
+        describe("with invalid keys containing spaces", () => {
+            test("", () => {
+                expect(main.generateArray("12 3")).toEqual([]);
+            });
+
+            test("", () => {
+                expect(main.generateArray("888 ")).toEqual([]);
+            });
+        });
+    });
 });
