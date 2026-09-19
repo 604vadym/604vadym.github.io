@@ -119,59 +119,59 @@ describe("Module: main", () => {
 
     describe("Function: generateArray()", () => {
         describe("with valid keys", () => {
-            test("", () => {
+            test("return [1, 2, 3] when key is '123'", () => {
                 expect(main.generateArray("123")).toEqual([1, 2, 3]);
             });
 
-            test("", () => {
+            test("return [8, 8, 8] when key is '888'", () => {
                 expect(main.generateArray("888")).toEqual([8, 8, 8]);
             });
 
-            test("", () => {
+            test("contain number 1 when key is '123'", () => {
                 expect(main.generateArray("123")).toContain(1);
             });
 
-            test("", () => {
+            test("contain number 2 when key is '123'", () => {
                 expect(main.generateArray("123")).toContain(2);
             });
 
-            test("", () => {
+            test("contain number 3 when key is '123'", () => {
                 expect(main.generateArray("123")).toContain(3);
             });
 
-            test("", () => {
+            test("contain number 8 when key is '888'", () => {
                 expect(main.generateArray("888")).toContain(8);
             });
         });
 
         describe("with invalid keys", () => {
-            test("", () => {
+            test("return an empty array for an empty string key", () => {
                 expect(main.generateArray("")).toEqual([]);
             });
 
-            test("", () => {
+            test("return an empty array for a single digit key", () => {
                 expect(main.generateArray("8")).toEqual([]);
             });
 
-            test("", () => {
+            test("return an empty array for a reversed key sequence", () => {
                 expect(main.generateArray("321")).toEqual([]);
             });
 
-            test("", () => {
+            test("return an empty array for an unmapped numeric key", () => {
                 expect(main.generateArray("777")).toEqual([]);
             });
 
-            test("", () => {
+            test("return an empty array for a non-numeric string key", () => {
                 expect(main.generateArray("hello")).toEqual([]);
             });
         });
 
         describe("with invalid keys containing spaces", () => {
-            test("", () => {
+            test("return an empty array when key has an internal space", () => {
                 expect(main.generateArray("12 3")).toEqual([]);
             });
 
-            test("", () => {
+            test("return an empty array when key has a trailing space", () => {
                 expect(main.generateArray("888 ")).toEqual([]);
             });
         });
@@ -179,7 +179,7 @@ describe("Module: main", () => {
 
     describe("Function generateObject()", () => {
         describe("with valid keys", () => {
-            test("", () => {
+            test("return a specific object when key is '123'", () => {
                 expect(main.generateObject("123")).toEqual({
                     a: 1,
                     b: 2,
@@ -187,7 +187,7 @@ describe("Module: main", () => {
                 });
             });
 
-            test("", () => {
+            test("return a specific object when key is '888'", () => {
                 expect(main.generateObject("888")).toEqual({
                     a: 8,
                     b: 8,
@@ -197,39 +197,39 @@ describe("Module: main", () => {
         });
 
         describe("with invalid keys", () => {
-            test("", () => {
+            test("return an empty object for an empty string key", () => {
                 expect(main.generateObject("")).toEqual({});
             });
 
-            test("", () => {
+            test("return an empty object for a single digit key", () => {
                 expect(main.generateObject("8")).toEqual({});
             });
 
-            test("", () => {
+            test("return an empty object for a reversed key sequence", () => {
                 expect(main.generateObject("321")).toEqual({});
             });
 
-            test("", () => {
+            test("return an empty object for an unmapped numeric key", () => {
                 expect(main.generateObject("777")).toEqual({});
             });
 
-            test("", () => {
+            test("return an empty object for a non-numeric string key", () => {
                 expect(main.generateObject("hello")).toEqual({});
             });
         });
 
         describe("with invalid keys containing spaces", () => {
-            test("", () => {
+            test("return an empty object when key has an internal space", () => {
                 expect(main.generateObject("12 3")).toEqual({});
             });
 
-            test("", () => {
+            test("return an empty object when key has a trailing space", () => {
                 expect(main.generateObject("888 ")).toEqual({});
             });
         });
 
         describe("with missing inputs", () => {
-            test("", () => {
+            test("return null when the argument is completely omitted", () => {
                 expect(main.generateObject()).toBeNull();
             });
         });
