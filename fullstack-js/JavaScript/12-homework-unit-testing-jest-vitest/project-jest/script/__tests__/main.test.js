@@ -195,4 +195,53 @@ describe("Module: main", () => {
             });
         });
     });
+
+    describe("Object: shoppingCart", () => {
+        beforeEach(() => {
+            main.shoppingCart.clear();
+        });
+
+        describe("clear()", () => {
+            test("remove all items and reset the cart to an empty state", () => {
+                main.shoppingCart.addItem({ name: "Laptop", price: 1000 });
+                expect(main.shoppingCart.items).not.toHaveLength(0);
+                main.shoppingCart.clear();
+                expect(main.shoppingCart.items).toEqual([]);
+            });
+        });
+
+        describe("addItem()", () => {
+            test("append a valid item to the cart and return true", () => {
+                const product = { name: "Laptop", price: 1000 };
+                const result = main.shoppingCart.addItem(product);
+
+                expect(result).toBe(true);
+                expect(main.shoppingCart.items).toEqual([product]);
+            });
+
+            test("return false and not modify items when item structure is invalid", () => {
+                const product = { name: "Laptop" };
+                const result = main.shoppingCart.addItem(product);
+
+                expect(result).toBe(false);
+                expect(main.shoppingCart.items).toHaveLength(0);
+            });
+        });
+
+        describe("getTotalPrice()", () => {
+            test("calculate total sum correctly for multiple items", () => {
+                main.shoppingCart.addItem({ name: "Laptop", price: 1000 });
+                main.shoppingCart.addItem({
+                    name: "Headphones",
+                    price: 2500,
+                });
+
+                expect(main.shoppingCart.getTotalPrice()).toBe(3500);
+            });
+
+            test("return 0 when the cart is completely empty", () => {
+                expect(main.shoppingCart.getTotalPrice()).toBe(0);
+            });
+        });
+    });
 });
