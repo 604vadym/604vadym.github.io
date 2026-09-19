@@ -50,6 +50,34 @@ function printMousePosition(e) {
     );
 }
 
+function initMouseTracking(runBtnId, stopBtnId) {
+    const runButton = document.getElementById(runBtnId);
+    const stopButton = document.getElementById(stopBtnId);
+
+    if (!runButton || !stopButton) {
+        console.error("DOM Error: Required tracking buttons not found");
+        return false;
+    }
+
+    runButton.addEventListener("click", () => {
+        if (!isTracking) {
+            trackMousePosition();
+        } else {
+            console.log("Mouse position tracking is already running");
+        }
+    });
+
+    stopButton.addEventListener("click", () => {
+        if (isTracking) {
+            stopMouseTracking();
+        } else {
+            console.log("Mouse position tracking is already stopped");
+        }
+    });
+
+    return true;
+}
+
 function trackMousePosition() {
     document.addEventListener("mousemove", printMousePosition);
     isTracking = true;
@@ -63,25 +91,6 @@ function stopMouseTracking() {
         "Mouse position tracking stopped. Click on button to run tracking again",
     );
 }
-
-// const runButton = document.getElementById("buttonRunMouseTrack");
-// const stopButton = document.getElementById("buttonStopMouseTrack");
-
-// runButton.addEventListener("click", () => {
-//     if (!isTracking) {
-//         trackMousePosition();
-//     } else {
-//         console.log("Mouse position tracking is already running");
-//     }
-// });
-
-// stopButton.addEventListener("click", () => {
-//     if (isTracking) {
-//         stopMouseTracking();
-//     } else {
-//         console.log("Mouse position tracking is already stopped");
-//     }
-// });
 
 // trackMousePosition();
 
@@ -133,8 +142,8 @@ function setupEventDelegation(selector) {
 
 export {
     handleButtonClick,
-    isTracking,
     trackMousePosition,
     stopMouseTracking,
+    initMouseTracking,
     setupEventDelegation,
 };
