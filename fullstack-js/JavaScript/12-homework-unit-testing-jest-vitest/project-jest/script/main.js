@@ -5,7 +5,7 @@
 // Тест повинен перевірити коректність роботи функції для всіх вказаних у прикладі діапазонів віку.
 
 export function ageClassification(num) {
-    return num < 0
+    return num <= 0
         ? null
         : num <= 24
           ? "Дитинство"
