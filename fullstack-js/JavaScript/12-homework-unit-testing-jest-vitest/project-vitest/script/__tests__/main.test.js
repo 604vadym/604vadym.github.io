@@ -11,6 +11,7 @@ describe("Module: main", () => {
         });
 
         afterEach(() => {
+            document.body.innerHTML = "";
             vi.restoreAllMocks();
         });
 
@@ -27,6 +28,46 @@ describe("Module: main", () => {
             main.handleButtonClick(invalidButtonId, expectedMessage);
             expect(errorSpy).toHaveBeenCalledWith(
                 expect.stringContaining(invalidButtonId),
+            );
+        });
+    });
+
+    describe("Function: initMouseTracking()", () => {
+        const runButtonId = "buttonRunMouseTrack";
+        const stopButtonId = "buttonStopMouseTrack";
+
+        beforeEach(() => {
+            document.body.innerHTML = `
+            <button id='${runButtonId}'>Run</button>
+            <button id='${stopButtonId}'>Stop</button>
+            `;
+        });
+
+        afterEach(() => {
+            document.body.innerHTML = "";
+            vi.restoreAllMocks();
+        });
+
+        test("log correct mouse coordinates to the console on mousemove event", () => {
+            const logSpy = vi.spyOn(console, "log");
+            const result = main.initMouseTracking(runButtonId, stopButtonId);
+            const clientX = 888;
+            const clientY = 333;
+
+            document.getElementById(runButtonId).click();
+
+            const mouseMoveEvent = new MouseEvent("mousemove", {
+                clientX,
+                clientY,
+                bubbles: true,
+            });
+            document.dispatchEvent(mouseMoveEvent);
+
+            expect(result).toBe(true);
+            expect(logSpy).toHaveBeenCalledWith(
+                expect.stringContaining(
+                    `Mouse X: ${clientX}, Mouse Y: ${clientY}`,
+                ),
             );
         });
     });
