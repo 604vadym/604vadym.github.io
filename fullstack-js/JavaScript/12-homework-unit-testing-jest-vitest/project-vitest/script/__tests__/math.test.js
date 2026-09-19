@@ -82,4 +82,10 @@ describe("Module: math", () => {
             expect(math.sum(2.00005, 0.00000007)).toBeCloseTo(2.00005007, 8);
         });
     });
+
+    describe("Function: divide()", () => {
+        test("should throw an error when dividing by zero", () => {
+            expect(() => math.divide(100, 0)).toThrow("Division by zero");
+        });
+    });
 });
