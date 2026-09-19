@@ -126,6 +126,22 @@ describe("Module: main", () => {
             test("", () => {
                 expect(main.generateArray("888")).toEqual([8, 8, 8]);
             });
+
+            test("", () => {
+                expect(main.generateArray("123")).toContain(1);
+            });
+
+            test("", () => {
+                expect(main.generateArray("123")).toContain(2);
+            });
+
+            test("", () => {
+                expect(main.generateArray("123")).toContain(3);
+            });
+
+            test("", () => {
+                expect(main.generateArray("888")).toContain(8);
+            });
         });
 
         describe("with invalid keys", () => {
