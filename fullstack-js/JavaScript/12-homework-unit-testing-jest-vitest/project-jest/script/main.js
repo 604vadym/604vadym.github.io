@@ -101,3 +101,8 @@ export function generateObject(key) {
     }
     return {};
 }
+
+export function addToArr(str, arr) {
+    if (arr.includes(str)) return arr;
+    return arr.concat([str]);
+}
