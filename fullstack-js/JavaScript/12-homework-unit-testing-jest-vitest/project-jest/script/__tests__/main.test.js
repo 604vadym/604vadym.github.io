@@ -66,4 +66,46 @@ describe("Module: main", () => {
             expect(main.ageClassification(150)).toBeNull();
         });
     });
+
+    describe("Function: weekFn()", () => {
+        test("return 'Понеділок' for day 1", () => {
+            expect(main.weekFn(1)).toBe("Понеділок");
+        });
+
+        test("return 'Вівторок' for day 2", () => {
+            expect(main.weekFn(2)).toBe("Вівторок");
+        });
+
+        test("return 'Середа' for day 3", () => {
+            expect(main.weekFn(3)).toBe("Середа");
+        });
+
+        test("return 'Четвер' for day 4", () => {
+            expect(main.weekFn(4)).toBe("Четвер");
+        });
+
+        test("return 'П'ятниця' for day 5", () => {
+            expect(main.weekFn(5)).toBe("П'ятниця");
+        });
+
+        test("return 'Субота' for day 6", () => {
+            expect(main.weekFn(6)).toBe("Субота");
+        });
+
+        test("return 'Неділя' for day 7", () => {
+            expect(main.weekFn(7)).toBe("Неділя");
+        });
+
+        test("return null for out-of-range integer", () => {
+            expect(main.weekFn(9)).toBeNull();
+        });
+
+        test("return null for floating-point number", () => {
+            expect(main.weekFn(1.5)).toBeNull();
+        });
+
+        test("return null for string input due to strict comparison", () => {
+            expect(main.weekFn("2")).toBeNull();
+        });
+    });
 });
