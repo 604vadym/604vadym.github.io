@@ -28,9 +28,13 @@ describe("Module: more", () => {
     });
 
     describe("Function: confirmAndSend()", () => {
-        const buttonId = "testButton";
+        const correctBtnId = "correct-id";
+        let button = null;
 
         beforeEach(() => {
+            button = document.createElement("button");
+            button.id = correctBtnId;
+            document.body.appendChild(button);
             vi.useFakeTimers();
         });
 
@@ -41,10 +45,6 @@ describe("Module: more", () => {
         });
 
         test("trigger onConfirm callback with accurate structured event data and timestamp on click", () => {
-            const button = document.createElement("button");
-            button.id = buttonId;
-            document.body.appendChild(button);
-
             const mockCallback = vi.fn();
             const mockDate = new Date(2026, 2, 23);
             vi.setSystemTime(mockDate);
@@ -54,7 +54,7 @@ describe("Module: more", () => {
                 timestamp: mockDate.valueOf(),
             };
 
-            const result = more.confirmAndSend(buttonId, mockCallback);
+            const result = more.confirmAndSend(correctBtnId, mockCallback);
             expect(result).toBe(true);
 
             button.click();
@@ -62,11 +62,14 @@ describe("Module: more", () => {
             expect(mockCallback).toHaveBeenCalledWith(expectedData);
         });
 
-        test("return false and prevent registration when the targets button is absent in DOM", () => {
+        test("return false and do not attach listener if button ID does not match", () => {
+            const wrongBtnId = "wrong-id";
             const mockCallback = vi.fn();
 
-            const result = more.confirmAndSend(buttonId, mockCallback);
+            const result = more.confirmAndSend(wrongBtnId, mockCallback);
             expect(result).toBe(false);
+
+            button.click();
             expect(mockCallback).not.toHaveBeenCalled();
         });
     });
