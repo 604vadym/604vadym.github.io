@@ -208,6 +208,10 @@ describe("Module: more", () => {
     });
 
     describe("Function: getUser()", () => {
+        afterEach(() => {
+            vi.restoreAllMocks();
+        });
+
         test("return user data and call the correct endpoint URL when a valid numeric ID is provided", async () => {
             const expectedObj = { userName: "John" };
             const expectedId = 11;
@@ -225,6 +229,52 @@ describe("Module: more", () => {
                 `https://example.com/users/${expectedId}`,
             );
             expect(result).toEqual(expectedObj);
+        });
+
+        test("return null when the server responds with a 404 Not Found status", async () => {
+            const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
+                ok: false,
+                status: 404,
+            });
+
+            const result = await more.getUser(11);
+            expect(result).toBeNull();
+        });
+
+        test("return null when the network request completes with any other non-ok status", async () => {
+            const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
+                ok: false,
+            });
+
+            const result = await more.getUser(11);
+            expect(result).toBeNull();
+        });
+
+        test("return null and catch critical exceptions when fetch throws a TypeError", async () => {
+            const fetchSpy = vi
+                .spyOn(globalThis, "fetch")
+                .mockRejectedValue(new TypeError("Failed to fetch"));
+
+            const result = await more.getUser(11);
+            expect(result).toBeNull();
+        });
+
+        test("throw a validation error when the provided user ID is not a numeric type", async () => {
+            const fetchSpy = vi.spyOn(globalThis, "fetch");
+
+            await expect(more.getUser("11")).rejects.toThrow("Invalid User ID");
+        });
+
+        test("throw a validation error when the provided user ID is exactly zero", async () => {
+            const fetchSpy = vi.spyOn(globalThis, "fetch");
+
+            await expect(more.getUser(0)).rejects.toThrow("Invalid User ID");
+        });
+
+        test("throw a validation error when the provided user ID is a negative value", async () => {
+            const fetchSpy = vi.spyOn(globalThis, "fetch");
+
+            await expect(more.getUser(-1)).rejects.toThrow("Invalid User ID");
         });
     });
 });
