@@ -73,4 +73,31 @@ describe("Module: more", () => {
             expect(mockCallback).not.toHaveBeenCalled();
         });
     });
+
+    describe("Function: loadUserProfile()", () => {
+        afterEach(() => {
+            vi.restoreAllMocks();
+        });
+
+        test("return user profile data and attach correct Authorization bearer token to fetch headers when a valid token is present", async () => {
+            const expectedObj = { msg: "Hello from fetch" };
+            const expectedToken = "validToken";
+
+            const localStorageSpy = vi
+                .spyOn(localStorage, "getItem")
+                .mockReturnValue(expectedToken);
+            const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
+                ok: true,
+                json: vi.fn().mockResolvedValue(expectedObj),
+            });
+
+            const result = await more.loadUserProfile();
+            const fetchOptions = fetchSpy.mock.calls[0][1];
+
+            expect(fetchOptions.headers.Authorization).toMatch(
+                new RegExp(`${expectedToken}$`),
+            );
+            expect(result).toEqual(expectedObj);
+        });
+    });
 });

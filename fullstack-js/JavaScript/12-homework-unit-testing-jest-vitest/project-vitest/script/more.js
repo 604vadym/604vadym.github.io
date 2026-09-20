@@ -27,7 +27,7 @@ export async function loadUserProfile() {
 
     try {
         const response = await fetch("https://example.com", {
-            headers: { Authorisation: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token}` },
         });
 
         if (!response.ok) return false;
