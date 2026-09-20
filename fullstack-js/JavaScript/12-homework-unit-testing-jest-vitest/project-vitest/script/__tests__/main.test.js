@@ -154,4 +154,60 @@ describe("Module: main", () => {
             expect(errorSpy).toHaveBeenCalled();
         });
     });
+
+    describe("Function: setupEventDelegation()", () => {
+        const listId = "testList";
+
+        afterEach(() => {
+            vi.restoreAllMocks();
+        });
+
+        test("log the correct text when a direct list item element is clicked", () => {
+            const expectedElementText = "Item 1";
+            const container = document.createElement("div");
+            container.innerHTML = `
+                <ul id="${listId}">
+                  <li>${expectedElementText}</li>
+                  <li>Item 2</li>
+                  <li>Item 3</li>
+                </ul>
+                `;
+            document.body.appendChild(container);
+
+            const logSpy = vi.spyOn(console, "log");
+            main.setupEventDelegation(`#${listId}`);
+            const list = document.getElementById(listId);
+            list.firstElementChild.click();
+            expect(logSpy).toHaveBeenCalledWith(
+                `Item clicked: ${expectedElementText}`,
+            );
+
+            container.innerHTML = "";
+            container.remove();
+        });
+
+        test("log the correct text even when a nested child element inside the list item is clicked", () => {
+            const expectedElementText = "Item 3 with span";
+            const container = document.createElement("div");
+            container.innerHTML = `
+                <ul id="${listId}">
+                  <li>Item 1</li>
+                  <li>Item 2</li>
+                  <li><span>${expectedElementText}</span></li>
+                </ul>
+                `;
+            document.body.appendChild(container);
+
+            const logSpy = vi.spyOn(console, "log");
+            main.setupEventDelegation(`#${listId}`);
+            const li = document.querySelector(`#${listId} li:nth-child(3)`);
+            li.firstElementChild.click();
+            expect(logSpy).toHaveBeenCalledWith(
+                `Item clicked: ${expectedElementText}`,
+            );
+
+            container.innerHTML = "";
+            container.remove();
+        });
+    });
 });
