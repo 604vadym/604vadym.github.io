@@ -219,7 +219,6 @@ describe("Module: main", () => {
         });
 
         test("not log anything when the container itself is clicked without targeting a list item", () => {
-            const expectedElementText = "Item 1";
             const container = document.createElement("div");
             container.innerHTML = `
                 <ul id="${listId}">

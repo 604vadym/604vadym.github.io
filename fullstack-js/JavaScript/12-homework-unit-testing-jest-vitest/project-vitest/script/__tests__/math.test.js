@@ -12,6 +12,10 @@ describe("Module: math", () => {
     });
 
     describe("Function: divide()", () => {
+        test("correctly divide two numbers", () => {
+            expect(math.divide(50, 2)).toBe(25);
+        });
+
         test("throw an error when dividing by zero", () => {
             expect(() => math.divide(100, 0)).toThrow("Division by zero");
         });
