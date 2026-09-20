@@ -160,6 +160,7 @@ describe("Module: main", () => {
 
         afterEach(() => {
             vi.restoreAllMocks();
+            document.body.innerHTML = "";
         });
 
         test("log the correct text when a direct list item element is clicked", () => {
@@ -181,9 +182,6 @@ describe("Module: main", () => {
             expect(logSpy).toHaveBeenCalledWith(
                 `Item clicked: ${expectedElementText}`,
             );
-
-            container.innerHTML = "";
-            container.remove();
         });
 
         test("log the correct text even when a nested child element inside the list item is clicked", () => {
@@ -205,9 +203,6 @@ describe("Module: main", () => {
             expect(logSpy).toHaveBeenCalledWith(
                 `Item clicked: ${expectedElementText}`,
             );
-
-            container.innerHTML = "";
-            container.remove();
         });
 
         test("log an error if the target list container element does not exist in the DOM", () => {
@@ -231,9 +226,6 @@ describe("Module: main", () => {
             const list = document.getElementById(listId);
             list.click();
             expect(logSpy).not.toHaveBeenCalled();
-
-            container.innerHTML = "";
-            container.remove();
         });
     });
 });
