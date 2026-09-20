@@ -1,5 +1,6 @@
 // @vitest-environment happy-dom
 import * as more from "../more.js";
+import { vi } from "vitest";
 
 describe("Module: more", () => {
     describe("Function: validateAndSubmit()", () => {
@@ -203,6 +204,27 @@ describe("Module: more", () => {
             return promise.catch((error) => {
                 expect(error.message).toBe("Role is required for filtering");
             });
+        });
+    });
+
+    describe("Function: getUser()", () => {
+        test("return user data and call the correct endpoint URL when a valid numeric ID is provided", async () => {
+            const expectedObj = { userName: "John" };
+            const expectedId = 11;
+
+            const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
+                ok: true,
+                status: 200,
+                json: vi.fn().mockResolvedValue(expectedObj),
+            });
+
+            const result = await more.getUser(expectedId);
+            const fetchOptions = fetchSpy.mock.calls[0][0];
+
+            expect(fetchOptions).toBe(
+                `https://example.com/users/${expectedId}`,
+            );
+            expect(result).toEqual(expectedObj);
         });
     });
 });

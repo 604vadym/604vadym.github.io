@@ -65,7 +65,7 @@ export async function getUser(id) {
     }
 
     try {
-        const response = await fetch(`https://example.com{id}`);
+        const response = await fetch(`https://example.com/users/${id}`);
 
         if (response.status === 404) {
             return null;
