@@ -75,13 +75,14 @@ describe("Module: more", () => {
     });
 
     describe("Function: loadUserProfile()", () => {
+        const expectedToken = "validToken";
+
         afterEach(() => {
             vi.restoreAllMocks();
         });
 
         test("return user profile data and attach correct Authorization bearer token to fetch headers when a valid token is present", async () => {
             const expectedObj = { msg: "Hello from fetch" };
-            const expectedToken = "validToken";
 
             const localStorageSpy = vi
                 .spyOn(localStorage, "getItem")
@@ -107,8 +108,30 @@ describe("Module: more", () => {
             const fetchSpy = vi.spyOn(globalThis, "fetch");
 
             const result = await more.loadUserProfile();
-            expect(result).toEqual(false);
             expect(fetchSpy).not.toHaveBeenCalled();
+            expect(result).toEqual(false);
+        });
+
+        test("return false when network request fails with a non-ok response status", async () => {
+            vi.spyOn(localStorage, "getItem").mockReturnValue(expectedToken);
+            const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
+                ok: false,
+            });
+
+            const result = await more.loadUserProfile();
+            expect(fetchSpy).toHaveBeenCalled();
+            expect(result).toEqual(false);
+        });
+
+        test("return false and handle network exceptions when fetch throws a TypeError", async () => {
+            vi.spyOn(localStorage, "getItem").mockReturnValue(expectedToken);
+            const fetchSpy = vi
+                .spyOn(globalThis, "fetch")
+                .mockRejectedValue(new TypeError("Failed to fetch"));
+
+            const result = await more.loadUserProfile();
+            expect(fetchSpy).toHaveBeenCalled();
+            expect(result).toEqual(false);
         });
     });
 });
