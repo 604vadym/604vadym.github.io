@@ -99,5 +99,16 @@ describe("Module: more", () => {
             );
             expect(result).toEqual(expectedObj);
         });
+
+        test("return false and prevent fetch request when auth token is missing in localStorage", async () => {
+            const localStorageSpy = vi
+                .spyOn(localStorage, "getItem")
+                .mockReturnValue(null);
+            const fetchSpy = vi.spyOn(globalThis, "fetch");
+
+            const result = await more.loadUserProfile();
+            expect(result).toEqual(false);
+            expect(fetchSpy).not.toHaveBeenCalled();
+        });
     });
 });
