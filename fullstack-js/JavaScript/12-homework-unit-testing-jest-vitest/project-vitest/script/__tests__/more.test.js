@@ -135,7 +135,7 @@ describe("Module: more", () => {
         });
     });
 
-    describe("Function: fetchData()", () => {
+    describe("Function: fetchData() with async/await", () => {
         beforeEach(() => {
             vi.useFakeTimers();
         });
@@ -167,6 +167,42 @@ describe("Module: more", () => {
             await expect(promise).rejects.toThrow(
                 "Role is required for filtering",
             );
+        });
+    });
+
+    describe("Function: fetchData() with promise & then", () => {
+        beforeEach(() => {
+            vi.useFakeTimers();
+        });
+
+        afterEach(() => {
+            vi.useRealTimers();
+        });
+
+        test("return filtered users array when role matches existing records", () => {
+            const promise = more.fetchData("admin");
+            vi.advanceTimersByTime(1000);
+            return promise.then((result) => {
+                expect(result).toEqual([
+                    { id: 1, name: "Alice", role: "admin" },
+                ]);
+            });
+        });
+
+        test("return an empty array when the provided role does not exist in the database", async () => {
+            const promise = more.fetchData("banned");
+            vi.advanceTimersByTime(1000);
+            return promise.then((result) => {
+                expect(result).toEqual([]);
+            });
+        });
+
+        test("reject with a validation error when no role argument is provided", async () => {
+            const promise = more.fetchData();
+            vi.advanceTimersByTime(1000);
+            return promise.catch((error) => {
+                expect(error.message).toBe("Role is required for filtering");
+            });
         });
     });
 });
