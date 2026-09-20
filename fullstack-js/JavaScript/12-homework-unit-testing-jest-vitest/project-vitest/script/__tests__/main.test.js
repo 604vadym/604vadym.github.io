@@ -209,5 +209,32 @@ describe("Module: main", () => {
             container.innerHTML = "";
             container.remove();
         });
+
+        test("log an error if the target list container element does not exist in the DOM", () => {
+            const errorSpy = vi.spyOn(console, "error");
+            main.setupEventDelegation(`#${listId}`);
+            expect(errorSpy).toHaveBeenCalledWith(
+                expect.stringContaining(listId),
+            );
+        });
+
+        test("not log anything when the container itself is clicked without targeting a list item", () => {
+            const expectedElementText = "Item 1";
+            const container = document.createElement("div");
+            container.innerHTML = `
+                <ul id="${listId}">
+                </ul>
+                `;
+            document.body.appendChild(container);
+
+            const logSpy = vi.spyOn(console, "log");
+            main.setupEventDelegation(`#${listId}`);
+            const list = document.getElementById(listId);
+            list.click();
+            expect(logSpy).not.toHaveBeenCalled();
+
+            container.innerHTML = "";
+            container.remove();
+        });
     });
 });
