@@ -38,3 +38,23 @@ export async function loadUserProfile() {
         return false;
     }
 }
+
+export function fetchData(role) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (!role) {
+                reject(new Error("Role is required for filtering"));
+                return;
+            }
+
+            const database = [
+                { id: 1, name: "Alice", role: "admin" },
+                { id: 2, name: "Bob", role: "user" },
+                { id: 3, name: "Charlie", role: "user" },
+            ];
+
+            const filteredUsers = database.filter((user) => user.role === role);
+            resolve(filteredUsers);
+        }, 1000);
+    });
+}
