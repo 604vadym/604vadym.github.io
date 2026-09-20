@@ -16,3 +16,25 @@ export function confirmAndSend(buttonId, onConfirm) {
 
     return true;
 }
+
+export async function loadUserProfile() {
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+        console.warn("Auth Error: No token found");
+        return false;
+    }
+
+    try {
+        const response = await fetch("https://example.com", {
+            headers: { Authorisation: `Bearer ${token}` },
+        });
+
+        if (!response.ok) return false;
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return false;
+    }
+}
