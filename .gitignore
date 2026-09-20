@@ -6,4 +6,5 @@
 .sass-cache/
 .eslintcache
 node_modules/
+coverage/
 Thumbs.db

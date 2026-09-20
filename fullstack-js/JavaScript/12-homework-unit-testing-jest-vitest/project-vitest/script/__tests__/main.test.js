@@ -44,13 +44,18 @@ describe("Module: main", () => {
         });
 
         afterEach(() => {
+            main.stopMouseTracking();
             document.body.innerHTML = "";
             vi.restoreAllMocks();
         });
 
+        test("return true upon successful DOM elements initialisation", () => {
+            const result = main.initMouseTracking(runButtonId, stopButtonId);
+            expect(result).toBe(true);
+        });
+
         test("log correct mouse coordinates to the console on mousemove event", () => {
             const logSpy = vi.spyOn(console, "log");
-            const result = main.initMouseTracking(runButtonId, stopButtonId);
             const clientX = 888;
             const clientY = 333;
 
@@ -63,7 +68,6 @@ describe("Module: main", () => {
             });
             document.dispatchEvent(mouseMoveEvent);
 
-            expect(result).toBe(true);
             expect(logSpy).toHaveBeenCalledWith(
                 expect.stringContaining(
                     `Mouse X: ${clientX}, Mouse Y: ${clientY}`,
