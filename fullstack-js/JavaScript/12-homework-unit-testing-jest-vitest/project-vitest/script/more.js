@@ -58,3 +58,26 @@ export function fetchData(role) {
         }, 1000);
     });
 }
+
+export async function getUser(id) {
+    if (typeof id !== "number" || id <= 0) {
+        throw new Error("Invalid User ID");
+    }
+
+    try {
+        const response = await fetch(`https://example.com{id}`);
+
+        if (response.status === 404) {
+            return null;
+        }
+
+        if (!response.ok) {
+            return null;
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return null;
+    }
+}
