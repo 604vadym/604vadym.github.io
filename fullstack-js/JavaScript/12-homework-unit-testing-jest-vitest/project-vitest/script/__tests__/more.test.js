@@ -134,4 +134,39 @@ describe("Module: more", () => {
             expect(result).toEqual(false);
         });
     });
+
+    describe("Function: fetchData()", () => {
+        beforeEach(() => {
+            vi.useFakeTimers();
+        });
+
+        afterEach(() => {
+            vi.useRealTimers();
+        });
+
+        test("return filtered users array when role matches existing records", async () => {
+            const promise = more.fetchData("user");
+            vi.advanceTimersByTime(1000);
+            const result = await promise;
+            expect(result).toEqual([
+                { id: 2, name: "Bob", role: "user" },
+                { id: 3, name: "Charlie", role: "user" },
+            ]);
+        });
+
+        test("return an empty array when the provided role does not exist in the database", async () => {
+            const promise = more.fetchData("hacker");
+            vi.advanceTimersByTime(1000);
+            const result = await promise;
+            expect(result).toEqual([]);
+        });
+
+        test("reject with a validation error when no role argument is provided", async () => {
+            const promise = more.fetchData();
+            vi.advanceTimersByTime(1000);
+            await expect(promise).rejects.toThrow(
+                "Role is required for filtering",
+            );
+        });
+    });
 });
