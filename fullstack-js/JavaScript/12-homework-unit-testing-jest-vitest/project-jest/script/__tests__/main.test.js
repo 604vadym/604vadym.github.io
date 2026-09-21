@@ -177,11 +177,14 @@ describe("Module: main", () => {
 
     describe("Function addToArr()", () => {
         describe("when the string is not present in the array", () => {
-            test("ensure the array contains the newly added string", () => {
+            test("add the string without removing existing elements", () => {
                 const expectedString = "hello";
-                expect(
-                    main.addToArr(expectedString, ["hi", "hallo", "bonjour"]),
-                ).toContain(expectedString);
+                const initialArray = ["hi", "hallo", "bonjour"];
+
+                const result = main.addToArr(expectedString, initialArray);
+                expect(result).toContain(expectedString);
+                expect(result).toEqual(expect.arrayContaining(initialArray));
+                expect(result).toHaveLength(initialArray.length + 1);
             });
         });
 
@@ -189,6 +192,7 @@ describe("Module: main", () => {
             test("return the original array without adding duplicates", () => {
                 const expectedString = "hi";
                 const initialArray = [expectedString, "hallo", "bonjour"];
+
                 expect(main.addToArr(expectedString, initialArray)).toEqual(
                     initialArray,
                 );
