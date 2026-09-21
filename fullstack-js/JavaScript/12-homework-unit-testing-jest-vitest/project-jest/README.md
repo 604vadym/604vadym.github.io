@@ -30,10 +30,20 @@ npm install
 
 ---
 
-## 🧪 Running Tests
+## 🧪 Running Tests & Coverage
 
-To execute the test suite, run the following command:
+You can execute the test suite or generate code coverage reports using the following commands:
+
+### Run all tests
 
 ```bash
 npm test
 ```
+
+### Run tests and generate code coverage report
+
+```bash
+npm run test:coverage
+```
+
+This command runs the test suite and generates a detailed HTML coverage report. The static files are compiled into the project's coverage directory.

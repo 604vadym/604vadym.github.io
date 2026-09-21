@@ -31,6 +31,8 @@ To be edited in the future.
 - Bootstrap
 - Tailwind CSS
 - JavaScript
+- Jest
+- Vitest
 
 ## Screenshots / Demo
 

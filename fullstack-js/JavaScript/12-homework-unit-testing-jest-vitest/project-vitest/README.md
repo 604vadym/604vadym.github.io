@@ -31,20 +31,20 @@ npm install
 
 ---
 
-## 🧪 Running Tests
+## 🧪 Running Tests & Coverage
 
-You can execute the test suite or check code coverage using the following commands:
+You can execute the test suite or generate code coverage reports using the following commands:
 
-### Run tests in watch mode
+### Run all tests
 
 ```bash
 npm test
 ```
 
-### Run tests once and generate coverage report
+### Run tests and generate code coverage report
 
 ```bash
 npm run test:coverage
 ```
 
-The coverage report will be generated using the `v8` provider and will output results in text and HTML formats.
+This command runs the test suite and generates a detailed HTML coverage report. The static files are compiled into the project's coverage directory.
