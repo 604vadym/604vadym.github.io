@@ -25,3 +25,15 @@ console.log(
  * { name: 'Roman', age: 30 },
  * { name: 'Jaroslav', age: 18 } ]
  */
+
+const users = [
+    { name: "Kateryna", age: 25 },
+    { name: "Mykola", age: 17 },
+    { name: "Roman", age: 30 },
+    { name: "Konstantyn", age: 15 },
+    { name: "Sashko", age: 4 },
+    { name: "Jaroslav", age: 18 },
+];
+
+const adultUsers = users.filter((user) => user.age >= 18);
+console.log(adultUsers);
