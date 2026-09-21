@@ -1,7 +1,19 @@
+"use strict";
 // @vitest-environment happy-dom
 import * as main from "../main.js";
+import { vi } from "vitest";
 
 describe("Module: main", () => {
+    beforeEach(() => {
+        vi.spyOn(console, "log").mockImplementation(() => {});
+        vi.spyOn(console, "error").mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+        vi.restoreAllMocks();
+        document.body.innerHTML = "";
+    });
+
     describe("Function: handleButtonClick()", () => {
         const buttonId = "testButton";
         const expectedMessage = "Hello from Vitest";
@@ -10,22 +22,23 @@ describe("Module: main", () => {
             document.body.innerHTML = `<button id='${buttonId}'>Click me</button>`;
         });
 
-        afterEach(() => {
-            document.body.innerHTML = "";
-            vi.restoreAllMocks();
-        });
-
         test("logs the message to the console on button click", () => {
-            const logSpy = vi.spyOn(console, "log");
+            const logSpy = vi
+                .spyOn(console, "log")
+                .mockImplementation(() => {});
             main.handleButtonClick("testButton", expectedMessage);
             document.getElementById(buttonId).click();
+
             expect(logSpy).toHaveBeenCalledWith(expectedMessage);
         });
 
         test("log an error to the console when the button is not found", () => {
-            const errorSpy = vi.spyOn(console, "error");
+            const errorSpy = vi
+                .spyOn(console, "error")
+                .mockImplementation(() => {});
             const invalidButtonId = "unknown-id";
             main.handleButtonClick(invalidButtonId, expectedMessage);
+
             expect(errorSpy).toHaveBeenCalledWith(
                 expect.stringContaining(invalidButtonId),
             );
@@ -49,8 +62,6 @@ describe("Module: main", () => {
 
         afterEach(() => {
             main.stopMouseTracking();
-            document.body.innerHTML = "";
-            vi.restoreAllMocks();
         });
 
         test("return true upon successful DOM elements initialisation", () => {
@@ -59,7 +70,6 @@ describe("Module: main", () => {
 
         test("log correct mouse coordinates to the console on mousemove event", () => {
             const logSpy = vi.spyOn(console, "log");
-
             document.getElementById(runButtonId).click();
 
             const mouseMoveEvent = new MouseEvent("mousemove", {
@@ -102,7 +112,6 @@ describe("Module: main", () => {
 
         test("handle multiple clicks on the run button without duplicating event listeners", () => {
             const logSpy = vi.spyOn(console, "log");
-
             document.getElementById(runButtonId).click();
             document.getElementById(runButtonId).click();
 
@@ -134,7 +143,9 @@ describe("Module: main", () => {
         });
 
         test("return false and log an error if the run button element is missing", () => {
-            const errorSpy = vi.spyOn(console, "error");
+            const errorSpy = vi
+                .spyOn(console, "error")
+                .mockImplementation(() => {});
             const invalidButtonId = "unknown-id";
 
             const result = main.initMouseTracking(
@@ -158,11 +169,6 @@ describe("Module: main", () => {
     describe("Function: setupEventDelegation()", () => {
         const listId = "testList";
 
-        afterEach(() => {
-            vi.restoreAllMocks();
-            document.body.innerHTML = "";
-        });
-
         test("log the correct text when a direct list item element is clicked", () => {
             const expectedElementText = "Item 1";
             const container = document.createElement("div");
@@ -179,6 +185,7 @@ describe("Module: main", () => {
             main.setupEventDelegation(`#${listId}`);
             const list = document.getElementById(listId);
             list.firstElementChild.click();
+
             expect(logSpy).toHaveBeenCalledWith(
                 `Item clicked: ${expectedElementText}`,
             );
@@ -200,6 +207,7 @@ describe("Module: main", () => {
             main.setupEventDelegation(`#${listId}`);
             const li = document.querySelector(`#${listId} li:nth-child(3)`);
             li.firstElementChild.click();
+
             expect(logSpy).toHaveBeenCalledWith(
                 `Item clicked: ${expectedElementText}`,
             );
@@ -208,6 +216,7 @@ describe("Module: main", () => {
         test("log an error if the target list container element does not exist in the DOM", () => {
             const errorSpy = vi.spyOn(console, "error");
             main.setupEventDelegation(`#${listId}`);
+
             expect(errorSpy).toHaveBeenCalledWith(
                 expect.stringContaining(listId),
             );
@@ -225,6 +234,7 @@ describe("Module: main", () => {
             main.setupEventDelegation(`#${listId}`);
             const list = document.getElementById(listId);
             list.click();
+
             expect(logSpy).not.toHaveBeenCalled();
         });
     });

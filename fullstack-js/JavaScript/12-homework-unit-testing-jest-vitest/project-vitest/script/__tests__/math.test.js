@@ -1,4 +1,6 @@
+"use strict";
 import * as math from "../math.js";
+import { vi } from "vitest";
 
 describe("Module: math", () => {
     describe("Function: sum()", () => {

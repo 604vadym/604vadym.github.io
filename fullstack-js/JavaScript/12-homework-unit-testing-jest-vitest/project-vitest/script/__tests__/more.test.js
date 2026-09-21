@@ -1,6 +1,7 @@
+"use strict";
 // @vitest-environment happy-dom
 import * as more from "../more.js";
-import { vi } from "vitest";
+import { beforeAll, beforeEach, vi } from "vitest";
 
 describe("Module: more", () => {
     describe("Function: validateAndSubmit()", () => {
@@ -78,6 +79,10 @@ describe("Module: more", () => {
     describe("Function: loadUserProfile()", () => {
         const expectedToken = "validToken";
 
+        beforeEach(() => {
+            vi.spyOn(console, "warn").mockImplementation(() => {});
+        });
+
         afterEach(() => {
             vi.restoreAllMocks();
         });
@@ -94,10 +99,12 @@ describe("Module: more", () => {
             });
 
             const result = await more.loadUserProfile();
+            const fetchUrl = fetchSpy.mock.calls[0][0];
             const fetchOptions = fetchSpy.mock.calls[0][1];
 
-            expect(fetchOptions.headers.Authorization).toMatch(
-                new RegExp(`${expectedToken}$`),
+            expect(fetchUrl).toBe("https://example.com");
+            expect(fetchOptions.headers.Authorization).toBe(
+                `Bearer ${expectedToken}`,
             );
             expect(result).toEqual(expectedObj);
         });
