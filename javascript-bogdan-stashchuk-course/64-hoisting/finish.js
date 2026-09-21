@@ -5,18 +5,27 @@
  * Ошибка после строки 21 все равно должна генерироваться.
  * Почему ошибка после строки 21 возникает?
  */
+"use strict";
 
-const a = 5
-const b = 10
+const a = 5;
+const b = 10;
 
 if (b > a) {
-  c = a + b + c
-  // ДО: ReferenceError: Cannot access 'c' before initialization
-  // ПОСЛЕ: Нет ошибки
-  let c = 2
-  console.log(c)
-  // 17
+    let c = 2;
+    c = a + b + c;
+    // ДО: ReferenceError: Cannot access 'c' before initialization
+    // ПОСЛЕ: Нет ошибки
+    console.log("Ошибка исправлена");
+    console.log(c);
+    // 17
 }
 
-console.log(c)
-// Uncaught ReferenceError: c is not defined
+try {
+    console.log(c);
+    // Uncaught ReferenceError: c is not defined
+} catch (error) {
+    console.log(
+        "Вторая ошибка все еще возникакет, потому что переменная let c объявлена внутри if. Так как она объявлена с ключевым словом let, а не var, " +
+            "у нее область видимости ограничена фигурными скобками, т.е. внутри функции или внутри выражения. Поэтому в глобальной области видимости к ней доступа нету",
+    );
+}
