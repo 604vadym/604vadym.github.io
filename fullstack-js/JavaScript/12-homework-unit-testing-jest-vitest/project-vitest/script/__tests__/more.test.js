@@ -1,7 +1,7 @@
 "use strict";
 // @vitest-environment happy-dom
 import * as more from "../more.js";
-import { beforeAll, beforeEach, vi } from "vitest";
+import { vi } from "vitest";
 
 describe("Module: more", () => {
     describe("Function: validateAndSubmit()", () => {

@@ -23,9 +23,7 @@ describe("Module: main", () => {
         });
 
         test("logs the message to the console on button click", () => {
-            const logSpy = vi
-                .spyOn(console, "log")
-                .mockImplementation(() => {});
+            const logSpy = vi.spyOn(console, "log");
             main.handleButtonClick("testButton", expectedMessage);
             document.getElementById(buttonId).click();
 
@@ -33,9 +31,7 @@ describe("Module: main", () => {
         });
 
         test("log an error to the console when the button is not found", () => {
-            const errorSpy = vi
-                .spyOn(console, "error")
-                .mockImplementation(() => {});
+            const errorSpy = vi.spyOn(console, "error");
             const invalidButtonId = "unknown-id";
             main.handleButtonClick(invalidButtonId, expectedMessage);
 
@@ -143,9 +139,7 @@ describe("Module: main", () => {
         });
 
         test("return false and log an error if the run button element is missing", () => {
-            const errorSpy = vi
-                .spyOn(console, "error")
-                .mockImplementation(() => {});
+            const errorSpy = vi.spyOn(console, "error");
             const invalidButtonId = "unknown-id";
 
             const result = main.initMouseTracking(

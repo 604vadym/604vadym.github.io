@@ -11,6 +11,7 @@ This project is a comprehensive unit testing workspace demonstrating test suites
 ├── project-vitest/        # Test suite implemented using Vitest with happy-dom
 ├── test-check/            # Meta-testing suite designed to validate Jest & Vitest implementations
 ├── tests-coverage/        # Centralised folder storing raw coverage artifacts from both frameworks
+├── screenshots/           # Directory containing test execution images
 ├── styles/                # Custom CSS styles for the centralised coverage dashboard
 ├── index.html             # The landing page for GitHub Pages with navigation to both reports
 └── README.md              # Root documentation (this file)
@@ -70,3 +71,13 @@ _(See the local **[README.md](./test-check/README.md)** inside that directory fo
 The generated testing reports is compiled inside the `tests-coverage/` directory.
 
 👉 **[Launch Dashboard with test coverage reports](https://604vadym.github.io/fullstack-js/JavaScript/12-homework-unit-testing-jest-vitest/index.html)**
+
+---
+
+## 📸 Screenshots
+
+![Test Execution Result](./screenshots/tests-results-coverage.png)
+_(Note: Shows successful test suites pass and coverage generation)._
+
+![Meta Test Result](./screenshots/meta-test.png)
+_(Note: Shows successful meta test pass)._
