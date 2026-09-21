@@ -1,0 +1,19 @@
+{
+  "name": "js-hw12-jest-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "happy-dom": "^20.14.5",
+    "jsdom": "^26.0.0",
+    "vitest": "^3.0.9"
+  },
+  "dependencies": {
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  }
+}
