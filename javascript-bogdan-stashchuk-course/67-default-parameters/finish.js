@@ -7,20 +7,24 @@
  * 2. Перепишите функцию с использованием значения по умолчанию
  * для параметра mult в "multiplyBy"
  */
+"use strict";
 
-function multiplyBy(a, mult) {
-  mult = mult !== undefined ? mult : 2
-  console.log(a * mult)
+function multiplyBy(a, mult = 2) {
+    console.log(a * mult);
 }
 
-multiplyBy(2)
+console.log(
+    "Мы не можем просто использовать оператор ИЛИ, потому что вторым аргументом могут явно передать 0 и тогда функция его проигнорирует и заменит на 2, что будет ошибочным поведением функции",
+);
+
+multiplyBy(2);
 // 4
 
-multiplyBy(2, undefined)
+multiplyBy(2, undefined);
 // 4
 
-multiplyBy(2, 0)
+multiplyBy(2, 0);
 // 0
 
-multiplyBy(5, 10)
+multiplyBy(5, 10);
 // 50
