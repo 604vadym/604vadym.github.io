@@ -16,7 +16,7 @@ const homeworkMap = {
     hw12: "12.homework-DOM/index.html",
     hw13: "13.homework-events/index.html",
     hw14: "14.homework-arrow-functions/script/main.js",
-    hw14: "15.homework-exceptions/script/main.js",
+    hw15: "15.homework-exceptions/script/main.js",
 };
 
 function logToTerminal(...args) {

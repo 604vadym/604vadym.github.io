@@ -12,12 +12,18 @@ console.log(
  * Додати блок finally який виводить у консоль повідомлення що калькулятор завершив свою роботу.
  */
 
+console.log(
+    "******************************\n" +
+        "Task 1\n" +
+        "******************************",
+);
+
 function calc(operand1, operand2, operation) {
     if (!Number.isFinite(operand1)) {
-        throw new Error(`Invalid operand1: ${operand1}`);
+        throw new TypeError(`Invalid operand1: ${operand1}`);
     }
     if (!Number.isFinite(operand2)) {
-        throw new Error(`Invalid operand2: ${operand2}`);
+        throw new TypeError(`Invalid operand2: ${operand2}`);
     }
 
     let result;
@@ -33,7 +39,7 @@ function calc(operand1, operand2, operation) {
             break;
         case "/":
             if (operand2 === 0) {
-                throw new Error("Error: division by zero");
+                throw new RangeError("Error: division by zero");
             }
             result = operand1 / operand2;
             break;
@@ -81,3 +87,39 @@ const foo = (() => {
 
     console.log("This will not be logged");
 })();
+
+/**
+ * Дано функцію яка приймає масив чисел довільного розміру. Повернути об'єкт який має максимальне і мінімальне число.
+ * Базовим значенням для мінімального і максимального числа є нуль.
+ *
+ * Приклади:
+ *
+ * [7, -2, 3, 64, 0, -9, 4, 8, 24, 0, 13] → { max: 64, min: -9 }
+ * [] → { max: 0, min: 0 }
+ * [-7, -2, -3, -9, -4] → { max: -2, min: -9 }
+ */
+
+console.log(
+    "******************************\n" +
+        "Task 2\n" +
+        "******************************",
+);
+
+function maxAndMin(array) {
+    let maxValue = 0;
+    let minValue = 0;
+
+    const sortedArr = array.slice().sort((a, b) => a - b);
+
+    minValue = sortedArr[0] ?? minValue;
+    maxValue = sortedArr[sortedArr.length - 1] ?? maxValue;
+
+    return {
+        max: maxValue,
+        min: minValue,
+    };
+}
+
+console.log(maxAndMin([7, -2, 3, 64, 0, -9, 4, 8, 24, 0, 13])); // → { max: 64, min: -9 }
+console.log(maxAndMin([])); // → { max: 0, min: 0 }
+console.log(maxAndMin([-7, -2, -3, -9, -4])); // → { max: -2, min: -9 }

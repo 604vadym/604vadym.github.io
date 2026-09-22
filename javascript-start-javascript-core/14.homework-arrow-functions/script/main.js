@@ -78,6 +78,6 @@ const countBrackets = (data) => {
     return openBracket === closeBracket;
 };
 
-console.log(countBrackets("(( ))"));
-console.log(countBrackets("(( )"));
-console.log(countBrackets("abc ) def ( 123 @#$ ()"));
+console.log(countBrackets("(( ))")); // → true
+console.log(countBrackets("(( )")); // → false
+console.log(countBrackets("abc ) def ( 123 @#$ ()")); // → true
