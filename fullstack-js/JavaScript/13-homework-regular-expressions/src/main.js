@@ -17,7 +17,9 @@ console.log(
 );
 
 function isValidEmail(email) {
-    // code here
+    return /(^[a-zA-Z0-9])[a-zA-Z0-9+-]*(?:\.[a-zA-Z0-9+-]+)*@[a-zA-Z0-9][a-zA-Z0-9-]*(?:\.[a-zA-Z0-9-]+)*\.([a-zA-Z]{2,3}$)/.test(
+        email,
+    );
 }
 
 // Тестові випадки
@@ -57,4 +59,4 @@ console.log(isValidUrl("https://www.example.com")); // Повинно вивес
 console.log(isValidUrl("invalid-url")); // Повинно вивести: false
 
 // Експорт функції для використання та тестування
-// export { isValidEmail, isValidUrl }
+export { isValidEmail, isValidUrl };
