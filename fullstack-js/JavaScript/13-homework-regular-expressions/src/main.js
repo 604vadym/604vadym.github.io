@@ -17,7 +17,7 @@ console.log(
 );
 
 function isValidEmail(email) {
-    return /(^[a-zA-Z0-9])[a-zA-Z0-9+-]*(?:\.[a-zA-Z0-9+-]+)*@[a-zA-Z0-9][a-zA-Z0-9-]*(?:\.[a-zA-Z0-9-]+)*\.([a-zA-Z]{2,3}$)/.test(
+    return /^[a-zA-Z0-9][a-zA-Z0-9+-]*(?:\.[a-zA-Z0-9+-]+)*@[a-zA-Z0-9][a-zA-Z0-9-]*(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,3}$/.test(
         email,
     );
 }
@@ -52,11 +52,13 @@ console.log(
 );
 
 function isValidUrl(url) {
-    // code here
+    return /^https?:\/\/(?!.*\.\.)[a-zA-Z0-9][a-zA-Z0-9.-]*\.[a-zA-Z]{2,3}$/.test(
+        url,
+    );
 }
 
 console.log(isValidUrl("https://www.example.com")); // Повинно вивести: true
 console.log(isValidUrl("invalid-url")); // Повинно вивести: false
 
 // Експорт функції для використання та тестування
-export { isValidEmail, isValidUrl };
+// export { isValidEmail, isValidUrl };
