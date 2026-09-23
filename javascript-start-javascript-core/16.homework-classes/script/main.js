@@ -22,6 +22,12 @@ console.log("JavaScript Core #16. Домашнє завдання. Класи у
  * 6. Створити 2 ексемпляра класа GraduateStudent
  */
 
+console.log(
+    "******************************\n" +
+        "Task 1\n" +
+        "******************************",
+);
+
 class Student {
     constructor(firstName, lastName, age, averageScore, coreSubject) {
         this.firstName = firstName;
@@ -93,3 +99,30 @@ graduateStudent1.print();
 console.log("******************************");
 
 graduateStudent2.print();
+
+/**
+ * Дано масив чисел. Повернути його перевернуту копію.
+ * Перевертання масиву - останній елемент оригінального масиву стає першим елементом нового масиву.
+ * Важливо: це завдання потрібно вирішити без використання методу Array.reverse()
+ *
+ * Приклади:
+ *
+ * [1, 2, 3] → [3, 2, 1]
+ * [-7, 5, 12, 8] → [8, 12, 5, -7]
+ */
+
+console.log(
+    "******************************\n" +
+        "Task 2\n" +
+        "******************************",
+);
+
+function reverseArray(array) {
+    return array.reduce((arr, value) => {
+        arr.unshift(value);
+        return arr;
+    }, []);
+}
+
+console.log(reverseArray([1, 2, 3]));
+console.log(reverseArray([-7, 5, 12, 8]));
