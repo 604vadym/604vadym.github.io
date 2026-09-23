@@ -109,7 +109,7 @@ function maxAndMin(array) {
     let maxValue = 0;
     let minValue = 0;
 
-    const sortedArr = array.slice().sort((a, b) => a - b);
+    const sortedArr = array.toSorted((a, b) => a - b);
 
     minValue = sortedArr[0] ?? minValue;
     maxValue = sortedArr[sortedArr.length - 1] ?? maxValue;
