@@ -1,7 +1,7 @@
 "use strict";
 
 console.log(
-    "JavaScript Core #15. Домашнє завдання. Основи JavaScript: Обробка помилок у JavaScript",
+    "JavaScript Core #15. Домашнє завдання. Обробка помилок у JavaScript",
 );
 
 /**
