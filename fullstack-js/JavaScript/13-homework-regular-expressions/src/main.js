@@ -17,7 +17,7 @@ console.log(
 );
 
 function isValidEmail(email) {
-    return /^[a-zA-Z0-9][a-zA-Z0-9+-]*(?:\.[a-zA-Z0-9+-]+)*@[a-zA-Z0-9][a-zA-Z0-9-]*(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,3}$/.test(
+    return /^(?!.*\.\.)[a-zA-Z0-9][a-zA-Z0-9.+-]*@[a-zA-Z0-9][a-zA-Z0-9.-]*\.[a-zA-Z]{2,3}$/.test(
         email,
     );
 }
