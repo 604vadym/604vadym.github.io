@@ -73,7 +73,7 @@ try {
     console.log("function calc() has completed");
 }
 
-const foo = (() => {
+(() => {
     try {
         calc(100, 4, "plus");
         return;

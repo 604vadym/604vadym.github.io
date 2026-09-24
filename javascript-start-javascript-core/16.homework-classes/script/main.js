@@ -124,5 +124,5 @@ function reverseArray(array) {
     }, []);
 }
 
-console.log(reverseArray([1, 2, 3]));
-console.log(reverseArray([-7, 5, 12, 8]));
+console.log(reverseArray([1, 2, 3])); // → [3, 2, 1]
+console.log(reverseArray([-7, 5, 12, 8])); // → [8, 12, 5, -7]
