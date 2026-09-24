@@ -118,8 +118,8 @@ console.log(
 );
 
 function reverseArray(array) {
-    return array.reduce((arr, value) => {
-        arr.unshift(value);
+    return array.reduceRight((arr, value) => {
+        arr.push(value);
         return arr;
     }, []);
 }
