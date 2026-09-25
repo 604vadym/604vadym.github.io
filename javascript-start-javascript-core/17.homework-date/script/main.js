@@ -49,3 +49,29 @@ function sumOfDigits(number) {
 console.log(sumOfDigits(1234)); // → 10
 console.log(sumOfDigits(100)); // → 1
 console.log(sumOfDigits(777)); // → 21
+
+/**
+ * Дано два додатних числа. Порахувати суму всіх чисел між ними, включно з самими числами. Гарантовано, що перше число завжди менше другого.
+ *
+ * Приклад:
+ *
+ * Вхідні дані: 3, 7
+ * Очікуваний результат: 25
+ * Пояснення: 3 + 4 + 5 + 6 + 7 = 25
+ */
+
+console.log(
+    "******************************\n" +
+        "Task 3\n" +
+        "******************************",
+);
+
+function sumOfRange(start, end) {
+    let sum = 0;
+    do {
+        sum += start++;
+    } while (start <= end);
+    return sum;
+}
+
+console.log(sumOfRange(3, 7)); // 25
