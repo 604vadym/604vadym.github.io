@@ -222,10 +222,6 @@ patchData(10, { userName: "Fred", role: "guest" })
     .then((response) => console.log("Fetched data:", response))
     .catch((msg) => console.error(msg));
 
-patchData(1000, { userName: "derF", role: "guest" })
-    .then((response) => console.log("Fetched data:", response))
-    .catch((msg) => console.error(msg));
-
 /*
  *
  * #5
@@ -256,11 +252,28 @@ patchData(1000, { userName: "derF", role: "guest" })
 
 async function deleteData(id) {
     try {
-        // const response = await fetch(...)
-        // code here
+        const response = await fetch(
+            `https://jsonplaceholder.typicode.com/posts/${id}`,
+            {
+                method: "DELETE",
+            },
+        );
+
+        if (!response.ok) {
+            console.error(
+                `Failed to delete post with id ${id}. Status: ${response.status}`,
+            );
+            return response.status;
+        }
+
+        console.log(`Post with id ${id} has been successfully deleted.`);
+        return true;
     } catch (error) {
-        // code here
+        console.error(`Error during deletion: ${error.message}`);
+        return error.message;
     }
 }
+
+deleteData(25);
 
 export { getData, postData, putData, patchData, deleteData };
