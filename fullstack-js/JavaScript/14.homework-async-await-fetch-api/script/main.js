@@ -32,17 +32,21 @@ getData("/posts/nonexistent")
     .then((data) => printHttpResponse("GET", data))
     .catch((error) => printHttpError("GET", error.message));
 
-try {
-    printHttpResponse("GET", await getData("/posts/2"));
-} catch (error) {
-    printHttpError("GET", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse("GET", await getData("/posts/2"));
+    } catch (error) {
+        printHttpError("GET", error.message);
+    }
+})();
 
-try {
-    printHttpResponse("GET", await getData("/posts/nonexistent"));
-} catch (error) {
-    printHttpError("GET", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse("GET", await getData("/posts/nonexistent"));
+    } catch (error) {
+        printHttpError("GET", error.message);
+    }
+})();
 
 async function postData(segment, data) {
     const response = await fetch(`${url}${segment}`, {
@@ -68,26 +72,30 @@ postData("/nonexistent", { userName: "nhoJ", role: "admin" })
     .then((data) => printHttpResponse("POST", data))
     .catch((error) => printHttpError("POST", error.message));
 
-try {
-    printHttpResponse(
-        "POST",
-        await postData("/posts", { userName: "Jack", role: "admin" }),
-    );
-} catch (error) {
-    printHttpError("POST", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "POST",
+            await postData("/posts", { userName: "Jack", role: "admin" }),
+        );
+    } catch (error) {
+        printHttpError("POST", error.message);
+    }
+})();
 
-try {
-    printHttpResponse(
-        "POST",
-        await postData("/nonexistent", {
-            userName: "kcaJ",
-            role: "admin",
-        }),
-    );
-} catch (error) {
-    printHttpError("POST", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "POST",
+            await postData("/nonexistent", {
+                userName: "kcaJ",
+                role: "admin",
+            }),
+        );
+    } catch (error) {
+        printHttpError("POST", error.message);
+    }
+})();
 
 async function putData(id, data) {
     const response = await fetch(`${urlPosts}${id}`, {
@@ -113,26 +121,30 @@ putData(-33, { userName: "derF", role: "user" })
     .then((data) => printHttpResponse("PUT", data))
     .catch((error) => printHttpError("PUT", error.message));
 
-try {
-    printHttpResponse(
-        "PUT",
-        await putData(88, { userName: "Mike", role: "user" }),
-    );
-} catch (error) {
-    printHttpError("PUT", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "PUT",
+            await putData(88, { userName: "Mike", role: "user" }),
+        );
+    } catch (error) {
+        printHttpError("PUT", error.message);
+    }
+})();
 
-try {
-    printHttpResponse(
-        "PUT",
-        await putData(-88, {
-            userName: "ekiM",
-            role: "user",
-        }),
-    );
-} catch (error) {
-    printHttpError("PUT", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "PUT",
+            await putData(-88, {
+                userName: "ekiM",
+                role: "user",
+            }),
+        );
+    } catch (error) {
+        printHttpError("PUT", error.message);
+    }
+})();
 
 async function patchData(id, data) {
     const response = await fetch(`${urlPosts}${id}`, {
@@ -154,14 +166,16 @@ patchData(77, { userName: "Sam", role: "guest" })
     .then((data) => printHttpResponse("PATCH", data))
     .catch((error) => printHttpError("PATCH", error.message));
 
-try {
-    printHttpResponse(
-        "PATCH",
-        await patchData(55, { userName: "Vincent", role: "guest" }),
-    );
-} catch (error) {
-    printHttpError("PATCH", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "PATCH",
+            await patchData(55, { userName: "Vincent", role: "guest" }),
+        );
+    } catch (error) {
+        printHttpError("PATCH", error.message);
+    }
+})();
 
 async function deleteData(id) {
     const response = await fetch(`${urlPosts}${id}`, {
@@ -179,11 +193,13 @@ deleteData(27)
     .then((data) => printHttpResponse("DELETE", data))
     .catch((error) => printHttpError("DELETE", error.message));
 
-try {
-    printHttpResponse("DELETE", await deleteData(28));
-} catch (error) {
-    printHttpError("DELETE", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse("DELETE", await deleteData(28));
+    } catch (error) {
+        printHttpError("DELETE", error.message);
+    }
+})();
 
 async function fetchData(httpMethod, url, data) {
     const methodsWithoutBody = ["GET", "DELETE"];
@@ -216,26 +232,33 @@ fetchData("GET", "https://jsonplaceholder.typicode.com/posts/nonexistent")
     .then((data) => printHttpResponse("FETCH-GET", data))
     .catch((error) => printHttpError("FETCH-GET", error.message));
 
-try {
-    printHttpResponse(
-        "FETCH-GET",
-        await fetchData("GET", "https://jsonplaceholder.typicode.com/posts/2"),
-    );
-} catch (error) {
-    printHttpError("FETCH-GET", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "FETCH-GET",
+            await fetchData(
+                "GET",
+                "https://jsonplaceholder.typicode.com/posts/2",
+            ),
+        );
+    } catch (error) {
+        printHttpError("FETCH-GET", error.message);
+    }
+})();
 
-try {
-    printHttpResponse(
-        "FETCH-GET",
-        await fetchData(
-            "GET",
-            "https://jsonplaceholder.typicode.com/posts/nonexistent",
-        ),
-    );
-} catch (error) {
-    printHttpError("FETCH-GET", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "FETCH-GET",
+            await fetchData(
+                "GET",
+                "https://jsonplaceholder.typicode.com/posts/nonexistent",
+            ),
+        );
+    } catch (error) {
+        printHttpError("FETCH-GET", error.message);
+    }
+})();
 
 fetchData("POST", "https://jsonplaceholder.typicode.com/posts", {
     userName: "John",
@@ -251,33 +274,41 @@ fetchData("POST", "https://jsonplaceholder.typicode.com/nonexistent", {
     .then((data) => printHttpResponse("FETCH-POST", data))
     .catch((error) => printHttpError("FETCH-POST", error.message));
 
-try {
-    printHttpResponse(
-        "FETCH-POST",
-        await fetchData("POST", "https://jsonplaceholder.typicode.com/posts", {
-            userName: "Jack",
-            role: "admin",
-        }),
-    );
-} catch (error) {
-    printHttpError("FETCH-POST", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "FETCH-POST",
+            await fetchData(
+                "POST",
+                "https://jsonplaceholder.typicode.com/posts",
+                {
+                    userName: "Jack",
+                    role: "admin",
+                },
+            ),
+        );
+    } catch (error) {
+        printHttpError("FETCH-POST", error.message);
+    }
+})();
 
-try {
-    printHttpResponse(
-        "FETCH-POST",
-        await fetchData(
-            "POST",
-            "https://jsonplaceholder.typicode.com/nonexistent",
-            {
-                userName: "kcaJ",
-                role: "admin",
-            },
-        ),
-    );
-} catch (error) {
-    printHttpError("FETCH-POST", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "FETCH-POST",
+            await fetchData(
+                "POST",
+                "https://jsonplaceholder.typicode.com/nonexistent",
+                {
+                    userName: "kcaJ",
+                    role: "admin",
+                },
+            ),
+        );
+    } catch (error) {
+        printHttpError("FETCH-POST", error.message);
+    }
+})();
 
 fetchData("PUT", "https://jsonplaceholder.typicode.com/posts/33", {
     userName: "Fred",
@@ -293,34 +324,38 @@ fetchData("PUT", "https://jsonplaceholder.typicode.com/posts/-33", {
     .then((data) => printHttpResponse("FETCH-PUT", data))
     .catch((error) => printHttpError("FETCH-PUT", error.message));
 
-try {
-    printHttpResponse(
-        "FETCH-PUT",
-        await fetchData(
-            "PUT",
-            "https://jsonplaceholder.typicode.com/posts/88",
-            { userName: "Mike", role: "user" },
-        ),
-    );
-} catch (error) {
-    printHttpError("FETCH-PUT", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "FETCH-PUT",
+            await fetchData(
+                "PUT",
+                "https://jsonplaceholder.typicode.com/posts/88",
+                { userName: "Mike", role: "user" },
+            ),
+        );
+    } catch (error) {
+        printHttpError("FETCH-PUT", error.message);
+    }
+})();
 
-try {
-    printHttpResponse(
-        "FETCH-PUT",
-        await fetchData(
-            "PUT",
-            "https://jsonplaceholder.typicode.com/posts/-88",
-            {
-                userName: "ekiM",
-                role: "user",
-            },
-        ),
-    );
-} catch (error) {
-    printHttpError("FETCH-PUT", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "FETCH-PUT",
+            await fetchData(
+                "PUT",
+                "https://jsonplaceholder.typicode.com/posts/-88",
+                {
+                    userName: "ekiM",
+                    role: "user",
+                },
+            ),
+        );
+    } catch (error) {
+        printHttpError("FETCH-PUT", error.message);
+    }
+})();
 
 fetchData("PATCH", "https://jsonplaceholder.typicode.com/posts/77", {
     userName: "Sam",
@@ -329,31 +364,35 @@ fetchData("PATCH", "https://jsonplaceholder.typicode.com/posts/77", {
     .then((data) => printHttpResponse("FETCH-PATCH", data))
     .catch((error) => printHttpError("FETCH-PATCH", error.message));
 
-try {
-    printHttpResponse(
-        "FETCH-PATCH",
-        await fetchData(
-            "PATCH",
-            "https://jsonplaceholder.typicode.com/posts/55",
-            { userName: "Vincent", role: "guest" },
-        ),
-    );
-} catch (error) {
-    printHttpError("FETCH-PATCH", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "FETCH-PATCH",
+            await fetchData(
+                "PATCH",
+                "https://jsonplaceholder.typicode.com/posts/55",
+                { userName: "Vincent", role: "guest" },
+            ),
+        );
+    } catch (error) {
+        printHttpError("FETCH-PATCH", error.message);
+    }
+})();
 
 fetchData("DELETE", "https://jsonplaceholder.typicode.com/posts/27")
     .then((data) => printHttpResponse("FETCH-DELETE", data))
     .catch((error) => printHttpError("FETCH-DELETE", error.message));
 
-try {
-    printHttpResponse(
-        "FETCH-DELETE",
-        await fetchData(
-            "DELETE",
-            "https://jsonplaceholder.typicode.com/posts/28",
-        ),
-    );
-} catch (error) {
-    printHttpError("FETCH-DELETE", error.message);
-}
+(async () => {
+    try {
+        printHttpResponse(
+            "FETCH-DELETE",
+            await fetchData(
+                "DELETE",
+                "https://jsonplaceholder.typicode.com/posts/28",
+            ),
+        );
+    } catch (error) {
+        printHttpError("FETCH-DELETE", error.message);
+    }
+})();
