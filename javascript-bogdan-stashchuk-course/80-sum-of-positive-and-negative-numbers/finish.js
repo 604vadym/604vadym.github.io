@@ -10,11 +10,19 @@
  *  }
  */
 
-const nums = [10, -12, 30, -1, -8, 0, 14, -33, 20]
+const nums = [10, -12, 30, -1, -8, 0, 14, -33, 20];
 
-// Создайте функцию "sumPositiveNegative" здесь
+function sumPositiveNegative(nums) {
+    return nums.reduce(
+        (obj, value) => {
+            value >= 0 ? (obj.positive += value) : (obj.negative += value);
+            return obj;
+        },
+        { positive: 0, negative: 0 },
+    );
+}
 
-const result = sumPositiveNegative(nums)
+const result = sumPositiveNegative(nums);
 
-console.log(result)
+console.log(result);
 // { positive: 74, negative: -54 }
