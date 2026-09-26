@@ -2,16 +2,6 @@
 
 console.log("JS #14. Асинхронні операції та робота з API в JavaScript");
 
-const handleResponse = (response) => {
-    if (typeof response === "object") {
-        console.log("Fetched data:", response);
-    } else {
-        console.error("HTTP error! status:", response);
-    }
-};
-
-const handleException = (error) => console.error("Error:", error);
-
 /*
  *
  * #1
@@ -49,17 +39,20 @@ async function getData(segment) {
             },
         );
 
-        if (!response.ok) return response.status;
+        if (!response.ok) {
+            console.error("HTTP error! status:", response.status);
+            return response.status;
+        }
 
-        return await response.json();
+        const responseData = await response.json();
+        console.log("GET data:", responseData);
+
+        return responseData;
     } catch (error) {
         console.error(error);
         return error.message;
     }
 }
-
-getData("/posts/1").then(handleResponse).catch(handleException);
-getData("/posts/nonexistent").then(handleResponse).catch(handleException);
 
 /*
  *
@@ -100,21 +93,20 @@ async function postData(segment, data) {
             },
         );
 
-        if (!response.ok) return `HTTP error! status: ${response.status}`;
+        if (!response.ok) {
+            console.error("HTTP error! status:", response.status);
+            return `HTTP error! status: ${response.status}`;
+        }
 
-        return await response.json();
+        const responseData = await response.json();
+        console.log("POST data:", responseData);
+
+        return responseData;
     } catch (error) {
+        console.error(error);
         return error.message;
     }
 }
-
-postData("/posts", { userName: "John", role: "admin" })
-    .then((response) => console.log("Fetched data:", response))
-    .catch((msg) => console.error(msg));
-
-postData("/nonexistent", { userName: "nhoJ", role: "admin" })
-    .then((response) => console.log("Fetched data:", response))
-    .catch((msg) => console.error(msg));
 
 /*
  *
@@ -155,21 +147,20 @@ async function putData(id, data) {
             },
         );
 
-        if (!response.ok) return `HTTP error! status: ${response.status}`;
+        if (!response.ok) {
+            console.error("HTTP error! status:", response.status);
+            return `HTTP error! status: ${response.status}`;
+        }
 
-        return await response.json();
+        const responseData = await response.json();
+        console.log("PUT data:", responseData);
+
+        return responseData;
     } catch (error) {
+        console.error(error);
         return error.message;
     }
 }
-
-putData(33, { userName: "Jack", role: "user" })
-    .then((response) => console.log("Fetched data:", response))
-    .catch((msg) => console.error(msg));
-
-putData(3333, { userName: "kcaJ", role: "user" })
-    .then((response) => console.log("Fetched data:", response))
-    .catch((msg) => console.error(msg));
 
 /*
  *
@@ -210,17 +201,20 @@ async function patchData(id, data) {
             },
         );
 
-        if (!response.ok) return `HTTP error! status: ${response.status}`;
+        if (!response.ok) {
+            console.error("HTTP error! status:", response.status);
+            return `HTTP error! status: ${response.status}`;
+        }
 
-        return await response.json();
+        const responseData = await response.json();
+        console.log("PATCH data:", responseData);
+
+        return responseData;
     } catch (error) {
+        console.error(error);
         return error.message;
     }
 }
-
-patchData(10, { userName: "Fred", role: "guest" })
-    .then((response) => console.log("Fetched data:", response))
-    .catch((msg) => console.error(msg));
 
 /*
  *
@@ -273,7 +267,5 @@ async function deleteData(id) {
         return error.message;
     }
 }
-
-deleteData(25);
 
 export { getData, postData, putData, patchData, deleteData };
