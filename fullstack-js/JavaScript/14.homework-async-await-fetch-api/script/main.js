@@ -2,13 +2,14 @@
 
 console.log("JS #14. Асинхронні операції та робота з API в JavaScript");
 
+const httpErrorMsg = "HTTP error! status:";
+const url = "https://jsonplaceholder.typicode.com";
+
 async function getData(segment) {
-    const response = await fetch(
-        `https://jsonplaceholder.typicode.com${segment}`,
-    );
+    const response = await fetch(`${url}${segment}`);
 
     if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`${httpErrorMsg} ${response.status}`);
     }
 
     return response.json();
@@ -34,58 +35,45 @@ try {
     console.error(error.message);
 }
 
-/*
- *
- * #2
- * Функціональні вимоги:
- *
- * 1. Вхідні параметри:
- *  - `segment`: Рядок, що вказує на сегмент API для виконання POST запиту (наприклад, `/posts`).
- *  - `data`: Об'єкт, який містить дані для відправки в тілі запиту.
- *
- * 2. Виконання запиту:
- *  - Виконати асинхронний HTTP POST запит до `https://jsonplaceholder.typicode.com`, додавши `segment` до URL. Використати `data` як тіло запиту.
- *  - Встановити необхідні заголовки для запиту, зокрема `Content-Type: application/json`.
- *
- * 3. Обробка відповіді:
- *  - У разі успішного отримання відповіді (HTTP статус 200-299), конвертувати відповідь у формат JSON і повернути отримані дані.
- *  - Якщо відповідь вказує на помилку (HTTP статус виходить за межі 200-299), повернути повідомлення про помилку.
- *
- * 4. Логування:
- *  - Логувати у консоль результат або повідомлення про помилку.
- *
- * Технічні Вимоги:
- * - Використання сучасних можливостей JavaScript (ES6+), зокрема асинхронних функцій (`async/await`).
- * - Належне управління помилками та відповідями від API.
- *
- */
-
 async function postData(segment, data) {
-    try {
-        const response = await fetch(
-            "https://jsonplaceholder.typicode.com" + segment,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            },
-        );
+    const response = await fetch(`${url}${segment}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
 
-        if (!response.ok) {
-            console.error("HTTP error! status:", response.status);
-            return `HTTP error! status: ${response.status}`;
-        }
-
-        const responseData = await response.json();
-        console.log("POST data:", responseData);
-
-        return responseData;
-    } catch (error) {
-        console.error(error);
-        return error.message;
+    if (!response.ok) {
+        throw new Error(`${httpErrorMsg} ${response.status}`);
     }
+
+    return response.json();
+}
+
+postData("/posts", { userName: "John", role: "admin" })
+    .then((data) => console.log(data))
+    .catch((error) => console.error(error.message));
+
+postData("/nonexistent", { userName: "nhoJ", role: "admin" })
+    .then((data) => console.log(data))
+    .catch((error) => console.error(error.message));
+
+try {
+    console.log(await postData("/posts", { userName: "Jack", role: "admin" }));
+} catch (error) {
+    console.error(error.message);
+}
+
+try {
+    console.log(
+        await postData("/nonexistent", {
+            userName: "kcaJ",
+            role: "admin",
+        }),
+    );
+} catch (error) {
+    console.error(error.message);
 }
 
 /*
