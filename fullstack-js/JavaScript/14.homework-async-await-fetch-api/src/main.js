@@ -2,11 +2,11 @@
 
 console.log("JS #14. Асинхронні операції та робота з API в JavaScript");
 
-const handleResponse = (data) => {
-    if (typeof data === "object") {
-        console.log("Fetched data:", data);
+const handleResponse = (response) => {
+    if (typeof response === "object") {
+        console.log("Fetched data:", response);
     } else {
-        console.error("HTTP Error. Status code:", data);
+        console.error("HTTP error! status:", response);
     }
 };
 
@@ -91,12 +91,34 @@ getData("/posts/nonexistent").then(handleResponse).catch(handleException);
 
 async function postData(segment, data) {
     try {
-        // const response = await fetch(...)
-        // code here
+        const response = await fetch(
+            "https://jsonplaceholder.typicode.com" + segment,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            },
+        );
+
+        if (!response.ok) {
+            return `HTTP error! status: ${response.status}`;
+        }
+
+        return await response.json();
     } catch (error) {
-        // code here
+        return error;
     }
 }
+
+postData("/posts", { userName: "John", role: "admin" })
+    .then((response) => console.log(response))
+    .catch((error) => console.error(error.message));
+
+postData("/nonexistent")
+    .then((response) => console.log(response))
+    .catch((error) => console.error(error.message));
 
 /*
  *
