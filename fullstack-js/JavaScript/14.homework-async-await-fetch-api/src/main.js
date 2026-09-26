@@ -2,6 +2,16 @@
 
 console.log("JS #14. Асинхронні операції та робота з API в JavaScript");
 
+const handleResponse = (data) => {
+    if (typeof data === "object") {
+        console.log("Fetched data:", data);
+    } else {
+        console.error("HTTP Error. Status code:", data);
+    }
+};
+
+const handleException = (error) => console.error("Error:", error);
+
 /*
  *
  * #1
@@ -32,12 +42,26 @@ console.log("JS #14. Асинхронні операції та робота з 
 
 async function getData(segment) {
     try {
-        // const response = await fetch(...)
-        // code here
+        const response = await fetch(
+            "https://jsonplaceholder.typicode.com" + segment,
+            {
+                method: "GET",
+            },
+        );
+
+        if (!response.ok) {
+            return response.status;
+        }
+
+        return await response.json();
     } catch (error) {
-        // code here
+        console.error(error);
+        return error.message;
     }
 }
+
+getData("/posts/1").then(handleResponse).catch(handleException);
+getData("/posts/nonexistent").then(handleResponse).catch(handleException);
 
 /*
  *
@@ -181,4 +205,4 @@ async function deleteData(id) {
     }
 }
 
-// export { getData, postData, putData, patchData, deleteData };
+export { getData, postData, putData, patchData, deleteData };
