@@ -18,7 +18,7 @@ const homeworkMap = {
         "11-homework-fsm-engine-slider-showcase-player-oop-prototypes-classes/on-classes-platipus/index.html",
     hw12: "12-homework-unit-testing-jest-vitest/index.html",
     hw13: "13-homework-regular-expressions/src/main.js",
-    hw14: "14.homework-async-await-fetch-api/src/main.js",
+    hw14: "14.homework-async-await-fetch-api/script/main.js",
 };
 
 function logToTerminal(...args) {
