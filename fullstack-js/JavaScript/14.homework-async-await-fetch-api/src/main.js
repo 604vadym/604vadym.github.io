@@ -108,17 +108,17 @@ async function postData(segment, data) {
 
         return await response.json();
     } catch (error) {
-        return error;
+        return error.message;
     }
 }
 
 postData("/posts", { userName: "John", role: "admin" })
-    .then((response) => console.log(response))
-    .catch((error) => console.error(error.message));
+    .then((response) => console.log("Fetched data:", response))
+    .catch((msg) => console.error(msg));
 
-postData("/nonexistent")
-    .then((response) => console.log(response))
-    .catch((error) => console.error(error.message));
+postData("/nonexistent", { userName: "John", role: "admin" })
+    .then((response) => console.log("Fetched data:", response))
+    .catch((msg) => console.error(msg));
 
 /*
  *
@@ -148,12 +148,38 @@ postData("/nonexistent")
 
 async function putData(id, data) {
     try {
-        // const response = await fetch(...)
-        // code here
+        const response = await fetch(
+            `https://jsonplaceholder.typicode.com/posts/${id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            },
+        );
+
+        if (!response.ok) {
+            return `HTTP error! status: ${response.status}`;
+        }
+
+        return await response.json();
     } catch (error) {
-        // code here
+        return error.message;
     }
 }
+
+putData(33, { userName: "Jack", role: "user" })
+    .then((response) => console.log("Fetched data:", response))
+    .catch((msg) => console.error(msg));
+
+putData(-33, { userName: "Jack", role: "user" })
+    .then((response) => console.log("Fetched data:", response))
+    .catch((msg) => console.error(msg));
+
+putData("nonexistent", { userName: "Jack", role: "user" })
+    .then((response) => console.log("Fetched data:", response))
+    .catch((msg) => console.error(msg));
 
 /*
  *
