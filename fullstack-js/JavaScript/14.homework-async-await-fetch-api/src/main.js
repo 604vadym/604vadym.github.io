@@ -49,9 +49,7 @@ async function getData(segment) {
             },
         );
 
-        if (!response.ok) {
-            return response.status;
-        }
+        if (!response.ok) return response.status;
 
         return await response.json();
     } catch (error) {
@@ -102,9 +100,7 @@ async function postData(segment, data) {
             },
         );
 
-        if (!response.ok) {
-            return `HTTP error! status: ${response.status}`;
-        }
+        if (!response.ok) return `HTTP error! status: ${response.status}`;
 
         return await response.json();
     } catch (error) {
@@ -116,7 +112,7 @@ postData("/posts", { userName: "John", role: "admin" })
     .then((response) => console.log("Fetched data:", response))
     .catch((msg) => console.error(msg));
 
-postData("/nonexistent", { userName: "John", role: "admin" })
+postData("/nonexistent", { userName: "nhoJ", role: "admin" })
     .then((response) => console.log("Fetched data:", response))
     .catch((msg) => console.error(msg));
 
@@ -159,9 +155,7 @@ async function putData(id, data) {
             },
         );
 
-        if (!response.ok) {
-            return `HTTP error! status: ${response.status}`;
-        }
+        if (!response.ok) return `HTTP error! status: ${response.status}`;
 
         return await response.json();
     } catch (error) {
@@ -173,11 +167,7 @@ putData(33, { userName: "Jack", role: "user" })
     .then((response) => console.log("Fetched data:", response))
     .catch((msg) => console.error(msg));
 
-putData(-33, { userName: "Jack", role: "user" })
-    .then((response) => console.log("Fetched data:", response))
-    .catch((msg) => console.error(msg));
-
-putData("nonexistent", { userName: "Jack", role: "user" })
+putData(3333, { userName: "kcaJ", role: "user" })
     .then((response) => console.log("Fetched data:", response))
     .catch((msg) => console.error(msg));
 
@@ -209,12 +199,32 @@ putData("nonexistent", { userName: "Jack", role: "user" })
 
 async function patchData(id, data) {
     try {
-        // const response = await fetch(...)
-        // code here
+        const response = await fetch(
+            `https://jsonplaceholder.typicode.com/posts/${id}`,
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            },
+        );
+
+        if (!response.ok) return `HTTP error! status: ${response.status}`;
+
+        return await response.json();
     } catch (error) {
-        // code here
+        return error.message;
     }
 }
+
+patchData(10, { userName: "Fred", role: "guest" })
+    .then((response) => console.log("Fetched data:", response))
+    .catch((msg) => console.error(msg));
+
+patchData(1000, { userName: "derF", role: "guest" })
+    .then((response) => console.log("Fetched data:", response))
+    .catch((msg) => console.error(msg));
 
 /*
  *
