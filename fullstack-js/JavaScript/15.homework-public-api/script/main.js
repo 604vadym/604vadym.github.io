@@ -3,34 +3,38 @@
 const input = document.querySelector(".search-input");
 const container = document.querySelector(".artists");
 container.innerHTML = "";
+let timeoutId = null;
 
 input.addEventListener("input", handleInput);
 
 function handleInput(e) {
+    clearTimeout(timeoutId);
     const searchQuery = e.target.value;
 
     if (searchQuery.length < 4) return;
 
-    getArtistData(searchQuery)
-        .then(({ results }) => {
-            container.innerHTML = "";
+    timeoutId = setTimeout(() => {
+        getArtistData(searchQuery)
+            .then(({ results }) => {
+                container.innerHTML = "";
 
-            const artists = results.filter((artist) => artist.image);
-            artists.forEach((artist) => {
-                const artistCard = document.createElement("div");
-                const img = document.createElement("img");
-                const header = document.createElement("h2");
+                const artists = results.filter((artist) => artist.image);
+                artists.forEach((artist) => {
+                    const artistCard = document.createElement("div");
+                    const img = document.createElement("img");
+                    const header = document.createElement("h2");
 
-                artistCard.classList.add("artist-card");
-                img.alt = header.textContent = artist.name;
-                img.src = artist.image;
+                    artistCard.classList.add("artist-card");
+                    img.alt = header.textContent = artist.name;
+                    img.src = artist.image;
 
-                artistCard.append(img);
-                artistCard.append(header);
-                container.append(artistCard);
-            });
-        })
-        .catch((error) => console.error(error.message));
+                    artistCard.append(img);
+                    artistCard.append(header);
+                    container.append(artistCard);
+                });
+            })
+            .catch((error) => console.error(error.message));
+    }, 1000);
 }
 
 async function getArtistData(searchQuery) {
