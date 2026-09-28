@@ -1,5 +1,7 @@
 "use strict";
 
+import { getArtistsData } from "./api.js";
+
 const input = document.querySelector(".search-input");
 const container = document.querySelector(".artists");
 container.innerHTML = "";
@@ -59,16 +61,4 @@ function handleInput(e) {
         header.innerText = msg;
         container.append(header);
     }
-}
-
-async function getArtistsData(searchQuery) {
-    const response = await fetch(
-        `https://api.jamendo.com/v3.0/artists/?client_id=ec9b8271&format=jsonpretty&order=name&hasimage=true&limit=200&namesearch=${encodeURIComponent(searchQuery)}`,
-    );
-
-    if (!response.ok) {
-        throw new Error(`HTTP Error. Status: ${response.status}`);
-    }
-
-    return response.json();
 }
