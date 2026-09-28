@@ -9,6 +9,7 @@ import Shop from "./components/shop.js";
 
 const albumsData = [];
 const playlistData = [];
+const sliderTrack = document.querySelector(".slider__track");
 
 const slider = new Slider({
     singleSelectors: {
@@ -245,6 +246,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
 
 const params = new URLSearchParams(window.location.search);
 const artisId = params.get("artistId");
+
 getArtistTracks(artisId)
     .then(({ results }) => {
         const artistName = results[0].name;
@@ -281,6 +283,21 @@ getArtistTracks(artisId)
                         },
                     ],
                 });
+
+                const sliderSlide = document.createElement("div");
+                const sliderImg = document.createElement("div");
+                const img = document.createElement("img");
+
+                sliderSlide.classList.add("slider__slide");
+                sliderImg.classList.add("image", "slider__image");
+                img.classList.add("image__img");
+                img.src = track.album_image;
+                img.alt = `${artistName} - ${track.album_name} (${parseInt(track.releasedate)})`;
+
+                sliderImg.append(img);
+                sliderSlide.append(sliderImg);
+                sliderTrack.append(sliderSlide);
+
                 return;
             }
 
