@@ -18,8 +18,15 @@ function handleInput(e) {
             const artists = results.filter((artist) => artist.image);
             artists.forEach((artist) => {
                 const artistCard = document.createElement("div");
+                const img = document.createElement("img");
+                const header = document.createElement("h2");
+
                 artistCard.classList.add("artist-card");
-                artistCard.innerHTML = `<img src="${artist.image}" alt="${artist.name}"> <h2>${artist.name}</h2>`;
+                img.alt = header.textContent = artist.name;
+                img.src = artist.image;
+
+                artistCard.append(img);
+                artistCard.append(header);
                 container.append(artistCard);
             });
         })
