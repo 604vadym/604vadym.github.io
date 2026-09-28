@@ -3,6 +3,7 @@
 const input = document.querySelector(".search-input");
 const container = document.querySelector(".artists");
 container.innerHTML = "";
+let lastSearchQuery = null;
 let timeoutId = null;
 
 input.addEventListener("input", handleInput);
@@ -12,11 +13,15 @@ function handleInput(e) {
     const searchQuery = e.target.value.trim();
 
     if (searchQuery.length < 4) {
+        lastSearchQuery = null;
         container.innerHTML = "";
         return;
     }
 
     timeoutId = setTimeout(() => {
+        if (lastSearchQuery === searchQuery) return;
+
+        lastSearchQuery = searchQuery;
         getArtistsData(searchQuery)
             .then(({ results }) => {
                 container.innerHTML = "";
@@ -24,9 +29,7 @@ function handleInput(e) {
                 const artists = results.filter((artist) => artist.image);
 
                 if (artists.length === 0) {
-                    const header = document.createElement("h2");
-                    header.innerText = "No artists found.";
-                    container.append(header);
+                    printMsg("No artists found.");
                     return;
                 }
 
@@ -44,13 +47,22 @@ function handleInput(e) {
                     container.append(artistCard);
                 });
             })
-            .catch((error) => console.error(error.message));
+            .catch((error) => {
+                console.error(error.message);
+                printMsg("Error loading artists.");
+            });
     }, 1000);
+
+    function printMsg(msg) {
+        const header = document.createElement("h2");
+        header.innerText = msg;
+        container.append(header);
+    }
 }
 
 async function getArtistsData(searchQuery) {
     const response = await fetch(
-        `https://api.jamendo.com/v3.0/artists/?client_id=ec9b8271&format=jsonpretty&hasimage=true&limit=200&namesearch=${encodeURIComponent(searchQuery)}`,
+        `https://api.jamendo.com/v3.0/artists/?client_id=ec9b8271&format=jsonpretty&order=name&hasimage=true&limit=200&namesearch=${encodeURIComponent(searchQuery)}`,
     );
 
     if (!response.ok) {
