@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+}
+
+.search-page {
+  width: min(1200px, 90%);
+  margin: 40px auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 16px;
+  margin-bottom: 30px;
+
+  border: 1px solid #444;
+  border-radius: 6px;
+
+  background: #222;
+  color: #fff;
+  font-size: 16px;
+}
+
+.artists {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.artist-card {
+  overflow: hidden;
+  border-radius: 8px;
+  background: #1d1d1d;
+  cursor: pointer;
+}
+
+.artist-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.artist-card h2 {
+  margin: 0;
+  padding: 12px;
+  font-size: 16px;
+  text-align: center;
+}
