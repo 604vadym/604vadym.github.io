@@ -41,7 +41,9 @@ function handleInput(e) {
                     const header = document.createElement("h2");
 
                     artistCard.classList.add("artist-card");
-                    artistCard.href = `./audio-player/index.html?artistId=${artist.id}`;
+                    artistCard.href =
+                        `./audio-player/index.html?artistId=${artist.id}` +
+                        `&shareurl=${encodeURIComponent(artist.shareurl)}`;
 
                     img.alt = header.textContent = artist.name;
                     img.src = artist.image;

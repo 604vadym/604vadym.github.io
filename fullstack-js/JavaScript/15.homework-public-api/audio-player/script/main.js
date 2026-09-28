@@ -9,7 +9,11 @@ import Shop from "./components/shop.js";
 
 const albumsData = [];
 const playlistData = [];
+const shopData = [];
 const sliderTrack = document.querySelector(".slider__track");
+const params = new URLSearchParams(window.location.search);
+const artisId = params.get("artistId");
+const shareurl = params.get("shareurl");
 
 const slider = new Slider({
     singleSelectors: {
@@ -169,11 +173,7 @@ const shop = new Shop({
 
     defaultUrl: null,
 
-    data: [
-        {
-            url: "https://www.jamendo.com",
-        },
-    ],
+    data: shopData,
 });
 
 const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
@@ -244,9 +244,6 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
     albums: albumsData,
 });
 
-const params = new URLSearchParams(window.location.search);
-const artisId = params.get("artistId");
-
 getArtistTracks(artisId)
     .then(({ results }) => {
         const artistName = results[0].name;
@@ -265,10 +262,12 @@ getArtistTracks(artisId)
             );
 
             if (albumIndex === -1) {
+                const albumReleaseYear = parseInt(track.releasedate);
+
                 albumsData.push({
                     artist: artistName,
                     title: track.album_name,
-                    year: parseInt(track.releasedate),
+                    year: albumReleaseYear,
                     tracks: [
                         {
                             name: track.name,
@@ -284,6 +283,10 @@ getArtistTracks(artisId)
                     ],
                 });
 
+                shopData.push({
+                    url: shareurl,
+                });
+
                 const sliderSlide = document.createElement("div");
                 const sliderImg = document.createElement("div");
                 const img = document.createElement("img");
@@ -292,7 +295,7 @@ getArtistTracks(artisId)
                 sliderImg.classList.add("image", "slider__image");
                 img.classList.add("image__img");
                 img.src = track.album_image;
-                img.alt = `${artistName} - ${track.album_name} (${parseInt(track.releasedate)})`;
+                img.alt = `${artistName} - ${track.album_name} (${albumReleaseYear})`;
 
                 sliderImg.append(img);
                 sliderSlide.append(sliderImg);
