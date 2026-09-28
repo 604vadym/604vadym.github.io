@@ -7,6 +7,9 @@ import AudioPlayer from "./components/audio-player.js";
 import AudioDeckView from "./components/audio-deck-view.js";
 import Shop from "./components/shop.js";
 
+const albumsData = [];
+const playlistData = [];
+
 const slider = new Slider({
     singleSelectors: {
         slider: ".slider",
@@ -143,15 +146,7 @@ const audioPlayer = new AudioPlayer({
 
     mainThemeSrc: null,
 
-    playlist: [
-        {
-            tracks: [
-                {
-                    src: "",
-                },
-            ],
-        },
-    ],
+    playlist: playlistData,
 });
 
 const audioDeckView = new AudioDeckView({
@@ -175,7 +170,7 @@ const shop = new Shop({
 
     data: [
         {
-            url: "",
+            url: "https://www.jamendo.com",
         },
     ],
 });
@@ -245,18 +240,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
         ],
     },
 
-    albums: [
-        {
-            artist: "Artist",
-            title: "Album",
-            year: 2026,
-            tracks: [
-                {
-                    name: "track name",
-                },
-            ],
-        },
-    ],
+    albums: albumsData,
 });
 
 const params = new URLSearchParams(window.location.search);
@@ -265,8 +249,45 @@ getArtistTracks(artisId)
     .then(({ results }) => {
         const artistName = results[0].name;
         const tracks = results[0].tracks;
-        console.log(artistName, tracks);
+
+        tracks.sort((a, b) => {
+            return (
+                new Date(a.releasedate).getTime() -
+                new Date(b.releasedate).getTime()
+            );
+        });
+
+        tracks.forEach((track) => {
+            const albumIndex = albumsData.findIndex(
+                (data) => data.title === track.album_name,
+            );
+
+            if (albumIndex === -1) {
+                albumsData.push({
+                    artist: artistName,
+                    title: track.album_name,
+                    year: parseInt(track.releasedate),
+                    tracks: [
+                        {
+                            name: track.name,
+                        },
+                    ],
+                });
+
+                playlistData.push({
+                    tracks: [
+                        {
+                            src: track.audio,
+                        },
+                    ],
+                });
+                return;
+            }
+
+            albumsData[albumIndex].tracks.push({ name: track.name });
+            playlistData[albumIndex].tracks.push({ src: track.audio });
+        });
+
+        app.init();
     })
     .catch((error) => console.log(error.message));
-
-app.init();
