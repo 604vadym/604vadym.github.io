@@ -12,8 +12,8 @@ const playlistData = [];
 const shopData = [];
 const sliderTrack = document.querySelector(".slider__track");
 const params = new URLSearchParams(window.location.search);
-const artisId = params.get("artistId");
-const shareurl = params.get("shareurl");
+const artistId = params.get("artistId");
+const shareUrl = params.get("shareurl");
 
 const slider = new Slider({
     singleSelectors: {
@@ -244,7 +244,7 @@ const app = new ShowcaseApp(slider, audioPlayer, audioDeckView, shop, {
     albums: albumsData,
 });
 
-getArtistTracks(artisId)
+getArtistTracks(artistId)
     .then(({ results }) => {
         const artistName = results[0].name;
         const tracks = results[0].tracks;
@@ -262,7 +262,7 @@ getArtistTracks(artisId)
             );
 
             if (albumIndex === -1) {
-                const albumReleaseYear = parseInt(track.releasedate);
+                const albumReleaseYear = parseInt(track.releasedate, 10);
 
                 albumsData.push({
                     artist: artistName,
@@ -284,7 +284,7 @@ getArtistTracks(artisId)
                 });
 
                 shopData.push({
-                    url: shareurl,
+                    url: shareUrl,
                 });
 
                 const sliderSlide = document.createElement("div");
@@ -294,6 +294,7 @@ getArtistTracks(artisId)
                 sliderSlide.classList.add("slider__slide");
                 sliderImg.classList.add("image", "slider__image");
                 img.classList.add("image__img");
+
                 img.src = track.album_image;
                 img.alt = `${artistName} - ${track.album_name} (${albumReleaseYear})`;
 
@@ -310,4 +311,4 @@ getArtistTracks(artisId)
 
         app.init();
     })
-    .catch((error) => console.log(error.message));
+    .catch((error) => console.error(error.message));
