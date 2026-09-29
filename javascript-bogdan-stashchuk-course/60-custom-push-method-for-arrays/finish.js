@@ -19,3 +19,26 @@
  * в классе "CustomArray" также будет "push" вместо "customPush"?
  * Попробуйте это.
  */
+"use strict";
+
+class CustomArray extends Array {
+    customPush(newElement) {
+        this[this.length] = newElement;
+        console.log(
+            `Новый элемент ${newElement} был только что добавлен в массив`,
+        );
+    }
+
+    push(newElement) {
+        super.push(newElement);
+        console.log("method push() is overrided");
+    }
+}
+
+const customArr = new CustomArray(3, 7, 8);
+
+customArr.customPush(33);
+console.log(customArr);
+
+customArr.push(88);
+console.log(customArr);
