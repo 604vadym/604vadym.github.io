@@ -8,9 +8,9 @@ const sass = gulpSass(sassCompiler);
 const brSync = browserSync.create();
 
 export function styles() {
-    return src("./styles/scss/main.scss")
+    return src("./styles/scss/main.scss", { sourcemaps: true })
         .pipe(sass().on("error", sass.logError))
-        .pipe(dest("./styles/css"))
+        .pipe(dest("./styles/css", { sourcemaps: "." }))
         .pipe(brSync.stream());
 }
 
