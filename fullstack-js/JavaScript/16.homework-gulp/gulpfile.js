@@ -3,6 +3,7 @@ import browserSync from "browser-sync";
 import gulpSass from "gulp-sass";
 import postcss from "gulp-postcss";
 import autoprefixer from "autoprefixer";
+import sortMediaQueries from "postcss-sort-media-queries";
 import * as sassCompiler from "sass";
 
 const { src, dest, watch, series, parallel } = gulp;
@@ -13,6 +14,9 @@ const PLUGINS = [
     autoprefixer({
         overrideBrowserslist: ["last 2 versions", "> 1%", "not dead"],
         cascade: true,
+    }),
+    sortMediaQueries({
+        sort: "desktop-first",
     }),
 ];
 
