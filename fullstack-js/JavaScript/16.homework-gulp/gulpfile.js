@@ -4,9 +4,11 @@ import gulpSass from "gulp-sass";
 import postcss from "gulp-postcss";
 import autoprefixer from "autoprefixer";
 import sortMediaQueries from "postcss-sort-media-queries";
+import rename from "gulp-rename";
+import cssnano from "cssnano";
 import * as sassCompiler from "sass";
 
-const { src, dest, watch, series, parallel } = gulp;
+const { src, dest, watch, series } = gulp;
 const sass = gulpSass(sassCompiler);
 const brSync = browserSync.create();
 
@@ -25,6 +27,15 @@ export function styles() {
         .pipe(sass().on("error", sass.logError))
         .pipe(postcss(PLUGINS))
         .pipe(dest("./styles/css", { sourcemaps: "." }))
+        .pipe(brSync.stream());
+}
+
+export function stylesMin() {
+    return src("./styles/scss/main.scss")
+        .pipe(sass().on("error", sass.logError))
+        .pipe(postcss([...PLUGINS, cssnano()]))
+        .pipe(rename({ suffix: ".min" }))
+        .pipe(dest("./styles/css"))
         .pipe(brSync.stream());
 }
 
