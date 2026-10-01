@@ -12,6 +12,24 @@ const { src, dest, watch, series } = gulp;
 const sass = gulpSass(sassCompiler);
 const brSync = browserSync.create();
 
+const srcDir = ".";
+const destDir = ".";
+
+const PATH = {
+    scss: {
+        src: `${srcDir}/styles/scss/main.scss`,
+        watch: `${srcDir}/styles/scss/**/*.scss`,
+        dest: `${destDir}/styles/css`,
+    },
+    js: {
+        src: `${srcDir}/script/main.js`,
+        watch: `${srcDir}/script/**/*.js`,
+    },
+    html: {
+        watch: `${srcDir}/*.html`,
+    },
+};
+
 const PLUGINS = [
     autoprefixer({
         overrideBrowserslist: ["last 2 versions", "> 1%", "not dead"],
@@ -23,19 +41,19 @@ const PLUGINS = [
 ];
 
 export function styles() {
-    return src("./styles/scss/main.scss", { sourcemaps: true })
+    return src(PATH.scss.src, { sourcemaps: true })
         .pipe(sass().on("error", sass.logError))
         .pipe(postcss(PLUGINS))
-        .pipe(dest("./styles/css", { sourcemaps: "." }))
+        .pipe(dest(PATH.scss.dest, { sourcemaps: "." }))
         .pipe(brSync.stream());
 }
 
-export function stylesMin() {
-    return src("./styles/scss/main.scss")
+export function build() {
+    return src(PATH.scss.src)
         .pipe(sass().on("error", sass.logError))
         .pipe(postcss([...PLUGINS, cssnano()]))
         .pipe(rename({ suffix: ".min" }))
-        .pipe(dest("./styles/css"))
+        .pipe(dest(PATH.scss.dest))
         .pipe(brSync.stream());
 }
 
@@ -44,9 +62,9 @@ export function server() {
         server: { baseDir: "./" },
         notify: false,
     });
-    watch("./styles/scss/**/*.scss", styles);
-    watch("./*.html").on("change", brSync.reload);
-    watch("./script/**/*.js").on("change", brSync.reload);
+    watch(PATH.scss.watch, styles);
+    watch(PATH.html.watch).on("change", brSync.reload);
+    watch(PATH.js.watch).on("change", brSync.reload);
 }
 
 export default series(styles, server);

@@ -20,6 +20,7 @@ const homeworkMap = {
     hw13: "13-homework-regular-expressions/src/main.js",
     hw14: "14.homework-async-await-fetch-api/index.html",
     hw15: "15.homework-public-api/index.html",
+    hw16: "16.homework-gulp/index.html",
 };
 
 function logToTerminal(...args) {
