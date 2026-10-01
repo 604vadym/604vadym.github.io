@@ -1,0 +1,31 @@
+@use "../abstracts" as a;
+
+.video {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__poster {
+    width: min(100%, a.rem(1110px));
+    aspect-ratio: 1100/600;
+    object-fit: cover;
+    padding-inline: clamp(0rem, -0.091rem + 0.39vw, a.rem(6px));
+  }
+
+  &__play-btn {
+    position: absolute;
+    transition: filter 0.5s;
+    width: clamp(a.rem(50px), 2.367rem + 3.24vw, a.rem(100px));
+    height: clamp(a.rem(50px), 2.367rem + 3.24vw, a.rem(100px));
+
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
+
+  &__play-icon {
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,8 @@
+@use "sass:math";
+@use "config" as cfg;
+
+@mixin responsive($breakpoint) {
+  @media (max-width: #{math.div($breakpoint, cfg.$base-font-size) * 1em}) {
+    @content;
+  }
+}

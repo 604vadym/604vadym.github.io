@@ -1,0 +1,41 @@
+@use "functions" as f;
+
+$color-black: #000;
+$color-white: #fff;
+$color-grey: #727272;
+$color-silver: #eeeff1;
+$color-light-silver: #f9f9f9;
+$color-blue: #34547a;
+$color-dark-blue: #1a3557;
+
+$font-main: "Roboto", sans-serif;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+
+$font-size-xs: clamp(f.rem(12px), 0.735rem + 0.065vw, f.rem(13px));
+$font-size-sm: clamp(f.rem(14px), 0.845rem + 0.129vw, f.rem(16px));
+$font-size-md: clamp(f.rem(17px), 1.002rem + 0.259vw, f.rem(21px));
+$font-size-lg: clamp(f.rem(22px), 1.223rem + 0.647vw, f.rem(32px));
+$font-size-xl: clamp(f.rem(28px), 1.447rem + 1.294vw, f.rem(48px));
+
+$line-height-main: 1.64;
+$line-height-tight: 1;
+
+$letter-spacing-wide: 0.1em;
+
+$container-width: f.rem(1152px);
+$container-padding: f.rem(15px);
+
+$text-max-width: 56ch;
+
+$color-dark: $color-black;
+$color-light: $color-white;
+$color-muted: $color-grey;
+$color-surface: $color-silver;
+$color-surface-alt: $color-light-silver;
+$color-accent: $color-blue;
+$color-accent-hover: $color-dark-blue;
+
+$breakpoint-tablet: 1038px;
+$breakpoint-mobile: 492px;

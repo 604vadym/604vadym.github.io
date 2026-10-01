@@ -1,0 +1,26 @@
+@use "../abstracts" as a;
+
+.footer {
+  background-color: a.$color-accent;
+
+  &__content {
+    padding-block: clamp(a.rem(24px), 1.106rem + 1.68vw, a.rem(50px));
+  }
+
+  &__author {
+    font-weight: a.$font-weight-medium;
+    font-size: a.$font-size-md;
+    line-height: a.$line-height-tight;
+    color: a.$color-light;
+
+    margin-bottom: clamp(a.rem(12px), 0.629rem + 0.52vw, a.rem(20px));
+    padding-inline: clamp(0rem, -0.106rem + 0.45vw, a.rem(7px));
+  }
+
+  &__copyright {
+    font-size: a.$font-size-xs;
+    color: a.$color-light;
+
+    padding-inline: clamp(0rem, -0.106rem + 0.45vw, a.rem(7px));
+  }
+}

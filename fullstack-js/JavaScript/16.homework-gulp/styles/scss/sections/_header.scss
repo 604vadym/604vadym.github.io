@@ -1,0 +1,7 @@
+@use "../abstracts/" as a;
+
+.header {
+  &__content {
+    padding-block: clamp(a.rem(32px), 1.287rem + 3.04vw, a.rem(79px));
+  }
+}

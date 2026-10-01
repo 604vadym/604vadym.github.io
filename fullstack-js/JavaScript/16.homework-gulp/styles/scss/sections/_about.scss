@@ -1,0 +1,20 @@
+@use "../abstracts" as a;
+
+.about {
+  background-color: a.$color-surface-alt;
+
+  &__content {
+    padding-top: clamp(a.rem(40px), 1.408rem + 4.66vw, a.rem(112px));
+    padding-bottom: clamp(a.rem(36px), 1.279rem + 4.14vw, a.rem(100px));
+    text-align: center;
+  }
+
+  &__title {
+    margin-bottom: clamp(a.rem(24px), 1.106rem + 1.68vw, a.rem(50px));
+  }
+
+  &__description {
+    width: min(100%, a.$text-max-width);
+    margin-inline: auto;
+  }
+}

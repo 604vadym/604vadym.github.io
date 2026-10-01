@@ -1,0 +1,18 @@
+@use "../abstracts" as a;
+
+.feature {
+  &__icon {
+    width: a.rem(50px);
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  &__text {
+    text-align: left;
+  }
+
+  &__title,
+  &__description {
+    color: a.$color-light;
+  }
+}
