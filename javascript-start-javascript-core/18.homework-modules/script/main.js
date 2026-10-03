@@ -25,5 +25,48 @@ console.log(
 import { orders } from "./orders.js";
 import { getTotalPrice } from "./getPrice.js";
 
+console.log(
+    "******************************\n" +
+        "Task 1\n" +
+        "******************************",
+);
+
 const totalPrice = getTotalPrice(orders);
 console.log("Total price: $" + totalPrice);
+
+/**
+ * Дано дві строки. Повернути true якщо вони є анаграмою, і false якщо ні.
+ * Анаграма - це слово, утворене шляхом перестановки літер іншого, наприклад, cat, утворене від act, (приклади в нашій мові: "банка" і "кабан").
+ *
+ * Приклади:
+ *
+ * "listen", "silent" → true
+ * "abba", "baab" → true
+ * "abba", "baaa" → false
+ * "abba", "baaba" → false
+ */
+
+console.log(
+    "******************************\n" +
+        "Task 2\n" +
+        "******************************",
+);
+
+function isAnagram(word1, word2) {
+    if (word1.length !== word2.length) return false;
+
+    for (const char of word1) {
+        const index = word2.indexOf(char);
+        if (index !== -1) {
+            word2 = word2.replace(char, "");
+            continue;
+        }
+        return false;
+    }
+    return true;
+}
+
+console.log(isAnagram("listen", "silent")); // → true
+console.log(isAnagram("abba", "baab")); // → true
+console.log(isAnagram("abba", "baaa")); // → false
+console.log(isAnagram("abba", "baaba")); // → false
