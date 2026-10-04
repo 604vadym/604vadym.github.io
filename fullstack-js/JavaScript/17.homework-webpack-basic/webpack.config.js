@@ -33,6 +33,19 @@ export default (env, argv) => {
             },
         },
 
+        optimization: {
+            splitChunks: {
+                chunks: "all",
+                cacheGroups: {
+                    defaultVendors: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name: "vendors",
+                        enforce: true,
+                    },
+                },
+            },
+        },
+
         module: {
             rules: [
                 {

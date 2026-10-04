@@ -2,7 +2,7 @@ export default class Post {
     constructor(title, img) {
         this.title = title;
         this.date = new Date();
-        // this.img = img;
+        this.img = img;
     }
 
     toString() {
@@ -10,7 +10,7 @@ export default class Post {
             {
                 title: this.title,
                 date: this.date.toJSON(),
-                // img: this.img,
+                img: this.img,
             },
             null,
             2,

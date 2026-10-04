@@ -1,9 +1,11 @@
+import $ from "jquery";
+
 function createStatistics() {
     let counter = 0;
     let isDestroyed = false;
     const listener = () => counter++;
 
-    document.addEventListener("click", listener);
+    $(document).on("click", listener);
 
     return {
         destroy() {
