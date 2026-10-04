@@ -28,6 +28,10 @@ export default (env, argv) => {
         module: {
             rules: [
                 {
+                    test: /\.html$/i,
+                    loader: "html-loader",
+                },
+                {
                     test: /\.css$/i,
                     use: [
                         isProduction
@@ -35,6 +39,15 @@ export default (env, argv) => {
                             : "style-loader",
                         "css-loader",
                     ],
+                },
+                {
+                    test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
+                    type: "asset/resource",
+                    generator: {
+                        filename: isProduction
+                            ? "images/[name].[contenthash][ext]"
+                            : "images/[name][ext]",
+                    },
                 },
             ],
         },
