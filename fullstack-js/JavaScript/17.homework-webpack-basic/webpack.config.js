@@ -1,6 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,7 +29,12 @@ export default (env, argv) => {
             rules: [
                 {
                     test: /\.css$/i,
-                    use: ["style-loader", "css-loader"],
+                    use: [
+                        isProduction
+                            ? MiniCssExtractPlugin.loader
+                            : "style-loader",
+                        "css-loader",
+                    ],
                 },
             ],
         },
@@ -38,7 +44,16 @@ export default (env, argv) => {
             hot: true,
         },
 
-        plugins: [new HtmlWebpackPlugin({ template: "./index.html" })],
+        plugins: [
+            new HtmlWebpackPlugin({ template: "./index.html" }),
+            ...(isProduction
+                ? [
+                      new MiniCssExtractPlugin({
+                          filename: "[name].[contenthash].css",
+                      }),
+                  ]
+                : []),
+        ],
 
         devtool: isProduction ? "source-map" : "eval-cheap-module-source-map",
     };

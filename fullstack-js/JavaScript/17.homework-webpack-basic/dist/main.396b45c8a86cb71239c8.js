@@ -1,0 +1,2 @@
+(()=>{"use strict";document.addEventListener("click",()=>{console.log(`You clicked ${statistics.getClicks()} times`)});const t=new class{constructor(t,e){this.title=t,this.date=new Date}toString(){return JSON.stringify({title:this.title,date:this.date.toJSON()},null,2)}}("Webpack Post Title");console.log("Post to string:",t.toString()),console.log("Hello")})();
+//# sourceMappingURL=main.396b45c8a86cb71239c8.js.map
