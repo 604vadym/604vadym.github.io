@@ -57,6 +57,15 @@ export default (env, argv) => {
                             : "images/[name][ext]",
                     },
                 },
+                {
+                    test: /\.(ttf|woff|woff2|eot)$/i,
+                    type: "asset/resource",
+                    generator: {
+                        filename: isProduction
+                            ? "fonts/[name].[contenthash][ext]"
+                            : "fonts/[name][ext]",
+                    },
+                },
             ],
         },
 
