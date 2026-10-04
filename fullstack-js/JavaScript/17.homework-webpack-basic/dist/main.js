@@ -1,0 +1,1 @@
+(()=>{"use strict";const t=new class{constructor(t,s){this.title=t,this.date=new Date}toString(){return JSON.stringify({title:this.title,date:this.date.toJSON()},null,2)}}("Webpack Post Title");console.log("Post to string:",t.toString())})();
