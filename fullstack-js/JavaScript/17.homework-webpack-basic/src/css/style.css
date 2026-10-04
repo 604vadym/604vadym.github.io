@@ -1,5 +1,5 @@
-@import "~normalize.css";
-@import "fonts.css";
+/* @import "~normalize.css"; */
+/* @import "fonts.css"; */
 
 body {
   font-family: "Rubik Doodle Shadow", system-ui;
@@ -31,13 +31,13 @@ p {
 }
 
 h4 {
-  font-family: 'Roboto Mono';
+  font-family: "Roboto Mono";
   font-weight: 200;
   text-align: center;
 }
 
 .logo {
-  background-image: url(../assets/icon-square-big.png);
+  /* background-image: url(../assets/icon-square-big.png); */
   background-size: cover;
   width: 300px;
   height: 300px;

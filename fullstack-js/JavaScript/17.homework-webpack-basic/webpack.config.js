@@ -9,19 +9,36 @@ export default (env, argv) => {
     const isProduction = argv.mode === "production";
 
     return {
+        context: path.resolve(import.meta.dirname, "src"),
+
         mode: argv.mode || "development",
 
         entry: {
-            stat: "./src/statistics.js",
-            main: "./src/index.js",
+            stat: "./statistics.js",
+            main: "./index.js",
         },
 
         output: {
             path: path.resolve(import.meta.dirname, "dist"),
             filename: isProduction ? "[name].[contenthash].js" : "[name].js",
+            clean: true,
         },
 
-        plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
+        module: {
+            rules: [
+                {
+                    test: /\.css$/i,
+                    use: ["style-loader", "css-loader"],
+                },
+            ],
+        },
+
+        devServer: {
+            watchFiles: ["./**/*.html"],
+            hot: true,
+        },
+
+        plugins: [new HtmlWebpackPlugin({ template: "./index.html" })],
 
         devtool: isProduction ? "source-map" : "eval-cheap-module-source-map",
     };
