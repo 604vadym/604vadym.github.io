@@ -14,7 +14,7 @@ console.log("Post to string:", post.toString());
 
 console.log("Hello");
 
-console.log("Imported image path", logo);
+console.log("Imported image path:", logo);
 
 const img = document.createElement("img");
 img.src = logo;

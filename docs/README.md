@@ -25,14 +25,16 @@ To be edited in the future.
 
 ## Tech Stack
 
+- JavaScript
 - HTML5
 - CSS3
 - SASS/SCSS
 - Bootstrap
 - Tailwind CSS
-- JavaScript
 - Jest
 - Vitest
+- Gulp
+- Webpack
 
 ## Screenshots / Demo
 

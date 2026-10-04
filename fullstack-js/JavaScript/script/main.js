@@ -21,6 +21,7 @@ const homeworkMap = {
     hw14: "14.homework-async-await-fetch-api/index.html",
     hw15: "15.homework-public-api/index.html",
     hw16: "16.homework-gulp/index.html",
+    hw17: "17.homework-webpack-basic/dist/index.html",
 };
 
 function logToTerminal(...args) {

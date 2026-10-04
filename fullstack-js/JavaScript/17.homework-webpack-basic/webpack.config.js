@@ -1,16 +1,15 @@
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = import.meta.dirname;
 
 export default (env, argv) => {
     const isProduction = argv.mode === "production";
 
     return {
-        context: path.resolve(import.meta.dirname, "src"),
+        context: path.resolve(__dirname, "src"),
 
         mode: argv.mode || "development",
 
@@ -20,20 +19,22 @@ export default (env, argv) => {
         },
 
         output: {
-            path: path.resolve(import.meta.dirname, "dist"),
+            path: path.resolve(__dirname, "dist"),
             filename: isProduction ? "[name].[contenthash].js" : "[name].js",
             clean: true,
         },
 
         resolve: {
             alias: {
-                "@": path.resolve(import.meta.dirname, "src"),
-                "@css": path.resolve(import.meta.dirname, "src/css"),
-                "@assets": path.resolve(import.meta.dirname, "src/assets"),
+                "@": path.resolve(__dirname, "src"),
+                "@css": path.resolve(__dirname, "src/css"),
+                "@assets": path.resolve(__dirname, "src/assets"),
             },
         },
 
         optimization: {
+            minimize: isProduction,
+            minimizer: [`...`, new CssMinimizerPlugin()],
             splitChunks: {
                 chunks: "all",
                 cacheGroups: {
