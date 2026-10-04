@@ -1,6 +1,7 @@
-import "./css/style.css";
-import Post from "./post.js";
-import logo from "./assets/icon-square-big.png";
+import "@css/style.css";
+import Post from "@/post.js";
+import logo from "@assets/icon-square-big.png";
+import data from "@assets/data.json" with { type: "json" };
 
 document.addEventListener("click", () => {
     console.log(`You clicked ${statistics.getClicks()} times`);
@@ -12,9 +13,11 @@ console.log("Post to string:", post.toString());
 
 console.log("Hello");
 
-console.log(logo);
+console.log("Imported image path", logo);
 
 const img = document.createElement("img");
 img.src = logo;
 img.width = 150;
 document.body.append(img);
+
+console.log("Imported JSON:", data);

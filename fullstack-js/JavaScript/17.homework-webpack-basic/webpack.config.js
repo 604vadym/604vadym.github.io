@@ -25,6 +25,14 @@ export default (env, argv) => {
             clean: true,
         },
 
+        resolve: {
+            alias: {
+                "@": path.resolve(import.meta.dirname, "src"),
+                "@css": path.resolve(import.meta.dirname, "src/css"),
+                "@assets": path.resolve(import.meta.dirname, "src/assets"),
+            },
+        },
+
         module: {
             rules: [
                 {
