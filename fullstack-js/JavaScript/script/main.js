@@ -22,6 +22,7 @@ const homeworkMap = {
     hw15: "15.homework-public-api/index.html",
     hw16: "16.homework-gulp/index.html",
     hw17: "17.homework-webpack-basic/dist/index.html",
+    hw18: "18.homework-webpack-advanced/dist/index.html",
 };
 
 function logToTerminal(...args) {
