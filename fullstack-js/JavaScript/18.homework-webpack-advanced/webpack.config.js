@@ -14,7 +14,7 @@ export default (env, argv) => {
         mode: argv.mode || "development",
 
         entry: {
-            stat: "./statistics.js",
+            stat: "./statistics.ts",
             main: "./index.js",
         },
 
@@ -57,12 +57,15 @@ export default (env, argv) => {
                     loader: "html-loader",
                 },
                 {
-                    test: /\.m?js$/,
+                    test: /\.(m?js|ts|tsx)$/,
                     exclude: /node_modules/,
                     use: {
                         loader: "babel-loader",
                         options: {
-                            presets: ["@babel/preset-env"],
+                            presets: [
+                                "@babel/preset-env",
+                                "@babel/preset-typescript",
+                            ],
                         },
                     },
                 },
