@@ -6,7 +6,7 @@ import "@css/style.css";
 import "@scss/style.scss";
 
 document.addEventListener("click", () => {
-    console.log(`You clicked ${statistics.getClicks()} times`);
+    console.log(`You clicked ${window.statistics.getClicks()} times`);
 });
 
 const post = new Post("Webpack Post Title", logo);
@@ -34,6 +34,6 @@ const getResource = () => ({
 
 function testBabel8() {
     using resource = getResource();
-    console.log("Using resource...");
+    console.log("Using resource...", resource);
 }
 testBabel8();
