@@ -2,6 +2,7 @@ import path from "node:path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 const __dirname = import.meta.dirname;
 
@@ -123,6 +124,15 @@ export default (env, argv) => {
                 ? [
                       new MiniCssExtractPlugin({
                           filename: "css/[name].[contenthash].css",
+                      }),
+                  ]
+                : []),
+            ...(isProduction
+                ? [
+                      new BundleAnalyzerPlugin({
+                          analyzerMode: "static",
+                          reportFilename: "bundle-report.html",
+                          openAnalyzer: true,
                       }),
                   ]
                 : []),
