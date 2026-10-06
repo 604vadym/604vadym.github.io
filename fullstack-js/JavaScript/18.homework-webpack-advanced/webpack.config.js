@@ -30,6 +30,7 @@ export default (env, argv) => {
             alias: {
                 "@": path.resolve(__dirname, "src"),
                 "@css": path.resolve(__dirname, "src/css"),
+                "@scss": path.resolve(__dirname, "src/scss"),
                 "@assets": path.resolve(__dirname, "src/assets"),
             },
         },
@@ -62,6 +63,16 @@ export default (env, argv) => {
                             ? MiniCssExtractPlugin.loader
                             : "style-loader",
                         "css-loader",
+                    ],
+                },
+                {
+                    test: /\.s[ac]ss$/i,
+                    use: [
+                        isProduction
+                            ? MiniCssExtractPlugin.loader
+                            : "style-loader",
+                        "css-loader",
+                        "sass-loader",
                     ],
                 },
                 {

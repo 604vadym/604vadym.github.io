@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "sideEffects": [
-    "*.css"
-  ],
   "scripts": {
     "dev": "webpack serve --mode development --open",
     "build": "webpack --mode production",
@@ -21,6 +18,8 @@
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.8",
     "mini-css-extract-plugin": "^2.10.2",
+    "sass": "^1.105.1",
+    "sass-loader": "^17.0.1",
     "style-loader": "^4.0.0",
     "webpack": "^5.111.1",
     "webpack-cli": "^7.2.3",

@@ -3,6 +3,7 @@ import Post from "@/post.js";
 import logo from "@assets/icon-square-big.png";
 import data from "@assets/data.json" with { type: "json" };
 import "@css/style.css";
+import "@scss/style.scss";
 
 document.addEventListener("click", () => {
     console.log(`You clicked ${statistics.getClicks()} times`);
