@@ -25,3 +25,15 @@ document.body.append(img);
 console.log("Imported JSON:", data);
 
 $("pre").html(post.toString());
+
+const getResource = () => ({
+    [Symbol.dispose]() {
+        console.log("Resource automatically cleared");
+    },
+});
+
+function testBabel8() {
+    using resource = getResource();
+    console.log("Using resource...");
+}
+testBabel8();
