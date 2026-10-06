@@ -20,7 +20,9 @@ export default (env, argv) => {
 
         output: {
             path: path.resolve(__dirname, "dist"),
-            filename: isProduction ? "[name].[contenthash].js" : "[name].js",
+            filename: isProduction
+                ? "js/[name].[contenthash].js"
+                : "js/[name].js",
             clean: true,
         },
 
@@ -89,11 +91,14 @@ export default (env, argv) => {
         },
 
         plugins: [
-            new HtmlWebpackPlugin({ template: "./index.html" }),
+            new HtmlWebpackPlugin({
+                template: "./index.html",
+                favicon: "./assets/favicon/favicon.png",
+            }),
             ...(isProduction
                 ? [
                       new MiniCssExtractPlugin({
-                          filename: "[name].[contenthash].css",
+                          filename: "css/[name].[contenthash].css",
                       }),
                   ]
                 : []),
