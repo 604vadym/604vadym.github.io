@@ -23,6 +23,7 @@ const homeworkMap = {
     hw16: "16.homework-gulp/index.html",
     hw17: "17.homework-webpack-basic/dist/index.html",
     hw18: "18.homework-webpack-advanced/dist/index.html",
+    hw19: "19.homework-typescript-basic/dist/main.js",
 };
 
 function logToTerminal(...args) {

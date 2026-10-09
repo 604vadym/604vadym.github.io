@@ -1,0 +1,16 @@
+{
+  "name": "ts-hw19-jest-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "jsdom": "^26.0.0",
+    "typescript": "^7.0.2",
+    "vitest": "^3.0.9"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  }
+}
