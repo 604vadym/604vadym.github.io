@@ -1,4 +1,4 @@
-declare function sumArray(): void;
+declare function sumArray(numbers: number[]): number;
 declare function createUser(): void;
 declare enum OrderStatus {
 }

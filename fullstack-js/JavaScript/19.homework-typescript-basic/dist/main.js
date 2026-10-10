@@ -16,9 +16,12 @@ console.log("JS #19. Програмування з TypeScript: Структур�
 console.log("******************************\n" +
     "Task 1\n" +
     "******************************");
-function sumArray() {
-    // code here
+function sumArray(numbers) {
+    return numbers.reduce((accum, value) => accum + value, 0);
 }
+// Вивід до консолі для демонстрації
+console.log(sumArray([1, 2, 3, 4])); // Повинно вивести 10
+console.log(sumArray([])); // Повинно вивести 0
 function createUser() {
     // code here
 }

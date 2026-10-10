@@ -21,13 +21,16 @@ console.log(
     "******************************",
 );
 
-function sumArray() {
-  // code here
+function sumArray(numbers: number[]): number {
+  return numbers.reduce(
+    (accum: number, value: number): number => accum + value,
+    0,
+  );
 }
 
 // Вивід до консолі для демонстрації
-// console.log(sumArray([1, 2, 3, 4])) // Повинно вивести 10
-// console.log(sumArray([])) // Повинно вивести 0
+console.log(sumArray([1, 2, 3, 4])); // Повинно вивести 10
+console.log(sumArray([])); // Повинно вивести 0
 
 /*
  * #2
