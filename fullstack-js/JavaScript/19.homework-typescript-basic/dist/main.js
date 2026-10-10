@@ -22,11 +22,11 @@ function sumArray(numbers) {
 // Вивід до консолі для демонстрації
 console.log(sumArray([1, 2, 3, 4])); // Повинно вивести 10
 console.log(sumArray([])); // Повинно вивести 0
-function createUser() {
-    // code here
+function createUser(name, age, isActive = true) {
+    return { name, age, isActive };
 }
-// const newUser = createUser('Анна', 25, true)
-// console.log(newUser)
+const newUser = createUser("Анна", 25, true);
+console.log(newUser);
 /*
  * #3
  *

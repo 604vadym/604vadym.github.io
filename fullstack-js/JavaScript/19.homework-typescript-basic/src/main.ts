@@ -48,14 +48,24 @@ console.log(sumArray([])); // Повинно вивести 0
  *
  */
 
-type User = {};
+console.log(
+  "******************************\n" +
+    "Task 2\n" +
+    "******************************",
+);
 
-function createUser() {
-  // code here
+type User = {
+  name: string;
+  age: number;
+  isActive: boolean;
+};
+
+function createUser(name: string, age: number, isActive: boolean = true): User {
+  return { name, age, isActive };
 }
 
-// const newUser = createUser('Анна', 25, true)
-// console.log(newUser)
+const newUser = createUser("Анна", 25, true);
+console.log(newUser);
 
 /*
  * #3
