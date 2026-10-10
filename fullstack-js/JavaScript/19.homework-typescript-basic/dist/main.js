@@ -1,3 +1,4 @@
+"use strict";
 console.log("JS #19. Програмування з TypeScript: Структури даних і функції");
 /*
  * #1
@@ -22,6 +23,24 @@ function sumArray(numbers) {
 // Вивід до консолі для демонстрації
 console.log(sumArray([1, 2, 3, 4])); // Повинно вивести 10
 console.log(sumArray([])); // Повинно вивести 0
+/*
+ * #2
+ *
+ * Задача: Розробити функцію createUser, яка створює об'єкт користувача з заданими властивостями.
+ *
+ * Мета: Створити функцію, що дозволяє легко генерувати нові об'єкти користувачів з переданими атрибутами ім'я, вік та статус активності, використовуючи визначений тип User.
+ *
+ * Вимоги до реалізації:
+ * 1. Функція повинна приймати три параметри: name (рядок), age (число) та isActive (булеве значення).
+ * 2. Функція має повертати об'єкт, що відповідає типу User. Тип User має бути оголошений з використанням ключового слова `type` та включати властивості name, age, та isActive.
+ * 3. Об'єкт, що повертається, має мати типи властивостей відповідно до оголошеного типу User: name як string, age як number, isActive як boolean.
+ * 4. Визначення типу User має бути сумісним зі структурою об'єкта, який повертається функцією, включно з порядком та наявністю всіх властивостей.
+ * 5. Функція має правильно обробляти випадок, коли isActive не передано, і за замовчуванням вважати цей параметр true.
+ *
+ */
+console.log("******************************\n" +
+    "Task 2\n" +
+    "******************************");
 function createUser(name, age, isActive = true) {
     return { name, age, isActive };
 }
@@ -48,16 +67,34 @@ console.log(newUser);
  * 6. Параметри функції та її тип повернення мають бути явно типізовані.
  *
  */
+console.log("******************************\n" +
+    "Task 3\n" +
+    "******************************");
 var OrderStatus;
 (function (OrderStatus) {
+    OrderStatus[OrderStatus["Pending"] = 0] = "Pending";
+    OrderStatus[OrderStatus["Shipped"] = 1] = "Shipped";
+    OrderStatus[OrderStatus["Delivered"] = 2] = "Delivered";
+    OrderStatus[OrderStatus["Cancelled"] = 3] = "Cancelled";
 })(OrderStatus || (OrderStatus = {}));
-function getOrderStatus() {
-    // code here
+function getOrderStatus(status) {
+    switch (status) {
+        case OrderStatus.Pending:
+            return "Замовлення очікує на обробку";
+        case OrderStatus.Shipped:
+            return "Замовлення було відправлено";
+        case OrderStatus.Delivered:
+            return "Замовлення доставлено";
+        case OrderStatus.Cancelled:
+            return "Замовлення скасовано";
+        default:
+            throw new Error("Невідомий статус замовлення");
+    }
 }
 // Приклад виклику функції
-// console.log(getOrderStatus(OrderStatus.Pending))
-// console.log(getOrderStatus(OrderStatus.Shipped))
-// console.log(getOrderStatus(OrderStatus.Delivered))
-// console.log(getOrderStatus(OrderStatus.Cancelled))
-export { sumArray, createUser, OrderStatus, getOrderStatus };
+console.log(getOrderStatus(OrderStatus.Pending));
+console.log(getOrderStatus(OrderStatus.Shipped));
+console.log(getOrderStatus(OrderStatus.Delivered));
+console.log(getOrderStatus(OrderStatus.Cancelled));
+// export { sumArray, createUser, OrderStatus, getOrderStatus };
 //# sourceMappingURL=main.js.map
