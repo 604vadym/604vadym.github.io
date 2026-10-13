@@ -22,10 +22,7 @@ console.log(
 );
 
 function sumArray(numbers: number[]): number {
-  return numbers.reduce(
-    (accum: number, value: number): number => accum + value,
-    0,
-  );
+  return numbers.reduce((accum, value) => accum + value, 0);
 }
 
 // Вивід до консолі для демонстрації

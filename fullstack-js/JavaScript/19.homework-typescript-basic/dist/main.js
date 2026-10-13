@@ -1,4 +1,3 @@
-"use strict";
 console.log("JS #19. Програмування з TypeScript: Структури даних і функції");
 /*
  * #1
@@ -96,5 +95,6 @@ console.log(getOrderStatus(OrderStatus.Pending));
 console.log(getOrderStatus(OrderStatus.Shipped));
 console.log(getOrderStatus(OrderStatus.Delivered));
 console.log(getOrderStatus(OrderStatus.Cancelled));
+export {};
 // export { sumArray, createUser, OrderStatus, getOrderStatus };
 //# sourceMappingURL=main.js.map
