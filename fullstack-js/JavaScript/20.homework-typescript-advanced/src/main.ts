@@ -106,11 +106,33 @@ console.log(calculator.multiply(3, 4)); // 12
  *
  */
 
+console.log(
+  "******************************\n" +
+    "Task 3\n" +
+    "******************************",
+);
+
 namespace UserProfile {
-  // code here
+  export interface ProfileInterface {
+    id: string;
+    name: string;
+    email: string;
+  }
+
+  export function createProfile(name: string, email: string): ProfileInterface {
+    return {
+      id: generateId(),
+      name,
+      email,
+    };
+  }
+
+  function generateId(): string {
+    return Math.random().toString(36).substring(2, 13);
+  }
 }
 
-// const profile = UserProfile.createProfile('John Doe', 'john@example.com')
-// console.log(profile) // { "id": "e6uvai5egqd", "name": "John Doe", "email": "john@example.com" }
+const profile = UserProfile.createProfile("John Doe", "john@example.com");
+console.log(profile); // { "id": "e6uvai5egqd", "name": "John Doe", "email": "john@example.com" }
 
-export { createPerson, Calculator };
+export { createPerson, Calculator, UserProfile };

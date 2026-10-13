@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -81,7 +82,38 @@ const calculator = new Calculator();
 console.log(calculator.add(2, 3)); // 5
 // "Calling "multiply" with arguments: 3, 4"
 console.log(calculator.multiply(3, 4)); // 12
-// const profile = UserProfile.createProfile('John Doe', 'john@example.com')
-// console.log(profile) // { "id": "e6uvai5egqd", "name": "John Doe", "email": "john@example.com" }
-export { createPerson, Calculator };
+/*
+ * #3
+ *
+ * Задача: Реалізувати функціонал для створення профілю користувача в просторі імен UserProfile.
+ *
+ * Мета: Надати можливість створювати об'єкт профілю з унікальним ідентифікатором, ім'ям та електронною поштою.
+ *
+ * Вимоги до реалізації:
+ * 1. Створити namespace `UserProfile`, що слугуватиме контейнером для визначення інтерфейсу профілю та функцій.
+ * 2. Визначити всередині `UserProfile` інтерфейс `ProfileInterface`, який має містити властивості `id` (string), `name` (string) та `email` (string).
+ * 3. Реалізувати функцію `createProfile` всередині `UserProfile`, яка приймає `name` та `email`, створює та повертає об'єкт `ProfileInterface` з унікальним `id`, вказаним ім'ям та електронною поштою.
+ * 4. Функція `generateId` має бути приватною всередині `UserProfile` і слугувати для генерації унікального ідентифікатора для кожного профілю.
+ *
+ */
+console.log("******************************\n" +
+    "Task 3\n" +
+    "******************************");
+var UserProfile;
+(function (UserProfile) {
+    function createProfile(name, email) {
+        return {
+            id: generateId(),
+            name,
+            email,
+        };
+    }
+    UserProfile.createProfile = createProfile;
+    function generateId() {
+        return Math.random().toString(36).substring(2, 13);
+    }
+})(UserProfile || (UserProfile = {}));
+const profile = UserProfile.createProfile("John Doe", "john@example.com");
+console.log(profile); // { "id": "e6uvai5egqd", "name": "John Doe", "email": "john@example.com" }
+// export { createPerson, Calculator, UserProfile };
 //# sourceMappingURL=main.js.map
