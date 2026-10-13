@@ -54,23 +54,42 @@ console.log(newPerson);
  *
  */
 
-// function LogMethodCalls(
-//   target: any,
-//   propertyName: string,
-//   propertyDescriptor: PropertyDescriptor,
-// ): PropertyDescriptor {
-// code here
-// }
+console.log(
+  "******************************\n" +
+    "Task 2\n" +
+    "******************************",
+);
 
-class Calculator {
-  // code here
+function LogMethodCalls(
+  target: any,
+  propertyName: string,
+  propertyDescriptor: PropertyDescriptor,
+): PropertyDescriptor {
+  const origin = propertyDescriptor.value;
+  propertyDescriptor.value = function (...args: any[]) {
+    console.log(`Calling "${propertyName}" with arguments: ${args.join(", ")}`);
+    return origin.apply(this, args);
+  };
+  return propertyDescriptor;
 }
 
-// const calculator = new Calculator()
-// // "Calling "add" with arguments: 2, 3"
-// console.log(calculator.add(2, 3)) // 5
-// // "Calling "multiply" with arguments: 3, 4"
-// console.log(calculator.multiply(3, 4)) // 12
+class Calculator {
+  @LogMethodCalls
+  add(num1: number, num2: number): number {
+    return num1 + num2;
+  }
+
+  @LogMethodCalls
+  multiply(num1: number, num2: number): number {
+    return num1 * num2;
+  }
+}
+
+const calculator = new Calculator();
+// "Calling "add" with arguments: 2, 3"
+console.log(calculator.add(2, 3)); // 5
+// "Calling "multiply" with arguments: 3, 4"
+console.log(calculator.multiply(3, 4)); // 12
 
 /*
  * #3

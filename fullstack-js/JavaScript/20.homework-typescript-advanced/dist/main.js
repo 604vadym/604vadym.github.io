@@ -1,3 +1,12 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 console.log("JS #20. Поглиблене вивчення TypeScript через практичні задачі");
 /*
  * #1
@@ -36,15 +45,42 @@ console.log(newPerson);
  * 5. Усе виведення логів має здійснюватись через `console.log`.
  *
  */
-// function LogMethodCalls(
-//   target: any,
-//   propertyName: string,
-//   propertyDescriptor: PropertyDescriptor,
-// ): PropertyDescriptor {
-// code here
-// }
-class Calculator {
+console.log("******************************\n" +
+    "Task 2\n" +
+    "******************************");
+function LogMethodCalls(target, propertyName, propertyDescriptor) {
+    const origin = propertyDescriptor.value;
+    propertyDescriptor.value = function (...args) {
+        console.log(`Calling "${propertyName}" with arguments: ${args.join(", ")}`);
+        return origin.apply(this, args);
+    };
+    return propertyDescriptor;
 }
+class Calculator {
+    add(num1, num2) {
+        return num1 + num2;
+    }
+    multiply(num1, num2) {
+        return num1 * num2;
+    }
+}
+__decorate([
+    LogMethodCalls,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", Number)
+], Calculator.prototype, "add", null);
+__decorate([
+    LogMethodCalls,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", Number)
+], Calculator.prototype, "multiply", null);
+const calculator = new Calculator();
+// "Calling "add" with arguments: 2, 3"
+console.log(calculator.add(2, 3)); // 5
+// "Calling "multiply" with arguments: 3, 4"
+console.log(calculator.multiply(3, 4)); // 12
 // const profile = UserProfile.createProfile('John Doe', 'john@example.com')
 // console.log(profile) // { "id": "e6uvai5egqd", "name": "John Doe", "email": "john@example.com" }
 export { createPerson, Calculator };
