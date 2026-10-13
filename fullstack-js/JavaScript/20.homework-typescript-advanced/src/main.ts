@@ -22,7 +22,9 @@ console.log(
 );
 
 interface PersonInterface {
-  // code here
+  name: string;
+  age: number;
+  isActive: boolean;
 }
 
 function createPerson(
@@ -30,11 +32,11 @@ function createPerson(
   age: number,
   isActive: boolean,
 ): PersonInterface {
-  // code here
+  return { name, age, isActive };
 }
 
-// const newPerson = createPerson('Олександр', 31, false)
-// console.log(newPerson)
+const newPerson = createPerson("Олександр", 31, false);
+console.log(newPerson);
 
 /*
  * #2
@@ -52,13 +54,13 @@ function createPerson(
  *
  */
 
-function LogMethodCalls(
-  target: any,
-  propertyName: string,
-  propertyDescriptor: PropertyDescriptor,
-): PropertyDescriptor {
-  // code here
-}
+// function LogMethodCalls(
+//   target: any,
+//   propertyName: string,
+//   propertyDescriptor: PropertyDescriptor,
+// ): PropertyDescriptor {
+// code here
+// }
 
 class Calculator {
   // code here
@@ -92,4 +94,4 @@ namespace UserProfile {
 // const profile = UserProfile.createProfile('John Doe', 'john@example.com')
 // console.log(profile) // { "id": "e6uvai5egqd", "name": "John Doe", "email": "john@example.com" }
 
-export { createPerson, Calculator, UserProfile };
+export { createPerson, Calculator };
