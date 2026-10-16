@@ -1,0 +1,7 @@
+@use "../abstracts/" as a;
+
+.team {
+  &__content {
+    padding-block: a.$space-lg;
+  }
+}

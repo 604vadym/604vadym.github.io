@@ -1,0 +1,8 @@
+@use "sass:color";
+@use "../abstracts/" as a;
+
+.about {
+  &__content {
+    padding-block: a.$space-lg;
+  }
+}

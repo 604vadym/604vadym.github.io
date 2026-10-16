@@ -12,7 +12,8 @@ h4,
 p,
 ul,
 ol,
-figure {
+figure,
+blockquote {
   margin: 0;
   padding: 0;
 }
@@ -26,11 +27,17 @@ ul {
   list-style-type: none;
 }
 
+cite {
+  display: block;
+  font-style: normal;
+}
+
 img,
 picture,
 svg {
   max-width: 100%;
   display: block;
+  height: auto;
 }
 
 input,

@@ -1,0 +1,24 @@
+@use "../abstracts/" as a;
+
+.hero {
+  @include a.flex-center;
+  position: relative;
+  min-height: 100vh;
+  background: url(../../assets/images/backgrounds/h-bg.svg) center top / 100%
+    100% no-repeat;
+
+  &__title {
+    @include a.text-bold(a.$font-size-h1);
+    text-align: center;
+  }
+
+  &__scroll {
+    // @include a.inline-flex-center;
+    @include a.hover-color-smooth(a.$color-accent);
+    position: absolute;
+    left: 50%;
+    bottom: a.$space-md;
+    transform: translateX(-50%);
+    color: a.$color-basic;
+  }
+}

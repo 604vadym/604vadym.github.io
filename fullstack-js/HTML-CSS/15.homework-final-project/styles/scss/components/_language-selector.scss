@@ -1,15 +1,10 @@
 @use "../abstracts/" as a;
 
-.languages-selector {
+.language-selector {
   display: flex;
 
   &__link {
-    @extend %flex-center;
-    font-weight: a.$font-weight-bold;
-    font-size: a.$font-size-sub;
-    line-height: a.$line-height-tight;
-    letter-spacing: 1px;
-
+    @include a.flex-center;
     min-width: 33px;
     min-height: 25px;
     padding: 5px 7px;

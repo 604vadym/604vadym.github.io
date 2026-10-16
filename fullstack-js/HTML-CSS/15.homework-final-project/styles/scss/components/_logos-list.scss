@@ -1,0 +1,34 @@
+@use "../abstracts/" as a;
+@use "sass:list";
+
+.logos-list {
+  @media (min-width: a.$container-width) {
+    border-radius: a.$border-radius;
+    overflow: hidden;
+  }
+
+  &__item {
+    @include a.flex-center;
+    width: min(100%, 430px);
+    height: a.$space-lg * 2;
+
+    $item-backgrounds:
+      #1c4280, #143646, #f48b30, #9e4dc3, #fd9339, #e2e2e4, #c71c36, #dcf3f9,
+      #eaeaea, #282240, #1d4568, a.$color-black;
+
+    @each $color in $item-backgrounds {
+      $index: list.index($item-backgrounds, $color);
+
+      &:nth-child(#{$index}) {
+        background-color: $color;
+      }
+    }
+  }
+
+  &--stretched-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    margin-inline: -(a.$space-lg);
+  }
+}

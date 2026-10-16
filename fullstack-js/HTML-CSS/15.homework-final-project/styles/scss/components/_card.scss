@@ -1,0 +1,13 @@
+@use "../abstracts/" as a;
+
+.card {
+  &__img {
+    margin-bottom: a.$space-md;
+  }
+
+  &__title {
+    @include a.text-bold(a.$font-size-h3);
+    color: a.$color-active-regular;
+    margin-bottom: a.$space-sm;
+  }
+}

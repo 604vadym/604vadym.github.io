@@ -1,5 +1,40 @@
 @use "../abstracts/" as a;
 
 .gradient-wrapper {
+  $frame-height: 10px;
+  $frame-padding: 20px;
+
+  position: relative;
+  z-index: 5;
+  margin-bottom: $frame-height * 2;
   background: a.$gradient-supersoft;
+
+  &,
+  &::before,
+  &::after {
+    @include a.border-radius-bottom(a.$border-radius);
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    height: $frame-height;
+  }
+
+  &::before {
+    z-index: -1;
+    left: $frame-padding;
+    right: $frame-padding;
+    bottom: -$frame-height;
+    background-color: #cacadb;
+  }
+
+  &::after {
+    z-index: -2;
+    left: $frame-padding * 2;
+    right: $frame-padding * 2;
+    bottom: -$frame-height * 2;
+    background-color: #e7e7f2;
+  }
 }

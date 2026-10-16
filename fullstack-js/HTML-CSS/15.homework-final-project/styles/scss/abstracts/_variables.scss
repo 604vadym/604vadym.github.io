@@ -1,11 +1,15 @@
+@use "sass:math";
 @use "functions" as f;
 
 $color-white: #fff;
+$color-black: #000;
 $color-grey: #f5f5fa;
+$color-grey-text: #b3b3ba;
 $color-grey-separator: #e6e6f0;
 
 $color-basic: $color-white;
 $color-main-regular: #323264;
+$color-active-regular: #24a3ff;
 $color-accent: #f0145a;
 $color-bg: $color-grey;
 
@@ -15,6 +19,16 @@ $gradient-supersoft: linear-gradient(
   $color-main-regular 57.17%,
   #643e72 87.46%
 );
+
+$gradient-text-red: linear-gradient(90.13deg, #f0145a 0.84%, #ef8080 99.96%);
+
+$gradient-text-red-reversed: linear-gradient(
+  90.13deg,
+  #ef8080 0.84%,
+  #f0145a 99.96%
+);
+
+$transition-time: 0.3s;
 
 $font-main: "Montserrat", sans-serif;
 
@@ -29,8 +43,17 @@ $font-size-h3: f.rem(22px);
 $font-size-h2: f.rem(30px);
 $font-size-h1: f.rem(38px);
 
+$line-height-none: 1;
+$line-height-tight: math.div(22, 14);
 $line-height-main: 1.625;
-$line-height-tight: 1;
 
-$container-width: 1630px;
-$container-padding: 60px;
+$line-thickness: 4px;
+$border-radius: 12px;
+$border-radius-sm: 8px;
+
+$space-sm: 15px;
+$space-md: 30px;
+$space-lg: 60px;
+
+$container-width: 1600px + $space-lg * 2;
+$container-padding: $space-lg;

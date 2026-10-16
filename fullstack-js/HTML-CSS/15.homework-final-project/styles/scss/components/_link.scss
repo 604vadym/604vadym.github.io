@@ -1,0 +1,45 @@
+@use "../abstracts/" as a;
+
+.link {
+  display: inline-flex;
+  align-items: center;
+
+  &--caption {
+    @include a.text-bold(a.$font-size-caption);
+    @include a.hover-color-smooth(a.$color-accent);
+    text-transform: uppercase;
+    color: a.$color-active-regular;
+  }
+
+  &--main {
+    @include a.text-bold(a.$font-size-main);
+  }
+
+  &--sub {
+    @include a.text-bold(a.$font-size-sub);
+    letter-spacing: 1px;
+  }
+
+  &--with-arrow {
+    gap: 2px;
+
+    &::after {
+      content: "";
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-bottom: 2px solid currentColor;
+      border-right: 2px solid currentColor;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &--icon {
+    justify-content: center;
+  }
+
+  &__icon {
+    width: 24px;
+    flex-shrink: 0;
+  }
+}

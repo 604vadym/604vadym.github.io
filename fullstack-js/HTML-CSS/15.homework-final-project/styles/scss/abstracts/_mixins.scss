@@ -1,8 +1,102 @@
 @use "sass:math";
 @use "config" as cfg;
+@use "variables" as v;
 
 @mixin responsive($breakpoint) {
   @media (max-width: #{math.div($breakpoint, cfg.$base-font-size) * 1em}) {
     @content;
   }
+}
+
+@mixin hover-desktop {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin hover-color-smooth(
+  $color,
+  $transition-time: null,
+  $trigger: null,
+  $target: null
+) {
+  $time: if(
+    sass($transition-time == null): v.$transition-time; else: $transition-time,
+  );
+
+  @if $target {
+    #{$target} {
+      @if $time and $time != 0s {
+        transition: color $time;
+      }
+    }
+  } @else {
+    @if $time and $time != 0s {
+      transition: color $time;
+    }
+  }
+
+  @media (hover: hover) {
+    @if $trigger and $target {
+      &:has(#{$trigger}:hover) #{$target} {
+        color: $color;
+      }
+    } @else if $target {
+      &:hover #{$target} {
+        color: $color;
+      }
+    } @else {
+      &:hover {
+        color: $color;
+      }
+    }
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin inline-flex-center {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin gradient-text($gradient) {
+  background-image: $gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@mixin text-bold($size) {
+  font-weight: v.$font-weight-bold;
+  line-height: v.$line-height-none;
+  font-size: $size;
+}
+
+@mixin text-bold-h1-gradient($gradient: v.$gradient-text-red) {
+  @include text-bold(v.$font-size-h1);
+  @include gradient-text($gradient);
+}
+
+@mixin border-radius-right($radius) {
+  border-radius: 0 $radius $radius 0;
+}
+
+@mixin border-radius-left($radius) {
+  border-radius: $radius 0 0 $radius;
+}
+
+@mixin border-radius-top($radius) {
+  border-radius: $radius $radius 0 0;
+}
+
+@mixin border-radius-bottom($radius) {
+  border-radius: 0 0 $radius $radius;
 }

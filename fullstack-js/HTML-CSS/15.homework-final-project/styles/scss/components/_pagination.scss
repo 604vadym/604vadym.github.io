@@ -1,0 +1,19 @@
+@use "sass:color";
+@use "../abstracts" as a;
+
+.pagination {
+  display: flex;
+  gap: a.$space-sm;
+
+  &__dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: color.adjust(a.$color-active-regular, $alpha: -0.8);
+
+    &--active {
+      pointer-events: none;
+      background-color: a.$color-active-regular;
+    }
+  }
+}
