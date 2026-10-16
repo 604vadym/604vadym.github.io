@@ -4,9 +4,9 @@ import Input from "./components/Input";
 function App() {
   return (
     <>
-      <Button type="button" text="Click me"></Button>
+      <Button type="button" text="Click me" />
       <br></br>
-      <Input type="text" placeholder="Type text and watch console"></Input>
+      <Input type="text" placeholder="Type text and watch console" />
     </>
   );
 }
