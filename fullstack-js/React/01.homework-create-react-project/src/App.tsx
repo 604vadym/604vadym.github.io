@@ -5,7 +5,8 @@ function App() {
   return (
     <>
       <Button type="button" text="Click me" />
-      <br></br>
+      <br />
+      <br />
       <Input type="text" placeholder="Type text and watch console" />
     </>
   );

@@ -1,7 +1,7 @@
 import StatelessComponent from "./components/StatelessComponent";
 import StatefulComponent from "./components/StatefulComponent";
 
-function showCurrentDataTime() {
+function showCurrentDateTime() {
   const currentDate = new Date();
   const day = String(currentDate.getDate()).padStart(2, "0");
   const month = String(currentDate.getMonth() + 1).padStart(2, "0");
@@ -17,7 +17,7 @@ function App() {
     <>
       <StatelessComponent
         text="Current date & time"
-        handleClick={showCurrentDataTime}
+        handleClick={showCurrentDateTime}
       />
       <br />
       <br />
