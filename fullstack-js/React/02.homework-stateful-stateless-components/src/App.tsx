@@ -1,4 +1,5 @@
 import StatelessComponent from "./components/StatelessComponent";
+import StatefulComponent from "./components/StatefulComponent";
 
 function showCurrentDataTime() {
   const currentDate = new Date();
@@ -13,10 +14,15 @@ function showCurrentDataTime() {
 
 function App() {
   return (
-    <StatelessComponent
-      text="Current date & time"
-      handleClick={showCurrentDataTime}
-    />
+    <>
+      <StatelessComponent
+        text="Current date & time"
+        handleClick={showCurrentDataTime}
+      />
+      <br />
+      <br />
+      <StatefulComponent />
+    </>
   );
 }
 
