@@ -13,7 +13,7 @@ function Input({ placeholder, type }: InputProps) {
         console.clear();
         console.log(`You entered into input: ${e.target.value}`);
       }}
-    ></input>
+    />
   );
 }
 
