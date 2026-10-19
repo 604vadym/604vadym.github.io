@@ -26,6 +26,8 @@ To be edited in the future.
 ## Tech Stack
 
 - JavaScript
+- TypeScript
+- React
 - HTML5
 - CSS3
 - SASS/SCSS
@@ -33,6 +35,7 @@ To be edited in the future.
 - Tailwind CSS
 - Jest
 - Vitest
+- Vite
 - Gulp
 - Webpack
 
