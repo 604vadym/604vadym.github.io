@@ -24,12 +24,11 @@ function ControlledForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="message">
+      <label>
         Numbers{" "}
         <input
           type="text"
           placeholder="Only numbers allowed"
-          id="message"
           value={inputValue}
           onChange={handleChange}
         />
@@ -37,10 +36,9 @@ function ControlledForm() {
 
       <button type="submit">Submit</button>
 
-      <label htmlFor="checkbox">
+      <label>
         <input
           type="checkbox"
-          id="checkbox"
           checked={checkboxValue}
           onChange={handleChange}
         />
