@@ -1,5 +1,5 @@
 import UserStatus from "./components/UserStatus";
-import ProductCard from "./components/ProductCard ";
+import ProductCard from "./components/ProductCard";
 
 function App() {
   return (
