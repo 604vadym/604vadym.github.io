@@ -15,8 +15,9 @@ function ControlledForm() {
     const { type, value, checked } = e.target;
 
     if (type === "text") {
-      if (!Number.isFinite(Number(value))) return;
-      setInputValue(value);
+      const trimmedValue = value.trim();
+      if (!Number.isFinite(Number(trimmedValue))) return;
+      setInputValue(trimmedValue);
     } else if (type === "checkbox") {
       setCheckboxValue(checked);
     }

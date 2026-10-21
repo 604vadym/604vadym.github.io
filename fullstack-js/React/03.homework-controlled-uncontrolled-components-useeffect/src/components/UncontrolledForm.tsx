@@ -5,8 +5,9 @@ function UncontrolledForm() {
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (!msgRef.current?.value) return;
-    alert("Your message: " + msgRef.current.value);
+    const trimmedValue = msgRef.current?.value.trim() || "";
+    if (!trimmedValue) return;
+    alert("Your message: " + trimmedValue);
   };
 
   return (

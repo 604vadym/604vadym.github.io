@@ -32,15 +32,15 @@ function FetchComponent() {
   }, []);
 
   if (error) {
-    return <span>Error loading photos: {error}</span>;
+    return <p>Error loading photos: {error}</p>;
   }
 
   if (!photos) {
-    return <span>Loading...</span>;
+    return <p>Loading...</p>;
   }
 
   if (photos.length === 0) {
-    return <span>No photos found.</span>;
+    return <p>No photos found.</p>;
   }
 
   return (
@@ -53,12 +53,12 @@ function FetchComponent() {
         paddingLeft: 0,
       }}
     >
-      {photos.slice(0, 50).map((photo) => {
+      {photos.slice(0, 50).map(({ id, thumbnailUrl, title }) => {
         return (
-          <li key={photo.id}>
+          <li key={id}>
             <img
-              src={photo.thumbnailUrl}
-              alt={photo.title}
+              src={thumbnailUrl}
+              alt={title}
               width={150}
               height={150}
               style={{ display: "block" }}
