@@ -12,7 +12,7 @@ function UncontrolledForm() {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Message <input ref={msgRef} type="text" />
+        Message <input ref={msgRef} type="text" name="message" />
       </label>
 
       <button type="submit">Submit</button>

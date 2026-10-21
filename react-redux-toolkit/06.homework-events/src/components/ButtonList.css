@@ -1,0 +1,35 @@
+.button-list {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.action-button {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #007bff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #007bff;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.action-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}

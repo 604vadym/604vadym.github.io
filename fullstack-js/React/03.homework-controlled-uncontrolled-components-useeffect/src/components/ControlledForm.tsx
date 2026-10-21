@@ -28,6 +28,7 @@ function ControlledForm() {
         Numbers{" "}
         <input
           type="text"
+          name="numbers"
           placeholder="Only numbers allowed"
           value={inputValue}
           onChange={handleChange}
@@ -39,6 +40,7 @@ function ControlledForm() {
       <label>
         <input
           type="checkbox"
+          name="agree"
           checked={checkboxValue}
           onChange={handleChange}
         />
