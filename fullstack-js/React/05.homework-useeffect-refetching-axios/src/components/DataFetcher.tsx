@@ -35,14 +35,14 @@ function DataFetcher({ postId }: DataFetcherProps) {
         if (isMounted) {
           setPost(postData);
         }
-      } catch (error) {
+      } catch (err) {
         if (isMounted) {
-          if (axios.isAxiosError(error)) {
+          if (axios.isAxiosError(err)) {
             setError(
-              error.response?.status === 404 ? "Post not found" : error.message,
+              err.response?.status === 404 ? "Post not found" : err.message,
             );
-          } else if (error instanceof Error) {
-            setError(error.message);
+          } else if (err instanceof Error) {
+            setError(err.message);
           } else {
             setError("An unknown error occurred");
           }

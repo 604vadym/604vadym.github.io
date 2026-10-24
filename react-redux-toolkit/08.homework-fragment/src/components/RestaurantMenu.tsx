@@ -53,19 +53,19 @@ function RestaurantMenu() {
     <div className="menu">
       <h1 className="menu-title ">Меню ресторану</h1>
 
-      {menuData.map((category) => (
-        <Fragment key={category.categoryId}>
+      {menuData.map(({ items, categoryId, categoryName }) => (
+        <Fragment key={categoryId}>
           <div className="category">
-            <h2 className="category-name">{category.categoryName}</h2>
+            <h2 className="category-name">{categoryName}</h2>
 
             <ul className="items-list">
-              {category.items.map((item) => (
-                <li key={item.id} className="menu-item">
+              {items.map(({ id, name, price, description }) => (
+                <li key={id} className="menu-item">
                   <div className="item-header">
-                    <h3 className="item-name">{item.name}</h3>
-                    <span className="item-price">{item.price}</span>
+                    <h3 className="item-name">{name}</h3>
+                    <span className="item-price">{price}</span>
                   </div>
-                  <p className="item-description">{item.description}</p>
+                  <p className="item-description">{description}</p>
                 </li>
               ))}
             </ul>

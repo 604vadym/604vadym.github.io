@@ -12,34 +12,53 @@ interface Photo {
 function FetchComponent() {
   const [photos, setPhotos] = useState<Photo[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    let isMounted = true;
+
     async function loadPhotos() {
+      setPhotos(null);
+      setError(null);
+      setIsLoading(true);
       try {
         const dataPhotos = await fetchData<Photo[]>(
           "https://jsonplaceholder.typicode.com/photos",
         );
-        setPhotos(dataPhotos);
-      } catch (error) {
-        if (error instanceof Error) {
-          console.error(error);
-          setError(error.message);
+        if (isMounted) {
+          setPhotos(dataPhotos);
+        }
+      } catch (err) {
+        if (isMounted) {
+          if (err instanceof Error) {
+            setError(err.message);
+          } else {
+            setError("An unknown error occurred");
+          }
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
         }
       }
     }
 
     loadPhotos();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   if (error) {
     return <p>Error loading photos: {error}</p>;
   }
 
-  if (!photos) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (photos.length === 0) {
+  if (!photos || photos.length === 0) {
     return <p>No photos found.</p>;
   }
 

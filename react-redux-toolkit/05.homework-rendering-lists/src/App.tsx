@@ -14,10 +14,10 @@ function App() {
       <h1 className="app-title">Movies</h1>
 
       <ul className="films-list">
-        {movies.map((movie) => (
-          <li key={movie.id} className="film-item">
-            <span className="film-title">{movie.title}</span>{" "}
-            <span className="film-year">({movie.year})</span>
+        {movies.map(({ id, title, year }) => (
+          <li key={id} className="film-item">
+            <span className="film-title">{title}</span>{" "}
+            <span className="film-year">({year})</span>
           </li>
         ))}
       </ul>

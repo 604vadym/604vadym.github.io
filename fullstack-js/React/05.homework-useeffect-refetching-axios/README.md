@@ -1,75 +1,49 @@
-# React + TypeScript + Vite
+# Fetching Data with React useEffect and Axios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+A simple React application demonstrating data fetching with the `useEffect` hook and Axios.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The application allows users to enter a post ID and fetch the corresponding post from the JSONPlaceholder API.
 
-## React Compiler
+- **Data Fetching:** Uses Axios to request post data from the JSONPlaceholder API based on the entered post ID.
+- **Loading State:** Displays a loading message while the request is in progress.
+- **Error Handling:** Handles failed requests, including 404 errors when a post is not found.
+- **Dynamic Requests:** Fetches data when the user clicks the Request button. The `useEffect` hook runs whenever the requested post ID changes.
+- **Clear Functionality:** Allows users to clear the input and remove the displayed post.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The project illustrates asynchronous data fetching, React state management, side effects with `useEffect` and error handling using Axios and TypeScript.
 
-## Expanding the ESLint configuration
+## Installation and Usage
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Prerequisites:** [Node.js](https://nodejs.org/) and npm.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Clone the repository:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+   ```bash
+   git clone https://github.com/604vadym/604vadym.github.io.git
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Navigate to the project directory:
 
-```
+   ```bash
+   cd 604vadym.github.io/fullstack-js/React/05.homework-useeffect-refetching-axios
+   ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+3. Install the dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```bash
+   npm install
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+4. Start the development server:
 
-```
+   ```bash
+   npm run dev
+   ```
+
+5. Open the local URL displayed in the terminal.
+
+## Live Demo
+
+[View Live Demo]()

@@ -52,16 +52,16 @@ function UserProfile() {
       <>
         <h2 className="section-title">Соціальні мережі</h2>
         <div className="social-links">
-          {user.socialLinks.map((link, i) => (
+          {user.socialLinks.map(({ url, icon, platform }, i) => (
             <Fragment key={i}>
               <a
                 className="social-link"
-                href={link.url}
+                href={url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="social-icon ">{link.icon}</span>
-                <span className="social-platform">{link.platform}</span>
+                <span className="social-icon ">{icon}</span>
+                <span className="social-platform">{platform}</span>
               </a>
             </Fragment>
           ))}
