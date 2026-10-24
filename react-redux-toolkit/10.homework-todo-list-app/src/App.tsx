@@ -1,0 +1,86 @@
+import { useState, useRef } from "react";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
+import TodoFilters from "./components/TodoFilters";
+import TodoStats from "./components/TodoStats";
+import { type Todo } from "./types/interfaces";
+import { type Filter } from "./types/types";
+
+function App() {
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [filter, setFilter] = useState<Filter>("all");
+  const counterRef = useRef<number>(0);
+
+  const addTodo = (text: string): void => {
+    counterRef.current += 1;
+    setTodos([
+      ...todos,
+      {
+        id: counterRef.current,
+        text,
+        completed: false,
+        createdAt: new Date().toISOString(),
+      },
+    ]);
+  };
+
+  const toggleTodo = (id: number) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
+  };
+
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const clearCompleted = () => {
+    setTodos(todos.filter((todo) => !todo.completed));
+  };
+
+  const getFilteredTodos = (): Todo[] => {
+    if (filter === "all") return todos;
+
+    return filter === "completed"
+      ? todos.filter((todos) => todos.completed)
+      : todos.filter((todos) => !todos.completed);
+  };
+
+  const filteredTodos = getFilteredTodos();
+
+  const selectFilter = (filter: Filter) => {
+    setFilter(filter);
+  };
+
+  return (
+    <div className="app">
+      <div className="container">
+        <div className="card">
+          <div className="card-header">
+            <h1 className="card-title">📝 My Todo List</h1>
+          </div>
+        </div>
+
+        <TodoForm onAddTodo={addTodo} />
+
+        <TodoFilters onSelect={selectFilter} />
+
+        {todos.length > 0 && <TodoStats todos={todos} />}
+
+        <TodoList
+          todos={filter === "all" ? todos : filteredTodos}
+          onToggle={toggleTodo}
+          onDelete={deleteTodo}
+        />
+
+        <button type="button" onClick={clearCompleted}>
+          Remove completed tasks
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default App;
