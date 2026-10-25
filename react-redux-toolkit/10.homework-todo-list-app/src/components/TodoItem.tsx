@@ -8,13 +8,21 @@ interface TodoItemtProps {
 
 function TodoItem({ todo, onToggle, onDelete }: TodoItemtProps) {
   return (
-    <div className={`todo-item ${todo.completed ? "completed" : ""}`}>
-      <input
-        type="checkbox"
-        checked={todo.completed}
-        onChange={() => onToggle(todo.id)}
-      />
-      <span className="todo-text">{todo.text}</span>
+    <div
+      className={`todo-item ${todo.completed ? "todo-item--completed" : ""}`}
+    >
+      {todo.completed ? (
+        <span>✅</span>
+      ) : (
+        <input type="checkbox" onChange={() => onToggle(todo.id)} />
+      )}
+
+      <span
+        className={`todo-text ${todo.completed ? "todo-text--completed" : ""}`}
+      >
+        {todo.text}
+      </span>
+
       <button className="btn btn-destructive" onClick={() => onDelete(todo.id)}>
         ✕
       </button>

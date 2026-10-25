@@ -1,61 +1,35 @@
-import { useState } from "react";
 import { type Filter } from "../types/types";
 
 interface TodoFiltersProps {
+  activeFilter: Filter;
   onSelect: (filter: Filter) => void;
 }
 
-function TodoFilters({ onSelect }: TodoFiltersProps) {
-  const [isAllSelected, setIsAllSelected] = useState<boolean>(true);
-  const [isActiveSelected, setIsActiveSelected] = useState<boolean>(false);
-  const [isCompletedSelected, setIsCompletedSelected] =
-    useState<boolean>(false);
-
-  const handleClickAll = () => {
-    setIsAllSelected(true);
-    setIsActiveSelected(false);
-    setIsCompletedSelected(false);
-    onSelect("all");
-  };
-
-  const handleClickActive = () => {
-    setIsActiveSelected(true);
-    setIsAllSelected(false);
-    setIsCompletedSelected(false);
-    onSelect("active");
-  };
-
-  const handleClickCompleted = () => {
-    setIsCompletedSelected(true);
-    setIsAllSelected(false);
-    setIsActiveSelected(false);
-    onSelect("completed");
-  };
-
+function TodoFilters({ activeFilter, onSelect }: TodoFiltersProps) {
   return (
     <div className="filter-container">
       <div className="filter-buttons ">
         <button
           type="button"
-          className="btn filter-btn"
-          disabled={isAllSelected}
-          onClick={handleClickAll}
+          className={`btn filter-btn ${activeFilter === "all" ? "active" : ""}`}
+          disabled={activeFilter === "all"}
+          onClick={() => onSelect("all")}
         >
           All
         </button>
         <button
           type="button"
-          className="btn filter-btn"
-          disabled={isActiveSelected}
-          onClick={handleClickActive}
+          className={`btn filter-btn ${activeFilter === "active" ? "active" : ""}`}
+          disabled={activeFilter === "active"}
+          onClick={() => onSelect("active")}
         >
           Active
         </button>
         <button
           type="button"
-          className="btn filter-btn"
-          disabled={isCompletedSelected}
-          onClick={handleClickCompleted}
+          className={`btn filter-btn ${activeFilter === "completed" ? "active" : ""}`}
+          disabled={activeFilter === "completed"}
+          onClick={() => onSelect("completed")}
         >
           Completed
         </button>

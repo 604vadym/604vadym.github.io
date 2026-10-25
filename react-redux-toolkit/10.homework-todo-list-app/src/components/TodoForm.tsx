@@ -12,12 +12,13 @@ function TodoForm({ onAddTodo }: TodoFormProps) {
     e.preventDefault();
 
     if (inputValue === "") {
-      setError("Enter task in input to add it to list");
+      setError("Task description can't be empty");
       return;
     }
-    setError("");
+
     onAddTodo(inputValue);
     setInputValue("");
+    setError("");
   };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,17 +26,27 @@ function TodoForm({ onAddTodo }: TodoFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="input">
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
+        className="input"
         value={inputValue}
         placeholder="What should be done?"
         onChange={handleChangeInput}
       />
-      <button type="submit" className="btn btn-default btn-sm">
+      <button type="submit" className="btn btn-default">
         Add
       </button>
-      {error && <p>{error}</p>}
+      {
+        <p className="error-message">
+          {error || "\u00A0"}{" "}
+          {error && (
+            <button className="btn" onClick={() => setError("")}>
+              ✕
+            </button>
+          )}
+        </p>
+      }
     </form>
   );
 }

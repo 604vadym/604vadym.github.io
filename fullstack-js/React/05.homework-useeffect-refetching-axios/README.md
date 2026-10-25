@@ -46,4 +46,4 @@ The project illustrates asynchronous data fetching, React state management, side
 
 ## Live Demo
 
-[View Live Demo]()
+[View Live Demo](https://604vadym-github-io-useeffect-refetc.vercel.app/)

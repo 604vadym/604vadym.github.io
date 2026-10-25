@@ -7,8 +7,8 @@ interface TodoStatsProps {
 function TodoStats({ todos }: TodoStatsProps) {
   return (
     <div>
-      {todos.filter((todo) => !todo.completed).length} active from{" "}
-      {todos.length} total
+      {todos.filter((todo) => !todo.completed).length} active / {todos.length}{" "}
+      total
     </div>
   );
 }

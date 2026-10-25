@@ -3,8 +3,10 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import TodoFilters from "./components/TodoFilters";
 import TodoStats from "./components/TodoStats";
+import EmptyState from "./components/EmptyState";
 import { type Todo } from "./types/interfaces";
 import { type Filter } from "./types/types";
+import "./App.css";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -19,7 +21,6 @@ function App() {
         id: counterRef.current,
         text,
         completed: false,
-        createdAt: new Date().toISOString(),
       },
     ]);
   };
@@ -50,8 +51,8 @@ function App() {
 
   const filteredTodos = getFilteredTodos();
 
-  const selectFilter = (filter: Filter) => {
-    setFilter(filter);
+  const selectFilter = (selectedFilter: Filter) => {
+    setFilter(selectedFilter);
   };
 
   return (
@@ -64,17 +65,21 @@ function App() {
 
       <TodoForm onAddTodo={addTodo} />
 
-      <TodoFilters onSelect={selectFilter} />
+      {todos.length > 0 ? (
+        <>
+          <TodoFilters activeFilter={filter} onSelect={selectFilter} />
+          <TodoStats todos={todos} />
+          <TodoList
+            todos={filter === "all" ? todos : filteredTodos}
+            onToggle={toggleTodo}
+            onDelete={deleteTodo}
+          />
+        </>
+      ) : (
+        <EmptyState />
+      )}
 
-      {todos.length > 0 && <TodoStats todos={todos} />}
-
-      <TodoList
-        todos={filter === "all" ? todos : filteredTodos}
-        onToggle={toggleTodo}
-        onDelete={deleteTodo}
-      />
-
-      {todos.some((todo) => todo.completed) && (
+      {todos.some((todo) => todo.completed) && filter !== "active" && (
         <button
           type="button"
           className={`btn btn-destructive`}

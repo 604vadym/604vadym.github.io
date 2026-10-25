@@ -9,18 +9,21 @@ interface TodoListProps {
 
 function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
   return (
-    <div className="form-grid ">
+    <div className="form-grid">
       <div className="form-group">
-        {todos.map((todo) => {
-          return (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              onToggle={onToggle}
-              onDelete={onDelete}
-            ></TodoItem>
-          );
-        })}
+        <ul>
+          {todos.map((todo) => {
+            return (
+              <li key={todo.id}>
+                <TodoItem
+                  todo={todo}
+                  onToggle={onToggle}
+                  onDelete={onDelete}
+                ></TodoItem>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
