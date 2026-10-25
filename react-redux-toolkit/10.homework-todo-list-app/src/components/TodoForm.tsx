@@ -15,6 +15,7 @@ function TodoForm({ onAddTodo }: TodoFormProps) {
       setError("Enter task in input to add it to list");
       return;
     }
+    setError("");
     onAddTodo(inputValue);
     setInputValue("");
   };
@@ -23,24 +24,18 @@ function TodoForm({ onAddTodo }: TodoFormProps) {
     setInputValue(e.target.value);
   };
 
-  if (error !== "") {
-    alert(error);
-    setError("");
-  }
-
   return (
-    <form className="todo-form" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="input">
       <input
         type="text"
         value={inputValue}
         placeholder="What should be done?"
-        className="todo-input"
         onChange={handleChangeInput}
       />
-      <button type="submit" className="add-button">
+      <button type="submit" className="btn btn-default btn-sm">
         Add
       </button>
-      {error && <p className="error-message">{error}</p>}
+      {error && <p>{error}</p>}
     </form>
   );
 }

@@ -55,30 +55,34 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <div className="container">
-        <div className="card">
-          <div className="card-header">
-            <h1 className="card-title">📝 My Todo List</h1>
-          </div>
+    <div className="container">
+      <div className="card">
+        <div className="card-header">
+          <h1 className="card-title">📝 My Todo List</h1>
         </div>
-
-        <TodoForm onAddTodo={addTodo} />
-
-        <TodoFilters onSelect={selectFilter} />
-
-        {todos.length > 0 && <TodoStats todos={todos} />}
-
-        <TodoList
-          todos={filter === "all" ? todos : filteredTodos}
-          onToggle={toggleTodo}
-          onDelete={deleteTodo}
-        />
-
-        <button type="button" onClick={clearCompleted}>
-          Remove completed tasks
-        </button>
       </div>
+
+      <TodoForm onAddTodo={addTodo} />
+
+      <TodoFilters onSelect={selectFilter} />
+
+      {todos.length > 0 && <TodoStats todos={todos} />}
+
+      <TodoList
+        todos={filter === "all" ? todos : filteredTodos}
+        onToggle={toggleTodo}
+        onDelete={deleteTodo}
+      />
+
+      {todos.some((todo) => todo.completed) && (
+        <button
+          type="button"
+          className={`btn btn-destructive`}
+          onClick={clearCompleted}
+        >
+          Remove all completed tasks
+        </button>
+      )}
     </div>
   );
 }

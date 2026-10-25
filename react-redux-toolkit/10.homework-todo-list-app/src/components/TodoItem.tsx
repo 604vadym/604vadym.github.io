@@ -12,11 +12,10 @@ function TodoItem({ todo, onToggle, onDelete }: TodoItemtProps) {
       <input
         type="checkbox"
         checked={todo.completed}
-        className="todo-checkbox"
         onChange={() => onToggle(todo.id)}
       />
       <span className="todo-text">{todo.text}</span>
-      <button className="delete-button" onClick={() => onDelete(todo.id)}>
+      <button className="btn btn-destructive" onClick={() => onDelete(todo.id)}>
         ✕
       </button>
     </div>

@@ -33,24 +33,33 @@ function TodoFilters({ onSelect }: TodoFiltersProps) {
   };
 
   return (
-    <div>
-      <button type="button" disabled={isAllSelected} onClick={handleClickAll}>
-        All
-      </button>
-      <button
-        type="button"
-        disabled={isActiveSelected}
-        onClick={handleClickActive}
-      >
-        Active
-      </button>
-      <button
-        type="button"
-        disabled={isCompletedSelected}
-        onClick={handleClickCompleted}
-      >
-        Completed
-      </button>
+    <div className="filter-container">
+      <div className="filter-buttons ">
+        <button
+          type="button"
+          className="btn filter-btn"
+          disabled={isAllSelected}
+          onClick={handleClickAll}
+        >
+          All
+        </button>
+        <button
+          type="button"
+          className="btn filter-btn"
+          disabled={isActiveSelected}
+          onClick={handleClickActive}
+        >
+          Active
+        </button>
+        <button
+          type="button"
+          className="btn filter-btn"
+          disabled={isCompletedSelected}
+          onClick={handleClickCompleted}
+        >
+          Completed
+        </button>
+      </div>
     </div>
   );
 }
