@@ -1,0 +1,7 @@
+.layout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3px;
+  height: 100vh;
+}
