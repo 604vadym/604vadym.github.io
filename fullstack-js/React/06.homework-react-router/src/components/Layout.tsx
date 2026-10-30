@@ -11,10 +11,10 @@ function Layout() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about">About us</NavLink>
+            <NavLink to="about">About us</NavLink>
           </li>
           <li>
-            <NavLink to="/contact">Contacts</NavLink>
+            <NavLink to="contact">Contacts</NavLink>
           </li>
         </ul>
       </nav>

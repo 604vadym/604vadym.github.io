@@ -1,8 +1,13 @@
+import ThemeToggler from "./components/ThemeToggler";
 import UsersPage from "./components/UsersPage";
-import "./App.css";
 
 function App() {
-  return <UsersPage />;
+  return (
+    <>
+      <ThemeToggler />
+      <UsersPage />
+    </>
+  );
 }
 
 export default App;

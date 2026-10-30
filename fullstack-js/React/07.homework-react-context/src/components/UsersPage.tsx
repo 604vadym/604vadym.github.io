@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { ThemeContext } from "../context/AppContext";
+import ThemeContext from "../context/ThemeContext";
 import UserCard from "./UserCard";
 import { users } from "../data/users";
 import "./UsersPage.css";
 
 function UsersPage() {
-  const theme = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const bgColour = theme === "dark" ? "darkgrey" : "white";
 
   return (

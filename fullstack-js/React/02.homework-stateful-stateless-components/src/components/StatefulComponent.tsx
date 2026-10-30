@@ -12,9 +12,9 @@ function StatefulComponent() {
   const [colorBtn, setColorBtn] = useState<ColorType>(Color.red);
 
   const handleClick = (): void => {
-    setColorBtn((currentColor) => {
-      if (currentColor === Color.red) return Color.green;
-      if (currentColor === Color.green) return Color.blue;
+    setColorBtn((prevColor) => {
+      if (prevColor === Color.red) return Color.green;
+      if (prevColor === Color.green) return Color.blue;
       return Color.red;
     });
   };
