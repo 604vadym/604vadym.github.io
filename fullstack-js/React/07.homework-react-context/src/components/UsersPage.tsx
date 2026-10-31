@@ -6,10 +6,9 @@ import "./UsersPage.css";
 
 function UsersPage() {
   const { theme } = useContext(ThemeContext);
-  const bgColour = theme === "dark" ? "darkgrey" : "white";
 
   return (
-    <div className="layout" style={{ backgroundColor: bgColour }}>
+    <div className={`layout layout--${theme}`}>
       {users.map(({ id, name, age, gender }) => (
         <UserCard key={id} name={name} age={age} gender={gender} />
       ))}

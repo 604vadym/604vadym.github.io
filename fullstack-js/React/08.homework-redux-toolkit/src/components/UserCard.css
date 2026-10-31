@@ -1,0 +1,14 @@
+.user-card {
+  text-align: center;
+  border: 2px solid blue;
+  color: blue;
+  margin-top: 5px;
+}
+
+.user-card--dark {
+  background-color: grey;
+}
+
+.user-card--light {
+  background-color: yellow;
+}

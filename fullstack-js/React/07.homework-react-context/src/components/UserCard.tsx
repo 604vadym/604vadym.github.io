@@ -7,10 +7,9 @@ type UserCardProps = Omit<User, "id">;
 
 function UserCard({ name, age, gender }: UserCardProps) {
   const { theme } = useContext(ThemeContext);
-  const bgColour = theme === "dark" ? "grey" : "yellow";
 
   return (
-    <div className="user-card" style={{ backgroundColor: bgColour }}>
+    <div className={`user-card user-card--${theme}`}>
       <p>{name}</p>
       <p>{age} years</p>
       <p>{gender}</p>
