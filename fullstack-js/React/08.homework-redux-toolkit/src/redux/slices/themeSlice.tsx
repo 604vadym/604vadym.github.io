@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { Theme } from "../../types/types";
+import { type Theme } from "../../types/types";
 
 const themeSlice = createSlice({
   name: "theme",
@@ -12,5 +12,4 @@ const themeSlice = createSlice({
 });
 
 export const { toggleTheme } = themeSlice.actions;
-export const selectTheme = (state: { theme: Theme }) => state.theme;
 export default themeSlice.reducer;

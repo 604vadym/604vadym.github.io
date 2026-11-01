@@ -1,0 +1,18 @@
+.user-greeting {
+  right: 5px;
+  position: absolute;
+  padding: 3px;
+  text-align: center;
+  border: 2px solid green;
+  margin-top: 5px;
+}
+
+.user-greeting--dark {
+  background-color: grey;
+  color: orange;
+}
+
+.user-greeting--light {
+  background-color: yellow;
+  color: cyan;
+}

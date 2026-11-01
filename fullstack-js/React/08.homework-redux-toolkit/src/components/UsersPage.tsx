@@ -1,4 +1,4 @@
-import { selectTheme } from "../redux/slices/themeSlice";
+import { selectTheme } from "../redux/selectors/themeSelectors";
 import { useAppSelector } from "../redux/hooks";
 import UserCard from "./UserCard";
 import { users } from "../data/users";

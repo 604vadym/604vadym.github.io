@@ -1,9 +1,15 @@
 import { shallowEqual } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { loginSuccess, logout, selectAuth } from "../redux/slices/authSlice";
+import { loginSuccess, logout } from "../redux/slices/authSlice";
+import type { RootState } from "../redux/store";
 
 function AuthStatus() {
-  const { isAuthenticated, user } = useAppSelector(selectAuth, shallowEqual);
+  const { isAuthenticated, user } = useAppSelector((state: RootState) => {
+    return {
+      isAuthenticated: state.auth.isAuthenticated,
+      user: state.auth.user,
+    };
+  }, shallowEqual);
   const username = user?.name;
   const dispatch = useAppDispatch();
 

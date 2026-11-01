@@ -1,23 +1,16 @@
 # My Portfolio
 
-Hello! I am Vadym — a student and a future full-stack web developer. I was also a C/C++ developer in the past.  
+Hello! I am Vadym - a former C/C++ developer transitioning into web development (full-stack / backend).  
 This is my personal portfolio website, hosted on [GitHub Pages](https://604vadym.github.io).  
 See also my C/C++/C#/Win API repository, hosted on [Bitbucket](https://bitbucket.org/vadym_rogachko/repos/src/master/).
 
 ## Project Description
 
-This repository contains the source code of my personal portfolio website and
-source code of all my projects. Projects are homework for Hillel for now.
-
-- Homework for Fullstack JS Course Hillel
-- Homework for Frontend Start Course Hillel
-- Homework for JavaScript Start
+This repository contains the source code of all my web projects.
 
 ## Key Features
 
-- Astral Projection website built with HTML5 and CSS3
-- Other few homework sites built with HTML5 and CSS3
-- Javascript homework projects
+To be edited in the future.
 
 ## Highlights & Advantages
 
@@ -28,6 +21,8 @@ To be edited in the future.
 - JavaScript
 - TypeScript
 - React
+- React Router
+- Redux Toolkit
 - HTML5
 - CSS3
 - SASS/SCSS
