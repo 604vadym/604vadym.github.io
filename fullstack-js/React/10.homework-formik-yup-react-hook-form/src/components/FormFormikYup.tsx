@@ -54,8 +54,16 @@ function FormFormikYup() {
   };
 
   const handleSubmit = async (values: FormInputs) => {
-    const cleanPhone = values.phone?.replace(/[^0-9+]/g, "") ?? "";
-    const payload = { ...values, phone: cleanPhone };
+    const normalizedValues: FormInputs = {
+      username: safeTrim(values.username),
+      email: safeTrim(values.email),
+      phone: safeTrim(values.phone),
+      dateOfBirth: safeTrim(values.dateOfBirth),
+      password: safeTrim(values.password),
+      confirmPassword: safeTrim(values.confirmPassword),
+    };
+    const cleanPhone = normalizedValues.phone?.replace(/[^0-9+]/g, "") ?? "";
+    const payload = { ...normalizedValues, phone: cleanPhone };
     await new Promise((resolve) => setTimeout(resolve, 1000));
     alert("Success!\n" + JSON.stringify(payload));
   };
