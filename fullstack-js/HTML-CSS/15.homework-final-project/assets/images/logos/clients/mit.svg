@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="217" height="48" viewBox="0 0 217 48" role="img" aria-labelledby="title desc">
+  <title id="title">Massachusetts Institute of Technology</title>
+  <desc id="desc">White MIT wordmark and the full university name on a transparent background.</desc>
+  <g fill="#fff">
+    <text x="0" y="36" font-family="Arial, Helvetica, sans-serif" font-size="43" font-weight="800" letter-spacing="-3">MIT</text>
+    <text x="91" y="19" font-family="Arial, Helvetica, sans-serif" font-size="12.2" font-weight="700" letter-spacing="-.25">Massachusetts</text>
+    <text x="91" y="34" font-family="Arial, Helvetica, sans-serif" font-size="12.2" font-weight="700" letter-spacing="-.25">Institute of Technology</text>
+  </g>
+</svg>
