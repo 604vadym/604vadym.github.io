@@ -2,7 +2,6 @@ import { Link } from "react-router";
 
 function Navigation() {
   return (
-    <>
       <div className="navigation">
         <span>Paths:</span>
         <nav>
@@ -19,7 +18,6 @@ function Navigation() {
           </ul>
         </nav>
       </div>
-    </>
   );
 }
 
