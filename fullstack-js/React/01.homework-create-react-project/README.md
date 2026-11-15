@@ -33,7 +33,3 @@ A simple React application. The project demonstrates the initial setup of a Reac
    ```
 
 5. Open the local URL displayed in the terminal.
-
-## Live Demo
-
-[View Live Demo](https://604vadym-github-io.vercel.app/)
