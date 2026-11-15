@@ -32,7 +32,6 @@
 const isDebugMode = () => {
     console.log(process.env.NODE_ENV === "development");
     console.log(process.env.NODE_ENV);
-
     return process.env.NODE_ENV === "development";
 };
 
@@ -74,34 +73,52 @@ isDebugMode();
 
 // Функції для кодування даних з довільною кількістю аргументів
 function encodeToBase64(...args) {
-    // code here
+    console.log(args);
+    const argsUnion = args.join(":");
+    const argsBase64 = Buffer.from(argsUnion).toString("base64");
+    return argsBase64;
 }
 
 function encodeToHex(...args) {
-    // code here
+    console.log(args);
+    const argsUnion = args.join(":");
+    const argsHex = Buffer.from(argsUnion).toString("hex");
+    return argsHex;
 }
 
 // Функції для декодування даних
 function decodeFromBase64(base64String) {
-    // code here
+    console.log(base64String);
+    const decodedStr = Buffer.from(base64String, "base64").toString("utf8");
+    return decodedStr;
 }
 
 function decodeFromHex(hexString) {
-    // code here
+    console.log(hexString);
+    const decodedStr = Buffer.from(hexString, "hex").toString("utf8");
+    return decodedStr;
 }
 
 // ! Приклад використання:
-// const base64Encoded = encodeToBase64('john@email.com', '123', 'extraData')
-// console.log('Base64 Encoded:', base64Encoded)
-//
-// const hexEncoded = encodeToHex('john@email.com', '123', 'extraData')
-// console.log('Hex Encoded:', hexEncoded)
-//
-// const base64Decoded = decodeFromBase64(base64Encoded)
-// console.log('Base64 Decoded:', base64Decoded)
-//
-// const hexDecoded = decodeFromHex(hexEncoded)
-// console.log('Hex Decoded:', hexDecoded)
+try {
+    const base64Encoded = encodeToBase64("john@email.com", "123", "extraData");
+    console.log("Base64 Encoded:", base64Encoded);
+
+    const base64Decoded = decodeFromBase64(base64Encoded);
+    console.log("Base64 Decoded:", base64Decoded);
+} catch (error) {
+    console.error(error);
+}
+
+try {
+    const hexEncoded = encodeToHex("john@email.com", "123", "extraData");
+    console.log("Hex Encoded:", hexEncoded);
+
+    const hexDecoded = decodeFromHex(hexEncoded);
+    console.log("Hex Decoded:", hexDecoded);
+} catch (error) {
+    console.error(error);
+}
 
 /*
  *
@@ -144,10 +161,11 @@ function safeDecodeFromHex(hexString) {
     // code here
 }
 
+const base64Encoded = encodeToBase64("john@email.com", "123", "extraData");
 // ! Приклад використання:
-// const safeBase64Decoded = safeDecodeFromBase64(base64Encoded)
-// console.log('Safe Base64 Decoded:', safeBase64Decoded)
-//
+const safeBase64Decoded = safeDecodeFromBase64(base64Encoded);
+console.log("Safe Base64 Decoded:", safeBase64Decoded);
+
 // const safeHexDecoded = safeDecodeFromHex(hexEncoded)
 // console.log('Safe Hex Decoded:', safeHexDecoded)
 
