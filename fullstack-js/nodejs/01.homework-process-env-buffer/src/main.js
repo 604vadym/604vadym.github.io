@@ -154,20 +154,58 @@ try {
  */
 
 function safeDecodeFromBase64(base64String) {
-    // code here
+    const base64Regex =
+        /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
+
+    if (
+        !base64String ||
+        typeof base64String !== "string" ||
+        !base64Regex.test(base64String)
+    ) {
+        const errMsg = "Invalid base64 string";
+        console.error(errMsg);
+        throw new Error(errMsg);
+    }
+
+    const decodedStr = decodeFromBase64(base64String);
+    console.log(decodedStr);
+    return decodedStr;
 }
 
 function safeDecodeFromHex(hexString) {
-    // code here
+    const hexRegex = /^(?:[0-9a-fA-F]{2})+$/;
+
+    if (
+        !hexString ||
+        typeof hexString !== "string" ||
+        !hexRegex.test(hexString)
+    ) {
+        const errMsg = "Invalid hex string";
+        console.error(errMsg);
+        throw new Error(errMsg);
+    }
+
+    const decodedStr = decodeFromHex(hexString);
+    console.log(decodedStr);
+    return decodedStr;
 }
 
-const base64Encoded = encodeToBase64("john@email.com", "123", "extraData");
 // ! Приклад використання:
-const safeBase64Decoded = safeDecodeFromBase64(base64Encoded);
-console.log("Safe Base64 Decoded:", safeBase64Decoded);
+try {
+    const base64Encoded = encodeToBase64("john@email.com", "123", "extraData");
+    const safeBase64Decoded = safeDecodeFromBase64(base64Encoded);
+    console.log("Safe Base64 Decoded:", safeBase64Decoded);
+} catch (error) {
+    console.error(error);
+}
 
-// const safeHexDecoded = safeDecodeFromHex(hexEncoded)
-// console.log('Safe Hex Decoded:', safeHexDecoded)
+try {
+    const hexEncoded = encodeToHex("john@email.com", "123", "extraData");
+    const safeHexDecoded = safeDecodeFromHex(hexEncoded);
+    console.log("Safe Hex Decoded:", safeHexDecoded);
+} catch (error) {
+    console.error(error);
+}
 
 export {
     isDebugMode,
