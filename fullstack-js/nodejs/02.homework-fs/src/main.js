@@ -1,4 +1,4 @@
-import { writeFile, readFile } from "node:fs/promises";
+import { writeFile, readFile, unlink } from "node:fs/promises";
 /*
  *
  * #1
@@ -78,18 +78,18 @@ writeFileAsync("example.txt", "Привіт, це тестовий файл!");
  */
 
 async function readFileAsync(filename) {
-    let content = null;
     try {
-        content = await readFile(filename, "utf8");
+        const content = await readFile(filename, "utf8");
         console.log("Файл успішно прочитано:", content);
+        return content;
     } catch (error) {
-        if (error.code == "ENOENT") {
+        if (error.code === "ENOENT") {
             console.error("Файл не існує:", filename);
         } else {
             console.error("Помилка при читанні файлу:", error);
         }
+        return null;
     }
-    return content;
 }
 
 // ! Приклад використання:
@@ -132,12 +132,21 @@ readFileAsync("example.txt").then((content) => {
  */
 
 async function deleteFileAsync(filename) {
-    // code here
+    try {
+        await unlink(filename);
+        console.log("Файл успішно видалено");
+    } catch (error) {
+        if (error.code === "ENOENT") {
+            console.error("Файл не існує:", filename);
+        } else {
+            console.error("Помилка при видаленні файлу:", error);
+        }
+    }
 }
 
 // ! Приклад використання:
-// writeFileAsync('example.txt', 'Привіт, це тестовий файл!').then(() => {
-//   deleteFileAsync('example.txt')
-// })
+writeFileAsync("example.txt", "Привіт, це тестовий файл!").then(() => {
+    deleteFileAsync("example.txt");
+});
 
 export { writeFileAsync, readFileAsync, deleteFileAsync };
