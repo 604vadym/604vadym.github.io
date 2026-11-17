@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { writeFile, readFile } from "node:fs/promises";
 /*
  *
  * #1
@@ -78,17 +78,24 @@ writeFileAsync("example.txt", "Привіт, це тестовий файл!");
  */
 
 async function readFileAsync(filename) {
-    // code here
+    let content = null;
+    try {
+        content = await readFile(filename, "utf8");
+        console.log("Файл успішно прочитано:", content);
+    } catch (error) {
+        if (error.code == "ENOENT") {
+            console.error("Файл не існує:", filename);
+        } else {
+            console.error("Помилка при читанні файлу:", error);
+        }
+    }
+    return content;
 }
 
 // ! Приклад використання:
-// readFileAsync('example.txt')
-//   .then((content) => {
-//     console.log('Прочитаний вміст:', content)
-//   })
-//   .catch((error) => {
-//     console.error('Помилка:', error)
-//   })
+readFileAsync("example.txt").then((content) => {
+    console.log("Прочитаний вміст:", content);
+});
 
 /*
  *
