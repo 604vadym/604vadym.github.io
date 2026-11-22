@@ -119,12 +119,15 @@ function verifyPassword(
   keylen = 64,
   digest = "sha512",
 ) {
-  // code here
+  return (
+    generatePasswordHash(inputPassword, salt, iterations, keylen, digest) ===
+    storedHash
+  );
 }
 
 // Застосування функції
-// const inputPassword = 'superSecret123'
-// const isCorrect = verifyPassword(inputPassword, hash, salt)
-// console.log(isCorrect ? 'Пароль вірний.' : 'Пароль невірний.')
+const inputPassword = "superSecret123";
+const isCorrect = verifyPassword(inputPassword, hash, salt);
+console.log(isCorrect ? "Пароль вірний." : "Пароль невірний.");
 
 export { generateHash, generatePasswordHash, verifyPassword };
