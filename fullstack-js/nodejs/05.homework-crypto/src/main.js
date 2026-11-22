@@ -71,13 +71,14 @@ function generatePasswordHash(
   keylen = 64,
   digest = "sha512",
 ) {
-  // code here
+  const key = crypto.pbkdf2Sync(password, salt, iterations, keylen, digest);
+  return key.toString("hex");
 }
 
 // Застосування функції
-// const password = 'superSecret123'
-// const salt = randomBytes(16).toString('hex')
-// const hash = generatePasswordHash(password, salt)
+const password = "superSecret123";
+const salt = crypto.randomBytes(16).toString("hex");
+const hash = generatePasswordHash(password, salt);
 
 /*
  *
