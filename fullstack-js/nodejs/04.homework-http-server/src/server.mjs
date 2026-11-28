@@ -1,12 +1,19 @@
 import http from "node:http";
 import { ROUTER } from "./router.mjs";
+import { createHTMLPage } from "./actions.mjs";
 // Реалізація HTTP-сервера відповідно до завдання, описаного у файлі ASSIGNMENT.md
 
 const PORT = Number(process.env.PORT) || 3000;
 
 async function executeRoute(route, req) {
     if (route === null) {
-        return { statusCode: 405, body: "Method Not Allowed" };
+        return {
+            statusCode: 405,
+            body: createHTMLPage(
+                "Method Not Allowed",
+                `<h1>Method Not Allowed</h1>`,
+            ),
+        };
     }
 
     return typeof route === "function" ? await route(req) : route;

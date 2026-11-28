@@ -63,7 +63,10 @@ async function submitForm(req) {
             if (!name?.trim() || !email?.trim()) {
                 return {
                     statusCode: 400,
-                    body: "Invalid form data",
+                    body: createHTMLPage(
+                        "Invalid form data",
+                        `<h1>Invalid form data</h1>`,
+                    ),
                 };
             }
 
@@ -80,7 +83,10 @@ async function submitForm(req) {
             if (error instanceof PayloadError) {
                 return {
                     statusCode: 413,
-                    body: "Payload Too Large",
+                    body: createHTMLPage(
+                        "Payload Too Large",
+                        `<h1>Payload Too Large</h1>`,
+                    ),
                 };
             }
             return {
@@ -91,7 +97,10 @@ async function submitForm(req) {
     } else {
         return {
             statusCode: 400,
-            body: "Unsupported Content-Type",
+            body: createHTMLPage(
+                "Unsupported Content-Type",
+                `<h1>Unsupported Content-Type</h1>`,
+            ),
         };
     }
 }
